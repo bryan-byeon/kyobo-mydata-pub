@@ -133,11 +133,11 @@
 }
 
 .btn-wrap{
-	margin-top:8px;
+	margin-top:6px;
 	text-align:center;
 	clear:both;
 	> .button + .button{
-		margin-top: 8px;
+		margin-top: 6px;
 	}
 	.button{
 		width: 100%;
@@ -213,7 +213,7 @@
 	&.vertical{
 		>div{
 			flex-direction:column;
-			>*+*{margin-left:0;margin-top:8px;}
+			>*+*{margin-left:0;margin-top:6px;}
 		}
 	}
 
@@ -221,7 +221,7 @@
 	+ .select,
 	+ .textare,
 	+ .flex{
-		margin-top: 8px;
+		margin-top: 6px;
 	}
 	&.bottom__fixed{
 		margin-top: 0;

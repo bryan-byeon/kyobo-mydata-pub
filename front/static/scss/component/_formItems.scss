@@ -37,13 +37,13 @@ i.require{
 		font-weight: normal;
 	}
 	+ .form-item,
-	+ .validate-item{margin-top:8px;}
+	+ .validate-item{margin-top:6px;}
 	
 }
 .form-item{
 	position:relative;
 	+ .form-item,
-	+ .validate-item{margin-top:8px;}
+	+ .validate-item{margin-top:6px;}
 }
 .validate-item{
 	&.is-error{
@@ -68,7 +68,7 @@ i.require{
 		}
 	}
 	+ .form-item,
-	+ .validate-item{margin-top:8px;}
+	+ .validate-item{margin-top:6px;}
 }
 .validate-txt{
 	margin-top: 4px;
@@ -83,10 +83,10 @@ i.require{
 	+ .flex,
 	+ .input,
 	+ .select,
-	+ .textare{margin-top: 8px;}
+	+ .textare{margin-top:6px;}
 }
 .help-txt{
-	margin-top: 8px;
+	margin-top: 6px;
 	font-size: 12px;
 	line-height: 1.33;
 	color: #666;

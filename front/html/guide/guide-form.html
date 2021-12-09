@@ -148,6 +148,94 @@
 							<label for="rdo4" class="lbl">라디오 disabled checked</label>
 						</span>
 					</div>
+					<h2 class="gd__h2">chk-item-list</h2>
+					<div>
+						<div class="chk-item-list mt-20">
+							<div class="chk-item">
+								<div class="checkbox ty2">
+									<input type="radio" id="eventRdo1" name="eventRdo"><i aria-hidden="true"></i>
+									<label for="eventRdo1" class="lbl">선택1</label>
+								</div>
+							</div>
+							<div class="chk-item">
+								<div class="checkbox ty2">
+									<input type="radio" id="eventRdo2" name="eventRdo"><i aria-hidden="true"></i>
+									<label for="eventRdo2" class="lbl">선택2</label>
+								</div>
+							</div>
+							<div class="chk-item">
+								<div class="checkbox ty2">
+									<input type="radio" id="eventRdo3" name="eventRdo"><i aria-hidden="true"></i>
+									<label for="eventRdo3" class="lbl">선택3</label>
+								</div>
+							</div>
+							<div class="chk-item">
+								<div class="checkbox ty2">
+									<input type="radio" id="eventRdo4" name="eventRdo"><i aria-hidden="true"></i>
+									<label for="eventRdo4" class="lbl">선택4</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h2 class="gd__h2">check-btn-grid</h2>
+					<div class="check-btn-grid pay-check-btn mt-16">
+            <div class="radio btn">
+              <input type="radio" id="pay-1" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-1" class="lbl">
+                <i class="i-pay-card" aria-hidden="true"></i>
+                <div>신용카드</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-2" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-2" class="lbl">
+                <i class="i-pay-banking" aria-hidden="true"></i>
+                <div>계좌이체</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-3" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-3" class="lbl">
+                <i class="i-pay-zero" aria-hidden="true"></i>
+                <div>제로페이</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-4" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-4" class="lbl">
+                <i class="i-pay-kakao" aria-hidden="true"></i>
+                <div>카카오페이</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-5" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-5" class="lbl">
+                <i class="i-pay-payco" aria-hidden="true"></i>
+                <div>페이코</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-6" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-6" class="lbl">
+                <i class="i-pay-naver" aria-hidden="true"></i>
+                <div>네이버페이</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-7" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-7" class="lbl">
+                <i class="i-pay-samsung" aria-hidden="true"></i>
+                <div>삼성페이</div>
+              </label>
+            </div>
+            <div class="radio btn">
+              <input type="radio" id="pay-8" name="pay"><i aria-hidden="true"></i>
+              <label for="pay-8" class="lbl">
+                <i class="i-pay-lpay" aria-hidden="true"></i>
+                <div>엘페이</div>
+              </label>
+            </div>
+          </div>
 
 					<h1 class="gd__h1">토글</h1>
 					<div>
@@ -242,22 +330,37 @@
 
 					<h1 class="gd__h1">select</h1>
 					<div>
-						<div class="select">
-							<select id="inpSel1" title="날짜 선택">
-								<option value="">날짜 선택</option>
-								<option value="1">1일</option>
-								<option value="2">2일</option>
-								<option value="3">3일</option>
-							</select>
-						</div>
+						<h2 class="gd__h2">기본</h2>
+						<div>
+							<div class="select">
+								<select id="inpSel1" title="날짜 선택">
+									<option value="">날짜 선택</option>
+									<option value="1">1일</option>
+									<option value="2">2일</option>
+									<option value="3">3일</option>
+								</select>
+							</div>
 
-						<div class="select">
-							<select id="inpSel2" title="날짜 선택" disabled>
-								<option value="">날짜 선택</option>
-								<option value="1">1일</option>
-								<option value="2">2일</option>
-								<option value="3">3일</option>
-							</select>
+							<div class="select">
+								<select id="inpSel2" title="날짜 선택" disabled>
+									<option value="">날짜 선택</option>
+									<option value="1">1일</option>
+									<option value="2">2일</option>
+									<option value="3">3일</option>
+								</select>
+							</div>
+						</div>
+						<h2 class="gd__h2">inline</h2>
+						<div>
+							<div class="select inline">
+								<select title="선택">
+									<option value="">선택</option>
+									<option value="1">옵셥1</option>
+									<option value="2">옵셥2</option>
+									<option value="3">옵셥3</option>
+									<option value="4">옵셥4</option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<h1 class="gd__h1">textarea</h1>
@@ -513,6 +616,79 @@
 							</div>
 							<div class="input"><input type="text" id="userAdr2" title="기본주소 입력" placeholder="기본주소" readonly></div>
 							<div class="input"><input type="text" id="userAdr3" title="상세주소 입력" placeholder="상세주소"></div>
+						</div>
+
+						<div class="form-lbl">휴대폰인증</div>
+						<div class="form-item">
+							<div class="input"><input type="text" placeholder="이름" title="이름 입력"></div>
+								<div class="input"><input type="tel" placeholder="휴대폰 번호" title="휴대폰 번호 입력"></div>
+								<div class="btn-wrap">
+									<button type="button" class="button line">인증번호 전송</button>
+									<button type="button" class="button line">인증번호 재전송</button>
+								</div>
+								<div class="input">
+									<input type="tel" placeholder="인증번호 6자리 입력" title="인증번호 6자리 입력">
+									<div class="timer">03:00</div>
+									<button type="button" class="button line small">인증확인</button>
+								</div>
+								<div class="btn-wrap">
+									<button type="button" class="button line checked" disabled><i class="i-ico-checked"></i>인증완료</button>
+								</div>
+						</div>
+
+						<div class="form-lbl">
+							<div class="left">사유 입력</div>
+							<div class="right fz-12">(<span id="txtCount">0</span>/100)</div>
+						</div>
+						<div class="form-item">
+							<div class="textarea">
+								<textarea rows="5" data-text-count="txtCount" maxlength="100" title="사유 작성" placeholder="100자 이내로 입력해 주세요"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<h1 class="gd__h1">약관</h1>
+					<div>
+						<div class="ui-agree mt-24">
+							<div class="chk-item">
+								<div class="checkbox ty2">
+									<input type="checkbox" id="agreeAll" class="ui-all-agree-chk"><i aria-hidden="true"></i>
+									<label for="agreeAll" class="lbl fz-16"><strong>약관 전체 동의</strong></label>
+								</div>
+							</div>
+							<div class="pd-x-16 mt-24">
+								<div class="checkbox ty2">
+									<input type="checkbox" id="agree1" class="ui-agree-chk"><i aria-hidden="true"></i>
+									<div class="lbl">
+										<label for="agree1">서비스 이용약관 동의 (필수)</label>
+										<a href="#" role="button" onclick="Layer.open('#agreeDetail1')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+									</div>
+								</div>
+								<div class="checkbox ty2">
+									<input type="checkbox" id="agree2" class="ui-agree-chk"><i aria-hidden="true"></i>
+									<div class="lbl">
+										<label for="agree2">개인정보의 제공 및 활용 동의 (필수)</label>
+										<a href="#" role="button" onclick="Layer.open('#agreeDetail2')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+									</div>
+								</div>
+								<div class="checkbox ty2">
+									<input type="checkbox" id="agree3" class="ui-agree-chk" data-agree-target="#agree3-sms, #agree3-mail"><i aria-hidden="true"></i>
+									<div class="lbl">
+										<label for="agree3">마케팅 정보 제공 및 활용 동의(선택)</label>
+										<a href="#" role="button" onclick="Layer.open('#agreeDetail3')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+									</div>
+								</div>
+								<div class="mt-14 pl-28">
+									<span class="checkbox ty2">
+										<input type="checkbox" id="agree3-sms"><i aria-hidden="true"></i>
+										<label for="agree3-sms" class="lbl fz-14">문자 수신</label>
+									</span>
+									<span class="checkbox ty2">
+										<input type="checkbox" id="agree3-mail"><i aria-hidden="true"></i>
+										<label for="agree3-mail" class="lbl fz-14">메일 수신</label>
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

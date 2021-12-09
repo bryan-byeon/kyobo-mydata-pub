@@ -3329,7 +3329,7 @@ const Form = {
 								const $btnPrevYear = $header.find('.ui-datepicker-prev-y');
 								const $btnNextYear = $header.find('.ui-datepicker-next-y');
 								if(direction != null){
-									const $distance = Math.min($max,distance);
+									let $distance = Math.min($max,distance);
 									if(direction == 'left' || direction == 'up')$distance = -$distance;
 									if(direction == 'left' || direction == 'right')$this.css('left',$distance);
 									if(direction == 'up' || direction == 'down')$this.css('top',$distance);

@@ -35,6 +35,13 @@
 			<div class="section pt-30">
 				<!--텍스트-->
 				<div>
+					<h1 class="gd__h1">리스트 없음</h1>
+					<div>
+						<div class="list-empty">
+							<i class="i-ico-warning" aria-hidden="true"></i>
+							<p>등록된 게시물이 없습니다.</p>
+						</div>
+					</div>
 					<h1 class="gd__h1">아코디언</h1>
 					<div>
 						<h2 class="gd__h2">단일</h2>
@@ -154,166 +161,174 @@
 								</li>
 							</ul>
 						</div>
-					</div>
 
-					<h1 class="gd__h1">상품</h1>
-					<div>
-						<div class="list-opt-bar top-line mt-32">
-							<div class="left">
-								상품 123개
-							</div>
-							<div class="right">
-								<div class="select inline">
-									<select title="정렬">
-										<option value="1">인기순</option>
-										<option value="2">낮은가격순</option>
-										<option value="3">높은가격순</option>
-										<option value="4">신규등록순</option>
-									</select>
+						<h2 class="gd__h2">기타</h2>
+						<h3 class="gd__h2">버튼형</h3>
+						<div>
+							<div class="user-txt-info pb-24">
+								<div class="dt">
+									<strong>홍길동</strong>
+									<a href="#userForm" class="button small gray ui-folding-btn">정보변경</a>
 								</div>
-								<div class="list-type-btn">
-									<a href="#" class="button icon list-bar">
-										<i class="i-ico-list-bar"></i>
-									</a>
-									<a href="#" class="button icon list-grid">
-										<i class="i-ico-list-grid"></i>
-									</a>
+								<div class="dd">
+									<p>010-2345-6780</p>
+									<p>ezenudu@naver.com</p>
 								</div>
 							</div>
-						</div>
-						<div class="product-list">
-							<ul>
-								<li>
-									<div class="product-list-item">
-										<a href="#상세페이지주소" class="product-img btn-click">
-											<img src="../../static/images/temp/thumb-temp.jpg" alt="">
-										</a>
-										<div class="product-cont">
-											<a href="#상세페이지주소" class="inner btn-click">
-												<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-												<div class="product-price-wrap">
-													<div class="product-price"><strong>20,000</strong>원</div>
-													<div class="product-price line-through"><strong>20,000</strong>원</div>
-												</div>
-												<div class="product-rating">
-													<i class="i-ico-star on" aira-label="별점"></i> 4.1 (12)
-												</div>
-												<div class="product-badge">
-													<i class="badge line red">MD추천</i>
-													<i class="badge line blue">무료배송</i>
-													<i class="badge line green">특가</i>
-												</div>
-											</a>
-											<button type="button" class="button icon btn-product-cart" aria-label="장바구니 담기"></button>
+							<div id="userForm" class="gray-form-wrap hide">
+								<div class="form-lbl mt-4">
+									<div class="left">
+										<label for="userName">보내는 분</label>
+										<i class="require" aria-label="필수"></i>
+									</div>
+									<div class="right fz-10 fc-666">보내는 분의 이름을 변경하여 주문 가능합니다</div>
+								</div>
+								<div class="form-item">
+									<div class="input">
+										<input type="text" id="userName" value="홍길동">
+									</div>
+								</div>
+		
+								<div class="form-lbl">
+									<div class="left">
+										<label for="userMobile1">휴대폰</label>
+										<i class="require" aria-label="필수"></i>
+									</div>
+									<div class="right fz-10 fc-666">해당 번호로 주문 정보가 발송됩니다</div>
+								</div>
+								<div class="form-item">
+									<div class="flex">
+										<div class="select">
+											<select id="userMobile1" title="휴대폰 식별번호 선택">
+												<option value="010">010</option>
+												<option value="011">011</option>
+												<option value="016">016</option>
+												<option value="017">017</option>
+												<option value="018">018</option>
+												<option value="019">019</option>
+											</select>
+										</div>
+										<div class="unit">-</div>
+										<div class="input">
+											<input type="tel" maxlength="4" title="휴대폰 중간번호 입력" value="2345">
+										</div>
+										<div class="unit">-</div>
+										<div class="input">
+											<input type="tel" maxlength="4" title="휴대폰 마지막번호 입력" value="6780">
 										</div>
 									</div>
-								</li>
-								<li>
-									<div class="product-list-item">
-										<a href="#상세페이지주소" class="product-img btn-click">
-											<img src="../../static/images/temp/thumb-temp.jpg" alt="">
-										</a>
-										<div class="product-cont">
-											<a href="#상세페이지주소" class="inner btn-click">
-												<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-												<div class="product-price-wrap">
-													<div class="product-price"><strong>20,000</strong>원</div>
-													<div class="product-price line-through"><strong>20,000</strong>원</div>
-												</div>
-												<div class="product-rating">
-													<i class="i-ico-star on" aira-label="별점"></i> 4.1 (12)
-												</div>
-												<div class="product-badge">
-													<i class="badge line red">MD추천</i>
-													<i class="badge line blue">무료배송</i>
-												</div>
-											</a>
-											<button type="button" class="button icon btn-product-cart" aria-label="장바구니 담기"></button>
+								</div>
+		
+								<div class="form-lbl">
+									<label for="userMail1">이메일</label>
+									<i class="require" aria-label="필수"></i>
+								</div>
+								<div class="form-item inp-mail">
+									<div class="flex">
+										<div class="input"><input type="text" title="이메일 계정 입력" value="ezenudu"></div>
+										<div class="unit">@</div>
+										<div class="input w-fp-50"><input type="text" title="이메일 도메인 입력" value="naver.com"></div>
+									</div>
+									<div class="flex">
+										<div class="select">
+											<select title="이메일 도메인 선택">
+												<option value="etc">직접입력</option>
+												<option value="naver.com">naver.com</option>
+												<option value="daum.net">daum.net</option>
+												<option value="hanmail.net">hanmail.net</option>
+												<option value="nate.com">nate.com</option>
+												<option value="gmail.com">gmail.com</option>
+											</select>
 										</div>
 									</div>
-								</li>
-								<li>
-									<div class="product-list-item">
-										<a href="#상세페이지주소" class="product-img btn-click soldout"><!-- 품절: .soldout -->
-											<img src="../../static/images/temp/thumb-temp.jpg" alt="">
-										</a>
-										<div class="product-cont">
-											<a href="#상세페이지주소" class="inner btn-click">
-												<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-												<div class="product-price-wrap">
-													<div class="product-price"><strong>20,000</strong>원</div>
-													<div class="product-price line-through"><strong>20,000</strong>원</div>
-												</div>
-												<div class="product-rating">
-													<i class="i-ico-star on" aira-label="별점"></i> 4.1 (12)
-												</div>
-												<div class="product-badge">
-												</div>
-											</a>
-											<button type="button" class="button icon btn-product-cart" aria-label="장바구니 담기"></button>
+								</div>
+		
+								<div class="t-center mt-20">
+									<button type="button" class="button line small ui-folding-close">취소</button>
+									<button type="button" class="button primary small ui-folding-close">확인</button>
+								</div>
+							</div>
+						</div>
+						<h3 class="gd__h2">하단 화살표형</h3>
+						<div>
+							<div class="gray-round-box pd-x-16">
+								<div class="box-item">
+									<div class="th">
+										<p><strong>총 적립금</strong></p>
+										<p class="fz-11 fc-666">가용 + 가용예정 적립금</p>
+									</div>
+									<div class="td">
+										<div class="product-price"><strong>20,000</strong>원</div>
+									</div>
+								</div>
+								<div id="detailPoint" class="hide">
+									<div class="box-item">
+										<div class="th">
+											<p><strong>가용예정 적립금</strong></p>
+											<p class="fz-11 fc-666">가용 적립금으로 전환 예정인 적립금</p>
+										</div>
+										<div class="td">
+											<div class="product-price"><strong>20,000</strong>원</div>
 										</div>
 									</div>
-								</li>
-								<li>
-									<div class="product-list-item">
-											<a href="#상세페이지주소" class="product-img btn-click">
-												<img src="../../static/images/temp/thumb-temp.jpg" alt="">
-											</a>
-											<div class="product-cont">
-												<a href="#상세페이지주소" class="inner btn-click">
-													<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-													<div class="product-price-wrap">
-														<div class="product-price"><strong>20,000</strong>원</div>
-														<div class="product-price line-through"><strong>20,000</strong>원</div>
-													</div>
-													<div class="product-rating">
-														<i class="i-ico-star on" aira-label="별점"></i> 4.1 (12)
-													</div>
-													<div class="product-badge">
-														<i class="badge line red">MD추천</i>
-														<i class="badge line blue">무료배송</i>
-														<i class="badge line green">특가</i>
-													</div>
-												</a>
-												<button type="button" class="button icon btn-product-cart" aria-label="장바구니 담기"></button>
-											</div>
+									<div class="box-item">
+										<div class="th">
+											<p><strong>가용 적립금</strong></p>
+											<p class="fz-11 fc-666">현재 사용 가능한 적립금</p>
+										</div>
+										<div class="td">
+											<div class="product-price"><strong>20,000</strong>원</div>
+										</div>
 									</div>
-								</li>
-							</ul>
+									<div class="box-item">
+										<div class="th">
+											<p><strong>소멸예정 적립금</strong></p>
+											<p class="fz-11 fc-666">이번달 소멸 예정 적립금</p>
+										</div>
+										<div class="td">
+											<div class="product-price"><strong>20,000</strong>원</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<a href="#detailPoint" class="button arr-folding-btn ui-folding-btn"><i class="i-ico-arrow-down-16"></i><span class="blind">적립금 상세보기</span></a>
+							</div>
 						</div>
-						<br>
-						<div class="scl-list-wrap">
-							<ul>
-								<li>
-									<a href="#" class="product-scl-item btn-click">
-										<div class="product-img"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-										<div class="product-price"><strong>20,000</strong>원</div>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="product-scl-item btn-click">
-										<div class="product-img "><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-										<div class="product-price"><strong>20,000</strong>원</div>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="product-scl-item btn-click">
-										<div class="product-img"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-										<div class="product-price"><strong>20,000</strong>원</div>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="product-scl-item btn-click">
-										<div class="product-img"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										<div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
-										<div class="product-price"><strong>20,000</strong>원</div>
-									</a>
-								</li>
-							</ul>
-						</div>
+
+						<h2 class="gd__h2">faq-list</h2>
+						<ul class="faq-list folding-list ui-folding">
+							<li>
+								<div class="folding-head">
+									<a href="#">회원 아이디와 비밀번호를 변경하고 싶어요.</a>
+								</div>
+								<div class="folding-panel">
+									<div>
+										카드환불의 경우 카드사 사정에 따라 환불 접수일로 부터 영업일 기준 3~7일 정도 소요될 수있습니다. <br>자세한 사항은 카드사에 문의 부탁드리며, 7일 이후에도 환불되지 않은 경우 1:1문의 부탁드립니다.
+									</div>
+		
+									<ul class="file-list mt-30"><!-- 첨부파일 없으면 display: none -->
+										<li><a href="#" class="btn-txt">Abcd.jpg<i class="i-ico-file ml-4" aria-hidden="true"></i></a></li>
+										<li><a href="#" class="btn-txt">Abcd.jpg<i class="i-ico-file ml-4" aria-hidden="true"></i></a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="folding-head">
+									<a href="#">현금영수증을 발급 받고 싶어요.</a>
+								</div>
+								<div class="folding-panel">
+									<div>
+										카드환불의 경우 카드사 사정에 따라 환불 접수일로 부터 영업일 기준 3~7일 정도 소요될 수있습니다. <br>자세한 사항은 카드사에 문의 부탁드리며, 7일 이후에도 환불되지 않은 경우 1:1문의 부탁드립니다.
+									</div>
+		
+									<ul class="file-list mt-30">
+										<li><a href="#" class="btn-txt">Abcd.jpg<i class="i-ico-file ml-4" aria-hidden="true"></i></a></li>
+										<li><a href="#" class="btn-txt">Abcd.jpg<i class="i-ico-file ml-4" aria-hidden="true"></i></a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
 					</div>
 
 					<h1 class="gd__h1">pagination</h1>
@@ -325,10 +340,14 @@
 							</div>
 							<a href="#none" class="btn next" aria-label="다음페이지" role="button"></a>
 						</div>
+						<div class="btn-wrap mt-24">
+							<button type="button" class="button line gray more" role="button">더보기<span>20/28</span></button>
+						</div>
 					</div>
 
 					<h1 class="gd__h1">line-list</h1>
 					<div>
+						<h2 class="gd__h2">line-list-1</h2>
 						<ul class="line-list-1 ico-line-list">
 							<li>
 								<a href="#" class="item btn-click">
@@ -355,108 +374,27 @@
 								</a>
 							</li>
 						</ul>
-					</div>
-
-					<h1 class="gd__h1">review-list</h1>
-					<div>
-						<div class="review-list">
-							<ul>
-								<li>
-									<div class="review-list-item">
-										<div class="info">
-											<div class="name">김*아</div>
-											<div class="date">2021.08.30</div>
-											<div class="ico-star-wrap" aira-label="별점" data-on="4">
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-											</div>
-										</div>
-										<div class="text">
-											주문하고 바로 보내주셔서 다음날 받았어요.<br>
-											너무 맛있습니다. 서비스도 좋고 기대이상입니다.<br>
-											재구매 의사있어요. 감사합니다.
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="review-list-item">
-										<div class="info">
-											<div class="name">김*아</div>
-											<div class="date">2021.08.30</div>
-											<div class="ico-star-wrap" aira-label="별점" data-on="5">
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-											</div>
-										</div>
-										<div class="img-box-wrap">
-											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										</div>
-										<div class="text">
-											주문하고 바로 보내주셔서 다음날 받았어요.<br>
-											너무 맛있습니다. 서비스도 좋고 기대이상입니다.<br>
-											재구매 의사있어요. 감사합니다.
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="review-list-item">
-										<div class="info">
-											<div class="name">김*아</div>
-											<div class="date">2021.08.30</div>
-											<div class="ico-star-wrap" aira-label="별점" data-on="3">
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-											</div>
-										</div>
-										<div class="text">
-											주문하고 바로 보내주셔서 다음날 받았어요.<br>
-											너무 맛있습니다. 서비스도 좋고 기대이상입니다.<br>
-											재구매 의사있어요. 감사합니다.
-										</div>
-										<div class="btn">
-											<button type="button" class="button small gray">수정하기</button>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="review-list-item">
-										<div class="info">
-											<div class="name">김*아</div>
-											<div class="date">2021.08.30</div>
-											<div class="ico-star-wrap" aira-label="별점" data-on="2">
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-												<i></i>
-											</div>
-										</div>
-										<div class="img-box-wrap">
-											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
-										</div>
-										<div class="text">
-											주문하고 바로 보내주셔서 다음날 받았어요.<br>
-											너무 맛있습니다. 서비스도 좋고 기대이상입니다.<br>
-											재구매 의사있어요. 감사합니다.
-										</div>
-										<div class="btn">
-											<button type="button" class="button small gray">수정하기</button>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
+						<h2 class="gd__h2">line-list-2</h2>
+						<ul class="line-list-2 mt-8">
+							<li>
+								<a href="#" class="notice-item btn-click">
+									<div class="tit">공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.</div>
+									<div class="date">2020-01-23</div>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="notice-item btn-click">
+									<div class="tit">공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.</div>
+									<div class="date">2020-01-23</div>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="notice-item btn-click">
+									<div class="tit">공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.공지사항제목입니다.</div>
+									<div class="date">2020-01-23</div>
+								</a>
+							</li>
+						</ul>
 					</div>
 
 					<h1 class="gd__h1">qna-list</h1>
@@ -470,7 +408,7 @@
 											<div class="name">김*아</div>
 											<div class="date">2021.08.30</div>
 										</div>
-										<div class="tit">주문했는데 언제 배송될까요?</div>
+										<div class="tit">언제쯤이면 답변이 올까요?</div>
 									</div>
 								</li>
 								<li>
@@ -492,7 +430,7 @@
 												<div class="name">김*아</div>
 												<div class="date">2021.08.30</div>
 											</div>
-											<div class="tit">주문했는데 언제 배송될까요?</div>
+											<div class="tit">언제쯤이면 답변이 올까요?</div>
 										</a>
 									</div>
 									<div class="folding-panel">
@@ -525,6 +463,115 @@
 								</li>
 							</ul>
 						</div>
+					</div>
+
+					<h1 class="gd__h1">reply-list</h1>
+					<div class="reply-list">
+						<ul>
+							<li>
+								<div class="reply-item">
+									<div class="info">
+										<div class="name">김*아</div>
+										<div class="date">2021.08.30</div>
+									</div>
+									<div class="reply-cont">
+										<div class="text">
+											이벤트 댓글 내용입니다.이벤트 댓글 내용입니다.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reply-item">
+									<div class="info">
+										<div class="name">김*아</div>
+										<div class="date">2021.08.30</div>
+									</div>
+									<div class="reply-cont">
+										<div class="text">
+											삭제된 댓글입니다.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reply-item">
+									<div class="info">
+										<div class="name">김*아</div>
+										<div class="date">2021.08.30</div>
+									</div>
+									<div class="reply-cont">
+										<div class="text">
+											이벤트 댓글 내용입니다.이벤트 댓글 내용입니다.
+										</div>
+										<a href="#" class="img-box-wrap">
+											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
+											<div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div>
+										</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reply-item">
+									<div class="info">
+										<div class="name">김*아</div>
+										<div class="date">2021.08.30</div>
+									</div>
+									<div class="reply-cont">
+										<div class="text">
+											이벤트 댓글 내용입니다.이벤트 댓글 내용입니다.
+										</div>
+									</div>
+									<div class="btn">
+										<button type="button" class="button small gray">수정</button>
+										<button type="button" class="button small gray">삭제</button>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reply-item">
+									<div class="info">
+										<div class="name">김*아</div>
+										<div class="date">2021.08.30</div>
+									</div>
+									<div class="reply-cont form"><!-- .form 클래스 추가 -->
+										<div class="form-item">
+											<div class="textarea">
+												<textarea rows="5" data-text-count="txtCount" maxlength="100" title="상품평 작성" placeholder="100자 이내로 입력해 주세요"></textarea>
+											</div>
+										</div>
+										<div class="form-item mt-24">
+											<div class="flex">
+												<button type="button" class="button line"> 
+													<i class="i-ico-camera" aria-hidden="true"></i>
+													<span class="fz-14 fw-500">사진 등록하기</span>
+												</button>
+											</div>
+											<p class="fz-12 fc-666 mt-8">확장자 JPG, GIF, PNG / 용량 10M 이하</p>
+				
+											<div class="img-box-wrap ty2 mt-20">
+												<div class="img-box">
+													<img src="../../static/images/temp/thumb-temp.jpg" alt="">
+													<button class="img-box-del" aria-label="첨부이미지 삭제"></button>
+												</div>
+												<div class="img-box">
+													<img src="../../static/images/temp/thumb-temp.jpg" alt="">
+													<button class="img-box-del" aria-label="첨부이미지 삭제"></button>
+												</div>
+												<div class="img-box">
+													<img src="../../static/images/temp/thumb-temp.jpg" alt="">
+													<button class="img-box-del" aria-label="첨부이미지 삭제"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="btn">
+										<button type="button" class="button small gray">확인</button>
+										<button type="button" class="button small gray">삭제</button>
+									</div>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

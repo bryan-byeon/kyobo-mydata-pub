@@ -104,16 +104,16 @@
       display: block;
       position: absolute;
       width: 20px;
-      height: 1px;
+      height: 2px;
       background: #333;
-      top: 20px;
+      top: 15px;
       right: 6px;
       transition: background 0.3s 0s;
       &:before {
         display: block;
         position: absolute;
         width: 20px;
-        height: 1px;
+        height: 2px;
         background: #333;
         content: '';
         transition: width 0.2s 0.4s, top 0.2s 0.2s, transform 0.2s 0s;
@@ -125,7 +125,7 @@
         display: block;
         position: absolute;
         width: 20px;
-        height: 1px;
+        height: 2px;
         background: #333;
         content: '';
         transition: width 0.2s 0.4s, bottom 0.2s 0.2s, transform 0.2s 0s;
@@ -689,7 +689,7 @@
         @include img-fit(false);
       }
       &.off:before{
-        content:'최근 본 상품';
+        content:'퀵 메뉴';
         display: flex;
         position: absolute;
         left: 0;

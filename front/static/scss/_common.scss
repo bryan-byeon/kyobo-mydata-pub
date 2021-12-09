@@ -191,7 +191,7 @@ html.mobile{
 .flex{
 	display:flex;
 	&+.flex{
-		margin-top:8px;
+		margin-top: 6px;
 	}
 	&:not([class*='space-']):not([class*='flex-']):not([class*='justify-']):not([class*='not-full']){
 		> *:not(.unit) {
@@ -213,12 +213,12 @@ html.mobile{
 		}
 	}
 	> * + * {
-		margin-left: 4px;
+		margin-left: 6px;
 	}
 	+ .input,
 	+ .select,
 	+ .textarea{
-		margin-top: 8px;
+		margin-top: 6px;
 	}
 }
 .overflow-hidden{overflow: hidden;}

@@ -97,10 +97,12 @@
 	&+.input,
 	&+.select,
 	&+.textarea{
-		margin-top:8px;
+		margin-top:6px;
 	}
 
 	&.inline{
+		display: inline-flex;
+		width: auto;
 		select,
 		.btn-select{
 			border: 0 none;

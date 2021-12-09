@@ -322,7 +322,7 @@ div.checkbox.ty2 + div.checkbox.ty2{
 }
 .chk-item-list{
 	.chk-item+.chk-item{
-		margin-top: 8px;
+		margin-top: 6px;
 	}
 }
 .chk-item{
@@ -384,5 +384,5 @@ div.checkbox.ty2 + div.checkbox.ty2{
 .check-btn-grid{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }

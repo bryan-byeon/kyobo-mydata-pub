@@ -36,12 +36,14 @@
 		box-shadow:0 0 5px rgba(0,0,0,0.3);
 	}
 	>div{
+		position:relative;
+		margin:0;
+		@include web-center;
 		display: flex;
 		align-items: center;
 		min-height: 68px;
 		padding:10px 50px;
 		text-align: center;
-		margin:0;
 		transition:border 0.5s;
 	}
 	h1{

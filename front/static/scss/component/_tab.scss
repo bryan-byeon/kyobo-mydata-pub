@@ -222,8 +222,9 @@
 	}
 	> ul{
 		display:flex;
-		justify-content: space-between;
-		padding: 0 12px;
+		// justify-content: space-between;
+		// padding: 0 12px;
+		justify-content: space-evenly;
 		white-space: nowrap;
 		text-align: center;
 		@include scroll-x;
