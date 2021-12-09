@@ -1,0 +1,78 @@
+// folding
+.section{
+	.folding-list{
+		@include outer;
+	}
+}
+.folding-list{
+	border:1px solid #eee;
+	border-width: 1px 0;
+	overflow:hidden;
+	&.line-none{
+		border-width: 0;
+	}
+	&.line-bottom-none{
+		border-bottom-width: 0;
+	}
+	>li,
+	>.folding-head{
+		position:relative;
+		border-top:1px solid #eee;
+		&:first-child{border-top-width:0;}
+	}
+	.folding-head{
+		background:#fff;
+		font-size: 15px;
+		line-height: 1.47;
+		a{
+			display:block;
+			position:relative;
+			padding:21px 54px 21px 20px;
+			overflow: hidden;
+			&:after{
+				content:'';
+				display:block;
+				position:absolute;
+				top:20px;
+				right:20px;
+				width:24px;
+				height:24px;
+				background: url(../images/icon/ico-arrow-down@3x.png) no-repeat center center / contain;
+				transform:rotate3d(1,0,0,0deg);
+				transition:0.3s;
+			}
+			&.disabled{
+				background:#f0f0f0;
+				color:#858585;
+				&:after{
+					border-color:#858585;
+				}
+			}
+		}
+	}
+	>li.open {
+		.folding-head{
+			a{
+				font-weight:bold;
+			}
+		} 
+	}
+	.folding-head a.open{
+		font-weight:bold;
+	}
+	li.open .folding-head a:after,
+  .folding-head a.open:after{
+		transform:rotate3d(1,0,0,180deg);
+	}
+	.folding-panel{
+		display:none;
+		position: relative;
+		padding:0 20px 30px;
+	}
+	&.folding-dl{
+		.folding-panel{
+			padding-top: 30px;
+			border-top: 1px solid #eee;
+		}
+	}
+}

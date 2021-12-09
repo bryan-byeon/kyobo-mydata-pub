@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+<title>교보증권 마이데이타</title>
+<link href="../../static/css/front.min.css" rel="stylesheet" />
+<script type="text/javascript" src="../../static/js/ui-common.js"></script>
+<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+</head>
+<body>
+<article id="wrap">
+	<div data-include-html="../../include/header-back.html" data-title="주문/배송 조회"></div>
+
+	<!-- 컨테이너 -->
+	<main id="container">
+		<!-- 컨텐츠 -->
+		<section id="contents">
+			<div class="section">
+        <p class="fz-13 fc-666 t-center">수취완료된 주문상품만 교환/반품 신청이 가능합니다.</p>
+
+        <div class="list-opt-bar top-line mt-16">
+          <div class="right">
+            <div class="select inline">
+              <select title="주문상태">
+                <option value="1">전체</option>
+                <option value="2">출고준비중</option>
+                <option value="3">배송중</option>
+                <option value="4">수취완료</option>
+              </select>
+            </div>
+            <div class="select inline">
+              <select title="기간별 검색" class="datepicker-etc-select">
+                <option value="30">30일</option>
+                <option value="etc">직접선택</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="datepicker-etc hide">
+          <div class="form-item">
+            <div class="flex">
+              <div class="input"><input type="tel" class="datepicker" data-max="today" title="시작날짜 입력"></div>
+              <div class="unit">~</div>
+              <div class="input"><input type="tel" class="datepicker" data-max="today" title="마지막날짜 입력"></div>
+            </div>
+          </div>
+          <div class="btn-wrap">
+            <button type="button" class="button line small">조회하기</button>
+          </div>
+        </div>
+
+        <!-- 내역없을때 -->
+        <div class="list-empty">
+          <i class="i-ico-warning" aria-hidden="true"></i>
+          <p>주문내역이 없습니다.</p>
+        </div>
+        <!-- //내역없을때 -->
+
+        <ul class="order-list">
+          <li>
+            <div class="order-list-item">
+              <div class="order-date-info">
+                <strong class="date">2021-09-05</strong>
+                <a href="#" class="number btn-txt">주문번호 B1008066895(1055397545)<i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+              </div>
+              <div class="order-line-box">
+                <div class="items">
+                  <div class="item">
+                    <a href="#" class="product-info btn-click"><!-- 상품 상세 -->
+                      <div class="product-img">
+                        <img src="../../static/images/temp/thumb-temp.jpg" alt="">
+                      </div>
+                      <div>
+                        <div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
+                        <div class="state">무료배송</div>
+                      </div>
+                    </a>
+                    <div class="product-opt-list mt-12">
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">불고기 2팩</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">반조리 불고기 2팩 + 우동사리 1팩 + 쌈야채 포함 / 1개</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-state-wrap">
+                  <div class="order-state">
+                    <div class="sub">배송비 3,000원</div>
+                    <div><strong>교환신청</strong></div>
+                  </div>
+                  <div class="order-util-btn">
+                    <button type="button" class="button line small" onclick="Layer.open('#popProductChangeCancel')">교환신청취소</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="order-list-item">
+              <div class="order-date-info">
+                <strong class="date">2021-09-05</strong>
+                <a href="#" class="number btn-txt">주문번호 B1008066895(1055397545)<i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+              </div>
+              <div class="order-line-box">
+                <div class="items">
+                  <div class="item">
+                    <a href="#" class="product-info btn-click"><!-- 상품 상세 -->
+                      <div class="product-img">
+                        <img src="../../static/images/temp/thumb-temp.jpg" alt="">
+                      </div>
+                      <div>
+                        <div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
+                        <div class="state">무료배송</div>
+                      </div>
+                    </a>
+                    <div class="product-opt-list mt-12">
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">불고기 2팩</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">반조리 불고기 2팩 + 우동사리 1팩 + 쌈야채 포함 / 1개</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <a href="#" class="product-info btn-click"><!-- 상품 상세 -->
+                      <div class="product-img">
+                        <img src="../../static/images/temp/thumb-temp.jpg" alt="">
+                      </div>
+                      <div>
+                        <div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
+                        <div class="state">무료배송</div>
+                      </div>
+                    </a>
+                    <div class="product-opt-list mt-12">
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">불고기 2팩</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">반조리 불고기 2팩 + 우동사리 1팩 + 쌈야채 포함 / 1개</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-state-wrap">
+                  <div class="order-state">
+                    <div class="sub">배송비 3,000원</div>
+                    <div><strong>반품신청</strong></div>
+                  </div>
+                  <div class="order-util-btn">
+                    <button type="button" class="button line small" onclick="Layer.open('#popProductReturnCancel')">반품신청취소</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="order-list-item">
+              <div class="order-date-info">
+                <strong class="date">2021-09-05</strong>
+                <a href="#" class="number btn-txt">주문번호 B1008066895(1055397545)<i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+              </div>
+              <div class="order-line-box">
+                <div class="items">
+                  <div class="item">
+                    <a href="#" class="product-info btn-click"><!-- 상품 상세 -->
+                      <div class="product-img">
+                        <img src="../../static/images/temp/thumb-temp.jpg" alt="">
+                      </div>
+                      <div>
+                        <div class="product-name">[산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득! [산지직송] 다양한 해물과 신선한 채소가 가득!</div>
+                        <div class="state">무료배송</div>
+                      </div>
+                    </a>
+                    <div class="product-opt-list mt-12">
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">불고기 2팩</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                      <div class="product-opt-item ty2">
+                        <div class="order-price align-center">
+                          <div class="opt-info">반조리 불고기 2팩 + 우동사리 1팩 + 쌈야채 포함 / 1개</div>
+                          <div class="product-price"><strong>20,000</strong>원</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-state-wrap">
+                  <div class="order-state">
+                    <div class="sub">배송비 3,000원</div>
+                    <div><strong>교환완료</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="btn-wrap mt-24">
+          <button type="button" class="button line gray more" role="button">더보기<span>20/28</span></button>
+        </div>
+			</div>
+		</section>
+		<!-- //컨텐츠 -->
+
+		<!-- 팝업 -->
+    <!-- 교환취소 -->
+    <div id="popProductChangeCancel" class="popup full" role="dialog" aria-hidden="true">
+      <article class="pop-wrap">
+        <div class="pop-head">
+          <div>
+            <h1>교환신청 취소</h1>
+            <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+          </div>
+        </div>
+        <div class="pop-body">
+          <div class="section">
+            <h2 class="fz-22 t-center mt-60 mb-12">교환신청을 <br>취소하시겠습니까?</h2>
+            <ul class="txt-list">
+              <li class="dot">상품을 이미 보내신 경우 취소가 불가능합니다.</li>
+              <li class="dot">교환/반품 관련하여 문의사항이 있을 경우, 온라인 상담신청 또는 상담센터 (00-0000-0000)로 문의 바랍니다.</li>
+              <li class="dot">결제하신 교환배송비가 있을 경우 결제수단에 따라 영업일 기준 7일 이내에 환불됩니다.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pop-foot">
+          <div>
+            <div class="flex">
+              <button type="button" class="button line ui-pop-close">취소</button>
+              <button type="button" class="button primary">교환신청 취소</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <!-- //교환취소 -->
+
+    <!-- 반품취소 -->
+    <div id="popProductReturnCancel" class="popup full" role="dialog" aria-hidden="true">
+      <article class="pop-wrap">
+        <div class="pop-head">
+          <div>
+            <h1>반품신청 취소</h1>
+            <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+          </div>
+        </div>
+        <div class="pop-body">
+          <div class="section">
+            <h2 class="fz-22 t-center mt-60 mb-12">반품신청을 <br>취소하시겠습니까?</h2>
+            <ul class="txt-list">
+              <li class="dot">상품을 이미 보내신 경우 취소가 불가능합니다.</li>
+              <li class="dot">교환/반품 관련하여 문의사항이 있을 경우, 온라인 상담신청 또는 상담센터 (00-0000-0000)로 문의 바랍니다.</li>
+              <li class="dot">결제하신 교환배송비가 있을 경우 결제수단에 따라 영업일 기준 7일 이내에 환불됩니다.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pop-foot">
+          <div>
+            <div class="flex">
+              <button type="button" class="button line ui-pop-close">취소</button>
+              <button type="button" class="button primary">반품신청 취소</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <!-- //반품취소 -->
+		<!-- //팝업 -->
+	</main>
+	<!-- 컨테이너 -->
+
+	<div data-include-html="../../include/footer.html"></div>
+</article>
+</body>
+</html>

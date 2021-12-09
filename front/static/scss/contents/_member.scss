@@ -1,0 +1,110 @@
+// 로그인
+.btn-txt-wrap{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+  margin-top: 24px;
+  .btn-txt{
+    line-height: 22px;
+    font-weight: 500;
+  }
+	> li{
+		position: relative;
+		padding: 0 13px 0 12px;
+		&:after{
+			content: '';
+			display: block;
+			width: 1px;
+			height: 12px;
+			position: absolute;
+			right: 0;
+			top: 7px;
+      background: #ddd;
+		}
+    &:first-child{
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+      &:after{
+        content: none;
+      }
+    }
+	}
+}
+.sns-menu-btn{
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: flex;
+  justify-content: center;
+  li{
+    padding: 0 12px;
+  }
+  .button{
+    display: block;
+    height: auto;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #666;
+    font-weight: normal;
+    [class*="i-ico-"]{
+      margin: 0;
+      vertical-align: top;
+    }
+    span{
+      display: block;
+      margin-top: 4px;
+    }
+  }
+  &.ty2{
+    display: flex;
+    padding: 16px 0;
+    margin-top: 0;
+    justify-content: space-evenly;
+    li{
+      padding: 0;
+      .button{
+        margin:0 auto;
+      }
+    }
+  }
+}
+
+// 로그인 팝업
+.pop-login-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc( 100vh - 108px);
+}
+
+//간편 로그인 미 연결 안내
+.simple-login-guide{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .inner{
+    display: flex;
+    height: 100%;
+    flex: 1 1 auto;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    h2{
+      font-size: 22px;
+      line-height: 30px;
+      color: #222;
+    }
+    p{
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 20px;
+      color: #666;
+    }
+  }
+  .btn-wrap{
+    padding-bottom: 20px;
+  }
+}
+

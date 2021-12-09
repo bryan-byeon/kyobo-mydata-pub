@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+<title>교보증권 마이데이타</title>
+<link href="../../static/css/front.min.css" rel="stylesheet" />
+<script type="text/javascript" src="../../static/js/ui-common.js"></script>
+<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+</head>
+<body>
+<article id="wrap">
+	<div data-include-html="../../include/header-back.html" data-title="적립금"></div>
+
+	<!-- 컨테이너 -->
+	<main id="container">
+		<!-- 컨텐츠 -->
+		<section id="contents">
+			<div class="section">
+        <div class="gray-round-box pd-x-16">
+          <div class="box-item">
+            <div class="th">
+              <p><strong>총 적립금</strong></p>
+              <p class="fz-11 fc-666">가용 + 가용예정 적립금</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong>20,000</strong>원</div>
+            </div>
+          </div>
+          <div id="detailPoint" class="hide">
+            <div class="box-item">
+              <div class="th">
+                <p><strong>가용예정 적립금</strong></p>
+                <p class="fz-11 fc-666">가용 적립금으로 전환 예정인 적립금</p>
+              </div>
+              <div class="td">
+                <div class="product-price"><strong>20,000</strong>원</div>
+              </div>
+            </div>
+            <div class="box-item">
+              <div class="th">
+                <p><strong>가용 적립금</strong></p>
+                <p class="fz-11 fc-666">현재 사용 가능한 적립금</p>
+              </div>
+              <div class="td">
+                <div class="product-price"><strong>20,000</strong>원</div>
+              </div>
+            </div>
+            <div class="box-item">
+              <div class="th">
+                <p><strong>소멸예정 적립금</strong></p>
+                <p class="fz-11 fc-666">이번달 소멸 예정 적립금</p>
+              </div>
+              <div class="td">
+                <div class="product-price"><strong>20,000</strong>원</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="#detailPoint" class="button arr-folding-btn ui-folding-btn"><i class="i-ico-arrow-down-16"></i><span class="blind">적립금 상세보기</span></a>
+        </div>
+        <div class="list-opt-bar top-line mt-16">
+          <div class="right">
+            <div class="select inline">
+              <select title="주문상태">
+                <option value="">적립/사용내역</option>
+                <option value="2">적립</option>
+                <option value="3">사용</option>
+                <option value="3">회수</option>
+                <option value="3">소멸</option>
+              </select>
+            </div>
+            <div class="select inline">
+              <select title="기간별 검색" class="datepicker-etc-select">
+                <option value="30">30일</option>
+                <option value="etc">직접선택</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="datepicker-etc hide">
+          <div class="form-item">
+            <div class="flex">
+              <div class="input"><input type="tel" class="datepicker" data-max="today" title="시작날짜 입력"></div>
+              <div class="unit">~</div>
+              <div class="input"><input type="tel" class="datepicker" data-max="today" title="마지막날짜 입력"></div>
+            </div>
+          </div>
+          <div class="btn-wrap">
+            <button type="button" class="button line small">조회하기</button>
+          </div>
+        </div>
+
+        <!-- 내역없을때 -->
+        <div class="list-empty">
+          <i class="i-ico-warning" aria-hidden="true"></i>
+          <p>해당 기간동안 내역이 없습니다.</p>
+        </div>
+        <!-- //내역없을때 -->
+        <div class="point-list">
+          <div class="point-item">
+            <div class="th">
+              <p>이벤트(보상)</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-blue">+20,000</strong>원</div>
+              <p class="sub">적립(가용)</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="th">
+              <p>적립취소</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-red">-20,000</strong>원</div>
+              <p class="sub">사용</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="th">
+              <p>이벤트(보상)</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-blue">+20,000</strong>원</div>
+              <p class="sub">적립(가용)</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="th">
+              <p>적립취소</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-red">-20,000</strong>원</div>
+              <p class="sub">사용</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="th">
+              <p>이벤트(보상)</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-blue">+20,000</strong>원</div>
+              <p class="sub">적립(가용)</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="th">
+              <p>적립취소</p>
+              <p class="sub">2021-09-24</p>
+            </div>
+            <div class="td">
+              <div class="product-price"><strong class="fc-red">-20,000</strong>원</div>
+              <p class="sub">사용</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-wrap mt-0">
+          <button type="button" class="button line gray more" role="button">더보기<span>20/28</span></button>
+        </div>
+
+        <div class="fz-14 mt-40"><strong>적립금이란?</strong></div>
+        <div class="txt-list mt-12">상품 구매 또는 상품평 작성, 이벤트 참여 등을 통한 각종 활동 시 지급해 드리는 적립금으로 1원 이상 적립 시 현금과 동일하게 제한없이 사용 가능합니다.</div>
+
+        <div class="fz-14 mt20"><strong>적립금 이용안내</strong></div>
+        <ul class="txt-list mt-12">
+          <li class="dot">신규가입 시 1,000원이 지급되며 한 ID당 1회만 지급합니다.</li>
+          <li class="dot">상품구매 시 구매 금액의 1%를 지급하여 드립니다.</li>
+          <li class="dot">적립금으로 구매하신 금액은 제외되며, 실 결제금액 기준으로 지급합니다.</li>
+          <li class="dot">배송비는 적립금에 포함되지 않습니다.</li>
+        </ul>
+			</div>
+		</section>
+		<!-- //컨텐츠 -->
+
+		<!-- 팝업 -->
+		<!-- //팝업 -->
+	</main>
+	<!-- 컨테이너 -->
+
+	<div data-include-html="../../include/footer.html"></div>
+</article>
+</body>
+</html>

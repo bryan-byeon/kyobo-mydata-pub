@@ -1,0 +1,100 @@
+.section .cs-main-link{
+  @include outer;
+}
+.cs-main-link{
+  li{
+    display: flex;
+    .button{
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      height: 60px;
+      padding: 0;
+      font-size: 15px;
+      text-align: left;
+      font-weight: normal;
+      &:first-child{
+        padding-left: 20px;
+      }
+    }
+    +li{
+      border-top: 1px solid #eee;
+    }
+  }
+}
+
+.faq-list.folding-list{
+  border-width: 0;
+  >li{
+    border-top-width: 0;
+    &:after{
+      content:'';
+      display: block;
+      height: 1px;
+      background: #eee;
+      margin: 0 20px;
+    }
+  }
+  &.no-last-line{
+    >li:last-child:after{
+      display: none;
+    }
+  }
+  .folding-head{
+    font-size: 14px;
+    line-height: 22px;
+    a{
+      padding-left: 40px;
+      &:before{
+        content:'Q';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 16px;
+        color: #666;
+        font-weight: 500;
+      }
+      &:after{
+        top: 50%;
+        margin-top: -12px;
+        background-image: url(../images/icon/ico-arrow-down-24@3x.png);
+      }
+    }
+  }
+  .folding-panel{
+    background: #f6f6f6;
+    padding: 20px 20px 20px 40px;
+    &:before{
+      content:'A';
+      position: absolute;
+      top: 19px;
+      left: 20px;
+      font-size: 16px;
+      color: var(--theme-color);
+      font-weight: 500;
+    }
+  }
+}
+.cs-main-banner{
+  border-radius: 8px;
+  padding: 20px 24px;
+  background: #e9f6db url(../images/contents/cs-main-banner@3x.png) no-repeat right 13px center / 60px auto;
+  a{
+    display: block;
+  }
+  .dt{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 25px;
+    b{
+      margin-left: 4px;
+    }
+  }
+  .dd{
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+    line-height: 19px;
+  }
+}

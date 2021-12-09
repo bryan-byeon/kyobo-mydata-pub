@@ -1,1 +1,1 @@
-# kb-mydata
+# kyobo-mydata-pub

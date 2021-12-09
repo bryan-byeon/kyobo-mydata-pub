@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+<title>교보증권 마이데이타</title>
+<link href="../../static/css/front.min.css" rel="stylesheet" />
+<script type="text/javascript" src="../../static/js/ui-common.js"></script>
+<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+</head>
+<body>
+<article id="wrap">
+	<div data-include-html="../../include/header-back.html" data-title="1:1 문의"></div>
+
+	<!-- 컨테이너 -->
+	<main id="container">
+		<!-- 컨텐츠 -->
+		<section id="contents">
+			<div class="section">
+
+        <div class="form-lbl mt12">
+          <label for="inquiryKind1">분류</label>
+        </div>
+        <div class="form-item">
+          <div class="select">
+            <select id="inquiryKind1" title="분류">
+              <option value="">상품문의</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-lbl">
+          <label for="inquiryTit1">문의제목</label>
+        </div>
+        <div class="form-item">
+          <div class="input"><input type="text" placeholder="내용을 입력하세요" id="inquiryTit1" title="내용입력"></div>
+        </div>
+
+        <div class="form-lbl">
+          <label for="inquiryText1">내용</label>
+        </div>
+        <div class="form-item">
+          <div class="textarea">
+            <textarea rows="8" id="inquiryText1"></textarea>
+          </div>
+        </div>
+
+        <div class="form-lbl">
+          <label for="emailRdo1">이메일</label>
+        </div>
+        <div class="form-item inp-mail">
+          <div class="chk-wrap">
+            <span class="radio">
+              <input type="radio" id="emailRdo1" name="emailRdo" value="Y" checked><i aria-hidden="true"></i>
+              <label for="emailRdo1" class="lbl">이메일로 받음</label>
+            </span>
+            <span class="radio">
+              <input type="radio" id="emailRdo2" name="emailRdo" value="N"><i aria-hidden="true"></i>
+              <label for="emailRdo2" class="lbl">이메일로 받지 않음</label>
+            </span>
+          </div>
+          <div class="flex">
+            <div class="input"><input type="text" title="이메일 계정 입력"></div>
+            <div class="unit">@</div>
+            <div class="input w-fp-50"><input type="text" title="이메일 도메인 입력"></div>
+          </div>
+          <div class="flex">
+            <div class="select">
+              <select title="이메일 도메인 선택">
+                <option value="etc">직접입력</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="hanmail.net">hanmail.net</option>
+                <option value="nate.com">nate.com</option>
+                <option value="gmail.com">gmail.com</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-24 fz-13 fc-666">고객님의 문의 내용에 대한 답변은 이메일과 마이페이지 &gt; 1:1문의내역에서 확인하실 수 있습니다.</div>
+        </div>
+
+
+        <div class="btn-wrap mt-32">
+          <div class="flex">
+            <a href="#none" class="button line" role="button">취소</a>
+            <a href="#none" class="button line" role="button">삭제</a>
+            <a href="#none" class="button green" role="button">확인</a>
+          </div>
+        </div>
+        
+			</div>
+		</section>
+		<!-- //컨텐츠 -->
+
+		<!-- 팝업 -->
+		<!-- //팝업 -->
+	</main>
+	<!-- 컨테이너 -->
+
+	<div data-include-html="../../include/footer.html"></div>
+</article>
+<script>
+  $('input[name=emailRdo]').change(function(){
+    const $val = $(this).val();
+    const $closest = $(this).closest('.form-item');
+    const $form = $closest.find('input[type=text], select');
+    if($val === 'N'){
+      $form.prop('disabled', true);
+    }else{
+      $form.prop('disabled', false);
+    }
+  });
+</script>
+</body>
+</html>

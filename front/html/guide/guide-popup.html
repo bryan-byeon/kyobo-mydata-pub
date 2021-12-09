@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+<title>교보증권 마이데이타</title>
+<link href="../../static/css/front.min.css" rel="stylesheet" />
+<script type="text/javascript" src="../../static/js/ui-common.js"></script>
+<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+</head>
+<body>
+<article id="wrap">
+	<div data-include-html="../../include/header.html" data-title="가이드"></div>
+	<div data-include-html="../../include/gnb.html"></div>
+
+	<!-- 컨테이너 -->
+	<main id="container">
+		<!-- 컨텐츠 -->
+		<section id="contents">
+			<div class="tab-navi">
+				<ul>
+					<li><a href="guide-txt.html"><span>텍스트</span></a></li>
+					<li><a href="guide-btn.html"><span>버튼</span></a></li>
+					<li><a href="guide-form.html"><span>폼요소</span></a></li>
+					<li><a href="guide-form2.html"><span>입력 UI</span></a></li>
+					<li><a href="guide-list.html"><span>리스트</span></a></li>
+					<li><a href="guide-table.html"><span>테이블</span></a></li>
+					<li class="active"><a href="guide-popup.html"><span>팝업</span></a></li>
+					<li><a href="guide-address.html"><span>주소검색</span></a></li>
+					<li><a href="guide-etc.html"><span>기타</span></a></li>
+					<li><a href="guide-dev.html"><span>개발자참고</span></a></li>
+				</ul>
+			</div>
+			<div class="section pt-30">
+				<div>
+					<h2 class="gd__h1">팝업</h2>
+					<h3 class="gd__h2">레이어</h3>
+					<div class="btn-wrap">
+						<div class="flex">
+							<a href="#" class="button line" onclick="Layer.open('#fullDialog')">풀팝업</a>
+							<a href="#" class="button line" onclick="Layer.open('#modalDialog')">모달팝업</a>
+						</div>
+					</div>
+					<div class="btn-wrap">
+						<div class="flex">
+							<a href="#" class="button line" onclick="Layer.open('#bottomDialog1')">하단팝업(짧음)</a>
+							<a href="#" class="button line" onclick="Layer.open('#bottomDialog2')">하단팝업(길때)</a>
+						</div>
+					</div>
+					<div class="btn-wrap">
+						<div class="flex">
+							<a href="win_pop.html" class="button line" target="_blank">팝업페이지</a>
+						</div>
+					</div>
+					<!-- <h3 class="gd__h2">select</h3>
+					<div class="mt-20">
+						<div class="form-lbl">
+							<label for="select1">옵션 선택</label>
+						</div>
+						<div class="form-item">
+							<div class="select">
+								<select id="select1" title="옵션 선택">
+									<option value="">옵션선택</option>
+									<option value="1">옵션1</option>
+									<option value="2">옵션2</option>
+									<option value="3">옵션3</option>
+									<option value="4">옵션4</option>
+									<option value="5">옵션5</option>
+								</select>
+							</div>
+						</div>
+					</div> -->
+					
+					<h2 class="gd__h1">로딩</h2>
+					<div class="btn-wrap">
+						<div class="flex">
+							<a href="#" class="button line" onclick="Loading.open();$(this).next().next().css('z-index',10000)">로딩창열기</a>
+							<a href="#" class="button line" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000)">로딩창열기 + 텍스트</a>
+							<a href="#" class="button line" onclick="Loading.close();$(this).removeAttr('style');">로딩창닫기</a>
+						</div>
+					</div>
+
+					<h2 class="gd__h1">메세지창</h2>
+					<div class="btn-wrap">
+						<div>
+							<div class="flex">
+								<a href="#" id="btnAlert" class="button line">얼럿</a>
+								<a href="#" id="btnConfirm" class="button line">컨펌</a>
+								<a href="#" id="btnPrompt" class="button line">입력</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- //컨텐츠 -->
+
+		<!-- 팝업 -->
+		<div id="fullDialog" class="popup full" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>전체팝업</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						<!-- CMS 영역 -->
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						<div class="form_lbl">
+							<label for="inpName1">이름</label>
+						</div>
+						<div class="fm_item">
+							<div class="input"><input type="text" id="inpName1" placeholder="이름입력"></div>
+						</div>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						팝업 컨텐츠<br>
+						<!-- //CMS 영역 -->
+					</div>
+				</div>
+				<div class="pop-foot">
+					<div>
+						<div class="flex">
+							<a href="#" class="button line ui-pop-close">확인</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="modalDialog" class="popup modal" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>팝업 타이틀</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 
+					</div>
+				</div>
+				<div class="pop-foot">
+					<div>
+						<div class="flex">
+							<a href="#" class="button line" onclick="Layer.close('#modalDialog');">확인</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="bottomDialog1" class="popup bottom" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>하단팝업제목</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="bottomDialog2" class="popup bottom" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+					</div>
+				</div>
+				<div class="pop-foot">
+					<div>
+						<div class="flex">
+							<a href="#" class="button line" onclick="Layer.close('#bottomDialog2');">확인</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+		<!-- //팝업 -->
+	</main>
+	<!-- //컨테이너 -->
+
+	<div data-include-html="../../include/footer.html"></div>
+</article>
+
+<!-- 디자인 확인용 -->
+<div class="gd__theme_color">
+	<dl>
+		<dt>테마색상 변경확인</dt>
+		<dd>
+			<input type="color" value="">
+			<div>
+				<div class="color"></div>
+				<div class="reset"><button type="button">리셋</button></div>
+			</div>
+		</dd>
+	</dl>
+</div>
+<!-- //디자인 확인용 -->
+
+<script>
+	$(function(){
+		$('#btnAlert').click(function(){
+			Layer.alert('얼럿창입니다.',function(){
+				console.log('얼럿 확인');
+			});
+			/*Layer.alert({
+				content:'얼럿창입니다.',
+				callback: function(){
+					console.log('얼럿 확인');
+				}
+			});*/
+		});
+		$('#btnConfirm').click(function(){
+			Layer.confirm('컨펌창입니다.',function(e){
+				if(e){
+					console.log('컨펌 확인');
+				}else{
+					console.log('컨펌 취소');
+				}
+			});
+		});
+		$('#btnPrompt').click(function(){
+			Layer.prompt('계좌번호를 입력해주세요.',function(e,val){
+				if(e){
+					console.log('prompt 확인');
+					$('#frm2_1').val(val);
+				}else{
+					console.log('prompt 취소');
+				}
+			});
+		});
+	});
+</script>
+</body>
+</html>

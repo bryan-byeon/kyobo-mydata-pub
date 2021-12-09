@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+<title>교보증권 마이데이타</title>
+<link href="../../static/css/front.min.css" rel="stylesheet" />
+<style>
+  
+</style>
+</head>
+<body>
+<h1 class="code__h1">교보증권 마이데이타 모바일 퍼블리싱</h1>
+<div class="code__wrap">
+  <div class="code__chk">
+    <span class="checkbox switch">
+      <input type="checkbox" id="isFrameChk"><i aria-hidden="true"></i>
+      <label for="autoLogin" class="lbl">미리보기창</label>
+    </span>
+  </div>
+  <div class="code__status">
+    <div class="info">
+      <span class="complete">완료본수 : <strong>0</strong></span>
+      <span class="ing">진행률 : <strong>0</strong>%</span>
+      <span class="total">총본수 : <strong>0</strong></span>
+    </div>
+    <div class="bar"><div style="width: 0%;"></div></div>
+  </div>
+	<div class="code__list">
+    <table>
+      <thead>
+        <tr>
+          <th>1뎁스</th>
+          <th>2뎁스</th>
+          <th>3뎁스</th>
+          <th>화면 ID</th>
+          <th>완료</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="code__preview">
+  <h2>미리보기</h2>
+  <a href="#" class="code__preview_close">닫기</a>
+  <div>
+    <iframe name="preview" src="../main/main.html" frameborder="0"></iframe>
+  </div>
+</div>
+
+<!-- 디자인 확인용 -->
+<div class="gd__theme_color">
+	<dl>
+		<dt>테마색상 변경확인</dt>
+		<dd>
+			<input type="color" value="">
+			<div>
+				<div class="color"></div>
+				<div class="reset"><button type="button">리셋</button></div>
+			</div>
+		</dd>
+	</dl>
+</div>
+<!-- //디자인 확인용 -->
+
+<script type="text/javascript" src="../../static/js/ui-common.js"></script>
+<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+<script>
+const coding = {
+  list: [
+    {
+      depth1: '메인',
+      depth2: '',
+      pageId: 'main',
+      path: '../main/',
+      complete: '10/31',
+      etc:'화면 ID 없음'
+    },
+    {
+      depth1: '전체메뉴',
+      depth2: '',
+      pageId: 'main',
+      path: '../main/',
+      complete: '10/31',
+      etc:'화면 ID 없음'
+    },
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '회원',
+      depth2: '로그인(회원)',
+      pageId: 'ONM02001',
+      path: '../member/',
+      complete: '10/10'
+    },
+    {
+      depth1: '회원',
+      depth2: '로그인(비회원)',
+      pageId: 'ONM02002',
+      path: '../member/',
+      complete: '10/10'
+    },
+    {
+      depth1: '회원',
+      depth2: '비회원 주문 비밀번호 찾기',
+      pageId: 'ONM02003',
+      path: '../member/',
+      complete: '10/10'
+    },
+    {
+      depth1: '회원',
+      depth2: '로그인(팝업)',
+      pageId: 'ONM02004',
+      path: '../member/',
+      complete: '10/10'
+    },
+    {
+      depth1: '회원',
+      depth2: '간편 로그인 미 연결 안내',
+      pageId: 'ONM02005',
+      path: '../member/',
+      complete: '10/10'
+    },
+    {
+      depth1: '회원',
+      depth2: '회원가입',
+      depth3: '약관동의',
+      pageId: 'ONM02201',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '회원가입',
+      depth3: '회원정보 입력',
+      pageId: 'ONM02202',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '회원가입',
+      depth3: '회원가입 완료',
+      pageId: 'ONM02203',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '아이디 찾기',
+      pageId: 'ONM02101',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '아이디 찾기 결과',
+      pageId: 'ONM02102',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '비밀번호 재설정',
+      pageId: 'ONM02103',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: '회원',
+      depth2: '비밀번호 변경',
+      pageId: 'ONM02104',
+      path: '../member/',
+      complete: '10/11'
+    },
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '상품',
+      depth2: '1뎁스 목록',
+      pageId: 'product-0001',
+      path: '../product/',
+      complete: '10/17',
+      etc:'화면 ID 없음'
+    },
+    {
+      depth1: '상품',
+      depth2: '2뎁스,3뎁스 목록',
+      pageId: 'product-0002',
+      path: '../product/',
+      complete: '10/17',
+      etc:'화면 ID 없음'
+    },
+    {
+      depth1: '상품',
+      depth2: '상품상세',
+      pageId: 'product-0003',
+      path: '../product/',
+      complete: '10/23',
+      etc:'화면 ID 없음, 관련 팝업 모두 포함'
+    },
+    {
+      depth1: '상품',
+      depth2: '상품상세 B타입',
+      pageId: 'product-0004',
+      path: '../product/',
+      complete: '10/23',
+      etc:'swipe 기능으로 탭이동'
+    },
+
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '주문',
+      depth2: '장바구니',
+      pageId: 'ONM05101',
+      path: '../order/',
+      complete: '10/23',
+      etc:'팝업포함'
+    },
+    {
+      depth1: '주문',
+      depth2: '주문결제',
+      pageId: 'ONM05201',
+      path: '../order/',
+      complete: '10/23',
+      etc:'팝업포함'
+    },
+    {
+      depth1: '주문',
+      depth2: '주문완료',
+      pageId: 'ONM05301',
+      path: '../order/',
+      complete: '10/23'
+    },
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '마이 메인',
+      pageId: 'ONM09101',
+      path: '../mypage/',
+      complete: '11/15'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '주문/배송조회',
+      pageId: 'ONM09201',
+      path: '../mypage/',
+      complete: '11/18',
+      etc:'ONM09202,ONM09203 팝업으로 포함'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '주문/배송조회 상세',
+      pageId: 'ONM09204',
+      path: '../mypage/',
+      complete: '11/21',
+      etc:'ONM09205,ONM09206 팝업으로 포함'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '주문취소',
+      pageId: 'ONM09207',
+      path: '../mypage/',
+      complete: '11/21',
+      etc:'기획 디자인 상이'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '주문취소 완료',
+      pageId: 'ONM09208',
+      path: '../mypage/',
+      complete: '11/21',
+      etc:'기획 디자인 상이'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '취소/반품/교환 목록',
+      pageId: 'ONM09301',
+      path: '../mypage/',
+      complete: '11/21',
+      etc:'ONM09302, ONM09303'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '교환/반품 신청',
+      pageId: 'ONM09304',
+      path: '../mypage/',
+      complete: '11/21'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '교환/반품 신청완료',
+      pageId: 'ONM09305',
+      path: '../mypage/',
+      complete: '11/21',
+      etc:'기획 디자인 상이'
+    },
+
+    {
+      depth1: '마이페이지',
+      depth2: '배송지 관리',
+      pageId: 'ONM09401',
+      path: '../mypage/',
+      complete: '11/18'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '환불계좌 관리',
+      pageId: 'ONM09501',
+      path: '../mypage/',
+      complete: '11/18'
+    },
+
+    {
+      depth1: '마이페이지',
+      depth2: '적립금',
+      pageId: 'ONM09601',
+      path: '../mypage/',
+      complete: '11/21'
+    },
+
+    {
+      depth1: '마이페이지',
+      depth2: '상품 Q&A 목록',
+      pageId: 'ONM09701',
+      path: '../mypage/',
+      complete: '11/17',
+      etc:'ONM09702 팝업으로 포함'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '1:1문의 목록',
+      pageId: 'ONM09801',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '1:1문의  수정',
+      pageId: 'ONM09802',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '1:1문의 상세',
+      pageId: 'ONM09803',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '나의상품평 목록',
+      pageId: 'ONM09901',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '나의상품평 상세',
+      pageId: 'ONM09902',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '회원정보변경 본인인증',
+      pageId: 'ONM09111',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '회원정보변경 입력',
+      pageId: 'ONM09112',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '비밀번호변경',
+      pageId: 'ONM09113',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: 'SNS 연결설정',
+      pageId: 'ONM09114',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    {
+      depth1: '마이페이지',
+      depth2: '회원탈퇴',
+      pageId: 'ONM09115',
+      path: '../mypage/',
+      complete: '11/17'
+    },
+    
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '고객센터',
+      depth2: '고객센터 메인',
+      pageId: 'ONM07101',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '공지사항 목록',
+      pageId: 'ONM07102',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '공지사항 상세',
+      pageId: 'ONM07103',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '자주묻는질문',
+      pageId: 'ONM07201',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '1:1문의 작성',
+      pageId: 'ONM07301',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '이용문의  > 회원등급',
+      pageId: 'ONM07401',
+      path: '../cscenter/',
+      complete: '11/21'
+    },
+    {
+      depth1: '고객센터',
+      depth2: '이용문의  > 결제수단',
+      pageId: 'ONM07402',
+      path: '../cscenter/',
+      complete: '11/21',
+    },
+    {
+      depth1: '고객센터',
+      depth2: '이용약관',
+      pageId: 'ONM07501',
+      path: '../cscenter/',
+      complete: '11/21',
+    },
+    {
+      depth1: '고객센터',
+      depth2: '개인정보처리방침',
+      pageId: 'ONM07601',
+      path: '../cscenter/',
+      complete: '11/21',
+    },
+
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '기획전',
+      depth2: '기획전 목록',
+      pageId: 'ONM04001',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '기획전',
+      depth2: '기획전 상세',
+      pageId: 'ONM04101',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '진행중이벤트 목록',
+      pageId: 'ONM04201',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '이벤트 상세(기본형)',
+      pageId: 'ONM04202',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '이벤트 상세(URL 등록형)',
+      pageId: 'ONM04203',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '이벤트 상세(댓글형)',
+      pageId: 'ONM04204',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '이벤트 상세(퀴즈형)',
+      pageId: 'ONM04205',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '이벤트 상세(투표형)',
+      pageId: 'ONM04206',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '지난 이벤트 목록',
+      pageId: 'ONM04207',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '지난 이벤트 상세',
+      pageId: 'ONM04208',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '당첨자발표 목록',
+      pageId: 'ONM04209',
+      path: '../event/',
+      complete: '11/28',
+    },
+    {
+      depth1: '이벤트',
+      depth2: '당첨자발표 상세',
+      pageId: 'ONM04210',
+      path: '../event/',
+      complete: '11/28',
+    },
+
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '프로모션',
+      depth2: '타임세일 목록',
+      pageId: 'ONM04301',
+      path: '../promotion/',
+      complete: '11/29',
+    },
+    {
+      depth1: '프로모션',
+      depth2: '타임세일 상세',
+      pageId: 'ONM04302',
+      path: '../product/product-0003.html?timer=Y&badge=time-sale',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '오늘만특가 목록',
+      pageId: 'ONM04303',
+      path: '../promotion/',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '오늘만특가 상세',
+      pageId: 'ONM04304',
+      path: '../product/product-0003.html?badge=today-special',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '마케팅 목록',
+      pageId: 'ONM04305',
+      path: '../promotion/',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '마케팅 상세',
+      pageId: 'ONM04306',
+      path: '../product/product-0003.html?badge=marketing',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '공동구매 목록',
+      pageId: 'ONM04307',
+      path: '../promotion/',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+    {
+      depth1: '프로모션',
+      depth2: '공동구매 상세',
+      pageId: 'ONM04308',
+      path: '../product/product-0003.html?badge=group-purchase',
+      complete: '11/29',
+      etc: '화면 ID 이상함(임시 ID 적용)'
+    },
+
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '선물하기',
+      depth2: '목록',
+      pageId: 'ONM04401',
+      path: '../gift/',
+      complete: '11/29',
+    },
+    {
+      depth1: '선물하기',
+      depth2: '상세',
+      pageId: 'ONM04402',
+      path: '../product/product-0003.html?badge=gift',
+      complete: '11/29',
+    },
+    {
+      depth1: '선물하기',
+      depth2: '결제',
+      pageId: 'ONM04403',
+      path: '../order/ONM05201.html?type=gift',
+      complete: '11/29',
+    },
+    {
+      depth1: '선물하기',
+      depth2: '주문완료',
+      pageId: 'ONM04404',
+      path: '../order/ONM05301.html?type=gift',
+      complete: '11/29',
+    },
+    {
+      depth1: '선물하기',
+      depth2: '배송정보입력(수령자)',
+      pageId: 'ONM04501',
+      path: '../gift/',
+      complete: '11/29',
+    },
+
+    {
+      depth1: 'line',
+    },
+    {
+      depth1: '가이드',
+      depth2: '텍스트',
+      pageId: 'guide-txt',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '버튼',
+      pageId: 'guide-btn',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '폼요소',
+      pageId: 'guide-form',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '입력 UI',
+      pageId: 'guide-form2',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '리스트',
+      pageId: 'guide-list',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '테이블',
+      pageId: 'guide-table',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '팝업',
+      pageId: 'guide-popup',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '주소검색',
+      pageId: 'guide-address',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '기타',
+      pageId: 'guide-etc',
+      path: '../guide/',
+      complete: '추가중'
+    },
+    {
+      depth1: '가이드',
+      depth2: '개발자참고',
+      pageId: 'guide-dev',
+      path: '../guide/',
+      complete: '추가중'
+    },
+  ],
+  totlaLength: 0,
+  completeLength: 0,
+  crate: function(){
+    const $columneLength = $('.code__list thead th').length;
+    const createTr = function(obj){
+      coding.totlaLength += 1;
+      let $html = '';
+      $html += '<tr>'
+        //1뎁스
+        if(obj.depth1 === undefined || obj.depth1 === ''){
+          $html += '<td></td>';
+        }else{
+          $html += '<td>'+obj.depth1+'</td>';
+        }
+
+        //2뎁스
+        if(obj.depth2 === undefined || obj.depth2 === ''){
+          $html += '<td></td>';
+        }else{
+          $html += '<td>'+obj.depth2+'</td>';
+        }
+
+        //3뎁스
+        if(obj.depth3 === undefined || obj.depth3 === ''){
+          $html += '<td></td>';
+        }else{
+          $html += '<td>'+obj.depth3+'</td>';
+        }
+
+        //화면ID
+        if(obj.pageId === undefined || obj.pageId === ''){
+          $html += '<td></td>';
+        }else{
+          $html += '<td>';
+          if(obj.path.indexOf('.html') >= 0){
+            $html += '<a href="'+obj.path+'" target="_blank">';
+          }else{
+            $html += '<a href="'+obj.path+obj.pageId+'.html" target="_blank">';
+          }
+          $html += obj.pageId+'</a></td>';
+        }
+
+        //완료일
+        if(obj.complete === undefined || obj.complete === ''){
+          $html += '<td></td>';
+        }else{
+          coding.completeLength += 1;
+          $html += '<td>'+obj.complete+'</td>';
+        }
+
+        //비고
+        if(obj.etc === undefined || obj.etc === ''){
+          $html += '<td></td>';
+        }else{
+          $html += '<td>'+obj.etc+'</td>';
+        }
+      $html += '</tr>';
+      return $html;
+    };
+    const creatTbody = function(){
+      let $tbody = '';
+      $.each(coding.list, function(index){
+        if(this.depth1 == 'line'){
+          $tbody += '<tr><td class="line" colspan="'+($columneLength+1)+'"></td><tr>'
+        }else{
+          $tbody += createTr(this);
+        }
+      });
+      return $tbody;
+    }
+    const $htmlTbody = creatTbody();
+    $('.code__list tbody').append($htmlTbody);
+  },
+  preview: function(){
+    $('#isFrameChk').change(function(){
+      if($(this).prop('checked')){
+        $('.code__preview').fadeIn(300);
+        $('.code__list tbody a').attr('target','preview');
+      }else{
+        $('.code__preview').fadeOut(300);
+        $('.code__list tbody a').attr('target','_blank');
+      }
+    });
+
+    $('.code__preview').draggable({ 
+      handle: 'h2'
+    });
+    $(document).on('click', '.code__preview_close', function(e){
+      e.preventDefault();
+      const $chk = $('#isFrameChk');
+      $chk.prop('checked', false).change();
+    });
+
+    $(document).on('click', '.code__list tbody a', function(e){
+      const $chk = $('#isFrameChk');
+      if($chk.prop('checked') && $(window).width() <= 400){
+        e.preventDefault();
+        const $href = $(this).attr('href');
+        window.open($href);
+      }
+    });
+
+  },
+  init: function(){
+    coding.crate();
+    $('.code__status .complete strong').text(coding.completeLength);
+    $('.code__status .total strong').text(coding.totlaLength);
+    const per = Math.round((coding.completeLength/coding.totlaLength) * 10000) / 100;
+    $('.code__status .bar div').animate({
+      width: per+'%'
+    }, {
+      duration: 500,
+      specialEasing: {
+        width: "easeOutCubic"
+      },
+      step: function(now){
+        const num = parseInt(now*100)/100;
+        $('.code__status .ing strong').text(num);
+      }
+    })
+    coding.preview();
+  }
+}
+coding.init();
+</script>
+</body>
+</html>

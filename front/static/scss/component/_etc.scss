@@ -1,0 +1,142 @@
+.rolling-number{
+	position: relative;
+	display: inline-flex;
+	overflow: hidden;
+	.rolling__in{
+		position: relative;
+		height: 100%;
+		// line-height: 100%;
+		text-align: center;
+		// display: flex;
+		// flex-direction: column;
+		>div{
+			height: 100%;
+		}
+	}
+	&:not(.is-active){
+		.rolling__in{
+			top:0 !important;
+		}
+	}
+	&.is-active{
+		.rolling__in{
+			animation: rollingNumber 1.5s backwards
+		}
+	}
+}
+@keyframes rollingNumber{
+	from{
+		top:0;
+	}
+}
+
+.animate__animated{
+	&.paused{
+		animation-play-state: paused;
+	}
+}
+
+
+// round-box
+.line-round-box{
+	border: 1px solid #eee;
+	background: #fff;
+	border-radius: 8px;
+	padding: 16px;
+	.title-bar:first-child{
+		margin-top: 0;
+	}
+	.box-top-line{
+		padding: 4px 0 20px;
+		border-bottom: 1px solid #eee;
+		font-size: 15px;
+		+ .txt-dl-list{
+			padding: 12px 0 4px;
+		}
+	}
+}
+.gray-round-box{
+	background: #f8f8f8;
+	border-radius: 8px;
+	.box-item{
+		display: flex;
+		padding: 16px 0;
+		align-items: center;
+		.th{
+			font-size: 14px;
+			strong{
+				font-weight: 500;
+			}
+			> div, p{
+				margin-top: 2px;
+				&:first-child{
+					margin-top: 0;
+				}
+			}
+		}
+		.td{
+			margin-left: auto;;
+		}
+		+.box-item,
+		&.top-line{
+			border-top: 1px solid #eee;
+		}
+	}
+}
+.gray-round-dl{
+	background: #eee;
+	border-radius: 8px;
+	overflow: hidden;
+	>.dt{
+		padding: 9px 16px;
+		background: #000;
+		color: #fff;
+		font-size: 10px;
+	}
+	>.dd{
+		padding: 16px;
+		font-size: 10px;
+		color: #666;
+	}
+}
+.section .gray-form-wrap{
+	@include outer;
+}
+.gray-form-wrap{
+	padding: 20px;
+	background: #f8f8f8;
+}
+.gray-round-dl-box{
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 0 20px;
+  .dt{
+    font-size: 14px;
+    font-weight: 500;
+    padding: 20px 0;
+    +.dd{
+      border-top: 1px solid #eee;
+      padding-top: 12px;
+    }
+  }
+  .dd{
+    padding: 20px 0;
+    ul>li{
+      display: flex;
+      font-size: 14px;
+      .th{
+        font-size: 13px;
+        color: #666;
+        width: 74px;
+        flex-shrink: 0;
+      }
+      .td{
+        flex: 1 1 auto;
+        word-break: break-all;
+      }
+      +li{
+        margin-top: 8px;
+      }
+    }
+  }
+}
