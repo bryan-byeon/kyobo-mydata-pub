@@ -247,6 +247,9 @@ var makeBoard = function(){
 					if(LoadCount === $lenth){
 						setTimeout(function(){
 							guide.init();
+							setTimeout(function(){
+								$(window).resize();
+							}, 100);
 						}, 100);
 					}
 				},
