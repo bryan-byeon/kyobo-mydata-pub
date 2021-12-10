@@ -44,7 +44,7 @@ table{background-color:#e6e6e6}
 .g_board table thead th button{background:#ccc url(../images/ico_delete.png) 50% 50% no-repeat}
 .g_board table thead th select{height:27px;line-height:25px;width:100%;}
 .g_board table tbody .hr th{background:repeating-linear-gradient(135deg,#fff,#fff 5px,#f1f1f1 5px,#f1f1f1 10px);color:#000;text-shadow:none}
-.g_board table tbody td{background-color:#f1f1f1;color:#666;text-shadow:none}
+.g_board table tbody td{background-color:#f1f1f1;color:#666;text-shadow:none;min-width:60px;}
 .g_board table tbody .complete td{background-color:#fff;color:#666}
 .g_board table tbody .complete.modify td{background-color:#fcf7f6;color:#ca4c07}
 .g_board table tbody .cms td.id, .g_board table tbody .cms td.no{background-color:#eef9ff!important;font-weight:700!important;color:#1973bf!important}

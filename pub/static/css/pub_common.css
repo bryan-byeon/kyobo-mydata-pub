@@ -354,7 +354,8 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 .g_grid table tbody th, .g_grid table tbody td{line-height:18px;margin-top:1px;padding:10px;background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,0.8);vertical-align:middle;word-break:break-all}
 .g_board table tbody tr.del td,
 .g_board table tbody tr.del td a{text-decoration:line-through;color:#bbb;}
-.g_board_scroll{display:none;position:fixed;left:230px;right:30px;bottom:0;background:#fff;z-index:1;opacity:0.6;}
+.g_board_scroll{display:none;position:fixed;left:0;right:30px;bottom:0;background:#fff;z-index:1;opacity:0.6;}\
+.g_nav+#gContainer .g_board_scroll{left:230px;}
 .g_board.catch+.g_board_scroll{display:block;}
 .g_board_scroll>div{height:5px;width:0;background:#20864d;transition:0.3s;}
 @media screen and (max-width: 1024px) {
