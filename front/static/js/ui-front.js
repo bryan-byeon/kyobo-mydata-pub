@@ -1028,6 +1028,26 @@ const common = {
 			});
 		}
 	},
+	lottie: function(){
+		const $lottie = $('[data-lottie]');
+
+		$lottie.each(function(){
+			// $(this).empty();
+			if(!$(this).hasClass('lottie__init')){
+				const $data = $(this).data('lottie');
+				$(this).addClass('lottie__init')
+				const isLoop = $(this).hasClass('loop')
+				const $lottieOpt = lottie.loadAnimation({
+					container: this,
+					renderer: 'svg',
+					loop: isLoop,
+					autoplay: true,
+					path: $data
+				});
+				$(this).data('lottie-opt', $lottieOpt);
+			}
+		});
+	},
 	init:function(){
 		if(!$('.bottom-fixed-space').length){
 			let $wrap = $('body');
@@ -1044,6 +1064,7 @@ const common = {
 		common.top();
 		//common.landscape();
 
+		common.lottie();
 		common.guide();
 
 		common.fixed('#header');
@@ -2424,11 +2445,13 @@ const tooltip = {
 const scrollUI = {
 	inCheck:function(target){
 		//스크린안에 있는지 확인
-		const $window = $(window);
-		const $wHeight = $window.height();
-		const $scrollTop = $window.scrollTop();
-		const $winBottom = ($scrollTop + $wHeight);
 		const $el = $(target);
+		const isPopup = $el.closest('.pop-body').length && $el.closest('.pop-wrap').length;
+		const $wrap = isPopup ? $el.closest('.pop-body') : $(window);
+		const $wHeight = $wrap.outerHeight();
+		const $scrollTop = $wrap.scrollTop();
+		const $winBottom = ($scrollTop + $wHeight);
+		
 		const $elHeight = $($el).outerHeight();
 		const $elTop = $($el).offset().top;
 		const $elCenter = $elTop + ($elHeight/2);
