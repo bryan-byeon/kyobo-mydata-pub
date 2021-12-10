@@ -82,7 +82,7 @@ $(function () {
 var makeBoard = function(){
 	var $slide = $('.g_board_tab .swiper-slide');
 	var $lenth = $slide.length;
-	var htmlBoard = function(boardid, index, data){
+	var htmlBoard = function(boardid, data){
 		var html = '<div id="'+boardid+'" class="g_board_panel">';
 			html += '<div class="g_status">';
 				html += '<span class="total">본수 : <strong class="num"></strong></span>';
@@ -138,12 +138,6 @@ var makeBoard = function(){
 			html += '</div>';
 		html += '</div>';
 		$('.g_content').append(html);
-
-		if(index !== ($lenth-1)){
-			setTimeout(function(){
-				guide.init();
-			}, 100);
-		}
 	}
 	var htmlTbody = function(data){
 		var $data = data;
@@ -228,6 +222,7 @@ var makeBoard = function(){
 		})
 		return tbodyHtml;
 	}
+	var LoadCount = 0;
 	$slide.each(function(i){
 		var $this = $(this);
 		var $idx = i;
@@ -245,8 +240,15 @@ var makeBoard = function(){
 					if(data.length) $dataHtml = htmlTbody(data)
 				},
 				complete : function(data) {
+					LoadCount += 1;
 					console.log('complete', data);
-					htmlBoard($rel, $idx, $dataHtml)
+					htmlBoard($rel, $dataHtml);
+					
+					if(LoadCount === $lenth){
+						setTimeout(function(){
+							guide.init();
+						}, 100);
+					}
 				},
 				error : function(xhr, status, error) {
 					console.error('에러발생',xhr, status, error);
@@ -294,7 +296,9 @@ var guide = {
 		}
 	},
 	tab: function(){
-		var $tab = $('.g_board_tab ul li'), $tabCurrent = $('.g_board_tab ul li.active'), $panel = $('.g_board_panel');
+		var $tab = $('.g_board_tab ul li'),
+			$tabCurrent = $('.g_board_tab ul li.active'), 
+			$panel = $('.g_board_panel');
 		$('#'+$tabCurrent.attr('rel')).addClass('active')
 		$tab.on('click', function(e){
 			e.preventDefault();
@@ -317,7 +321,7 @@ var guide = {
 				});
 			}else{
 				$tab.eq(0).addClass('active');
-				$panel.eq(0).addClass('active');
+				$('#'+$tab.eq(0).attr('rel')).addClass('active');
 			}
 		//});
 	},
@@ -458,7 +462,6 @@ var guide = {
 	},
 	state: function(){
 		$('.g_content tbody .c_date').each(function(){
-			console.log($.trim($(this).html()),$.trim($(this).html()) == '')
 			if(!$.trim($(this).html())==''){
 				$(this).parent('tr').addClass('complete');
 			}
@@ -603,12 +606,12 @@ var guide = {
 	},
 	init: function(){
 		guide.header();
-		guide.tab();
 		guide.board();
 		guide.state();
 		guide.UI();
 		guide.navi();
 		guide.slide();
+		guide.tab();
 		guide.resize();
 	}
 }
