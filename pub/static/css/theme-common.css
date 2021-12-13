@@ -346,8 +346,10 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 .g_board table thead th{padding:10px;font-weight:500;background-color:#fff;font-size:12px;color:#666}
 .g_board table thead th button{width:27px;height:27px;margin-left:15px;background:#ccc url(../images/ico_delete.png) 50% 50% no-repeat;border-radius:100%;text-indent:-9999px}
 .g_board table thead th select{height:27px;line-height:25px;width:100%;}
-.g_board table tbody td{margin-top:1px;padding:12px 10px;vertical-align:middle;font-size:13px;word-break:break-all;background-color:#f1f1f1;color:#666;}
+.g_board table tbody td{margin-top:1px;padding:12px 10px;vertical-align:middle;font-size:13px;word-break:break-all;background-color:#f1f1f1;color:#666;text-align:center;}
 .g_board table tbody td:not(.no){min-width:60px;}
+.g_board table thead th:first-child,
+.g_board table tbody td.no{width:25px;padding-left:0;padding-right:0;}
 /*.g_board table tbody td.id{padding:0}*/
 .g_board table tbody td.deps, .g_board table tbody td.name{text-align:left}
 .g_board table tbody .complete td{background-color:#fff;color:#666}
@@ -394,8 +396,13 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 .g_layout .g_layout_content:before{content:'div#content'}
 .g_layout .g_layout_footer:before{content:'div#footer'}
 @media screen and (max-width: 1024px) {
-.g_layout{padding-top:10px}
-.g_layout div{margin-top:30px;padding:30px 10px 10px;border:1px solid rgba(255,255,255,0.5)}
-.g_layout div:before{position:absolute;top:-21px;left:-1px;width:100px;height:20px;line-height:20px;font-size:12px}
-.g_layout .g_layout_content>div{padding:40px 0;font-size:14px}
+	.g_layout{padding-top:10px}
+	.g_layout div{margin-top:30px;padding:30px 10px 10px;border:1px solid rgba(255,255,255,0.5)}
+	.g_layout div:before{position:absolute;top:-21px;left:-1px;width:100px;height:20px;line-height:20px;font-size:12px}
+	.g_layout .g_layout_content>div{padding:40px 0;font-size:14px}
+
+	.g_project_status{border:1px solid #e6e6e6;box-shadow:none}
+  .g_project_status .g_count{border:none}
+  .g_project_status .g_project_ing{border:none}
+	.g_board table tbody .hr th{padding:15px 0;background:repeating-linear-gradient(135deg,#fff,#fff 3px,#f1f1f1 3px,#f1f1f1 6px);font-size:14px;text-align:center}
 }

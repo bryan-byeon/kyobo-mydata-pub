@@ -1,5 +1,5 @@
 @charset "utf-8";
-
+/* 적용 못시킨 css */
 .g_nav{background-color:#fff;border-right:1px solid #e6e6e6}
 .g_nav>ul>li>a{border-color:#20864d;color:#666}
 .g_nav>ul>li.active>a{color:#157841}
@@ -28,8 +28,6 @@
   .g_nav>ul>li>ul{border-width:1px 0;border-style:solid;border-color:rgba(255,255,255,0.3);background-color:rgba(255,255,255,0.2);box-shadow:none}
   .g_nav>ul>li>ul>li>a{color:rgba(255,255,255,0.5)}
   .g_nav>ul>li>ul>li:hover>a, .g_nav>ul>li>ul>li.active>a{color:#fff}
-  .g_project_status{border:1px solid #e6e6e6;box-shadow:none}
-  .g_project_status .g_count{border:none}
-  .g_project_status .g_project_ing{border:none}
-  .g_board table tbody .hr th{padding:15px 0;background:repeating-linear-gradient(135deg,#fff,#fff 3px,#f1f1f1 3px,#f1f1f1 6px);font-size:14px;text-align:center}
+  
+  
 }
