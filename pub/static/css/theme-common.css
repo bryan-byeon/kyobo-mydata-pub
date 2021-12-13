@@ -88,12 +88,17 @@ blockquote,q{quotes:none}
 blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
 a{color:#666;text-decoration:none}
 button{border:none;cursor:pointer}
-table{width:100%;border-collapse:separate!important;border-spacing:1px!important;table-layout:fixed;text-align:center}
+table{width:100%;}
+
+::-webkit-scrollbar{width:8px;height:8px;border:3px solid #fff;}
+::-webkit-scrollbar-track{background:#efefef;-webkit-border-radius:10px;border-radius:10px;-webkit-box-shadow:inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb{height:50px;width:50px;background:rgba(0,0,0,.2);-webkit-border-radius:8px;border-radius:8px;-webkit-box-shadow:inset 0 0 4px rgba(0,0,0,.1)}
 /*****************************************************************
   Normalize
 *****************************************************************/
-/*body,html{width:100%;height:100%}*/
-body{line-height:1;/*overflow:hidden!important;*/background:url(../images/bg_pc2.jpg) 50% 50% no-repeat;background-size:cover;font-size:14px;font-family:'Noto Sans KR','Apple SD Gothic Neo','AppleSDGothicNeo',sans-serif;color:#333;word-break:normal;-webkit-text-size-adjust:none;vertical-align:baseline}
+html{height:100%}
+body{min-height:100%}
+body{font-size:14px;line-height:1.2;font-family:'Noto Sans KR','Apple SD Gothic Neo','AppleSDGothicNeo',sans-serif;color:#333;word-break:normal;-webkit-text-size-adjust:none;vertical-align:baseline}
 img{vertical-align:top}
 input[type=text]::-ms-clear{display:none}
 @media screen and (max-width: 1024px) {
@@ -102,9 +107,8 @@ body{font-size:12px}
 /*****************************************************************
   UI Library
 *****************************************************************/
-/*#gWrap{height:100%}
-#gHeader{position:relative;background-color:rgba(0,0,0,0.5)}*/
-#gHeader{position:fixed;top:0;left:0;width:100%;height:60px;background-color:rgba(0,0,0,0.5);z-index:100;}
+#gWrap{overflow:hidden;}
+#gHeader{position:fixed;top:0;left:0;width:100%;height:60px;z-index:100;background:rgba(32, 134, 77, 1);backdrop-filter:blur(2px);}
 @media screen and (max-width: 1024px) {
 #gHeader{height:50px;}	
 }
@@ -125,16 +129,13 @@ body{font-size:12px}
 .no_scroll .g_util .btn_nav span:after{transform:rotate(45deg) translate(-5px, -6px)}
 .g_project{position:absolute;top:12px;right:20px;}
 .g_project .current{position:relative;width:200px;height:35px;line-height:35px;padding:0 40px 0 15px;border:1px solid rgba(255,255,255,0.5);background:none;color:#fff;text-align:left;overflow:hidden;}
-.g_project .current:after{content:'';position:absolute;top:0;right:0;width:40px;height:30px;background:url(../images/ico_select_arrow.png) 50% 50% no-repeat;opacity:0.5;transform:rotate(0deg);transition:all 0.3s ease-in-out}
-.g_project .current.active:after{transform:rotate(180deg)}
-.g_project .g_list{display:none;position:absolute;top:35px;left:0;right:0;border-width:0 1px;border-style:solid;border-color:rgba(255,255,255,0.5);background-color:rgba(0,0,0,0.8);z-index:100}
+.g_project .current:after{content:'';position:absolute;top:0;right:0;width:40px;height:30px;background:url(../images/ico_select_arrow.png) 50% 50% no-repeat;transform:rotate3D(1, 0, 0, 0deg);transition:all 0.3s ease-in-out}
+.g_project .current.active:after{transform:rotate3D(1, 0, 0, 180deg)}
+.g_project .g_list{display:none;position:absolute;top:35px;left:0;right:0;border-width:0 1px;border-style:solid;border-color:rgba(255,255,255,0.5);z-index:100;}
 .g_project .g_list li{border-bottom:1px solid rgba(255,255,255,0.5)}
-.g_project .g_list li a{display:block;position:relative;height:30px;line-height:30px;padding:0 15px;color:rgba(255,255,255,0.5)}
-.g_project .g_list li.active a,
-.g_project .g_list li a:hover{color:#fff}
-.g_project .g_list li.active a{font-weight:bold;}
-.g_project .g_list li.active a:before,
-.g_project .g_list li a:hover:before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.3);z-index:-1}
+.g_project .g_list li a{display:block;position:relative;height:30px;line-height:30px;padding:0 15px;color:rgba(0,0,0,0.5);background-color:rgba(255,255,255,0.8);backdrop-filter:blur(2px);}
+.g_project .g_list li a:hover{color:#000;background-color:rgba(255,255,255,1);}
+.g_project .g_list li.active a{color:#000;font-weight:bold;}
 @media screen and (max-width: 1024px) {
 /*.g_util{height:100px;height:50px;transition:all 0.3s ease-in-out}*/
 .g_util h1{top:12px;left:15px;width:auto}
@@ -186,7 +187,7 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 #gHeader+#gContainer,
 #gHeader+.g_nav+#gContainer{margin-top:60px;}
 .g_nav+#gContainer{margin-left:200px;}
-.g_content>h2{font-size:24px;font-weight:500;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.6)}
+.g_content>h2{font-size:24px;font-weight:500;color:#333;text-shadow:1px 1px 1px rgba(0,0,0,0.5)}
 .g_section{margin-top:30px}
 .g_section h3{position:relative;padding:20px;background-color:rgba(0,0,0,0.3);font-size:18px;font-weight:500;color:#fff}
 .g_section .g_guide_info{margin-top:3px;padding:20px;background-color:rgba(255,255,255,0.3);box-shadow:1px 1px 1px 0px rgba(0,0,0,0.3)}
@@ -293,13 +294,13 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 /*****************************************************************
   Tab
 *****************************************************************/
-.g_board_tab{margin-top:25px;background-color:rgba(0,0,0,0.2);box-shadow:1px 1px 1px 0px rgba(0,0,0,0.5);overflow:hidden}
+.g_board_tab{margin-top:25px;overflow:hidden;border:1px solid #e6e6e6;background-color:#fff;}
 .g_board_tab ul:after{content:'';display:block;clear:both}
-.g_board_tab ul li{float:left;height:50px;line-height:48px;padding:0 20px;border-left:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);text-align:center;cursor:pointer}
+.g_board_tab ul li{float:left;height:50px;line-height:48px;padding:0 20px;border-left:1px solid #e6e6e6;color:#666;text-align:center;cursor:pointer}
 .g_board_tab ul li:first-child{border:none}
-.g_board_tab ul li.active{background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,1)}
+.g_board_tab ul li.active{background-color:#3c3e45;color:#fff}
 .g_board_tab .swiper-slide{width:auto}
-.g_board_panel{position:fixed;top:-9999px;margin-top:25px}
+.g_board_panel{position:fixed;top:-9999999999999px;margin-top:25px}
 .g_board_panel.active{position:relative;top:inherit}
 @media screen and (max-width: 1024px) {
 .g_board_tab ul li{height:40px;line-height:40px}
@@ -309,22 +310,22 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 *****************************************************************/
 .g_project_status{position:absolute;top:10px;right:30px}
 .g_project_status:after{content:'';display:block;clear:both}
-.g_project_status .g_count{float:left;display:block;width:100px;height:55px;margin-right:15px;background-color:rgba(255,255,255,0.1);border-radius:8px;box-shadow:1px 1px 1px 0px rgba(0,0,0,0.6);text-align:center}
-.g_project_status .g_count>span{display:block;height:20px;line-height:20px;border-bottom:1px solid rgba(0,0,0,0.2);font-size:11px;color:rgba(255,255,255,0.5)}
-.g_project_status .g_count>strong{display:block;height:35px;line-height:33px;border-top:1px solid rgba(255,255,255,0.1);font-size:20px;font-weight:bold;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
-.g_project_status .g_project_ing{float:left;position:relative;width:400px;height:55px;background-color:rgba(255,255,255,0.1);border-radius:8px;box-shadow:1px 1px 1px 0px rgba(0,0,0,0.6)}
+.g_project_status .g_count{float:left;display:block;width:100px;height:55px;margin-right:15px;background-color:rgba(255,255,255,0.1);border-radius:8px;text-align:center;border:1px solid #e6e6e6;}
+.g_project_status .g_count>span{display:block;height:20px;line-height:20px;border-bottom:1px solid #e6e6e6;font-size:11px;color:#666}
+.g_project_status .g_count>strong{display:block;height:35px;line-height:33px;font-size:20px;font-weight:bold;color:#157841;}
+.g_project_status .g_project_ing{float:left;position:relative;width:400px;height:55px;border-radius:8px;border:1px solid #e6e6e6;}
 .g_project_status .g_project_ing .ing{position:absolute;top:17px;left:5px;width:390px;text-align:center;font-size:22px;font-weight:500;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4);z-index:10}
-.g_project_status .g_project_ing .graph{display:block;position:relative;height:45px;margin:5px;background-color:rgba(0,0,0,0.2);border-radius:7px;overflow:hidden;box-shadow:inset 1px 1px 1px 0px rgba(0,0,0,0.6)}
+.g_project_status .g_project_ing .graph{display:block;position:relative;height:45px;margin:5px;border-radius:7px;overflow:hidden;box-shadow:inset 1px 1px 1px 0px rgba(0,0,0,0.6);background-color:#e1e1e1;}
 .g_project_status .g_project_ing .graph .bar{position:absolute;top:0;left:0;height:45px;width:0;overflow:hidden;background:linear-gradient(to bottom right, #65bd8b, #0e7e72);border-radius:6px;transition:width 2s ease-in-out}
 .g_project_status .g_project_ing .graph .bar:before{content:'';position:absolute;right:-10px;bottom:15px;width:170px;height:170px;background-color:rgba(255,255,255,0.1);border-radius:100%}
 .g_project_status .g_project_ing .graph .bar:after{content:'';position:absolute;right:-40px;top:0;width:130px;height:130px;background-color:rgba(255,255,255,0.1);border-radius:100%}
 .g_status{position:relative}
-.g_status .total, .g_status .cp_num{font-size:12px;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
+.g_status .total, .g_status .cp_num{font-size:12px;color:#666;}
 .g_status .total strong, .g_status .cp_num strong{font-size:16px}
 .g_status .cp_num{position:absolute;top:0;right:0}
-.g_status .ing{position:absolute;top:0;left:50%;width:200px;margin-left:-100px;text-align:center;font-size:16px;font-weight:500;color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
-.g_status_box{position:relative;height:5px;margin-top:10px;background-color:rgba(0,0,0,0.2)}
-.g_status_box .bar{position:absolute;top:0;left:0;height:5px;width:0;background-color:#fff;transition:width 2s ease-in-out}
+.g_status .ing{position:absolute;top:0;left:50%;width:200px;margin-left:-100px;text-align:center;font-size:16px;font-weight:500;color:#333;}
+.g_status_box{position:relative;height:5px;margin-top:10px;background-color:#e6e6e6}
+.g_status_box .bar{position:absolute;top:0;left:0;height:5px;width:0;background-color:#666;transition:width 2s ease-in-out}
 @media screen and (max-width: 1024px) {
 .g_project_status{position:relative;top:inherit;right:inherit;margin-top:15px;box-shadow:1px 1px 1px 0px rgba(0,0,0,0.6)}
 .g_project_status .g_count{width:50%;margin:0;border-radius:0;box-shadow:none}
@@ -336,25 +337,30 @@ caption,legend{overflow:hidden;width:1px;height:0.1px;font-size:0px;line-height:
 /*****************************************************************
   Table
 *****************************************************************/
-.g_board{margin-top:20px;overflow-x:auto;overflow-y:hidden;}
+.g_board{margin-top:20px;overflow-x:auto;overflow-y:hidden;border-top:2px solid #4d4d4d;}
 .g_board.catch{cursor:grab;}
 .g_board.catching{cursor:grabbing;}
-.g_board table{white-space:nowrap;table-layout:auto;}
-.g_board table thead th{padding:15px 10px;background-color:rgba(0,0,0,0.6);font-weight:500;color:rgba(255,255,255,0.7)}
-.g_board table thead th button{width:27px;height:27px;margin-left:15px;background:rgba(0,0,0,0.6) url(../images/ico_delete.png) 50% 50% no-repeat;border-radius:100%;text-indent:-9999px}
-.g_board table tbody td{margin-top:1px;padding:15px 10px;background-color:rgba(0,0,0,0.2);color:rgba(255,255,255,0.5);word-break:break-all}
+.g_board table{white-space:nowrap;table-layout:auto;border-collapse:collapse;border-spacing:0;}
+.g_board table th,
+.g_board table td{border:1px solid #e6e6e6;}
+.g_board table thead th{padding:10px;font-weight:500;background-color:#fff;font-size:12px;color:#666}
+.g_board table thead th button{width:27px;height:27px;margin-left:15px;background:#ccc url(../images/ico_delete.png) 50% 50% no-repeat;border-radius:100%;text-indent:-9999px}
+.g_board table thead th select{height:27px;line-height:25px;width:100%;}
+.g_board table tbody td{margin-top:1px;padding:12px 10px;vertical-align:middle;font-size:13px;word-break:break-all;background-color:#f1f1f1;color:#666;}
+.g_board table tbody td:not(.no){min-width:60px;}
 /*.g_board table tbody td.id{padding:0}*/
 .g_board table tbody td.deps, .g_board table tbody td.name{text-align:left}
-.g_board table tbody .complete td{background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,0.7)}
-.g_board table tbody tr:hover td{background-color:rgba(0,0,0,0.6);color:rgba(255,255,255,0.8)}
-.g_board table tbody td a{display:block;margin:-20px -10px;padding:20px 10px;height:100%;font-weight:500;color:#fff;text-decoration:underline}
-.g_board table tbody .hr th{padding:20px 30px;border:none;background-color:rgba(255,255,255,0.2);font-size:18px;font-weight:500;color:#fff;text-align:left;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
-.g_board table tbody .hr+tr td{border:none}
+.g_board table tbody .complete td{background-color:#fff;color:#666}
+.g_board table tbody .complete.modify td{background-color:#fcf7f6;color:#ca4c07}
+.g_board table tbody tr:hover td{background-color:#d7f1ff;color:#666}
+.g_board table tbody td a{display:block;margin:-20px -10px;padding:20px 10px;height:100%;font-weight:500;color:#000;text-decoration:underline}
+.g_board table tbody .hr th{padding:16px 30px;font-size:14px;font-weight:500;text-align:left;background:repeating-linear-gradient(135deg,#fff,#fff 5px,#f1f1f1 5px,#f1f1f1 10px);color:#000;}
 .g_grid table thead th{line-height:18px;padding:10px;background-color:rgba(0,0,0,0.6);color:rgba(255,255,255,0.8)}
 .g_grid table tbody th, .g_grid table tbody td{line-height:18px;margin-top:1px;padding:10px;background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,0.8);vertical-align:middle;word-break:break-all}
 .g_board table tbody tr.del td,
 .g_board table tbody tr.del td a{text-decoration:line-through;color:#bbb;}
-.g_board_scroll{display:none;position:fixed;left:0;right:30px;bottom:0;background:#fff;z-index:1;opacity:0.6;}
+.g_board table .delete{text-decoration:line-through}
+.g_board_scroll{display:none;position:fixed;left:30px;right:30px;bottom:0;background:#fff;z-index:1;opacity:0.6;}
 .g_nav+#gContainer .g_board_scroll{left:230px;}
 .g_board.catch+.g_board_scroll{display:block;}
 .g_board_scroll>div{height:5px;width:0;background:#20864d;transition:0.3s;}

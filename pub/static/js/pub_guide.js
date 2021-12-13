@@ -75,6 +75,13 @@ var $naviHtmlAdmin = ''
 +'</ul>';
 
 $(function () {	
+	//다크모드 체크
+	try{
+		const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
+		if(prefersDark)$('html').addClass('dark');
+	}catch(e){ }
+
+	guide.header();
 	// guide.init();
 	makeBoard();
 	$(window).resize();
@@ -608,7 +615,7 @@ var guide = {
 		});
 	},
 	init: function(){
-		guide.header();
+		// guide.header();
 		guide.board();
 		guide.state();
 		guide.UI();

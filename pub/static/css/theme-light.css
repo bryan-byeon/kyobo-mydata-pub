@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.g_nav{background-color:#fff;border-right:1px solid #e6e6e6}
+.g_nav>ul>li>a{border-color:#20864d;color:#666}
+.g_nav>ul>li.active>a{color:#157841}
+.g_nav>ul>li>ul{background-color:#fff;box-shadow:1px 1px 1px 0px rgba(0,0,0,0.2)}
+.g_nav>ul>li>ul>li>a{color:#666}
+.g_nav>ul>li>ul>li:hover>a, .g_nav>ul>li>ul>li.active>a{color:#157841}
+
+.g_section{border:1px solid #e6e6e6;border-radius:10px;overflow:hidden}
+.g_section h3{background-color:#fff;border-bottom:1px solid #e6e6e6;color:#333}
+.g_section .g_guide_info{background-color:#fff;box-shadow:none}
+.g_guide_info .viewer{background-color:#fff;border:1px solid #e6e6e6;box-shadow:none}
+.g_guide_info .code_view{border-color:#e6e6e6}
+.g_guide_info .code_view h4 a:after{right:0}
+.g_item .tag li{border-color:#666;background-color:#e6e6e6}
+
+.g_grid{border-top:2px solid #4d4d4d}
+.g_grid table thead th{background-color:#f5f5f5;font-weight:700;color:#666}
+.g_grid table tbody th, .g_grid table tbody td{background-color:#fff;color:#666;text-shadow:none}
+.g_layout div{border-color:#e6e6e6}
+.g_layout div:before{background-color:#e6e6e6;color:#666;text-shadow:none}
+@media screen and (max-width: 1024px) {
+  .g_nav{background:#20864d}
+  .g_nav>ul>li>a{border-color:#0069a0;color:rgba(255,255,255,0.5)}
+  .g_nav>ul>li:hover>a{border-color:#0687c8;border-width:5px}
+  .g_nav>ul>li.active>a{color:#fff}
+  .g_nav>ul>li>ul{border-width:1px 0;border-style:solid;border-color:rgba(255,255,255,0.3);background-color:rgba(255,255,255,0.2);box-shadow:none}
+  .g_nav>ul>li>ul>li>a{color:rgba(255,255,255,0.5)}
+  .g_nav>ul>li>ul>li:hover>a, .g_nav>ul>li>ul>li.active>a{color:#fff}
+  .g_project_status{border:1px solid #e6e6e6;box-shadow:none}
+  .g_project_status .g_count{border:none}
+  .g_project_status .g_project_ing{border:none}
+  .g_board table tbody .hr th{padding:15px 0;background:repeating-linear-gradient(135deg,#fff,#fff 3px,#f1f1f1 3px,#f1f1f1 6px);font-size:14px;text-align:center}
+}

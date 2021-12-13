@@ -1,0 +1,44 @@
+html.dark body{background:fixed url(../images/bg_pc2.jpg) 50% 50% no-repeat;background-size:cover;}
+html.dark #gHeader{background-color:rgba(0,0,0,0.7);}
+html.dark .g_project .g_list li a{color:rgba(255,255,255,0.5);background-color:rgba(0,0,0,0.8);}
+html.dark .g_project .g_list li a:hover{color:#fff;background-color:rgba(0,0,0,1);}
+html.dark .g_project .g_list li.active a{color:#fff;}
+
+html.dark .g_content>h2{color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.6)}
+
+/*****************************************************************
+  Tab
+*****************************************************************/
+html.dark .g_board_tab{background-color:rgba(0,0,0,0.2);box-shadow:1px 1px 1px 0px rgba(0,0,0,0.5);border-width:0;}
+html.dark .g_board_tab ul li{border-left:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);}
+html.dark .g_board_tab ul li.active{background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,1)}
+
+/*****************************************************************
+  Status Chart
+*****************************************************************/
+html.dark .g_project_status .g_count{background-color:rgba(255,255,255,0.1);box-shadow:1px 1px 1px 0px rgba(0,0,0,0.6);border-width:0;}
+html.dark .g_project_status .g_count>span{border-bottom:1px solid rgba(0,0,0,0.2);color:rgba(255,255,255,0.5)}
+html.dark .g_project_status .g_count>strong{color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
+html.dark .g_project_status .g_project_ing{background-color:rgba(255,255,255,0.1);box-shadow:1px 1px 1px 0px rgba(0,0,0,0.6);border-width:0;}
+html.dark .g_project_status .g_project_ing .graph{background-color:rgba(0,0,0,0.2);}
+html.dark .g_status .total, .g_status .cp_num{color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
+html.dark .g_status .ing{color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
+html.dark .g_status_box{background-color:rgba(0,0,0,0.2)}
+html.dark .g_status_box .bar{background-color:#fff;}
+
+/*****************************************************************
+  Table
+*****************************************************************/
+html.dark .g_board{border-top-width:0;}
+html.dark .g_board table{border-collapse:separate;border-spacing:1px;}
+html.dark .g_board table th,
+html.dark .g_board table td{border-width:0;}
+html.dark .g_board table thead th{background-color:rgba(0,0,0,0.6);color:rgba(255,255,255,0.7)}
+html.dark .g_board table thead th button{background-color:rgba(0,0,0,0.6);}
+html.dark .g_board table tbody .hr th{background:rgba(255,255,255,0.2);color:#fff;text-shadow:1px 1px 1px rgba(0,0,0,0.4)}
+html.dark .g_board table tbody .hr+tr td{border:none}
+html.dark .g_board table tbody td{background-color:rgba(0,0,0,0.2);color:rgba(255,255,255,0.5);}
+html.dark .g_board table tbody .complete td{background-color:rgba(0,0,0,0.4);color:rgba(255,255,255,0.7)}
+html.dark .g_board table tbody .complete.modify td{background-color:rgba(0,0,0,0.6);color:rgba(255,255,255,0.9)}
+html.dark .g_board table tbody tr:hover td{background-color:rgba(0,0,0,0.6);color:rgba(255,255,255,0.8)}
+html.dark .g_board table tbody td a{color:#fff;}
