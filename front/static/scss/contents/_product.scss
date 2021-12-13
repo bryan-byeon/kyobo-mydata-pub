@@ -1,6 +1,7 @@
 
 //swiper
 .banner-swiper{
+  @include web-center;
   .inner{
     display: block;
     position: relative;
@@ -140,7 +141,7 @@
   padding: 10px 16px;
   border-radius: 8px;
   background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
   pointer-events: none;
   z-index: 1;
   dt{

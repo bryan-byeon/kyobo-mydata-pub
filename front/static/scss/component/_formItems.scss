@@ -57,6 +57,7 @@ i.require{
 				background-image: url(../images/icon/ico-error@3x.png);
 				background-repeat: no-repeat;
 				background-position: right 12px center;
+				background-size: 16px auto;
 			}
 		}
 	}
@@ -83,7 +84,7 @@ i.require{
 	+ .flex,
 	+ .input,
 	+ .select,
-	+ .textare{margin-top:6px;}
+	+ .textare{margin-top: 6px;}
 }
 .help-txt{
 	margin-top: 6px;

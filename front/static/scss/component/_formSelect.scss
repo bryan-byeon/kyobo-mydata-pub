@@ -17,6 +17,7 @@
 	height:48px;
 	white-space: nowrap;
 	background-color: #fff;
+	overflow: hidden;
 	&.off{
 		color:var(--placeholder-txt-color);
 	}
@@ -109,12 +110,23 @@
 			height: 24px;
 			font-size: 14px;
 			padding: 0 20px 0 0;
+			&.fz-15{
+				padding-right: 28px;	
+			}
 		}
-		.btn-select:after{
-			width: 16px;
-			height: 16px;
-			right: 0;
-			margin-top: -8px;
+		.btn-select{
+			&:after{
+				width: 16px;
+				height: 16px;
+				right: 0;
+				margin-top: -8px;
+				background-image: url(../images/icon/ico-arrow-down-24@3x.png);
+			}
+			&.fz-15:after{
+				width: 24px;
+				height: 24px;
+				margin-top: -12px;
+			}
 		}
 		select:disabled ~ .btn-select{
 			opacity: 0.4;

@@ -51,7 +51,23 @@
 					</div>
 					<div class="btn-wrap">
 						<div class="flex">
-							<a href="win-pop.html" class="button line" target="_blank">팝업페이지</a>
+							<a href="#" class="button line" onclick="Layer.open('#sideDialog1')">사이드팝업(왼쪽)</a>
+							<a href="#" class="button line" onclick="Layer.open('#sideDialog2')">사이드팝업(오른쪽)</a>
+						</div>
+					</div>
+					<h3 class="gd__h2">팝업불러오기</h3>
+					<div class="btn-wrap">
+						<div class="flex">
+							<a href="win-pop.html" class="button line" target="_blank">(윈도우)팝업페이지</a>
+							<a href="#" data-popup-full="win-pop.html" class="button line">팝업불러오기(full)</a>
+						</div>
+						<div class="flex">
+							<a href="#" data-popup-modal="win-pop.html" class="button line">팝업불러오기(modal)</a>
+							<a href="#" data-popup-bottom="win-pop.html" class="button line">팝업불러오기(bottom)</a>
+						</div>
+						<div class="flex">
+							<a href="#" data-popup-left="win-pop.html" class="button line">팝업불러오기(side-left)</a>
+							<a href="#" data-popup-right="win-pop.html" class="button line">팝업불러오기(side-right)</a>
 						</div>
 					</div>
 					<!-- <h3 class="gd__h2">select</h3>
@@ -257,64 +273,30 @@
 					<div class="section">
 						텍스트 <br>
 						텍스트 <br>
+						<div style="height:1500px;background:#f1f1f1;text-align:center;">스크롤을 위한 임시영역</div>
 						텍스트 <br>
 						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
+					</div>
+				</div>
+				<div class="pop-foot">
+					<div>
+						<div class="flex">
+							<a href="#" class="button line" onclick="Layer.close('#bottomDialog2');">확인</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="sideDialog1" class="popup side-left" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>왼쪽사이드팝업제목</h1>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
 						텍스트 <br>
 						텍스트 <br>
 						텍스트 <br>
@@ -324,7 +306,33 @@
 				<div class="pop-foot">
 					<div>
 						<div class="flex">
-							<a href="#" class="button line" onclick="Layer.close('#bottomDialog2');">확인</a>
+							<a href="#" class="button line ui-pop-close">확인</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="sideDialog2" class="popup side-right" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>왼쪽사이드팝업제목</h1>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						텍스트 <br>
+						텍스트 <br>
+						<div style="height:1500px;background:#f1f1f1;text-align:center;">스크롤을 위한 임시영역</div>
+						텍스트 <br>
+						텍스트 <br>
+					</div>
+				</div>
+				<div class="pop-foot">
+					<div>
+						<div class="flex">
+							<a href="#" class="button line ui-pop-close">확인</a>
 						</div>
 					</div>
 				</div>
@@ -375,7 +383,7 @@
 			});
 		});
 		$('#btnPrompt').click(function(){
-			Layer.prompt('이름을 입력해주세요.',function(e,val){
+			Layer.prompt('계좌번호를 입력해주세요.',function(e,val){
 				if(e){
 					console.log('prompt 확인');
 					$('#frm2_1').val(val);

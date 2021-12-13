@@ -77,6 +77,9 @@
 .i-pay-lpay{
 	background-image: url(../images/icon/pay-lpay@3x.png);
 }
+.i-pay-onnuri{
+	background-image: url(../images/icon/pay-onnuri@3x.png);
+}
 
 .i-ico-checked{
 	&:after{
@@ -98,8 +101,18 @@
 	background-image: url(../images/icon/bar-menu@3x.png);
 }
 .i-ico-search,
+.i-ico-search-16,
 .i-bar-search{
 	background-image: url(../images/icon/ico-search@3x.png);
+}
+.i-ico-search-w,
+.i-ico-search-w-16{
+	background-image: url(../images/icon/ico-search-w@3x.png);
+}
+.i-ico-search-16,
+.i-ico-search-w-16{
+	width: 16px;
+	height: 16px;
 }
 .i-bar-home{
 	background-image: url(../images/icon/bar-home@3x.png);
@@ -247,6 +260,9 @@
 .i-ico-my-sns{
 	background-image: url(../images/icon/ico-my-sns@3x.png);
 }
+.i-ico-my-pay{
+	background-image: url(../images/icon/ico-my-pay@3x.png);
+}
 .i-ico-point{
 	width: 36px;
 	height: 36px;
@@ -289,4 +305,28 @@
 }
 .i-ico-cs-terms{
 	background-image: url(../images/icon/ico-cs-terms@3x.png);
+}
+.i-ico-trash-16{
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/icon/ico-trash-16@3x.png);
+}
+.i-ico-filter{
+	width: 20px;
+	height: 20px;
+	background-image: url(../images/icon/ico-filter@3x.png);
+}
+
+[class*="i-ico-error-"]{
+	width: 100px;
+	height: 80px;
+}
+.i-ico-error-warning{
+	background-image: url(../images/icon/ico-error-warning@3x.png);
+}
+.i-ico-error-404{
+	background-image: url(../images/icon/ico-error-404@3x.png);
+}
+.i-ico-error-user{
+	background-image: url(../images/icon/ico-error-user@3x.png);
 }

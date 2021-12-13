@@ -111,7 +111,7 @@ div.checkbox.ty2 + div.checkbox.ty2{
 			height:20px;
 			+.lbl{
 				margin-left:20px;
-				padding-left:4px;
+				padding-left:6px;
 			}
 		}
 		>.lbl{
@@ -385,4 +385,13 @@ div.checkbox.ty2 + div.checkbox.ty2{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 6px;
+}
+.checkbox-wrap{
+	.radio,
+	.checkbox{
+		+.radio,
+		+.checkbox{
+			margin-top: 16px;
+		}
+	}
 }

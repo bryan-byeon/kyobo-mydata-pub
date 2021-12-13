@@ -707,3 +707,23 @@
     }
   }
 }
+html.full-contents{
+  height: 100%;
+  #header, 
+  #footer{
+    display: none;
+  }
+  body,
+  #wrap,
+  #container,
+  #contents{
+    height: 100%;
+  }
+  #contents{
+    > .section{
+      height: 100%;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}

@@ -203,6 +203,7 @@
       div{
         margin-top: 6px;
         font-size: 12px;
+        line-height: 18px;
       }
     }
   }
@@ -339,17 +340,15 @@
     }
   }
   &.ty-7{
-    background: #000;
+    background: #79cbc7;
     .gift-card-img{
-      // background-image: url(../images/gift-card/img-gift-07@3x.png); // 이미지 없음
-      background-image: url(../images/temp/thumb-temp.jpg);
+      background-image: url(../images/gift-card/img-gift-07@3x.png);
     }
   }
   &.ty-8{
-    background: red;
+    background: #ffd456;
     .gift-card-img{
-      // background-image: url(../images/gift-card/img-gift-08@3x.png); // 이미지 없음
-      background-image: url(../images/temp/thumb-temp.jpg);
+      background-image: url(../images/gift-card/img-gift-08@3x.png);
     }
   }
 }
@@ -424,5 +423,180 @@
   }
   &.ty-8{
     background-image: url(../images/gift-card/img-gift-08-s@3x.png);
+  }
+}
+.simple-pay-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 220px;
+  height: 140px;
+  margin: 0 auto;
+  padding: 20px 20px 16px 16px;
+  border-radius: 8px;
+  background: #f4f4f4;
+  .logo{
+    display: block;
+    height: 24px;
+    background-image: url(../images/pay/simple-pay-etc@3x.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: contain;
+  }
+  .info{
+    font-size: 13px;
+    text-align: right;
+    dt{
+      font-size: 14px;
+      font-weight: bold;
+      +dd{
+        margin-top: 4px;
+      }
+    }
+  }
+  .simple-pay-delete{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  + .simple-pay-card{
+    margin-top: 16px;
+  }
+  &.hyundai{
+    background: #000000;
+    color: #fff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-hyundai@3x.png);
+    }
+  }
+  &.kb{
+    background: #ffce0b;
+    .logo{
+      background-image: url(../images/pay/simple-pay-kb@3x.png);
+    }
+  }
+  &.shinhan{
+    background: #b5ebff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-shinhan@3x.png);
+    }
+  }
+  &.samsung{
+    background: #cbe0ff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-samsung@3x.png);
+    }
+  }
+  &.lotte{
+    background: #6f6259;
+    color: #fff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-lotte@3x.png);
+    }
+  }
+  &.woori{
+    background: #aceff8;
+    .logo{
+      background-image: url(../images/pay/simple-pay-woori@3x.png);
+    }
+  }
+  &.hana{
+    background: #a6d8d1;
+    .logo{
+      background-image: url(../images/pay/simple-pay-hana@3x.png);
+    }
+  }
+  &.bc{
+    background: #e73e44;
+    color: #fff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-bc@3x.png);
+    }
+  }
+  &.nh{
+    background: #d6eaff;
+    .logo{
+      background-image: url(../images/pay/simple-pay-nh@3x.png);
+    }
+  }
+  &.citi{
+    background: #c9e3f4;
+    .logo{
+      background-image: url(../images/pay/simple-pay-citi@3x.png);
+    }
+  }
+  &.kakao{
+    background: #ffde21;
+    .logo{
+      background-image: url(../images/pay/simple-pay-kakao@3x.png);
+    }
+  }
+  &.add{
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 0;
+    .button{
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      font-weight: normal;
+      color: #666;
+      font-size: 16px;
+    }
+  }
+}
+.simple-pay-delete{
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.ui-swiper.simple-pay-swiper{
+  @include outer;
+  .swiper{
+    background: none;
+  }
+  .swiper-slide{
+    width: auto;
+    height: 140px;
+    padding: 0 10px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    &.swiper-slide-active{
+      opacity: 1;
+    }
+  }
+  .swiper-pagination{
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .swiper-pagination-current{
+    font-weight: bold;
+  }
+}
+.img-guide-list{
+  > li{
+    +li{
+      margin-top: 40px;
+    }
+  }
+  .dt{
+    position: relative;
+    background: #f6f6f6;
+    border-radius: 8px;
+    padding: 16px 20px 16px 58px;
+    font-weight: 15px;
+    line-height: 22px;
+    strong{
+      position: absolute;
+      top: 16px;
+      left: 20px;
+    }
+  }
+  .dd{
+    margin-top: 24px;
   }
 }

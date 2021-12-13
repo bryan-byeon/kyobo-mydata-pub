@@ -23,6 +23,7 @@
 				background-image: url(../images/icon/ico-error@3x.png);
 				background-repeat: no-repeat;
 				background-position: right 12px center;
+				background-size: 16px auto;
 			}
 		}
 	}
@@ -63,6 +64,18 @@
 		}
 		&:disabled{
 			color: var(--placeholder-txt-color);
+		}
+	}
+	&.small{
+		input{
+			height: 30px;
+			font-size: 14px;
+			&:first-child{
+				padding-left:8px;
+			}
+			&:last-child{
+				padding-right:8px;
+			}
 		}
 	}
 	&.disabled{
