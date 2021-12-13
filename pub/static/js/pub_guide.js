@@ -243,12 +243,12 @@ var makeBoard = function(){
 				url:$json,
 				dataType:"JSON",
 				success : function(data) {
-					console.log('success', data, data.length);
+					console.log($rel, 'success', data, data.length);
 					if(data.length) $dataHtml = htmlTbody(data)
 				},
 				complete : function(data) {
 					LoadCount += 1;
-					console.log('complete', data);
+					console.log($rel, 'complete', data);
 					htmlBoard($rel, $dataHtml);
 					
 					if(LoadCount === $lenth){
@@ -261,7 +261,7 @@ var makeBoard = function(){
 					}
 				},
 				error : function(xhr, status, error) {
-					console.error('에러발생',xhr, status, error);
+					console.error($rel, '에러발생',xhr, status, error);
 				}
 			});
 		}
@@ -601,6 +601,94 @@ var guide = {
 			});
 		}
 	},
+	preview: function(){
+		const resizePreview = function(isInit){
+			if(isInit === undefined)isInit = false;
+			const $el = $('.code__preview')
+			const $elW = $el.outerWidth();
+			const $elH = $el.outerHeight();
+			const $winW = $(window).width();
+			const $winH = $(window).height();
+			$('.code__preview').css({
+				'left': Math.max(0, ($winW-$elW) / 2),
+				'top': Math.max(0, ($winH-$elH) / 2)
+			});
+			if(isInit){
+				setTimeout(function(){
+					$('.code__preview').draggable({ 
+						handle: 'h2'
+					});
+				},10);
+			}
+		}
+		const showPreview = function(){
+			const $table = $('.g_board_panel table');
+			const $link = $table.find('tbody a');
+			$link.attr('target','preview');
+
+			const $activePanel = $('.g_board_panel.active');
+			const $activeFirstLink = $activePanel.find('tbody a').first();
+
+			if($activeFirstLink.length){
+				$activeFirstLink.closest('tr').addClass('selected');
+			}
+			const $url = $activeFirstLink.attr('href');
+
+			if($('.code__preview').length){
+				$('.code__preview iframe').attr('src', $url);
+			}else{
+				let $html = '<div class="code__preview">';
+					$html += '<a href="'+$url+'" target="_blank" class="code__preview_link">새창으로</a>';
+					$html += '<h2>미리보기</h2>';
+					$html += '<a href="#" class="code__preview_close">닫기</a>';
+					$html += '<div class="code__preview_tab">';
+						$html += '<a href="#" data-width="320">320 x 568</a>';
+						$html += '<a href="#" data-width="360">360 x 640</a>';
+						$html += '<a href="#" data-width="375" class="on">375 x 812</a>';
+						$html += '<a href="#" data-width="768">768 x 1024</a>';
+					$html += '</div>';
+					$html += '<div>';
+						$html += '<iframe class="w375" name="preview" src="'+$url+'" frameborder="0"></iframe>';
+					$html += '</div>';
+				$html += '</div>';
+				$('body').append($html);
+
+				resizePreview(true);
+			}
+		}
+		const hidePreview = function(){
+			$('table tr.selected').removeClass('selected');
+			$('.g_board_panel table tbody a').attr('target','_blank');
+			$('.code__preview').remove();
+		}
+		
+		$('.switch input').change(function(){
+			const $this = $(this);
+			if($this.prop('checked')){
+				showPreview();
+			}else{
+				hidePreview();
+			}
+		});
+
+		$(document).on('click','.code__preview_close',function(e){
+			e.preventDefault();
+			$('.switch input').prop('checked', false).change();
+		});
+
+		$(document).on('click','.code__preview_tab a',function(e){
+			e.preventDefault();
+			$(this).addClass('on').siblings().removeClass('on');
+			const $width = $(this).data('width');
+			const $iframe = $('.code__preview iframe');
+			$iframe.removeAttr('class').addClass('w'+$width);
+			// resizePreview();
+		});
+
+		if($('.switch input').prop('checked')){
+			showPreview();
+		}
+	},
 	resize: function(){
 		$(window).on('resize', function () {
 			var $hr = $('tr.hr th'), 
@@ -622,6 +710,7 @@ var guide = {
 		guide.navi();
 		guide.slide();
 		guide.tab();
+		guide.preview();
 		guide.resize();
 	}
 }

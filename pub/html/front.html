@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../static/css/pub_guide.css">
 <link rel="stylesheet" type="text/css" href="../static/css/swiper.css">
 <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery-ui.1.12.1.min.js"></script>
 <script type="text/javascript" src="../static/js/swiper.min.js"></script>
 <script type="text/javascript" src="../static/js/pub_guide.js"></script>
 <title>교보증권 마이데이타 | Publishing Guide</title>
@@ -18,7 +19,14 @@
  	<!-- <nav class="g_nav"></nav> -->
 	<div id="gContainer">
 		<div class="g_content">
-			<h2>Front Status Board</h2>
+			<div class="g_content_tit">
+				<h2>Front Status Board</h2>
+				<div class="switch">
+					<input type="checkbox" id="switch" />
+					<i></i>
+					<label for="switch">미리보기</label>
+				</div>
+			</div>
 			<div class="g_project_status">
 				<div class="g_count total">
 					<span class="lb">총본수</span><strong class="num"></strong>
