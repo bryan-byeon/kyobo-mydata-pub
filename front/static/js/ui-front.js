@@ -174,8 +174,8 @@ $.fn.sameHeight = function(item){
 	const $this = this;
 	$(window).on('resize',function(){
 		$this.each(function(){
-			const $heightArry = [],
-				$item = $(this).find(item);
+			const $heightArry = [];
+			let $item = $(this).find(item);
 			if(item == null)$item = $(this).children();
 			$item.each(function(){
 				$(this).css('height','auto');
@@ -1319,7 +1319,7 @@ const Layer = {
 	select:function(target,col){
 		const $target = $(target);
 		const $targetVal = $target.val();
-		const $title = $target.attr('title');
+		let $title = $target.attr('title');
 		const $popId = Layer.selectId+Layer.selectIdx;
 		const $length = $target.children().length;
 		let $option = '';
@@ -2334,7 +2334,7 @@ const buttonUI ={
 
 		//checkbox tab
 		$(document).on('change','.ui-tab-chk input',function(e){
-			const $tar = $(this).data('show');
+			let $tar = $(this).data('show');
 
 			if($(this).prop('checked')){
 				if($($tar).hasClass('tab-panel')){
@@ -2458,7 +2458,7 @@ const tooltip = {
 			const $winW	= $(window).width()-40;
 			const $btnW	= $btn.width();
 			const $btnX	= Math.min($winW+($btnW/2)-2,$btn.offset().left)-20;
-			const $scrollEnd	= $(window).height()+$(window).scrollTop();
+			let $scrollEnd	= $(window).height()+$(window).scrollTop();
 			if($('.bottom__fixed:visible').not('.pop_btn').length)$scrollEnd = $scrollEnd-60;
 			const $left = Math.max(-4,$btnX);
 			$tar.children('.tooltip-arr').css({
@@ -2654,7 +2654,7 @@ const scrollUI = {
 			if(!$this.siblings('.'+$barClass).length)$this.after('<div class="'+$barClass+'" aria-hidden="true"><div></div></div>');
 			const $info = $this.siblings('.'+$infoClass);
 			const $bar = $this.siblings('.'+$barClass);
-			const $percent = scrollUI.scrllPer(this);
+			let $percent = scrollUI.scrllPer(this);
 			if($percent <= 0){
 				$bar.hide();	
 			}else{
@@ -2829,7 +2829,7 @@ const Form = {
 					$this.append($optionHtml);
 					$select.change(function(){
 						const $val = $(this).val();
-						const $selectTxt = $(this).find(':selected').text();
+						let $selectTxt = $(this).find(':selected').text();
 						if($selectTxt == '')$selectTxt = '선택';
 						$(this).siblings('.btn-select').find('.val').html($selectTxt);
 						if($val == ''){
@@ -3894,7 +3894,7 @@ const folding = {
 		$(document).on('click',btn,function(e){
 			e.preventDefault();
 			const $this = $(this);
-			const $panel = $this.attr('href');
+			let $panel = $this.attr('href');
 			if($this.closest('.disabled').length || $this.hasClass('disabled')) return false;
 
 			const slideCallback = function(){
@@ -4392,6 +4392,13 @@ const scrollItem ={
 			$(window).on('scroll resize',function(){
 				scrollItem.checkInView($animations);
 			});
+			if (!'IntersectionObserver' in window &&
+					!'IntersectionObserverEntry' in window &&
+					!'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+					console.log('IntersectionObserver not')
+			}else{
+				console.log('IntersectionObserver OK')
+			}
 		}
 	}
 };
@@ -4410,8 +4417,8 @@ $.fn.splitText = function(speed, delay){
 		let $isTag = false;
 		const $style = $(this).attr('style');
 		let j = 0;
-		const $speed = !!speed?speed:$(this).data('speed');
-		const $delay = !!delay?delay:$(this).data('delay');
+		let $speed = !!speed?speed:$(this).data('speed');
+		let $delay = !!delay?delay:$(this).data('delay');
 		const $distance = $(this).data('distance');
 		
 		$this.attr({
@@ -4490,7 +4497,7 @@ const brTxtInsert = function(el,mark,maxWordLength){
 		if($text.indexOf(mark) >= 0){
 			const $txtAry = $text.split(mark);
 			let $insertTxt = '';
-			const $wordLength = $insertTxt.length;
+			let $wordLength = $insertTxt.length;
 			let $row = 1;
 			for(let i=0;i<$txtAry.length;i++){
 				if(i != 0){
@@ -4686,9 +4693,9 @@ const DdayChk = function(time){
 	}
 	const $day = $openDay-$nowDay;
 	if($day < 0)return [0,0,0,0];
-	const $hour = $openHour-$nowHour;
-	const $min = $openMin-$nowMin;
-	const $sec = $openSec-$nowSec;
+	let $hour = $openHour-$nowHour;
+	let $min = $openMin-$nowMin;
+	let $sec = $openSec-$nowSec;
 	if((''+$hour).length==1)$hour='0'+$hour;
 	if((''+$min).length==1)$min='0'+$min;
 	if((''+$sec).length==1)$sec='0'+$sec;
@@ -4711,7 +4718,7 @@ const DdayChkHtml = function(element,completTime,callback){
 
 //byte 체크
 const bytePrint=function(tar){
-	const $txt = $(tar).text();
+	let $txt = $(tar).text();
 	if($(tar).is('input') || $(tar).is('select') || $(tar).is('textarea')){
 		$txt = $(tar).val();
 	}
