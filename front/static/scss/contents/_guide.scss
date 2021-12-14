@@ -25,7 +25,7 @@
 .gd__wrap{overflow:hidden;}
 .gd__box{
   margin:20px auto;display:flex;width:150px;height:150px;background:#eee;align-items:center;justify-content:center;
-  transition:background 1s 0.5s;
+  transition: 0.5s;
   &.on{background:#d00;color:#fff;}
   &.active{background:blue;color:#fff;}
   &.checked{background:green;color:#fff;}

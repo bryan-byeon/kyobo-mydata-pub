@@ -4185,10 +4185,15 @@ const scrollItem ={
 			const $addClassAry = ['on','active','checked','selected'];
 			const $animateClassAry = ['rolling-number', 'couter-number'];
 			const $dataAnimation = $el.data('animation');
-			let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
-			if($animateClassAry.indexOf($dataAnimation) >= 0) {
+			let $animationClass = 'animate__'+$dataAnimation;
+			if($addClassAry.indexOf($dataAnimation) >= 0){
+				$el.data('animation-type', 2);
+				$animationClass = $dataAnimation;
+			}else if($animateClassAry.indexOf($dataAnimation) >= 0) {
+				$el.data('animation-type', 3);
 				$el.addClass($dataAnimation);
 			}else if(!$el.hasClass('animate__animated') && $animationClass.indexOf('animate__') >= 0){
+				$el.data('animation-type', 1);
 				if($delay>0){
 					$el.css({
 						'-webkit-animation-delay':$delay+'ms',
@@ -4208,6 +4213,20 @@ const scrollItem ={
 				$el.addClass('animate__animated paused '+$animationClass);
 			}
 		})
+	},
+	typeChkClass: function(el){
+		let returnVal = null;
+		const $el = el;
+		const $type = $el.data('animation-type');
+		const $dataAnimation = $el.data('animation');
+		if($type == 1){
+			returnVal = 'animate__'+$dataAnimation;
+		}else if($type == 2){
+			returnVal = $dataAnimation;
+		}else if($type == 3){
+			returnVal = 'is-active';
+		}
+		return returnVal;
 	},
 	checkInView: function(target){
 		const $window = $(window);
@@ -4231,15 +4250,11 @@ const scrollItem ={
 			const $elCenter = $elTop + ($elHeight/2);
 			const $elBottom = $elTop + $elHeight;
 
-			const $addClassAry = ['on','active','checked','selected'];
-			const $animateClassAry = ['rolling-number', 'couter-number'];
-			const $dataAnimation = $el.data('animation');
-			let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
-			if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
+			const $animationClass = scrollItem.typeChkClass($el);
 
 			if($el.data('init')) return;
 			if(($winTop <= $elTop && $elTop <= $winBottom) || ($winTop <= $elBottom && $elBottom <= $winBottom)){
-				scrollItem.action($el, $animationClass);
+				scrollItem.action($el);
 			}else{
 				const $timer = $el.data('time');
 				if($timer !== undefined){
@@ -4251,16 +4266,10 @@ const scrollItem ={
 		});
 	},
 	observer: function(el){
-		const $el = $(el);
-		const $addClassAry = ['on','active','checked','selected'];
-		const $animateClassAry = ['rolling-number', 'couter-number'];
-		const $dataAnimation = $el.data('animation');
-		let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
-		if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
-		
+		const $el = $(el)
 		const io = new IntersectionObserver(entries => {
       if (entries.some(entry => entry.intersectionRatio > 0)) {
-        scrollItem.action($el, $animationClass);
+        scrollItem.action($el);
       }
     },{
       threshold: 0.03
@@ -4269,11 +4278,9 @@ const scrollItem ={
     io.observe(el)
     return io
 	},
-	action: function(el, $animationClass){
-		const $el = el;
-		const $dataAnimation = $el.data('animation');
-		const $animateClassAry = ['rolling-number', 'couter-number'];
-		if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
+	action: function(el){
+		const $el = $(el);
+		const $animationClass = scrollItem.typeChkClass(el);
 
 		if($el.data('time') !== undefined) return;
 		scrollItem.index += 1;
@@ -4297,7 +4304,7 @@ const scrollItem ={
 				if($slide.length){
 					if($slide.hasClass('swiper-slide-active'))$el.addClass($animationClass);
 				}else{
-					if($dataAnimation === 'couter-number')scrollItem.couterInit($el);
+					if($el.hasClass('couter-number'))scrollItem.couterInit($el);
 					$el.addClass($animationClass);
 				}
 			}
@@ -4455,10 +4462,11 @@ const scrollItem ={
 			});
 
 			scrollItem.ready($animations);
-			// $(window).on('scroll resize',function(){
-			// 	scrollItem.checkInView($animations);
-			// });
+			$(window).on('scroll resize',function(){
+				scrollItem.checkInView($animations);
+			});
 			
+			/*
 			if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
 				// IntersectionObserver 지원안할때 
 				$(window).on('scroll resize',function(){
@@ -4470,6 +4478,7 @@ const scrollItem ={
 					scrollItem.aray.push(scrollItem.observer(this))
 				});
 			}
+			*/
 		}
 	}
 };
