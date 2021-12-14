@@ -998,36 +998,63 @@ const common = {
 		}
 	},
 	guide: function(){
-		if($('.gd__theme_color').length){
-			const $baseThemeColor = '#3cc35b';
-			const $input = $('.gd__theme_color input');
-			const $color = $('.gd__theme_color .color');
-			const $resetBtn = $('.gd__theme_color .reset button');
-			const $themeColor = uiCookie.get('theme-color') !== '' ? uiCookie.get('theme-color') : $baseThemeColor;
-			
-			const setColor = function(colorStr){
-				$input.val(colorStr);
-				$color.text(colorStr);
-				if($baseThemeColor !== colorStr){
-					$('html').css('--theme-color',colorStr);
-					uiCookie.set('theme-color',colorStr)
-				}else{
-					$('html').removeCss('--theme-color');
-					uiCookie.set('theme-color', '')
+		const themeColorChange = function(){
+			const $path = location.pathname;
+			if($path.indexOf('/html/guide') > -1){
+				// if(!$('.gd__theme_color').length){
+				// }
+				let $html = '<div class="gd__theme_color">';
+					$html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></button>';
+					$html += '<dl>';
+						$html += '<dt>테마색상 변경확인</dt>';
+						$html += '<dd>';
+							$html += '<input type="color">';
+							$html += '<div>';
+								$html += '<div class="color"></div>';
+								$html += '<div class="reset"><button type="button">리셋</button></div>';
+							$html += '</div>';
+						$html += '</dd>';
+					$html += '</dl>';
+				$html += '</div>';
+				$('body').append($html);
+				
+				const $baseThemeColor = '#3cc35b';
+				const $input = $('.gd__theme_color input');
+				const $color = $('.gd__theme_color .color');
+				const $openBtn = $('.gd__theme_btn');
+				const $resetBtn = $('.gd__theme_color .reset button');
+				const $themeColor = uiCookie.get('theme-color') !== '' ? uiCookie.get('theme-color') : $baseThemeColor;
+				
+				const setColor = function(colorStr){
+					$input.val(colorStr);
+					$color.text(colorStr);
+					if($baseThemeColor !== colorStr){
+						$('html').css('--theme-color',colorStr);
+						uiCookie.set('theme-color',colorStr)
+					}else{
+						$('html').removeCss('--theme-color');
+						uiCookie.set('theme-color', '')
+					}
 				}
-			}
-			setColor($themeColor);
-			// $input.change(function(){
-			$input.on('input',function(){
-				const $val = $(this).val();
-				setColor($val);
-			})
+				setColor($themeColor);
+				
+				$openBtn.on('click',function(e){
+					e.preventDefault();
+					$('.gd__theme_color').toggleClass('open');
+				});
 
-			$resetBtn.click(function(e){
-				e.preventDefault();
-				setColor($baseThemeColor);
-			});
+				$input.on('input',function(){
+					const $val = $(this).val();
+					setColor($val);
+				})
+
+				$resetBtn.on('click',function(e){
+					e.preventDefault();
+					setColor($baseThemeColor);
+				});
+			}
 		}
+		themeColorChange();
 	},
 	lottie: function(){
 		const $lottie = $('[data-lottie]');
@@ -4149,6 +4176,39 @@ const getOffset = function(element) {
 //data-animation
 const scrollItem ={
 	index: 0,
+	ready: function(target){
+		$.each(target, function(){
+			const $el = $(this);
+			const $delay = parseInt($el.data('delay'));
+			const $duration = parseInt($el.data('duration'));
+			let $repeat = parseInt($el.data('repeat'));
+			const $addClassAry = ['on','active','checked','selected'];
+			const $animateClassAry = ['rolling-number', 'couter-number'];
+			const $dataAnimation = $el.data('animation');
+			let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
+			if($animateClassAry.indexOf($dataAnimation) >= 0) {
+				$el.addClass($dataAnimation);
+			}else if(!$el.hasClass('animate__animated') && $animationClass.indexOf('animate__') >= 0){
+				if($delay>0){
+					$el.css({
+						'-webkit-animation-delay':$delay+'ms',
+						'animation-delay':$delay+'ms'
+					});
+				}
+				if($duration>0){
+					$el.css({
+						'-webkit-animation-duration':$duration+'ms',
+						'animation-duration':$duration+'ms'
+					});
+				}
+				if($repeat>0){
+					if($repeat > 5) $repeat = 5;
+					$el.addClass('animate__repeat-'+$repeat);
+				}
+				$el.addClass('animate__animated paused '+$animationClass);
+			}
+		})
+	},
 	checkInView: function(target){
 		const $window = $(window);
 		const $wHeight = $window.height();
@@ -4170,68 +4230,16 @@ const scrollItem ={
 			// console.log($el.offset().top, $matrixY, $elTop)
 			const $elCenter = $elTop + ($elHeight/2);
 			const $elBottom = $elTop + $elHeight;
-			const $delay = parseInt($el.data('delay'));
-			const $duration = parseInt($el.data('duration'));
-			let $repeat = parseInt($el.data('repeat'));
+
 			const $addClassAry = ['on','active','checked','selected'];
 			const $animateClassAry = ['rolling-number', 'couter-number'];
 			const $dataAnimation = $el.data('animation');
 			let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
-			if($animateClassAry.indexOf($dataAnimation) >= 0) {
-				$el.addClass($dataAnimation);
-				$animationClass = 'is-active';
-			}
-			if(!$el.hasClass('animate__animated') && $animationClass.indexOf('animate__') >= 0){
-				if($delay>0){
-					$el.css({
-						'-webkit-animation-delay':$delay+'ms',
-						'animation-delay':$delay+'ms'
-					});
-				}
-				if($duration>0){
-					$el.css({
-						'-webkit-animation-duration':$duration+'ms',
-						'animation-duration':$duration+'ms'
-					});
-				}
-				if($repeat>0){
-					if($repeat > 5) $repeat = 5;
-					$el.addClass('animate__repeat-'+$repeat);
-				}
-				$el.addClass('animate__animated paused '+$animationClass);
-			}
+			if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
 
 			if($el.data('init')) return;
 			if(($winTop <= $elTop && $elTop <= $winBottom) || ($winTop <= $elBottom && $elBottom <= $winBottom)){
-				if($el.data('time') !== undefined) return;
-				scrollItem.index += 1;
-        const timer = scrollItem.index * 200;
-				const initTimer = setTimeout(function(){
-					$el.data('init',true);
-					if(scrollItem.index > 0)scrollItem.index -= 1;
-					const $slide = $el.closest('.swiper-slide');
-					if($el.hasClass('animate__animated')){
-						if($el.closest('.tab-panel').length && !$el.closest('.tab-panel').hasClass('active'))return;
-						if($slide.length){
-							if($slide.hasClass('swiper-slide-active')){
-								if(!$el.hasClass($animationClass))$el.addClass($animationClass);
-								if($el.hasClass('paused'))$el.removeClass('paused');
-							}
-						}else{
-							if(!$el.hasClass($animationClass))$el.addClass($animationClass);
-							if($el.hasClass('paused'))$el.removeClass('paused');
-						}
-					}else{
-						if($slide.length){
-							if($slide.hasClass('swiper-slide-active'))$el.addClass($animationClass);
-						}else{
-							if($dataAnimation === 'couter-number')scrollItem.couterInit($el);
-							$el.addClass($animationClass);
-						}
-					}
-					$el.removeData('time');
-				}, timer);
-				$el.data('time',initTimer);
+				scrollItem.action($el, $animationClass);
 			}else{
 				const $timer = $el.data('time');
 				if($timer !== undefined){
@@ -4241,6 +4249,61 @@ const scrollItem ={
 				}
 			}
 		});
+	},
+	observer: function(el){
+		const $el = $(el);
+		const $addClassAry = ['on','active','checked','selected'];
+		const $animateClassAry = ['rolling-number', 'couter-number'];
+		const $dataAnimation = $el.data('animation');
+		let $animationClass = $addClassAry.indexOf($dataAnimation) < 0 ? 'animate__'+$dataAnimation : $dataAnimation;
+		if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
+		
+		const io = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.intersectionRatio > 0)) {
+        scrollItem.action($el, $animationClass);
+      }
+    },{
+      threshold: 0.03
+    }
+    )
+    io.observe(el)
+    return io
+	},
+	action: function(el, $animationClass){
+		const $el = el;
+		const $dataAnimation = $el.data('animation');
+		const $animateClassAry = ['rolling-number', 'couter-number'];
+		if($animateClassAry.indexOf($dataAnimation) >= 0) $animationClass = 'is-active';
+
+		if($el.data('time') !== undefined) return;
+		scrollItem.index += 1;
+		const timer = scrollItem.index * 200;
+		const initTimer = setTimeout(function(){
+			$el.data('init',true);
+			if(scrollItem.index > 0)scrollItem.index -= 1;
+			const $slide = $el.closest('.swiper-slide');
+			if($el.hasClass('animate__animated')){
+				if($el.closest('.tab-panel').length && !$el.closest('.tab-panel').hasClass('active'))return;
+				if($slide.length){
+					if($slide.hasClass('swiper-slide-active')){
+						if(!$el.hasClass($animationClass))$el.addClass($animationClass);
+						if($el.hasClass('paused'))$el.removeClass('paused');
+					}
+				}else{
+					if(!$el.hasClass($animationClass))$el.addClass($animationClass);
+					if($el.hasClass('paused'))$el.removeClass('paused');
+				}
+			}else{
+				if($slide.length){
+					if($slide.hasClass('swiper-slide-active'))$el.addClass($animationClass);
+				}else{
+					if($dataAnimation === 'couter-number')scrollItem.couterInit($el);
+					$el.addClass($animationClass);
+				}
+			}
+			$el.removeData('time');
+		}, timer);
+		$el.data('time',initTimer);
 	},
 	rollingReady: function(target){
 		const $this = $(target);
@@ -4381,6 +4444,7 @@ const scrollItem ={
 			}
 		});
 	},
+	aray: [],
 	init: function(){
 		const $animations = $.find('*[data-animation]');
 		if($animations.length > 0){
@@ -4389,15 +4453,22 @@ const scrollItem ={
 				if($dataAnimation === 'rolling-number')scrollItem.rollingReady(this);
 				if($dataAnimation === 'couter-number')scrollItem.couterReady(this);
 			});
-			$(window).on('scroll resize',function(){
-				scrollItem.checkInView($animations);
-			});
-			if (!'IntersectionObserver' in window &&
-					!'IntersectionObserverEntry' in window &&
-					!'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
-					console.log('IntersectionObserver not')
+
+			scrollItem.ready($animations);
+			// $(window).on('scroll resize',function(){
+			// 	scrollItem.checkInView($animations);
+			// });
+			
+			if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+				// IntersectionObserver 지원안할때 
+				$(window).on('scroll resize',function(){
+					scrollItem.checkInView($animations);
+				});
 			}else{
-				console.log('IntersectionObserver OK')
+				// IntersectionObserver 지원될때 
+				$($animations).each(function(){
+					scrollItem.aray.push(scrollItem.observer(this))
+				});
 			}
 		}
 	}
