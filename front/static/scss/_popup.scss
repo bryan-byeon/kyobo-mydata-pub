@@ -375,11 +375,53 @@
 .select-item{
   position:relative;
   >a{
-    display:block;padding:4px 10px;min-height:50px;line-height:40px;text-align:center;word-break:break-all;border:1px solid #ddd;border-radius:4px;
-    &.disabled{background:#f0f0f0;color:#858585;}
-    >span{display:inline-block;line-height:1.2;}
+    position:relative;
+		display:flex;
+		align-items: center;
+		// padding:8px 15px 8px 45px;
+		padding:8px 30 8px 0;
+		min-height:48px;
+		word-break:break-all;
+		border-radius:4px;
+		// &:before{
+		// 	content:'';
+		// 	display: block;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	left: 0;
+		// 	right: 0;
+		// 	bottom: 0;
+		// 	border-radius:4px;
+		// 	border: 1px solid #eee;
+		// 	opacity: 0.4;
+		// }
+		.checkbox{
+			position: absolute;
+			//left: 15px;
+			right: 0;
+			top: 12px;
+			&>i:after{
+				border-color: #f1f1f1;
+			}
+		}
+    &.disabled{
+			background:#f0f0f0;
+			color:#858585;
+		}
+    >div{
+			line-height:1.2;
+		}
   }
-  &.selected>a{color:#fff;background:var(--theme-color);border-color:var(--theme-color);}
+  &.selected>a{
+		color:var(--theme-color);
+		&:before{
+			border-color: var(--theme-color);
+			color:var(--theme-color);
+		}
+		.checkbox>i:after{
+			border-color: var(--theme-color);
+		}
+	}
 }
 .select-item-wrap{
   padding:0 17px 17px;
@@ -437,51 +479,20 @@
 		transition-delay:0s;
 	}
 }
-
-//gnb
-.folding-list.gnb-list{
-	border-width: 0;
-	>li{
-		border-top-width: 0;
-		&:before{
-			content:'';
-			display: block;
-			height: 1px;
-			margin: 0 20px;
-			background: #eee;
-		}
-	}
-	.folding-head{
-		font-size: 16px;
-		a{
-			padding: 20px 54px 20px 52px;
-			i{
-				display: block;
-				width: 24px;
-				height: 24px;
-				position: absolute;
-				left: 20px;
-				top: 20px;
-				background: #000;
+@include mediaMinWidth(1024){
+	.popup{
+		&.full{
+			.pop-wrap{
+				@include web-center;
 			}
 		}
-	}
-	.folding-panel{
-		padding-top: 0;
-		padding-left: 52px;
-		padding-bottom: 26px;
-		ul{
-			display: flex;
-			flex-wrap: wrap;
-			>li{
-				width: 50%;
-				>a{
-					display: block;
-					padding: 6px 0;
-					font-size: 14px;
-					color: #666;
-				}
+		&.bottom{
+			.pop-wrap{
+				@include web-center;
+				left: 50%;
+				margin-left: -512px;
 			}
 		}
 	}
 }
+

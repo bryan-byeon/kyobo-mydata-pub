@@ -38,6 +38,12 @@
 			color: var(--placeholder-txt-color);
 			background-color: #f8f8f8;
 		}
+		select:disabled{
+			display: block !important;
+			~ .btn-select{
+				display: none;
+			}
+		}
 	}
 	&.focus{
 		select,

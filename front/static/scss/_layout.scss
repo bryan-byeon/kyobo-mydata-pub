@@ -727,3 +727,51 @@ html.full-contents{
     }
   }
 }
+
+//gnb
+.folding-list.gnb-list{
+	border-width: 0;
+	>li{
+		border-top-width: 0;
+		&:before{
+			content:'';
+			display: block;
+			height: 1px;
+			margin: 0 20px;
+			background: #eee;
+		}
+	}
+	.folding-head{
+		font-size: 16px;
+		a{
+			padding: 20px 54px 20px 52px;
+			i{
+				display: block;
+				width: 24px;
+				height: 24px;
+				position: absolute;
+				left: 20px;
+				top: 20px;
+				background: #000;
+			}
+		}
+	}
+	.folding-panel{
+		padding-top: 0;
+		padding-left: 52px;
+		padding-bottom: 26px;
+		ul{
+			display: flex;
+			flex-wrap: wrap;
+			>li{
+				width: 50%;
+				>a{
+					display: block;
+					padding: 6px 0;
+					font-size: 14px;
+					color: #666;
+				}
+			}
+		}
+	}
+}

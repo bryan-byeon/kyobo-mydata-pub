@@ -1384,7 +1384,8 @@ const Layer = {
 								$popHtml += '<a href="#" class="ui-pop-select-btn'+($opDisabled?' disabled':'')+'" role="button" data-value="'+$opVal+'"';
 								if($targetVal == $opVal)$popHtml +=  ' title="'+(($opTxt.length)>20 ?$opTxt.substring(20,$opTxt.lastIndexOf('(')):$opTxt)+' 선택됨"';
 								$popHtml += '>';
-									$popHtml += '<span>'+$opTxt+'</span>';
+									$popHtml += '<div class="checkbox ty2"><i aria-hidden="true"></i></div>';
+									$popHtml += '<div>'+$opTxt+'</div>';
 								$popHtml += '</a>';
 							$popHtml += '</div>';
 							$popHtml += '</li>';
@@ -1429,6 +1430,7 @@ const Layer = {
 				$txtLengthArry.push($optTxt.length);
 			}
 		});
+		/*
 		const $maxTxtLength = Math.max.apply(null, $txtLengthArry);
 
 		//들어갈수 있는 글자수 체크
@@ -1451,6 +1453,8 @@ const Layer = {
 		}else{
 			Layer.select($select);
 		}
+		*/
+		Layer.select($select);
 
 		const $pop = $select.data('popup');
 		Layer.open($pop,function(){
@@ -1505,7 +1509,7 @@ const Layer = {
 			if(Layer.openPop.indexOf('#'+$id) < 0)Layer.openPop.push('#'+$id);
 
 
-			if(!$(tar).hasClass('alert') && !$(tar).hasClass('full') && !$(tar).hasClass('bg-no-click')){
+			if(!$(tar).hasClass('alert') && !$(tar).hasClass('bg-no-click')){
 				const $bgClick = '<div class="pop-bg-close ui-pop-close" role="button" aria-label="팝업창 닫기"></div>';
 				if(!$(tar).find('.pop-bg-close').length)$(tar).prepend($bgClick);
 			}
@@ -2061,6 +2065,27 @@ const buttonUI ={
 			}
 		});
 	},
+	disabled: function(){
+		$('a[aria-disabled]').each(function(){
+			if(!$(this).hasClass('disabled'))$(this).removeAttr('aria-disabled');
+		});
+		$('a.disabled').each(function(){
+			$(this).attr('aria-disabled','true');
+		});
+	},
+	disabledChk: function(){
+		var checking = function(){
+			setTimeout(function(){
+				buttonUI.disabled();
+			}, 100);
+		}
+		$(document).on ('click','a, button',function(){
+			checking();
+		});
+		$(document).on ('change','input',function(){
+			checking();
+		});
+	},
 	effect: function(){
 		//버튼 클릭 효과
 		const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .ui-folding-btn, .ui-folding .folding-head a, .tab-box a';
@@ -2459,6 +2484,7 @@ const buttonUI ={
 	},
 	init: function(){
 		buttonUI.default();
+		buttonUI.disabledChk();
 		buttonUI.effect();
 		buttonUI.tab();
 		buttonUI.star();
@@ -2793,7 +2819,7 @@ const Form = {
 		});
 	},
 	select:function(){
-		const $select = $('.select').not('.btn, .not, .inline');
+		const $select = $('.select').not('.btn, .not');
 		if($select.length){
 			$select.each(function(e){
 				const $this = $(this);
@@ -3658,8 +3684,8 @@ const Form = {
 	},
 	init:function(){
 		Form.focus();
-		// Form.select();
-		Form.select2();
+		Form.select();
+		// Form.select2();
 		Form.selectUI();
 		Form.input();
 		Form.inpBtn();
@@ -4273,8 +4299,7 @@ const scrollItem ={
       }
     },{
       threshold: 0.03
-    }
-    )
+    })
     io.observe(el)
     return io
 	},
