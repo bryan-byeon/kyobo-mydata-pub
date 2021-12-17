@@ -1477,33 +1477,145 @@ const Layer = {
 			const $tar = $(this).is('a') ? $(this).attr('href') : '#'+$(this).attr('for');
 			$($tar).next('.ui-select-open').focus().click();
 		});
-		$(document).on('click','.' +Layer.selectClass,function(e){
-			e.preventDefault();
-			Layer.close(this,function(){
-				if(typeof(closeCallbackAction) == "function" ){
-					closeCallbackAction();
+	},
+	bottomTouch: function(tar){
+		const $popup = $(tar);
+		const $wrap = $popup.find('.'+Layer.wrapClass);
+		const $body = $popup.find('.'+Layer.bodyClass);
+		const $bodyMinHeight = parseInt($body.css('padding-top'))+parseInt($body.css('padding-bottom'));
+
+		const $animateSpeed = 300;
+		let $startH = '';
+		let $startX = 0;
+		let $startY = 0;
+		let $distanceX = 0;
+		let $distanceY = 0;
+		let $isFull = false;
+		let $duration = 0;
+		let $directionX = false;
+		let $directionY = false;
+		let $durationTimer;
+
+		$(tar).find('.'+Layer.headClass).on('touchstart',function(e){
+			const $this = $(this);
+			const $clientX = (e.type === 'touchstart') ? e.touches[0].clientX : e.clientX;
+			const $clientY = (e.type === 'touchstart') ? e.touches[0].clientY : e.clientY;
+			$startX = $clientX;
+			$startY = $clientY;
+			$startH = $this.closest('.'+Layer.wrapClass).outerHeight();
+			if($this.data('first-height') === undefined)$this.data('first-height', $startH);
+			$wrap.stop(false,true);
+			$durationTimer = setInterval(function(){
+				$duration += 10;
+			},10)
+		});
+
+		$(tar).find('.'+Layer.headClass).on('touchmove',function(e){
+			// const $this = $(this);
+			const $clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
+			const $clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
+			$distanceX = $clientX - $startX;
+			$distanceY = $clientY - $startY;
+			// console.log($distanceX, $distanceY)
+
+			// const $min = $(tar).hasClass('touch-move') ? $firstHeight:0;
+			const $min = $bodyMinHeight;
+			const $max = $(tar).hasClass('touch-move') ? $popup.height():$popup.outerHeight();
+			const $height = Math.max($min,Math.min($max, $startH - $distanceY));
+
+			$wrap.css('height',$height);
+			$body.css('max-height',$height);
+			if(!$(tar).hasClass('touch-move')){
+				if($popup.hasClass('full')){
+					$isFull = true;
+					$popup.removeClass('full').addClass('bottom');
 				}
-			});
-		}).on('click','.'+Layer.wrapClass,function(e){
-			e.stopPropagation();
+			}
+		});
+
+		$(tar).find('.'+Layer.headClass).on('touchend',function(e){
+			const $this = $(this);
+			const $clientX = (e.type === 'touchend') ? e.changedTouches[0].clientX : e.clientX;
+			const $clientY = (e.type === 'touchend') ? e.changedTouches[0].clientY : e.clientY;
+			$distanceX = $clientX - $startX;
+			$distanceY = $clientY - $startY;
+			if($distanceX !== 0) $directionX = $distanceX > 0 ? 'right' : 'left';
+			if($distanceY !== 0) $directionY = $distanceY > 0 ? 'down' : 'up';
+			const $firstHeight = $this.data('first-height');
+			const $min = $bodyMinHeight;
+			const $max = $(tar).hasClass('touch-move') ? $popup.height():$popup.outerHeight();
+
+			clearInterval($durationTimer);
+			const $powerRatio = $duration === 0 || $distanceY === 0 ? 0 : Math.abs($distanceY) / $duration;
+			const $power = (1+Math.round($powerRatio * 3)) * Math.round($powerRatio * 30)
+			const $powerDistance = Math.round(($distanceY * -1) / $duration * $power);
+			if($(tar).hasClass('touch-move')){
+				const $wrapHeight = $wrap.outerHeight();
+				const $endHeight = Math.max($min,Math.min($max,$wrapHeight + $powerDistance));
+				const $endSpeed = Math.min(2000, Math.abs($powerDistance*10));
+				$wrap.animate({'height':$endHeight}, $endSpeed, 'easeOutQuint', function(){
+					$body.css('max-height',$endHeight);
+				});
+			}else{
+				if(Math.abs($distanceY) > 50){
+					if($popup.hasClass('bottom') && !$isFull){
+						if($directionY === 'up'){
+							$wrap.animate({'height':'100%'},$animateSpeed,function(){
+								$wrap.removeCss('height');
+								$body.removeCss('max-height');
+								$popup.removeClass('bottom').addClass('full');
+							});
+						}else if($directionY === 'down'){
+							Layer.close(tar);
+						}
+					}
+					if($isFull && $directionY === 'down'){
+						$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
+							$isFull = false;
+							$wrap.removeCss('height');
+							$this.removeData('first-height');
+						});
+					}
+				}else{
+					if($isFull){
+						$wrap.animate({'height':'100%'},$animateSpeed,function(){
+							$isFull = false;
+							$wrap.removeCss('height');
+							$popup.removeClass('bottom').addClass('full');
+						});
+					}else{
+						$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
+							$wrap.removeCss('height');
+							$body.css('max-height',$firstHeight);
+							$this.removeData('first-height');
+						});
+					}
+				}
+			}
+
+			$duration = 0;
 		});
 	},
 	bottomSwipe: function(tar){
+		const $popup = $(tar);
+		const $wrap = $popup.find('.'+Layer.wrapClass);
+		const $body = $popup.find('.'+Layer.bodyClass);
+		const $bodyMinHeight = parseInt($body.css('padding-top'))+parseInt($body.css('padding-bottom'));
+		const $animateSpeed = 300;
 		let $popWrapH = '';
 		let $isFull = false;
+
 		$(tar).find('.'+Layer.headClass).on('touchstart',function(){
 			const $this = $(this);
 			$popWrapH = $this.closest('.'+Layer.wrapClass).outerHeight();
 			if($this.data('first-height') === undefined)$this.data('first-height', $popWrapH);
+			$wrap.stop(false,true);
 		});
+
 		$(tar).find('.'+Layer.headClass).swipe({
 			swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
 				const $this = $(this);
-				const $popup = $(tar);
-				const $wrap = $this.closest('.'+Layer.wrapClass);
-				const $body = $wrap.find('.'+Layer.bodyClass);
 				const $firstHeight = $this.data('first-height');
-				const $bodyMinHeight = parseInt($body.css('padding-top'))+parseInt($body.css('padding-bottom'));
 				// const $min = $(tar).hasClass('touch-move') ? $firstHeight:0;
 				const $min = $bodyMinHeight;
 				const $max = $(tar).hasClass('touch-move') ? $popup.height():$popup.outerHeight();
@@ -1511,16 +1623,14 @@ const Layer = {
 				const $isDown = direction == 'down'?true:false;
 				const $distance = $isDown?-distance:distance;
 				const $height = Math.max($min,Math.min($max,$popWrapH+$distance));
-				const $animateSpeed = 300;
 				const $powerRatio = duration === 0 || distance === 0 ? 0 : distance / duration;
 				const $power = (1+Math.round($powerRatio * 3)) * Math.round($powerRatio * 30)
 				const $powerDistance = Math.round($distance / duration * $power);
-				$wrap.stop(false,true);
 				if($isUp || $isDown){
+					$wrap.stop(false,true).css('height',$height);
+					$body.css('max-height',$height);
 					if($(tar).hasClass('touch-move')){
 						//터치무브만큼 크기조절
-						$wrap.css('height',$height);
-						$body.css('max-height',$height);
 						if(phase == 'end' || phase == 'cancel'){
 							if($powerDistance !== 0){
 								const $wrapHeight = $wrap.outerHeight();
@@ -1534,15 +1644,9 @@ const Layer = {
 						}
 					}else{
 						//터치무브로 상태값 바로 변경
-						if($popup.hasClass('bottom')){
-							$wrap.css('height',$height);
-							$body.css('max-height',$height);
-						}
 						if($popup.hasClass('full')){
 							$isFull = true;
 							$popup.removeClass('full').addClass('bottom');
-							$wrap.css('height',$height);
-							$body.css('max-height',$height);
 						}
 						if(phase == 'end' || phase == 'cancel'){
 							if(distance > 50){
@@ -1715,7 +1819,8 @@ const Layer = {
 				//swipe 기능
 				if($(tar).hasClass('is-swipe') && !$(tar).hasClass('is-swipe__init')){
 					$(tar).addClass('is-swipe__init');
-					Layer.bottomSwipe(tar);
+					// Layer.bottomSwipe(tar);
+					Layer.bottomTouch(tar);
 				}
 
 				if(!isMobile.any())Layer.focusMove(tar);
@@ -1882,8 +1987,8 @@ const Layer = {
 			if(!isWinPop){	//레이어팝업
 				//컨텐츠 스크롤이 필요할때
 				const $height = $(tar).height();
-				const	$popHeight = $(tar).find('.'+Layer.wrapClass).outerHeight();
-				if(!$(tar).hasClass('full'))$content.css('max-height',$popHeight);
+				// const	$popHeight = $(tar).find('.'+Layer.wrapClass).outerHeight();
+				if($(tar).hasClass('bottom') || $(tar).hasClass('modal'))$content.css('max-height',$height);
 
 				//팝업 헤더 shadow
 				addShadow($content);
@@ -1891,7 +1996,6 @@ const Layer = {
 				//바텀시트 선택요소로 스크롤
 				const $sclWrp = $(tar).find('.pop-body');
 				if($(tar).hasClass(Layer.showClass) && $(tar).hasClass(Layer.selectClass) && $(tar).find('.selected').length && !$sclWrp.hasClass('scrolling')){
-					
 					const $sclWrpPdT = parseInt($sclWrp.css('padding-top'));
 					const $sclWrpH = $sclWrp.outerHeight();
 					const $sclWrpH2 = $sclWrp.get(0).scrollHeight;
@@ -1911,8 +2015,6 @@ const Layer = {
 				addShadow(window);
 			}
 		});
-
-		
 
 		//팝업 헤더 shadow
 		if(!isWinPop){	//레이어팝업
@@ -2060,16 +2162,6 @@ const Layer = {
 			let $pop = $(this).attr('href');
 			if ($pop == '#' || $pop == '#none' || $pop == undefined)$pop = $(this).closest('.'+Layer.popClass);
 			if($pop.length)Layer.close($pop);
-		});
-		$(document).on('click', '.bg-pop-close',function(e){
-			const $btnClose = $(this).find('.pop-head .pop-close');
-			if($btnClose.length){
-				$btnClose.click();
-			}else{
-				Layer.close(this);
-			}
-		}).on('click','.bg-pop-close .'+Layer.wrapClass,function(e){
-			e.stopPropagation();
 		});
 
 		Layer.keyEvt();
