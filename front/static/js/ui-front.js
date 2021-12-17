@@ -1494,6 +1494,7 @@ const Layer = {
 		$(tar).find('.'+Layer.headClass).on('touchstart',function(){
 			const $this = $(this);
 			$popWrapH = $this.closest('.'+Layer.wrapClass).outerHeight();
+			if($this.data('first-height') === undefined)$this.data('first-height', $popWrapH);
 		});
 		$(tar).find('.'+Layer.headClass).swipe({
 			swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
@@ -1506,17 +1507,29 @@ const Layer = {
 				const $isUp = direction == 'up'?true:false;
 				const $isDown = direction == 'down'?true:false;
 				const $distance = $isDown?-distance:distance;
+				const $firstHeight = $this.data('first-height');
 				const $height = Math.max($min,Math.min($max,$popWrapH+$distance));
+				const $animateSpeed = 300;
+				const $powerRatio = duration === 0 || distance === 0 ? 0 : distance / duration;
+				const $power = (1+Math.round($powerRatio * 3)) * Math.round($powerRatio * 30)
+				const $powerDistance = Math.round($distance / duration * $power);
+				$wrap.stop(false,true);
 				if($isUp || $isDown){
 					if($(tar).hasClass('touchmove')){
 						//터치무브만큼 크기조절
 						$wrap.css('height',$height);
 						$body.css('max-height',$height);
-						// if($height == $max){
-						// 	$popup.removeClass('bottom').addClass('full');
-						// }else{
-						// 	$popup.removeClass('full').addClass('bottom');
-						// }
+						if(phase == 'end' || phase == 'cancel'){
+							if($powerDistance !== 0){
+								const $wrapHeight = $wrap.outerHeight();
+								const $endHeight = Math.max($min,Math.min($max,$wrapHeight + $powerDistance));
+								const $endSpeed = Math.min(2000, Math.abs($powerDistance*10));
+								// console.log($powerDistance, $endSpeed)
+								$wrap.animate({'height':$endHeight},$endSpeed, 'easeOutQuint', function(){
+									$body.css('max-height',$endHeight);
+								});
+							}
+						}
 					}else{
 						//터치무브로 상태값 바로 변경
 						if($popup.hasClass('bottom')){
@@ -1533,7 +1546,7 @@ const Layer = {
 							if(distance > 50){
 								if($popup.hasClass('bottom') && !$isFull){
 									if($isUp){
-										$wrap.animate({'height':'100%'},300,function(){
+										$wrap.animate({'height':'100%'},$animateSpeed,function(){
 											$wrap.removeCss('height');
 											$body.removeCss('max-height');
 											$popup.removeClass('bottom').addClass('full');
@@ -1544,21 +1557,23 @@ const Layer = {
 									}
 								}
 								if($isFull && $isDown){
-									$wrap.animate({'height':'50%'},300,function(){
+									$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
 										$isFull = false;
 										$wrap.removeCss('height');
+										$this.removeData('first-height');
 									});
 								}
 							}else{
 								if($isFull){
-									$wrap.animate({'height':'100%'},300,function(){
+									$wrap.animate({'height':'100%'},$animateSpeed,function(){
 										$isFull = false;
 										$wrap.removeCss('height');
 										$popup.removeClass('bottom').addClass('full');
 									});
 								}else{
-									$wrap.animate({'height':'50%'},300,function(){
+									$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
 										$wrap.removeCss('height');
+										$this.removeData('first-height');
 									});
 								}
 							}
