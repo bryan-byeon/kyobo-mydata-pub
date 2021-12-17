@@ -1555,9 +1555,7 @@ const Layer = {
 										});
 									}
 									if($isDown){
-										Layer.close(tar,function(){
-											$wrap.removeCss('height');
-										});
+										Layer.close(tar);
 									}
 								}
 								if($isFull && $isDown){
@@ -1577,6 +1575,7 @@ const Layer = {
 								}else{
 									$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
 										$wrap.removeCss('height');
+										$body.css('max-height',$firstHeight);
 										$this.removeData('first-height');
 									});
 								}
@@ -1788,6 +1787,7 @@ const Layer = {
 		if($(tar).hasClass('no_motion'))$closeDelay = 10;
 		setTimeout(function(){
 			$(tar).removeAttr('style');
+			if($(tar).hasClass('is-swipe')) $(tar).find('.'+Layer.wrapClass).removeCss('height');
 			$(tar).find('.'+Layer.headClass).removeAttr('style').removeClass('shadow').find('h1').removeAttr('tabindex');
 			$(tar).find('.'+Layer.bodyClass).removeAttr('tabindex style');
 			$(tar).find('.'+Layer.focusInClass).removeAttr('tabindex');
