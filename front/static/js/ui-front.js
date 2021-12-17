@@ -1484,6 +1484,7 @@ const Layer = {
 		const $body = $popup.find('.'+Layer.bodyClass);
 		const $bodyMinHeight = parseInt($body.css('padding-top'))+parseInt($body.css('padding-bottom'));
 
+		let isMove = false;
 		const $animateSpeed = 300;
 		let $startH = '';
 		let $startX = 0;
@@ -1496,7 +1497,8 @@ const Layer = {
 		let $directionY = false;
 		let $durationTimer;
 
-		$(tar).find('.'+Layer.headClass).on('touchstart',function(e){
+		$(tar).find('.'+Layer.headClass).on('touchstart mousedown',function(e){
+			isMove = true;
 			const $this = $(this);
 			const $clientX = (e.type === 'touchstart') ? e.touches[0].clientX : e.clientX;
 			const $clientY = (e.type === 'touchstart') ? e.touches[0].clientY : e.clientY;
@@ -1510,7 +1512,8 @@ const Layer = {
 			},10)
 		});
 
-		$(tar).find('.'+Layer.headClass).on('touchmove',function(e){
+		$(tar).find('.'+Layer.headClass).on('touchmove mousemove',function(e){
+			if(!isMove) return false;
 			// const $this = $(this);
 			const $clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
 			const $clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
@@ -1533,7 +1536,9 @@ const Layer = {
 			}
 		});
 
-		$(tar).find('.'+Layer.headClass).on('touchend',function(e){
+		$(tar).find('.'+Layer.headClass).on('touchend mouseup mouseleave',function(e){
+			if(!isMove) return false;
+			isMove = false;
 			const $this = $(this);
 			const $clientX = (e.type === 'touchend') ? e.changedTouches[0].clientX : e.clientX;
 			const $clientY = (e.type === 'touchend') ? e.changedTouches[0].clientY : e.clientY;
