@@ -1360,7 +1360,7 @@ const Layer = {
 
 		Layer.selectIdx++;
 		if($title == undefined)$title = '선택';
-		$popHtml += '<div id="'+$popId+'" class="'+Layer.popClass+' '+($isFullPop?'full':'bottom')+($isTouch || $isTouchMove?' is-swipe':'')+($isTouchMove?' touchmove':'')+' '+Layer.selectClass+'" role="dialog" aria-hidden="true">';
+		$popHtml += '<div id="'+$popId+'" class="'+Layer.popClass+' '+($isFullPop?'full':'bottom')+($isTouch || $isTouchMove?' is-swipe':'')+($isTouchMove?' touch-move':'')+' '+Layer.selectClass+'" role="dialog" aria-hidden="true">';
 			$popHtml += '<article class="'+Layer.wrapClass+'">';
 				$popHtml += '<div class="'+Layer.headClass+'">';
 					$popHtml += '<div>';
@@ -1502,12 +1502,13 @@ const Layer = {
 				const $popup = $(tar);
 				const $wrap = $this.closest('.'+Layer.wrapClass);
 				const $body = $wrap.find('.'+Layer.bodyClass);
-				const $min = 200;
-				const $max = $(tar).hasClass('touchmove') ? $popup.height():$popup.outerHeight();
+				const $firstHeight = $this.data('first-height');
+				// const $min = $(tar).hasClass('touch-move') ? $firstHeight:0;
+				const $min = $(tar).hasClass('touch-move') ? 100:0;
+				const $max = $(tar).hasClass('touch-move') ? $popup.height():$popup.outerHeight();
 				const $isUp = direction == 'up'?true:false;
 				const $isDown = direction == 'down'?true:false;
 				const $distance = $isDown?-distance:distance;
-				const $firstHeight = $this.data('first-height');
 				const $height = Math.max($min,Math.min($max,$popWrapH+$distance));
 				const $animateSpeed = 300;
 				const $powerRatio = duration === 0 || distance === 0 ? 0 : distance / duration;
@@ -1515,7 +1516,7 @@ const Layer = {
 				const $powerDistance = Math.round($distance / duration * $power);
 				$wrap.stop(false,true);
 				if($isUp || $isDown){
-					if($(tar).hasClass('touchmove')){
+					if($(tar).hasClass('touch-move')){
 						//터치무브만큼 크기조절
 						$wrap.css('height',$height);
 						$body.css('max-height',$height);

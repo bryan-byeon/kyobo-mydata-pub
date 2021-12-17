@@ -34,10 +34,9 @@
 				</ul>
 			</div>
 			<div class="section pt-30">
-				<h1 class="t-center">내용없음</h1>
-				<h1 class="gd__h1">select</h1>
+				<h1 class="gd__h1">bottom swipe</h1>
 					<div>
-						<h2 class="gd__h2">기본</h2>
+						<h2 class="gd__h2">select</h2>
 						<div>
 							<div class="select">
 								<select id="inpSel1" title="날짜 선택">
@@ -66,13 +65,58 @@
 								</select>
 							</div>
 						</div>
+						<h2 class="gd__h2">popup</h2>
+						<div>
+							<div class="btn-wrap">
+								<div class="flex">
+									<button class="button line" onclick="Layer.open('#bottomDialog1')">is-swipe</button>
+									<button class="button line" onclick="Layer.open('#bottomDialog2')">is-swipe-move</button>
+								</div>
+							</div>
+						</div>
 					</div>
 			</div>
 		</section>
 		<!-- //컨텐츠 -->
 
 		<!-- 팝업 -->
-		
+		<div id="bottomDialog1" class="popup bottom is-swipe" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>하단팝업제목</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div id="bottomDialog2" class="popup bottom is-swipe touch-move" role="dialog" aria-hidden="true">
+			<article class="pop-wrap">
+				<div class="pop-head">
+					<div>
+						<h1>하단팝업제목</h1>
+						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+					</div>
+				</div>
+				<div class="pop-body">
+					<div class="section">
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+						텍스트 <br>
+					</div>
+				</div>
+			</article>
+		</div>
 		<!-- //팝업 -->
 	</main>
 	<!-- 컨테이너 -->
