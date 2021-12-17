@@ -1111,7 +1111,7 @@ const Layer = {
 	popClass:'popup',
 	wrapClass:'pop-wrap',
 	headClass:'pop-head',
-	contClass:'pop-body',
+	bodyClass:'pop-body',
 	footClass:'pop-foot',
 	innerClass:'section',
 	showClass:'show',
@@ -1144,7 +1144,7 @@ const Layer = {
 	alertHtml: function(type,popId,btnActionId,btnCancelId){
 		let $html = '<div id="'+popId+'" class="'+Layer.popClass+' modal alert '+Layer.alertClass+'" role="dialog" aria-hidden="true">';
 				$html += '<article class="'+Layer.wrapClass+'">';
-					$html += '<div class="'+Layer.contClass+'">';
+					$html += '<div class="'+Layer.bodyClass+'">';
 						$html += '<div class="'+Layer.innerClass+'">';
 							if(type === 'prompt'){
 							$html += '<div class="form-lbl mt-0">';
@@ -1282,7 +1282,7 @@ const Layer = {
 						$html += '</div>';
 					$html += '</div>';
 					}
-					$html += '<div class="'+Layer.contClass+'">';
+					$html += '<div class="'+Layer.bodyClass+'">';
 						$html += '<div class="'+Layer.innerClass+'">';
 							if(title === undefined){
 								$html += '<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>';
@@ -1304,7 +1304,7 @@ const Layer = {
 		const imgPopId = 'uiPopImgBox';
 		let $html = '<div id="'+imgPopId+'" class="'+Layer.popClass+' full pop-img-box '+Layer.removePopClass+'" role="dialog" aria-hidden="true">';
 				$html += '<article class="'+Layer.wrapClass+'">';
-					$html += '<div class="'+Layer.contClass+'">';
+					$html += '<div class="'+Layer.bodyClass+'">';
 						$html += '<div class="ui-swiper img-box-swiper">';
 							$html += '<div class="swiper">';
 								$html += '<div class="swiper-wrapper"></div>';
@@ -1354,13 +1354,13 @@ const Layer = {
 		let $opTxt = '';
 		let $opVal = '';
 		let $popHtml = '';
-		const $isTouch = $target.hasClass('is-touch')?true:false;
-		const $isTouchMove = $target.hasClass('is-touch-move')?true:false;
+		const $isTouch = $target.hasClass('is-swipe')?true:false;
+		const $isTouchMove = $target.hasClass('is-swipe-move')?true:false;
 		let $isFullPop = false;
 
 		Layer.selectIdx++;
 		if($title == undefined)$title = '선택';
-		$popHtml += '<div id="'+$popId+'" class="'+Layer.popClass+' '+($isFullPop?'full':'bottom')+($isTouch || $isTouchMove?' is-touch':'')+($isTouchMove?' touchmove':'')+' '+Layer.selectClass+'" role="dialog" aria-hidden="true">';
+		$popHtml += '<div id="'+$popId+'" class="'+Layer.popClass+' '+($isFullPop?'full':'bottom')+($isTouch || $isTouchMove?' is-swipe':'')+($isTouchMove?' touchmove':'')+' '+Layer.selectClass+'" role="dialog" aria-hidden="true">';
 			$popHtml += '<article class="'+Layer.wrapClass+'">';
 				$popHtml += '<div class="'+Layer.headClass+'">';
 					$popHtml += '<div>';
@@ -1368,7 +1368,7 @@ const Layer = {
 						$popHtml += '<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>';
 					$popHtml += '</div>';
 				$popHtml += '</div>';
-				$popHtml += '<div class="'+Layer.contClass+'">';
+				$popHtml += '<div class="'+Layer.bodyClass+'">';
 
 					$popHtml += '<ul class="select-item-wrap';
 					if(!!col)$popHtml += ' col'+col;
@@ -1488,40 +1488,46 @@ const Layer = {
 			e.stopPropagation();
 		});
 	},
-	selectSwipe: function(tar){
+	bottomSwipe: function(tar){
 		let $popWrapH = '';
 		let $isFull = false;
 		$(tar).find('.'+Layer.headClass).on('touchstart',function(){
-			var $this = $(this);
+			const $this = $(this);
 			$popWrapH = $this.closest('.'+Layer.wrapClass).outerHeight();
 		});
 		$(tar).find('.'+Layer.headClass).swipe({
 			swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
-				var $this = $(this),
-					$popup = $(tar),
-					$wrap = $this.closest('.'+Layer.wrapClass),
-					$min = 200,
-					$max = $popup.height(),
-					$isUp = direction == 'up'?true:false,
-					$isDown = direction == 'down'?true:false,
-					$distance = $isDown?-distance:distance,
-					$height = Math.max($min,Math.min($max,$popWrapH+$distance));
+				const $this = $(this);
+				const $popup = $(tar);
+				const $wrap = $this.closest('.'+Layer.wrapClass);
+				const $body = $wrap.find('.'+Layer.bodyClass);
+				const $min = 200;
+				const $max = $(tar).hasClass('touchmove') ? $popup.height():$popup.outerHeight();
+				const $isUp = direction == 'up'?true:false;
+				const $isDown = direction == 'down'?true:false;
+				const $distance = $isDown?-distance:distance;
+				const $height = Math.max($min,Math.min($max,$popWrapH+$distance));
 				if($isUp || $isDown){
 					if($(tar).hasClass('touchmove')){
 						//터치무브만큼 크기조절
 						$wrap.css('height',$height);
-						if($height == $max){
-							$popup.removeClass('bottom').addClass('full');
-						}else{
-							$popup.removeClass('full').addClass('bottom');
-						}
+						$body.css('max-height',$height);
+						// if($height == $max){
+						// 	$popup.removeClass('bottom').addClass('full');
+						// }else{
+						// 	$popup.removeClass('full').addClass('bottom');
+						// }
 					}else{
 						//터치무브로 상태값 바로 변경
-						if($popup.hasClass('bottom'))$wrap.css('height',$height);
+						if($popup.hasClass('bottom')){
+							$wrap.css('height',$height);
+							$body.css('max-height',$height);
+						}
 						if($popup.hasClass('full')){
 							$isFull = true;
 							$popup.removeClass('full').addClass('bottom');
 							$wrap.css('height',$height);
+							$body.css('max-height',$height);
 						}
 						if(phase == 'end' || phase == 'cancel'){
 							if(distance > 50){
@@ -1529,6 +1535,7 @@ const Layer = {
 									if($isUp){
 										$wrap.animate({'height':'100%'},300,function(){
 											$wrap.removeCss('height');
+											$body.removeCss('max-height');
 											$popup.removeClass('bottom').addClass('full');
 										});
 									}
@@ -1637,7 +1644,7 @@ const Layer = {
 						$first.focus();
 					}else{
 						if(!$focusInEl.length){
-							$focusInEl = $(tar).find('.'+Layer.contClass);
+							$focusInEl = $(tar).find('.'+Layer.bodyClass);
 							$first = $focusInEl.children().not('br').first();
 							if($first.text() == '' || $first.attr('aria-hidden') == 'true')$first = $first.next();
 							$thisTxt = $.trim($focusInEl.text());
@@ -1685,12 +1692,12 @@ const Layer = {
 				//열기
 				if(!$('html').hasClass('lock'))Body.lock();
 				$(tar).addClass(Layer.showClass);
-				$(tar).find('.'+Layer.contClass).scrollTop(0);
+				$(tar).find('.'+Layer.bodyClass).scrollTop(0);
 
 				//swipe 기능
-				if($(tar).hasClass('is-touch') && !$(tar).hasClass('is-touch__init')){
-					$(tar).addClass('is-touch__init');
-					Layer.selectSwipe(tar);
+				if($(tar).hasClass('is-swipe') && !$(tar).hasClass('is-swipe__init')){
+					$(tar).addClass('is-swipe__init');
+					Layer.bottomSwipe(tar);
 				}
 
 				if(!isMobile.any())Layer.focusMove(tar);
@@ -1763,7 +1770,7 @@ const Layer = {
 		setTimeout(function(){
 			$(tar).removeAttr('style');
 			$(tar).find('.'+Layer.headClass).removeAttr('style').removeClass('shadow').find('h1').removeAttr('tabindex');
-			$(tar).find('.'+Layer.contClass).removeAttr('tabindex style');
+			$(tar).find('.'+Layer.bodyClass).removeAttr('tabindex style');
 			$(tar).find('.'+Layer.focusInClass).removeAttr('tabindex');
 			if($(tar).find('.pop-close.last_focus').length)$(tar).find('.pop-close.last_focus').remove();
 		},$closeDelay);
@@ -1795,7 +1802,7 @@ const Layer = {
 		$(tar).data('popPosition',true);
 		const $head = $(tar).find('.'+Layer.headClass);
 		const $tit = $head.find('h1');
-		const $content = $(tar).find('.'+Layer.contClass);
+		const $content = $(tar).find('.'+Layer.bodyClass);
 		const $foot = $(tar).find('.'+Layer.footClass);
 		
 		//shadow 넣기
@@ -1829,7 +1836,7 @@ const Layer = {
 			}
 		};
 
-		if($foot.length) $(tar).find('.'+Layer.contClass).addClass('next-foot');
+		if($foot.length) $(tar).find('.'+Layer.bodyClass).addClass('next-foot');
 		const footHeight = function(footCont, contentCont){
 			const $footH = footCont.children().outerHeight();
 			const	$padBottom = parseInt(contentCont.css('padding-bottom'));
@@ -1857,7 +1864,7 @@ const Layer = {
 				//컨텐츠 스크롤이 필요할때
 				const $height = $(tar).height();
 				const	$popHeight = $(tar).find('.'+Layer.wrapClass).outerHeight();
-				if(!$(tar).hasClass('full'))$content.css('max-height',$height);
+				if(!$(tar).hasClass('full'))$content.css('max-height',$popHeight);
 
 				//팝업 헤더 shadow
 				addShadow($content);
