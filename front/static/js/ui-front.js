@@ -1488,6 +1488,80 @@ const Layer = {
 			e.stopPropagation();
 		});
 	},
+	selectSwipe: function(tar){
+		let $popWrapH = '';
+		let $isFull = false;
+		$(tar).find('.'+Layer.headClass).on('touchstart',function(){
+			var $this = $(this);
+			$popWrapH = $this.closest('.'+Layer.wrapClass).outerHeight();
+		});
+		$(tar).find('.'+Layer.headClass).swipe({
+			swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
+				var $this = $(this),
+					$popup = $(tar),
+					$wrap = $this.closest('.'+Layer.wrapClass),
+					$min = 200,
+					$max = $popup.height(),
+					$isUp = direction == 'up'?true:false,
+					$isDown = direction == 'down'?true:false,
+					$distance = $isDown?-distance:distance,
+					$height = Math.max($min,Math.min($max,$popWrapH+$distance));
+				if($isUp || $isDown){
+					if($(tar).hasClass('touchmove')){
+						//터치무브만큼 크기조절
+						$wrap.css('height',$height);
+						if($height == $max){
+							$popup.removeClass('bottom').addClass('full');
+						}else{
+							$popup.removeClass('full').addClass('bottom');
+						}
+					}else{
+						//터치무브로 상태값 바로 변경
+						if($popup.hasClass('bottom'))$wrap.css('height',$height);
+						if($popup.hasClass('full')){
+							$isFull = true;
+							$popup.removeClass('full').addClass('bottom');
+							$wrap.css('height',$height);
+						}
+						if(phase == 'end' || phase == 'cancel'){
+							if(distance > 50){
+								if($popup.hasClass('bottom') && !$isFull){
+									if($isUp){
+										$wrap.animate({'height':'100%'},300,function(){
+											$wrap.removeCss('height');
+											$popup.removeClass('bottom').addClass('full');
+										});
+									}
+									if($isDown){
+										Layer.close(tar);
+									}
+								}
+								if($isFull && $isDown){
+									$wrap.animate({'height':'50%'},300,function(){
+										$isFull = false;
+										$wrap.removeCss('height');
+									});
+								}
+							}else{
+								if($isFull){
+									$wrap.animate({'height':'100%'},300,function(){
+										$isFull = false;
+										$wrap.removeCss('height');
+										$popup.removeClass('bottom').addClass('full');
+									});
+								}else{
+									$wrap.animate({'height':'50%'},300,function(){
+										$wrap.removeCss('height');
+									});
+								}
+							}
+						}
+					}
+				}
+			},
+			cancleTreshold:0
+		});
+	},
 	reOpen:false,
 	openEl:'',
 	openPop:[],
@@ -1612,6 +1686,12 @@ const Layer = {
 				if(!$('html').hasClass('lock'))Body.lock();
 				$(tar).addClass(Layer.showClass);
 				$(tar).find('.'+Layer.contClass).scrollTop(0);
+
+				//swipe 기능
+				if($(tar).hasClass('is-touch') && !$(tar).hasClass('is-touch__init')){
+					$(tar).addClass('is-touch__init');
+					Layer.selectSwipe(tar);
+				}
 
 				if(!isMobile.any())Layer.focusMove(tar);
 				Layer.position(tar);
