@@ -1503,8 +1503,9 @@ const Layer = {
 				const $wrap = $this.closest('.'+Layer.wrapClass);
 				const $body = $wrap.find('.'+Layer.bodyClass);
 				const $firstHeight = $this.data('first-height');
+				const $bodyMinHeight = parseInt($body.css('padding-top'))+parseInt($body.css('padding-bottom'));
 				// const $min = $(tar).hasClass('touch-move') ? $firstHeight:0;
-				const $min = $(tar).hasClass('touch-move') ? 100:0;
+				const $min = $bodyMinHeight;
 				const $max = $(tar).hasClass('touch-move') ? $popup.height():$popup.outerHeight();
 				const $isUp = direction == 'up'?true:false;
 				const $isDown = direction == 'down'?true:false;
@@ -1554,7 +1555,9 @@ const Layer = {
 										});
 									}
 									if($isDown){
-										Layer.close(tar);
+										Layer.close(tar,function(){
+											$wrap.removeCss('height');
+										});
 									}
 								}
 								if($isFull && $isDown){
