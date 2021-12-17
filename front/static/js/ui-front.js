@@ -1486,15 +1486,14 @@ const Layer = {
 
 		let isMove = false;
 		const $animateSpeed = 300;
-		let $startH = '';
+		let $startH = 0;
 		let $startX = 0;
 		let $startY = 0;
 		let $distanceX = 0;
 		let $distanceY = 0;
-		let $isFull = false;
-		let $duration = 0;
 		let $directionX = false;
 		let $directionY = false;
+		let $duration = 0;
 		let $durationTimer;
 
 		$(tar).find('.'+Layer.headClass).on('touchstart mousedown',function(e){
@@ -1505,16 +1504,22 @@ const Layer = {
 			$startX = $clientX;
 			$startY = $clientY;
 			$startH = $this.closest('.'+Layer.wrapClass).outerHeight();
+			$distanceX = 0;
+			$distanceY = 0;
+			$directionX = false;
+			$directionY = false;
 			if($this.data('first-height') === undefined)$this.data('first-height', $startH);
-			$wrap.stop(false,true);
+			if($this.data('is-full') === undefined)$this.data('is-full', false);
+			$duration = 0;
 			$durationTimer = setInterval(function(){
 				$duration += 10;
-			},10)
+			},10);
+			$wrap.stop(false,true);
 		});
 
 		$(tar).find('.'+Layer.headClass).on('touchmove mousemove',function(e){
 			if(!isMove) return false;
-			// const $this = $(this);
+			const $this = $(this);
 			const $clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
 			const $clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
 			$distanceX = $clientX - $startX;
@@ -1530,7 +1535,9 @@ const Layer = {
 			$body.css('max-height',$height);
 			if(!$(tar).hasClass('touch-move')){
 				if($popup.hasClass('full')){
-					$isFull = true;
+					// $isFull = true;
+					console.log('touchmove full')
+					$this.data('is-full', true);
 					$popup.removeClass('full').addClass('bottom');
 				}
 			}
@@ -1540,6 +1547,7 @@ const Layer = {
 			if(!isMove) return false;
 			isMove = false;
 			const $this = $(this);
+			const $isFull = $this.data('is-full');
 			const $clientX = (e.type === 'touchend') ? e.changedTouches[0].clientX : e.clientX;
 			const $clientY = (e.type === 'touchend') ? e.changedTouches[0].clientY : e.clientY;
 			$distanceX = $clientX - $startX;
@@ -1563,6 +1571,7 @@ const Layer = {
 				});
 			}else{
 				if(Math.abs($distanceY) > 50){
+					
 					if($popup.hasClass('bottom') && !$isFull){
 						if($directionY === 'up'){
 							$wrap.animate({'height':'100%'},$animateSpeed,function(){
@@ -1574,9 +1583,11 @@ const Layer = {
 							Layer.close(tar);
 						}
 					}
+					console.log($isFull, $directionY, $firstHeight)
 					if($isFull && $directionY === 'down'){
 						$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
-							$isFull = false;
+							// $isFull = false;
+							$this.data('is-full', false);
 							$wrap.removeCss('height');
 							$this.removeData('first-height');
 						});
@@ -1584,11 +1595,13 @@ const Layer = {
 				}else{
 					if($isFull){
 						$wrap.animate({'height':'100%'},$animateSpeed,function(){
-							$isFull = false;
+							// $isFull = false;
+							$this.data('is-full', false);
 							$wrap.removeCss('height');
 							$popup.removeClass('bottom').addClass('full');
 						});
 					}else{
+						console.log('bbb',$firstHeight)
 						$wrap.animate({'height':$firstHeight},$animateSpeed,function(){
 							$wrap.removeCss('height');
 							$body.css('max-height',$firstHeight);
@@ -1597,8 +1610,8 @@ const Layer = {
 					}
 				}
 			}
-
-			$duration = 0;
+			
+			$this.removeData('is-full');
 		});
 	},
 	bottomSwipe: function(tar){
@@ -1897,7 +1910,10 @@ const Layer = {
 		if($(tar).hasClass('no_motion'))$closeDelay = 10;
 		setTimeout(function(){
 			$(tar).removeAttr('style');
-			if($(tar).hasClass('is-swipe')) $(tar).find('.'+Layer.wrapClass).removeCss('height');
+			if($(tar).hasClass('is-swipe')){
+				$(tar).find('.'+Layer.wrapClass).removeCss('height');
+				if($(tar).hasClass('full'))$(tar).removeClass('full').addClass('bottom');
+			}
 			$(tar).find('.'+Layer.headClass).removeAttr('style').removeClass('shadow').find('h1').removeAttr('tabindex');
 			$(tar).find('.'+Layer.bodyClass).removeAttr('tabindex style');
 			$(tar).find('.'+Layer.focusInClass).removeAttr('tabindex');
