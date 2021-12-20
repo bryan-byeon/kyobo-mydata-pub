@@ -3,6 +3,8 @@
  * 작성자 : 안효주 *
  ********************************/
  $(function(){
+	common.vhChk();
+
 	//다크모드 체크
 	try{
 		const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
@@ -36,7 +38,7 @@ $(window).on('load',function(){
 	//buttonUI.tabNavi();
 
 	if($('.item_effect').length > 0) itemEffect('.item_effect');
-	
+	common.vhChk();
 
 	$(window).scroll();
 	$(window).resize();
@@ -331,7 +333,9 @@ const Body = {
 	lock: function(){
 		if(!$('html').hasClass('lock')){
 			Body.scrollTop = window.pageYOffset;
-			$('#wrap').css('top',-(Body.scrollTop));
+			const $wrap = $('#wrap');
+			const $wrapTop = $wrap.offset().top;
+			$wrap.css('top',((Body.scrollTop*-1) + $wrapTop));
 			$('html').addClass('lock');
 		}
 	},
@@ -534,6 +538,10 @@ const common = {
 			$('#header').addClass("no_btn");
 			$('.fake_header').remove();
 		}
+	},
+	vhChk: function(){
+		const $vh = window.innerHeight * 0.01;
+		$('html').css('--vh',$vh);
 	},
 	path:function(type){
 		let $path = location.pathname;
@@ -1098,6 +1106,10 @@ const common = {
 		common.fixed('#header');
 		common.fixed('.tab-navi');
 		common.fixed('.line-tab-menu');
+
+		$(window).on('resize',function(){
+			common.vhChk();
+		});
 	}
 };
 
@@ -1177,7 +1189,7 @@ const Layer = {
 			$('body').append($html);
 		}
 	},
-	alertEvt: function(type, option, callback){
+	alertEvt: function(type, option, callback, callback2, callback3){
 		const $length = $('.' +Layer.alertClass).length;
 		const $popId = Layer.id+'Alert'+$length;
 		const $actionId = $popId+'ActionBtn';
@@ -1206,7 +1218,9 @@ const Layer = {
 			$('#'+$popId).find('.'+Layer.wrapClass).prepend($titleHtml);
 		}
 		if(!!option.actionTxt)$('#'+$actionId).text(option.actionTxt);
+		if(typeof callback === 'string')$('#'+$actionId).text(callback);
 		if(!!option.cancelTxt)$('#'+$cancelId).text(option.cancelTxt);
+		if(typeof callback2 === 'string')$('#'+$cancelId).text(callback2);
 		const $htmlContent = Layer.content;
 		if(type === 'prompt'){
 			$('#'+$popId).find('.form-lbl label').html($htmlContent);
@@ -1234,11 +1248,15 @@ const Layer = {
 				if(type === 'prompt'){
 					if(!!option.action)option.action($result,$inpVal);
 					if(!!option.callback)option.callback($result,$inpVal);
-					if(!!callback)callback($result,$inpVal);
+					if(typeof callback === 'function')callback($result,$inpVal);
+					if(typeof callback2 === 'function')callback2($result,$inpVal);
+					if(typeof callback3 === 'function')callback3($result,$inpVal);
 				}else{
 					if(!!option.action)option.action($result);
 					if(!!option.callback)option.callback($result);
-					if(!!callback)callback($result);
+					if(typeof callback === 'function')callback($result);
+					if(typeof callback2 === 'function')callback2($result);
+					if(typeof callback3 === 'function')callback3($result);
 				}
 			});
 		});
@@ -1251,14 +1269,14 @@ const Layer = {
 			});
 		});
 	},
-	alert: function(option, callback){
-		Layer.alertEvt('alert',option, callback);
+	alert: function(option, callback, callback2){
+		Layer.alertEvt('alert',option, callback, callback2);
 	},
-	confirm: function(option, callback){
-		Layer.alertEvt('confirm',option, callback);
+	confirm: function(option, callback, callback2, callback3){
+		Layer.alertEvt('confirm',option, callback, callback2, callback3);
 	},
-	prompt: function(option, callback){
-		Layer.alertEvt('prompt',option, callback);
+	prompt: function(option, callback, callback2, callback3){
+		Layer.alertEvt('prompt',option, callback, callback2, callback3);
 	},
 	keyEvt:function(){
 		//컨펌팝업 버튼 좌우 방할기로 포거스 이동

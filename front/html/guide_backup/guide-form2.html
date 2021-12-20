@@ -115,6 +115,34 @@
 							<button type="button" class="button plus" aria-label="더하기"></button>
 						</div>
 					</div>
+
+					<h2 id="giftcard" class="gd__h1">gift-card</h2>
+					<div>
+						<div class="gift-card ty-1"><!-- .ty-1 ~ .ty-8 클래스로 타입구분 -->
+							<div class="gift-card-img"></div>
+							<div class="gift-card-msg">
+								<div class="textarea in-count">
+									<textarea id="giftCardMsg" rows="2" data-text-count="txtCount" maxlength="60" title="선물메시지 작성" placeholder="선물메세지를 입력해주세요"></textarea>
+									<div class="textarea-count">(<span id="txtCount">0</span>/60)</div>
+								</div>
+							</div>
+						</div>
+						<div class="t-center mt-12">
+							<button type="button" id="giftCardPreview" class="button line small">미리보기</button>
+						</div>
+						<div class="gift-thumb-list mt-32">
+							<ul>
+								<li><a href="#" class="gift-thumb ty-1 on" data-idx="1"><div class="blind">1번</div></a></li><!-- 활성화 a태그에 .on 클래스-->
+								<li><a href="#" class="gift-thumb ty-2" data-idx="2"><div class="blind">2번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-3" data-idx="3"><div class="blind">3번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-4" data-idx="4"><div class="blind">4번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-5" data-idx="5"><div class="blind">5번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-6" data-idx="6"><div class="blind">6번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-7" data-idx="7"><div class="blind">7번</div></a></li>
+								<li><a href="#" class="gift-thumb ty-8" data-idx="8"><div class="blind">8번</div></a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</section>
 			<!-- //컨텐츠 -->
