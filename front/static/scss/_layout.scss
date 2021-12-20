@@ -1,6 +1,6 @@
 #wrap {
   display: flex;
-  min-height: 100vh;
+  min-height: -vh(100);
   flex-direction: column;
   // min-width: 320px;
 }
@@ -245,7 +245,7 @@
     }
     .category-wrap{
       visibility: visible;
-      max-height: 100vh;
+      max-height: -vh(100);
     }
   }
 }

@@ -30,6 +30,19 @@
   &.active{background:blue;color:#fff;}
   &.checked{background:green;color:#fff;}
   &.selected{background:orange;color:#fff;}
+
+  //@extend 샘플
+  &-2{
+    @extend .gd__box;
+    border: 4px solid red;
+    //at-root 샘플
+    @include unify-parent("section"){
+      background-color: blue;
+    }
+    @include when-inside('.gd__wrap2'){
+      border-color: #000;
+    }
+  }
 }
 .gd__img{
   @include outer;
@@ -126,120 +139,6 @@
   }
   input{
     width: 100%;
-  }
-}
-
-.code__h1{
-  text-align:center;
-  margin-bottom: 0;
-}
-.code__wrap{
-  padding: 0 20px 20px;
-}
-.code__list{
-  overflow:auto;
-  td,
-  th{
-    border:1px solid #dddddd;
-    text-align:center;
-    white-space:nowrap;
-    padding:.3em;
-    &:nth-child(5){color:red}
-  }
-  th{
-    background:#f1f1f1;
-    min-width:80px;
-  }
-  
-  td{
-    &.line{
-      padding:0;
-      height:2px;
-      background:#dddddd;
-    }
-    &.sub{
-      background:#eeeeee;
-    }
-  }
-  a{
-    color:#5177bc;
-    text-decoration:underline;
-  }
-}
-.code__status{
-  margin-bottom:1rem;
-  .info{
-    display:flex;
-    justify-content:space-between;
-    span{font-size:12px}
-    strong{font-size:16px}
-  }
-  .bar{
-    margin-top:10px;
-    background:#dddddd;
-    overflow:hidden;
-    div{
-      width:0;
-      height:5px;
-      background:var(--theme-color);
-    }
-  }
-}
-.code__chk{
-  position: relative;
-  text-align: right;
-}
-.code__preview{
-  display: none;
-  position: fixed;
-  left: calc(100vw - 380px);
-  top: calc(100vh - 680px);
-  bottom: 0;
-  width: 360px;
-  padding-top: 40px;
-  background: #fff;
-  z-index: 999999;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  padding-bottom: 0;
-  >h2{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    margin: 0;
-    text-align: center;
-    font-size: 16px;
-    line-height: 40px;
-    background: #f1f1f1;
-    font-weight: 500;
-    cursor: move;
-  }
-  .code__preview_close{
-    position: absolute;
-    right: 15px;
-    top: 0px;
-    line-height: 40px;
-    font-size: 12px;
-    font-weight: normal;
-    color: #666;
-  }
-  >div{
-    height: 100%;
-    iframe{
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-@media screen and (max-width: 400px){
-  .code__chk{
-    display: none;
-  }
-  .code__status{
-    margin-top: 20px;
-  }
-  .code__preview{
-    display: none !important;
   }
 }
 .gd__lottie-box{

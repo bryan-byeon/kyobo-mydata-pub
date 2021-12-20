@@ -307,12 +307,12 @@ html.mobile{
 @for $i from 0 through 100{
 	@if $i != 33 && $i != 66{
 		.h-vh-#{$i}{
-			height:$i*1vw !important;
+			height:-vh(#{$i}) !important;
 		}
 	}
 }
-.h-vh-33{height:33.3333vh !important;}
-.h-vh-66{height:66.6666vh !important;}
+.h-vh-33{height:-vh(33.3333) !important;}
+.h-vh-66{height:-vh(66.6666) !important;}
 
 // margin
 .ml-auto{margin-left:auto !important;}

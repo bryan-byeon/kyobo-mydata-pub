@@ -1051,13 +1051,13 @@
 .qna-textarea{
   textarea{
     padding: 13px 16px;
-    height: calc( 100vh - 200px);
+    height: -vh(100, -200);
   }
   &.ty2{
     margin-top: 24px;
     textarea{
       padding: 13px 16px;
-      height: calc( 100vh - 315px);
+      height: -vh(100, -315);
     }
   }
 }

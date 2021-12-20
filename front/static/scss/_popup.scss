@@ -2,7 +2,7 @@
 .pop-wrap{
 	position:relative;
 	&.page{
-		min-height:100vh;
+		min-height:-vh(100);
 		.pop-head{
 			position:fixed;left:0;top:0;width:100%;
 			>div{
@@ -201,7 +201,7 @@
 		}
 	}
 	&.bottom{
-		padding-top:calc(var(--vh) * 20);
+		padding-top:-vh(20);
 		.pop-wrap{position:fixed;bottom:0;border-radius:16px 16px 0 0;max-height:100%;}
 		&.ty2{
 			.pop-wrap{

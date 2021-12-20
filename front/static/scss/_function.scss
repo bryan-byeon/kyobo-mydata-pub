@@ -7,3 +7,29 @@
 @function to-dark($color,$percentage){
   @return mix(black,$color,$percentage);
 }
+
+@function -vh($val: 1, $add: null){
+  @if ($add) {
+    $num : strip-unit($add);
+    $num2 : -absPX($num);
+    @if($num < 0){
+      @return calc((var(--vh) * #{$val}) - #{$num2});
+    }@else{
+      @return calc((var(--vh) * #{$val}) + #{$num2});
+    }
+  } @else {
+    @return calc(var(--vh) * #{$val});
+  }
+}
+
+@function -absPX($add){
+  @return abs($add) * 1px;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}

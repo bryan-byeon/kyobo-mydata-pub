@@ -541,7 +541,7 @@ const common = {
 	},
 	vhChk: function(){
 		const $vh = window.innerHeight * 0.01;
-		$('html').css('--vh',$vh);
+		$('html').css('--vh',$vh+'px');
 	},
 	path:function(type){
 		let $path = location.pathname;

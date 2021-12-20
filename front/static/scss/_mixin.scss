@@ -1,4 +1,19 @@
 /* @mixin */
+@use "sass:selector";
+/// 간단한 선택자 내포 API를 제공하는 헬퍼 믹스인
+/// @param {String} $selector - 선택자
+@mixin when-inside($selector) {
+  #{$selector} & {
+    @content;
+  }
+}
+
+@mixin unify-parent($child) {
+  @at-root #{selector.unify(&, $child)} {
+    @content;
+  }
+}
+
 @mixin mediaMinWidth($size){
   @media (min-width:#{$size}px){
       @content;
