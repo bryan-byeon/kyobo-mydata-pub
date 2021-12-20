@@ -1,14 +1,14 @@
-.promotion-top-visual{
+.promotion-top-visual {
   position: relative;
   overflow: hidden;
   @include web-center;
-  img{
+  img {
     max-width: 100%;
   }
-  >img{
+  > img {
     width: 100%;
   }
-  >.cont{
+  > .cont {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,48 +23,48 @@
     color: #fff;
     font-size: 16px;
     line-height: 24px;
-    .tit{
+    .tit {
       margin: 0;
       font-size: 28px;
       line-height: 36px;
-      +p{
+      + p {
         margin-top: 4px;
       }
     }
-    .date{
+    .date {
       margin-top: 16px;
     }
   }
-  >.text{
+  > .text {
     padding: 12px 20px;
     font-size: 11px;
   }
 }
-.promotion-list{
-  >li{
-    +li{
+.promotion-list {
+  > li {
+    + li {
       margin-top: 40px;
     }
   }
-  .item{
+  .item {
     display: block;
   }
-  .img{
+  .img {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
     background: #f1f1f1;
-    &:before{
-      content:'';
+    &:before {
+      content: '';
       display: block;
       padding-top: 61.25%;
     }
-    img{
+    img {
       @include img-fit(true);
     }
-    &.end{
-      &:after{
-        content:'이벤트 종료';
+    &.end {
+      &:after {
+        content: '이벤트 종료';
         display: block;
         position: absolute;
         left: 0;
@@ -81,86 +81,86 @@
       }
     }
   }
-  .tit{
+  .tit {
     margin-top: 12px;
     font-size: 18px;
     line-height: 26px;
   }
-  .sub{
+  .sub {
     margin-top: 4px;
     font-size: 14px;
     color: 666;
     line-height: 22px;
   }
-  .date{
+  .date {
     margin-top: 4px;
     font-size: 13px;
     line-height: 19px;
     color: #666;
   }
-  &.line-type{
-    li{
-      +li{
+  &.line-type {
+    li {
+      + li {
         margin-top: 0;
         border-top: 1px solid #eee;
       }
     }
-    .item{
+    .item {
       padding: 24px 0;
     }
-    .tit{
+    .tit {
       margin-top: 0;
       font-size: 18px;
       line-height: 22px;
       @include ellipsis;
     }
-    .date{
+    .date {
       font-size: 12px;
       line-height: 16px;
     }
   }
 }
-.event-view{
+.event-view {
   padding-top: 20px;
-  .event-tit{
+  .event-tit {
     margin: 0;
     font-size: 20px;
     line-height: 26px;
-    +.event-date{
+    + .event-date {
       margin-top: 7px;
     }
   }
-  .event-date{
+  .event-date {
     margin-top: 4px;
     font-size: 14px;
     line-height: 20px;
     color: #666;
   }
-  .event-img{
+  .event-img {
     position: relative;
     margin-top: 24px;
     @include outer;
-    img{
+    img {
       width: 100%;
     }
   }
-  .event-cont{
+  .event-cont {
     margin-top: 40px;
-    .event-dt{
+    .event-dt {
       font-size: 15px;
       margin-top: 24px;
-      &:first-child{
+      &:first-child {
         margin-top: 24px;
       }
     }
-    .event-dd{
+    .event-dd {
       margin-top: 12px;
     }
-    .txt-list{
+    .txt-list {
       font-size: 14px;
       color: #222;
     }
-    &.ty2{
+    &.ty2 {
       margin-top: 24px;
       padding-top: 24px;
       border-top: 1px solid #eee;
@@ -169,38 +169,38 @@
       color: #666;
     }
   }
-  .btn-wrap{
+  .btn-wrap {
     margin-top: 24px;
   }
-  .event-form{
+  .event-form {
     margin-top: 40px;
-    .event-form-tit{
+    .event-form-tit {
       font-size: 20px;
       line-height: 28px;
       text-align: center;
     }
-    .event-form-sub{
+    .event-form-sub {
       margin-top: 8px;
       text-align: center;
       font-size: 14px;
       line-height: 22px;
       color: #666;
     }
-    .event-form-dl{
+    .event-form-dl {
       margin-top: 20px;
       background: #f8f8f8;
       padding: 16px 20px 20px;
       font-size: 16px;
       line-height: 24px;
-      > dt{
+      > dt {
         position: relative;
         color: var(--theme-color);
         font-weight: bold;
         padding-left: 24px;
         font-size: 15px;
         line-height: 22px;
-        &:before{
-          content:'';
+        &:before {
+          content: '';
           display: block;
           width: 20px;
           height: 20px;
@@ -210,62 +210,62 @@
           background: url(../images/icon/ico-evt-notice@3x.png) no-repeat 0 0 / contain;
         }
       }
-      > dd{
+      > dd {
         margin-top: 8px;
       }
     }
   }
 }
-.reply-list{
+.reply-list {
   font-size: 14px;
   line-height: 1.57;
-  > ul{
-    >li{
-      +li{
+  > ul {
+    > li {
+      + li {
         border-top: 1px solid #eee;
       }
-      &.no-line{
+      &.no-line {
         border-bottom-width: 0;
       }
     }
   }
-  &.no-last-line{
-    > ul{
-      >li:last-child{
+  &.no-last-line {
+    > ul {
+      > li:last-child {
         border-bottom-width: 0;
       }
     }
   }
-  
-  .reply-item{
+
+  .reply-item {
     position: relative;
     display: block;
     padding: 16px 0;
     overflow: hidden;
-    .info{
+    .info {
       display: flex;
       align-items: center;
       font-size: 12px;
       color: #666;
-      > div{
+      > div {
         margin-right: 6px;
       }
     }
-    .reply-cont{
+    .reply-cont {
       margin-top: 11px;
-      &.form{
-        +.btn{
+      &.form {
+        + .btn {
           margin-top: 24px;
         }
       }
     }
-    .btn{
+    .btn {
       margin-top: 12px;
     }
   }
 }
-.promotion-product{
-  .product-list-item + .product-list-item{
+.promotion-product {
+  .product-list-item + .product-list-item {
     margin-top: 20px;
   }
 }

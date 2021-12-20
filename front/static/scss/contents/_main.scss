@@ -1,10 +1,9 @@
-
-.main{
-  #header{
-    > div{
+.main {
+  #header {
+    > div {
       padding: 0 20px;
     }
-    .head-search-box{
+    .head-search-box {
       position: relative;
       display: flex;
       align-items: center;
@@ -15,8 +14,8 @@
       padding-right: 12px;
       border-radius: 22px;
       overflow: hidden;
-      &:before{
-        content:'';
+      &:before {
+        content: '';
         display: block;
         position: absolute;
         left: 0;
@@ -26,43 +25,42 @@
         background: var(--theme-color);
         opacity: 0.1;
       }
-      .input{
+      .input {
         position: relative;
         border: 0 none;
         height: 44px;
         background: transparent;
-        input{
+        input {
           padding: 0 0 0 16px;
         }
-        .btn-inp-del{
+        .btn-inp-del {
           margin-right: 4px;
         }
       }
-      .head-search{
+      .head-search {
         position: relative;
         margin-right: 0;
         background-image: url(../images/icon/icon-search-main@3x.png);
       }
     }
   }
-
-  .tab-navi{
+  .tab-navi {
     border-bottom-color: transparent;
   }
 }
-.section .main-banner-swiper{
+.section .main-banner-swiper {
   @include outer;
 }
-.main-banner-swiper{
+.main-banner-swiper {
   position: relative;
-  .swiper{
+  .swiper {
     background: none;
     padding: 0 10px;
   }
-  .main-banner-img{
+  .main-banner-img {
     margin: 0 10px;
   }
-  .swiper-util{
+  .swiper-util {
     position: absolute;
     bottom: 16px;
     right: 40px;
@@ -72,53 +70,53 @@
     justify-content: space-between;
     color: #fff;
     z-index: 2;
-    .left{
+    .left {
       display: flex;
       align-items: center;
-      .btn-swiper-autoplay{
+      .btn-swiper-autoplay {
         margin-left: 8px;
       }
     }
-    .swiper-pagination{
+    .swiper-pagination {
       margin-top: 0;
       color: rgba(255, 255, 255, 0.6);
-      .swiper-pagination-current{
+      .swiper-pagination-current {
         font-weight: bold;
         color: #fff;
       }
     }
   }
 }
-.btn-swiper-autoplay{
+.btn-swiper-autoplay {
   display: inline-block;
   width: 16px;
   height: 16px;
   flex-shrink: 0;
   background: url(../images/icon/ico-banner-play@3x.png) no-repeat center center / contain;
-  &.stop{
+  &.stop {
     background: url(../images/icon/ico-banner-stop@3x.png) no-repeat center center / contain;
   }
 }
-.btn-banner-more{
+.btn-banner-more {
   display: inline-block;
   width: 32px;
   height: 32px;
   flex-shrink: 0;
   background: url(../images/icon/ico-banner-more@3x.png) no-repeat center center / contain;
 }
-.main-banner-img{
+.main-banner-img {
   display: block;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  &:before{
-    content:'';
+  &:before {
+    content: '';
     display: block;
     // padding-top: 90.625%;
     height: 290px;
   }
-  &:after{
-    content:'';
+  &:after {
+    content: '';
     display: block;
     position: absolute;
     left: 0;
@@ -127,12 +125,12 @@
     height: 100%;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
   }
-  img{
+  img {
     @include img-fit(true);
     max-width: none;
     pointer-events: none;
   }
-  .cont{
+  .cont {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -141,150 +139,150 @@
     font-size: 14px;
     color: #fff;
     z-index: 1;
-    .tit{
+    .tit {
       font-weight: bold;
       font-size: 26px;
       line-height: 1.23;
     }
-    div+div{
+    div + div {
       margin-top: 4px;
     }
   }
 }
-.main-banner-wrap{
-  .main-banner-img + .main-banner-img{
+.main-banner-wrap {
+  .main-banner-img + .main-banner-img {
     margin-top: 20px;
   }
 }
-.section .main-category{
+.section .main-category {
   @include outer;
 }
 .main-category {
   margin-top: 24px;
-  > ul{
+  > ul {
     display: flex;
     @include scroll-x;
     @include scroll-hide;
-    > li{
+    > li {
       padding: 0 6px;
-      &:first-child{
+      &:first-child {
         padding-left: 20px;
       }
-      &:last-child{
+      &:last-child {
         padding-right: 20px;
       }
-      a{
+      a {
         display: block;
         width: 60px;
         font-size: 13px;
         text-align: center;
         font-weight: 500;
       }
-      img{
+      img {
         width: 100%;
         pointer-events: none;
       }
-      .txt{
+      .txt {
         margin-top: 6px;
       }
     }
   }
 }
-.section .bar-banner{
+.section .bar-banner {
   @include outer;
 }
-.bar-banner{
+.bar-banner {
   margin-top: 14px;
-  >div,
-  >a{
+  > div,
+  > a {
     position: relative;
     display: block;
-    &:before{
-      content:'';
+    &:before {
+      content: '';
       display: block;
       // padding-top: 27.7778%;
       height: 80px;
     }
-    img{
+    img {
       @include img-fit(true);
       max-width: none;
       pointer-events: none;
     }
   }
 }
-.section .promotion-scl-list{
+.section .promotion-scl-list {
   @include outer;
 }
-.promotion-scl-list{
+.promotion-scl-list {
   margin-top: 20px;
-  > ul{
+  > ul {
     display: flex;
     @include scroll-x;
     @include scroll-hide;
-    > li{
+    > li {
       padding: 0 10px;
-      &:first-child{
+      &:first-child {
         padding-left: 20px;
       }
-      &:last-child{
+      &:last-child {
         padding-right: 20px;
       }
     }
   }
 }
-.promotion-scl-item{
+.promotion-scl-item {
   display: block;
   width: 272px;
-  .img{
+  .img {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    &:before{
-      content:'';
+    &:before {
+      content: '';
       display: block;
       padding-top: 61.02941176%;
     }
-    img{
+    img {
       @include img-fit(true);
       max-width: none;
       pointer-events: none;
     }
   }
-  .cont{
+  .cont {
     margin-top: 15px;
     text-align: center;
-    .txt{
+    .txt {
       font-size: 14px;
       line-height: 22px;
       font-weight: 500;
-      +.tit{
+      + .tit {
         margin-top: 4px;
       }
     }
-    .tit{
+    .tit {
       font-size: 18px;
       line-height: 26px;
       font-weight: bold;
     }
   }
 }
-.section .promotion-banner{
+.section .promotion-banner {
   @include outer;
 }
-.promotion-banner{
+.promotion-banner {
   margin-top: 48px;
   > a,
-  > div{
+  > div {
     position: relative;
     display: block;
     height: 100px;
     text-align: right;
     overflow: hidden;
   }
-  img{
+  img {
     height: 100%;
   }
-  .cont{
+  .cont {
     position: absolute;
     left: 0;
     top: 0;
@@ -295,35 +293,35 @@
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    .sub{
+    .sub {
       color: #4a506f;
       font-size: 12px;
       line-height: 14px;
     }
-    .tit{
+    .tit {
       font-size: 15px;
       line-height: 20px;
       font-weight: bold;
     }
   }
 }
-.main-notice{
+.main-notice {
   margin-top: 48px;
   @include outer;
   padding: 36px 20px 0;
   border-top: 1px solid #eee;
-  .title-bar{
+  .title-bar {
     margin-top: 0;
   }
-  .main-notice-list{
+  .main-notice-list {
     margin-top: 16px;
   }
 }
-.main-notice-list{
-  li+li{
+.main-notice-list {
+  li + li {
     margin-top: 12px;
   }
-  a{
+  a {
     display: block;
     font-size: 14px;
     line-height: 20px;
@@ -331,21 +329,21 @@
   }
 }
 
-.top-banner{
+.top-banner {
   text-align: left;
-  .section{
+  .section {
     padding: 0;
   }
-  .inner{
+  .inner {
     position: relative;
     display: block;
     height: 60px;
     overflow: hidden;
-    img{
+    img {
       @include img-fit;
     }
   }
-  .top-banner-close{
+  .top-banner-close {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -354,7 +352,7 @@
     background: url(../images/contents/top-banner-close@3x.png) no-repeat center center / contain;
   }
 }
-.search-input{
+.search-input {
   display: flex;
   padding: 12px 20px !important;
   > .input {
@@ -362,15 +360,15 @@
     border-radius: 22px;
     background-color: #f4f4f4;
     border-color: #f4f4f4;
-    input{
+    input {
       height: 42px;
       padding-left: 20px;
     }
-    .button{
+    .button {
       margin-right: 12px;
     }
   }
-  >.button{
+  > .button {
     padding: 0;
     height: 44px;
     font-size: 15px;
@@ -379,14 +377,14 @@
     flex-shrink: 0;
   }
 }
-.search-contents{
+.search-contents {
   padding: 12px 0;
 }
-.keyword-list{
-  li{
+.keyword-list {
+  li {
     position: relative;
   }
-  .button.keyword{
+  .button.keyword {
     display: block;
     width: 100%;
     padding: 8px 24px;
@@ -396,14 +394,14 @@
     text-align: left;
     font-weight: 500;
     color: #666;
-    strong{
+    strong {
       color: #000;
     }
   }
-  &.recent-keyword{
-    .button.keyword{
-      &:before{
-        content:'';
+  &.recent-keyword {
+    .button.keyword {
+      &:before {
+        content: '';
         position: absolute;
         left: 0;
         top: 12px;
@@ -412,7 +410,7 @@
         background: url(../images/icon/ico-clock-16@3x.png) no-repeat center center / contain;
       }
     }
-    .button.delete{
+    .button.delete {
       padding: 0;
       position: absolute;
       right: 0;
@@ -422,21 +420,21 @@
       background: url(../images/icon/ico-close-24@3x.png) no-repeat center center / contain;
     }
   }
-  &.relate-keyword{
-    .button.keyword{
+  &.relate-keyword {
+    .button.keyword {
       &:before,
-      &:after{
-        content:'';
+      &:after {
+        content: '';
         position: absolute;
       }
-      &:before{
+      &:before {
         left: 0;
         top: 12px;
         width: 16px;
         height: 16px;
         background: url(../images/icon/ico-search-16@3x.png) no-repeat center center / contain;
       }
-      &:after{
+      &:after {
         right: 0;
         top: 8px;
         width: 24px;
@@ -446,12 +444,12 @@
     }
   }
 }
-.search-opt-wrap{
+.search-opt-wrap {
   position: relative;
   z-index: 0;
   transition: 0.3s 0.3s;
   @include web-center;
-  .bg{
+  .bg {
     visibility: hidden;
     display: block;
     position: fixed;
@@ -459,19 +457,19 @@
     left: 0;
     width: 100%;
     height: 0;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
     backdrop-filter: blur(2px);
-    transition:background 0.3s 0s, visibility 0s 0.3s, height 0s 0.3s;
+    transition: background 0.3s 0s, visibility 0s 0.3s, height 0s 0.3s;
   }
-  .search-opt{
+  .search-opt {
     display: flex;
     position: relative;
     padding: 0px 20px 7px;
     background: #fff;
-    .btn-select{
+    .btn-select {
       height: 44px;
     }
-    >.button{
+    > .button {
       margin-left: auto;
       height: 44px;
       padding: 0;
@@ -479,7 +477,7 @@
       font-weight: normal;
     }
   }
-  .search-opt-panel{
+  .search-opt-panel {
     display: none;
     position: absolute;
     left: 0;
@@ -488,27 +486,27 @@
     padding: 8px 20px 12px;
     background: #fff;
   }
-  &.expend{
+  &.expend {
     z-index: 2;
     transition-delay: 0s;
-    .bg{
+    .bg {
       visibility: visible;
       height: 100%;
-      background: rgba(0,0,0,0.7);
-      transition-delay:0s, 0s, 0s;
+      background: rgba(0, 0, 0, 0.7);
+      transition-delay: 0s, 0s, 0s;
     }
-    .search-opt-panel{
+    .search-opt-panel {
       display: block;
     }
   }
 }
-.filter-list.folding-list{
+.filter-list.folding-list {
   border-width: 0px;
-  >li{
+  > li {
     border-top-width: 0px;
-    + li{
-      &:before{
-        content:'';
+    + li {
+      &:before {
+        content: '';
         display: block;
         height: 1px;
         margin: 0 20px;
@@ -516,16 +514,16 @@
       }
     }
   }
-  .folding-panel{
+  .folding-panel {
     padding-bottom: 20px;
   }
 }
-.col-flex-content{
+.col-flex-content {
   padding: 20px !important;
   min-height: -vh(100);
   display: flex;
   flex-direction: column;
-  >.cont{
+  > .cont {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
@@ -533,27 +531,27 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    [class*="i-ico-"]{
-      + .tit{
+    [class*="i-ico-"] {
+      + .tit {
         margin-top: 20px;
-      }  
+      }
     }
-    .tit{
+    .tit {
       font-size: 22px;
       line-height: 30px;
       font-weight: 500;
       margin: 0;
-      + .txt{
+      + .txt {
         margin-top: 12px;
       }
     }
-    .txt{
+    .txt {
       color: #666;
       font-size: 13px;
       line-height: 20px;
     }
   }
-  > .btn-wrap{
+  > .btn-wrap {
     margin-top: 0;
     flex-shrink: 0;
   }

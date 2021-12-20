@@ -14,29 +14,29 @@
   }
 }
 
-@mixin mediaMinWidth($size){
-  @media (min-width:#{$size}px){
-      @content;
+@mixin mediaMinWidth($size) {
+  @media (min-width:#{$size}px) {
+    @content;
   }
 }
-@mixin mediaMaxWidth($size){
-  @media (max-width:#{$size}px){
-      @content;
+@mixin mediaMaxWidth($size) {
+  @media (max-width:#{$size}px) {
+    @content;
   }
 }
-@mixin mediaMinHeight($size){
-  @media (min-height:#{$size}px){
-      @content;
+@mixin mediaMinHeight($size) {
+  @media (min-height:#{$size}px) {
+    @content;
   }
 }
-@mixin mediaMaxHeight($size){
-  @media (max-height:#{$size}px){
-      @content;
+@mixin mediaMaxHeight($size) {
+  @media (max-height:#{$size}px) {
+    @content;
   }
 }
-@mixin sticky{
-  @supports ((position:-webkit-sticky) or (position:sticky)){
-      @content;
+@mixin sticky {
+  @supports ((position:-webkit-sticky) or (position:sticky)) {
+    @content;
   }
 }
 
@@ -45,25 +45,26 @@
   color: transparent;
 }
 
-@mixin ellipsis($line: 1){
+@mixin ellipsis($line: 1) {
   overflow: hidden;
-  @if($line == 1){
+  @if($line==1) {
     text-overflow: ellipsis;
     white-space: nowrap;
-  } @else {
+  }
+  @else {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $line;
   }
 }
 
-@mixin clear-fix{
+@mixin clear-fix {
   content: '';
   display: block;
   clear: both;
 }
 
-@mixin img-fit($isAbsolute: false, $type: cover){
+@mixin img-fit($isAbsolute: false, $type: cover) {
   @if $isAbsolute {
     position: absolute;
     top: 0;
@@ -74,7 +75,7 @@
   object-fit: $type;
 }
 
-@mixin outer($isPadding: false){
+@mixin outer($isPadding: false) {
   margin-left: -20px;
   margin-right: -20px;
   @if $isPadding {
@@ -83,9 +84,9 @@
   }
 }
 
-@mixin ff-pps($weight: 600){
+@mixin ff-pps($weight: 600) {
   font-family: 'Poppins';
-	font-weight: $weight;
+  font-weight: $weight;
 }
 
 @mixin scroll-x {
@@ -95,19 +96,19 @@
 }
 
 @mixin scroll-hide {
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 }
 
 @mixin line {
-  height:8px;
-	border-top: 1px solid #dbdbdb;
-	background:#f4f4f4;
+  height: 8px;
+  border-top: 1px solid #dbdbdb;
+  background: #f4f4f4;
 }
 
 @mixin web-center {
   max-width: 1024px;
   margin-left: auto;
-	margin-right: auto;
+  margin-right: auto;
 }

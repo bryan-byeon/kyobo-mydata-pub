@@ -1,15 +1,37 @@
 {
   "liveSassCompile.settings.formats": [
     {
-        "format": "compressed",
-        "extensionName": ".min.css",
-        "savePath": "~/../css/"
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "~/../css/"
     }
   ],
   "liveSassCompile.settings.autoprefix": [
-      "> 2%",
-      "last 2 versions"
+    "> 2%",
+    "last 2 versions"
   ],
   "liveServer.settings.port": 5600,
+  "editor.formatOnSave": true,
+  // "editor.formatOnSaveMode": "modifications",
+  "beautify.config": {
+    "indent_size": 2,
+    "newline_between_rules": false,
+    "space_around_combinator": true,
+    "indent_head_inner_html": false,
+    "indent_body_inner_html": false,
+    "extra_liners": []
+  },
+  "beautify.language": {
+    // "js": [
+    //   "js",
+    //   "json"
+    // ],
+    "css": [
+      "scss"
+    ],
+    "html": [
+      "html"
+    ]
+  },
   //"editor.fontSize": 16
 }

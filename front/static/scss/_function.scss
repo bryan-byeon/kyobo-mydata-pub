@@ -1,33 +1,35 @@
 // 색을 약간 밝게 한다
-@function to-light($color,$percentage){
-  @return mix(white,$color,$percentage);
+@function to-light($color, $percentage) {
+  @return mix(white, $color, $percentage);
 }
 
 // 색을 약간 어둡게 한다
-@function to-dark($color,$percentage){
-  @return mix(black,$color,$percentage);
+@function to-dark($color, $percentage) {
+  @return mix(black, $color, $percentage);
 }
 
-@function -vh($val: 1, $add: null){
+@function -vh($val: 1, $add: null) {
   @if ($add) {
-    $num : strip-unit($add);
-    $num2 : -absPX($num);
-    @if($num < 0){
+    $num: strip-unit($add);
+    $num2: -absPX($num);
+    @if($num < 0) {
       @return calc((var(--vh) * #{$val}) - #{$num2});
-    }@else{
+    }
+    @else {
       @return calc((var(--vh) * #{$val}) + #{$num2});
     }
-  } @else {
+  }
+  @else {
     @return calc(var(--vh) * #{$val});
   }
 }
 
-@function -absPX($add){
+@function -absPX($add) {
   @return abs($add) * 1px;
 }
 
 @function strip-unit($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
+  @if type-of($number)=='number'and not unitless($number) {
     @return $number / ($number * 0 + 1);
   }
 
