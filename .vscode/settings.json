@@ -19,17 +19,31 @@
     "space_around_combinator": true,
     "indent_head_inner_html": false,
     "indent_body_inner_html": false,
-    "extra_liners": []
+    "extra_liners": [],
+    // "space_after_anon_function": false,
+    // "space_after_named_function": false,
   },
+  "beautify.ignore": [
+    "**/*.min.js",
+    "**/admin/static/**/*",
+    "**/lib/*"
+  ],
   "beautify.language": {
     // "js": [
     //   "js",
     //   "json"
     // ],
+    // "js": {
+    //   "type": ["javascript", "json"],
+    //   "filename": [".jshintrc", ".jsbeautifyrc"],
+    //   "ext": ["js", "json"]
+    // },
     "css": [
+      // "css",
       "scss"
     ],
     "html": [
+      // "htm",
       "html"
     ]
   },

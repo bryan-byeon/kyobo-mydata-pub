@@ -1,8 +1,8 @@
-body{
+body {
   overflow: hidden;
   background: #003974;
 }
-.index-logo{
+.index-logo {
   position: absolute;
   width: 385px;
   height: 124px;
@@ -16,12 +16,12 @@ body{
   position: relative;
   display: flex;
   height: 100vh;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  > div{
+  > div {
     position: relative;
   }
 
@@ -32,7 +32,7 @@ body{
     text-shadow: 1px 1px #222;
     font-size: 3em;
     line-height: 1.3;
-    strong{
+    strong {
       font-weight: bold;
     }
   }
@@ -42,12 +42,12 @@ body{
     animation-delay: calc(60ms * var(--char-index));
   }
 
-  .index-btn{
+  .index-btn {
     margin-top: 3rem;
     display: flex;
     justify-content: center;
     text-align: center;
-    a{
+    a {
       display: flex;
       width: 140px;
       height: 140px;
@@ -63,14 +63,14 @@ body{
       box-sizing: border-box;
       transition: 0.25s;
       color: #222;
-      &:hover, 
+      &:hover,
       &:focus {
         transform: scale(1.1);
         color: #fff;
         border-width: 0;
         box-shadow: inset -5em 0 0 0 #28b432, inset 5em 0 0 0 #28b432;
       }
-      + a{
+      + a {
         margin-left: 3rem;
       }
     }

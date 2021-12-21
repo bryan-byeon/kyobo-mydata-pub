@@ -2519,8 +2519,6 @@ const buttonUI ={
 				$closest.after('<div class="tab-expand"></div>');
 				$closest.next('.tab-expand').append($list)
 			}
-			
-			
 		});
 
 		
@@ -2532,7 +2530,7 @@ const buttonUI ={
 			if($(wrap).length){
 				$(wrap).each(function(){
 					const $active = $(this).find('.active');
-					if($active.length)scrollUI.center($active);
+					if($active.length)scrollUI.center($active, 10);
 				});
 			}
 		}
