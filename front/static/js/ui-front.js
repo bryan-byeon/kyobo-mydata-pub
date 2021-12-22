@@ -2351,16 +2351,22 @@ const buttonUI ={
 	tabAria:function(element){
 		if($(element).length){
 			$(element).each(function(){
+				const $this = $(this);
+				let $tablist = null;
 				let isFirst = false;
-				if($(this).is('ul')){
-					if($(this).attr('role') != 'tablist')isFirst = true;
-					if(isFirst)$(this).attr('role','tablist');
+				if($this.is('ul') || $this.hasClass('.tab-list')){
+					$tablist = $this;
+				}else if($this.find('.tab-list').length){
+					$tablist = $this.find('.tab-list');
 				}else{
-					if($(this).find('ul').attr('role') != 'tablist')isFirst = true;
-					if(isFirst)$(this).find('ul').attr('role','tablist');
+					$tablist = $this.find('ul');
 				}
-				
-				$(this).find('li').each(function(f){
+				if($tablist.attr('role') != 'tablist')isFirst = true;
+				if(isFirst)$tablist.attr('role','tablist');
+
+				let $tab = $(this).find('.tab');
+				if(!$tab.length)$tab = $(this).find('li');
+				$tab.each(function(f){
 					const _a = $(this).find('a');
 					if(_a.length){
 						if(isFirst)$(this).attr('role','presentation');
@@ -2376,6 +2382,7 @@ const buttonUI ={
 		}
 	},
 	tabLine:function(wrap, isAni){
+		console.log('tabLine', wrap)
 		if(isAni === undefined)isAni = true;
 		const $wrap = $(wrap);
 		const $line = $wrap.find('.tab-line');
@@ -2445,13 +2452,62 @@ const buttonUI ={
 			_tabInfoSave();
 		});
 
-		const $uiTab = $('.ui-tab');
-
 		buttonUI.tabAria('.tab-navi-menu');
 		buttonUI.tabAria('.tab-box-menu');
 		buttonUI.tabAria('.tab-line-menu');
 		buttonUI.tabAria('.tab-txt-menu');
 		// buttonUI.tabAria('.ui-tab');
+
+		const scrolledCheck = function(wrap){
+			if(!$(wrap).length) return;
+			$(wrap).each(function(){
+				const $this = $(this);
+				const $children = $this.children();
+				const $childrenWidth = $children.outerWidth();
+				const $scrollWidth = $children.get(0).scrollWidth
+				const $btnClass = 'tab-expand-btn';
+				const $btn = '<div class="'+$btnClass+'"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>'
+				if($childrenWidth < $scrollWidth){
+					$this.addClass('scroll-able');
+					if($this.hasClass('tab-navi-menu') && !$this.find('.'+$btnClass).length)$this.append($btn);
+				}else{
+					$this.removeClass('scroll-able');
+					if($this.hasClass('tab-navi-menu') && $this.find('.'+$btnClass).length)$this.find('.'+$btnClass).remove();
+				}
+			});
+		};
+		scrolledCheck('.tab-navi-menu');
+
+		$(window).resize(function(){
+			scrolledCheck('.tab-navi-menu');
+			if($('.tab-line').length){
+				$('.tab-line').each(function(){
+					const $this = $(this);
+					if(parseInt($this.css('left')) === 0) return;
+					const $parent = $this.closest('.tab-inner').parent();
+					buttonUI.tabLine($parent, false);
+				});
+			}
+		});
+
+		const tabAcitveCenterScroll = function(){
+			if($('.tab-inner').length){
+				$('.tab-inner').each(function(){
+					const $this = $(this);
+					if($this.closest('.ui-tab').length) return;
+					let $delay = 1;
+					if($this.closest('.tab-navi-menu').length || $this.closest('.tab-box-menu').length)$delay = 100;
+					setTimeout(function(){
+						const $active = $this.find('.active');
+						if($active.length){
+							scrollUI.center($active, 10);
+							buttonUI.tabLine($this, false);
+						}
+					}, $delay);
+				});
+			}
+		}
+		tabAcitveCenterScroll();
 
 		const $tabActive = function(target){
 			const $target = $(target);
@@ -2461,7 +2517,7 @@ const buttonUI ={
 
 			$tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected',false);
 			$btn.attr('aria-selected',true);
-
+			console.log('$tabActive');
 			buttonUI.tabLine($closest);
 		};
 		const $panelActive = function(target){
@@ -2478,6 +2534,58 @@ const buttonUI ={
 				$($href).addClass('active').attr('aria-expanded',true);
 			}
 		};
+
+		const $uiTab = $('.ui-tab');
+		const $hash = location.hash;
+		if($uiTab.length){
+			$uiTab.each(function(e){
+				let isHash =false;
+				let isHashClk = '';
+				const tarAry = [];
+				const $isFirst = $(this).data('first');
+				let $tab = $(this).find('.tab');
+				if(!$tab.length)$tab = $(this).find('li');
+				$tab.each(function(f){
+					const _a = $(this).find('a');
+					let _aId = _a.attr('id');
+					const _href = _a.attr('href');
+					if(_a.length && $(_href).length){
+						if(!_aId) _aId = 'tab_btn_'+e+'_'+f;
+						if(_href !== '' && _href !== '#') tarAry.push(_href);
+						_a.attr({
+							'id' :_aId,
+							'aria-controls': _href.substring(1)
+						});
+						$(_href).attr({
+							'role':'tabpanel',
+							'aria-labelledby':_aId
+						});
+						if(_href == $hash || $(_href).find($hash).length){
+							isHash = true;
+							isHashClk = _a;
+						}
+					}
+				});
+				if(tarAry.length)$(this).data('target',tarAry.join(','));
+				if(isHash == false){
+					if($isFirst == undefined || $isFirst == true){
+						$(this).data('first',true);
+						let $first;
+						if($(this).find('.active').length){
+							$first = $(this).find('.active').find('a');
+						}else{
+							$first = $(this).find('li').eq(0).find('a')
+						}
+						$tabActive($first);
+						$panelActive($first);
+					}
+				}
+				if(isHash == true){
+					isHashClk.trigger('click');
+				}
+				Layer.openEl = '';
+			});
+		}
 
 		$(document).on('click','.ui-tab a',function(e){
 			e.preventDefault();
@@ -2520,88 +2628,6 @@ const buttonUI ={
 			}
 		});
 
-		const scrolledCheck = function(wrap){
-			if(!$(wrap).length) return;
-			$(wrap).each(function(){
-				const $this = $(this);
-				const $children = $this.children();
-				const $childrenWidth = $children.outerWidth();
-				const $scrollWidth = $children.get(0).scrollWidth
-				const $btnClass = 'tab-expand-btn';
-				const $btn = '<div class="'+$btnClass+'"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>'
-				if($childrenWidth < $scrollWidth){
-					$this.addClass('scroll-able');
-					if($this.hasClass('tab-navi-menu') && !$this.find('.'+$btnClass).length)$this.append($btn);
-				}else{
-					$this.removeClass('scroll-able');
-					if($this.hasClass('tab-navi-menu') && $this.find('.'+$btnClass).length)$this.find('.'+$btnClass).remove();
-				}
-			});
-		};
-		scrolledCheck('.tab-navi-menu');
-		//scrolledCheck('.tab-box-menu');
-		$(window).resize(function(){
-			scrolledCheck('.tab-navi-menu');
-			//scrolledCheck('.tab-box-menu');
-
-			if($('.tab-line').length){
-				$('.tab-line').each(function(){
-					const $parent = $(this).closest('.tab-inner').parent();
-					buttonUI.tabLine($parent, false);
-				});
-			}
-		});
-
-		const $hash = location.hash;
-		
-		if($uiTab.length){
-			$uiTab.each(function(e){
-				let isHash =false;
-				let isHashClk = '';
-				const tarAry = [];
-				const $isFirst = $(this).data('first');
-				$(this).find('li').each(function(f){
-					const _a = $(this).find('a');
-					let _aId = _a.attr('id');
-					const _href = _a.attr('href');
-					if(_a.length){
-						if(!_aId) _aId = 'tab_btn_'+e+'_'+f;
-						if(_href !== '' && _href !== '#') tarAry.push(_href);
-						_a.attr({
-							'id' :_aId,
-							'aria-controls': _href.substring(1)
-						});
-						$(_href).attr({
-							'role':'tabpanel',
-							'aria-labelledby':_aId
-						});
-						if(_href == $hash || $(_href).find($hash).length){
-							isHash = true;
-							isHashClk = _a;
-						}
-					}
-				});
-				if(tarAry.length)$(this).data('target',tarAry.join(','));
-				if(isHash == false){
-					if($isFirst == undefined || $isFirst == true){
-						$(this).data('first',true);
-						let $first;
-						if($(this).find('.active').length){
-							$first = $(this).find('.active').find('a');
-						}else{
-							$first = $(this).find('li').eq(0).find('a')
-						}
-						$tabActive($first);
-						$panelActive($first);
-					}
-				}
-				if(isHash == true){
-					isHashClk.trigger('click');
-				}
-				Layer.openEl = '';
-			});
-		}
-
 		$(document).on('click','.tab-expand-btn button',function(e){
 			e.preventDefault();
 			const $closest = $(this).closest('.tab-expand-btn');
@@ -2624,24 +2650,7 @@ const buttonUI ={
 			e.preventDefault();
 			scrollUI.center($(this).parent());
 		});
-		const tabAcitveCenterScroll = function(wrap){
-			if($(wrap).length){
-				$(wrap).each(function(){
-					if($(this).hasClass('ui-tab' || !$(this).find('.tab-inner').length)) return;
-					const $active = $(this).find('.active');
-					if($active.length){
-						scrollUI.center($active, 10);
-						buttonUI.tabLine(this, false);
-					}
-				});
-			}
-		}
-		setTimeout(function(){
-			tabAcitveCenterScroll('.tab-navi-menu');
-			tabAcitveCenterScroll('.tab-box-menu');
-		}, 100)
-		tabAcitveCenterScroll('.tab-line-menu');
-		tabAcitveCenterScroll('.tab-round-menu');
+		
 
 		//select tab
 		$(document).on('change','.ui-tab-select',function(e){
