@@ -1105,7 +1105,7 @@ const common = {
 
 		common.fixed('#header');
 		common.fixed('.tab-navi');
-		common.fixed('.line-tab-menu');
+		common.fixed('.tab-line-menu');
 
 		$(window).on('resize',function(){
 			common.vhChk();
@@ -2325,7 +2325,7 @@ const buttonUI ={
 	},
 	effect: function(){
 		//버튼 클릭 효과
-		const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .ui-folding-btn, .ui-folding .folding-head a, .tab-box a';
+		const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .ui-folding-btn, .ui-folding .folding-head a';
 		$(document).on('click', btnInEfList,function(e){
 			const $btnEl = $(this);
 			const	$delay = 650;
@@ -2375,14 +2375,67 @@ const buttonUI ={
 			});
 		}
 	},
+	tabLine:function(wrap){
+		const $wrap = $(wrap);
+		const $line = $wrap.find('.tab-line');
+		if(!$line.length) return;
+		const $list = $wrap.find('.tab-list');
+		const $listLeft = parseInt($list.css('margin-left'));
+		const $active = $wrap.find('.active');
+		const $tabBtn = $active.find('a');
+		// const $tabWidth = $tabBtn.get(0).offsetWidth;
+		// const $tabLeft = $active.get(0).offsetLeft + $tabBtn.get(0).offsetLeft;
+		const $tabWidth = $tabBtn.outerWidth();
+		const $tabLeft = $listLeft + $active.position().left + $tabBtn.position().left;
+
+		$wrap.addClass('tab-line-moving');
+		$line.css({
+			'width':$tabWidth,
+			'left':$tabLeft
+		});
+		const transitionEndEvt = function(){
+			$wrap.removeClass('tab-line-moving')
+			$line.off('transitionend',transitionEndEvt);
+		}
+		$line.on('transitionend',transitionEndEvt);
+	},
+	tabActive:function(){
+
+	},
 	tab:function(){
 		const $uiTab = $('.ui-tab');
 
 		buttonUI.tabAria('.tab-navi');
 		buttonUI.tabAria('.tab-box');
-		buttonUI.tabAria('.line-tab-menu');
+		buttonUI.tabAria('.tab-line-menu');
 		buttonUI.tabAria('.txt-tab-menu');
 		// buttonUI.tabAria('.ui-tab');
+
+		const $tabActive = function(target){
+			const $target = $(target);
+			const $closest = $target.closest('.ui-tab');
+			const $btn = $target.is('a') ? $target : $target.find('a');
+			const $tab = $btn.closest('.tab').length ? $btn.closest('.tab') : $btn.closest('li');
+
+			$tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected',false);
+			$btn.attr('aria-selected',true);
+
+			buttonUI.tabLine($closest);
+		};
+		const $panelActive = function(target){
+			const $target = $(target);
+			const $closest = $target.closest('.ui-tab');
+			const $siblings = $closest.data('target');
+			const $btn = $target.is('a') ? $target : $target.find('a');
+			const $href = $btn.attr('href');
+			if($siblings === undefined){
+				$($href).addClass('active').attr('aria-expanded',true).siblings('.tab-panel').attr('aria-expanded',false).removeClass('active');
+				if($($href).find('.bottom__fixed').length)$($href).addClass('add-bottom__fixed');
+			}else{
+				$($siblings).attr('aria-expanded',false).removeClass('active');
+				$($href).addClass('active').attr('aria-expanded',true);
+			}
+		};
 
 		$(document).on('click','.ui-tab a',function(e){
 			e.preventDefault();
@@ -2390,7 +2443,6 @@ const buttonUI ={
 			const $closest = $this.closest('.ui-tab');
 			const $isFirst = $closest.data('first');
 			const $href = $this.attr('href');
-			const $target = $closest.data('target');
 			let $winScrollTop = $(window).scrollTop();
 
 			const $topFixed = $this.closest('.top__fixed');
@@ -2403,20 +2455,14 @@ const buttonUI ={
 				if($winScrollTop > $scrollMove) scrollUI.move($scrollMove);
 			}
 
-			if($($href).length){
-				if($isFirst == true){
-					$closest.data('first', false) ;
-				}
+			if($isFirst == true){
+				$closest.data('first', false) ;
+			}
 
-				if($target == undefined){
-					$($href).addClass('active').attr('aria-expanded',true).siblings('.tab-panel').attr('aria-expanded',false).removeClass('active');
-					if($($href).find('.bottom__fixed').length)$($href).addClass('add-bottom__fixed');
-				}else{
-					$($target).attr('aria-expanded',false).removeClass('active');
-					$($href).addClass('active').attr('aria-expanded',true);
-				}
-				$this.parent().addClass('active').siblings().removeClass('active').find('a').removeAttr('title');
-				$this.attr('aria-selected',true).closest('li').siblings().find('[role=tab]').attr('aria-selected',false);
+			$tabActive($this);
+			$panelActive($this);
+
+			if($($href).length){
 
 				//scrollItem
 				if($($href).find('.animate__animated').length){
@@ -2429,13 +2475,11 @@ const buttonUI ={
 				if($($href).find('.ui-swiper').length){
 					swiperUpdate($($href).find('.ui-swiper'));
 				}
-			}else{
-				$this.parent().addClass('active').siblings().removeClass('active').find('a').removeAttr('title');
-				$this.attr('aria-selected',true).closest('li').siblings().find('[role=tab]').attr('aria-selected',false);
 			}
 		});
 
 		const scrolledCheck = function(wrap){
+			if(!$(wrap).length) return;
 			$(wrap).each(function(){
 				const $this = $(this);
 				const $children = $this.children();
@@ -2444,14 +2488,20 @@ const buttonUI ={
 				const $btnClass = 'tab-expand-btn';
 				const $btn = '<div class="'+$btnClass+'"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>'
 				if($childrenWidth < $scrollWidth){
-					$this.addClass('scrollable');
+					$this.addClass('scroll-able');
 					if($this.hasClass('tab-navi') && !$this.find('.'+$btnClass).length)$this.append($btn);
 				}else{
-					$this.removeClass('scrollable');
+					$this.removeClass('scroll-able');
 					if($this.hasClass('tab-navi') && $this.find('.'+$btnClass).length)$this.find('.'+$btnClass).remove();
 				}
 			});
 		};
+		scrolledCheck('.tab-navi');
+		//scrolledCheck('.tab-box');
+		$(window).resize(function(){
+			scrolledCheck('.tab-navi');
+			//scrolledCheck('.tab-box');
+		});
 
 		const $hash = location.hash;
 		
@@ -2467,7 +2517,7 @@ const buttonUI ={
 					const _href = _a.attr('href');
 					if(_a.length){
 						if(!_aId) _aId = 'tab_btn_'+e+'_'+f;
-						tarAry.push(_href);
+						if(_href !== '' && _href !== '#') tarAry.push(_href);
 						_a.attr({
 							'id' :_aId,
 							'aria-controls': _href.substring(1)
@@ -2482,15 +2532,18 @@ const buttonUI ={
 						}
 					}
 				});
-				$(this).data('target',tarAry.join(','));
+				if(tarAry.length)$(this).data('target',tarAry.join(','));
 				if(isHash == false){
 					if($isFirst == undefined || $isFirst == true){
 						$(this).data('first',true);
+						let $first;
 						if($(this).find('.active').length){
-							$(this).find('.active').find('a').trigger('click');
+							$first = $(this).find('.active').find('a');
 						}else{
-							$(this).find('li').eq(0).find('a').trigger('click');
+							$first = $(this).find('li').eq(0).find('a')
 						}
+						$tabActive($first);
+						$panelActive($first);
 					}
 				}
 				if(isHash == true){
@@ -2500,24 +2553,20 @@ const buttonUI ={
 			});
 		}
 
-		scrolledCheck('.tab-navi');
-		scrolledCheck('.tabmenu');
-		$(window).resize(function(){
-			scrolledCheck('.tab-navi');
-			scrolledCheck('.tabmenu');
-		});
-
 		$(document).on('click','.tab-expand-btn button',function(e){
 			e.preventDefault();
 			const $closest = $(this).closest('.tab-expand-btn');
-			const $list = $closest.siblings('ul').clone();
+			const $list = $closest.siblings('.tab-inner').find('.tab-list').clone();
 			if($(this).hasClass('on')){
 				$(this).removeClass('on');
 				$closest.next('.tab-expand').remove();
 			}else{
 				$(this).addClass('on');
 				$closest.after('<div class="tab-expand"></div>');
-				$closest.next('.tab-expand').append($list)
+				const $expand = $closest.next('.tab-expand')
+				$expand.append($list)
+				$expand.find('.tab-list').removeClass('tab-list');
+				$expand.find('.tab').removeClass('tab');
 			}
 		});
 
@@ -2529,25 +2578,21 @@ const buttonUI ={
 		const tabAcitveCenterScroll = function(wrap){
 			if($(wrap).length){
 				$(wrap).each(function(){
+					if($(this).hasClass('ui-tab' || !$(this).find('.tab-inner').length)) return;
 					const $active = $(this).find('.active');
-					if($active.length)scrollUI.center($active, 10);
+					if($active.length){
+						scrollUI.center($active, 10);
+						buttonUI.tabLine(this);
+					}
 				});
 			}
 		}
-		tabAcitveCenterScroll('.tab-navi');
-		tabAcitveCenterScroll('.line-tab-menu');
-		
-
-		$(document).on('click','.tabmenu.ui-tab a',function(e){
-			e.preventDefault();
-			scrollUI.center($(this).parent());
-		});
-		if($('.tabmenu').length){
-			$('.tabmenu').each(function(){
-				const $active = $(this).find('.active');
-				if($active.length)scrollUI.center($active);
-			});
-		}
+		setTimeout(function(){
+			tabAcitveCenterScroll('.tab-navi');
+			tabAcitveCenterScroll('.tab-box');
+		}, 100)
+		tabAcitveCenterScroll('.tab-line-menu');
+		tabAcitveCenterScroll('.round-tab-menu');
 
 		//select tab
 		$(document).on('change','.ui-tab-select',function(e){
@@ -2870,22 +2915,41 @@ const scrollUI = {
 		});
 	},
 	center: function(el, speed, direction){
-		const $parent = $(el).parent();
+		let $parent = $(el).parent();
+		let $parentLeft = parseInt($parent.css('margin-left'));
+		let $parentTop = parseInt($parent.css('margin-top'));
+		// if($parent.css('position') === 'relative'){
+		// 	$parentLeft += $parent.position().left;
+		// 	$parentTop += $parent.position().top;
+		// }
+		while ($parent.css('overflow-x') !== 'auto' && !$parent.is('body')){
+			$parent = $parent.parent();
+			$parentLeft += parseInt($parent.css('margin-left'));
+			$parentTop += parseInt($parent.css('margin-top'));
+			// if($parent.css('position') === 'relative'){
+			// 	$parentLeft += $parent.position().left;
+			// 	$parentTop += $parent.position().top;
+			// }
+		}
 		if(speed == undefined)speed = 200;
 		if(!!direction && direction == 'vertical'){
-			const $prtH = $parent.height();
+			const $prtH = $parent.outerWidth();
+			// const $prtSclT = $parent.scrollTop();
 			const $prtSclH = $parent.get(0).scrollHeight;
-			const $thisT = $(el).position().top;
+			const $thisT = Math.round($(el).position().top);
 			const $thisH = $(el).outerHeight();
-			const $sclT = $thisT - ($prtH/2) + ($thisH/2);
-			if($prtH < $prtSclH)$parent.stop(true,false).animate({'scrollTop':'+='+$sclT},speed);
+			let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
+			if($sclT < 0) $sclT = 0;
+			if($prtH < $prtSclH)$parent.stop(true,false).animate({'scrollTop':$sclT},speed);
 		}else{
 			const $prtW = $parent.outerWidth();
+			// const $prtSclL = Math.round($parent.scrollLeft());
 			const $prtSclW = $parent.get(0).scrollWidth;
-			const $thisL = $(el).position().left;
+			let $thisL = Math.round($(el).position().left);
 			const $thisW = $(el).outerWidth();
-			const $sclL = $thisL - ($prtW/2) + ($thisW/2);
-			if($prtW < $prtSclW)$parent.stop(true,false).animate({'scrollLeft':'+='+$sclL},speed);
+			let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
+			if($sclL < 0) $sclL = 0;
+			if($prtW < $prtSclW)$parent.stop(true,false).animate({'scrollLeft':$sclL},speed);
 		}
 	},
 	hidden: function(){

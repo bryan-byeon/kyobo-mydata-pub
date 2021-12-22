@@ -1,354 +1,365 @@
 // 탭
-.section .tab-navi{
-	@include outer;
+.tab-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  .tab-line-moving & {
+    transition: 0.3s;
+  }
 }
-.tab-navi{
-	--tab-active:var(--theme-color);
-	position:sticky;
-	top: 68px;
-	height:40px;
-	background: #fff;
-	border-bottom: 1px solid #ddd;
-	z-index: 10;
-	transition: 0.3s;
-	@include web-center;
-	&.top__fixed{
-		border-bottom-width: 0px;
-		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
-	}
-	&>ul{
-		display:flex;
-		padding: 0 12px;
-		white-space: nowrap;
-		text-align: center;
-		@include scroll-x;
-		@include scroll-hide;
-		@include web-center;
-		&>li{
-			width:100%;
-			position:relative;
-			text-align:center;
-			&>a{
-				position:relative;
-				display:block;
-				padding:0 8px 17px;
-				height:40px;
-				text-align:center;
-				color:#000;
-				font-weight: 500;
-				font-size:15px;
-				line-height: 22px;
-				overflow: hidden;
-				transition: 0.3s;
-				&:after{
-					content:'';
-					display: block;
-					position: absolute;
-					bottom: -11px;
-					left: 50%;
-					width: 4px;
-					height: 4px;
-					margin-left: -2px;
-					border-radius: 50%;
-					background: var(--tab-active);
-					transition: bottom 0.3s 0.2s;
-				}
-			}
-			&.active>a{
-				color:var(--tab-active);
-				&:after{
-					bottom: 11px;
-				}
-			}
-		}
-	}
-	.tab-expand-btn{
-		position: absolute;
-		right: 0;
-		top: 0;
-		width: 34px;
-		height: 39px;
-		background: #fff;
-		// box-shadow: -10px 0 10px rgba(255,255,255,1);
-		&:before{
-			content:'';
-			position: absolute;
-			right: 100%;
-			top: 0;
-			width: 20px;
-			height: 100%;
-			background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
-			pointer-events: none;
-		}
-		button{
-			display: flex;
-			align-items: flex-start;
-			width: 100%;
-			height: 100%;
-			opacity: 0.4;
-			transition:0.3s;
-			&:before{
-				content:'';
-				display: block;
-				width: 24px;
-				height: 24px;
-				background: url(../images/icon/tab-navi-arr@3x.png) no-repeat center center / contain;
-				transform:rotate3d(1,0,0,0deg);
-				transition:0.3s;
-			}
-			&.on{
-				opacity: 1;
-				&:before{
-					transform:rotate3d(1,0,0,180deg);
-				}
-			}
-		}
-	}
-	.tab-expand{
-		position: absolute;
-		top: 39px;
-		left: 0;
-		width: 100%;
-		border-top: 1px solid #eee;
-		background: #f7f7f7;
-		box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
-		ul{
-			display: flex;
-			flex-wrap: wrap;
-			padding: 21px 10px;
-			li{
-				padding: 6px 10px;
-				a{
-					font-size: 17px;
-					font-weight: 500;
-					color: #000;
-				}
-				&.active{
-					a{
-						color: var(--tab-active);
-					}
-				}
-			}
-		}
-	}
-	&.scrollable{
-		&:before{
-			content:'';
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 20px;
-			height: 100%;
-			background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
-			z-index: 1;
-			pointer-events: none;
-		}
-		&>ul{
-			padding-right: 46px;
-		}
-	}
+.tab-inner {
+  position: relative;
+  @include scroll-x;
+  @include scroll-hide;
+  @include web-center;
 }
-.tab-panel{
-	display:none;
-	&.active{
-		display:block;
-		&.flex{
-			display:flex;
-		}
-	}
+.tab-list {
+  position: relative;
+  display: inline-flex;
+  min-width: 100%;
+  white-space: nowrap;
+  text-align: center;
 }
-
-.tab-box{
-	position: relative;
-	&>ul{
-		position: relative;
-		display:flex;
-		&:before{
-			content: '';
-			display: block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			background: #f8f8f8;
-		}
-		&>li{
-			position: relative;
-			width:100%;
-			text-align:center;
-			&>a{
-				position:relative;
-				display:block;
-				padding:10px 10px 12px;
-				border: 1px solid transparent;
-				border-radius: 4px;
-				background: transparent;
-				text-align:center;
-				color:#666;
-				font-size: 15px;
-				line-height: 24px;
-				overflow: hidden;
-				transition: 0.3s;
-			}
-			&.active>a{
-				border-color: #222;
-				background: #fff;
-				font-size: 16px;
-				font-weight: bold;
-				color: #222;
-			}
-		}
-	}
+.tab-navi {
+  .section & {
+    @include outer;
+  }
+  --tab-active:var(--theme-color);
+  position:sticky;
+  top: 68px;
+  height:40px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+  transition: 0.3s;
+  @include web-center;
+  &.top__fixed {
+    border-bottom-width: 0px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+  }
+  .tab-line {
+    z-index: 1;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 11px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      margin-left: -2px;
+      border-radius: 50%;
+      background: var(--tab-active);
+    }
+  }
+  .tab-list {
+    padding: 0 12px;
+  }
+  .tab {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    & > a {
+      position: relative;
+      display: block;
+      padding: 0 8px 17px;
+      height: 40px;
+      text-align: center;
+      color: #000;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 22px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+    &.active > a {
+      color: var(--tab-active);
+    }
+  }
+  .tab-expand-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 34px;
+    height: 39px;
+    background: #fff;
+    // box-shadow: -10px 0 10px rgba(255,255,255,1);
+    &:before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
+      pointer-events: none;
+    }
+    button {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      transition: 0.3s;
+      &:before {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: url(../images/icon/tab-navi-arr@3x.png) no-repeat center center / contain;
+        transform: rotate3d(1, 0, 0, 0deg);
+        transition: 0.3s;
+      }
+      &.on {
+        opacity: 1;
+        &:before {
+          transform: rotate3d(1, 0, 0, 180deg);
+        }
+      }
+    }
+  }
+  .tab-expand {
+    position: absolute;
+    top: 39px;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #eee;
+    background: #f7f7f7;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 21px 10px;
+      li {
+        padding: 6px 10px;
+        a {
+          font-size: 17px;
+          font-weight: 500;
+          color: #000;
+        }
+        &.active {
+          a {
+            color: var(--tab-active);
+          }
+        }
+      }
+    }
+  }
+  &.scroll-able {
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .tab-list {
+      padding-right: 46px;
+    }
+  }
+}
+.tab-panel {
+  display: none;
+  &.active {
+    display: block;
+    &.flex {
+      display: flex;
+    }
+  }
 }
 
-.section .line-tab-menu{
-	@include outer;
-}
-.line-tab-menu{
-	position:sticky;
-	top: 68px;
-	height: 61px;
-	background: #fff;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #f4f4f4;
-	transition: 0.3s;
-	z-index: 10;
-	&.top__fixed{
-		border-top-color: #f4f4f4;
-		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
-	}
-	> ul{
-		display:flex;
-		// justify-content: space-between;
-		// padding: 0 12px;
-		justify-content: space-evenly;
-		white-space: nowrap;
-		text-align: center;
-		@include scroll-x;
-		@include scroll-hide;
-		&>li{
-			position:relative;
-			padding: 0 8px;
-			&>a{
-				position:relative;
-				display:flex;
-				align-items: center;
-				justify-content: center;
-				height:61px;
-				color:#666;
-				font-size:14px;
-				line-height: 20px;
-				overflow: hidden;
-				transition: 0.3s;
-				&:after{
-					content:'';
-					display: block;
-					position: absolute;
-					bottom: 0;
-					left: 50%;
-					width: 0;
-					height: 1px;
-					background: #000;
-					opacity: 0;
-					transition: 0.3s;
-				}
-			}
-			&.active>a{
-				font-weight: bold;
-				color: #222;
-				&:after{
-					left: 0;
-					width: 100%;
-					opacity: 1;
-				}
-			}
-		}
-	}
+.tab-box {
+  position: relative;
+  .section & {
+    @include outer;
+  }
+  .tab-line {
+    border: 1px solid #222;
+    background: #fff;
+    border-radius: 4px;
+    height: 100%;
+    z-index: 1;
+  }
+  .tab-list {
+    padding: 0 20px;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 20px;
+      top: 0;
+      right: 20px;
+      bottom: 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f8f8f8;
+      border-radius: 4px;
+    }
+  }
+  .tab {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    & > a {
+      position: relative;
+      display: block;
+      padding: 12px 10px;
+      text-align: center;
+      color: #666;
+      font-size: 15px;
+      line-height: 24px;
+      overflow: hidden;
+      transition: color 0.3s;
+    }
+    &.active > a {
+      font-size: 16px;
+      font-weight: bold;
+      color: #222;
+    }
+  }
+  .section &.scroll-able {
+    @include outer;
+  }
 }
 
-.section .round-tab-menu{
-	@include outer;
-}
-.round-tab-menu{
-	> ul{
-		display:flex;
-		white-space: nowrap;
-		text-align: center;
-		@include scroll-x;
-		@include scroll-hide;
-		&>li{
-			position:relative;
-			padding: 0 3px;
-			&:first-child{
-				padding-left: 20px;
-			}
-			&:last-child{
-				padding-right: 20px;
-			}
-			&>a{
-				position:relative;
-				display:flex;
-				align-items: center;
-				justify-content: center;
-				height:44px;
-				padding: 0 20px;
-				background: #eee;
-				border-radius: 22px;
-				color:#222;
-				font-size:14px;
-				overflow: hidden;
-				transition: 0.3s;
-			}
-			&.active{
-				> a{
-					background: #000;
-					color: #fff;
-				}
-			}
-		}
-	}
+.tab-line-menu {
+  .section & {
+    @include outer;
+  }
+  position: sticky;
+  top: 68px;
+  height: 60px;
+  background: #fff;
+  transition: 0.3s;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #f4f4f4;
+  }
+  &.top__fixed {
+    border-top-color: #f4f4f4;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+    z-index: 10;
+  }
+  .tab-line {
+    height: 1px;
+    background: #000;
+  }
+  .tab-list {
+    justify-content: space-evenly;
+    padding: 0 12px;
+  }
+  .tab {
+    position: relative;
+    text-align: center;
+    padding: 0 8px;
+    & > a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      color: #666;
+      font-size: 14px;
+      line-height: 20px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+    &.active > a {
+      font-weight: bold;
+      color: #222;
+      &:after {
+        left: 0;
+        width: 100%;
+        opacity: 1;
+      }
+    }
+  }
 }
 
-.txt-tab-menu{
-	display: flex;
-	flex-wrap: wrap;
-	margin: 0 -12px;
-	> li{
-		position: relative;
-		padding-right: 1px;
-		margin: 4px 0;
-		&:after{
-			content:'';
-			display: block;
-			width: 1px;
-			height: 12px;
-			position: absolute;
-			right: 0;
-			top: 50%;
-			margin-top: -6px;
-			background: #ddd;
-		}
-		&:last-child{
-			padding-right: 0;
-			&:after{
-				content: none;
-			}
-		}
-		>a{
-			display: block;
-			padding: 0 12px;
-			font-size: 14px;
-			line-height: 20px;
-			color: #999;
-			white-space: nowrap;
-		}
-		&.active{
-			>a{
-				color: #222;
-			}
-		}
-	}
+.round-tab-menu {
+  .section & {
+    @include outer;
+  }
+  .tab-list {
+    padding: 0 17px;
+  }
+  .tab {
+    position: relative;
+    padding: 0 3px;
+    & > a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 20px;
+      background: #eee;
+      border-radius: 22px;
+      color: #222;
+      font-size: 14px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+    &.active {
+      > a {
+        background: #000;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.txt-tab-menu {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
+  > li {
+    position: relative;
+    padding-right: 1px;
+    margin: 4px 0;
+    &:after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 12px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -6px;
+      background: #ddd;
+    }
+    &:last-child {
+      padding-right: 0;
+      &:after {
+        content: none;
+      }
+    }
+    > a {
+      display: block;
+      padding: 0 12px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #999;
+      white-space: nowrap;
+    }
+    &.active {
+      > a {
+        color: #222;
+      }
+    }
+  }
 }
