@@ -2375,7 +2375,8 @@ const buttonUI ={
 			});
 		}
 	},
-	tabLine:function(wrap){
+	tabLine:function(wrap, isAni){
+		if(isAni === undefined)isAni = true;
 		const $wrap = $(wrap);
 		const $line = $wrap.find('.tab-line');
 		if(!$line.length) return;
@@ -2388,19 +2389,18 @@ const buttonUI ={
 		const $tabWidth = $tabBtn.outerWidth();
 		const $tabLeft = $listLeft + $active.position().left + $tabBtn.position().left;
 
-		$wrap.addClass('tab-line-moving');
+		if(isAni)$wrap.addClass('tab-line-moving');
 		$line.css({
 			'width':$tabWidth,
 			'left':$tabLeft
 		});
-		const transitionEndEvt = function(){
-			$wrap.removeClass('tab-line-moving')
-			$line.off('transitionend',transitionEndEvt);
+		if(isAni){
+			const transitionEndEvt = function(){
+				$wrap.removeClass('tab-line-moving')
+				$line.off('transitionend',transitionEndEvt);
+			}
+			$line.on('transitionend',transitionEndEvt);
 		}
-		$line.on('transitionend',transitionEndEvt);
-	},
-	tabActive:function(){
-
 	},
 	tab:function(){
 		const $uiTab = $('.ui-tab');
@@ -2501,6 +2501,13 @@ const buttonUI ={
 		$(window).resize(function(){
 			scrolledCheck('.tab-navi');
 			//scrolledCheck('.tab-box');
+
+			if($('.tab-line').length){
+				$('.tab-line').each(function(){
+					const $parent = $(this).closest('.tab-inner').parent();
+					buttonUI.tabLine($parent, false);
+				});
+			}
 		});
 
 		const $hash = location.hash;
