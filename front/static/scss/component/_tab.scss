@@ -23,7 +23,7 @@
   white-space: nowrap;
   text-align: center;
 }
-.tab-navi {
+.tab-navi-menu {
   .section & {
     @include outer;
   }
@@ -175,7 +175,7 @@
   }
 }
 
-.tab-box {
+.tab-box-menu {
   position: relative;
   .section & {
     @include outer;
@@ -290,7 +290,7 @@
   }
 }
 
-.round-tab-menu {
+.tab-round-menu {
   .section & {
     @include outer;
   }
@@ -323,10 +323,9 @@
   }
 }
 
-.txt-tab-menu {
+.tab-txt-menu {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -12px;
   > li {
     position: relative;
     padding-right: 1px;
@@ -342,10 +341,17 @@
       margin-top: -6px;
       background: #ddd;
     }
+    &:first-child {
+      a {
+        padding-left: 0;
+      }
+    }
     &:last-child {
-      padding-right: 0;
       &:after {
         content: none;
+      }
+      a {
+        padding-right: 0;
       }
     }
     > a {

@@ -1104,7 +1104,7 @@ const common = {
 		common.lottie();
 
 		common.fixed('#header');
-		common.fixed('.tab-navi');
+		common.fixed('.tab-navi-menu');
 		common.fixed('.tab-line-menu');
 
 		$(window).on('resize',function(){
@@ -2403,12 +2403,54 @@ const buttonUI ={
 		}
 	},
 	tab:function(){
+		const $tabInfoSaveString = uiStorage.get('tabInfoSave');
+		const $tabInfoSaveAry = $tabInfoSaveString === null ? null : JSON.parse($tabInfoSaveString);
+		console.log($tabInfoSaveAry);
+
+		const _tabInnerTxt = function(wrap){
+			let $wrap = $(wrap);
+			if($wrap.hasClass('tab-inner'))$wrap = $wrap.parent();
+			if($wrap.hasClass('tab-list'))$wrap = $wrap.parent().parent();
+			const $firstClass = $wrap.attr('class').split(' ')[0];
+			let $innerTxt = $firstClass;
+			$wrap.find('.tab').each(function(){
+				$innerTxt += ','+$(this).text();
+			});
+			return $innerTxt;
+		}
+
+		const _tabInfoSave = function(){
+			if(!$('.tab-inner').length){
+				uiStorage.remove('tabInfoSave')
+			}else{
+				const $saveAry = [];
+				$('.tab-inner').each(function(){
+					const stateObj = {};
+					const $innerTxt = _tabInnerTxt(this);
+					const $sclLeft = $(this).scrollLeft();
+					const $line = $(this).find('tab-line');
+					const $lineLeft = parseInt($line.css('left'));
+					const $lineWidth = parseInt($line.css('width'));
+					stateObj.innerText = $innerTxt;
+					stateObj.lineLeft = $lineLeft;
+					stateObj.lineWidth = $lineWidth;
+					stateObj.sclLeft = $sclLeft;
+					$saveAry.push(stateObj);
+				});
+				if($saveAry.length)uiStorage.set('tabInfoSave', JSON.stringify($saveAry))
+			}
+		}
+		
+		window.addEventListener("unload", function(event) { 
+			_tabInfoSave();
+		});
+
 		const $uiTab = $('.ui-tab');
 
-		buttonUI.tabAria('.tab-navi');
-		buttonUI.tabAria('.tab-box');
+		buttonUI.tabAria('.tab-navi-menu');
+		buttonUI.tabAria('.tab-box-menu');
 		buttonUI.tabAria('.tab-line-menu');
-		buttonUI.tabAria('.txt-tab-menu');
+		buttonUI.tabAria('.tab-txt-menu');
 		// buttonUI.tabAria('.ui-tab');
 
 		const $tabActive = function(target){
@@ -2489,18 +2531,18 @@ const buttonUI ={
 				const $btn = '<div class="'+$btnClass+'"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>'
 				if($childrenWidth < $scrollWidth){
 					$this.addClass('scroll-able');
-					if($this.hasClass('tab-navi') && !$this.find('.'+$btnClass).length)$this.append($btn);
+					if($this.hasClass('tab-navi-menu') && !$this.find('.'+$btnClass).length)$this.append($btn);
 				}else{
 					$this.removeClass('scroll-able');
-					if($this.hasClass('tab-navi') && $this.find('.'+$btnClass).length)$this.find('.'+$btnClass).remove();
+					if($this.hasClass('tab-navi-menu') && $this.find('.'+$btnClass).length)$this.find('.'+$btnClass).remove();
 				}
 			});
 		};
-		scrolledCheck('.tab-navi');
-		//scrolledCheck('.tab-box');
+		scrolledCheck('.tab-navi-menu');
+		//scrolledCheck('.tab-box-menu');
 		$(window).resize(function(){
-			scrolledCheck('.tab-navi');
-			//scrolledCheck('.tab-box');
+			scrolledCheck('.tab-navi-menu');
+			//scrolledCheck('.tab-box-menu');
 
 			if($('.tab-line').length){
 				$('.tab-line').each(function(){
@@ -2589,17 +2631,17 @@ const buttonUI ={
 					const $active = $(this).find('.active');
 					if($active.length){
 						scrollUI.center($active, 10);
-						buttonUI.tabLine(this);
+						buttonUI.tabLine(this, false);
 					}
 				});
 			}
 		}
 		setTimeout(function(){
-			tabAcitveCenterScroll('.tab-navi');
-			tabAcitveCenterScroll('.tab-box');
+			tabAcitveCenterScroll('.tab-navi-menu');
+			tabAcitveCenterScroll('.tab-box-menu');
 		}, 100)
 		tabAcitveCenterScroll('.tab-line-menu');
-		tabAcitveCenterScroll('.round-tab-menu');
+		tabAcitveCenterScroll('.tab-round-menu');
 
 		//select tab
 		$(document).on('change','.ui-tab-select',function(e){
@@ -2781,8 +2823,8 @@ const buttonUI ={
 };
 
 const reTabAria = function(){
-	if($('.tab-navi').length)buttonUI.tabAria('.tab-navi');
-	if($('.tab-box').length)buttonUI.tabAria('.tab-box');
+	if($('.tab-navi-menu').length)buttonUI.tabAria('.tab-navi-menu');
+	if($('.tab-box-menu').length)buttonUI.tabAria('.tab-box-menu');
 	if($('.is-tab').length)buttonUI.tabAria('.is-tab');
 	if($('.ui-tab').length)buttonUI.tabAria('.ui-tab');
 };
@@ -2923,19 +2965,19 @@ const scrollUI = {
 	},
 	center: function(el, speed, direction){
 		let $parent = $(el).parent();
-		let $parentLeft = parseInt($parent.css('margin-left'));
-		let $parentTop = parseInt($parent.css('margin-top'));
+		// let $parentTop = parseInt($parent.css('margin-top'));
+		// let $parentLeft = parseInt($parent.css('margin-left'));
 		// if($parent.css('position') === 'relative'){
-		// 	$parentLeft += $parent.position().left;
 		// 	$parentTop += $parent.position().top;
+		// 	$parentLeft += $parent.position().left;
 		// }
 		while ($parent.css('overflow-x') !== 'auto' && !$parent.is('body')){
 			$parent = $parent.parent();
-			$parentLeft += parseInt($parent.css('margin-left'));
-			$parentTop += parseInt($parent.css('margin-top'));
+			// $parentTop += parseInt($parent.css('margin-top'));
+			// $parentLeft += parseInt($parent.css('margin-left'));
 			// if($parent.css('position') === 'relative'){
-			// 	$parentLeft += $parent.position().left;
 			// 	$parentTop += $parent.position().top;
+			// 	$parentLeft += $parent.position().left;
 			// }
 		}
 		if(speed == undefined)speed = 200;
@@ -2945,7 +2987,8 @@ const scrollUI = {
 			const $prtSclH = $parent.get(0).scrollHeight;
 			const $thisT = Math.round($(el).position().top);
 			const $thisH = $(el).outerHeight();
-			let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
+			// let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
+			let $sclT = $thisT - ($prtH/2) + ($thisH/2);
 			if($sclT < 0) $sclT = 0;
 			if($prtH < $prtSclH)$parent.stop(true,false).animate({'scrollTop':$sclT},speed);
 		}else{
@@ -2954,7 +2997,8 @@ const scrollUI = {
 			const $prtSclW = $parent.get(0).scrollWidth;
 			let $thisL = Math.round($(el).position().left);
 			const $thisW = $(el).outerWidth();
-			let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
+			// let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
+			let $sclL = $thisL - ($prtW/2) + ($thisW/2);
 			if($sclL < 0) $sclL = 0;
 			if($prtW < $prtSclW)$parent.stop(true,false).animate({'scrollLeft':$sclL},speed);
 		}
@@ -5011,7 +5055,28 @@ const getUnlParams = function(){
 	return params;
 };
 
-//쿠키
+// 스토리지(localStorage, sessionStorage) 값 컨트롤
+const uiStorage = {
+	set: function(key, value, type){
+		let $storage = type === 'session' ? sessionStorage : localStorage;
+		$storage.setItem(key,value);
+	},
+	get: function(key, type){
+		let $storage = type === 'session' ? sessionStorage : localStorage;
+		const $value = $storage.getItem(key);
+		return $value;
+	},
+	remove: function(key, type){
+		let $storage = type === 'session' ? sessionStorage : localStorage;
+		$storage.removeItem(key);
+	},
+	clear: function(type){
+		let $storage = type === 'session' ? sessionStorage : localStorage;
+		$storage.clear();
+	}
+}
+
+// 쿠키 컨트롤
 const uiCookie = {
 	set:function(key, value, expireYn){
 		let cookieVal = key + "=" + value;

@@ -230,3 +230,19 @@
   height: 100px;
   margin: 0 auto;
 }
+.gd__scroll-area {
+  max-height: 250px;
+  padding: 1rem;
+  background: #f1f1f1;
+  border: 1px solid #ddd;
+}
+
+.reverse-scroll-wrap {
+  transform: rotate(180deg);
+  direction: rtl;
+  overflow: auto;
+}
+.reverse-scroll-inside {
+  direction: ltr;
+  transform: rotate(-180deg);
+}

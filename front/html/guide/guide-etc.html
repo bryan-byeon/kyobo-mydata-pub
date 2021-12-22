@@ -18,7 +18,7 @@
 	<main id="container">
 		<!-- 컨텐츠 -->
 		<section id="contents">
-			<div class="tab-navi">
+			<div class="tab-navi-menu">
 				<div class="tab-inner">
 					<i class="tab-line" aria-hidden="true"></i>
 					<ul class="tab-list">
@@ -80,17 +80,23 @@
 					</div>
 					<h1 class="gd__h1">scss 샘플</h1>
 					<div style="position:relative;overflow:hidden;">
-						<div class="gd__box" id="box"></div>
+						<div class="gd__box"></div>
 						<div class="gd__box-2"></div>
 						<section class="gd__box-2"></section>
 						<div class="gd__wrap2">
 							<div class="gd__box-2"></div>
 						</div>
 					</div>
-					<script>
-						console.log('top', $('#box').position().top)
-						console.log('left', $('#box').position().left)
-					</script>
+					<h1 class="gd__h1">역(하단시작) 스크롤 테스트</h1>
+					<div class="gd__scroll-area reverse-scroll-wrap">
+						<div class="reverse-scroll-inside">
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsum blanditiis optio officiis quia fugiat ut eius expedita rerum nostrum id quas, iusto reprehenderit. Nesciunt porro praesentium eum eius ex!</p>
+							<p>Illo ducimus atque repudiandae, hic dicta soluta nihil laboriosam. Minus, alias aliquam aperiam maxime porro itaque fuga doloribus quas ex et veritatis labore cupiditate at, enim, repellat tempora quod soluta.</p>
+							<p>Aut quaerat sit dolores excepturi odio. Non totam voluptatum aut similique suscipit ullam dolorum dolore doloremque omnis recusandae inventore dolores quos, quo dolorem, voluptatibus quasi quisquam corporis porro rem soluta.</p>
+							<p>Porro animi corrupti accusamus tenetur harum minima cum unde ullam, ea consectetur et impedit ad ipsum odit laboriosam, reprehenderit autem accusantium voluptate tempore. Aliquam odit mollitia, ipsam cum quam necessitatibus.</p>
+							<p>Non modi maiores molestiae ut ex esse commodi, eos deserunt, nisi, magnam perferendis neque ipsa. Inventore beatae, autem corporis, doloribus modi fugit ab ipsam sit recusandae sequi tempore quo in?</p>
+						</div>
+					</div>
 			</div>
 		</section>
 		<!-- //컨텐츠 -->
