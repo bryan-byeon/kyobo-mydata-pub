@@ -2495,16 +2495,17 @@ const buttonUI ={
 				$('.tab-inner').each(function(i){
 					const $this = $(this);
 					if($this.closest('.ui-tab').length) return;
+					
 					const $line = $this.find('.tab-line');
 					let isMove = false;
 					let $delay = 1;
+
 					if($line.length){
 						const $innerTxt = _tabInnerTxt(this);
 						$.each($tabInfoSaveAry, function(){
 							if(this.innerText === $innerTxt){
 								isMove = true;
 								$delay = 50;
-								console.log(this.lineLeft)
 								$line.css({
 									'left':this.lineLeft,
 									'width':this.lineWidth
@@ -2521,7 +2522,7 @@ const buttonUI ={
 							scrollUI.center($active, $delay*10);
 							buttonUI.tabLine($this, isMove);
 						}
-						if(i, $('.tab-inner').length-1){
+						if(i === $('.tab-inner').length-1){
 							isTabLineChk = true;
 						}
 					}, $delay);
