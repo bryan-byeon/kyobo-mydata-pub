@@ -17,7 +17,7 @@ html {
   -o-text-size-adjust: none;
 }
 body {
-  font: normal 15px/1.44 'Noto Sans KR', 'Apple SD Gothic Neo', 'AppleSDGothicNeo', sans-serif;
+  font: normal 15px/1.44 'Roboto', 'Noto Sans KR', 'Apple SD Gothic Neo', 'AppleSDGothicNeo', sans-serif;
   color: var(--base-txt-color);
   letter-spacing: -0.02em;
   word-break: keep-all;
@@ -297,6 +297,10 @@ html.mobile {
 .ff-nt,
 .ff-noto {
   font-family: 'Noto Sans KR'
+}
+.ff-rbt,
+.ff-roboto {
+  font-family: 'Roboto'
 }
 .ff-pps,
 .ff-poppins {
