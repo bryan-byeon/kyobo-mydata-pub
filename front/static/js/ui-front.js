@@ -2382,9 +2382,10 @@ const buttonUI ={
 		}
 	},
 	tabLine:function(wrap, isAni){
-		console.log('tabLine', wrap)
 		if(isAni === undefined)isAni = true;
-		const $wrap = $(wrap);
+		let $wrap = $(wrap);
+		if($wrap.hasClass('tab-inner'))$wrap = $wrap.parent();
+		if($wrap.hasClass('tab-list'))$wrap = $wrap.closest('.tab-inner').parent();
 		const $line = $wrap.find('.tab-line');
 		if(!$line.length) return;
 		const $list = $wrap.find('.tab-list');
@@ -2412,7 +2413,6 @@ const buttonUI ={
 	tab:function(){
 		const $tabInfoSaveString = uiStorage.get('tabInfoSave');
 		const $tabInfoSaveAry = $tabInfoSaveString === null ? null : JSON.parse($tabInfoSaveString);
-		console.log($tabInfoSaveAry);
 
 		const _tabInnerTxt = function(wrap){
 			let $wrap = $(wrap);
@@ -2435,7 +2435,7 @@ const buttonUI ={
 					const stateObj = {};
 					const $innerTxt = _tabInnerTxt(this);
 					const $sclLeft = $(this).scrollLeft();
-					const $line = $(this).find('tab-line');
+					const $line = $(this).find('.tab-line');
 					const $lineLeft = parseInt($line.css('left'));
 					const $lineWidth = parseInt($line.css('width'));
 					stateObj.innerText = $innerTxt;
@@ -2477,10 +2477,10 @@ const buttonUI ={
 			});
 		};
 		scrolledCheck('.tab-navi-menu');
-
+		let isTabLineChk = false;
 		$(window).resize(function(){
 			scrolledCheck('.tab-navi-menu');
-			if($('.tab-line').length){
+			if($('.tab-line').length && isTabLineChk){
 				$('.tab-line').each(function(){
 					const $this = $(this);
 					if(parseInt($this.css('left')) === 0) return;
@@ -2492,16 +2492,37 @@ const buttonUI ={
 
 		const tabAcitveCenterScroll = function(){
 			if($('.tab-inner').length){
-				$('.tab-inner').each(function(){
+				$('.tab-inner').each(function(i){
 					const $this = $(this);
 					if($this.closest('.ui-tab').length) return;
+					const $line = $this.find('.tab-line');
+					let isMove = false;
 					let $delay = 1;
-					if($this.closest('.tab-navi-menu').length || $this.closest('.tab-box-menu').length)$delay = 100;
+					if($line.length){
+						const $innerTxt = _tabInnerTxt(this);
+						$.each($tabInfoSaveAry, function(){
+							if(this.innerText === $innerTxt){
+								isMove = true;
+								$delay = 50;
+								console.log(this.lineLeft)
+								$line.css({
+									'left':this.lineLeft,
+									'width':this.lineWidth
+								});
+								$this.scrollLeft(this.sclLeft);
+							}
+						});
+					}
+					
+					if($this.closest('.tab-navi-menu').length || $this.closest('.tab-box-menu').length)$delay = 50;
 					setTimeout(function(){
 						const $active = $this.find('.active');
 						if($active.length){
-							scrollUI.center($active, 10);
-							buttonUI.tabLine($this, false);
+							scrollUI.center($active, $delay*10);
+							buttonUI.tabLine($this, isMove);
+						}
+						if(i, $('.tab-inner').length-1){
+							isTabLineChk = true;
 						}
 					}, $delay);
 				});
@@ -2511,13 +2532,12 @@ const buttonUI ={
 
 		const $tabActive = function(target){
 			const $target = $(target);
-			const $closest = $target.closest('.ui-tab');
+			const $closest = $target.closest('.ui-tab').length ? $target.closest('.ui-tab') : $target.closest('.tab-list');
 			const $btn = $target.is('a') ? $target : $target.find('a');
 			const $tab = $btn.closest('.tab').length ? $btn.closest('.tab') : $btn.closest('li');
 
 			$tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected',false);
 			$btn.attr('aria-selected',true);
-			console.log('$tabActive');
 			buttonUI.tabLine($closest);
 		};
 		const $panelActive = function(target){
@@ -2539,19 +2559,18 @@ const buttonUI ={
 		const $hash = location.hash;
 		if($uiTab.length){
 			$uiTab.each(function(e){
-				let isHash =false;
-				let isHashClk = '';
-				const tarAry = [];
-				const $isFirst = $(this).data('first');
-				let $tab = $(this).find('.tab');
-				if(!$tab.length)$tab = $(this).find('li');
+				const $this = $(this);
+				let $hashActive = null;
+				const $tarAry = [];
+				let $tab = $this.find('.tab');
+				if(!$tab.length)$tab = $this.find('li');
 				$tab.each(function(f){
-					const _a = $(this).find('a');
+					const _a = $this.find('a');
 					let _aId = _a.attr('id');
 					const _href = _a.attr('href');
 					if(_a.length && $(_href).length){
 						if(!_aId) _aId = 'tab_btn_'+e+'_'+f;
-						if(_href !== '' && _href !== '#') tarAry.push(_href);
+						if(_href !== '' && _href !== '#') $tarAry.push(_href);
 						_a.attr({
 							'id' :_aId,
 							'aria-controls': _href.substring(1)
@@ -2560,72 +2579,61 @@ const buttonUI ={
 							'role':'tabpanel',
 							'aria-labelledby':_aId
 						});
-						if(_href == $hash || $(_href).find($hash).length){
-							isHash = true;
-							isHashClk = _a;
+						if(_href === $hash || $(_href).find($hash).length){
+							$hashActive = _a;
 						}
 					}
 				});
-				if(tarAry.length)$(this).data('target',tarAry.join(','));
-				if(isHash == false){
-					if($isFirst == undefined || $isFirst == true){
-						$(this).data('first',true);
-						let $first;
-						if($(this).find('.active').length){
-							$first = $(this).find('.active').find('a');
-						}else{
-							$first = $(this).find('li').eq(0).find('a')
-						}
-						$tabActive($first);
-						$panelActive($first);
-					}
+				if($tarAry.length)$this.data('target',$tarAry.join(','));
+
+				let $active;
+				if($hashActive){
+					$active = $hashActive;
+				}else if($this.find('.active').length){
+					$active = $this.find('.active').find('a');
+				}else{
+					$active = $this.find('li').eq(0).find('a');
 				}
-				if(isHash == true){
-					isHashClk.trigger('click');
-				}
-				Layer.openEl = '';
+				$tabActive($active);
+				$panelActive($active);
 			});
 		}
 
+		// $(document).on('click','.ui-tab a, .tab-list a',function(e){
 		$(document).on('click','.ui-tab a',function(e){
 			e.preventDefault();
 			const $this = $(this);
-			const $closest = $this.closest('.ui-tab');
-			const $isFirst = $closest.data('first');
-			const $href = $this.attr('href');
-			let $winScrollTop = $(window).scrollTop();
-
-			const $topFixed = $this.closest('.top__fixed');
-			if($topFixed.length){
-				let $scrollMove =  getOffset($topFixed[0]).top;
-				if($('#header').length){
-					$winScrollTop = $winScrollTop - $('#header').outerHeight();
-					$scrollMove = $scrollMove - $('#header').outerHeight();
-				}
-				if($winScrollTop > $scrollMove) scrollUI.move($scrollMove);
-			}
-
-			if($isFirst == true){
-				$closest.data('first', false) ;
-			}
-
 			$tabActive($this);
-			$panelActive($this);
+			//if($(this).closest('.ui-tab').length) {
+				// e.preventDefault();
+				$panelActive($this);
 
-			if($($href).length){
-
-				//scrollItem
-				if($($href).find('.animate__animated').length){
-					setTimeout(function(){
-						$($href).find('.animate__animated').addClass('paused');
-						$(window).scroll();
-					},100);
+				const $href = $this.attr('href');
+				let $winScrollTop = $(window).scrollTop();
+				const $topFixed = $this.closest('.top__fixed');
+				if($topFixed.length){
+					let $scrollMove =  getOffset($topFixed[0]).top;
+					if($('#header').length){
+						$winScrollTop = $winScrollTop - $('#header').outerHeight();
+						$scrollMove = $scrollMove - $('#header').outerHeight();
+					}
+					if($winScrollTop > $scrollMove) scrollUI.move($scrollMove);
 				}
 
-				if($($href).find('.ui-swiper').length){
-					swiperUpdate($($href).find('.ui-swiper'));
+				if($($href).length){
+					//scrollItem
+					if($($href).find('.animate__animated').length){
+						setTimeout(function(){
+							$($href).find('.animate__animated').addClass('paused');
+							$(window).scroll();
+						},100);
+					}
+	
+					if($($href).find('.ui-swiper').length){
+						swiperUpdate($($href).find('.ui-swiper'));
+					}
 				}
-			}
+			//}
 		});
 
 		$(document).on('click','.tab-expand-btn button',function(e){
@@ -2671,10 +2679,10 @@ const buttonUI ={
 		});
 		if($('.ui-tab-select').length){
 			$('.ui-tab-select').each(function(){
-				const tarAry = [];
+				const $tarAry = [];
 				$(this).find('option').each(function(){
 					const $tar = $(this).data('show');
-					if(tarAry.indexOf($tar) < 0 && !!$tar)tarAry.push($tar);
+					if($tarAry.indexOf($tar) < 0 && !!$tar)$tarAry.push($tar);
 					if($(this).is(':selected')){
 						if($($tar).hasClass('tab-panel')){
 							$($tar).addClass('active');
@@ -2683,7 +2691,7 @@ const buttonUI ={
 						}
 					}
 				});
-				if($(this).data('hide') == undefined)$(this).data('hide',tarAry.join(','));
+				if($(this).data('hide') == undefined)$(this).data('hide',$tarAry.join(','));
 			});
 		}
 
@@ -2706,10 +2714,10 @@ const buttonUI ={
 		});
 		if($('.ui-tab-rdo').length){
 			$('.ui-tab-rdo').each(function(){
-				const tarAry = [];
+				const $tarAry = [];
 				$(this).find('input[type=radio]').each(function(){
 					const $tar = $(this).data('show');
-					if(tarAry.indexOf($tar) < 0 && !!$tar)tarAry.push($tar);
+					if($tarAry.indexOf($tar) < 0 && !!$tar)$tarAry.push($tar);
 					if($(this).prop('checked')){
 						if($($tar).hasClass('tab-panel')){
 							$($tar).addClass('active');
@@ -2718,7 +2726,7 @@ const buttonUI ={
 						}
 					}
 				});
-				if($(this).data('hide') == undefined)$(this).data('hide',tarAry.join(','));
+				if($(this).data('hide') == undefined)$(this).data('hide',$tarAry.join(','));
 			});
 		}
 
