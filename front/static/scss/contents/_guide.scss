@@ -238,10 +238,9 @@
 }
 .gd__txt-box {
   border: 1px solid #ddd;
+  word-break: break-all;
   > div {
     padding: 1em;
-    white-space: nowrap;
-    overflow: auto;
   }
   div + div {
     margin-top: 1em;
