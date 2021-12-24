@@ -8,13 +8,10 @@
 html {
   height: 100%;
   font-size: 62.5%;
-  /*-webkit-touch-callout:none;
-	-webkit-user-select:none;
-	-webkit-tap-highlight-color:transparent;*/
-  -webkit-text-size-adjust: none;
-  -moz-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  -o-text-size-adjust: none;
+  // user-select: none;
+  // -webkit-touch-callout:none;
+  // -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
 }
 body {
   font: normal 15px/1.44 'Roboto', 'Noto Sans KR', 'Apple SD Gothic Neo', 'AppleSDGothicNeo', sans-serif;
@@ -511,6 +508,10 @@ html.mobile {
 }
 .flex-column {
   flex-direction: column !important;
+  &.flex > div + div {
+    margin-left: 0;
+    margin-top: 6px;
+  }
 }
 .flex {
   display: flex;
@@ -587,51 +588,51 @@ html.mobile {
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
-    .w-p-#{$i} {
+    .w-#{$i}p {
       width: $i*1% !important;
     }
   }
 }
-.w-p-33 {
+.w-33p {
   width: 33.3333% !important;
 }
-.w-p-66 {
+.w-66p {
   width: 66.6666% !important;
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
-    .w-vw-#{$i} {
+    .w-#{$i}vw {
       width: $i*1vw !important;
     }
   }
 }
-.w-vw-33 {
+.w-33vw {
   width: 33.3333vw !important;
 }
-.w-vw-66 {
+.w-66vw {
   width: 66.6666vw !important;
 }
 @for $i from 0 through 100 {
-  .w-f-#{$i} {
+  .w-#{$i}f {
     flex: 0 0 $i*1px !important;
   }
 }
 @for $i from 1 through 40 {
-  .w-f-#{$i*5+100} {
+  .w-#{$i*5+100}f {
     flex: 0 0 $i*5px+100px !important;
   }
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
-    .w-fp-#{$i} {
+    .w-#{$i}fp {
       flex: 0 0 $i*1% !important;
     }
   }
 }
-.w-fp-33 {
+.w-33fp {
   flex: 0 0 33.3333% !important;
 }
-.w-fp-66 {
+.w-66fp {
   flex: 0 0 66.6666% !important;
 }
 
@@ -648,28 +649,28 @@ html.mobile {
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
-    .h-p-#{$i} {
+    .h-#{$i}p {
       height: $i*1% !important;
     }
   }
 }
-.h-p-33 {
+.h-33p {
   height: 33.3333% !important;
 }
-.h-p-66 {
+.h-66p {
   height: 66.6666% !important;
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
-    .h-vh-#{$i} {
+    .h-#{$i}vh {
       height:-vh(#{$i}) !important;
     }
   }
 }
-.h-vh-33 {
+.h-33vh {
   height: -vh(33.3333) !important;
 }
-.h-vh-66 {
+.h-66vh {
   height: -vh(66.6666) !important;
 }
 
@@ -697,25 +698,25 @@ html.mobile {
   }
 }
 @for $i from 0 through 50 {
-  .mg-x-#{$i} {
+  .mg-#{$i}x {
     margin-left: $i*1px !important;
     margin-right: $i*1px !important;
   }
 }
 @for $i from 11 through 20 {
-  .mg-x-#{$i*5} {
+  .mg-#{$i*5}x {
     margin-left: $i*5px !important;
     margin-right: $i*5px !important;
   }
 }
 @for $i from 0 through 50 {
-  .mg-y-#{$i} {
+  .mg-#{$i}y {
     margin-top: $i*1px !important;
     margin-bottom: $i*1px !important;
   }
 }
 @for $i from 11 through 20 {
-  .mg-y-#{$i*5} {
+  .mg-#{$i*5}y {
     margin-top: $i*5px !important;
     margin-bottom: $i*5px !important;
   }
@@ -725,10 +726,7 @@ html.mobile {
     margin-top: $i*1px !important;
   }
 }
-.mt-m1 {
-  margin-top: -1px !important;
-}
-@for $i from 0 through 10 {
+@for $i from 1 through 10 {
   .mt-m#{$i} {
     margin-top: -$i*1px !important;
   }
@@ -781,25 +779,25 @@ html.mobile {
   }
 }
 @for $i from 0 through 50 {
-  .pd-x-#{$i} {
+  .pd-#{$i}x {
     padding-left: $i*1px !important;
     padding-right: $i*1px !important;
   }
 }
 @for $i from 11 through 20 {
-  .pd-x-#{$i*5} {
+  .pd-#{$i*5}x {
     padding-left: $i*5px !important;
     padding-right: $i*5px !important;
   }
 }
 @for $i from 0 through 50 {
-  .pd-y-#{$i} {
+  .pd-#{$i}y {
     padding-top: $i*1px !important;
     padding-bottom: $i*1px !important;
   }
 }
 @for $i from 11 through 20 {
-  .pd-y-#{$i*5} {
+  .pd-#{$i*5}y {
     padding-top: $i*5px !important;
     padding-bottom: $i*5px !important;
   }
