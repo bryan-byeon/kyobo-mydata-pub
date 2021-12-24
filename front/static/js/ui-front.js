@@ -2480,7 +2480,6 @@ const buttonUI ={
 		let isTabLineChk = false;
 		$(window).resize(function(){
 			scrolledCheck('.tab-navi-menu');
-			console.log(isTabLineChk)
 			if($('.tab-line').length && isTabLineChk){
 				$('.tab-line').each(function(){
 					const $this = $(this);
@@ -2496,7 +2495,9 @@ const buttonUI ={
 				$('.tab-inner').each(function(i){
 					const $this = $(this);
 					if(i === $('.tab-inner').length-1){
-						isTabLineChk = true;
+						setTimeout(function(){
+							isTabLineChk = true;
+						},50)
 					}
 					if($this.closest('.ui-tab').length) return;
 					

@@ -1,72 +1,112 @@
 //badge
-.badge{
-	display:inline-flex;
-	background:#ccc;
-	font-size:10px;
-	height: 20px;
-	color:#fff;
-	padding:0 6px;
-	vertical-align:middle;
-	white-space:nowrap;
-	align-items: center;
+.badge {
+  display: inline-flex;
+  background: #ccc;
+  font-size: 10px;
+  height: 20px;
+  color: #fff;
+  padding: 0 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+  align-items: center;
 
-	&.red{background:#e3635f;}
-	&.blue{background:#425fa5;}
-	&.primary{background:var(--theme-color);}
-	&.green{background:#2e9b4c;}
-	&.yellow{background:#ffe626;color:#222;}
-	&.gray{background:#3b3f47;}
-	&.black{background:#222;}
-	
-	&.pink{background:#f35aa9;}
-	&.purple{background:#a87af4;}
-	&.line{
-		background:#fff;
-		color:#222;border-radius:0;border:1px solid #eee;
-		&.red{color:#e3635f;border-color: #e3635f;}
-		&.blue{color:#425fa5;border-color: #425fa5;}
-		&.green{color:#2e9b4c;border-color: #2e9b4c;}
-	}
-	&.round{
-		border-radius:15px;
-		&.gold,
-		&.lv-1{background-color:#f2cd00;border-color: #f2cd00;}
-		&.silver,
-		&.lv-2{background-color:#cbcbcb;border-color: #cbcbcb;}
-		&.bronze,
-		&.lv-3{background-color:#a57c5d;border-color: #a57c5d;}
-		&.point,
-		&.lv-4{background-color:var(--theme-color);border-color: var(--theme-color);}
-	}
-	&.h24{
-		height: 24px;
-		padding:0 12px;
-	}
-	&.h28{
-		height: 28px;
-		padding:0 12px;
-		font-size: 12px;
-	}
+  &.red {
+    background: #e3635f;
+  }
+  &.blue {
+    background: #425fa5;
+  }
+  &.primary {
+    background: var(--theme-color);
+  }
+  &.green {
+    background: #2e9b4c;
+  }
+  &.yellow {
+    background: #ffe626;
+    color: #222;
+  }
+  &.gray {
+    background: #3b3f47;
+  }
+  &.black {
+    background: #222;
+  }
 
-	&.recommend{
-		width: 48px;
-		height: 48px;
-		padding: 0;
-		border-radius: 50%;
-		background:var(--theme-color);
-		justify-content: center;
-		font-size: 12px;
-		line-height: 1;
-		color: #fff;
-		font-family: 'Black Han Sans';
-	}
-	&.sale{
-		background: #fff;
-		padding: 8px 12px;
-		border-radius: 4px;
-		font-size: 14px;
-		line-height: 16px;
-		color: #222;
-		font-family: 'Black Han Sans';
-	}
+  &.pink {
+    background: #f35aa9;
+  }
+  &.purple {
+    background: #a87af4;
+  }
+  &.line {
+    background: #fff;
+    color: #222;
+    border-radius: 0;
+    border: 1px solid #eee;
+    &.red {
+      color: #e3635f;
+      border-color: #e3635f;
+    }
+    &.blue {
+      color: #425fa5;
+      border-color: #425fa5;
+    }
+    &.green {
+      color: #2e9b4c;
+      border-color: #2e9b4c;
+    }
+  }
+  &.round {
+    border-radius: 15px;
+    &.gold,
+    &.lv-1 {
+      background-color: #f2cd00;
+      border-color: #f2cd00;
+    }
+    &.silver,
+    &.lv-2 {
+      background-color: #cbcbcb;
+      border-color: #cbcbcb;
+    }
+    &.bronze,
+    &.lv-3 {
+      background-color: #a57c5d;
+      border-color: #a57c5d;
+    }
+    &.point,
+    &.lv-4 {
+      background-color: var(--theme-color);
+      border-color: var(--theme-color);
+    }
+  }
+  &.h24 {
+    height: 24px;
+    padding: 0 12px;
+  }
+  &.h28 {
+    height: 28px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  &.recommend {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--theme-color);
+    justify-content: center;
+    font-size: 12px;
+    line-height: 1;
+    color: #fff;
+  }
+  &.sale {
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #222;
+  }
 }
