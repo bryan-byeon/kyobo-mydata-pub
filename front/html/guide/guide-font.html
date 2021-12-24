@@ -20,7 +20,6 @@ $(function(){
 		const $fwSel = $('.fw-sel');
 		const $ffRdo = $('.ff-rdo:checked');
 		const $target = $('[data-target]');
-		console.log($fzSel.val(), $fwSel.val(), $ffRdo.val())
 		$target.removeAttr('class').addClass($fzSel.val()+' '+$fwSel.val()+' '+$ffRdo.val())
 	}
 	targetAddClass();
