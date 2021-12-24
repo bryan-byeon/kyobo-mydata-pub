@@ -2480,6 +2480,7 @@ const buttonUI ={
 		let isTabLineChk = false;
 		$(window).resize(function(){
 			scrolledCheck('.tab-navi-menu');
+			console.log(isTabLineChk)
 			if($('.tab-line').length && isTabLineChk){
 				$('.tab-line').each(function(){
 					const $this = $(this);
@@ -2494,6 +2495,9 @@ const buttonUI ={
 			if($('.tab-inner').length){
 				$('.tab-inner').each(function(i){
 					const $this = $(this);
+					if(i === $('.tab-inner').length-1){
+						isTabLineChk = true;
+					}
 					if($this.closest('.ui-tab').length) return;
 					
 					const $line = $this.find('.tab-line');
@@ -2521,9 +2525,6 @@ const buttonUI ={
 						if($active.length){
 							scrollUI.center($active, $delay*10);
 							buttonUI.tabLine($this, isMove);
-						}
-						if(i === $('.tab-inner').length-1){
-							isTabLineChk = true;
 						}
 					}, $delay);
 				});
@@ -2566,7 +2567,7 @@ const buttonUI ={
 				let $tab = $this.find('.tab');
 				if(!$tab.length)$tab = $this.find('li');
 				$tab.each(function(f){
-					const _a = $this.find('a');
+					const _a = $(this).find('a');
 					let _aId = _a.attr('id');
 					const _href = _a.attr('href');
 					if(_a.length && $(_href).length){
