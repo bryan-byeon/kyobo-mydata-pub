@@ -2477,10 +2477,10 @@ const buttonUI ={
 			});
 		};
 		scrolledCheck('.tab-navi-menu');
-		let isTabLineChk = false;
+		let isTabInit = false;
 		$(window).resize(function(){
 			scrolledCheck('.tab-navi-menu');
-			if($('.tab-line').length && isTabLineChk){
+			if($('.tab-line').length && isTabInit){
 				$('.tab-line').each(function(){
 					const $this = $(this);
 					if(parseInt($this.css('left')) === 0) return;
@@ -2496,7 +2496,7 @@ const buttonUI ={
 					const $this = $(this);
 					if(i === $('.tab-inner').length-1){
 						setTimeout(function(){
-							isTabLineChk = true;
+							isTabInit = true;
 						},50)
 					}
 					if($this.closest('.ui-tab').length) return;
@@ -2543,18 +2543,33 @@ const buttonUI ={
 			$btn.attr('aria-selected',true);
 			buttonUI.tabLine($closest);
 		};
-		const $panelActive = function(target){
+		const $panelActive = function(target, isAni){
+			if(isAni === undefined)isAni = false
 			const $target = $(target);
 			const $closest = $target.closest('.ui-tab');
 			const $siblings = $closest.data('target');
 			const $btn = $target.is('a') ? $target : $target.find('a');
 			const $href = $btn.attr('href');
+			const $panel = $($href);
+			const $panelWrap = $panel.closest('.tab-panels');
+			const $panelWrapH = $panelWrap.outerHeight();
+			const $panelWrapGap = $panelWrapH - $panelWrap.height();
+			if(!$panel.length) return;
 			if($siblings === undefined){
-				$($href).addClass('active').attr('aria-expanded',true).siblings('.tab-panel').attr('aria-expanded',false).removeClass('active');
-				if($($href).find('.bottom__fixed').length)$($href).addClass('add-bottom__fixed');
+				$panel.addClass('active').attr('aria-expanded',true).siblings('.tab-panel').attr('aria-expanded',false).removeClass('active');
+				if($panel.find('.bottom__fixed').length)$panel.addClass('add-bottom__fixed');
 			}else{
 				$($siblings).attr('aria-expanded',false).removeClass('active');
-				$($href).addClass('active').attr('aria-expanded',true);
+				$panel.addClass('active').attr('aria-expanded',true);
+			}
+			
+			if(isAni && $panelWrap.length){
+				const $setHeight = $panel.outerHeight() + $panelWrapGap;
+				if($panelWrapH !== $setHeight){
+					$panelWrap.css('height', $panelWrapH).animate({'height':$setHeight}, 300, function(){
+						$panelWrap.removeCss('height');
+					});
+				}
 			}
 		};
 
@@ -2609,7 +2624,7 @@ const buttonUI ={
 			$tabActive($this);
 			//if($(this).closest('.ui-tab').length) {
 				// e.preventDefault();
-				$panelActive($this);
+				$panelActive($this, true);
 
 				const $href = $this.attr('href');
 				let $winScrollTop = $(window).scrollTop();
