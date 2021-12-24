@@ -236,6 +236,17 @@
   background: #f1f1f1;
   border: 1px solid #ddd;
 }
+.gd__txt-box {
+  border: 1px solid #ddd;
+  > div {
+    padding: 1em;
+    white-space: nowrap;
+    overflow: auto;
+  }
+  div + div {
+    margin-top: 1em;
+  }
+}
 
 .reverse-scroll-wrap {
   transform: rotate(180deg);
