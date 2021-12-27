@@ -1,12 +1,5 @@
 /* @mixin */
 @use "sass:selector";
-/// 간단한 선택자 내포 API를 제공하는 헬퍼 믹스인
-/// @param {String} $selector - 선택자
-@mixin when-inside($selector) {
-  #{$selector} & {
-    @content;
-  }
-}
 
 @mixin unify-parent($child) {
   @at-root #{selector.unify(&, $child)} {
@@ -111,4 +104,27 @@
   max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@mixin iosTop($key, $value, $miuns: false) {
+  #{$key}: $value;
+  @if($miuns) {
+    #{$key}: -iosConstant($value, true, true);
+    #{$key}: -iosEnv($value, true, true);
+  }
+  @else {
+    #{$key}: -iosConstant($value, true, false);
+    #{$key}: -iosEnv($value, true, false);
+  }
+}
+@mixin iosBottom($key, $value, $miuns: false) {
+  #{$key}: $value;
+  @if($miuns) {
+    #{$key}: -iosConstant($value, false, true);
+    #{$key}: -iosEnv($value, false, true);
+  }
+  @else {
+    #{$key}: -iosConstant($value, false, false);
+    #{$key}: -iosEnv($value, false, false);
+  }
 }

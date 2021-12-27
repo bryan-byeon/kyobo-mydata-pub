@@ -35,3 +35,39 @@
 
   @return $number;
 }
+@function -iosConstant($value, $top: true, $miuns: false) {
+  @if($miuns) {
+    @if($top) {
+      @return calc(#{$value} - constant(safe-area-inset-top));
+    }
+    @else {
+      @return calc(#{$value} - constant(safe-area-inset-bottom));
+    }
+  }
+  @else {
+    @if($top) {
+      @return calc(#{$value} + constant(safe-area-inset-top));
+    }
+    @else {
+      @return calc(#{$value} + constant(safe-area-inset-bottom));
+    }
+  }
+}
+@function -iosEnv($value, $top: true, $miuns: false) {
+  @if($miuns) {
+    @if($top) {
+      @return calc(#{$value} - env(safe-area-inset-top));
+    }
+    @else {
+      @return calc(#{$value} - env(safe-area-inset-bottom));
+    }
+  }
+  @else {
+    @if($top) {
+      @return calc(#{$value} + env(safe-area-inset-top));
+    }
+    @else {
+      @return calc(#{$value} + env(safe-area-inset-bottom));
+    }
+  }
+}
