@@ -220,8 +220,8 @@
   }
 }
 .gd__lottie-box {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   margin: 0 auto;
 }
 .gd__lottie-confetti,
@@ -246,15 +246,104 @@
     margin-top: 1em;
   }
 }
-
-.reverse-scroll-wrap {
-  transform: rotate(180deg);
-  direction: rtl;
-  overflow: auto;
+.ui-tap-area {
+  position: relative;
+  overflow: hidden;
+  .ui-tap-item {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    i {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: absolute;
+    }
+  }
 }
-.reverse-scroll-inside {
+.gd__tap_box {
   display: flex;
-  flex-direction: column-reverse;
-  direction: ltr;
-  transform: rotate(-180deg);
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  height: -vh(50, 100);
+  .ui-tap-item {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    opacity: 0;
+    animation: tapGravity 1s ease-in backwards;
+    i {
+      background: url(../images/icon/ico-star-on@3x.png) no-repeat center center / contain;
+      animation: tapBang 1s forwards, tapBangSize 1s forwards;
+      &:nth-child(1) {
+        left: -100px;
+        top: 60px;
+      }
+      &:nth-child(2) {
+        left: -98px;
+        top: -108px;
+      }
+      &:nth-child(3) {
+        left: -70px;
+        top: -63px;
+      }
+      &:nth-child(4) {
+        left: -40px;
+        top: -47px;
+      }
+      &:nth-child(5) {
+        left: -15px;
+        top: -168px;
+      }
+      &:nth-child(6) {
+        left: 12px;
+        top: -51px;
+      }
+      &:nth-child(7) {
+        left: 60px;
+        top: -141px;
+      }
+      &:nth-child(8) {
+        left: 30px;
+        top: -88px;
+      }
+      &:nth-child(9) {
+        left: 78px;
+        top: -16px;
+      }
+      &:nth-child(10) {
+        left: 90px;
+        top: 16px;
+      }
+    }
+  }
+}
+@keyframes tapBang {
+  from {
+    opacity: 0;
+    left: 0;
+    top: 0;
+  }
+}
+@keyframes tapBangSize {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes tapGravity {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  15% {
+    transform: translateY(-25px);
+  }
+  to {
+    transform: translateY(300px);
+    opacity: 0;
+  }
 }

@@ -771,11 +771,11 @@ const common = {
 					const $this = $(this);
 					let $offsetTop = Math.max(0, getOffset(this).top);
 					if($scrollTop > $offsetTop){
-						$(this).addClass('top__fixed');
-						if($(this).attr('id') !== 'header' && $('#header').hasClass('top__fixed'))$('#header').addClass('no-shadow');
+						$(this).addClass('top-fixed');
+						if($(this).attr('id') !== 'header' && $('#header').hasClass('top-fixed'))$('#header').addClass('no-shadow');
 					}else{
-						$(this).removeClass('top__fixed');
-						if($(this).attr('id') !== 'header' && $('#header').hasClass('top__fixed') && $('.top__fixed').length === 1)$('#header').removeClass('no-shadow');
+						$(this).removeClass('top-fixed');
+						if($(this).attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1)$('#header').removeClass('no-shadow');
 					}
 				});
 			});
@@ -818,9 +818,11 @@ const common = {
 			if($naviBar.length && $naviBar.height() != 0){
 				$spaceArryHeight.push($naviBar.outerHeight());
 			}
-			$('.bottom__fixed').each(function(){
+			$('.bottom-fixed').each(function(){
 				const $this = $(this);
-				$spaceArryHeight.push($this.children().outerHeight());
+				const $height = $this.children().outerHeight();
+				$spaceArryHeight.push($height);
+				if($this.hasClass('is-restore'))$this.css('height',$height)
 			});
 
 			const $maxHeight = Math.max.apply(null, $spaceArryHeight);
@@ -987,12 +989,26 @@ const common = {
 						$('.floating-bar').removeClass('end');
 					}
 				}
-				if($('.btn-wrap.bottom__fixed').length){
-					if($SclTop + $Height > ($scrollHeight - 3)){
-						$('.btn-wrap.bottom__fixed').addClass('no-shadow');
-					}else{
-						$('.btn-wrap.bottom__fixed').removeClass('no-shadow');
-					}
+				const $btnFixed = $('.btn-wrap.bottom-fixed');
+				if($btnFixed.length){
+					$btnFixed.each(function(){
+						const $this = $(this);
+						if($this.hasClass('is-restore')){
+							const $top = $this.offset().top;
+							const $bottom = $top + $this.children().outerHeight();
+							if($SclTop + $Height > $bottom){
+								$this.addClass('fixed-none');
+							}else{
+								$this.removeClass('fixed-none');
+							}
+						}else{
+							if($SclTop + $Height > ($scrollHeight - 3)){
+								$this.addClass('no-shadow');
+							}else{
+								$this.removeClass('no-shadow');
+							}
+						}
+					})
 				}
 
 				setTimeout(function(){
@@ -2557,7 +2573,6 @@ const buttonUI ={
 			if(!$panel.length) return;
 			if($siblings === undefined){
 				$panel.addClass('active').attr('aria-expanded',true).siblings('.tab-panel').attr('aria-expanded',false).removeClass('active');
-				if($panel.find('.bottom__fixed').length)$panel.addClass('add-bottom__fixed');
 			}else{
 				$($siblings).attr('aria-expanded',false).removeClass('active');
 				$panel.addClass('active').attr('aria-expanded',true);
@@ -2628,7 +2643,7 @@ const buttonUI ={
 
 				const $href = $this.attr('href');
 				let $winScrollTop = $(window).scrollTop();
-				const $topFixed = $this.closest('.top__fixed');
+				const $topFixed = $this.closest('.top-fixed');
 				if($topFixed.length){
 					let $scrollMove =  getOffset($topFixed[0]).top;
 					if($('#header').length){
@@ -2819,6 +2834,34 @@ const buttonUI ={
 			Layer.imgBox($children.clone());
 		});
 	},
+	tap: function(){
+		let $idx = 0;
+		$('.ui-tap-area').click(function(e){
+			// e.preventDefault();
+			const $this = $(this);
+			const $thisTop = $this.offset().top;
+			const $thisLeft = $this.offset().left;
+			const $sclTop = $(window).scrollLeft();
+			const $sclLeft = $(window).scrollTop();
+			const $tapY = e.clientY;
+			const $tapX = e.clientX;
+			const $tapTop = $tapY - $thisTop + $sclTop;
+			const $tapLeft = $tapX - $thisLeft + $sclLeft;
+			let $appendLength = $this.data('append');
+			if($appendLength === undefined)$appendLength = 10;
+			let $append = '';
+			for(let i=0; i<$appendLength; i++){
+				$append += '<i></i>';
+			}
+			const $itemClass = 'ui-tap-item__'+$idx;
+			$idx += 1;
+			const $item = '<div class="ui-tap-item '+$itemClass+'" style="top:'+$tapTop+'px;left:'+$tapLeft+'px;">'+$append+'</div>';
+			$(this).append($item);
+			$('.'+$itemClass).one('animationend',function(e){
+				$('.'+$itemClass).remove();
+			});
+		});
+	},
 	etc: function(){
 		$(document).on('click','.search-opt-wrap .btn-select', function(e){
 			e.preventDefault();
@@ -2853,6 +2896,7 @@ const buttonUI ={
 		buttonUI.tab();
 		buttonUI.star();
 		buttonUI.imgBox();
+		buttonUI.tap();
 		buttonUI.etc();
 	}
 };
@@ -2876,7 +2920,7 @@ const tooltip = {
 			const $btnW	= $btn.width();
 			const $btnX	= Math.min($winW+($btnW/2)-2,$btn.offset().left)-20;
 			let $scrollEnd	= $(window).height()+$(window).scrollTop();
-			if($('.bottom__fixed:visible').not('.pop_btn').length)$scrollEnd = $scrollEnd-60;
+			if($('.bottom-fixed:visible').length)$scrollEnd = $scrollEnd-$('.bottom-fixed').children().outerHeight();
 			const $left = Math.max(-4,$btnX);
 			$tar.children('.tooltip-arr').css({
 				'left': $left+($btnW/2)
@@ -4375,10 +4419,10 @@ const folding = {
 		//아코디언 열릴때 스크롤 함수
 		const $scrollTop = $(window).scrollTop();
 		let $winHeight = $(window).height();
-		if($('.bottom__fixed').length)$winHeight = $winHeight - $('.bottom__fixed').children().outerHeight();
+		if($('.bottom-fixed').length)$winHeight = $winHeight - $('.bottom-fixed').children().outerHeight();
 		let $topMargin = 10;
-		if($('.top__fixed').length){
-			$('.top__fixed').each(function(){
+		if($('.top-fixed').length){
+			$('.top-fixed').each(function(){
 				$topMargin = $topMargin+$(this).outerHeight();
 			});
 		}

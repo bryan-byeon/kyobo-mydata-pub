@@ -36,7 +36,7 @@
   z-index: 10;
   transition: 0.3s;
   @include web-center;
-  &.top__fixed {
+  &.top-fixed {
     border-bottom-width: 0px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
   }
@@ -249,7 +249,7 @@
     height: 1px;
     background: #f4f4f4;
   }
-  &.top__fixed {
+  &.top-fixed {
     border-top-color: #f4f4f4;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
     z-index: 10;
