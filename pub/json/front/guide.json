@@ -83,8 +83,8 @@
     "complete": "9999-99-99"
   },
   {
-    "id":"guide-animte",
-    "url":"../../front/html/guide/guide-animte.html",
+    "id":"guide-animate",
+    "url":"../../front/html/guide/guide-animate.html",
     "type":"page",
     "name": "애니메이션",
     "worker": "안효주",

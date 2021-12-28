@@ -407,11 +407,11 @@
 }
 @keyframes tapGravity2 {
   from {
-    transform: translateY(0);
+    transform: translateY(50%);
     opacity: 1;
   }
   to {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
     opacity: 0;
   }
 }
