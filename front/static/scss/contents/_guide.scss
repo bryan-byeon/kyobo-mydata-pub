@@ -267,56 +267,112 @@
   justify-content: center;
   background: #f1f1f1;
   height: -vh(50, 100);
-  @include iosTop(padding-top, 10px);
-  @include iosBottom(padding-bottom, 10px);
+  html.ios & {
+    @include iosTop(padding-top, 0);
+    @include iosBottom(padding-bottom, 0);
+  }
   .ui-tap-item {
     width: 30px;
     height: 30px;
     margin: -15px 0 0 -15px;
-    opacity: 0;
-    animation: tapGravity 1s ease-in backwards;
-    i {
-      background: url(../images/icon/ico-star-on@3x.png) no-repeat center center / contain;
-      animation: tapBang 1s forwards, tapBangSize 1s forwards;
-      &:nth-child(1) {
-        left: -100px;
-        top: 60px;
+  }
+  &.star {
+    .ui-tap-item {
+      opacity: 0;
+      animation: tapGravity 1s ease-in backwards;
+      i {
+        background: url(../images/icon/ico-star-on@3x.png) no-repeat center center / contain;
+        animation: tapBang 1s forwards, tapBangSize 1s forwards;
+        &:nth-child(1) {
+          left: -100px;
+          top: 60px;
+        }
+        &:nth-child(2) {
+          left: -98px;
+          top: -108px;
+        }
+        &:nth-child(3) {
+          left: -70px;
+          top: -63px;
+        }
+        &:nth-child(4) {
+          left: -40px;
+          top: -47px;
+        }
+        &:nth-child(5) {
+          left: -15px;
+          top: -168px;
+        }
+        &:nth-child(6) {
+          left: 12px;
+          top: -51px;
+        }
+        &:nth-child(7) {
+          left: 60px;
+          top: -141px;
+        }
+        &:nth-child(8) {
+          left: 30px;
+          top: -88px;
+        }
+        &:nth-child(9) {
+          left: 78px;
+          top: -16px;
+        }
+        &:nth-child(10) {
+          left: 90px;
+          top: 16px;
+        }
       }
-      &:nth-child(2) {
-        left: -98px;
-        top: -108px;
-      }
-      &:nth-child(3) {
-        left: -70px;
-        top: -63px;
-      }
-      &:nth-child(4) {
-        left: -40px;
-        top: -47px;
-      }
-      &:nth-child(5) {
-        left: -15px;
-        top: -168px;
-      }
-      &:nth-child(6) {
-        left: 12px;
-        top: -51px;
-      }
-      &:nth-child(7) {
-        left: 60px;
-        top: -141px;
-      }
-      &:nth-child(8) {
-        left: 30px;
-        top: -88px;
-      }
-      &:nth-child(9) {
-        left: 78px;
-        top: -16px;
-      }
-      &:nth-child(10) {
-        left: 90px;
-        top: 16px;
+    }
+  }
+  &.heart {
+    .ui-tap-item {
+      opacity: 0;
+      animation: tapGravity2 1s ease-out backwards;
+      i {
+        background: url(../images/icon/ico-heart.png) no-repeat center center / contain;
+        animation: tapBang 1s forwards, tapBangSize 1s forwards;
+        &:nth-child(1) {
+          left: -68px;
+          top: 0px;
+        }
+        &:nth-child(2) {
+          left: -58px;
+          top: -20px;
+        }
+        &:nth-child(3) {
+          left: -20px;
+          top: -38px;
+        }
+        &:nth-child(4) {
+          left: -45px;
+          top: -55px;
+        }
+        &:nth-child(5) {
+          left: -15px;
+          top: -62px;
+        }
+        &:nth-child(6) {
+          left: 12px;
+          top: -8px;
+        }
+        &:nth-child(7) {
+          left: 60px;
+          top: -14px;
+        }
+        &:nth-child(8) {
+          left: 30px;
+          top: -32px;
+        }
+        &:nth-child(9) {
+          left: 38px;
+          top: -54px;
+        }
+        &:nth-child(10) {
+          left: 78px;
+          top: -26px;
+        }
       }
     }
   }
@@ -346,6 +402,16 @@
   }
   to {
     transform: translateY(300px);
+    opacity: 0;
+  }
+}
+@keyframes tapGravity2 {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100px);
     opacity: 0;
   }
 }

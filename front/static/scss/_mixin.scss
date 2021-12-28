@@ -107,7 +107,7 @@
 }
 
 @mixin iosTop($key, $value, $miuns: false) {
-  #{$key}: $value;
+  // #{$key}: $value;
   @if($miuns) {
     #{$key}: -iosConstant($value, true, true);
     #{$key}: -iosEnv($value, true, true);
@@ -118,7 +118,7 @@
   }
 }
 @mixin iosBottom($key, $value, $miuns: false) {
-  #{$key}: $value;
+  // #{$key}: $value;
   @if($miuns) {
     #{$key}: -iosConstant($value, false, true);
     #{$key}: -iosEnv($value, false, true);

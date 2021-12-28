@@ -36,38 +36,58 @@
   @return $number;
 }
 @function -iosConstant($value, $top: true, $miuns: false) {
-  @if($miuns) {
+  @if($value==0) {
     @if($top) {
-      @return calc(#{$value} - constant(safe-area-inset-top));
+      @return constant(safe-area-inset-top);
     }
     @else {
-      @return calc(#{$value} - constant(safe-area-inset-bottom));
+      @return constant(safe-area-inset-bottom);
     }
   }
   @else {
-    @if($top) {
-      @return calc(#{$value} + constant(safe-area-inset-top));
+    @if($miuns) {
+      @if($top) {
+        @return calc(#{$value} - constant(safe-area-inset-top));
+      }
+      @else {
+        @return calc(#{$value} - constant(safe-area-inset-bottom));
+      }
     }
     @else {
-      @return calc(#{$value} + constant(safe-area-inset-bottom));
+      @if($top) {
+        @return calc(#{$value} + constant(safe-area-inset-top));
+      }
+      @else {
+        @return calc(#{$value} + constant(safe-area-inset-bottom));
+      }
     }
   }
 }
 @function -iosEnv($value, $top: true, $miuns: false) {
-  @if($miuns) {
+  @if($value==0) {
     @if($top) {
-      @return calc(#{$value} - env(safe-area-inset-top));
+      @return env(safe-area-inset-top);
     }
     @else {
-      @return calc(#{$value} - env(safe-area-inset-bottom));
+      @return env(safe-area-inset-bottom);
     }
   }
   @else {
-    @if($top) {
-      @return calc(#{$value} + env(safe-area-inset-top));
+    @if($miuns) {
+      @if($top) {
+        @return calc(#{$value} - env(safe-area-inset-top));
+      }
+      @else {
+        @return calc(#{$value} - env(safe-area-inset-bottom));
+      }
     }
     @else {
-      @return calc(#{$value} + env(safe-area-inset-bottom));
+      @if($top) {
+        @return calc(#{$value} + env(safe-area-inset-top));
+      }
+      @else {
+        @return calc(#{$value} + env(safe-area-inset-bottom));
+      }
     }
   }
 }
