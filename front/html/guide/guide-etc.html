@@ -37,6 +37,45 @@
 				</div>
 			</div>
 			<div class="section pt-30">
+				<h2 class="gd__h1">character-face</h2>
+				<div class="character-face-wrap">
+					<div class="input"><input type="text" name="" placeholder="이름 입력"></div>
+					<div class="input"><input type="password" name="" placeholder="주민번호 입력"></div>
+					<br>
+					<div class="character-face">
+						<div class="body"></div>
+						<div class="face">
+							<div class="ears">
+								<div></div>
+								<div></div>
+							</div>
+							<div class="face-line">
+								<div class="face-in">
+									<div class="eyes">
+										<div class="eye left"></div>
+										<div class="eye right"></div>
+									</div>
+									<div class="mouse">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="input"><input type="text" name="" placeholder="아이디 입력"></div>
+					<div class="input"><input type="password" name="" placeholder="비밀번호 입력"></div>
+					<div class="character-hidden"></div>
+				</div>
+				<h2 class="gd__h1">ui-tap-area</h2>
+				<div>
+					<div class="gd__tap_box star ui-tap-area">
+						해당 영역을 탭 해주세요
+					</div>
+					<br>
+					<div class="gd__tap_box heart ui-tap-area">
+						해당 영역을 탭 해주세요
+					</div>
+				</div>
 				<h1 class="gd__h1">bottom swipe</h1>
 					<div>
 						<h2 class="gd__h2">select</h2>
@@ -154,5 +193,80 @@
 
 	<div data-include-html="../../include/footer.html"></div>
 </article>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  _character();
+});
+const _character = function(){
+	let $timer;
+	const $character = document.querySelector('.character-face');
+	const $characterHidden = document.querySelector('.character-hidden');
+	const _rotate3d = function(x, y, z, rad) {
+		const face = $character.querySelectorAll('.ears, .eyes, .mouse');
+		const value = `rotate3d(${x}, ${y}, ${z}, ${rad}rad)`;
+		face.forEach((el) => {
+			el.style.transform = value;
+		});
+	}
+	const _reset = function() {
+		clearTimeout($timer);
+		$character.classList.remove('playing');
+		$timer = setTimeout(() => {
+			$character.classList.remove('look-away', 'down', 'up');
+			_rotate3d(0, 0, 0, 0);
+		}, 1);
+	}
+	const _characterLook = function(event) {
+		const el = event.target;
+		const text = el.value.substr(0, el.selectionStart);
+		$characterHidden.innerHTML = '<span>'+text + '.</span>';
+
+		const characterRect = $character.getBoundingClientRect();
+		const inputRect = el.getBoundingClientRect();
+		const caretRect = $characterHidden.getBoundingClientRect();
+		const caretPos = caretRect.left + Math.min(caretRect.width, inputRect.width) * !!text;
+		const distCaret = characterRect.left + characterRect.width / 2 - inputRect.left - caretPos;
+		const distInput = characterRect.top + characterRect.height / 2 - inputRect.top;
+		const y = Math.atan2(-distCaret, Math.abs(distInput) * 3);
+		const x = Math.atan2(distInput, (Math.abs(distInput) * 3) / Math.cos(y));
+		const angle = Math.max(Math.abs(x), Math.abs(y));
+		_rotate3d(x / angle, y / angle, y / angle / 2, angle);
+	};
+  const _characterLookAway= function(event) {
+		const el = event.target;
+		const characterRect = $character.getBoundingClientRect();
+		const inputRect = el.getBoundingClientRect();
+		const distInput = characterRect.top + characterRect.height / 2 - inputRect.top;
+
+		$character.classList.add('look-away', distInput < 0 ? 'up' : 'down');
+	
+		$timer = setTimeout(() => {
+			$character.classList.add('playing');
+		}, 300);
+	};
+	
+	const _inpEvt = function(e){
+		const el = event.target;
+		setTimeout(() => {
+			if(el.type === 'password'){
+				_characterLookAway(e);
+			}else{
+				_characterLook(e);
+			}
+		} ,2);
+	}
+
+	// init
+	const $wrap = document.querySelector('.character-face-wrap');
+	const $input = $wrap.querySelectorAll('input');
+	for (let i = 0; i < $input.length; i++) {
+		const $inp = $input[i];
+		$inp.addEventListener('focusin', _inpEvt, false);
+		$inp.addEventListener('click', _inpEvt, false);
+		$inp.addEventListener('keyup', _inpEvt, false);
+		$inp.addEventListener('focusout', _reset, false);
+	}
+}
+</script>
 </body>
 </html>
