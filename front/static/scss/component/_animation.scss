@@ -71,8 +71,8 @@
     display: block;
     padding-top: 100%;
   }
-  &.type7 {
-    background: #666;
+  &.dark {
+    background: rgba(0, 0, 0, 0.8);
   }
   + .gd__confetti {
     margin-top: 20px;
@@ -314,6 +314,7 @@
       min-width: 1px;
       width: 0.2777vw;
       height: 5.5555vw;
+      margin-left: -0.13888vw;
       i {
         background: #f54460;
       }

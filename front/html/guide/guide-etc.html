@@ -39,6 +39,19 @@
 			<div class="section pt-30">
 				<h2 class="gd__h1">ui-confetti</h2>
 				<div>
+					<div class="btn-wrap group">
+						<div class="flex">
+							<div class="radio btn">
+								<input type="radio" id="confettiBgTg1" name="confettiBgTg" value="0" checked><i aria-hidden="true"></i>
+								<label for="confettiBgTg1" class="lbl">배경 밝게</label>
+							</div>
+							<div class="radio btn">
+								<input type="radio" id="confettiBgTg2" name="confettiBgTg" value="1"><i aria-hidden="true"></i>
+								<label for="confettiBgTg2" class="lbl">배경 어둡게</label>
+							</div>
+						</div>
+					</div>
+					<br>
 					<div class="ui-confetti type1 gd__confetti"></div>
 					<div class="ui-confetti type2 gd__confetti"></div>
 					<div class="ui-confetti type3 gd__confetti"></div>
@@ -219,6 +232,14 @@
 </article>
 <script>
 uiForm.character();
+$('input[name=confettiBgTg]').click(function(){
+	const $val = $('input[name=confettiBgTg]:checked').val()
+	if($val === '1'){
+		$('.gd__confetti').addClass('dark');
+	}else{
+		$('.gd__confetti').removeClass('dark');
+	}
+});
 </script>
 </body>
 </html>
