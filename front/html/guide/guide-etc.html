@@ -309,7 +309,7 @@ const _uiRotate = {
 			});
 		});
 	},
-	swipe: function(element){
+	rotate: function(element){
 		let ang = 0; // All angles are expressed in radians
 		let angStart = 0;
 		let isStart = false;
@@ -332,6 +332,9 @@ const _uiRotate = {
 			}
 			isStart = true;
 			angStart = _angXY(ev) - ang;
+			setTimeout(function(){
+				element.classList.add('rotating');
+			},10);
 		};
 
 		const _move = (ev) => {
@@ -351,6 +354,7 @@ const _uiRotate = {
 				isTouch = false;
 				Body.unlock();
 			}
+			element.classList.remove('rotating');
 		};
 
 		element.addEventListener('mousedown', _start, false);
@@ -362,7 +366,7 @@ const _uiRotate = {
 	},
 	init: function(){
 		_uiRotate.items();
-		document.querySelectorAll(_uiRotate.wrap).forEach(_uiRotate.swipe);
+		document.querySelectorAll(_uiRotate.wrap).forEach(_uiRotate.rotate);
 		$(window).resize(_uiRotate.items);
 	}
 }
