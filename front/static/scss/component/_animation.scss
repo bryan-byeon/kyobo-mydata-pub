@@ -101,9 +101,15 @@
   }
   &.type1 {
     .confetti-item {
-      width: 2.4vw;
-      height: 2.4vw;
-      margin-left: -1.2vw;
+      width: 2.4%;
+      height: auto;
+      margin-left: -1.2%;
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+
       span,
       span:before {
         content: '';
@@ -172,26 +178,28 @@
   }
   &.type2 {
     .confetti-item {
-      width: 5.3333vw;
-      height: 5.3333vw;
-      margin-left: -2.6667vw;
-      margin-top: -5.3333vw;
-      background: url(../images/guide/confetti_coin.png) no-repeat;
-      background-size: contain;
+      width: 5.3333%;
+      height: auto;
+      margin-left: -2.6667%;
+      margin-top: -5.3333%;
+      background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
     }
     .size1 {
       z-index: 1;
     }
     .size2 {
-      width: 4vw;
-      height: 4vw;
-      margin-left: -2vw;
+      width: 4%;
+      margin-left: -2%;
       z-index: 1;
     }
     .size3 {
-      width: 6vw;
-      height: 6vw;
-      margin-left: -3vw;
+      width: 6%;
+      margin-left: -3%;
       z-index: 1;
     }
   }
@@ -332,13 +340,14 @@
   }
   &.type4 {
     .confetti-item {
-      width: 7.7333vw;
-      height: 8.9333vw;
-      margin-left: -3.8667vw;
-      background: url(../images/guide/confetti_balloon1.png) no-repeat;
-      background-size: contain;
+      width: 7.7333%;
+      height: auto;
+      margin-left: -3.8667%;
+      background: url(../images/guide/confetti_balloon1.png) no-repeat center center / contain;
       &:before {
-        display: none;
+        content: '';
+        display: block;
+        padding-top: 112.5%;
       }
     }
     .color2 {
@@ -351,28 +360,26 @@
       z-index: 1;
     }
     .size2 {
-      width: 5.0667vw;
-      height: 5.8667vw;
-      margin-left: -2.5333vw;
+      width: 5.0667%;
+      margin-left: -2.5333%;
     }
     .size3 {
-      width: 3.8667vw;
-      height: 4.4667vw;
-      margin-left: 1.9333vw;
+      width: 3.8667%;
+      margin-left: -1.9333%;
     }
   }
   &.type5 {
     .confetti-item {
-      width: 12vw;
-      height: 50%;
-      margin-left: -5vw;
+      width: 12%;
+      height: auto;
+      margin-left: -6%;
       opacity: 1;
       .firework {
         display: block;
         position: relative;
-        height: 12vw;
-        background: url(../images/guide/confetti_fireworks1_1.png) no-repeat;
-        background-size: contain;
+        padding-top: 100%;
+        margin-bottom: 300%;
+        background: url(../images/guide/confetti_fireworks1_1.png) no-repeat center center / contain;
         opacity: 0;
       }
       &.color2 .firework {
@@ -385,7 +392,7 @@
     .fire-arr {
       display: block;
       position: absolute;
-      top: 6vw;
+      top: 10%;
       bottom: 0;
       left: 0;
       width: 100%;
@@ -395,18 +402,17 @@
         position: absolute;
         left: 50%;
         top: 100%;
-        width: 1.6vw;
-        padding-top: 6.6666vw;
+        width: 16%;
+        padding-top: 80%;
         opacity: 0;
-        margin-left: -0.8vw;
-        background: url(../images/guide/fire_arr1.png) no-repeat;
-        background-size: contain;
+        margin-left: -8%;
+        background: url(../images/guide/fire_arr1.png) no-repeat center top / contain;
         &:after {
           content: '';
           display: block;
-          width: 30%;
-          margin: 1.6667vw auto 0;
-          height: 6.6666vw;
+          width: 25%;
+          margin: 0 auto;
+          padding-top: 600%;
           background-color: #f54460;
         }
       }
@@ -432,19 +438,14 @@
   }
   &.type6 {
     .confetti-item {
-      width: 6.1333vw;
-      height: 5.8667vw;
-      margin-left: -3.0667vw;
+      width: 6.1333%;
+      height: auto;
+      margin-left: -3.0667%;
       &:before {
         content: '';
         display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url(../images/guide/confetti_heart1.png) no-repeat;
-        background-size: contain;
+        padding-top: 95.7%;
+        background: url(../images/guide/confetti_heart1.png) no-repeat center center / contain;
       }
     }
     .item2:before {
@@ -454,9 +455,8 @@
       transform: rotate(-10deg);
     }
     .color2 {
-      width: 4.1333vw;
-      height: 3.8667vw;
-      margin-left: -2.0667vw;
+      width: 4.1333%;
+      margin-left: -2.0667%;
       &:before {
         background-image: url(../images/guide/confetti_heart2.png);
       }
@@ -464,20 +464,15 @@
   }
   &.type7 {
     .confetti-item {
-      width: 9.4667vw;
-      height: 9.4667vw;
-      margin-left: -4.7333vw;
+      width: 9.4667%;
+      height: auto;
+      margin-left: -4.7333%;
       z-index: 1;
       &:before {
         content: '';
         display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url(../images/guide/confetti_star.png) no-repeat;
-        background-size: contain;
+        padding-top: 100%;
+        background: url(../images/guide/confetti_star.png) no-repeat center center / contain;
       }
     }
     .size2:before {
@@ -495,28 +490,30 @@
   }
   &.type8 {
     .confetti-item {
-      width: 7.6vw;
-      height: 7.6vw;
-      margin-left: -3.8vw;
+      width: 7.6%;
+      height: auto;
+      margin-left: -3.8%;
       opacity: 1;
       .dot {
         display: block;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 1.6vw;
-        height: 1.6vw;
-        margin: -0.8vw 0 0 -0.8vw;
+        left: 40%;
+        top: 40%;
+        width: 20%;
         border-radius: 50%;
         opacity: 0;
         background-color: #f54460;
+        &:before {
+          content: '';
+          display: block;
+          padding-top: 100%;
+        }
       }
       .firework {
         display: block;
         position: relative;
-        height: 7.6vw;
-        background: url(../images/guide/confetti_fireworks2_1.png) no-repeat;
-        background-size: contain;
+        padding-top: 100%;
+        background: url(../images/guide/confetti_fireworks2_1.png) no-repeat center center / contain;
         opacity: 0;
       }
     }
@@ -689,20 +686,20 @@
 @keyframes confettiFireArr {
   0% {
     top: 100%;
-    margin-top: 0;
     opacity: 0;
+    transform: translateY(0);
   }
   15% {
     opacity: 1;
   }
   50% {
     top: 0;
-    margin-top: -16vw;
     opacity: 1;
+    transform: translateY(-100%);
   }
   100% {
     top: 0;
-    margin-top: -16vw;
+    transform: translateY(-100%);
   }
 }
 @keyframes confettiFireworkDot {
