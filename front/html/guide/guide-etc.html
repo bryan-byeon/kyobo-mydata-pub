@@ -309,15 +309,16 @@ const _uiRotate = {
 			});
 		});
 	},
-	swipe: function(EL){
+	swipe: function(element){
 		let ang = 0; // All angles are expressed in radians
 		let angStart = 0;
 		let isStart = false;
 
 		const _angXY = (ev) => {
-			const bcr = EL.getBoundingClientRect();
+			const bcr = element.getBoundingClientRect();
 			const radius = bcr.width / 2;
-			const { clientX, clientY } = ev.touches ? ev.touches[0] : ev;
+			const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+			const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
 			const y = clientY - bcr.top - radius;  // y from center
 			const x = clientX - bcr.left - radius; // x from center
 			return Math.atan2(y, x);
@@ -330,19 +331,23 @@ const _uiRotate = {
 
 		const mousemove = (ev) => {
 			if (!isStart) return;
-			ev.preventDefault();
+			if(ev.touches === undefined)ev.preventDefault();
 			ang = _angXY(ev) - angStart;
-			EL.style.transform = 'rotateZ('+ang+'rad)';
+			element.style.transform = 'rotateZ('+ang+'rad)';
+			const $items = element.querySelectorAll('.rotate-item');
+			$items.forEach(function(item){
+				item.style.transform = 'rotateZ(-'+ang+'rad)';
+			});
 		};
 
 		const mouseup = () => {
 			isStart = false; 
 		};
 
-		EL.addEventListener('mousedown', mousedown);
-		document.addEventListener('mousemove', mousemove);
-		document.addEventListener('mouseup', mouseup);
-		EL.addEventListener('touchstart', mousedown, false);
+		element.addEventListener('mousedown', mousedown, false);
+		document.addEventListener('mousemove', mousemove, false);
+		document.addEventListener('mouseup', mouseup, false);
+		element.addEventListener('touchstart', mousedown, false);
 		document.addEventListener('touchmove', mousemove, false);
 		document.addEventListener('touchend', mouseup, false);
 	},
