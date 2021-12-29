@@ -1,0 +1,1081 @@
+/* splitting */
+.splitting {
+  /* The center word index */
+  --word-center: calc((var(--word-total) - 1) / 2);
+  /* The center character index */
+  --char-center: calc((var(--char-total) - 1) / 2);
+  /* The center character index */
+  --line-center: calc((var(--line-total) - 1) / 2);
+
+  .word,
+  .char {
+    display: inline-block;
+  }
+  .char {
+    position: relative;
+    &:before,
+    &:after {
+      content: attr(data-char);
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+      transition: inherit;
+      user-select: none;
+    }
+  }
+
+  .word {
+    /* Pecent (0-1) of the word's position */
+    --word-percent: calc(var(--word-index) / var(--word-total));
+    /* Pecent (0-1) of the line's position */
+    --line-percent: calc(var(--line-index) / var(--line-total));
+  }
+
+  .char {
+    /* Percent (0-1) of the char's position */
+    --char-percent: calc(var(--char-index) / var(--char-total));
+    /* Offset from center, positive & negative */
+    --char-offset: calc(var(--char-index) - var(--char-center));
+    /* Absolute distance from center, only positive */
+    --distance: calc((var(--char-offset) * var(--char-offset)) / var(--char-center));
+    /* Distance from center where -1 is the far left, 0 is center, 1 is far right */
+    --distance-sine: calc(var(--char-offset) / var(--char-center));
+    /* Distance from center where 1 is far left/far right, 0 is center */
+    --distance-percent: calc((var(--distance) / var(--char-center)));
+  }
+}
+
+[data-splitting][data-animation] {
+  opacity: 0;
+  &.active {
+    opacity: 1;
+    .char {
+      animation: splitting-char-in 1s cubic-bezier(0.5, 0, 0.5, 1) backwards;
+      animation-delay: calc(60ms * var(--char-index));
+    }
+  }
+}
+@keyframes splitting-char-in {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+// ui-confetti
+.gd__confetti {
+  background: #f1f1f1;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  + .gd__confetti {
+    margin-top: 20px;
+  }
+}
+.ui-confetti {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  img {
+    position: relative;
+    max-width: 100%;
+    z-index: 1;
+  }
+  .confetti-item {
+    display: block;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    margin-left: -4px;
+    opacity: 0;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+  &.type1 {
+    .confetti-item {
+      width: 2.4vw;
+      height: 2.4vw;
+      margin-left: -1.2vw;
+      span,
+      span:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .color1 span:before {
+      background: #b82525;
+    }
+    .color2 span:before {
+      background: #a12460;
+    }
+    .color3 span:before {
+      background: #f399c5;
+    }
+    .color4 span:before {
+      background: #3081c2;
+    }
+    .color5 span:before {
+      background: #d2f583;
+    }
+    .color6 span:before {
+      background: #e2c220;
+    }
+
+    .size1 {
+      z-index: 3;
+    }
+    .size2 {
+      z-index: 2;
+      span {
+        transform: scale(0.7);
+      }
+    }
+    .size3 {
+      filter: blur(1px);
+      span {
+        transform: scale(0.4);
+      }
+    }
+
+    .item1 span:before {
+      transform: skewX(-15deg);
+    }
+    .item2 span:before {
+      transform: skewX(25deg);
+    }
+    .item3 span:before {
+      transform: skewX(-35deg);
+    }
+    .item4 span:before {
+      transform: skewX(45deg);
+    }
+    .item5 span:before {
+      transform: skewX(-55deg);
+    }
+    .item6 span:before {
+      transform: skewX(65deg);
+    }
+  }
+  &.type2 {
+    .confetti-item {
+      width: 5.3333vw;
+      height: 5.3333vw;
+      margin-left: -2.6667vw;
+      background: url(../images/guide/confetti_coin.png) no-repeat;
+      background-size: contain;
+    }
+    .size1 {
+      z-index: 1;
+    }
+    .size2 {
+      width: 4vw;
+      height: 4vw;
+      margin-left: -2vw;
+      z-index: 1;
+    }
+    .size3 {
+      width: 6vw;
+      height: 6vw;
+      margin-left: -3vw;
+      z-index: 1;
+    }
+  }
+  &.type3 {
+    .confetti-item {
+      width: 4vw;
+      height: 4vw;
+      margin-left: -2vw;
+      z-index: 1;
+    }
+    .item1 {
+      border: 0.4vw solid #f54460;
+      border-radius: 50%;
+      &.color2 {
+        border-color: #669aee;
+      }
+      &.color3 {
+        border-color: #f9e66d;
+      }
+    }
+    .item2 {
+      width: 3.2vw;
+      height: 3.2vw;
+      margin-left: -1.6vw;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 40%;
+        position: absolute;
+        top: 30%;
+        left: 0;
+        border-radius: 80%;
+        background: #f54460;
+      }
+      &:after {
+        transform: rotate(90deg);
+      }
+      .color2 {
+        &:before,
+        &:after {
+          background: #669aee;
+        }
+      }
+      .color3 {
+        &:before,
+        &:after {
+          background: #f9e66d;
+        }
+      }
+    }
+  }
+  &.type4 {
+    .confetti-item {
+      width: 7.7333vw;
+      height: 8.9333vw;
+      margin-left: -3.8667vw;
+      background: url(../images/guide/confetti_balloon1.png) no-repeat;
+      background-size: contain;
+      &:before {
+        display: none;
+      }
+    }
+    .color2 {
+      background-image: url(../images/guide/confetti_balloon2.png);
+    }
+    .color3 {
+      background-image: url(../images/guide/confetti_balloon3.png);
+    }
+    .size1 {
+      z-index: 1;
+    }
+    .size2 {
+      width: 5.0667vw;
+      height: 5.8667vw;
+      margin-left: -2.5333vw;
+    }
+    .size3 {
+      width: 3.8667vw;
+      height: 4.4667vw;
+      margin-left: 1.9333vw;
+    }
+  }
+  &.type5 {
+    .confetti-item {
+      width: 10vw;
+      height: 50%;
+      margin-left: -5vw;
+      opacity: 1;
+      .firework {
+        display: block;
+        position: relative;
+        height: 10vw;
+        background: url(../images/guide/confetti_fireworks1_1.png) no-repeat;
+        background-size: contain;
+        opacity: 0;
+      }
+      &.color2 .firework {
+        background-image: url(../images/guide/confetti_fireworks1_2.png);
+      }
+      &.color3 .firework {
+        background-image: url(../images/guide/confetti_fireworks1_2.png);
+      }
+    }
+    .fire-arr {
+      display: block;
+      position: absolute;
+      top: 5vw;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      i {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 1.6vw;
+        padding-top: 6.6666vw;
+        opacity: 0;
+        margin-left: -0.8vw;
+        background: url(../images/guide/fire_arr1.png) no-repeat;
+        background-size: contain;
+        &:after {
+          content: '';
+          display: block;
+          width: 50%;
+          margin: 0.6667vw auto 0;
+          height: 6.6666vw;
+          background-color: #f54460;
+        }
+      }
+    }
+    .color2 .fire-arr i {
+      background-image: url(../images/guide/fire_arr2.png);
+      &:after {
+        background-color: #669aee;
+      }
+    }
+    .color3 .fire-arr i {
+      background-image: url(../images/guide/fire_arr3.png);
+      &:after {
+        background-color: #f9e66d;
+      }
+    }
+    .size2 {
+      transform: scale(0.8);
+    }
+    .size3 {
+      transform: scale(0.6);
+    }
+  }
+  &.type6 {
+    .confetti-item {
+      width: 6.1333vw;
+      height: 5.8667vw;
+      margin-left: -3.0667vw;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(../images/guide/confetti_heart1.png) no-repeat;
+        background-size: contain;
+      }
+    }
+    .item2:before {
+      transform: rotate(10deg);
+    }
+    .item3:before {
+      transform: rotate(-10deg);
+    }
+    .color2 {
+      width: 4.1333vw;
+      height: 3.8667vw;
+      margin-left: -2.0667vw;
+      &:before {
+        background-image: url(../images/guide/confetti_heart2.png);
+      }
+    }
+  }
+  &.type7 {
+    .confetti-item {
+      width: 9.4667vw;
+      height: 9.4667vw;
+      margin-left: -4.7333vw;
+      z-index: 1;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(../images/guide/confetti_star.png) no-repeat;
+        background-size: contain;
+      }
+    }
+    .size2:before {
+      transform: scale(0.8);
+      opacity: 0.9;
+    }
+    .size3:before {
+      transform: scale(0.6);
+      opacity: 0.8;
+    }
+    .size4:before {
+      transform: scale(0.4);
+      opacity: 0.7;
+    }
+  }
+  &.type8 {
+    .confetti-item {
+      width: 7.6vw;
+      height: 7.6vw;
+      margin-left: -3.8vw;
+      opacity: 1;
+      .dot {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1.6vw;
+        height: 1.6vw;
+        margin: -0.8vw 0 0 -0.8vw;
+        border-radius: 50%;
+        opacity: 0;
+        background-color: #f54460;
+      }
+      .firework {
+        display: block;
+        position: relative;
+        height: 7.6vw;
+        background: url(../images/guide/confetti_fireworks2_1.png) no-repeat;
+        background-size: contain;
+        opacity: 0;
+      }
+    }
+    .color2 {
+      .dot {
+        background-color: #669aee;
+      }
+      .firework {
+        background-image: url(../images/guide/confetti_fireworks2_2.png);
+      }
+    }
+    .color3 {
+      .dot {
+        background-color: #f9e66d;
+      }
+      .firework {
+        background-image: url(../images/guide/confetti_fireworks2_3.png);
+      }
+    }
+    .size2 {
+      transform: scale(0.8);
+    }
+    .size3 {
+      transform: scale(0.6);
+    }
+  }
+}
+
+@keyframes confettiSwing1 {
+  0% {
+    transform: rotate(30deg) rotateX(0) translateX(-100%);
+  }
+  100% {
+    transform: rotate(-30deg) rotateX(0) translateX(100%);
+  }
+}
+@keyframes confettiSwing2 {
+  0% {
+    transform: rotate(-30deg) rotateX(0) translateX(100%);
+  }
+  100% {
+    transform: rotate(30deg) rotateX(0) translateX(-100%);
+  }
+}
+@keyframes confettiDrop {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+@keyframes confettiCoin {
+  0% {
+    top: 0%;
+    opacity: 0;
+    margin-top: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  36% {
+    top: 98%;
+    margin-top: -5.3333vw;
+  }
+  50% {
+    top: 75%;
+  }
+  70% {
+    top: 98%;
+  }
+  80% {
+    top: 90%;
+    margin-top: -5.3333vw;
+  }
+  85% {
+    opacity: 1;
+  }
+  90% {
+    top: 99%;
+  }
+  94% {
+    top: 98%;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+    margin-top: 0;
+  }
+}
+@keyframes confettiFlash {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  30%,
+  80% {
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes confettiBalloon1 {
+  0% {
+    transform: rotate(5deg) translateX(-30%);
+  }
+  100% {
+    transform: rotate(-5deg) translateX(30%);
+  }
+}
+@keyframes confettiBalloon2 {
+  0% {
+    transform: rotate(-10deg) translateX(30%);
+  }
+  100% {
+    transform: rotate(10deg) translateX(-30%);
+  }
+}
+@keyframes confettiUp {
+  0% {
+    top: 100%;
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: -10%;
+    opacity: 0;
+  }
+}
+@keyframes confettiFirework {
+  40% {
+    opacity: 0.1;
+    transform: scale(0.2);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  82%,
+  86% {
+    opacity: 0.5;
+  }
+  80%,
+  84%,
+  88% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+    top: 0;
+  }
+  100% {
+    opacity: 0;
+    top: 10%;
+  }
+}
+@keyframes confettiFireArr {
+  0% {
+    top: 100%;
+    margin-top: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    top: 0;
+    margin-top: -14vw;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    margin-top: -14vw;
+  }
+}
+@keyframes confettiFireworkDot {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes confettiFirework2 {
+  40% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.character-face-wrap {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.character-hidden {
+  visibility: hidden;
+  position: absolute;
+  top: -999px;
+  left: 0;
+}
+.character-face {
+  position: relative;
+  width: 180px;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0 0 100px 100px;
+  &:before {
+    content: '';
+    display: block;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #f1f1f1;
+  }
+  .body {
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    width: 180px;
+    height: 200px;
+    padding: 50px 30px 10px;
+    margin-left: -90px;
+    background: #9c8481;
+    border-radius: 100%;
+    border: 4px solid #221e1f;
+  }
+  .face {
+    position: relative;
+    width: 150px;
+    height: 132px;
+    margin: 10px auto 0;
+    padding: 0 5px;
+  }
+  .ears {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > div {
+      width: 45px;
+      height: 45px;
+      border: 4px solid #221e1f;
+      border-radius: 100%;
+      background: #9c8481;
+    }
+  }
+  .face-line {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #9c8481;
+    border-radius: 50%;
+    border: 4px solid #221e1f;
+  }
+  .face-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .eyes {
+    position: relative;
+    width: 64px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 34px;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: -20px;
+      right: -20px;
+      top: 100%;
+      height: 15px;
+      opacity: 0;
+      background: url(../images/guide/charater-cheek.png) no-repeat center center;
+      background-size: contain;
+      transition: opacity 0.3s;
+    }
+    > div {
+      width: 14px;
+      height: 12px;
+      padding: 0 1px;
+      transition: padding 0.3s;
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #221e1f;
+        border-radius: 50%;
+      }
+    }
+  }
+  .mouse {
+    position: relative;
+    width: 52px;
+    height: 48px;
+    margin: 0 auto 0;
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
+    &:before {
+      background-image: url(../images/guide/charater-mouse.png);
+    }
+    &:after {
+      background-image: url(../images/guide/charater-mouse2.png);
+      opacity: 0;
+    }
+  }
+
+  .ears {
+    transform-origin: 50% 50% 5px;
+  }
+  .eyes {
+    transform-origin: 50% 50% -40px;
+  }
+  .mouse {
+    transform-origin: 50% 50% -44px;
+  }
+  .ears,
+  .eyes,
+  .mouse {
+    transition: transform .5s;
+  }
+
+  &.look-away {
+    .eyes {
+      &:after {
+        opacity: 1;
+      }
+      > div {
+        padding: 5px 0;
+      }
+    }
+    .mouse {
+      &:before {
+        opacity: 0;
+      }
+      &:after {
+        opacity: 1;
+      }
+    }
+    .ears,
+    .eyes,
+    .mouse {
+      transition-duration: .3s;
+      animation: 3s infinite alternate;
+    }
+    &.up {
+      .ears,
+      .eyes,
+      .mouse {
+        transform: rotate3d(.2, 0, 0, 20deg) !important;
+      }
+    }
+    &.down {
+      .ears,
+      .eyes,
+      .mouse {
+        transform: rotate3d(-.2, 0, 0, 20deg) !important;
+      }
+    }
+  }
+  &.playing {
+    &.up {
+      .ears,
+      .eyes,
+      .mouse {
+        animation-name: lookaway-up;
+      }
+    }
+    &.down {
+      .ears,
+      .eyes,
+      .mouse {
+        animation-name: lookaway-down;
+      }
+    }
+  }
+}
+@keyframes lookaway-up {
+  from {
+    transform: rotate3d(.2, 0, -.01, 20deg);
+  }
+  to {
+    transform: rotate3d(.2, -.05, -.01, 20deg);
+  }
+}
+
+@keyframes lookaway-down {
+  0% {
+    transform: rotate3d(-.2, 0, -.01, 20deg);
+  }
+  100% {
+    transform: rotate3d(-.2, -.05, .01, 20deg);
+  }
+}
+
+.ui-circle-rotate {
+  position: relative;
+  margin: 0 auto;
+  &:after {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  .rotate-items {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f1f1f1;
+    border-radius: 50%;
+    &.rotating {
+      * {
+        pointer-events: none;
+      }
+    }
+  }
+  .rotate-item {
+    position: absolute;
+    width: 60px;
+  }
+}
+
+.ui-tap-area {
+  position: relative;
+  overflow: hidden;
+  .ui-tap-item {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    i {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: absolute;
+    }
+  }
+}
+.gd__tap_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  height: -vh(50, 100);
+  html.ios & {
+    @include iosTop(padding-top, 0);
+    @include iosBottom(padding-bottom, 0);
+  }
+  .ui-tap-item {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+  }
+  &.coin {
+    .ui-tap-item {
+      opacity: 0;
+      animation: tapGravity 1s ease-in backwards;
+      i {
+        background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
+        animation: tapBang 1s forwards, tapBangSize 1s forwards;
+        &:nth-child(1) {
+          left: -100px;
+          top: 60px;
+        }
+        &:nth-child(2) {
+          left: -98px;
+          top: -108px;
+        }
+        &:nth-child(3) {
+          left: -70px;
+          top: -63px;
+        }
+        &:nth-child(4) {
+          left: -40px;
+          top: -47px;
+        }
+        &:nth-child(5) {
+          left: -15px;
+          top: -168px;
+        }
+        &:nth-child(6) {
+          left: 12px;
+          top: -51px;
+        }
+        &:nth-child(7) {
+          left: 60px;
+          top: -141px;
+        }
+        &:nth-child(8) {
+          left: 30px;
+          top: -88px;
+        }
+        &:nth-child(9) {
+          left: 78px;
+          top: -16px;
+        }
+        &:nth-child(10) {
+          left: 90px;
+          top: 16px;
+        }
+      }
+    }
+  }
+  &.heart {
+    .ui-tap-item {
+      opacity: 0;
+      animation: tapGravity2 1s ease-out backwards;
+      i {
+        background: url(../images/guide/confetti_heart1.png) no-repeat center center / contain;
+        animation: tapBang 1s forwards, tapBangSize 1s forwards;
+        &:nth-child(1) {
+          left: -68px;
+          top: 0px;
+        }
+        &:nth-child(2) {
+          left: -58px;
+          top: -20px;
+        }
+        &:nth-child(3) {
+          left: -20px;
+          top: -38px;
+        }
+        &:nth-child(4) {
+          left: -45px;
+          top: -55px;
+        }
+        &:nth-child(5) {
+          left: -15px;
+          top: -62px;
+        }
+        &:nth-child(6) {
+          left: 12px;
+          top: -8px;
+        }
+        &:nth-child(7) {
+          left: 60px;
+          top: -14px;
+        }
+        &:nth-child(8) {
+          left: 30px;
+          top: -32px;
+        }
+        &:nth-child(9) {
+          left: 38px;
+          top: -54px;
+        }
+        &:nth-child(10) {
+          left: 78px;
+          top: -26px;
+        }
+      }
+    }
+  }
+}
+@keyframes tapBang {
+  from {
+    opacity: 0;
+    left: 0;
+    top: 0;
+  }
+}
+@keyframes tapBangSize {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes tapGravity {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  15% {
+    transform: translateY(-25px);
+  }
+  to {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+}
+@keyframes tapGravity2 {
+  from {
+    transform: translateY(50%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+}
