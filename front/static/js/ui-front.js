@@ -4565,7 +4565,7 @@ const uiConfetti = {
 					$html += '" aria-hidden="true"><span></span></span>';
 				}else if($wrap.hasClass('type2')){
 					//코인(1가지 모양, 3가지 사이즈)
-					rdSpeed = randomNumber(10,15,0) * 100;	//속도조절
+					rdSpeed = randomNumber(10,15,0) * 150;	//속도조절
 					$html = '<span class="confetti-item size'+rdSize+'" style="left:'+rdLeft+'%;';
 						$html += '-webkit-animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';
 						$html += 'animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';
