@@ -194,24 +194,25 @@
 	<div data-include-html="../../include/footer.html"></div>
 </article>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   _character();
 });
 const _character = function(){
 	let $timer;
 	const $character = document.querySelector('.character-face');
+	if($character === null) return;
 	const $characterHidden = document.querySelector('.character-hidden');
 	const _rotate3d = function(x, y, z, rad) {
 		const face = $character.querySelectorAll('.ears, .eyes, .mouse');
 		const value = `rotate3d(${x}, ${y}, ${z}, ${rad}rad)`;
-		face.forEach((el) => {
+		face.forEach(function(el) {
 			el.style.transform = value;
 		});
 	}
 	const _reset = function() {
 		clearTimeout($timer);
 		$character.classList.remove('playing');
-		$timer = setTimeout(() => {
+		$timer = setTimeout(function() {
 			$character.classList.remove('look-away', 'down', 'up');
 			_rotate3d(0, 0, 0, 0);
 		}, 1);
@@ -240,14 +241,14 @@ const _character = function(){
 
 		$character.classList.add('look-away', distInput < 0 ? 'up' : 'down');
 	
-		$timer = setTimeout(() => {
+		$timer = setTimeout(function() {
 			$character.classList.add('playing');
 		}, 300);
 	};
 	
 	const _inpEvt = function(e){
 		const el = event.target;
-		setTimeout(() => {
+		setTimeout(function() {
 			if(el.type === 'password'){
 				_characterLookAway(e);
 			}else{
@@ -257,13 +258,13 @@ const _character = function(){
 	}
 
 	// init
-	const $wrap = document.querySelector('.character-face-wrap');
-	const $input = $wrap.querySelectorAll('input');
+	const $input = document.querySelectorAll('.input input');
 	for (let i = 0; i < $input.length; i++) {
 		const $inp = $input[i];
 		$inp.addEventListener('focusin', _inpEvt, false);
 		$inp.addEventListener('click', _inpEvt, false);
 		$inp.addEventListener('keyup', _inpEvt, false);
+		$inp.addEventListener('keypress', _inpEvt, false);
 		$inp.addEventListener('focusout', _reset, false);
 	}
 }
