@@ -4708,7 +4708,7 @@ const uiConfetti = {
 		for(let i = 0; i < $itemLength;i++){
 			rdClass = randomNumber(1,3,0);
 			rdSize = randomNumber(1,3,0);
-			rdColor = (i%6) + 1;
+			rdColor = (i%3) + 1;
 			rdLeft = randomNumber(0,20,0) * 5;
 			rdTop = randomNumber(2,14,0) * 5;
 			rdDelay = randomNumber(0,10,0) * 400;
@@ -4723,6 +4723,7 @@ const uiConfetti = {
 				if($wrap.hasClass('type1')){
 					//꽃가루(2가지 모션, 3가지 컬러, 3가지 사이즈, 6가지 모양)
 					rdClass = randomNumber(1,6,0);
+					rdColor = (i%6) + 1;
 					$html = '<span class="confetti-item item'+rdClass+' color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;';
 						$html += '-webkit-animation:confettiSwing'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiDrop '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
 						$html += 'animation:confettiSwing'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiDrop '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
@@ -4735,13 +4736,15 @@ const uiConfetti = {
 						$html += 'animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';
 					$html += '"></span>';
 				}else if($wrap.hasClass('type3')){
-					//깜빡임(3가지 모양, 3가지 사이즈, 3가지 컬러)
+					//깜빡임(3가지 모양, 5가지 사이즈, 3가지 컬러)
 					rdSpeed = randomNumber(10,15,0) * 100;	//속도조절
 					rdDelay = randomNumber(0,5,0) * 200;	//딜레이조절
+					rdClass = randomNumber(1,5,0);
+					const $rotate = randomNumber(0,18,0) * 5;
 					$html = '<span class="confetti-item item'+rdClass+' color'+rdColor+'" style="left:'+rdLeft+'%;top:'+rdTop+'%;';
 						$html += '-webkit-animation:confettiFlash '+rdSpeed+'ms infinite '+rdDelay+'ms;';
 						$html += 'animation:confettiFlash '+rdSpeed+'ms infinite '+rdDelay+'ms;';
-					$html += '"></span>';
+					$html += '"><i style="-webkit-transform:rotate('+$rotate+'deg);transform:rotate('+$rotate+'deg);"></i></span>';
 				}else if($wrap.hasClass('type4')){
 					//풍선(3가지 모양, 3가지 사이즈)
 					$html = '<span class="confetti-item color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;';
