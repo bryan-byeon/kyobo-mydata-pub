@@ -380,6 +380,13 @@
     background: #f5045e;
     border: 1px solid #f5045e;
   }
+  &.gray {
+    &:before,
+    &:after {
+      background: #ddd;
+      border: 1px solid #ddd;
+    }
+  }
   i {
     display: block;
     position: absolute;
