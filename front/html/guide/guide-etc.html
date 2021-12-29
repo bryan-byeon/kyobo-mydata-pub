@@ -344,7 +344,7 @@ const _uiRotate = {
 			element.style.transform = 'rotateZ('+ang+'rad)';
 			const $items = element.querySelectorAll('.rotate-item');
 			$items.forEach(function(item){
-				item.style.transform = 'rotateZ(-'+ang+'rad)';
+				item.style.transform = 'rotateZ('+(ang*-1)+'rad)';
 			});
 		};
 
