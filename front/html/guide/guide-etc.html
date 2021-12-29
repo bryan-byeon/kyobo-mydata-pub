@@ -313,6 +313,7 @@ const _uiRotate = {
 		let ang = 0; // All angles are expressed in radians
 		let angStart = 0;
 		let isStart = false;
+		let isTouch = false;
 
 		const _angXY = (ev) => {
 			const bcr = element.getBoundingClientRect();
@@ -324,14 +325,18 @@ const _uiRotate = {
 			return Math.atan2(y, x);
 		};
 
-		const mousedown = (ev) => {
+		const _start = (ev) => {
+			if(ev.touches !== undefined){
+				isTouch = true;
+				Body.lock();
+			}
 			isStart = true;
 			angStart = _angXY(ev) - ang;
 		};
 
-		const mousemove = (ev) => {
+		const _move = (ev) => {
 			if (!isStart) return;
-			if(ev.touches === undefined)ev.preventDefault();
+			if(!isTouch)ev.preventDefault();
 			ang = _angXY(ev) - angStart;
 			element.style.transform = 'rotateZ('+ang+'rad)';
 			const $items = element.querySelectorAll('.rotate-item');
@@ -340,16 +345,20 @@ const _uiRotate = {
 			});
 		};
 
-		const mouseup = () => {
+		const _end = () => {
 			isStart = false; 
+			if(isTouch){
+				isTouch = false;
+				Body.unlock();
+			}
 		};
 
-		element.addEventListener('mousedown', mousedown, false);
-		document.addEventListener('mousemove', mousemove, false);
-		document.addEventListener('mouseup', mouseup, false);
-		element.addEventListener('touchstart', mousedown, false);
-		document.addEventListener('touchmove', mousemove, false);
-		document.addEventListener('touchend', mouseup, false);
+		element.addEventListener('mousedown', _start, false);
+		document.addEventListener('mousemove', _move, false);
+		document.addEventListener('mouseup', _end, false);
+		element.addEventListener('touchstart', _start, false);
+		document.addEventListener('touchmove', _move, false);
+		document.addEventListener('touchend', _end, false);
 	},
 	init: function(){
 		_uiRotate.items();
