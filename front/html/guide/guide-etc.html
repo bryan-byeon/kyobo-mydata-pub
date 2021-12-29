@@ -281,6 +281,11 @@ const _character = function(){
 	}
 };
 
+
+const radToDeg = function(radians){
+  var pi = Math.PI;
+  return radians * (180/pi);
+}
 const _uiRotate = {
 	wrap : '.ui-circle-rotate .rotate-items',
 	items: function(){
@@ -341,10 +346,11 @@ const _uiRotate = {
 			if (!isStart) return;
 			if(!isTouch)ev.preventDefault();
 			ang = _angXY(ev) - angStart;
-			element.style.transform = 'rotateZ('+ang+'rad)';
+			const deg = radToDeg(ang);
+			element.style.transform = 'rotate('+deg+'deg)';
 			const $items = element.querySelectorAll('.rotate-item');
 			$items.forEach(function(item){
-				item.style.transform = 'rotateZ('+(ang*-1)+'rad)';
+				item.style.transform = 'rotate('+(deg*-1)+'deg)';
 			});
 		};
 
@@ -371,6 +377,8 @@ const _uiRotate = {
 	}
 }
 _uiRotate.init();
+
+
 </script>
 </body>
 </html>
