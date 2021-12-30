@@ -71,8 +71,7 @@
     position: relative;
     transform-style: preserve-3d;
     transform-origin: 0 50%;
-    height: 200px;
-    padding-bottom: 18px;
+    padding: 10px 0;
     box-sizing: content-box;
   }
   .slider-item {
@@ -101,12 +100,10 @@
   }
 	*/
   .indicators {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
     text-align: center;
     font-size: 0;
+    margin-top: 10px;
     li {
       display: inline-block;
       text-align: center;
@@ -138,10 +135,6 @@
     .slider-item {
       display: flex !important;
     }
-  }
-  .slider-wrapper {
-    height: 180px;
-    padding-bottom: 30px;
   }
   .slider-item {
     width: 140px;
