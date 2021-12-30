@@ -2837,10 +2837,26 @@ const uiButton = {
       const $tapTop = $tapY - $thisTop + $sclTop;
       const $tapLeft = $tapX - $thisLeft + $sclLeft;
       let $appendLength = $this.data('append');
-      if($appendLength === undefined)$appendLength = 10;
+      if($appendLength === undefined)$appendLength = $this.hasClass('confetti')? 20 : 10;
       let $append = '';
+      let rdLeft;
+      let rdTop;
       for(let i=0; i<$appendLength; i++){
-        $append += '<i></i>';
+        if($this.hasClass('heart')){
+          rdLeft = $appendLength <= 20 ? randomNumber(0,20,0) * 8 : randomNumber(0,$appendLength,0) * (160 / $appendLength);
+          rdLeft -= 80;
+          rdTop = $appendLength <= 10 ? randomNumber(0,10,0) * 5 : randomNumber(0,$appendLength,0) * (50 / $appendLength);
+        }else{
+          rdLeft = $appendLength <= 40 ? randomNumber(0,40,0) * 5 : randomNumber(0,$appendLength,0) * (200 / $appendLength);
+          rdLeft -= 100;
+          if($this.hasClass('confetti')){
+            rdTop = $appendLength <= 12 ? randomNumber(0,12,0) * 5 : randomNumber(0,$appendLength,0) * (60 / $appendLength);
+          }else{
+            rdTop = $appendLength <= 15 ? randomNumber(0,15,0) * 10 : randomNumber(0,$appendLength,0) * (150 / $appendLength);
+          }
+        }
+        $append += '<i style="left:'+rdLeft+'px;top:'+(rdTop*-1)+'px;" class="item-'+(i%3+1)+'"></i>';
+        // $append += '<i></i>';
       }
       const $itemClass = 'ui-tap-item__'+$idx;
       $idx += 1;
@@ -4701,7 +4717,7 @@ const uiSwiperUpdate = function(target) {
 const uiConfetti = {
 	set: function(wrap){
 		const $wrap = $(wrap);
-		let $itemLength = 10;      //20 넘지 않게
+		let $itemLength = 12;
 		let rdClass; 
 		let rdLeft;
 		let rdTop;
@@ -4711,14 +4727,14 @@ const uiConfetti = {
 		let $html = '';
 		const rdLeftAry = [];
 
-		if($wrap.hasClass('type1'))$itemLength = 20;
-		if($wrap.hasClass('type2'))$itemLength = 12;
+		if($wrap.hasClass('type1'))$itemLength = 24;
+		// if($wrap.hasClass('type2'))$itemLength = 12;
 
 		for(let i = 0; i < $itemLength;i++){
 			rdClass = randomNumber(1,3,0);
 			rdSize = randomNumber(1,3,0);
 			rdColor = (i%5) + 1;
-			rdLeft = randomNumber(0,20,0) * 5;
+			rdLeft = $itemLength <= 18 ? randomNumber(1,19,0) * 5 : randomNumber(1,($itemLength+1),0) * (90 / $itemLength);
 			rdTop = randomNumber(2,14,0) * 5;
 			rdDelay = randomNumber(0,10,0) * 400;
 			//rdDelay = (i%10) * 200;
@@ -4739,7 +4755,7 @@ const uiConfetti = {
 					$html += '" aria-hidden="true"><span></span></span>';
 				}else if($wrap.hasClass('type2')){
 					//코인(1가지 모양, 3가지 사이즈)
-					rdSpeed = randomNumber(10,15,0) * 150;	//속도조절
+					rdSpeed = randomNumber(10,15,0) * 200;	//속도조절
 					$html = '<span class="confetti-item size'+rdSize+'" style="left:'+rdLeft+'%;';
 						$html += '-webkit-animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';
 						$html += 'animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';

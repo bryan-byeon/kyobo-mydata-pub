@@ -101,9 +101,9 @@
   }
   &.type1 {
     .confetti-item {
-      width: 2.4%;
+      width: 3%;
       height: auto;
-      margin-left: -1.2%;
+      margin-left: -1.5%;
       &:before {
         content: '';
         display: block;
@@ -144,13 +144,13 @@
     .size2 {
       z-index: 2;
       span {
-        transform: scale(0.7);
+        transform: scale(0.8);
       }
     }
     .size3 {
-      filter: blur(1px);
+      // filter: blur(1px);
       span {
-        transform: scale(0.4);
+        transform: scale(0.6);
       }
     }
 
@@ -175,29 +175,25 @@
   }
   &.type2 {
     .confetti-item {
-      width: 5.3333%;
+      width: 6%;
       height: auto;
-      margin-left: -2.6667%;
-      margin-top: -5.3333%;
+      margin-left: -3%;
       background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
+      transform: translateY(-100%);
       &:before {
         content: '';
         display: block;
         padding-top: 100%;
       }
-    }
-    .size1 {
-      z-index: 1;
+      z-index: auto;
     }
     .size2 {
-      width: 4%;
-      margin-left: -2%;
-      z-index: 1;
+      width: 7%;
+      margin-left: -3.5%;
     }
     .size3 {
-      width: 6%;
-      margin-left: -3%;
-      z-index: 1;
+      width: 8%;
+      margin-left: -4%;
     }
   }
   &.type3 {
@@ -690,39 +686,60 @@
   0% {
     top: 0%;
     opacity: 0;
-    //margin-top: 0;
+    transform: translateY(-100%);
   }
-  15% {
+  4% {
     opacity: 1;
   }
-  26% {
-    top: 98%;
-    //margin-top: -5.3333vw;
+  12% {
+    top: 100%;
+  }
+  22% {
+    top: 78%;
+  }
+  32% {
+    top: 100%;
   }
   40% {
-    top: 75%;
+    top: 84%;
+  }
+  48% {
+    top: 100%;
+  }
+  54% {
+    top: 92%;
   }
   60% {
+    top: 100%;
+  }
+  64% {
+    top: 96%;
+  }
+  68% {
+    top: 100%;
+  }
+
+  72% {
     top: 98%;
   }
-  70% {
-    top: 90%;
-    //margin-top: -5.3333vw;
+  74% {
+    top: 100%;
   }
+
   75% {
-    opacity: 1;
-  }
-  80% {
     top: 99%;
   }
-  84% {
-    top: 98%;
+  76% {
+    top: 100%;
   }
-  90%,
+  80% {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
   100% {
     top: 100%;
     opacity: 0;
-    //margin-top: 0;
+    transform: translateY(100%);
   }
 }
 @keyframes confettiFlash {
@@ -1121,125 +1138,100 @@
     i {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
       position: absolute;
     }
   }
-}
-.gd__tap_box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f1f1f1;
-  height: -vh(50, 100);
-  html.ios & {
-    @include iosTop(padding-top, 0);
-    @include iosBottom(padding-bottom, 0);
-  }
-  .ui-tap-item {
-    width: 30px;
-    height: 30px;
-    margin: -15px 0 0 -15px;
-  }
   &.coin {
     .ui-tap-item {
+      width: 30px;
+      height: 30px;
+      margin: -15px 0 0 -15px;
       opacity: 0;
       animation: tapGravity 1s ease-in backwards;
       i {
         background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
         animation: tapBang 1s forwards, tapBangSize 1s forwards;
-        &:nth-child(1) {
-          left: -100px;
-          top: 60px;
-        }
-        &:nth-child(2) {
-          left: -98px;
-          top: -108px;
-        }
-        &:nth-child(3) {
-          left: -70px;
-          top: -63px;
-        }
-        &:nth-child(4) {
-          left: -40px;
-          top: -47px;
-        }
-        &:nth-child(5) {
-          left: -15px;
-          top: -168px;
-        }
-        &:nth-child(6) {
-          left: 12px;
-          top: -51px;
-        }
-        &:nth-child(7) {
-          left: 60px;
-          top: -141px;
-        }
-        &:nth-child(8) {
-          left: 30px;
-          top: -88px;
-        }
-        &:nth-child(9) {
-          left: 78px;
-          top: -16px;
-        }
-        &:nth-child(10) {
-          left: 90px;
-          top: 16px;
-        }
       }
     }
   }
   &.heart {
     .ui-tap-item {
+      width: 30px;
+      height: 30px;
+      margin: -15px 0 0 -15px;
       opacity: 0;
       animation: tapGravity2 1s ease-out backwards;
       i {
         background: url(../images/guide/confetti_heart1.png) no-repeat center center / contain;
         animation: tapBang 1s forwards, tapBangSize 1s forwards;
-        &:nth-child(1) {
-          left: -68px;
-          top: 0px;
+      }
+    }
+  }
+  &.confetti {
+    .ui-tap-item {
+      width: 10px;
+      height: 10px;
+      margin: -5px 0 0 -5px;
+      opacity: 0;
+      animation: tapGravity3 1s ease-in backwards;
+      i {
+        animation: tapBang 1s forwards, tapBangSize 1s forwards;
+        &:before {
+          content: '';
+          display: block;
+          padding-top: 100%;
         }
-        &:nth-child(2) {
-          left: -58px;
-          top: -20px;
+        &:nth-child(5n+0):before {
+          background: #ff718d;
         }
-        &:nth-child(3) {
-          left: -20px;
-          top: -38px;
+        &:nth-child(5n+1):before {
+          background: #29cdff;
         }
-        &:nth-child(4) {
-          left: -45px;
-          top: -55px;
+        &:nth-child(5n+2):before {
+          background: #78ff44;
         }
-        &:nth-child(5) {
-          left: -15px;
-          top: -62px;
+        &:nth-child(5n+3):before {
+          background: #a864fd;
         }
-        &:nth-child(6) {
-          left: 12px;
-          top: -8px;
+        &:nth-child(5n+4):before {
+          background: #fdff6a;
         }
-        &:nth-child(7) {
-          left: 60px;
-          top: -14px;
+      }
+      .item-1 {
+        &:before {
+          transform: skewX(-40deg);
         }
-        &:nth-child(8) {
-          left: 30px;
-          top: -32px;
+      }
+      .item-2 {
+        &:before {
+          transform: skewX(50deg);
         }
-        &:nth-child(9) {
-          left: 38px;
-          top: -54px;
-        }
-        &:nth-child(10) {
-          left: 78px;
-          top: -26px;
+      }
+      .item-3 {
+        &:before {
+          transform: skewX(-60deg);
         }
       }
     }
+  }
+}
+.gd__tap_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  height: -vh(50, 100);
+  user-select: none;
+  > * {
+    pointer-events: none;
+  }
+  + .gd__tap_box {
+    margin-top: 30px;
+  }
+  html.ios & {
+    @include iosTop(padding-top, 0);
+    @include iosBottom(padding-bottom, 0);
   }
 }
 @keyframes tapBang {
@@ -1258,14 +1250,17 @@
   }
 }
 @keyframes tapGravity {
-  from {
+  0% {
     transform: translateY(0);
     opacity: 1;
   }
   15% {
     transform: translateY(-25px);
   }
-  to {
+  60% {
+    opacity: 1;
+  }
+  100% {
     transform: translateY(300px);
     opacity: 0;
   }
@@ -1277,6 +1272,20 @@
   }
   to {
     transform: translateY(-80px);
+    opacity: 0;
+  }
+}
+@keyframes tapGravity3 {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(40px);
     opacity: 0;
   }
 }
