@@ -1509,6 +1509,7 @@ const Layer = {
     let $directionY = false;
     let $duration = 0;
     let $durationTimer;
+    // let $distanceAry = [];
 
     $(tar).find('.'+Layer.headClass).on('touchstart mousedown',function(e){
       isMove = true;
@@ -1529,6 +1530,7 @@ const Layer = {
         $duration += 10;
       },10);
       $wrap.stop(false,true);
+      if($(tar).hasClass('touch-move'))$(tar).addClass('touch-moving');
     });
 
     $(tar).find('.'+Layer.headClass).on('touchmove mousemove',function(e){
@@ -1550,11 +1552,15 @@ const Layer = {
       if(!$(tar).hasClass('touch-move')){
         if($popup.hasClass('full')){
           // $isFull = true;
-          console.log('touchmove full')
           $this.data('is-full', true);
           $popup.removeClass('full').addClass('bottom');
         }
       }
+      /*
+      if($duration%10 === 0){
+        const $lastVal = $distanceAry.length ? $distanceAry[$distanceAry.length-1] : 0;
+        $distanceAry.push($distanceY - $lastVal);
+      }*/
     });
 
     $(tar).find('.'+Layer.headClass).on('touchend mouseup mouseleave',function(e){
@@ -1577,6 +1583,8 @@ const Layer = {
       const $power = (1+Math.round($powerRatio * 3)) * Math.round($powerRatio * 30)
       const $powerDistance = Math.round(($distanceY * -1) / $duration * $power);
       if($(tar).hasClass('touch-move')){
+        $(tar).removeClass('touch-moving');
+        
         const $wrapHeight = $wrap.outerHeight();
         const $endHeight = Math.max($min,Math.min($max,$wrapHeight + $powerDistance));
         const $endSpeed = Math.min(2000, Math.abs($powerDistance*10));
@@ -1626,6 +1634,7 @@ const Layer = {
       }
       
       $this.removeData('is-full');
+      // $distanceAry = [];
     });
   },
   bottomSwipe: function(tar){
@@ -4708,7 +4717,7 @@ const uiConfetti = {
 		for(let i = 0; i < $itemLength;i++){
 			rdClass = randomNumber(1,3,0);
 			rdSize = randomNumber(1,3,0);
-			rdColor = (i%3) + 1;
+			rdColor = (i%5) + 1;
 			rdLeft = randomNumber(0,20,0) * 5;
 			rdTop = randomNumber(2,14,0) * 5;
 			rdDelay = randomNumber(0,10,0) * 400;
@@ -4723,7 +4732,7 @@ const uiConfetti = {
 				if($wrap.hasClass('type1')){
 					//꽃가루(2가지 모션, 3가지 컬러, 3가지 사이즈, 6가지 모양)
 					rdClass = randomNumber(1,6,0);
-					rdColor = (i%6) + 1;
+					// rdColor = (i%6) + 1;
 					$html = '<span class="confetti-item item'+rdClass+' color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;';
 						$html += '-webkit-animation:confettiSwing'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiDrop '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
 						$html += 'animation:confettiSwing'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiDrop '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
@@ -4736,7 +4745,7 @@ const uiConfetti = {
 						$html += 'animation:confettiCoin '+rdSpeed+'ms linear '+rdDelay+'ms infinite;';
 					$html += '"></span>';
 				}else if($wrap.hasClass('type3')){
-					//깜빡임(3가지 모양, 5가지 사이즈, 3가지 컬러)
+					//깜빡임(5가지 모양, 5가지 컬러)
 					rdSpeed = randomNumber(10,15,0) * 100;	//속도조절
 					rdDelay = randomNumber(0,5,0) * 200;	//딜레이조절
 					rdClass = randomNumber(1,5,0);
@@ -4747,12 +4756,13 @@ const uiConfetti = {
 					$html += '"><i style="-webkit-transform:rotate('+$rotate+'deg);transform:rotate('+$rotate+'deg);"></i></span>';
 				}else if($wrap.hasClass('type4')){
 					//풍선(3가지 모양, 3가지 사이즈)
+          rdColor = (i%3) + 1;
 					$html = '<span class="confetti-item color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;';
 						$html += '-webkit-animation:confettiBalloon'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiUp '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
 						$html += 'animation:confettiBalloon'+rdDirection+' '+(rdSpeed/4)+'ms infinite '+rdDelay+'ms alternate, confettiUp '+rdSpeed+'ms infinite ease-out '+rdDelay+'ms;';
 					$html += '"></span>';
 				}else if($wrap.hasClass('type5')){
-					//불꽃(3가지 모양)
+					//불꽃(3가지 모양, 3가지 사이즈)
 					rdTop = randomNumber(0,8,0) * 5;		//top값 조정
 					rdSpeed = randomNumber(15,25,0) * 150;	//속도조절
 					$html = '<span class="confetti-item color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;top:'+rdTop+'%;">';
@@ -4785,7 +4795,7 @@ const uiConfetti = {
 						$html += 'animation:confettiFlash '+rdSpeed+'ms infinite '+rdDelay+'ms;';
 					$html += '"></span>';
 				}else if($wrap.hasClass('type8')){
-					//불꽃2(3가지 모양)
+					//불꽃2(5가지 모양, 3가지 크기)
 					rdTop = randomNumber(0,14,0) * 5;		//top값 조정
 					rdSpeed = randomNumber(15,25,0) * 100;	//속도조절
 					$html = '<span class="confetti-item color'+rdColor+' size'+rdSize+'" style="left:'+rdLeft+'%;top:'+rdTop+'%;">';
