@@ -2916,9 +2916,9 @@ const reTabAria = function() {
 };
 
 const uiTouch = {
-	wrap : '.ui-touch-rotate .rotate-items',
-	items: function(){
-		const $wrap = $(uiTouch.wrap);
+	rotateWrap : '.ui-touch-rotate .rotate-items',
+	rotateItem: function(){
+		const $wrap = $(uiTouch.rotateWrap);
 		const $items = $wrap.find('.rotate-item');
 		const $radius = $wrap.outerWidth() /2;
 		const $total = $items.length
@@ -3000,9 +3000,9 @@ const uiTouch = {
 		document.addEventListener('touchend', _end, false);
 	},
 	init: function(){
-		uiTouch.items();
-		document.querySelectorAll(uiTouch.wrap).forEach(uiTouch.rotate);
-		$(window).resize(uiTouch.items);
+		uiTouch.rotateItem();
+		document.querySelectorAll(uiTouch.rotateWrap).forEach(uiTouch.rotate);
+		$(window).resize(uiTouch.rotateItem);
 	}
 }
 
