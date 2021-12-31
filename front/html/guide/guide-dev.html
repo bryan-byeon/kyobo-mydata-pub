@@ -1,195 +1,219 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
-<title>교보증권 마이데이타</title>
-<link href="../../static/css/front.min.css" rel="stylesheet" />
-<script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
-<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+    <title>교보증권 마이데이타</title>
+    <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-front.js"></script>
 
-
-
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/css.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/css.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/javascript.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/vbscript-html.min.js"></script> -->
-</head>
-<body>
-<article id="wrap">
-	<div data-include-html="../../include/header.html" data-title="가이드"></div>
-	<div data-include-html="../../include/gnb.html"></div>
+  </head>
+  <body>
+    <article id="wrap">
+      <div data-include-html="../../include/header.html" data-title="가이드"></div>
+      <div data-include-html="../../include/gnb.html"></div>
 
-	<!-- 컨테이너 -->
-	<main id="container">
-		<!-- 컨텐츠 -->
-		<section id="contents">
-			<div class="tab-navi-menu">
-				<div class="tab-inner">
-					<i class="tab-line" aria-hidden="true"></i>
-					<ul class="tab-list">
-						<li class="tab active"><a href="guide-dev.html"><span>개발자참고</span></a></li>
-						<li class="tab"><a href="guide-txt.html"><span>텍스트</span></a></li>
-						<li class="tab"><a href="guide-btn.html"><span>버튼</span></a></li>
-						<li class="tab"><a href="guide-form.html"><span>폼요소</span></a></li>
-						<li class="tab"><a href="guide-form2.html"><span>입력 UI</span></a></li>
-						<li class="tab"><a href="guide-list.html"><span>리스트</span></a></li>
-						<li class="tab"><a href="guide-table.html"><span>테이블</span></a></li>
-						<li class="tab"><a href="guide-popup.html"><span>팝업</span></a></li>
-						<li class="tab"><a href="guide-address.html"><span>주소검색</span></a></li>
-						<li class="tab"><a href="guide-animate.html"><span>애니메이션</span></a></li>
-						<li class="tab"><a href="guide-etc.html"><span>기타</span></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="section pt-30">
-				<!--텍스트-->
-				<div>
-					<h1 class="gd__h0">개발자 참고 퍼블가이드</h1>
-					<h2 class="gd__h1">마크업 안내</h2>
-					<div class="txt-list">
-						<ul>
-							<li class="dot">아래 ID 빼고 대부분의 ID는 임시 ID 입니다. 변경해서 사용하셔도 됩니다. (예: popup, input, select 등등)</li>
-							<li class="dot">변경하면 안되는 ID: 레이아웃 관련된 ID (#wrap, #header, #footer, #container, #contents 등등)</li>
-							<li class="dot">input, select, textarea의 id를 변경할때 <strong class="underline fc-black">label의 for 값도 같이 변경</strong>해야 연결됩니다.</li>
-							<li class="dot">popup의 마크업은 <strong class="underline fc-black"><span class="fc-red">#contents</span> 밖에 위치해야합니다.</strong></li>
-						</ul>
-					</div>
-					
-					<h2 class="gd__h1">버튼 비활성화</h2>
-					<div>
-						<div class="txt-list">
-							<ul>
-								<li class="dot">button클래스를 갖고 있으면 <strong class="underline fc-black">a태그를 button태그으로 바꾸거나, 반대로 button태그를 a태그로 바꿔도 무방</strong>합니다.</li>
-							</ul>
-						</div>
-						<h4 class="gd__h3">&lt;button&gt; 태그 일 경우(권장)</h4>
-						<button type="button" class="button green small">활성화</button>
-						<button type="button" class="button green small" disabled="disabled">비활성화</button>
-						<button type="button" class="button line small">활성화</button>
-						<button type="button" class="button line small" disabled="disabled">비활성화</button>
-						<div class="txt-list">
-							<ul>
-								<li class="dot">disabled 속성이 활성화되면 스타일이 변경됩니다.</li>
-								<li class="dot">disabled 속성은 고유속성으로 이벤트 실행이 안됩니다.(별도의 막는 스크립트 없음)</li>
-								<li class="dot"><strong class="underline fc-red">button 태그 사용을 권장합니다. a태그 쓰면 스크립트로 .disabled 클래스 여부를 체크해서 이벤트 막아야함</strong></li>
-							</ul>
-						</div>
-						<h4 class="gd__h3">&lt;a&gt; 태그 일 경우</h4>
-						<a href="#" class="button green small">활성화</a>
-						<a href="#" class="button green small disabled">비활성화</a>
-						<a href="#" class="button line small">활성화</a>
-						<a href="#" class="button line small disabled">비활성화</a>
-						<div class="txt-list">
-							<ul>
-								<li class="dot">&lt;a&gt;에 "disabled" 클래스를 추가해주세요.</li>
-								<li class="dot">"disabled"클래스가 이벤트를 막아주지 않음. 별도의 if문 처리를 해줘야함</li>
-							</ul>
-						</div>
-						
-					</div>
-	
-					<h2 class="gd__h1">팝업</h2>
-					<h3 class="gd__h2">레이어팝업</h3>
-					<div>
-						<h4 class="gd__h3">종류</h4>
-						<div>
-							<a href="#" class="button line small" onclick="Layer.open('#fullDialog')">풀팝업 열기</a>
-							<a href="#modalDialog" class="button line small ui-pop-open">모달팝업 열기</a>
-							<a href="#" class="button line small" onclick="Layer.open('#bottomDialog')">바텀시트팝업 열기</a>
-							<a href="#" class="button line small" onclick="Layer.open('#sideDialog1')">사이드팝업(왼쪽) 열기</a>
-							<a href="#" class="button line small" onclick="Layer.open('#sideDialog2')">사이드팝업(오른쪽) 열기</a>
-						</div>
-						<br>
-						<div class="txt-list">
-							<ul>
-								<li class="dot">팝업 ID 기준으로 호출하기때문에 팝업끼리 <strong class="fc-red">ID가 중복되면 안됩니다. 중복일 경우 변경</strong>해주시면 됩니다.</li>
-								<li class="dot t_line">팝업의 ID는 임시ID 입니다. <strong class="fc-red">편한대로 변경</strong>해도 됩니다.</li>
-								<li class="dot">팝업의 형태가 다르다 하여도 클래스로 구분되기때문에 모두 아래와 같은 방법으로 사용하시면됩니다.</li>
-							</ul>
-						</div>
-	
-						<h4 class="gd__h3">오픈 방법</h4>
-						<h5 class="gd__h4">함수로 오픈</h5>
-						<div class="txt-list mt-20">
-<pre><code class="language-javascript">Layer.open('#팝업ID');</code></pre>
-							<ul>
-								<li class="dot">띄울려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
-							</ul>
-						</div>
-	
-						<h5 class="gd__h4">클래스로 오픈</h5>
-						<div class="txt-list mt-20">
-<pre><code class="language-xml">&lt;a href="#팝업ID" class="button line small ui-pop-open"&gt;버튼텍스트&lt;/a&gt;
+      <!-- 컨테이너 -->
+      <main id="container">
+        <!-- 컨텐츠 -->
+        <section id="contents">
+          <div class="tab-navi-menu">
+            <div class="tab-inner">
+              <i class="tab-line" aria-hidden="true"></i>
+              <ul class="tab-list">
+                <li class="tab active">
+                  <a href="guide-dev.html"><span>개발자참고</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-txt.html"><span>텍스트</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-btn.html"><span>버튼</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-form.html"><span>폼요소</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-form2.html"><span>입력 UI</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-list.html"><span>리스트</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-table.html"><span>테이블</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-popup.html"><span>팝업</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-address.html"><span>주소검색</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-animate.html"><span>애니메이션</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-etc.html"><span>기타</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="section pt-30">
+            <!--텍스트-->
+            <div>
+              <h1 class="gd__h0">개발자 참고 퍼블가이드</h1>
+              <h2 class="gd__h1">마크업 안내</h2>
+              <div class="txt-list">
+                <ul>
+                  <li class="dot">아래 ID 빼고 대부분의 ID는 임시 ID 입니다. 변경해서 사용하셔도 됩니다. (예: popup, input, select 등등)</li>
+                  <li class="dot">변경하면 안되는 ID: 레이아웃 관련된 ID (#wrap, #header, #footer, #container, #contents 등등)</li>
+                  <li class="dot">input, select, textarea의 id를 변경할때 <strong class="underline fc-black">label의 for 값도 같이 변경</strong>해야 연결됩니다.</li>
+                  <li class="dot">
+                    popup의 마크업은 <strong class="underline fc-black"><span class="fc-red">#contents</span> 밖에 위치해야합니다.</strong>
+                  </li>
+                </ul>
+              </div>
+
+              <h2 class="gd__h1">버튼 비활성화</h2>
+              <div>
+                <div class="txt-list">
+                  <ul>
+                    <li class="dot">button클래스를 갖고 있으면 <strong class="underline fc-black">a태그를 button태그으로 바꾸거나, 반대로 button태그를 a태그로 바꿔도 무방</strong>합니다.</li>
+                  </ul>
+                </div>
+                <h4 class="gd__h3">&lt;button&gt; 태그 일 경우(권장)</h4>
+                <button type="button" class="button green small">활성화</button>
+                <button type="button" class="button green small" disabled="disabled">비활성화</button>
+                <button type="button" class="button line small">활성화</button>
+                <button type="button" class="button line small" disabled="disabled">비활성화</button>
+                <div class="txt-list">
+                  <ul>
+                    <li class="dot">disabled 속성이 활성화되면 스타일이 변경됩니다.</li>
+                    <li class="dot">disabled 속성은 고유속성으로 이벤트 실행이 안됩니다.(별도의 막는 스크립트 없음)</li>
+                    <li class="dot"><strong class="underline fc-red">button 태그 사용을 권장합니다. a태그 쓰면 스크립트로 .disabled 클래스 여부를 체크해서 이벤트 막아야함</strong></li>
+                  </ul>
+                </div>
+                <h4 class="gd__h3">&lt;a&gt; 태그 일 경우</h4>
+                <a href="#" class="button green small">활성화</a>
+                <a href="#" class="button green small disabled">비활성화</a>
+                <a href="#" class="button line small">활성화</a>
+                <a href="#" class="button line small disabled">비활성화</a>
+                <div class="txt-list">
+                  <ul>
+                    <li class="dot">&lt;a&gt;에 "disabled" 클래스를 추가해주세요.</li>
+                    <li class="dot">"disabled"클래스가 이벤트를 막아주지 않음. 별도의 if문 처리를 해줘야함</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2 class="gd__h1">팝업</h2>
+              <h3 class="gd__h2">레이어팝업</h3>
+              <div>
+                <h4 class="gd__h3">종류</h4>
+                <div>
+                  <a href="#" class="button line small" onclick="Layer.open('#fullDialog')">풀팝업 열기</a>
+                  <a href="#modalDialog" class="button line small ui-pop-open">모달팝업 열기</a>
+                  <a href="#" class="button line small" onclick="Layer.open('#bottomDialog')">바텀시트팝업 열기</a>
+                  <a href="#" class="button line small" onclick="Layer.open('#sideDialog1')">사이드팝업(왼쪽) 열기</a>
+                  <a href="#" class="button line small" onclick="Layer.open('#sideDialog2')">사이드팝업(오른쪽) 열기</a>
+                </div>
+                <br />
+                <div class="txt-list">
+                  <ul>
+                    <li class="dot">팝업 ID 기준으로 호출하기때문에 팝업끼리 <strong class="fc-red">ID가 중복되면 안됩니다. 중복일 경우 변경</strong>해주시면 됩니다.</li>
+                    <li class="dot t_line">팝업의 ID는 임시ID 입니다. <strong class="fc-red">편한대로 변경</strong>해도 됩니다.</li>
+                    <li class="dot">팝업의 형태가 다르다 하여도 클래스로 구분되기때문에 모두 아래와 같은 방법으로 사용하시면됩니다.</li>
+                  </ul>
+                </div>
+
+                <h4 class="gd__h3">오픈 방법</h4>
+                <h5 class="gd__h4">함수로 오픈</h5>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-javascript">Layer.open('#팝업ID');</code></pre>
+                  <ul>
+                    <li class="dot">띄울려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
+                  </ul>
+                </div>
+
+                <h5 class="gd__h4">클래스로 오픈</h5>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-xml">&lt;a href="#팝업ID" class="button line small ui-pop-open"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
-							<ul>
-								<li class="dot">클래스로 <strong class="fc-red">ui-pop-open</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
-								<li class="dot"><strong class="fc-red">ui-pop-open</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
-							</ul>
-						</div>
-	
-						<h4 class="gd__h3">닫기 방법</h4>
-						<h5 class="gd__h4">함수로 닫기</h5>
-						<div class="txt-list mt-20">
-<pre><code class="language-javascript">Layer.close('#팝업ID');</code></pre>
-							<ul>
-								<li class="dot">숨기려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
-							</ul>
-						</div>
-	
-						<h5 class="gd__h4">클래스로 닫기</h5>
-						<div class="txt-list mt-20">
-<pre><code class="language-xml">&lt;-- 닫으려는 팝업 밖에 있는 버튼이라면: href에 팝업ID 추가 --&gt;
+                  <ul>
+                    <li class="dot">클래스로 <strong class="fc-red">ui-pop-open</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
+                    <li class="dot"><strong class="fc-red">ui-pop-open</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
+                  </ul>
+                </div>
+
+                <h4 class="gd__h3">닫기 방법</h4>
+                <h5 class="gd__h4">함수로 닫기</h5>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-javascript">Layer.close('#팝업ID');</code></pre>
+                  <ul>
+                    <li class="dot">숨기려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
+                  </ul>
+                </div>
+
+                <h5 class="gd__h4">클래스로 닫기</h5>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-xml">&lt;-- 닫으려는 팝업 밖에 있는 버튼이라면: href에 팝업ID 추가 --&gt;
 &lt;a href="#팝업ID" class="button line small ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
 
 &lt;-- 닫으려는 팝업안에 있는 버튼이라면: href에 안넣어도 됨 --&gt;
 &lt;a href="#" class="button line small ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
-							<ul>
-								<li class="dot">클래스로 <strong class="fc-red">ui-pop-close</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
-								<li class="dot">만약 닫으려는 팝업 안에 있는 버튼이라면 href속성에 <strong class="fc-red">팝업의 ID를 넣지 않아도 됩니다.</strong></li>
-								<li class="dot"><strong class="fc-red">ui-pop-close</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
-							</ul>
-						</div>
-					</div>
-					<h3 class="gd__h2">url로 팝업열기</h3>
-					<div>
-						<a href="win-pop.html" class="button line small" target="_blank">사용된 (윈도우)팝업페이지 확인</a>
-						<br>
-						<br>
-						<a href="#" data-popup="win-pop.html" class="button line small">팝업불러오기(기본:full)</a>
-						<a href="#" data-popup-full="win-pop.html" class="button line small">팝업불러오기(full)</a>
-						<a href="#" data-popup-modal="win-pop.html" class="button line small">팝업불러오기(modal)</a>
-						<a href="#" data-popup-bottom="win-pop.html" class="button line small">팝업불러오기(bottom)</a>
-						<a href="#" data-popup-left="win-pop.html" class="button line small">팝업불러오기(side-left)</a>
-						<a href="#" data-popup-right="win-pop.html" class="button line small">팝업불러오기(side-right)</a>
-						<div class="txt-list mt-20">
-<pre><code class="language-xml">&lt;a href="#" data-popup="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- 기본(full)팝업호출 --&gt;
+                  <ul>
+                    <li class="dot">클래스로 <strong class="fc-red">ui-pop-close</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
+                    <li class="dot">만약 닫으려는 팝업 안에 있는 버튼이라면 href속성에 <strong class="fc-red">팝업의 ID를 넣지 않아도 됩니다.</strong></li>
+                    <li class="dot"><strong class="fc-red">ui-pop-close</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
+                  </ul>
+                </div>
+              </div>
+              <h3 class="gd__h2">url로 팝업열기</h3>
+              <div>
+                <a href="win-pop.html" class="button line small" target="_blank">사용된 (윈도우)팝업페이지 확인</a>
+                <br />
+                <br />
+                <a href="#" data-popup="win-pop.html" class="button line small">팝업불러오기(기본:full)</a>
+                <a href="#" data-popup-full="win-pop.html" class="button line small">팝업불러오기(full)</a>
+                <a href="#" data-popup-modal="win-pop.html" class="button line small">팝업불러오기(modal)</a>
+                <a href="#" data-popup-bottom="win-pop.html" class="button line small">팝업불러오기(bottom)</a>
+                <a href="#" data-popup-left="win-pop.html" class="button line small">팝업불러오기(side-left)</a>
+                <a href="#" data-popup-right="win-pop.html" class="button line small">팝업불러오기(side-right)</a>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-xml">&lt;a href="#" data-popup="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- 기본(full)팝업호출 --&gt;
 &lt;a href="#" data-popup-full="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- full 팝업호출 --&gt;
 &lt;a href="#" data-popup-modal="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- modal 팝업호출 --&gt;
 &lt;a href="#" data-popup-bottom="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- bottom 팝업호출 --&gt;
 &lt;a href="#" data-popup-left="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-left 팝업호출 --&gt;
 &lt;a href="#" data-popup-right="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-right 팝업호출 --&gt;
 </code></pre>
-							<ul>
-								<li class="dot">불러오는 팝업에 <strong class="fc-black underline">꼭 <strong class="fc-red">#load</strong> 가 있어야한다.</strong> 'win-pop.html' 참고해서 id 속성으로 load를 부여하던가. 새 div(#load) 태그로 감싸줘야 그안에 내용을 갖고 온다</li>
-							</ul>
-						</div>
-					</div>
-					<h3 class="gd__h2">얼럿, 컨펌</h3>
-					<h4 class="gd__h3">기본(약식)</h4>
-					<div>
-						<a href="#" id="btnAlert" class="button line small">얼럿창 팝업 열기</a>
-						<a href="#" id="btnAlert1" class="button line small">얼럿창 팝업 열기(+버튼수정)</a>
-						<br>
-						<a href="#" id="btnConfirm" class="button line small">컨펌창 팝업 열기</a>
-						<a href="#" id="btnConfirm1" class="button line small">컨펌창 팝업 열기(+버튼수정)</a>
-						<br>
-						<br>
-<pre><code class="language-javascript">//얼럿 
+                  <ul>
+                    <li class="dot">
+                      불러오는 팝업에 <strong class="fc-black underline">꼭 <strong class="fc-red">#load</strong> 가 있어야한다.</strong> 'win-pop.html' 참고해서 id 속성으로 load를 부여하던가. 새
+                      div(#load) 태그로 감싸줘야 그안에 내용을 갖고 온다
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <h3 class="gd__h2">얼럿, 컨펌</h3>
+              <h4 class="gd__h3">기본(약식)</h4>
+              <div>
+                <a href="#" id="btnAlert" class="button line small">얼럿창 팝업 열기</a>
+                <a href="#" id="btnAlert1" class="button line small">얼럿창 팝업 열기(+버튼수정)</a>
+                <br />
+                <a href="#" id="btnConfirm" class="button line small">컨펌창 팝업 열기</a>
+                <a href="#" id="btnConfirm1" class="button line small">컨펌창 팝업 열기(+버튼수정)</a>
+                <br />
+                <br />
+                <pre><code class="language-javascript">//얼럿 
 Layer.alert('얼럿 메세지');
 //얼럿 + 콜백
 Layer.alert('얼럿창입니다.',function(){
@@ -219,48 +243,48 @@ Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
 	}
 });
 </code></pre>
-						<script>
-						$('#btnAlert').click(function(e){
-							e.preventDefault();
-							Layer.alert('얼럿창입니다.',function(){
-								console.log('얼럿 확인');
-							});
-						});
-						$('#btnAlert1').click(function(e){
-							e.preventDefault();
-							Layer.alert('얼럿창입니다.','완료',function(){
-								console.log('얼럿 완료');
-							});
-						});
-						$('#btnConfirm').click(function(e){
-							e.preventDefault();
-							Layer.confirm('컨펌창입니다.',function(e){
-								if(e){
-									console.log('컨펌 확인');
-								}else{
-									console.log('컨펌 취소');
-								}
-							});
-						});
-						$('#btnConfirm1').click(function(e){
-							e.preventDefault();
-							Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
-								if(e){
-									console.log('컨펌 완료');
-								}else{
-									console.log('컨펌 넘기기');
-								}
-							});
-						});
-						</script>
-					</div>
-					<h4 class="gd__h3">커스텀(옵션)</h4>
-					<div>
-						<a href="#" id="btnAlert2" class="button line small">커스텀 얼럿창 팝업 열기</a>
-						<a href="#" id="btnConfirm2" class="button line small">커스텀 컨펌창 팝업 열기</a>
-						<br>
-						<br>
-<pre><code class="language-javascript">//커스텀 얼럿
+                <script>
+                  $('#btnAlert').click(function (e) {
+                    e.preventDefault();
+                    Layer.alert('얼럿창입니다.', function () {
+                      console.log('얼럿 확인');
+                    });
+                  });
+                  $('#btnAlert1').click(function (e) {
+                    e.preventDefault();
+                    Layer.alert('얼럿창입니다.', '완료', function () {
+                      console.log('얼럿 완료');
+                    });
+                  });
+                  $('#btnConfirm').click(function (e) {
+                    e.preventDefault();
+                    Layer.confirm('컨펌창입니다.', function (e) {
+                      if (e) {
+                        console.log('컨펌 확인');
+                      } else {
+                        console.log('컨펌 취소');
+                      }
+                    });
+                  });
+                  $('#btnConfirm1').click(function (e) {
+                    e.preventDefault();
+                    Layer.confirm('컨펌창입니다.', '완료', '넘기기', function (e) {
+                      if (e) {
+                        console.log('컨펌 완료');
+                      } else {
+                        console.log('컨펌 넘기기');
+                      }
+                    });
+                  });
+                </script>
+              </div>
+              <h4 class="gd__h3">커스텀(옵션)</h4>
+              <div>
+                <a href="#" id="btnAlert2" class="button line small">커스텀 얼럿창 팝업 열기</a>
+                <a href="#" id="btnConfirm2" class="button line small">커스텀 컨펌창 팝업 열기</a>
+                <br />
+                <br />
+                <pre><code class="language-javascript">//커스텀 얼럿
 Layer.alert({
 	title:'얼럿창',
 	content:'얼럿메세지&lt;br&gt;얼럿메세지',
@@ -294,74 +318,74 @@ Layer.confirm(
 	}
 });
 </code></pre>
-						<script>
-							$('#btnAlert2').click(function(e){
-								e.preventDefault();
-								Layer.alert({
-									title:'얼럿창',
-									content:'얼럿메세지<br>얼럿메세지',
-									actionTxt:'닫기',
-									action:function(){
-										console.log('커스텀 얼럿 action');
-									},
-									callback:function(e){
-										console.log('커스텀 얼럿 확인');
-									}
-								});
-							});
-							$('#btnConfirm2').click(function(e){
-								e.preventDefault();
-								Layer.confirm({
-									title:'<strong class="fc_green">컨펌창</strong>',
-									content:'컨펌메세지 <br>컨펌메세지',
-									actionTxt:'다음',
-									action:function(){
-										console.log('커스텀 컨펌 action');
-									},
-									cancelTxt:'이전',
-									cancel:function(){
-										console.log('커스텀 컨펌 cancel');
-									},
-									callback:function(e){
-										if(e){
-											console.log('커스텀 컨펌 확인');
-										}else{
-											console.log('커스텀 컨펌 취소');
-										}
-									}
-								});
-							});
-							</script>
-					</div>
-					<h3 class="gd__h2">그외 팝업</h3>
-	
-					<h4 class="gd__h3">토스트팝업</h4>
-					<div>
-						<div><a href="#" class="button line small" id="toastOpen">토스트팝업 열기</a></div>
-						<script>
-							$('#toastOpen').click(function(e){
-								e.preventDefault();
-								const msg = '설명 글을 넣으면됩니다.<br>줄바꿈은 br태그로 처리, <strong>html 태그 사용 가능</strong>';
-								toastBox(msg);
-							})
-						</script>
-						<div class="txt-list mt-20">
-<pre><code class="language-javascript">toastBox('넣으려는 메세지');</code></pre>
-							<ul>
-								<li class="dot">토스트팝업은 열린 후 약 3초 후 자동으로 닫힙니다.</li>
-							</ul>
-						</div>
-					</div>
-					
-					<h4 class="gd__h3">로딩 팝업</h4>
-					<div>
-						<div>
-							<a href="#" class="button line small" onclick="Loading.open();$(this).next().next().css('z-index',10000);">로딩창 열기</a>
-							<a href="#" class="button line small" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000);">텍스트+로딩창 열기</a>
-							<a href="#" class="button line small" onclick="Loading.close();$(this).removeAttr('style');">로딩창 닫기</a>
-						</div>
-						<br>
-<pre><code class="language-javascript">//로딩창열기
+                <script>
+                  $('#btnAlert2').click(function (e) {
+                    e.preventDefault();
+                    Layer.alert({
+                      title: '얼럿창',
+                      content: '얼럿메세지<br>얼럿메세지',
+                      actionTxt: '닫기',
+                      action: function () {
+                        console.log('커스텀 얼럿 action');
+                      },
+                      callback: function (e) {
+                        console.log('커스텀 얼럿 확인');
+                      }
+                    });
+                  });
+                  $('#btnConfirm2').click(function (e) {
+                    e.preventDefault();
+                    Layer.confirm({
+                      title: '<strong class="fc_green">컨펌창</strong>',
+                      content: '컨펌메세지 <br>컨펌메세지',
+                      actionTxt: '다음',
+                      action: function () {
+                        console.log('커스텀 컨펌 action');
+                      },
+                      cancelTxt: '이전',
+                      cancel: function () {
+                        console.log('커스텀 컨펌 cancel');
+                      },
+                      callback: function (e) {
+                        if (e) {
+                          console.log('커스텀 컨펌 확인');
+                        } else {
+                          console.log('커스텀 컨펌 취소');
+                        }
+                      }
+                    });
+                  });
+                </script>
+              </div>
+              <h3 class="gd__h2">그외 팝업</h3>
+
+              <h4 class="gd__h3">토스트팝업</h4>
+              <div>
+                <div><a href="#" class="button line small" id="toastOpen">토스트팝업 열기</a></div>
+                <script>
+                  $('#toastOpen').click(function (e) {
+                    e.preventDefault();
+                    const msg = '설명 글을 넣으면됩니다.<br>줄바꿈은 br태그로 처리, <strong>html 태그 사용 가능</strong>';
+                    toastBox(msg);
+                  });
+                </script>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-javascript">toastBox('넣으려는 메세지');</code></pre>
+                  <ul>
+                    <li class="dot">토스트팝업은 열린 후 약 3초 후 자동으로 닫힙니다.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4 class="gd__h3">로딩 팝업</h4>
+              <div>
+                <div>
+                  <a href="#" class="button line small" onclick="Loading.open();$(this).next().next().css('z-index',10000);">로딩창 열기</a>
+                  <a href="#" class="button line small" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000);">텍스트+로딩창 열기</a>
+                  <a href="#" class="button line small" onclick="Loading.close();$(this).removeAttr('style');">로딩창 닫기</a>
+                </div>
+                <br />
+                <pre><code class="language-javascript">//로딩창열기
 Loading.open();
 
 // 텍스트 들어간 로딩창열기
@@ -370,13 +394,12 @@ Loading.open('텍스트 텍스트 텍스트');
 //로딩창닫기
 Loading.close(); 
 </code></pre>
-					</div>
-	
-	
-					<h2 class="gd__h1">폼관련 UI</h2>
-					<h3 class="gd__h2">input 밸리데이션 체크 후 error 표시 할때</h3>
-					<div>
-						<pre><code class="language-javascript">//에러 표시
+              </div>
+
+              <h2 class="gd__h1">폼관련 UI</h2>
+              <h3 class="gd__h2">input 밸리데이션 체크 후 error 표시 할때</h3>
+              <div>
+                <pre><code class="language-javascript">//에러 표시
 Form.error(element,massege);
 Form.error('#inputText','이름을 입력하세요');
 
@@ -388,195 +411,196 @@ Form.error('#inputText',false);
 Form.success(element,massege);
 Form.success('#inputText','이름이 입력되었습니다.');
 </code></pre>
-						<h4 class="gd__h3">버튼으로 확인 예시</h4>
-						<div>
-							<div class="form-lbl"><label for="inputText">이름</label></div>
-							<div class="form-item">
-								<div class="flex">
-									<div>
-										<div class="input"><input type="text" id="inputText" placeholder=""></div>
-									</div>
-									<div class=" w-80f">
-										<button type="button" class="button line full" id="chkName">확인</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<script>
-							$('#chkName').click(function(){
-								const $val = $('#inputText').val();
-								if($val === ''){
-									Form.error('#inputText','이름을 입력하세요');
-								}else{
-									Form.success('#inputText','이름이 입력되었습니다.');
-								}
-							});
-						</script>
-						<h4 class="gd__h3">실시간 확인 예시</h4>
-						<div>
-							<div class="form-lbl"><label for="inputText">이름</label></div>
-							<div class="form-item">
-								<div class="input"><input type="text" id="inputText2" placeholder="이름을 3자리 이상 입력하세요"></div>
-							</div>
-						</div>
-						<script>
-							$('#inputText2').on('focus keyup',function(){
-								const $val = $(this).val();
-								if($val.length < 3){
-									Form.error(this,'이름을 입력하세요');
-								}else{
-									Form.error(this,false);
-								}
-							});
-						</script>
-	
-						<h4 class="gd__h3">다중 폼 error 표시하고 싶을때</h4>
-						<div class="form-lbl">
-							<label for="userAdr1">주소 찾기</label>
-						</div>
-						<div class="form-item validate-item"><!-- validate-item 클래스 추가 -->
-							<div class="input">
-								<input type="tel" id="userAdr1" maxlength="6" title="우편번호 입력" placeholder="우편번호">
-								<button type="button" id="btnAdrs" class="button small search" aria-label="검색"><i class="i-ico-search" aria-hidden="true"></i></button>
-							</div>
-							<div class="input"><input type="text" id="userAdr2" title="기본주소 입력" placeholder="기본주소"></div>
-							<div class="input"><input type="text" id="userAdr3" title="상세주소 입력" placeholder="상세주소"></div>
-						</div>
-						<script>
-							$('#btnAdrs').click(function(){
-								if($('#userAdr1').val() === '') Form.error('#userAdr1','우편번호를 입력하세요');
-								else if($('#userAdr2').val() === '') Form.error('#userAdr2','기본주소를 입력하세요');
-								else if($('#userAdr3').val() === '') Form.error('#userAdr3','상세주소를 입력하세요');
-							});
-							$('#userAdr1, #userAdr2, #userAdr3').on('focus keyup',function(){
-								Form.error(this,false);
-							});
-						</script>
+                <h4 class="gd__h3">버튼으로 확인 예시</h4>
+                <div>
+                  <div class="form-lbl"><label for="inputText">이름</label></div>
+                  <div class="form-item">
+                    <div class="flex">
+                      <div>
+                        <div class="input"><input type="text" id="inputText" placeholder="" /></div>
+                      </div>
+                      <div class="w-80f">
+                        <button type="button" class="button line full" id="chkName">확인</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $('#chkName').click(function () {
+                    const $val = $('#inputText').val();
+                    if ($val === '') {
+                      Form.error('#inputText', '이름을 입력하세요');
+                    } else {
+                      Form.success('#inputText', '이름이 입력되었습니다.');
+                    }
+                  });
+                </script>
+                <h4 class="gd__h3">실시간 확인 예시</h4>
+                <div>
+                  <div class="form-lbl"><label for="inputText">이름</label></div>
+                  <div class="form-item">
+                    <div class="input"><input type="text" id="inputText2" placeholder="이름을 3자리 이상 입력하세요" /></div>
+                  </div>
+                </div>
+                <script>
+                  $('#inputText2').on('focus keyup', function () {
+                    const $val = $(this).val();
+                    if ($val.length < 3) {
+                      Form.error(this, '이름을 입력하세요');
+                    } else {
+                      Form.error(this, false);
+                    }
+                  });
+                </script>
 
-						<div class="txt-list mt-20">
-							<ul>
-								<li class="dot">[검색] 클릭하면 표시형태 확인가능</li>
-								<li class="dot">다중 폼요소에 에러 표시를 할때는 <strong class="fc-red">.validate-item</strong>로 감싸주가 클래스를 추가해준다</li>
-							</ul>
-						</div>
-					</div>
-					<h3 class="gd__h2">range-slider</h3>
-					<div>
-						<div class="mt-30">
-							<div class="form-lbl">기간선택</div>
-							<div class="form-item">
-								<div class="range-slider">
-									<div class="slider" data-min="0" data-max="5" data-step="1" data-value="1" aria-hidden="true"></div>
-									<div class="list" title="기간을 선택해주세요" data-unit="년"></div>
-									<input type="hidden" id="slider1" title="선택한 기간">
-								</div>
-							</div>
-						</div>
-						<div class="txt-list mt-20">
-<pre><code class="language-xml">&lt;div class="slider" data-min="최소값" data-max="최대값" data-step="간격값" data-value="현재값" aria-hidden="true"&gt;&lt;/div&gt;</code></pre>
-							<ul>
-								<li class="dot">data-min <strong class="fc-red">최소값</strong></li>
-								<li class="dot">data-max <strong class="fc-red">최대값</strong></li>
-								<li class="dot">data-step <strong class="fc-red">값사이 간격</strong></li>
-								<li class="dot">data-value <strong class="fc-red">현재값(화면 로딩시 보여줄 값)</strong></li>
-								<li class="dot underline">input[hidden]의 ID값은 임시 ID 입니다. 변경하셔도 무방합니다.</li>
-								<li class="dot">값 조절시 input[hidden]의 값이 변경되므로<br>개발에서는 <strong class="fc-red">input[hidden]의 change 이벤트</strong>로 작업합시면됩니다.</li>
-							</ul>
-						</div>
-						<h5 class="gd__h4">개발 시 input[hidden] 값을 체크</h5>
-						<div>
-							<a href="#" class="button line" id="btnSlider">선택기간 확인</a>
-						</div>
-						<script>
-							//선택기간 확인
-							$('#btnSlider').click(function(e){
-								e.preventDefault();
-								alert('현재 선택한 기간은 ' + $('#slider1').val()+'년 입니다.');
-							});
-	
-							//input[type="hidden"]
-							$('#slider1').change(function(){
-								console.log('선택한 기간은 ' + $(this).val()+'년 입니다.');
-							});
-						</script>
-					</div>
-					<h1 class="gd__h1">spinner</h1>
-					<div>
-						<div class="spinner" data-min="1" data-max="99">
-							<button type="button" class="button minus" aria-label="빼기"></button>
-							<input type="tel">
-							<button type="button" class="button plus" aria-label="더하기"></button>
-						</div>
-					</div>
-					<div class="txt-list mt-20">
-						<pre><code class="language-xml">&lt;div class="spinner" data-min="1" data-max="99"&gt;
+                <h4 class="gd__h3">다중 폼 error 표시하고 싶을때</h4>
+                <div class="form-lbl">
+                  <label for="userAdr1">주소 찾기</label>
+                </div>
+                <div class="form-item validate-item">
+                  <!-- validate-item 클래스 추가 -->
+                  <div class="input">
+                    <input type="tel" id="userAdr1" maxlength="6" title="우편번호 입력" placeholder="우편번호" />
+                    <button type="button" id="btnAdrs" class="button small search" aria-label="검색"><i class="i-ico-search" aria-hidden="true"></i></button>
+                  </div>
+                  <div class="input"><input type="text" id="userAdr2" title="기본주소 입력" placeholder="기본주소" /></div>
+                  <div class="input"><input type="text" id="userAdr3" title="상세주소 입력" placeholder="상세주소" /></div>
+                </div>
+                <script>
+                  $('#btnAdrs').click(function () {
+                    if ($('#userAdr1').val() === '') Form.error('#userAdr1', '우편번호를 입력하세요');
+                    else if ($('#userAdr2').val() === '') Form.error('#userAdr2', '기본주소를 입력하세요');
+                    else if ($('#userAdr3').val() === '') Form.error('#userAdr3', '상세주소를 입력하세요');
+                  });
+                  $('#userAdr1, #userAdr2, #userAdr3').on('focus keyup', function () {
+                    Form.error(this, false);
+                  });
+                </script>
+
+                <div class="txt-list mt-20">
+                  <ul>
+                    <li class="dot">[검색] 클릭하면 표시형태 확인가능</li>
+                    <li class="dot">다중 폼요소에 에러 표시를 할때는 <strong class="fc-red">.validate-item</strong>로 감싸주가 클래스를 추가해준다</li>
+                  </ul>
+                </div>
+              </div>
+              <h3 class="gd__h2">range-slider</h3>
+              <div>
+                <div class="mt-30">
+                  <div class="form-lbl">기간선택</div>
+                  <div class="form-item">
+                    <div class="range-slider">
+                      <div class="slider" data-min="0" data-max="5" data-step="1" data-value="1" aria-hidden="true"></div>
+                      <div class="list" title="기간을 선택해주세요" data-unit="년"></div>
+                      <input type="hidden" id="slider1" title="선택한 기간" />
+                    </div>
+                  </div>
+                </div>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-xml">&lt;div class="slider" data-min="최소값" data-max="최대값" data-step="간격값" data-value="현재값" aria-hidden="true"&gt;&lt;/div&gt;</code></pre>
+                  <ul>
+                    <li class="dot">data-min <strong class="fc-red">최소값</strong></li>
+                    <li class="dot">data-max <strong class="fc-red">최대값</strong></li>
+                    <li class="dot">data-step <strong class="fc-red">값사이 간격</strong></li>
+                    <li class="dot">data-value <strong class="fc-red">현재값(화면 로딩시 보여줄 값)</strong></li>
+                    <li class="dot underline">input[hidden]의 ID값은 임시 ID 입니다. 변경하셔도 무방합니다.</li>
+                    <li class="dot">값 조절시 input[hidden]의 값이 변경되므로<br />개발에서는 <strong class="fc-red">input[hidden]의 change 이벤트</strong>로 작업합시면됩니다.</li>
+                  </ul>
+                </div>
+                <h5 class="gd__h4">개발 시 input[hidden] 값을 체크</h5>
+                <div>
+                  <a href="#" class="button line" id="btnSlider">선택기간 확인</a>
+                </div>
+                <script>
+                  //선택기간 확인
+                  $('#btnSlider').click(function (e) {
+                    e.preventDefault();
+                    alert('현재 선택한 기간은 ' + $('#slider1').val() + '년 입니다.');
+                  });
+
+                  //input[type="hidden"]
+                  $('#slider1').change(function () {
+                    console.log('선택한 기간은 ' + $(this).val() + '년 입니다.');
+                  });
+                </script>
+              </div>
+              <h1 class="gd__h1">spinner</h1>
+              <div>
+                <div class="spinner" data-min="1" data-max="99">
+                  <button type="button" class="button minus" aria-label="빼기"></button>
+                  <input type="tel" />
+                  <button type="button" class="button plus" aria-label="더하기"></button>
+                </div>
+              </div>
+              <div class="txt-list mt-20">
+                <pre><code class="language-xml">&lt;div class="spinner" data-min="1" data-max="99"&gt;
 &lt;button type="button" class="button minus" aria-label="빼기"&gt;&lt;/button&gt;
 &lt;input type="tel"&gt;
 &lt;button type="button" class="button plus" aria-label="더하기"&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-						<ul>
-							<li class="dot">data-min <strong class="fc-red">최소값</strong>: 없으면 1</li>
-							<li class="dot">data-max <strong class="fc-red">최대값</strong>: 없으면 999</li>
-							<li class="dot">input에서 직접 값을 입력해도 blur 될때 min~max 사이값이 아니면 자동 조정됩니다.</li>
-							<li class="dot">input[type="tel"]에 chagne 이벤트로 가격을 계산하면 됩니다.</li>
-							<li class="dot">.spinner를 스크립트로 삽입 후 input의 value가 1임에도 [마이너스] 버튼이 disabled가 아니면 <strong class="fc-red">Form.spinner();</strong> 함수를 실행해주세요</li>
-						</ul>
-					</div>
-	
-					<h2 class="gd__h1">달력</h2>
-					<div>
-						<h3 class="gd__h2">기본</h3>
-						<div>
-							<div class="form-lbl">
-								<label for="inpDate1">기간입력</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate1" class="datepicker" title="날짜 입력"></div>
-							</div>
-						</div>
-						<div class="txt-list mt-20">
-<pre><code class="language-xml">&lt;input type="tel" class="<strong class="fc-red">datepicker</strong>" title="날짜 입력"&gt;</code></pre>
-						</div>
-	
-						<h3 class="gd__h2">달력 선택제한(data-min,data-max 활용)</h3>
-						<div class="mt-30">
-							<div class="form-lbl">
-								<label for="inpDate2">오늘 이전 선택</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate2" class="datepicker" data-max="today" title="날짜 입력"></div>
-							</div>
-							
-							<div class="form-lbl">
-								<label for="inpDate3">오늘 이후 선택</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate3" class="datepicker" data-min="today" title="날짜 입력"></div>
-							</div>
-							
-							<div class="form-lbl">
-								<label for="inpDate4">-5일 이전 선택</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate4" class="datepicker" data-max="-5d" title="날짜 입력"></div>
-							</div>
-							
-							<div class="form-lbl">
-								<label for="inpDate5">+3달 이후 선택</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate5" class="datepicker" data-min="+3m" title="날짜 입력"></div>
-							</div>
-							
-							<div class="form-lbl">
-								<label for="inpDate6">-2주 ~ +1년 사이 선택</label>
-							</div>
-							<div class="form-item">
-								<div class="input"><input type="tel" id="inpDate6" class="datepicker" data-min="-2w" data-max="+1y" title="날짜 입력"></div>
-							</div>
-						</div>
-						<br>
-<pre><code class="language-xml">&lt;!-- 오늘 이전 선택 --&gt;<br>
+                <ul>
+                  <li class="dot">data-min <strong class="fc-red">최소값</strong>: 없으면 1</li>
+                  <li class="dot">data-max <strong class="fc-red">최대값</strong>: 없으면 999</li>
+                  <li class="dot">input에서 직접 값을 입력해도 blur 될때 min~max 사이값이 아니면 자동 조정됩니다.</li>
+                  <li class="dot">input[type="tel"]에 chagne 이벤트로 가격을 계산하면 됩니다.</li>
+                  <li class="dot">.spinner를 스크립트로 삽입 후 input의 value가 1임에도 [마이너스] 버튼이 disabled가 아니면 <strong class="fc-red">Form.spinner();</strong> 함수를 실행해주세요</li>
+                </ul>
+              </div>
+
+              <h2 class="gd__h1">달력</h2>
+              <div>
+                <h3 class="gd__h2">기본</h3>
+                <div>
+                  <div class="form-lbl">
+                    <label for="inpDate1">기간입력</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate1" class="datepicker" title="날짜 입력" /></div>
+                  </div>
+                </div>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-xml">&lt;input type="tel" class="<strong class="fc-red">datepicker</strong>" title="날짜 입력"&gt;</code></pre>
+                </div>
+
+                <h3 class="gd__h2">달력 선택제한(data-min,data-max 활용)</h3>
+                <div class="mt-30">
+                  <div class="form-lbl">
+                    <label for="inpDate2">오늘 이전 선택</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate2" class="datepicker" data-max="today" title="날짜 입력" /></div>
+                  </div>
+
+                  <div class="form-lbl">
+                    <label for="inpDate3">오늘 이후 선택</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate3" class="datepicker" data-min="today" title="날짜 입력" /></div>
+                  </div>
+
+                  <div class="form-lbl">
+                    <label for="inpDate4">-5일 이전 선택</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate4" class="datepicker" data-max="-5d" title="날짜 입력" /></div>
+                  </div>
+
+                  <div class="form-lbl">
+                    <label for="inpDate5">+3달 이후 선택</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate5" class="datepicker" data-min="+3m" title="날짜 입력" /></div>
+                  </div>
+
+                  <div class="form-lbl">
+                    <label for="inpDate6">-2주 ~ +1년 사이 선택</label>
+                  </div>
+                  <div class="form-item">
+                    <div class="input"><input type="tel" id="inpDate6" class="datepicker" data-min="-2w" data-max="+1y" title="날짜 입력" /></div>
+                  </div>
+                </div>
+                <br />
+                <pre><code class="language-xml">&lt;!-- 오늘 이전 선택 --&gt;<br>
 &lt;input type="tel" class="datepicker" <strong class="fc-red">data-max="today"</strong> title="날짜 입력"&gt;
 
 &lt;!-- 오늘 이후 선택 --&gt;<br>
@@ -590,217 +614,217 @@ Form.success('#inputText','이름이 입력되었습니다.');
 
 &lt;!-- -2주 ~ +1년 사이 선택 --&gt;<br>
 &lt;input type="tel" class="datepicker" <strong class="fc-red">data-min="-2w" data-max="+1y"</strong> title="날짜 입력"&gt;</code></pre>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- //컨텐츠 -->
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- //컨텐츠 -->
 
-		<!-- 팝업 -->
-		<div id="fullDialog" class="popup full" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>전체팝업</h1>
-						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						<!-- CMS 영역 -->
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						<div class="form_lbl">
-							<label for="inpName1">이름</label>
-						</div>
-						<div class="fm_item">
-							<div class="input"><input type="text" id="inpName1" placeholder="이름입력"></div>
-						</div>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						팝업 컨텐츠<br>
-						<!-- //CMS 영역 -->
-					</div>
-				</div>
-				<div class="pop-foot">
-					<div>
-						<div class="flex">
-							<a href="#" class="button line ui-pop-close">확인</a>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
+        <!-- 팝업 -->
+        <div id="fullDialog" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>전체팝업</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                <div class="form_lbl">
+                  <label for="inpName1">이름</label>
+                </div>
+                <div class="fm_item">
+                  <div class="input"><input type="text" id="inpName1" placeholder="이름입력" /></div>
+                </div>
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button line ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
 
-		<div id="modalDialog" class="popup modal" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>팝업 타이틀</h1>
-						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 
-					</div>
-				</div>
-				<div class="pop-foot">
-					<div>
-						<div class="flex">
-							<a href="#" class="button line" onclick="Layer.close('#modalDialog');">확인</a>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
+        <div id="modalDialog" class="popup modal" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>팝업 타이틀</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용</div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button line" onclick="Layer.close('#modalDialog');">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
 
-		<div id="bottomDialog1" class="popup bottom" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>하단팝업제목</h1>
-						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-					</div>
-				</div>
-			</article>
-		</div>
+        <div id="bottomDialog1" class="popup bottom" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>하단팝업제목</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+              </div>
+            </div>
+          </article>
+        </div>
 
-		<div id="sideDialog1" class="popup side-left" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>왼쪽사이드팝업제목</h1>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-					</div>
-				</div>
-				<div class="pop-foot">
-					<div>
-						<div class="flex">
-							<a href="#" class="button line ui-pop-close">확인</a>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
+        <div id="sideDialog1" class="popup side-left" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>왼쪽사이드팝업제목</h1>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button line ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
 
-		<div id="sideDialog2" class="popup side-right" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>왼쪽사이드팝업제목</h1>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						텍스트 <br>
-						텍스트 <br>
-						<div style="height:1500px;background:#f1f1f1;text-align:center;">스크롤을 위한 임시영역</div>
-						텍스트 <br>
-						텍스트 <br>
-					</div>
-				</div>
-				<div class="pop-foot">
-					<div>
-						<div class="flex">
-							<a href="#" class="button line ui-pop-close">확인</a>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
-		<!-- //팝업 -->
-	</main>
-	<!-- //컨테이너 -->
+        <div id="sideDialog2" class="popup side-right" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>왼쪽사이드팝업제목</h1>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                텍스트 <br />
+                텍스트 <br />
+                <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
+                텍스트 <br />
+                텍스트 <br />
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button line ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- //팝업 -->
+      </main>
+      <!-- //컨테이너 -->
 
-	<div data-include-html="../../include/footer.html"></div>
-</article>
+      <div data-include-html="../../include/footer.html"></div>
+    </article>
 
-<script>hljs.highlightAll();</script>
-</body>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
 </html>

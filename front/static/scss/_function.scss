@@ -12,14 +12,12 @@
   @if ($add) {
     $num: strip-unit($add);
     $num2: -absPX($num);
-    @if($num < 0) {
+    @if ($num < 0) {
       @return calc((var(--vh) * #{$val}) - #{$num2});
-    }
-    @else {
+    } @else {
       @return calc((var(--vh) * #{$val}) + #{$num2});
     }
-  }
-  @else {
+  } @else {
     @return calc(var(--vh) * #{$val});
   }
 }
@@ -29,63 +27,53 @@
 }
 
 @function strip-unit($number) {
-  @if type-of($number)=='number'and not unitless($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
     @return $number / ($number * 0 + 1);
   }
 
   @return $number;
 }
 @function -iosConstant($value, $top: true, $miuns: false) {
-  @if($value==0) {
-    @if($top) {
+  @if ($value==0) {
+    @if ($top) {
       @return constant(safe-area-inset-top);
-    }
-    @else {
+    } @else {
       @return constant(safe-area-inset-bottom);
     }
-  }
-  @else {
-    @if($miuns) {
-      @if($top) {
+  } @else {
+    @if ($miuns) {
+      @if ($top) {
         @return calc(#{$value} - constant(safe-area-inset-top));
-      }
-      @else {
+      } @else {
         @return calc(#{$value} - constant(safe-area-inset-bottom));
       }
-    }
-    @else {
-      @if($top) {
+    } @else {
+      @if ($top) {
         @return calc(#{$value} + constant(safe-area-inset-top));
-      }
-      @else {
+      } @else {
         @return calc(#{$value} + constant(safe-area-inset-bottom));
       }
     }
   }
 }
 @function -iosEnv($value, $top: true, $miuns: false) {
-  @if($value==0) {
-    @if($top) {
+  @if ($value==0) {
+    @if ($top) {
       @return env(safe-area-inset-top);
-    }
-    @else {
+    } @else {
       @return env(safe-area-inset-bottom);
     }
-  }
-  @else {
-    @if($miuns) {
-      @if($top) {
+  } @else {
+    @if ($miuns) {
+      @if ($top) {
         @return calc(#{$value} - env(safe-area-inset-top));
-      }
-      @else {
+      } @else {
         @return calc(#{$value} - env(safe-area-inset-bottom));
       }
-    }
-    @else {
-      @if($top) {
+    } @else {
+      @if ($top) {
         @return calc(#{$value} + env(safe-area-inset-top));
-      }
-      @else {
+      } @else {
         @return calc(#{$value} + env(safe-area-inset-bottom));
       }
     }

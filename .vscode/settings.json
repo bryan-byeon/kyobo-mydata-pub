@@ -11,41 +11,20 @@
     "last 2 versions"
   ],
   "liveServer.settings.port": 5600,
-  "editor.formatOnSave": true,
-  // "editor.formatOnSaveMode": "modifications",
-  "beautify.config": {
-    "indent_size": 2,
-    "newline_between_rules": false,
-    "space_around_combinator": true,
-    "indent_head_inner_html": false,
-    "indent_body_inner_html": false,
-    "extra_liners": [],
-    // "space_after_anon_function": false,
-    // "space_after_named_function": false,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.formatOnSave": true,
+  "[html]": {
+    "editor.formatOnSave": true
   },
-  "beautify.ignore": [
-    "**/*.min.js",
-    "**/admin/static/**/*",
-    "**/lib/*"
-  ],
-  "beautify.language": {
-    // "js": [
-    //   "js",
-    //   "json"
-    // ],
-    // "js": {
-    //   "type": ["javascript", "json"],
-    //   "filename": [".jshintrc", ".jsbeautifyrc"],
-    //   "ext": ["js", "json"]
-    // },
-    "css": [
-      // "css",
-      "scss"
-    ],
-    "html": [
-      // "htm",
-      "html"
-    ]
+  "[scss]": {
+    "editor.formatOnSave": true
   },
-  //"editor.fontSize": 16
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "prettier.tabWidth": 2,
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 200,
+  "prettier.trailingComma":"none",
 }

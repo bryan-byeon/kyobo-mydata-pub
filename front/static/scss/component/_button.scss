@@ -30,7 +30,7 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       margin: 0 !important;
     }
     &.share {
@@ -138,7 +138,7 @@
 
   &.search {
     padding: 0 4px;
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       margin: 0;
     }
   }
@@ -340,12 +340,12 @@
   padding: 0;
   text-align: center;
   height: auto;
-  [class*="i-ico-"] {
+  [class*='i-ico-'] {
     margin-right: 0;
     transition: 0.3s;
   }
   &.open {
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       transform: rotate3d(1, 0, 0, 180deg);
     }
   }

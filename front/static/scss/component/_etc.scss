@@ -32,7 +32,7 @@
   }
   &.is-active {
     .rolling__in {
-      animation: rollingNumber 1.5s backwards
+      animation: rollingNumber 1.5s backwards;
     }
   }
 }
@@ -47,7 +47,6 @@
     animation-play-state: paused;
   }
 }
-
 
 // round-box
 .line-round-box {
@@ -89,7 +88,6 @@
     }
     .td {
       margin-left: auto;
-      ;
     }
     + .box-item,
     &.top-line {

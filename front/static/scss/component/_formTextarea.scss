@@ -1,58 +1,58 @@
-.textarea{
-	position:relative;
-	border:1px solid #ddd;
-	border-radius:4px;
-	min-height: 48px;
-	background: #fff;
-	&.focus{
-		border-color:#222;
-	}
-	textarea{
-		border-radius:4px;
-		display: block;
-		border: 0 none;
-		outline: none;
-		padding: 11px 12px;
-		min-height: 46px;
-		resize: none;
-		line-height: 22px;
-	}
-	.btn-inp-del {
-		@include text-blind;
-		position:absolute;
-		display:block;
-		top: 15px;
-		right: 12px;
-		width:16px;
-		height:16px;
-		overflow:hidden;
-		background:url(../images/icon/ico-input-del@3x.png) no-repeat center center / contain;
-	}
-	&.auto-height{
-		textarea{
-			// box-sizing: content-box;
-			min-height: auto;
-			line-height: 24px;
-			overflow: hidden;
-		}
-	}
-	&+.flex,
-	&+.input,
-	&+.select,
-	&+.textarea{
-		margin-top:6px;
-	}
-	.textarea-count{
-		font-size: 12px;
-		line-height: 18px;
-		position: absolute;
-		right: 12px;
-		bottom: 12px;
-	}
-	&.in-count{
-		padding-bottom: 30px;
-		textarea{
-			padding-bottom: 0;
-		}
-	}
+.textarea {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 48px;
+  background: #fff;
+  &.focus {
+    border-color: #222;
+  }
+  textarea {
+    border-radius: 4px;
+    display: block;
+    border: 0 none;
+    outline: none;
+    padding: 11px 12px;
+    min-height: 46px;
+    resize: none;
+    line-height: 22px;
+  }
+  .btn-inp-del {
+    @include text-blind;
+    position: absolute;
+    display: block;
+    top: 15px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    background: url(../images/icon/ico-input-del@3x.png) no-repeat center center / contain;
+  }
+  &.auto-height {
+    textarea {
+      // box-sizing: content-box;
+      min-height: auto;
+      line-height: 24px;
+      overflow: hidden;
+    }
+  }
+  & + .flex,
+  & + .input,
+  & + .select,
+  & + .textarea {
+    margin-top: 6px;
+  }
+  .textarea-count {
+    font-size: 12px;
+    line-height: 18px;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
+  &.in-count {
+    padding-bottom: 30px;
+    textarea {
+      padding-bottom: 0;
+    }
+  }
 }

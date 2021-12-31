@@ -122,7 +122,7 @@ hgroup,
 menu,
 nav,
 section {
-  display: block
+  display: block;
 }
 legend,
 caption {
@@ -158,7 +158,7 @@ a[href*='tel'] {
   cursor: default;
 }
 button,
-input[type="button"] {
+input[type='button'] {
   border: none;
   background: none;
   cursor: pointer;
@@ -207,7 +207,7 @@ option:disabled,
 input:disabled,
 button:disabled {
   background: inherit;
-  color: inherit
+  color: inherit;
 }
 button:disabled,
 a.disabled {
@@ -248,10 +248,10 @@ input::-webkit-search-results-decoration {
   display: none;
 }
 
-input[type="date"]::-webkit-clear-button {
+input[type='date']::-webkit-clear-button {
   display: none;
 }
-input[type="time"]::-webkit-clear-button {
+input[type='time']::-webkit-clear-button {
   display: none;
 }
 
@@ -293,11 +293,11 @@ html.lock,
 // font-family
 .ff-nt,
 .ff-noto {
-  font-family: 'Noto Sans KR'
+  font-family: 'Noto Sans KR';
 }
 .ff-rbt,
 .ff-roboto {
-  font-family: 'Roboto'
+  font-family: 'Roboto';
 }
 .ff-pps,
 .ff-poppins {
@@ -389,7 +389,7 @@ html.lock,
 /* 폰트 사이즈 */
 @for $i from 6 through 40 {
   .fz-#{$i} {
-    font-size: $i*1px !important;
+    font-size: $i * 1px !important;
   }
 }
 
@@ -406,7 +406,7 @@ html.lock,
 }
 @for $i from 1 through 9 {
   .fw-#{$i}00 {
-    font-weight: $i*100 !important;
+    font-weight: $i * 100 !important;
   }
 }
 
@@ -578,18 +578,18 @@ html.lock,
 // width
 @for $i from 0 through 100 {
   .w-#{$i} {
-    width: $i*1px !important;
+    width: $i * 1px !important;
   }
 }
 @for $i from 1 through 40 {
-  .w-#{$i*5+100} {
-    width: $i*5px+100px !important;
+  .w-#{$i*5 + 100} {
+    width: $i * 5px+100px !important;
   }
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
     .w-#{$i}p {
-      width: $i*1% !important;
+      width: $i * 1% !important;
     }
   }
 }
@@ -602,7 +602,7 @@ html.lock,
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
     .w-#{$i}vw {
-      width: $i*1vw !important;
+      width: $i * 1vw !important;
     }
   }
 }
@@ -614,18 +614,18 @@ html.lock,
 }
 @for $i from 0 through 100 {
   .w-#{$i}f {
-    flex: 0 0 $i*1px !important;
+    flex: 0 0 $i * 1px !important;
   }
 }
 @for $i from 1 through 40 {
-  .w-#{$i*5+100}f {
-    flex: 0 0 $i*5px+100px !important;
+  .w-#{$i*5 + 100}f {
+    flex: 0 0 $i * 5px+100px !important;
   }
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
     .w-#{$i}fp {
-      flex: 0 0 $i*1% !important;
+      flex: 0 0 $i * 1% !important;
     }
   }
 }
@@ -639,18 +639,18 @@ html.lock,
 // height
 @for $i from 0 through 100 {
   .h-#{$i} {
-    height: $i*1px !important;
+    height: $i * 1px !important;
   }
 }
 @for $i from 1 through 40 {
-  .h-#{$i*5+100} {
-    height: $i*5px+100px !important;
+  .h-#{$i*5 + 100} {
+    height: $i * 5px+100px !important;
   }
 }
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
     .h-#{$i}p {
-      height: $i*1% !important;
+      height: $i * 1% !important;
     }
   }
 }
@@ -663,7 +663,7 @@ html.lock,
 @for $i from 0 through 100 {
   @if $i !=33 && $i !=66 {
     .h-#{$i}vh {
-      height:-vh(#{$i}) !important;
+      height: -vh(#{$i}) !important;
     }
   }
 }
@@ -689,157 +689,157 @@ html.lock,
 }
 @for $i from 0 through 50 {
   .mg-#{$i} {
-    margin: $i*1px !important;
+    margin: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mg-#{$i*5} {
-    margin: $i*5px !important;
+    margin: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .mg-#{$i}x {
-    margin-left: $i*1px !important;
-    margin-right: $i*1px !important;
+    margin-left: $i * 1px !important;
+    margin-right: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mg-#{$i*5}x {
-    margin-left: $i*5px !important;
-    margin-right: $i*5px !important;
+    margin-left: $i * 5px !important;
+    margin-right: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .mg-#{$i}y {
-    margin-top: $i*1px !important;
-    margin-bottom: $i*1px !important;
+    margin-top: $i * 1px !important;
+    margin-bottom: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mg-#{$i*5}y {
-    margin-top: $i*5px !important;
-    margin-bottom: $i*5px !important;
+    margin-top: $i * 5px !important;
+    margin-bottom: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .mt-#{$i} {
-    margin-top: $i*1px !important;
+    margin-top: $i * 1px !important;
   }
 }
 @for $i from 1 through 10 {
   .mt-m#{$i} {
-    margin-top: -$i*1px !important;
+    margin-top: -$i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mt-#{$i*5} {
-    margin-top: $i*5px !important;
+    margin-top: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .mb-#{$i} {
-    margin-bottom: $i*1px !important;
+    margin-bottom: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mb-#{$i*5} {
-    margin-bottom: $i*5px !important;
+    margin-bottom: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .ml-#{$i} {
-    margin-left: $i*1px !important;
+    margin-left: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .ml-#{$i*5} {
-    margin-left: $i*5px !important;
+    margin-left: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .mr-#{$i} {
-    margin-right: $i*1px !important;
+    margin-right: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .mr-#{$i*5} {
-    margin-right: $i*5px !important;
+    margin-right: $i * 5px !important;
   }
 }
 
 // padding
 @for $i from 0 through 50 {
   .pd-#{$i} {
-    padding: $i*1px !important;
+    padding: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pd-#{$i*5} {
-    padding: $i*5px !important;
+    padding: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pd-#{$i}x {
-    padding-left: $i*1px !important;
-    padding-right: $i*1px !important;
+    padding-left: $i * 1px !important;
+    padding-right: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pd-#{$i*5}x {
-    padding-left: $i*5px !important;
-    padding-right: $i*5px !important;
+    padding-left: $i * 5px !important;
+    padding-right: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pd-#{$i}y {
-    padding-top: $i*1px !important;
-    padding-bottom: $i*1px !important;
+    padding-top: $i * 1px !important;
+    padding-bottom: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pd-#{$i*5}y {
-    padding-top: $i*5px !important;
-    padding-bottom: $i*5px !important;
+    padding-top: $i * 5px !important;
+    padding-bottom: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pt-#{$i} {
-    padding-top: $i*1px !important;
+    padding-top: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pt-#{$i*5} {
-    padding-top: $i*5px !important;
+    padding-top: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pb-#{$i} {
-    padding-bottom: $i*1px !important;
+    padding-bottom: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pb-#{$i*5} {
-    padding-bottom: $i*5px !important;
+    padding-bottom: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pl-#{$i} {
-    padding-left: $i*1px !important;
+    padding-left: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pl-#{$i*5} {
-    padding-left: $i*5px !important;
+    padding-left: $i * 5px !important;
   }
 }
 @for $i from 0 through 50 {
   .pr-#{$i} {
-    padding-right: $i*1px !important;
+    padding-right: $i * 1px !important;
   }
 }
 @for $i from 11 through 20 {
   .pr-#{$i*5} {
-    padding-right: $i*5px !important;
+    padding-right: $i * 5px !important;
   }
 }
 
@@ -858,35 +858,35 @@ html.lock,
 
 // border
 .bd-none {
-  border: none !important
+  border: none !important;
 }
 .bd-l-none {
-  border-left: none !important
+  border-left: none !important;
 }
 .bd-r-none {
-  border-right: none !important
+  border-right: none !important;
 }
 .bd-t-none {
-  border-top: none !important
+  border-top: none !important;
 }
 .bd-b-none {
-  border-bottom: none !important
+  border-bottom: none !important;
 }
 @for $i from 0 through 10 {
   .bd-#{$i} {
-    border-width: $i*1px !important;
+    border-width: $i * 1px !important;
   }
   .bd-l-#{$i} {
-    border-left-width: $i*1px !important;
+    border-left-width: $i * 1px !important;
   }
   .bd-r-#{$i} {
-    border-right-width: $i*1px !important;
+    border-right-width: $i * 1px !important;
   }
   .bd-t-#{$i} {
-    border-top-width: $i*1px !important;
+    border-top-width: $i * 1px !important;
   }
   .bd-b-#{$i} {
-    border-bottom-width: $i*1px !important;
+    border-bottom-width: $i * 1px !important;
   }
 }
 .bd-solid {
@@ -899,7 +899,7 @@ html.lock,
 // opacity
 @for $i from 1 through 10 {
   .op-#{$i*10} {
-    opacity: $i*10 !important;
+    opacity: $i * 10 !important;
   }
 }
 
@@ -1016,7 +1016,7 @@ html.lock,
   }
 }
 .button .empty-place,
-[class*=ico-] .empty-place {
+[class*='ico-'] .empty-place {
   background: none;
 }
 
@@ -1044,7 +1044,7 @@ html.lock,
 //     .select,
 //     .textarea,
 //     .btn-toggle{transform:translateZ(0);}
-// } 
+// }
 
 .ios-img {
   display: none;

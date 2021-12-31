@@ -1,266 +1,297 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
-<title>교보증권 마이데이타</title>
-<link href="../../static/css/front.min.css" rel="stylesheet" />
-<script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
-<script type="text/javascript" src="../../static/js/ui-front.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+    <title>교보증권 마이데이타</title>
+    <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-front.js"></script>
 
-<script type="text/javascript" src="../../static/js/lib/micro-slider-1.0.9.custom.js"></script>
-</head>
-<body>
-<article id="wrap">
-	<div data-include-html="../../include/header.html" data-title="가이드"></div>
-	<div data-include-html="../../include/gnb.html"></div>
+    <script type="text/javascript" src="../../static/js/lib/micro-slider-1.0.9.custom.js"></script>
+  </head>
+  <body>
+    <article id="wrap">
+      <div data-include-html="../../include/header.html" data-title="가이드"></div>
+      <div data-include-html="../../include/gnb.html"></div>
 
-	<!-- 컨테이너 -->
-	<main id="container">
-		<!-- 컨텐츠 -->
-		<section id="contents">
-			<div class="tab-navi-menu">
-				<div class="tab-inner">
-					<i class="tab-line" aria-hidden="true"></i>
-					<ul class="tab-list">
-						<li class="tab"><a href="guide-dev.html"><span>개발자참고</span></a></li>
-						<li class="tab"><a href="guide-txt.html"><span>텍스트</span></a></li>
-						<li class="tab"><a href="guide-btn.html"><span>버튼</span></a></li>
-						<li class="tab"><a href="guide-form.html"><span>폼요소</span></a></li>
-						<li class="tab"><a href="guide-form2.html"><span>입력 UI</span></a></li>
-						<li class="tab"><a href="guide-list.html"><span>리스트</span></a></li>
-						<li class="tab"><a href="guide-table.html"><span>테이블</span></a></li>
-						<li class="tab"><a href="guide-popup.html"><span>팝업</span></a></li>
-						<li class="tab"><a href="guide-address.html"><span>주소검색</span></a></li>
-						<li class="tab"><a href="guide-animate.html"><span>애니메이션</span></a></li>
-						<li class="tab active"><a href="guide-etc.html"><span>기타</span></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="section pt-30">
-				<h2 class="gd__h1">micro-slider</h2>
-				<div>
-					<div class="micro-slider sample-micro-slider">
-						<div class="slider-item s1">1</div>
-						<div class="slider-item s2">2</div>
-						<div class="slider-item s3">3</div>
-						<div class="slider-item s4">4</div>
-						<div class="slider-item s5">5</div>
-						<div class="slider-item s6">6</div>
-					</div>
-				</div>
+      <!-- 컨테이너 -->
+      <main id="container">
+        <!-- 컨텐츠 -->
+        <section id="contents">
+          <div class="tab-navi-menu">
+            <div class="tab-inner">
+              <i class="tab-line" aria-hidden="true"></i>
+              <ul class="tab-list">
+                <li class="tab">
+                  <a href="guide-dev.html"><span>개발자참고</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-txt.html"><span>텍스트</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-btn.html"><span>버튼</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-form.html"><span>폼요소</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-form2.html"><span>입력 UI</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-list.html"><span>리스트</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-table.html"><span>테이블</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-popup.html"><span>팝업</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-address.html"><span>주소검색</span></a>
+                </li>
+                <li class="tab">
+                  <a href="guide-animate.html"><span>애니메이션</span></a>
+                </li>
+                <li class="tab active">
+                  <a href="guide-etc.html"><span>기타</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="section pt-30">
+            <h2 class="gd__h1">micro-slider</h2>
+            <div>
+              <div class="micro-slider sample-micro-slider">
+                <div class="slider-item s1">1</div>
+                <div class="slider-item s2">2</div>
+                <div class="slider-item s3">3</div>
+                <div class="slider-item s4">4</div>
+                <div class="slider-item s5">5</div>
+                <div class="slider-item s6">6</div>
+              </div>
+            </div>
 
-				<h2 class="gd__h1">ui-confetti</h2>
-				<div>
-					<div class="btn-wrap group">
-						<div class="flex">
-							<div class="radio btn">
-								<input type="radio" id="confettiBgTg1" name="confettiBgTg" value="0" checked><i aria-hidden="true"></i>
-								<label for="confettiBgTg1" class="lbl">배경 밝게</label>
-							</div>
-							<div class="radio btn">
-								<input type="radio" id="confettiBgTg2" name="confettiBgTg" value="1"><i aria-hidden="true"></i>
-								<label for="confettiBgTg2" class="lbl">배경 어둡게</label>
-							</div>
-						</div>
-					</div>
-					<br>
-					<div class="ui-confetti type1 gd__confetti"></div>
-					<div class="ui-confetti type2 gd__confetti"></div>
-					<div class="ui-confetti type3 gd__confetti"></div>
-					<div class="ui-confetti type4 gd__confetti"></div>
-					<div class="ui-confetti type5 gd__confetti"></div>
-					<div class="ui-confetti type6 gd__confetti"></div>
-					<div class="ui-confetti type7 gd__confetti"></div>
-					<div class="ui-confetti type8 gd__confetti"></div>
-				</div>
-				
-				<h2 class="gd__h1">ui-touch-rotate</h2>
-				<div style="overflow: hidden;">
-					<div class="ui-touch-rotate mg-40">
-						<div class="rotate-items">
-							<div class="rotate-item"><div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div></div>
-							<div class="rotate-item"><div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div></div>
-							<div class="rotate-item"><div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div></div>
-							<div class="rotate-item"><div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div></div>
-							<div class="rotate-item"><div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt=""></div></div>
-						</div>
-					</div>
-				</div>
-				<h2 class="gd__h1">character-face</h2>
-				<div class="character-face-wrap">
-					<div class="input"><input type="text" name="" placeholder="이름 입력"></div>
-					<div class="input"><input type="password" name="" placeholder="주민번호 입력"></div>
-					<br>
-					<div class="character-face">
-						<div class="body"></div>
-						<div class="face">
-							<div class="ears">
-								<div></div>
-								<div></div>
-							</div>
-							<div class="face-line">
-								<div class="face-in">
-									<div class="eyes">
-										<div class="eye left"></div>
-										<div class="eye right"></div>
-									</div>
-									<div class="mouse">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<br>
-					<div class="input"><input type="text" name="" placeholder="아이디 입력"></div>
-					<div class="input"><input type="password" name="" placeholder="비밀번호 입력"></div>
-					<div class="character-hidden"></div>
-				</div>
-				<h2 class="gd__h1">ui-tap-area</h2>
-				<div>
-					<div class="gd__tap_box coin ui-tap-area">
-						<h2>COIN BAAM!</h2>
-						<p>해당 영역을 탭 해주세요</p>
-					</div>
-					<div class="gd__tap_box heart ui-tap-area">
-						<h2>HEART BAAM!</h2>
-						<p>해당 영역을 탭 해주세요</p>
-					</div>
-					<div class="gd__tap_box confetti ui-tap-area">
-						<h2>CONFETTI BAAM!</h2>
-						<p>해당 영역을 탭 해주세요</p>
-					</div>
-				</div>
-				<h1 class="gd__h1">bottom swipe</h1>
-				<div>
-					<h2 class="gd__h2">select</h2>
-					<div>
-						<div class="select">
-							<select title="날짜 선택">
-								<option value="">기본 select</option>
-								<option value="1">1일</option>
-								<option value="2">2일</option>
-								<option value="3">3일</option>
-							</select>
-						</div>
+            <h2 class="gd__h1">ui-confetti</h2>
+            <div>
+              <div class="btn-wrap group">
+                <div class="flex">
+                  <div class="radio btn">
+                    <input type="radio" id="confettiBgTg1" name="confettiBgTg" value="0" checked /><i aria-hidden="true"></i>
+                    <label for="confettiBgTg1" class="lbl">배경 밝게</label>
+                  </div>
+                  <div class="radio btn">
+                    <input type="radio" id="confettiBgTg2" name="confettiBgTg" value="1" /><i aria-hidden="true"></i>
+                    <label for="confettiBgTg2" class="lbl">배경 어둡게</label>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="ui-confetti type1 gd__confetti"></div>
+              <div class="ui-confetti type2 gd__confetti"></div>
+              <div class="ui-confetti type3 gd__confetti"></div>
+              <div class="ui-confetti type4 gd__confetti"></div>
+              <div class="ui-confetti type5 gd__confetti"></div>
+              <div class="ui-confetti type6 gd__confetti"></div>
+              <div class="ui-confetti type7 gd__confetti"></div>
+              <div class="ui-confetti type8 gd__confetti"></div>
+            </div>
 
-						<div class="select">
-							<select title="날짜 선택" class="is-swipe">
-								<option value="">is-swipe</option>
-								<option value="1">1일</option>
-								<option value="2">2일</option>
-								<option value="3">3일</option>
-							</select>
-						</div>
+            <h2 class="gd__h1">ui-touch-rotate</h2>
+            <div style="overflow: hidden">
+              <div class="ui-touch-rotate mg-40">
+                <div class="rotate-items">
+                  <div class="rotate-item">
+                    <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  </div>
+                  <div class="rotate-item">
+                    <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  </div>
+                  <div class="rotate-item">
+                    <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  </div>
+                  <div class="rotate-item">
+                    <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  </div>
+                  <div class="rotate-item">
+                    <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="gd__h1">character-face</h2>
+            <div class="character-face-wrap">
+              <div class="input"><input type="text" name="" placeholder="이름 입력" /></div>
+              <div class="input"><input type="password" name="" placeholder="주민번호 입력" /></div>
+              <br />
+              <div class="character-face">
+                <div class="body"></div>
+                <div class="face">
+                  <div class="ears">
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div class="face-line">
+                    <div class="face-in">
+                      <div class="eyes">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                      </div>
+                      <div class="mouse"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="input"><input type="text" name="" placeholder="아이디 입력" /></div>
+              <div class="input"><input type="password" name="" placeholder="비밀번호 입력" /></div>
+              <div class="character-hidden"></div>
+            </div>
+            <h2 class="gd__h1">ui-tap-area</h2>
+            <div>
+              <div class="gd__tap_box coin ui-tap-area">
+                <h2>COIN BAAM!</h2>
+                <p>해당 영역을 탭 해주세요</p>
+              </div>
+              <div class="gd__tap_box heart ui-tap-area">
+                <h2>HEART BAAM!</h2>
+                <p>해당 영역을 탭 해주세요</p>
+              </div>
+              <div class="gd__tap_box confetti ui-tap-area">
+                <h2>CONFETTI BAAM!</h2>
+                <p>해당 영역을 탭 해주세요</p>
+              </div>
+            </div>
+            <h1 class="gd__h1">bottom swipe</h1>
+            <div>
+              <h2 class="gd__h2">select</h2>
+              <div>
+                <div class="select">
+                  <select title="날짜 선택">
+                    <option value="">기본 select</option>
+                    <option value="1">1일</option>
+                    <option value="2">2일</option>
+                    <option value="3">3일</option>
+                  </select>
+                </div>
 
-						<div class="select">
-							<select title="날짜 선택" class="is-swipe-move">
-								<option value="">is-swipe-move</option>
-								<option value="1">1일</option>
-								<option value="2">2일</option>
-								<option value="3">3일</option>
-							</select>
-						</div>
-					</div>
-					<h2 class="gd__h2">popup</h2>
-					<div>
-						<div class="btn-wrap">
-							<div class="flex">
-								<button class="button line" onclick="Layer.open('#bottomDialog1')">is-swipe</button>
-								<button class="button line" onclick="Layer.open('#bottomDialog2')">is-swipe-move</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h1 class="gd__h1">scss 샘플</h1>
-				<div style="position:relative;overflow:hidden;">
-					<div class="gd__box"></div>
-					<div class="gd__box-2"></div>
-					<section class="gd__box-2"></section>
-					<div class="gd__wrap2">
-						<div class="gd__box-2"></div>
-					</div>
-				</div>
-				<h1 class="gd__h1">역(하단시작) 스크롤 테스트</h1>
-				<div class="gd__scroll-area reverse-scroll-wrap">
-					<div class="reverse-scroll-inside">
-						<p>1번메세지 1번메세지</p>
-						<p>2번메세지 2번메세지</p>
-						<p>3번메세지 3번메세지</p>
-						<p>4번메세지 4번메세지</p>
-						<p>5번메세지 5번메세지</p>
-						<p>6번메세지 6번메세지</p>
-						<p>7번메세지 7번메세지</p>
-						<p>8번메세지 8번메세지</p>
-						<p>9번메세지 9번메세지</p>
-						<p>10번메세지 10번메세지</p>
-						<p>11번메세지 11번메세지</p>
-						<p>12번메세지 12번메세지</p>
-						<p>13번메세지 13번메세지</p>
-						<p>14번메세지 14번메세지</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- //컨텐츠 -->
+                <div class="select">
+                  <select title="날짜 선택" class="is-swipe">
+                    <option value="">is-swipe</option>
+                    <option value="1">1일</option>
+                    <option value="2">2일</option>
+                    <option value="3">3일</option>
+                  </select>
+                </div>
 
-		<!-- 팝업 -->
-		<div id="bottomDialog1" class="popup bottom is-swipe" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>하단팝업제목</h1>
-						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-					</div>
-				</div>
-			</article>
-		</div>
+                <div class="select">
+                  <select title="날짜 선택" class="is-swipe-move">
+                    <option value="">is-swipe-move</option>
+                    <option value="1">1일</option>
+                    <option value="2">2일</option>
+                    <option value="3">3일</option>
+                  </select>
+                </div>
+              </div>
+              <h2 class="gd__h2">popup</h2>
+              <div>
+                <div class="btn-wrap">
+                  <div class="flex">
+                    <button class="button line" onclick="Layer.open('#bottomDialog1')">is-swipe</button>
+                    <button class="button line" onclick="Layer.open('#bottomDialog2')">is-swipe-move</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1 class="gd__h1">scss 샘플</h1>
+            <div style="position: relative; overflow: hidden">
+              <div class="gd__box"></div>
+              <div class="gd__box-2"></div>
+              <section class="gd__box-2"></section>
+              <div class="gd__wrap2">
+                <div class="gd__box-2"></div>
+              </div>
+            </div>
+            <h1 class="gd__h1">역(하단시작) 스크롤 테스트</h1>
+            <div class="gd__scroll-area reverse-scroll-wrap">
+              <div class="reverse-scroll-inside">
+                <p>1번메세지 1번메세지</p>
+                <p>2번메세지 2번메세지</p>
+                <p>3번메세지 3번메세지</p>
+                <p>4번메세지 4번메세지</p>
+                <p>5번메세지 5번메세지</p>
+                <p>6번메세지 6번메세지</p>
+                <p>7번메세지 7번메세지</p>
+                <p>8번메세지 8번메세지</p>
+                <p>9번메세지 9번메세지</p>
+                <p>10번메세지 10번메세지</p>
+                <p>11번메세지 11번메세지</p>
+                <p>12번메세지 12번메세지</p>
+                <p>13번메세지 13번메세지</p>
+                <p>14번메세지 14번메세지</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- //컨텐츠 -->
 
-		<div id="bottomDialog2" class="popup bottom is-swipe touch-move" role="dialog" aria-hidden="true">
-			<article class="pop-wrap">
-				<div class="pop-head">
-					<div>
-						<h1>하단팝업제목</h1>
-						<a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-					</div>
-				</div>
-				<div class="pop-body">
-					<div class="section">
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-						텍스트 <br>
-					</div>
-				</div>
-			</article>
-		</div>
-		<!-- //팝업 -->
-	</main>
-	<!-- 컨테이너 -->
+        <!-- 팝업 -->
+        <div id="bottomDialog1" class="popup bottom is-swipe" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>하단팝업제목</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+              </div>
+            </div>
+          </article>
+        </div>
 
-	<div data-include-html="../../include/footer.html"></div>
-</article>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  microSliderInit();
-});
-const microSliderInit = function(){
-  const __ms = document.querySelector('.micro-slider');
-  const __msSlider = new MicroSlider(__ms, { 
-		indicators: true, 
-		// padding: 150,
-		perspectiveFactor : 2.5,
-	});
-	/*
+        <div id="bottomDialog2" class="popup bottom is-swipe touch-move" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>하단팝업제목</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+                텍스트 <br />
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- //팝업 -->
+      </main>
+      <!-- 컨테이너 -->
+
+      <div data-include-html="../../include/footer.html"></div>
+    </article>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        microSliderInit();
+      });
+      const microSliderInit = function () {
+        const __ms = document.querySelector('.micro-slider');
+        const __msSlider = new MicroSlider(__ms, {
+          indicators: true,
+          // padding: 150,
+          perspectiveFactor: 2.5
+        });
+        /*
 	let __msTimer = 3000;
 	let __msAutoplay = null;
   const __msAutoplayStart = function(){
@@ -294,17 +325,17 @@ const microSliderInit = function(){
     __msAutoplayStart();
   });
 	*/
-};
+      };
 
-uiForm.character();
-$('input[name=confettiBgTg]').click(function(){
-	const $val = $('input[name=confettiBgTg]:checked').val()
-	if($val === '1'){
-		$('.gd__confetti').addClass('dark');
-	}else{
-		$('.gd__confetti').removeClass('dark');
-	}
-});
-</script>
-</body>
+      uiForm.character();
+      $('input[name=confettiBgTg]').click(function () {
+        const $val = $('input[name=confettiBgTg]:checked').val();
+        if ($val === '1') {
+          $('.gd__confetti').addClass('dark');
+        } else {
+          $('.gd__confetti').removeClass('dark');
+        }
+      });
+    </script>
+  </body>
 </html>

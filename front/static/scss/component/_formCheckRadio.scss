@@ -1,6 +1,6 @@
 //checkbox, radio
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   margin: 0;
 }
 div.radio,
@@ -92,7 +92,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       left: auto;
       right: 0;
     }
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       vertical-align: top;
       margin-top: 4px;
     }
@@ -283,7 +283,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       line-height: 20px;
       padding-top: 0;
       padding-bottom: 0;
-      [class*="i-ico-"] {
+      [class*='i-ico-'] {
         margin-top: 2px;
       }
     }

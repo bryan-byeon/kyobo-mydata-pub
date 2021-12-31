@@ -1,5 +1,5 @@
 /* @mixin */
-@use "sass:selector";
+@use 'sass:selector';
 
 @mixin unify-parent($child) {
   @at-root #{selector.unify(&, $child)} {
@@ -28,7 +28,7 @@
   }
 }
 @mixin sticky {
-  @supports ((position:-webkit-sticky) or (position:sticky)) {
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
     @content;
   }
 }
@@ -40,11 +40,10 @@
 
 @mixin ellipsis($line: 1) {
   overflow: hidden;
-  @if($line==1) {
+  @if ($line==1) {
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-  @else {
+  } @else {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $line;
@@ -108,22 +107,20 @@
 
 @mixin iosTop($key, $value, $miuns: false) {
   // #{$key}: $value;
-  @if($miuns) {
+  @if ($miuns) {
     #{$key}: -iosConstant($value, true, true);
     #{$key}: -iosEnv($value, true, true);
-  }
-  @else {
+  } @else {
     #{$key}: -iosConstant($value, true, false);
     #{$key}: -iosEnv($value, true, false);
   }
 }
 @mixin iosBottom($key, $value, $miuns: false) {
   // #{$key}: $value;
-  @if($miuns) {
+  @if ($miuns) {
     #{$key}: -iosConstant($value, false, true);
     #{$key}: -iosEnv($value, false, true);
-  }
-  @else {
+  } @else {
     #{$key}: -iosConstant($value, false, false);
     #{$key}: -iosEnv($value, false, false);
   }

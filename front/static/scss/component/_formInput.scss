@@ -1,170 +1,172 @@
 // input
-.input{
-	position:relative;
-	display:flex;
-	width:100%;
-	background:#fff;
-	border:1px solid #ddd;
-	border-radius:4px;
-	color:#222;
-	align-items:center;
-	transition:border 0.3s;
-	&.readonly,
-	&.disabled{
-		background: #f8f8f8;
-	}
-	&.focus{
-		border-color: #222;
-	}
-	&.is-error{
-		border-color: #dc512f;
-		&:not(.focus){
-			input{
-				background-image: url(../images/icon/ico-error@3x.png);
-				background-repeat: no-repeat;
-				background-position: right 12px center;
-				background-size: 16px auto;
-			}
-		}
-	}
-	&.is-success{
-		border-color: var(--theme-color);
-	}
-	&.disabled{
-		border-color: #eee;
-		background-color: #f8f8f8;
-	}
-	input:-internal-autofill-selected{background:none;}
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button{
-		-webkit-appearance:none;
-		margin:0;
-	}
-	input {
-		width:100%;
-		flex: 1 1 auto;
-		height:46px;
-		padding:0 8px;
-		font-size:var(--base-font-size);
-		border:0 none;
-		color:inherit;
-		background:none;
-		-webkit-appearance:none;
-		border-radius:4px;
-		outline: none;
-		&:first-child{
-			padding-left:16px;
-		}
-		&:last-child{
-			padding-right:16px;
-		}
-		// &[readonly],
-		&:disabled{
-			background: #f8f8f8;
-		}
-		&:disabled{
-			color: var(--placeholder-txt-color);
-		}
-	}
-	&.small{
-		input{
-			height: 30px;
-			font-size: 14px;
-			&:first-child{
-				padding-left:8px;
-			}
-			&:last-child{
-				padding-right:8px;
-			}
-		}
-	}
-	&.disabled{
-		input{
-			background: #f8f8f8;
-		}
-	}
-	> div:last-child {
-		margin-right:12px;
-	}
-	.button{
-		flex: 0 0 auto;
-	}
-	> .button:last-child {
-		margin-right:8px;
-	}
-	.timer{
-		color:#f0431a;
-		font-size:12px;
-		white-space:nowrap;
-		font-weight: bold;
-		margin-right: 12px;
-	}
-	.btn-inp-del {
-		@include text-blind;
-		position:relative;
-		display:block;
-		width:16px;
-		height:16px;
-		flex:0 0 16px;
-		margin-right: 8px;
-		overflow:hidden;
-		background:url(../images/icon/ico-input-del@3x.png) no-repeat center center / contain;
-		&:last-child{
-			margin-right: 12px;
-		}
-		// + .btn-inp-pwd{
-		// 	margin-left: 8px;
-		// }
-	}
-	.btn-inp-pwd{
-		@include text-blind;
-		position:relative;
-		display:block;
-		width:16px;
-		height:16px;
-		flex:0 0 16px;
-		margin-right: 16px;
-		overflow:hidden;
-		background: url(../images/icon/Ico-eye-off@3x.png) no-repeat center center / contain;
-	}
+.input {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #222;
+  align-items: center;
+  transition: border 0.3s;
+  &.readonly,
+  &.disabled {
+    background: #f8f8f8;
+  }
+  &.focus {
+    border-color: #222;
+  }
+  &.is-error {
+    border-color: #dc512f;
+    &:not(.focus) {
+      input {
+        background-image: url(../images/icon/ico-error@3x.png);
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px auto;
+      }
+    }
+  }
+  &.is-success {
+    border-color: var(--theme-color);
+  }
+  &.disabled {
+    border-color: #eee;
+    background-color: #f8f8f8;
+  }
+  input:-internal-autofill-selected {
+    background: none;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input {
+    width: 100%;
+    flex: 1 1 auto;
+    height: 46px;
+    padding: 0 8px;
+    font-size: var(--base-font-size);
+    border: 0 none;
+    color: inherit;
+    background: none;
+    -webkit-appearance: none;
+    border-radius: 4px;
+    outline: none;
+    &:first-child {
+      padding-left: 16px;
+    }
+    &:last-child {
+      padding-right: 16px;
+    }
+    // &[readonly],
+    &:disabled {
+      background: #f8f8f8;
+    }
+    &:disabled {
+      color: var(--placeholder-txt-color);
+    }
+  }
+  &.small {
+    input {
+      height: 30px;
+      font-size: 14px;
+      &:first-child {
+        padding-left: 8px;
+      }
+      &:last-child {
+        padding-right: 8px;
+      }
+    }
+  }
+  &.disabled {
+    input {
+      background: #f8f8f8;
+    }
+  }
+  > div:last-child {
+    margin-right: 12px;
+  }
+  .button {
+    flex: 0 0 auto;
+  }
+  > .button:last-child {
+    margin-right: 8px;
+  }
+  .timer {
+    color: #f0431a;
+    font-size: 12px;
+    white-space: nowrap;
+    font-weight: bold;
+    margin-right: 12px;
+  }
+  .btn-inp-del {
+    @include text-blind;
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    margin-right: 8px;
+    overflow: hidden;
+    background: url(../images/icon/ico-input-del@3x.png) no-repeat center center / contain;
+    &:last-child {
+      margin-right: 12px;
+    }
+    // + .btn-inp-pwd{
+    // 	margin-left: 8px;
+    // }
+  }
+  .btn-inp-pwd {
+    @include text-blind;
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    margin-right: 16px;
+    overflow: hidden;
+    background: url(../images/icon/Ico-eye-off@3x.png) no-repeat center center / contain;
+  }
 
-	input[type="text"] ~ .btn-inp-pwd{
-		background-image: url(../images/icon/Ico-eye-on@3x.png);
-	}
-	
-	&+.flex,
-	&+.input,
-	&+.select,
-	&+.textarea{
-		margin-top:6px;
-	}
+  input[type='text'] ~ .btn-inp-pwd {
+    background-image: url(../images/icon/Ico-eye-on@3x.png);
+  }
+
+  & + .flex,
+  & + .input,
+  & + .select,
+  & + .textarea {
+    margin-top: 6px;
+  }
 }
 
-.datepicker-time{
-	display: flex;
-	> div{
-		+ div{
-			margin-top: 0 !important;
-			margin-left: 4px;
-		}
-	}
-	.input{
-		flex: 0 0 45%;
-	}
+.datepicker-time {
+  display: flex;
+  > div {
+    + div {
+      margin-top: 0 !important;
+      margin-left: 4px;
+    }
+  }
+  .input {
+    flex: 0 0 45%;
+  }
 }
-@media (max-width: 359px){
-	.datepicker-time{
-		display: flex;
-		flex-wrap: wrap;
-		.input{
-			flex: 0 0 100%;
-			margin-bottom: 8px;
-			+.select{
-				margin-left: 0;
-			}
-		}
-		.select{
-			width: calc(50% - 2px);
-		}
-	}
+@media (max-width: 359px) {
+  .datepicker-time {
+    display: flex;
+    flex-wrap: wrap;
+    .input {
+      flex: 0 0 100%;
+      margin-bottom: 8px;
+      + .select {
+        margin-left: 0;
+      }
+    }
+    .select {
+      width: calc(50% - 2px);
+    }
+  }
 }

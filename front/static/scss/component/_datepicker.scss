@@ -36,7 +36,7 @@ jq-Datepicker
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 299;
 }
 .ui-datepicker {
@@ -318,8 +318,6 @@ jq-Datepicker
       }
     }
   }
-
-
 }
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-close {
   display: none;
@@ -342,7 +340,7 @@ jq-Datepicker
   }
   .ui-datepicker-group table {
     width: 95%;
-    margin: 0 auto .4em;
+    margin: 0 auto 0.4em;
   }
   .ui-datepicker-group-last .ui-datepicker-header,
   .ui-datepicker-group-middle .ui-datepicker-header {

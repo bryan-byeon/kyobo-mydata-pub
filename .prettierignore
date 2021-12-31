@@ -1,0 +1,5 @@
+**/*.min.js
+**/admin/static/**/*
+**/lib/*
+_font.scss
+front.scss
