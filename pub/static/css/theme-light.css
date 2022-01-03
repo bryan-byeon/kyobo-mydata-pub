@@ -28,6 +28,4 @@
   .g_nav>ul>li>ul{border-width:1px 0;border-style:solid;border-color:rgba(255,255,255,0.3);background-color:rgba(255,255,255,0.2);box-shadow:none}
   .g_nav>ul>li>ul>li>a{color:rgba(255,255,255,0.5)}
   .g_nav>ul>li>ul>li:hover>a, .g_nav>ul>li>ul>li.active>a{color:#fff}
-  
-  
 }
