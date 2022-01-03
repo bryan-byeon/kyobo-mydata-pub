@@ -831,16 +831,26 @@ const uiCommon = {
       $(window).on('scroll', function () {
         if ($('html').hasClass('lock')) return false;
         const $scrollTop = $(this).scrollTop();
+
         $target.each(function () {
           if ($(this).closest('.' + Layer.popClass).length) return;
           const $this = $(this);
-          let $offsetTop = Math.max(0, getOffset(this).top);
-          if ($scrollTop > $offsetTop) {
-            $(this).addClass('top-fixed');
-            if ($(this).attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
+          let $topMargin = 0;
+          if ($('.top-fixed').length) {
+            $('.top-fixed').each(function () {
+              if ($this[0] == $(this)[0]) return false;
+              $topMargin += $(this).children().outerHeight();
+            });
+          }
+          let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
+          if ($scrollTop + $topMargin > $offsetTop) {
+            $this.data('top', $offsetTop);
+            $this.addClass('top-fixed');
+            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
           } else {
-            $(this).removeClass('top-fixed');
-            if ($(this).attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
+            $this.removeData('top');
+            $this.removeClass('top-fixed');
+            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
           }
         });
       });
