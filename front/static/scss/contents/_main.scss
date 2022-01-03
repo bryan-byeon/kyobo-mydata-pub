@@ -318,14 +318,17 @@
   }
 }
 .main-notice-list {
-  li + li {
-    margin-top: 12px;
-  }
-  a {
-    display: block;
+  li {
     font-size: 14px;
     line-height: 20px;
-    @include ellipsis();
+    a,
+    div {
+      display: block;
+      @include ellipsis();
+    }
+    + li {
+      margin-top: 12px;
+    }
   }
 }
 
@@ -531,7 +534,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       + .tit {
         margin-top: 20px;
       }

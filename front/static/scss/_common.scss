@@ -1008,16 +1008,36 @@ html.lock,
 }
 
 // empty
-.empty-place {
+.empty-txt {
+  pointer-events: none;
+  cursor: pointer;
   color: transparent !important;
-  background: linear-gradient(to bottom, transparent 0% 25%, #eee 25% 75%, transparent 75% 100%);
+  word-break: break-all !important;
+  background: linear-gradient(to bottom, transparent 0% 25%, #ddd 25% 75%, transparent 75% 100%);
+  animation: emptyOpacity 2s linear infinite alternate;
   * {
-    color: transparent !important;
+    opacity: 0 !important;
   }
 }
-.button .empty-place,
-[class*='ico-'] .empty-place {
-  background: none;
+.empty-bg {
+  pointer-events: none;
+  cursor: pointer;
+  color: transparent !important;
+  background: #ddd !important;
+  border-color: #ddd !important;
+  word-break: break-all !important;
+  animation: emptyOpacity 2s linear infinite alternate;
+  * {
+    opacity: 0 !important;
+  }
+}
+@keyframes emptyOpacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
 }
 
 .hr-line {
