@@ -16,7 +16,7 @@
         // text-overflow:ellipsis;
       }
       &:not(.no-title) + .pop-body {
-        padding-top: 68px;
+        padding-top: 60px;
       }
     }
     .pop-body {
@@ -47,7 +47,7 @@
   > div {
     display: flex;
     align-items: center;
-    min-height: 68px;
+    min-height: 60px;
     padding: 10px 50px;
     text-align: center;
     margin: 0;
@@ -166,7 +166,7 @@
     }
     .pop-head {
       &:not(.no-title) + .pop-body {
-        padding-top: 68px;
+        padding-top: 60px;
       }
     }
     .pop-body {
@@ -187,7 +187,7 @@
         background: transparent;
       }
       .pop-body {
-        padding: 68px 0;
+        padding: 60px 0;
         height: 100%;
         overflow: hidden;
       }
@@ -372,7 +372,7 @@
         text-align: left;
       }
       &:not(.no-title) + .pop-body {
-        padding-top: 68px;
+        padding-top: 60px;
       }
     }
   }

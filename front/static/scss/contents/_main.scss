@@ -584,6 +584,9 @@
 .match-content {
   position: relative;
   background: #fff;
+  margin-top: -40px;
+  padding-top: 40px;
+  border-radius: 40px 40px 0 0;
   .title-bar {
     position: sticky;
     top: 60px;
@@ -600,7 +603,7 @@
 .match-content-top {
   position: absolute;
   left: 0;
-  top: -50px;
+  top: -10px;
   width: 100%;
   height: 50px;
   padding-top: 10px;
@@ -608,7 +611,7 @@
   &.top-fixed {
     position: fixed;
     top: 60px;
-    background: #ff7970;
+    background: linear-gradient(90deg, rgba(255, 169, 118, 1) 0%, rgba(255, 121, 112, 1) 100%);
     pointer-events: none;
   }
   &:before {

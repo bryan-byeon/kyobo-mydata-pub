@@ -842,13 +842,18 @@ const uiCommon = {
               $topMargin += $(this).children().outerHeight();
             });
           }
+          let $topEl = $this;
           let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
           if ($scrollTop + $topMargin > $offsetTop) {
             $this.data('top', $offsetTop);
             $this.addClass('top-fixed');
-            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
+            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+            $topEl.css('top', $topMargin);
+            if ($this.css('position')) if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
           } else {
             $this.removeData('top');
+            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+            $topEl.removeCss('top');
             $this.removeClass('top-fixed');
             if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
           }
@@ -3472,6 +3477,26 @@ const uiScroll = {
       });
     });
   },
+  debounce: function (fn, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(this, arguments);
+      }, delay);
+    };
+  },
+  throttle: function (fn, delay) {
+    let timer;
+    return function () {
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          fn.apply(this, arguments);
+        }, delay);
+      }
+    };
+  },
   init: function () {
     uiScroll.hidden();
     uiScroll.loading();
@@ -5413,7 +5438,8 @@ const uiScrollIn = {
 
       uiScrollIn.ready($animations);
       $(window).on('scroll resize', function () {
-        uiScrollIn.checkInView($animations);
+        // uiScroll.throttle(uiScrollIn.checkInView($animations), 200);
+        uiScroll.debounce(uiScrollIn.checkInView($animations), 100);
       });
 
       /*
