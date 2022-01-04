@@ -3002,46 +3002,69 @@ const uiButton = {
   },
   tap: function () {
     let $idx = 0;
-    $('.ui-tap-area').click(function (e) {
+    const appendItem = function (length, type) {
+      let $append = '';
+      let rdLeft;
+      let rdTop;
+      for (let i = 0; i < length; i++) {
+        if (type === 'heart') {
+          rdLeft = length <= 20 ? randomNumber(0, 20, 0) * 8 : randomNumber(0, length, 0) * (160 / length);
+          rdLeft -= 80;
+          rdTop = length <= 10 ? randomNumber(0, 10, 0) * 5 : randomNumber(0, length, 0) * (50 / length);
+        } else {
+          rdLeft = length <= 40 ? randomNumber(0, 40, 0) * 5 : randomNumber(0, length, 0) * (200 / length);
+          rdLeft -= 100;
+          if (type === 'confetti') {
+            rdTop = length <= 12 ? randomNumber(0, 12, 0) * 5 : randomNumber(0, length, 0) * (60 / length);
+          } else {
+            rdTop = length <= 15 ? randomNumber(0, 15, 0) * 10 : randomNumber(0, length, 0) * (150 / length);
+          }
+        }
+        $append += '<i style="left:' + rdLeft + 'px;top:' + rdTop * -1 + 'px;" class="item-' + ((i % 3) + 1) + '"></i>';
+        // $append += '<i></i>';
+      }
+      return $append;
+    };
+    const eventType = isMobile.any() ? 'touchstart' : 'click';
+    $('.ui-tap-area').on(eventType, function (e) {
       // e.preventDefault();
       const $this = $(this);
       const $thisTop = $this.offset().top;
       const $thisLeft = $this.offset().left;
       const $sclTop = $(window).scrollTop();
       const $sclLeft = $(window).scrollLeft();
-      const $tapY = e.clientY;
-      const $tapX = e.clientX;
+      const $tapY = e.targetTouches.length ? e.targetTouches[0].clientY : e.clientY;
+      const $tapX = e.targetTouches.length ? e.targetTouches[0].clientX : e.clientX;
       const $tapTop = $tapY - $thisTop + $sclTop;
       const $tapLeft = $tapX - $thisLeft + $sclLeft;
       let $appendLength = $this.data('append');
       if ($appendLength === undefined) $appendLength = $this.hasClass('confetti') ? 20 : 10;
-      let $append = '';
-      let rdLeft;
-      let rdTop;
-      for (let i = 0; i < $appendLength; i++) {
-        if ($this.hasClass('heart')) {
-          rdLeft = $appendLength <= 20 ? randomNumber(0, 20, 0) * 8 : randomNumber(0, $appendLength, 0) * (160 / $appendLength);
-          rdLeft -= 80;
-          rdTop = $appendLength <= 10 ? randomNumber(0, 10, 0) * 5 : randomNumber(0, $appendLength, 0) * (50 / $appendLength);
-        } else {
-          rdLeft = $appendLength <= 40 ? randomNumber(0, 40, 0) * 5 : randomNumber(0, $appendLength, 0) * (200 / $appendLength);
-          rdLeft -= 100;
-          if ($this.hasClass('confetti')) {
-            rdTop = $appendLength <= 12 ? randomNumber(0, 12, 0) * 5 : randomNumber(0, $appendLength, 0) * (60 / $appendLength);
-          } else {
-            rdTop = $appendLength <= 15 ? randomNumber(0, 15, 0) * 10 : randomNumber(0, $appendLength, 0) * (150 / $appendLength);
-          }
-        }
-        $append += '<i style="left:' + rdLeft + 'px;top:' + rdTop * -1 + 'px;" class="item-' + ((i % 3) + 1) + '"></i>';
-        // $append += '<i></i>';
-      }
+
+      let $typeClass;
+      if ($this.hasClass('coin')) $typeClass = 'coin';
+      if ($this.hasClass('heart')) $typeClass = 'heart';
+      if ($this.hasClass('confetti')) $typeClass = 'confetti';
+      const $append = appendItem($appendLength, $typeClass);
       const $itemClass = 'ui-tap-item__' + $idx;
       $idx += 1;
-      const $item = '<div class="ui-tap-item ' + $itemClass + '" style="top:' + $tapTop + 'px;left:' + $tapLeft + 'px;">' + $append + '</div>';
+      const $item = '<div class="ui-tap-item active ' + $typeClass + ' ' + $itemClass + '" style="top:' + $tapTop + 'px;left:' + $tapLeft + 'px;">' + $append + '</div>';
       $(this).append($item);
       $('.' + $itemClass).one('animationend', function (e) {
         $('.' + $itemClass).remove();
       });
+    });
+    $('.ui-tap-item').each(function () {
+      const $this = $(this);
+      let $typeClass;
+      let $length = 10;
+      if ($this.hasClass('coin')) $typeClass = 'coin';
+      if ($this.hasClass('heart')) $typeClass = 'heart';
+      if ($this.hasClass('confetti')) {
+        $typeClass = 'confetti';
+        $length = 20;
+      }
+      const $append = appendItem($length, $typeClass);
+      $this.append($append);
     });
   },
   etc: function () {

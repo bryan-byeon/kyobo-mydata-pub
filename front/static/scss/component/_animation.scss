@@ -1132,91 +1132,100 @@
 .ui-tap-area {
   position: relative;
   overflow: hidden;
-  .ui-tap-item {
-    display: block;
+}
+.ui-tap-item {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  i {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    pointer-events: none;
-    i {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
   }
   &.coin {
-    .ui-tap-item {
-      width: 30px;
-      height: 30px;
-      margin: -15px 0 0 -15px;
-      opacity: 0;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    opacity: 0;
+    i {
+      background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
+    }
+    &.active {
       animation: tapGravity 1s ease-in backwards;
       i {
-        background: url(../images/guide/confetti_coin.png) no-repeat center center / contain;
         animation: tapBang 1s forwards, tapBangSize 1s forwards;
       }
     }
   }
   &.heart {
-    .ui-tap-item {
-      width: 30px;
-      height: 30px;
-      margin: -15px 0 0 -15px;
-      opacity: 0;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    opacity: 0;
+    i {
+      background: url(../images/guide/confetti_heart1.png) no-repeat center center / contain;
+    }
+    &.active {
       animation: tapGravity2 1s ease-out backwards;
       i {
-        background: url(../images/guide/confetti_heart1.png) no-repeat center center / contain;
         animation: tapBang 1s forwards, tapBangSize 1s forwards;
       }
     }
   }
   &.confetti {
-    .ui-tap-item {
-      width: 10px;
-      height: 10px;
-      margin: -5px 0 0 -5px;
-      opacity: 0;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    opacity: 0;
+    i {
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+      &:nth-child(5n + 0):before {
+        background: #ff718d;
+      }
+      &:nth-child(5n + 1):before {
+        background: #29cdff;
+      }
+      &:nth-child(5n + 2):before {
+        background: #78ff44;
+      }
+      &:nth-child(5n + 3):before {
+        background: #a864fd;
+      }
+      &:nth-child(5n + 4):before {
+        background: #fdff6a;
+      }
+    }
+    .item-1 {
+      &:before {
+        transform: skewX(-40deg);
+      }
+    }
+    .item-2 {
+      &:before {
+        transform: skewX(50deg);
+      }
+    }
+    .item-3 {
+      &:before {
+        transform: skewX(-60deg);
+      }
+    }
+    &.active {
       animation: tapGravity3 1s ease-in backwards;
       i {
         animation: tapBang 1s forwards, tapBangSize 1s forwards;
-        &:before {
-          content: '';
-          display: block;
-          padding-top: 100%;
-        }
-        &:nth-child(5n + 0):before {
-          background: #ff718d;
-        }
-        &:nth-child(5n + 1):before {
-          background: #29cdff;
-        }
-        &:nth-child(5n + 2):before {
-          background: #78ff44;
-        }
-        &:nth-child(5n + 3):before {
-          background: #a864fd;
-        }
-        &:nth-child(5n + 4):before {
-          background: #fdff6a;
-        }
-      }
-      .item-1 {
-        &:before {
-          transform: skewX(-40deg);
-        }
-      }
-      .item-2 {
-        &:before {
-          transform: skewX(50deg);
-        }
-      }
-      .item-3 {
-        &:before {
-          transform: skewX(-60deg);
-        }
       }
     }
   }
 }
 .gd__tap_box {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1224,6 +1233,7 @@
   background: #f1f1f1;
   height: -vh(50, 100);
   user-select: none;
+  overflow: hidden;
   > * {
     pointer-events: none;
   }
@@ -1233,6 +1243,9 @@
   html.ios & {
     @include iosTop(padding-top, 0);
     @include iosBottom(padding-bottom, 0);
+  }
+  &.ty2 {
+    height: -vh(30);
   }
 }
 @keyframes tapBang {
