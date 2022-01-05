@@ -91,6 +91,9 @@
       <div data-include-html="../../include/footer.html"></div>
     </article>
     <script>
+      const $chartData = [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6];
+      var $max = Math.max.apply(null, $chartData);
+
       Highcharts.chart('chart1', {
         chart: {
           type: 'areaspline',
@@ -107,28 +110,50 @@
           categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
         },
         yAxis: {
+          // max: $max,
           labels: {
             style: {
               color: 'rgba(255,255,255,0.7)'
-            }
+            },
+            x: -6
+            //padding: 3
           },
           lineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineDashStyle: 'Dot',
+          tickAmount: 5,
           title: false
         },
-        // tooltip: {
-        //   shared: true,
-        //   valueSuffix: ' units'
-        // },
+        tooltip: {
+          enabled: false
+        },
         credits: {
           enabled: false
         },
         plotOptions: {
           areaspline: {
             lineColor: '#E4FF96',
+            states: {
+              hover: {
+                enabled: false
+              },
+              inactive: {
+                enabled: false
+              },
+              select: {
+                enabled: false
+              }
+            },
             marker: {
-              enabled: false
+              enabled: false,
+              states: {
+                hover: {
+                  enabled: false
+                },
+                select: {
+                  enabled: false
+                }
+              }
             },
             fillOpacity: 1,
             fillColor: {
@@ -147,7 +172,7 @@
         },
         series: [
           {
-            data: [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6]
+            data: $chartData
           }
         ]
       });
