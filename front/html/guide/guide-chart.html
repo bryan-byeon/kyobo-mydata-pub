@@ -19,8 +19,7 @@
         background: linear-gradient(156.21deg, #5f6fff 0%, #a26cff 100%);
       }
       .chart {
-        height: 150px;
-        margin: 0 -15px;
+        height: 100px;
         background: transparent;
       }
     </style>
@@ -89,12 +88,12 @@
           </div>
           <br />
           <div class="chart-top">
+            <div id="chart4" class="chart"></div>
+          </div>
+          <br />
+          <div class="chart-top">
             <div id="chart3" class="chart"></div>
           </div>
-          <!-- <br />
-          <div class="chart-top">
-            <div id="chart4"></div>
-          </div> -->
         </section>
         <!-- //컨텐츠 -->
       </main>
@@ -104,12 +103,14 @@
     </article>
     <script>
       const $chartData = [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6];
-      var $max = Math.max.apply(null, $chartData);
-
+      const $chartData2 = [2000000, 1800000, 3500000, 2000000, 4300000, 5500000, 6500000, 6800000, 6400000, 6200000, 8000000, 6000000];
+      const $max = Math.max.apply(null, $chartData);
+      console.log($max);
       Highcharts.chart('chart1', {
         chart: {
           type: 'areaspline',
-          backgroundColor: 'rgba(255,255,255,0)'
+          backgroundColor: 'rgba(255,255,255,0)',
+          spacing: [10, 0, 0, 0]
         },
         title: false,
         legend: false,
@@ -122,18 +123,15 @@
           categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
         },
         yAxis: {
-          // max: $max,
           labels: {
             style: {
               color: 'rgba(255,255,255,0.7)'
             },
             x: -6
-            //padding: 3
           },
           lineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineDashStyle: 'Dot',
-          // tickAmount: 5,
           title: false
         },
         tooltip: {
@@ -192,7 +190,8 @@
       Highcharts.chart('chart2', {
         chart: {
           type: 'areaspline',
-          backgroundColor: 'rgba(255,255,255,0)'
+          backgroundColor: 'rgba(255,255,255,0)',
+          spacing: [10, 0, 0, 0]
         },
         title: false,
         legend: false,
@@ -211,7 +210,6 @@
               color: 'rgba(255,255,255,0.7)'
             },
             x: -6
-            //padding: 3
           },
           lineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineColor: 'rgba(255, 255, 255, 0.35)',
@@ -272,10 +270,11 @@
         ]
       });
 
-      Highcharts.chart('chart3', {
+      Highcharts.chart('chart4', {
         chart: {
           type: 'areaspline',
-          backgroundColor: 'rgba(255,255,255,0)'
+          backgroundColor: 'rgba(255,255,255,0)',
+          spacing: [10, 0, 0, 0]
         },
         title: false,
         legend: false,
@@ -285,23 +284,114 @@
               color: 'rgba(255,255,255,0.7)'
             }
           },
-          categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12월']
+          categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
         },
         yAxis: {
-          title: {
-            text: '단위 천만원'
-          },
+          type: 'logarithmic',
           labels: {
             style: {
               color: 'rgba(255,255,255,0.7)'
+            },
+            x: -6
+          },
+          lineColor: 'rgba(255, 255, 255, 0.35)',
+          gridLineColor: 'rgba(255, 255, 255, 0.35)',
+          gridLineDashStyle: 'Dot',
+          title: false
+        },
+        tooltip: {
+          enabled: false
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          areaspline: {
+            lineColor: '#E4FF96',
+            states: {
+              hover: {
+                enabled: false
+              },
+              inactive: {
+                enabled: false
+              },
+              select: {
+                enabled: false
+              }
+            },
+            marker: {
+              enabled: false,
+              states: {
+                hover: {
+                  enabled: false
+                },
+                select: {
+                  enabled: false
+                }
+              }
+            },
+            fillOpacity: 1,
+            fillColor: {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+              },
+              stops: [
+                [0, Highcharts.color('#E4FF96').setOpacity(0.6).get('rgba')],
+                [1, Highcharts.color('#E4FF96').setOpacity(0).get('rgba')]
+              ]
             }
-            //padding: 3
+          }
+        },
+        series: [
+          {
+            data: $chartData2
+          }
+        ]
+      });
+
+      Highcharts.chart('chart3', {
+        chart: {
+          type: 'areaspline',
+          backgroundColor: 'rgba(255,255,255,0)',
+          spacing: [21, 0, 0, 0]
+        },
+        title: false,
+        legend: false,
+        xAxis: {
+          labels: {
+            style: {
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: '9px'
+            }
+          },
+          categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12월']
+        },
+        yAxis: {
+          labels: {
+            style: {
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: '9px'
+            }
           },
           lineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineColor: 'rgba(255, 255, 255, 0.35)',
           gridLineDashStyle: 'Dot',
           tickAmount: 5,
-          title: false
+          title: {
+            align: 'high',
+            textAlign: 'left',
+            reserveSpace: false,
+            rotation: 0,
+            text: '단위 천만원',
+            style: {
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: '9px'
+            },
+            y: -11
+          }
         },
         tooltip: {
           enabled: false
