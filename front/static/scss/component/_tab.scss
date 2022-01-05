@@ -29,7 +29,7 @@
   }
   --tab-active: var(--theme-color);
   position: sticky;
-  top: 60px;
+  top: 50px;
   height: 50px;
   background: #fff;
   border-bottom: 1px solid #ddd;
@@ -235,8 +235,8 @@
     @include outer;
   }
   position: sticky;
-  top: 60px;
-  height: 60px;
+  top: 50px;
+  height: 50px;
   background: #fff;
   transition: 0.3s;
   &:before {
@@ -271,7 +271,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 60px;
+      height: 50px;
       color: #666;
       font-size: 14px;
       line-height: 20px;

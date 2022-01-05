@@ -861,8 +861,8 @@ const uiCommon = {
             $this.data('top', $offsetTop);
             $this.addClass('top-fixed');
             if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
-            $topEl.css('top', $topMargin);
-            if ($this.css('position')) if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
+            if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
+            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
           } else {
             $this.removeData('top');
             if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
@@ -872,9 +872,9 @@ const uiCommon = {
           }
         });
       });
-      $(window).resize(function () {
-        $(window).scroll();
-      });
+      // $(window).resize(function () {
+      //   $(window).scroll();
+      // });
     }
   },
   header: function () {
@@ -5529,6 +5529,7 @@ const getOffset = function (element) {
     if (isSticky) {
       isSticky = false;
       $el.style.position = '';
+      if ($el.getAttribute('style') === '') $el.removeAttribute('style');
     }
     $el = $el.offsetParent;
     if ($el !== null) {

@@ -9,23 +9,7 @@
     <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <style>
-      .chart-top {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        height: 400px;
-        padding: 20px 20px 32px;
-        margin-left: -20px;
-        margin-right: -20px;
-        color: #fff;
-        background: linear-gradient(156.21deg, #5f6fff 0%, #a26cff 100%);
-      }
-      .chart {
-        height: 100px;
-        background: transparent;
-      }
-    </style>
+    <style></style>
     <script>
       uiCommon.title('가이드');
     </script>
@@ -83,22 +67,50 @@
             </div>
           </div>
           <div class="section">
-            <div class="chart-top">
+            <div class="gd__chart-wrap">
+              <div class="match-profile">
+                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                <div class="cont">
+                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                  <div>가나다라마바사</div>
+                </div>
+              </div>
               <div class="t-center"><strong class="fz-38 fw-500" data-animation="rolling-number">82,645,020</strong>원</div>
               <div id="chart1" class="chart"></div>
             </div>
-            <br />
-            <div class="chart-top">
+
+            <div class="gd__chart-wrap">
+              <div class="match-profile">
+                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                <div class="cont">
+                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                  <div>가나다라마바사</div>
+                </div>
+              </div>
               <div class="t-center"><strong class="fz-38 fw-500" data-animation="count-number">82,645,020</strong>원</div>
               <div id="chart2" class="chart"></div>
             </div>
-            <br />
-            <div class="chart-top">
+
+            <div class="gd__chart-wrap">
+              <div class="match-profile">
+                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                <div class="cont">
+                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                  <div>가나다라마바사</div>
+                </div>
+              </div>
               <div class="t-center"><strong class="fz-38 fw-500" data-animation="rolling-number">82,645,020</strong>원</div>
               <div id="chart4" class="chart"></div>
             </div>
-            <br />
-            <div class="chart-top">
+
+            <div class="gd__chart-wrap">
+              <div class="match-profile">
+                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                <div class="cont">
+                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                  <div>가나다라마바사</div>
+                </div>
+              </div>
               <div class="t-center"><strong class="fz-38 fw-500" data-animation="count-number">82,645,020</strong>원</div>
               <div id="chart3" class="chart"></div>
             </div>
@@ -114,7 +126,7 @@
       const $chartData = [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6];
       const $chartData2 = [2000000, 1800000, 3500000, 2000000, 4300000, 5500000, 6500000, 6800000, 6400000, 6200000, 8000000, 6000000];
       const $max = Math.max.apply(null, $chartData);
-      console.log($max);
+
       Highcharts.chart('chart1', {
         chart: {
           type: 'areaspline',

@@ -1,5 +1,5 @@
 /*가이드*/
-[class*=gd__h] {
+[class*='gd__h'] {
   color: #999;
   margin-bottom: 1em;
   font-weight: bold;
@@ -9,7 +9,7 @@
   &.first {
     margin-top: 0 !important;
   }
-  & + [class*=gd__h] {
+  & + [class*='gd__h'] {
     margin-top: 1em !important;
   }
   &:before {
@@ -89,7 +89,7 @@
     @extend .gd__box;
     border: 5px solid red;
     //at-root 샘플
-    @include unify-parent("section") {
+    @include unify-parent('section') {
       background-color: blue;
     }
     .gd__wrap2 & {
@@ -244,5 +244,29 @@
   }
   div + div {
     margin-top: 1em;
+  }
+}
+.gd__chart-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 400px;
+  padding: 20px 20px 32px;
+  color: #fff;
+  background: linear-gradient(156.21deg, #5f6fff 0%, #a26cff 100%);
+  .section & {
+    @include outer;
+  }
+  .match-profile {
+    background: none;
+    height: auto;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+  .chart {
+    height: 100px;
+  }
+  + .gd__chart-wrap {
+    margin-top: 30px;
   }
 }
