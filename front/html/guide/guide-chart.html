@@ -9,6 +9,21 @@
     <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+      .chart-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 400px;
+        padding: 20px 20px 32px;
+        background: linear-gradient(156.21deg, #5f6fff 0%, #a26cff 100%);
+      }
+      #chart1 {
+        height: 150px;
+        margin: 0 -15px;
+        background: transparent;
+      }
+    </style>
     <script>
       uiCommon.title('가이드');
     </script>
@@ -65,7 +80,9 @@
               </ul>
             </div>
           </div>
-          <div class="section pt-30"></div>
+          <div class="chart-top">
+            <div id="chart1"></div>
+          </div>
         </section>
         <!-- //컨텐츠 -->
       </main>
@@ -74,60 +91,65 @@
       <div data-include-html="../../include/footer.html"></div>
     </article>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        microSliderInit();
-      });
-      const microSliderInit = function () {
-        const __ms = document.querySelector('.micro-slider');
-        const __msSlider = new MicroSlider(__ms, {
-          indicators: true,
-          // padding: 150,
-          perspectiveFactor: 2.5
-        });
-        /*
-	let __msTimer = 3000;
-	let __msAutoplay = null;
-  const __msAutoplayStart = function(){
-    if(__msAutoplay !== null)clearInterval(__msAutoplay);
-    __msAutoplay = setInterval(() => __msSlider.next(), __msTimer);
-  };
-  const __msAutoplayStop = function(){
-    if(__msAutoplay === null) return
-    clearInterval(__msAutoplay);
-    __msAutoplay = null;
-  };
-	
-  //set autoplay (start)
-	__msAutoplayStart();
-
-  // PC: mouse autoplay control
-	__ms.onmouseenter = function(e) {
-    __msAutoplayStop();
-  }
-	__ms.onmouseleave = function(e) {
-    __msAutoplayStart();
-  }
-
-  
-  // mobile: hammer autoplay control
-  const __hammer = new Hammer(__ms);
-  __hammer.on('panstart', function(e) {
-    __msAutoplayStop();
-  });
-  __hammer.on('panend', function(e) {
-    __msAutoplayStart();
-  });
-	*/
-      };
-
-      uiForm.character();
-      $('input[name=confettiBgTg]').click(function () {
-        const $val = $('input[name=confettiBgTg]:checked').val();
-        if ($val === '1') {
-          $('.gd__confetti').addClass('dark');
-        } else {
-          $('.gd__confetti').removeClass('dark');
-        }
+      Highcharts.chart('chart1', {
+        chart: {
+          type: 'areaspline',
+          backgroundColor: 'rgba(255,255,255,0)'
+        },
+        title: false,
+        legend: false,
+        xAxis: {
+          labels: {
+            style: {
+              color: 'rgba(255,255,255,0.7)'
+            }
+          },
+          categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+        },
+        yAxis: {
+          labels: {
+            style: {
+              color: 'rgba(255,255,255,0.7)'
+            }
+          },
+          lineColor: 'rgba(255, 255, 255, 0.35)',
+          gridLineColor: 'rgba(255, 255, 255, 0.35)',
+          gridLineDashStyle: 'Dot',
+          title: false
+        },
+        // tooltip: {
+        //   shared: true,
+        //   valueSuffix: ' units'
+        // },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          areaspline: {
+            lineColor: '#E4FF96',
+            marker: {
+              enabled: false
+            },
+            fillOpacity: 1,
+            fillColor: {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+              },
+              stops: [
+                [0, Highcharts.color('#E4FF96').setOpacity(0.6).get('rgba')],
+                [1, Highcharts.color('#E4FF96').setOpacity(0).get('rgba')]
+              ]
+            }
+          }
+        },
+        series: [
+          {
+            data: [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6]
+          }
+        ]
       });
     </script>
   </body>
