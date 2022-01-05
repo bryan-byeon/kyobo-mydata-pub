@@ -288,14 +288,17 @@ const Html = {
         const $html = $this.data('include-html');
         const $htmlAry = $html.split('/');
         const $htmlFile = $htmlAry[$htmlAry.length - 1];
-        const $title = $this.data('title');
+        const $docTitle = document.title;
+        let $title = null;
+        if ($docTitle.indexOf(' | ') > -1) {
+          $title = $docTitle.split(' | ')[0];
+        }
         $this.load($html, function (res, sta, xhr) {
           if (sta == 'success') {
             console.log('Include ' + $htmlFile + '!');
-
             if ($htmlFile.indexOf('header') == 0) {
-              if ($title !== undefined) {
-                if (!$('#header h1').hasClass('category-tit')) $('#header h1').text($title);
+              if ($title !== null) {
+                $('#header h1').html($title);
               }
               uiCommon.fixed('#header');
               uiCommon.header();
@@ -624,6 +627,16 @@ const uiCommon = {
     $last.delay(delay).fadeOut(500, function () {
       $(this).remove();
     });
+  },
+  title: function (string) {
+    const $title = document.title;
+    if ($title.indexOf(string) < 0) document.title = string + ' | ' + $title;
+    const $titleEl = '#header h1';
+
+    const setPageTitle = function () {
+      if ($($titleEl).length) $($titleEl).html(string);
+    };
+    setPageTitle();
   },
   gnbOutCont: '#header,#contents,.floating-bar,#footer',
   gnb: function () {
