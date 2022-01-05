@@ -5189,7 +5189,7 @@ const uiScrollIn = {
       const $duration = parseInt($el.data('duration'));
       let $repeat = parseInt($el.data('repeat'));
       const $addClassAry = ['on', 'active', 'checked', 'selected'];
-      const $animateClassAry = ['rolling-number', 'couter-number'];
+      const $animateClassAry = ['rolling-number', 'count-number'];
       const $dataAnimation = $el.data('animation');
       let $animationClass = 'animate__' + $dataAnimation;
       if ($addClassAry.indexOf($dataAnimation) >= 0) {
@@ -5312,7 +5312,7 @@ const uiScrollIn = {
         if ($slide.length) {
           if ($slide.hasClass('swiper-slide-active')) $el.addClass($animationClass);
         } else {
-          if ($el.hasClass('couter-number')) uiScrollIn.couterInit($el);
+          if ($el.hasClass('count-number')) uiScrollIn.couterInit($el);
           $el.addClass($animationClass);
         }
       }
@@ -5469,7 +5469,7 @@ const uiScrollIn = {
       $($animations).each(function () {
         const $dataAnimation = $(this).data('animation');
         if ($dataAnimation === 'rolling-number') uiScrollIn.rollingReady(this);
-        if ($dataAnimation === 'couter-number') uiScrollIn.couterReady(this);
+        if ($dataAnimation === 'count-number') uiScrollIn.couterReady(this);
       });
 
       uiScrollIn.ready($animations);
