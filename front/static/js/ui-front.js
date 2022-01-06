@@ -1260,7 +1260,7 @@ const uiUtil = {
       }
     };
   }
-}
+};
 
 //레이어팝업(Layer): 레이어 팝업은 #contents 밖에 위치해야함
 const Layer = {
@@ -2553,11 +2553,21 @@ const uiButton = {
       const $delay = 650;
 
       if (!$btnEl.is('.disabled')) {
+        let $bgColor = rgba2hex($btnEl.css('background-color'));
+        let $bgAlpha = 0;
+        if ($bgColor.length > 7) {
+          const $tempColor = $bgColor;
+          $bgColor = $tempColor.substr(0, 7);
+          $bgAlpha = 255 - parseInt($tempColor.substr(7, 2), 16);
+        }
+        const $bgColorVal = Math.max($bgAlpha, Math.round(getBgBrightValue($bgColor)));
+        const isBalck = $bgColorVal < 50 ? true : false;
         if (!$btnEl.find('.btn-click-in').length) $btnEl.append('<i class="btn-click-in"></i>');
         const $btnIn = $btnEl.find('.btn-click-in');
         const $btnMax = Math.max($btnEl.outerWidth(), $btnEl.outerHeight());
         const $btnX = e.pageX - $btnEl.offset().left - $btnMax / 2;
         const $btnY = e.pageY - $btnEl.offset().top - $btnMax / 2;
+        if (isBalck) $btnIn.addClass('white');
         $btnIn
           .css({
             left: $btnX,
@@ -3759,11 +3769,11 @@ const uiForm = {
       if (
         $this.prop('readonly') ||
         $this.prop('disabled') ||
-        $this.hasClass('no-del') ||
         $this.hasClass('hasDatepicker') ||
         $this.hasClass('time') ||
-        $this.hasClass('t-right') ||
-        $this.hasClass('t-center')
+        // $this.hasClass('t-right') ||
+        // $this.hasClass('t-center') ||
+        $this.hasClass('no-del')
       ) {
         return false;
       }
@@ -5561,6 +5571,57 @@ const getOffset = function (element) {
 const radToDeg = function (radians) {
   var pi = Math.PI;
   return radians * (180 / pi);
+};
+
+// 컬러가 어두운지 밝은지 확인
+const getBgBrightValue = function (hexColor) {
+  const c = hexColor.substring(1); // 색상 앞의 # 제거
+  const rgb = parseInt(c, 16); // rrggbb를 10진수로 변환
+  const r = (rgb >> 16) & 0xff; // red 추출
+  const g = (rgb >> 8) & 0xff; // green 추출
+  const b = (rgb >> 0) & 0xff; // blue 추출
+
+  const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+  // 색상 선택
+  return luma;
+};
+
+//컬러값 변경
+const hexToRgb = function (h) {
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  // 3 digits
+  if (h.length === 3) {
+    r = parseInt(h[0] + h[0], 16);
+    g = parseInt(h[1] + h[1], 16);
+    b = parseInt(h[2] + h[2], 16);
+    // 6 digits
+  } else if (h.length === 6) {
+    r = parseInt(h[0] + h[1], 16);
+    g = parseInt(h[2] + h[3], 16);
+    b = parseInt(h[4] + h[5], 16);
+  }
+  return r + ',' + g + ',' + b;
+};
+const rgbToHex = function (r, g, b) {
+  function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+  }
+  return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+};
+const hex2rgba = function (str) {
+  const num = parseInt(str.slice(1), 16); // Convert to a number
+  const ary = [(num >> 16) & 255, (num >> 8) & 255, num & 255, (num >> 24) & 255];
+  return ary.join(',');
+};
+const rgba2hex = function (rgba) {
+  const $match = rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1);
+  const $map = $match.map((n, i) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', ''));
+  const $rtnVal = $map.join('');
+  return '#' + $rtnVal;
 };
 
 //br 태그 삽입

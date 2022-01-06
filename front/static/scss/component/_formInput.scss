@@ -60,14 +60,22 @@
     &:last-child {
       padding-right: 16px;
     }
-    // &[readonly],
-    &:disabled {
-      background: #f8f8f8;
-    }
+
     &:disabled {
       color: var(--placeholder-txt-color);
     }
+    &.t-right {
+      &::placeholder {
+        text-align: left;
+      }
+    }
   }
+  &.disabled input,
+  // input[readonly],
+  input:disabled {
+    background: #f8f8f8;
+  }
+
   &.small {
     input {
       height: 30px;

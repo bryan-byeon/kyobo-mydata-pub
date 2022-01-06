@@ -8,7 +8,6 @@
   border: 0 solid transparent;
   text-align: center;
   font-size: inherit;
-  // white-space:nowrap;
   text-decoration: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -20,6 +19,8 @@
   font-weight: bold;
   vertical-align: middle;
   transition: opacity 0.3s;
+  // white-space:nowrap;
+  -webkit-tap-highlight-color: transparent;
   &.disabled,
   &:disabled {
     opacity: 0.3;
@@ -174,6 +175,9 @@
   transform: scale(0);
   &.animate {
     animation: btnClickEf 0.65s linear;
+  }
+  &.white {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 @keyframes btnClickEf {

@@ -132,13 +132,15 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       height: 100%;
       &:disabled ~ .lbl {
         // opacity: 0.3;
-        background: #f1f1f1;
-        color: #bbb;
+        background: #f8f8f8;
+        color: var(--placeholder-txt-color);
       }
       &:checked ~ .lbl {
         font-weight: bold;
-        border-color: #222;
         color: #222;
+      }
+      &:checked:not(:disabled) ~ .lbl {
+        border-color: #222;
         z-index: 1;
       }
     }
