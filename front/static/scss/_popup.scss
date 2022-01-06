@@ -48,8 +48,8 @@
     display: flex;
     align-items: center;
     min-height: 50px;
-    padding: 10px 50px;
-    text-align: center;
+    padding: 10px 50px 10px 24px;
+    text-align: left;
     margin: 0;
     transition: border 0.5s;
   }
@@ -144,6 +144,9 @@
     left: 0;
     top: 0;
     width: 100%;
+    &:not(.no-title) + .pop-body {
+      padding-top: 50px;
+    }
   }
   .pop-body {
     max-height: 100%;
@@ -164,11 +167,6 @@
   &.full {
     .pop-wrap {
       height: 100%;
-    }
-    .pop-head {
-      &:not(.no-title) + .pop-body {
-        padding-top: 50px;
-      }
     }
     .pop-body {
       height: 100%;
@@ -202,26 +200,27 @@
       }
     }
   }
-  &.bottom,
-  &.modal {
-    .pop-head {
-      padding-top: 12px;
-      > div {
-        min-height: 48px;
-        padding: 0px 50px 0px 20px;
-        text-align: left;
-      }
-      h1 {
-        font-size: 16px;
-      }
-      .pop-close {
-        top: 24px;
-      }
-      &:not(.no-title) + .pop-body {
-        padding-top: 50px;
-      }
-    }
-  }
+
+  // &.bottom,
+  // &.modal {
+  //   .pop-head {
+  //     padding-top: 12px;
+  //     > div {
+  //       min-height: 48px;
+  //       padding: 0px 50px 0px 20px;
+  //       text-align: left;
+  //     }
+  //     h1 {
+  //       font-size: 16px;
+  //     }
+  //     .pop-close {
+  //       top: 24px;
+  //     }
+  //     &:not(.no-title) + .pop-body {
+  //       padding-top: 50px;
+  //     }
+  //   }
+  // }
   &.bottom {
     padding-top: -vh(20);
     .pop-wrap {
@@ -300,6 +299,12 @@
     align-items: center;
     justify-content: center;
     .pop-head {
+      > div {
+        padding-left: 50px;
+      }
+      h1 {
+        text-align: center;
+      }
       &.no-title + .pop-body > .section:first-child:before {
         content: '';
         display: block;
@@ -307,9 +312,6 @@
         height: 24px;
         float: right;
         margin: -4px 2px 0 0;
-      }
-      h1 {
-        text-align: center;
       }
     }
 
@@ -363,18 +365,6 @@
       width: 67%;
       max-width: 400px;
       height: 100%;
-    }
-    .pop-head {
-      > div {
-        padding-left: 20px;
-        // padding-right: 20px;
-      }
-      h1 {
-        text-align: left;
-      }
-      &:not(.no-title) + .pop-body {
-        padding-top: 50px;
-      }
     }
   }
   &.side-left {
