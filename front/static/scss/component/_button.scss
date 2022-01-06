@@ -220,8 +220,8 @@
       > .lbl {
         border-radius: 0;
       }
-      & + .checkbox.btn > .lbl,
-      & + .radio.btn > .lbl {
+      & + .checkbox.btn,
+      & + .radio.btn {
         margin-left: -1px;
         width: calc(100% + 1px);
       }

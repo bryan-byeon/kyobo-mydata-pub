@@ -2522,9 +2522,11 @@ const uiButton = {
   },
   effect: function () {
     //버튼 클릭 효과
-    const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .ui-folding-btn, .ui-folding .folding-head a';
+    const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .radio.btn input, .checkbox.btn input, .ui-folding-btn, .ui-folding .folding-head a';
     $(document).on('click', btnInEfList, function (e) {
-      const $btnEl = $(this);
+      const $this = $(this);
+      let $btnEl = $this;
+      if ($btnEl.is('input')) $btnEl = $btnEl.siblings('.lbl');
       const $delay = 650;
 
       if (!$btnEl.is('.disabled')) {

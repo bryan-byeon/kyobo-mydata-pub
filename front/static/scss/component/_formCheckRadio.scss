@@ -131,13 +131,14 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       width: 100%;
       height: 100%;
       &:disabled ~ .lbl {
-        opacity: 0.3;
+        // opacity: 0.3;
+        background: #f1f1f1;
+        color: #bbb;
       }
       &:checked ~ .lbl {
         font-weight: bold;
         border-color: #222;
         color: #222;
-        background: #fff;
         z-index: 1;
       }
     }
@@ -164,7 +165,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       font-weight: normal;
       vertical-align: middle;
       margin: 0;
-      border: 1px solid #eee;
+      border: 1px solid #ddd;
       color: #666;
       background: #fff;
       transition: 0.3s;
