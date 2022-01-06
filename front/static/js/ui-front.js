@@ -1124,7 +1124,7 @@ const uiCommon = {
         }
       };
       $(window).on('scroll', $scrollEvt);
-      window.addEventListener('scroll', uiScroll.debounce($scrollEndEvt, 2000));
+      window.addEventListener('scroll', uiUtil.debounce($scrollEndEvt, 1500));
     } else {
       if ($('.floating-bar').length && !$('.floating-bar .btn-page-top').length) {
         $('.floating-bar').prepend($('.floating-btn.btn-page-top'));
@@ -1238,6 +1238,29 @@ const uiCommon = {
     });
   }
 };
+
+const uiUtil = {
+  debounce: function (fn, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(this, arguments);
+      }, delay);
+    };
+  },
+  throttle: function (fn, delay) {
+    let timer;
+    return function () {
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          fn.apply(this, arguments);
+        }, delay);
+      }
+    };
+  }
+}
 
 //레이어팝업(Layer): 레이어 팝업은 #contents 밖에 위치해야함
 const Layer = {
@@ -3523,26 +3546,6 @@ const uiScroll = {
       });
     });
   },
-  debounce: function (fn, delay) {
-    let timer;
-    return function () {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn.apply(this, arguments);
-      }, delay);
-    };
-  },
-  throttle: function (fn, delay) {
-    let timer;
-    return function () {
-      if (!timer) {
-        timer = setTimeout(() => {
-          timer = null;
-          fn.apply(this, arguments);
-        }, delay);
-      }
-    };
-  },
   init: function () {
     uiScroll.hidden();
     uiScroll.loading();
@@ -5488,8 +5491,8 @@ const uiScrollIn = {
       //   uiScrollIn.checkInView($animations);
       // });
       uiScrollIn.checkInView();
-      window.addEventListener('scroll', uiScroll.debounce(uiScrollIn.checkInView, 100));
-      window.addEventListener('resize', uiScroll.debounce(uiScrollIn.checkInView, 100));
+      window.addEventListener('scroll', uiUtil.debounce(uiScrollIn.checkInView, 100));
+      window.addEventListener('resize', uiUtil.debounce(uiScrollIn.checkInView, 100));
 
       /*
       if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
