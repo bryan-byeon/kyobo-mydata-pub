@@ -918,11 +918,11 @@ const uiCommon = {
       $('.bottom-fixed').each(function () {
         const $this = $(this);
         const $height = $this.children().outerHeight();
-        $spaceArryHeight.push($height);
+        if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
         if ($this.hasClass('is-restore')) $this.css('height', $height);
       });
 
-      const $maxHeight = Math.max.apply(null, $spaceArryHeight);
+      const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
       $space.css('height', $maxHeight);
       if ($('.floating-btn').length) {
         $('.floating-btn').css('bottom', $maxHeight + 20);
@@ -1055,8 +1055,8 @@ const uiCommon = {
       */
 
       let $lastSclTop = $(window).scrollTop();
-      $(window).on('scroll', function () {
-        const $SclTop = $(this).scrollTop();
+      const $scrollEvt = function () {
+        const $SclTop = $(window).scrollTop();
         const $spaceH = $('.bottom-fixed-space').outerHeight();
         const $bottom = parseInt($(settings.button).parent().css('bottom'));
         const $margin = 20;
@@ -1116,7 +1116,15 @@ const uiCommon = {
         setTimeout(function () {
           $lastSclTop = $SclTop;
         }, 50);
-      });
+      };
+      const $scrollEndEvt = function () {
+        const $SclTop = $(window).scrollTop();
+        if ($SclTop > settings.min) {
+          btnTopOff();
+        }
+      };
+      $(window).on('scroll', $scrollEvt);
+      window.addEventListener('scroll', uiScroll.debounce($scrollEndEvt, 2000));
     } else {
       if ($('.floating-bar').length && !$('.floating-bar .btn-page-top').length) {
         $('.floating-bar').prepend($('.floating-btn.btn-page-top'));
@@ -5234,7 +5242,8 @@ const uiScrollIn = {
     }
     return returnVal;
   },
-  checkInView: function (target) {
+  checkInView: function () {
+    const $target = $.find('*[data-animation]');
     const $window = $(window);
     const $wHeight = $window.height();
     const $scrollTop = $window.scrollTop();
@@ -5242,7 +5251,7 @@ const uiScrollIn = {
     const $winCenter = $scrollTop + $wHeight / 2;
     const $winBottom = $scrollTop + ($wHeight / 10) * 9;
 
-    $.each(target, function () {
+    $.each($target, function () {
       const $el = $(this);
       const $elHeight = $el.outerHeight();
       const $matrix = $el.css('transform');
@@ -5473,10 +5482,12 @@ const uiScrollIn = {
       });
 
       uiScrollIn.ready($animations);
-      $(window).on('scroll resize', function () {
-        // uiScroll.throttle(uiScrollIn.checkInView($animations), 200);
-        uiScroll.debounce(uiScrollIn.checkInView($animations), 100);
-      });
+      // $(window).on('scroll resize', function () {
+      //   uiScrollIn.checkInView($animations);
+      // });
+      uiScrollIn.checkInView();
+      window.addEventListener('scroll', uiScroll.debounce(uiScrollIn.checkInView, 100));
+      window.addEventListener('resize', uiScroll.debounce(uiScrollIn.checkInView, 100));
 
       /*
       if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
