@@ -143,7 +143,7 @@
                 <h5 class="gd__h4">함수로 오픈</h5>
                 <div class="txt-list mt-20">
                   <pre><code class="language-javascript">Layer.open('#팝업ID');</code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">띄울려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
                   </ul>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="txt-list mt-20">
                   <pre><code class="language-xml">&lt;a href="#팝업ID" class="button line small ui-pop-open"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">클래스로 <strong class="fc-red">ui-pop-open</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
                     <li class="dot"><strong class="fc-red">ui-pop-open</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
                   </ul>
@@ -162,7 +162,7 @@
                 <h5 class="gd__h4">함수로 닫기</h5>
                 <div class="txt-list mt-20">
                   <pre><code class="language-javascript">Layer.close('#팝업ID');</code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">숨기려는 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
                   </ul>
                 </div>
@@ -175,7 +175,7 @@
 &lt;-- 닫으려는 팝업안에 있는 버튼이라면: href에 안넣어도 됨 --&gt;
 &lt;a href="#" class="button line small ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">클래스로 <strong class="fc-red">ui-pop-close</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
                     <li class="dot">만약 닫으려는 팝업 안에 있는 버튼이라면 href속성에 <strong class="fc-red">팝업의 ID를 넣지 않아도 됩니다.</strong></li>
                     <li class="dot"><strong class="fc-red">ui-pop-close</strong>클래스는 해당 용도가 아니면 에러를 발생할수 있으니 안쓸때는 삭제해주세요.</li>
@@ -201,7 +201,7 @@
 &lt;a href="#" data-popup-left="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-left 팝업호출 --&gt;
 &lt;a href="#" data-popup-right="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-right 팝업호출 --&gt;
 </code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">
                       불러오는 팝업에 <strong class="fc-black underline">꼭 <strong class="fc-red">#load</strong> 가 있어야한다.</strong> 'win-pop.html' 참고해서 id 속성으로 load를 부여하던가. 새
                       div(#load) 태그로 감싸줘야 그안에 내용을 갖고 온다
@@ -372,13 +372,39 @@ Layer.confirm(
                   $('#toastOpen').click(function (e) {
                     e.preventDefault();
                     const msg = '설명 글을 넣으면됩니다.<br>줄바꿈은 br태그로 처리, <strong>html 태그 사용 가능</strong>';
-                    toastBox(msg);
+                    Layer.toast(msg, function () {
+                      console.log('토스트 클릭');
+                    });
                   });
                 </script>
                 <div class="txt-list mt-20">
-                  <pre><code class="language-javascript">toastBox('넣으려는 메세지');</code></pre>
-                  <ul>
+                  <pre><code class="language-javascript">Layer.toast('넣으려는 메세지');
+Layer.toast('넣으려는 메세지', fn:클릭시 실행할 함수);</code></pre>
+                  <ul class="mt-10">
                     <li class="dot">토스트팝업은 열린 후 약 3초 후 자동으로 닫힙니다.</li>
+                    <li class="dot">클릭시 실행할 함수넣어서 실행 시 바로 닫힙니다.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4 class="gd__h3">알람팝업</h4>
+              <div>
+                <div><a href="#" class="button line small" id="alarmOpen">알람팝업 열기</a></div>
+                <script>
+                  $('#alarmOpen').click(function (e) {
+                    e.preventDefault();
+                    const msg = '설명 글을 넣으면됩니다.<br>줄바꿈은 br태그로 처리, <strong>html 태그 사용 가능</strong>';
+                    Layer.alarm(msg, function () {
+                      console.log('알람 클릭');
+                    });
+                  });
+                </script>
+                <div class="txt-list mt-20">
+                  <pre><code class="language-javascript">Layer.alarm('넣으려는 메세지');
+Layer.alarm('넣으려는 메세지', fn:클릭시 실행할 함수);</code></pre>
+                  <ul class="mt-10">
+                    <li class="dot">alarm팝업은 닫기버튼을 클릭해야 닫힙니다.</li>
+                    <li class="dot">클릭시 실행할 함수넣어서 실행 시 바로 닫힙니다.</li>
                   </ul>
                 </div>
               </div>
@@ -504,7 +530,7 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
                 </div>
                 <div class="txt-list mt-20">
                   <pre><code class="language-xml">&lt;div class="slider" data-min="최소값" data-max="최대값" data-step="간격값" data-value="현재값" aria-hidden="true"&gt;&lt;/div&gt;</code></pre>
-                  <ul>
+                  <ul class="mt-10">
                     <li class="dot">data-min <strong class="fc-red">최소값</strong></li>
                     <li class="dot">data-max <strong class="fc-red">최대값</strong></li>
                     <li class="dot">data-step <strong class="fc-red">값사이 간격</strong></li>
@@ -544,7 +570,7 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
 &lt;input type="tel"&gt;
 &lt;button type="button" class="button plus" aria-label="더하기"&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-                <ul>
+                <ul class="mt-10">
                   <li class="dot">data-min <strong class="fc-red">최소값</strong>: 없으면 1</li>
                   <li class="dot">data-max <strong class="fc-red">최대값</strong>: 없으면 999</li>
                   <li class="dot">input에서 직접 값을 입력해도 blur 될때 min~max 사이값이 아니면 자동 조정됩니다.</li>

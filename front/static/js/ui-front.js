@@ -2386,6 +2386,58 @@ const Layer = {
       }
     });
   },
+  toast: function (txt, fn, type, delayTime) {
+    if (type === undefined) type = 'toast';
+    const $isAlarm = type === 'alarm';
+    const $isFn = !!fn;
+    const $className = '.' + type + '-box';
+
+    if (delayTime == undefined) delayTime = 3000;
+
+    let $boxHtml = '<div class="' + $className.substring(1) + '">';
+    $boxHtml += '<div>';
+    if ($isFn) {
+      $boxHtml += '<a href="#" role="button" class="txt">' + txt + '</a>';
+    } else {
+      $boxHtml += '<div class="txt">' + txt + '</div>';
+    }
+    if ($isAlarm) {
+      $boxHtml += '<button type="button" class="close">닫기</button>';
+    }
+    $boxHtml += '</div>';
+    $boxHtml += '</div>';
+    $('#contents').before($boxHtml);
+    const $toast = $($className).last();
+    const $toastClose = function () {
+      $toast.removeClass('on');
+      $toast.one('transitionend', function () {
+        $(this).remove();
+      });
+    };
+    if ($('.bottom-fixed-space').length) {
+      const $bottom = parseInt($toast.css('bottom'));
+      const $spaceH = $('.bottom-fixed-space').outerHeight();
+      $toast.css('bottom', $bottom + $spaceH);
+    }
+    $toast.addClass('on');
+    let $closeTime;
+    if (!$isAlarm) {
+      $closeTime = setTimeout($toastClose, delayTime);
+    }
+    if ($isFn) {
+      $toast.find('a.txt').one('click', function (e) {
+        e.preventDefault();
+        fn();
+
+        // 이벤트 실행시 바로 닫기
+        clearTimeout($closeTime);
+        $toastClose();
+      });
+    }
+  },
+  alarm: function (txt, fn, delayTime) {
+    Layer.toast(txt, fn, 'alarm', delayTime);
+  },
   init: function () {
     if ($('.' + Layer.popClass + '.' + Layer.showClass).length) {
       Layer.open('.' + Layer.popClass + '.' + Layer.showClass);
@@ -2456,30 +2508,17 @@ const Layer = {
       const $popup = $(this).data('popup-right');
       Layer.load($popup, 'side-right');
     });
-  }
-};
 
-//토스트팝업
-const toastBox = function (txt, delayTime) {
-  const $className = '.toast-box';
-
-  if (delayTime == undefined) delayTime = 3000;
-
-  let $boxHtml = '<div class="' + $className.substring(1) + '">';
-  $boxHtml += '<div class="txt">' + txt + '</div>';
-  $boxHtml += '</div>';
-  $('#contents').before($boxHtml);
-  const $toast = $($className).last();
-  if ($('.bottom-fixed-space').length) {
-    const $bottom = parseInt($toast.css('bottom'));
-    const $spaceH = $('.bottom-fixed-space').outerHeight();
-    $toast.css('bottom', $bottom + $spaceH);
-  }
-  $toast.addRemoveClass('on', 0, delayTime, function () {
-    $toast.on('transitionend', function () {
-      $(this).remove();
+    // 알람박스 닫기
+    $(document).on('click', '.alarm-box .close', function (e) {
+      e.preventDefault();
+      const $box = $(this).closest('.alarm-box');
+      $box.removeClass('on');
+      $box.on('transitionend', function () {
+        $(this).remove();
+      });
     });
-  });
+  }
 };
 
 //버튼 관련

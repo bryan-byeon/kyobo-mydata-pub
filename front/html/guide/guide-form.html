@@ -113,6 +113,11 @@
                 </span>
                 <br />
                 <span class="checkbox">
+                  <label for="chk1-1" class="lbl">좌측텍스트</label>
+                  <input type="checkbox" id="chk1-1" /><i aria-hidden="true"></i>
+                </span>
+                <br />
+                <span class="checkbox">
                   <input type="checkbox" id="chk3" disabled /><i aria-hidden="true"></i>
                   <label for="chk3" class="lbl">체크박스 disabled</label>
                 </span>
@@ -145,11 +150,27 @@
                   <input type="checkbox" id="chk2_2" /><i aria-hidden="true"></i>
                   <label for="chk2_2" class="lbl">체크박스 타입2</label>
                 </div>
+                <div class="checkbox ty2 small">
+                  <input type="checkbox" id="chk2_3" /><i aria-hidden="true"></i>
+                  <label for="chk2_3" class="lbl">체크박스 타입2 small</label>
+                </div>
 
                 <h2 class="gd__h2">스위치</h2>
+                <span class="checkbox switch"> <input type="checkbox" /><i aria-hidden="true"></i></span>
+                <br />
                 <span class="checkbox switch">
-                  <input type="checkbox" id="autoLogin" /><i aria-hidden="true"></i>
-                  <label for="autoLogin" class="lbl">자동 로그인</label>
+                  <input type="checkbox" id="switch1" /><i aria-hidden="true"></i>
+                  <label for="switch1" class="lbl">우측텍스트</label>
+                </span>
+                <br />
+                <span class="checkbox switch">
+                  <label for="switch2" class="lbl">좌측텍스트</label>
+                  <input type="checkbox" id="switch2" /><i aria-hidden="true"></i>
+                </span>
+                <br />
+                <span class="checkbox switch small">
+                  <input type="checkbox" id="switch3" /><i aria-hidden="true"></i>
+                  <label for="switch3" class="lbl">small</label>
                 </span>
 
                 <h2 class="gd__h2">기타</h2>
@@ -706,6 +727,50 @@
                     <textarea rows="5" data-text-count="txtCount" maxlength="100" title="사유 작성" placeholder="100자 이내로 입력해 주세요"></textarea>
                   </div>
                 </div>
+              </div>
+              <h1 class="gd__h1">벨리데이션</h1>
+              <div>
+                <h2 class="gd__h2">단일 표시</h2>
+                <div class="form-lbl">이름</div>
+                <div class="form-item">
+                  <div class="input is-error">
+                    <input type="text" placeholder="" title="이름입력" />
+                    <button type="button" class="button line small">확인</button>
+                  </div>
+                  <div class="validate-txt is-error">이름을 입력하세요.</div>
+                </div>
+
+                <div class="form-lbl">이름</div>
+                <div class="form-item">
+                  <div class="input is-success">
+                    <input type="text" placeholder="" title="이름입력" />
+                    <button type="button" class="button line small">확인</button>
+                  </div>
+                  <div class="validate-txt is-success">이름이 입력되었습니다.</div>
+                </div>
+
+                <h2 class="gd__h2">전체 표시</h2>
+                <div class="form-lbl">주소 찾기</div>
+                <div class="form-item validate-item is-error">
+                  <div class="input">
+                    <input type="tel" maxlength="6" title="우편번호 입력" placeholder="우편번호" />
+                    <button type="button" class="button small search" aria-label="검색"><i class="i-ico-search" aria-hidden="true"></i></button>
+                  </div>
+                  <div class="input"><input type="text" title="기본주소 입력" placeholder="기본주소" /></div>
+                  <div class="input"><input type="text" title="상세주소 입력" placeholder="상세주소" /></div>
+                </div>
+                <div class="validate-txt is-error">우편번호를 입력하세요</div>
+
+                <div class="form-lbl">주소 찾기</div>
+                <div class="form-item validate-item is-success">
+                  <div class="input">
+                    <input type="tel" maxlength="6" title="우편번호 입력" placeholder="우편번호" />
+                    <button type="button" class="button small search" aria-label="검색"><i class="i-ico-search" aria-hidden="true"></i></button>
+                  </div>
+                  <div class="input"><input type="text" title="기본주소 입력" placeholder="기본주소" /></div>
+                  <div class="input"><input type="text" title="상세주소 입력" placeholder="상세주소" /></div>
+                </div>
+                <div class="validate-txt is-success">우편번호를 입력되었습니다.</div>
               </div>
 
               <h1 class="gd__h1">약관</h1>
