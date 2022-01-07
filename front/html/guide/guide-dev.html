@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
     <title>교보증권 마이데이타</title>
     <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/lib/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
 
@@ -16,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/vbscript-html.min.js"></script> -->
     <script>
-      uiCommon.title('가이드');
+      ui.Common.title('가이드');
     </script>
   </head>
   <body>
@@ -42,7 +43,7 @@
                   <a href="guide-btn.html"><span>버튼</span></a>
                 </li>
                 <li class="tab">
-                  <a href="guide-uiForm.html"><span>폼요소</span></a>
+                  <a href="guide-form.html"><span>폼요소</span></a>
                 </li>
                 <li class="tab">
                   <a href="guide-form2.html"><span>입력 UI</span></a>
@@ -432,16 +433,16 @@ Loading.close();
               <h3 class="gd__h2">input 밸리데이션 체크 후 error 표시 할때</h3>
               <div>
                 <pre><code class="language-javascript">//에러 표시
-uiForm.error(element,massege);
-uiForm.error('#inputText','이름을 입력하세요');
+ui.Form.error(element,massege);
+ui.Form.error('#inputText','이름을 입력하세요');
 
 //에러 지우기
-uiForm.error(element, false);
-uiForm.error('#inputText',false);
+ui.Form.error(element, false);
+ui.Form.error('#inputText',false);
 
 //완료 표시
-uiForm.success(element,massege);
-uiForm.success('#inputText','이름이 입력되었습니다.');
+ui.Form.success(element,massege);
+ui.Form.success('#inputText','이름이 입력되었습니다.');
 </code></pre>
                 <h4 class="gd__h3">버튼으로 확인 예시</h4>
                 <div>
@@ -461,9 +462,9 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
                   $('#chkName').click(function () {
                     const $val = $('#inputText').val();
                     if ($val === '') {
-                      uiForm.error('#inputText', '이름을 입력하세요');
+                      ui.Form.error('#inputText', '이름을 입력하세요');
                     } else {
-                      uiForm.success('#inputText', '이름이 입력되었습니다.');
+                      ui.Form.success('#inputText', '이름이 입력되었습니다.');
                     }
                   });
                 </script>
@@ -478,9 +479,9 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
                   $('#inputText2').on('focus keyup', function () {
                     const $val = $(this).val();
                     if ($val.length < 3) {
-                      uiForm.error(this, '이름을 입력하세요');
+                      ui.Form.error(this, '이름을 입력하세요');
                     } else {
-                      uiForm.error(this, false);
+                      ui.Form.error(this, false);
                     }
                   });
                 </script>
@@ -500,12 +501,12 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
                 </div>
                 <script>
                   $('#btnAdrs').click(function () {
-                    if ($('#userAdr1').val() === '') uiForm.error('#userAdr1', '우편번호를 입력하세요');
-                    else if ($('#userAdr2').val() === '') uiForm.error('#userAdr2', '기본주소를 입력하세요');
-                    else if ($('#userAdr3').val() === '') uiForm.error('#userAdr3', '상세주소를 입력하세요');
+                    if ($('#userAdr1').val() === '') ui.Form.error('#userAdr1', '우편번호를 입력하세요');
+                    else if ($('#userAdr2').val() === '') ui.Form.error('#userAdr2', '기본주소를 입력하세요');
+                    else if ($('#userAdr3').val() === '') ui.Form.error('#userAdr3', '상세주소를 입력하세요');
                   });
                   $('#userAdr1, #userAdr2, #userAdr3').on('keyup', function () {
-                    uiForm.error(this, false);
+                    ui.Form.error(this, false);
                   });
                 </script>
 
@@ -575,7 +576,7 @@ uiForm.success('#inputText','이름이 입력되었습니다.');
                   <li class="dot">data-max <strong class="fc-red">최대값</strong>: 없으면 999</li>
                   <li class="dot">input에서 직접 값을 입력해도 blur 될때 min~max 사이값이 아니면 자동 조정됩니다.</li>
                   <li class="dot">input[type="tel"]에 chagne 이벤트로 가격을 계산하면 됩니다.</li>
-                  <li class="dot">.spinner를 스크립트로 삽입 후 input의 value가 1임에도 [마이너스] 버튼이 disabled가 아니면 <strong class="fc-red">uiForm.spinner();</strong> 함수를 실행해주세요</li>
+                  <li class="dot">.spinner를 스크립트로 삽입 후 input의 value가 1임에도 [마이너스] 버튼이 disabled가 아니면 <strong class="fc-red">ui.Form.spinner();</strong> 함수를 실행해주세요</li>
                 </ul>
               </div>
 

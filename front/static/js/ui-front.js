@@ -3,26 +3,21 @@
  * 작성자 : 안효주 *
  ********************************/
 $(function () {
-  uiCommon.vhChk();
+  ui.Common.vhChk();
+  ui.Common.dark();
 
-  //다크모드 체크
-  try {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
-    if (prefersDark) $('html').addClass('dark');
-  } catch (e) {}
-
-  Html.include();
-  uiDevice.check();
-  uiDevice.hide();
-  uiCommon.init();
+  ui.Html.include();
+  ui.Device.check();
+  ui.Device.hide();
+  ui.Common.init();
   Layer.init();
-  uiButton.init();
-  uiTooltip.init();
-  uiScroll.init();
-  uiForm.init();
-  uiList.init();
+  ui.Button.init();
+  ui.Tooltip.init();
+  ui.Scroll.init();
+  ui.Form.init();
+  ui.List.init();
 
-  uiScrollIn.init();
+  ui.ScrollAnimation.init();
   Splitting();
 
   // $(window).scroll();
@@ -31,228 +26,17 @@ $(function () {
 
 $(window).on('load', function () {
   //console.log('window load complete');
-  uiCommon.winLoad();
-  uiForm.winLoad();
-  uiList.winLoad();
-  uiButton.winLoad();
+  ui.Common.winLoad();
+  ui.Form.winLoad();
+  ui.List.winLoad();
+  ui.Button.winLoad();
 
-  uiConfetti.init();
-  uiCommon.vhChk();
+  ui.Confetti.init();
+  ui.Common.vhChk();
 
   $(window).scroll();
   $(window).resize();
 });
-
-/********************************
- * front 제작 플러그인 *
- ********************************/
-//검색어 강조표시
-$.fn.highlightTxt = function (keyword) {
-  return this.each(function () {
-    let $firstHtml = $(this).data('html'),
-      $html = $(this).html();
-    if (!$firstHtml) {
-      $firstHtml = $(this).html();
-      $(this).data('html', $html);
-    }
-    if (keyword != '') {
-      if ($firstHtml.indexOf(keyword) >= 0) {
-        $html = $firstHtml.split(keyword).join('<em class="t-keyword">' + keyword + '</em>');
-      } else {
-        $html = $firstHtml;
-      }
-    } else {
-      $html = $firstHtml;
-    }
-    $(this).html($html);
-  });
-};
-
-//접근성 관련 플러그인
-//$(element).aria('hidden',true});
-//$(element).aria({'hidden':true,'selected':true});
-$.fn.aria = function (attr, val) {
-  const $ariaType = [
-    'hidden',
-    'label',
-    'live',
-    'expanded',
-    'controls',
-    'selected',
-    'checked',
-    'pressed',
-    'disabled',
-    'readonly',
-    'required',
-    'labelledby',
-    'describedby',
-    'invalid',
-    'secret',
-    'valuemax',
-    'valuemin',
-    'valuenow',
-    'level',
-    'multiline',
-    'multiselectable',
-    'datatype',
-    'autocomplete',
-    'owns',
-    'haspopup',
-    'relevant',
-    'atomic',
-    'busy',
-    'dropeffect',
-    'grabbed',
-    'activedescendant',
-    'colcount',
-    'colindex',
-    'colspan',
-    'details',
-    'errormessage',
-    'flowto',
-    'posinset',
-    'rowcount',
-    'rowindex',
-    'rowspan',
-    'setsize'
-  ];
-  return this.each(function () {
-    const $this = $(this);
-    if (typeof attr === 'string') {
-      if (arrayIndexOf($ariaType, attr)) {
-        $this.attr('aria-' + attr, val);
-      } else {
-        console.log('aria-' + attr + ': 확인안된 aria 속성 타입~~!\n$ariaType 및 철자 확인요망');
-      }
-    } else if (typeof attr == 'object') {
-      const $key = Object.keys(attr),
-        $length = $key.length;
-      for (let i = 0; i < $length; i++) {
-        if (arrayIndexOf($ariaType, $key[i])) {
-          $this.attr('aria-' + $key[i], attr[$key[i]]);
-        } else {
-          console.log('aria-' + $key[i] + ': 확인안된 aria 속성 타입~~!\n$ariaType 및 철자 확인요망');
-        }
-      }
-    }
-  });
-};
-
-//$(element).removeAria('hidden');
-//$(element).removeAria('hidden, selected');
-$.fn.removeAria = function (attr) {
-  return this.each(function () {
-    const $this = $(this);
-    const $arry = txtSpaceDel(attr).split(',');
-    for (let i = 0; i < $arry.length; i++) {
-      $this.removeAttr('aria-' + $arry[i]);
-    }
-  });
-};
-
-//$(element).role('button');
-$.fn.role = function (val) {
-  return this.each(function () {
-    const $this = $(this);
-    $this.attr('role', val);
-  });
-};
-
-//resize가 끝나면: resizeEnd
-//$(window).resizeEnd(function(){console.log('resizeEnd');},300);
-let resizeEndCnt = 0;
-$.fn.resizeEnd = function (callback, timeout) {
-  resizeEndCnt = resizeEndCnt + 1;
-  const cnt = resizeEndCnt;
-  return this.each(function () {
-    const $this = $(this);
-    $this.resize(function () {
-      if ($this.data('resizeTimeout' + cnt)) {
-        clearTimeout($this.data('resizeTimeout' + cnt));
-      }
-      $this.data('resizeTimeout' + cnt, setTimeout(callback, timeout));
-    });
-  });
-};
-
-//scroll이 끝나면: scrollEnd
-//$(window).scrollEnd(function(){console.log('scrollEnd');},300);
-let scrollEndCnt = 0;
-$.fn.scrollEnd = function (callback, timeout) {
-  scrollEndCnt = scrollEndCnt + 1;
-  const cnt = scrollEndCnt;
-  return this.each(function () {
-    const $this = $(this);
-    $this.scroll(function () {
-      if ($this.data('scrollTimeout' + cnt)) {
-        clearTimeout($this.data('scrollTimeout' + cnt));
-      }
-      $this.data('scrollTimeout' + cnt, setTimeout(callback, timeout));
-    });
-  });
-};
-
-//css 지우기
-// $('body').removeCss('background');
-// $('body').removeCss(['border','background']);
-// $('body').removeCss({color: 'white'});
-$.fn.removeCss = function (css) {
-  let properties = [];
-  const is = $.type(css);
-
-  if (is === 'array') properties = css;
-  if (is === 'object') for (let rule in css) properties.push(rule);
-  if (is === 'string') properties = css.replace(/,$/, '').split(',');
-
-  return this.each(function () {
-    const $this = $(this);
-    $.map(properties, function (prop) {
-      $this.css(prop, '');
-    });
-  });
-};
-
-//글자바꾸기: changeTxt(바꿀텍스트,바낄텍스트)
-//$('.txt').changeTxt('열기','닫기');
-$.fn.changeTxt = function (beforeTxt, afterTxt) {
-  return this.each(function () {
-    const element = $(this);
-    const $html = element.html();
-    if ($html != undefined && $html != '') {
-      element.html($html.split(beforeTxt).join(afterTxt));
-    }
-  });
-};
-$.fn.changeAriaLabel = function (beforeTxt, afterTxt) {
-  return this.each(function () {
-    const element = $(this);
-    const $ariaLabel = element.attr('aria-label');
-    if ($ariaLabel != undefined) {
-      const $ariaLabel2 = $ariaLabel.split(beforeTxt).join(afterTxt);
-      element.attr('aria-label', $ariaLabel2);
-    }
-  });
-};
-
-//클래스 넣었다 빼기: addRemoveClass(클래스명, 붙는 시간, 빼는 시간)
-//$(this).addRemoveClass('on', 500, 1000);
-$.fn.addRemoveClass = function (className, addTime, removeTime, callback) {
-  const element = this;
-  const addIt = function () {
-    element.addClass(className);
-  };
-  const removeIt = function () {
-    element.removeClass(className);
-    if (!!callback) {
-      callback();
-    }
-  };
-  setTimeout(function () {
-    addIt();
-    setTimeout(removeIt, removeTime);
-  }, addTime);
-  return this;
-};
 
 /********************************
  * front 사용함수 *
@@ -277,45 +61,26 @@ const Focus = {
   }
 };
 
-//Html include
-const Html = {
-  include: function () {
-    const $elements = $.find('*[data-include-html]');
-    const $fileName = location.pathname.split('/').pop();
-    if ($elements.length) {
-      $.each($elements, function () {
-        const $this = $(this);
-        const $html = $this.data('include-html');
-        const $htmlAry = $html.split('/');
-        const $htmlFile = $htmlAry[$htmlAry.length - 1];
-        const $docTitle = document.title;
-        let $title = null;
-        if ($docTitle.indexOf(' | ') > -1) {
-          $title = $docTitle.split(' | ')[0];
-        }
-        $this.load($html, function (res, sta, xhr) {
-          if (sta == 'success') {
-            console.log('Include ' + $htmlFile + '!');
-            if ($htmlFile.indexOf('header') == 0) {
-              if ($title !== null) {
-                $('#header h1').html($title);
-              }
-              uiCommon.fixed('#header');
-              uiCommon.header();
-            }
-            if ($htmlFile == 'gnb.html') {
-              uiCommon.gnb();
-            }
-            if ($htmlFile == 'floating.html') {
-              uiCommon.floating();
-            }
-            if ($htmlFile == 'footer.html') {
-              uiCommon.footer();
-            }
-            $this.children().unwrap();
-          }
-        });
-      });
+//body scroll lock
+const Body = {
+  scrollTop: '',
+  lock: function () {
+    if (!$('html').hasClass('lock')) {
+      Body.scrollTop = window.pageYOffset;
+      const $wrap = $('#wrap');
+      const $wrapTop = $wrap.offset().top;
+      $wrap.css('top', Body.scrollTop * -1 + $wrapTop);
+      $('html').addClass('lock');
+    }
+  },
+  unlock: function () {
+    if ($('html').hasClass('lock')) {
+      $('html').removeClass('lock');
+      $('#wrap').removeAttr('style');
+      window.scrollTo(0, Body.scrollTop);
+      window.setTimeout(function () {
+        Body.scrollTop = '';
+      }, 0);
     }
   }
 };
@@ -353,912 +118,6 @@ const Loading = {
       .fadeOut(Loading.speed, function () {
         $(this).remove();
       });
-  }
-};
-
-//body scroll lock
-const Body = {
-  scrollTop: '',
-  lock: function () {
-    if (!$('html').hasClass('lock')) {
-      Body.scrollTop = window.pageYOffset;
-      const $wrap = $('#wrap');
-      const $wrapTop = $wrap.offset().top;
-      $wrap.css('top', Body.scrollTop * -1 + $wrapTop);
-      $('html').addClass('lock');
-    }
-  },
-  unlock: function () {
-    if ($('html').hasClass('lock')) {
-      $('html').removeClass('lock');
-      $('#wrap').removeAttr('style');
-      window.scrollTo(0, Body.scrollTop);
-      window.setTimeout(function () {
-        Body.scrollTop = '';
-      }, 0);
-    }
-  }
-};
-
-//PC 디바이스 체크
-const isPC = {
-  window: function () {
-    return navigator.userAgent.match(/windows/i) == null ? false : true;
-  },
-  mac: function () {
-    return navigator.userAgent.match(/macintosh/i) == null ? false : true;
-  },
-  chrome: function () {
-    return navigator.userAgent.match(/chrome/i) == null ? false : true;
-  },
-  firefox: function () {
-    return navigator.userAgent.match(/firefox/i) == null ? false : true;
-  },
-  opera: function () {
-    return navigator.userAgent.match(/opera|OPR/i) == null ? false : true;
-  },
-  safari: function () {
-    return navigator.userAgent.match(/safari/i) == null ? false : true;
-  },
-  edge: function () {
-    return navigator.userAgent.match(/edge/i) == null ? false : true;
-  },
-  msie: function () {
-    return navigator.userAgent.match(/rv:11.0|msie/i) == null ? false : true;
-  },
-  ie11: function () {
-    return navigator.userAgent.match(/rv:11.0/i) == null ? false : true;
-  },
-  ie10: function () {
-    return navigator.userAgent.match(/msie 10.0/i) == null ? false : true;
-  },
-  ie9: function () {
-    return navigator.userAgent.match(/msie 9.0/i) == null ? false : true;
-  },
-  ie8: function () {
-    return navigator.userAgent.match(/msie 8.0/i) == null ? false : true;
-  },
-  any: function () {
-    return isPC.window() || isPC.mac();
-  },
-  check: function () {
-    if (isPC.any()) {
-      if (isPC.window()) $('html').addClass('window');
-      if (isPC.mac()) $('html').addClass('mac');
-      if (isPC.msie()) $('html').addClass('msie');
-      if (isPC.ie11()) $('html').addClass('ie11');
-      if (isPC.ie10()) $('html').addClass('ie10');
-      if (isPC.ie9()) $('html').addClass('ie9');
-      if (isPC.ie8()) $('html').addClass('ie8');
-      if (isPC.edge()) {
-        $('html').addClass('edge');
-      } else if (isPC.opera()) {
-        $('html').addClass('opera');
-      } else if (isPC.chrome()) {
-        $('html').addClass('chrome');
-      } else if (isPC.safari()) {
-        $('html').addClass('safari');
-      } else if (isPC.firefox()) {
-        $('html').addClass('firefox');
-      }
-    }
-  }
-};
-
-//모바일 디바이스 체크
-const isMobile = {
-  Android: function () {
-    return navigator.userAgent.match(/Android/i) == null ? false : true;
-  },
-  BlackBerry: function () {
-    return navigator.userAgent.match(/BlackBerry/i) == null ? false : true;
-  },
-  iOS: function () {
-    return navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true;
-  },
-  iPhone: function () {
-    return navigator.userAgent.match(/iPhone/i) == null ? false : true;
-  },
-  iPad: function () {
-    return navigator.userAgent.match(/iPad/i) == null ? false : true;
-  },
-  iPhoneVersion: function () {
-    const $sliceStart = navigator.userAgent.indexOf('iPhone OS') + 10;
-    const $sliceEnd = $sliceStart + 2;
-    const $version = parseFloat(navigator.userAgent.slice($sliceStart, $sliceEnd));
-    return $version;
-  },
-  Opera: function () {
-    return navigator.userAgent.match(/Opera Mini/i) == null ? false : true;
-  },
-  Windows: function () {
-    return navigator.userAgent.match(/IEMobile/i) == null ? false : true;
-  },
-  tablet: function () {
-    if (isMobile.any()) {
-      if (window.screen.width < window.screen.height) {
-        return window.screen.width > 760 ? true : false;
-      } else {
-        return window.screen.height > 760 ? true : false;
-      }
-    }
-  },
-  any: function () {
-    return isMobile.Android() || isMobile.iOS() || isMobile.BlackBerry() || isMobile.Opera() || isMobile.Windows();
-  },
-  check: function () {
-    if (isMobile.any()) {
-      $('html').addClass('mobile');
-      if (isMobile.tablet()) $('html').addClass('tablet');
-    }
-    if (isMobile.iOS()) $('html').addClass('ios');
-    if (isMobile.Android()) $('html').addClass('android');
-    //if(isMobile.iPhoneVersion() >= 12)$('html').addClass('ios12');
-  }
-};
-
-//디바이스체크 실행
-const uiDevice = {
-  iPhone8PlusH: 736,
-  screenH: window.screen.height,
-  screenW: window.screen.width,
-  isIPhoneX: function () {
-    $('html').addClass('iPhone-X');
-  },
-  notIPhoneX: function () {
-    $('html').removeClass('iPhone-X');
-  },
-  check: function () {
-    isMobile.check();
-    isPC.check();
-    if (isMobile.any()) {
-      const $pixelRatio = Math.round(window.devicePixelRatio);
-      if (!!$pixelRatio) $('html').addClass('pixel-ratio-' + $pixelRatio);
-    }
-    const $isIPhoneX = isMobile.iPhone() && uiDevice.screenH > uiDevice.iPhone8PlusH ? true : false;
-    if ($isIPhoneX) {
-      //첫로딩
-      if ($(window).width() < $(window).height()) {
-        uiDevice.isIPhoneX();
-      } else {
-        uiDevice.notIPhoneX();
-      }
-    }
-
-    //가로, 세로 회전시
-    if (isMobile.any()) {
-      if (window.orientation == 0) {
-        $('html').removeClass('landscape');
-      } else {
-        $('html').addClass('landscape');
-      }
-      $(window).on('orientationchange', function () {
-        if (window.orientation == 0) {
-          $('html').removeClass('landscape');
-          if ($isIPhoneX) uiDevice.isIPhoneX();
-        } else {
-          $('html').addClass('landscape');
-          if ($isIPhoneX) uiDevice.notIPhoneX();
-        }
-      });
-    }
-  },
-  hide: function () {
-    if ($('[data-device-hide]').length) {
-      $('[data-device-hide]').each(function () {
-        const $device = $(this).data('device-hide');
-        if (isMobile.any()) {
-          //모바일
-          if ($device == 'ios' && isMobile.iOS()) {
-            $(this).hide();
-          } else if ($device == 'android' && isMobile.Android()) {
-            $(this).hide();
-          }
-        } else {
-          //PC
-          if ($device == 'ios' && $('html').hasClass('safari')) {
-            $(this).hide();
-          } else if ($device == 'android' && !$('html').hasClass('safari')) {
-            $(this).hide();
-          }
-        }
-      });
-    }
-  }
-};
-
-//공통: 헤더, 레이아웃, 앱용플로팅버튼, 스킵네비, meta[og:image]
-const uiCommon = {
-  winLoad: function () {
-    //hr태그 토크백 제외
-    $('hr').each(function () {
-      $(this).attr('aria-hidden', true);
-    });
-
-    //버튼없는 헤더 쓸때
-    if ($('.fake_header').length && $('#header').length) {
-      $('#header').addClass('no_btn');
-      $('.fake_header').remove();
-    }
-  },
-  vhChk: function () {
-    const $vh = window.innerHeight * 0.01;
-    $('html').css('--vh', $vh + 'px');
-  },
-  path: function (type) {
-    let $path = location.pathname;
-    let $returnVal = $path;
-    if ($.isNumeric(type)) {
-      if ($path.indexOf('/') >= 0) {
-        $path = $path.split('/');
-        $returnVal = $path[type];
-      }
-    } else if (type === 'file') {
-      if ($path.indexOf('/') >= 0) $returnVal = $path.split('/').pop();
-    } else if (type === 'fileName') {
-      if ($path.indexOf('/') >= 0) $path = $path.split('/').pop();
-      if ($path.indexOf('.') >= 0) {
-        $returnVal = $path.split('.').shift();
-      } else {
-        $returnVal = $path;
-      }
-    } else if (type === 'fileType') {
-      if ($path.indexOf('/') >= 0) $path = $path.split('/').pop();
-      if ($path.indexOf('.') >= 0) {
-        $returnVal = $path.split('.').pop();
-      } else {
-        $returnVal = null;
-      }
-    }
-    return $returnVal;
-  },
-  console: function (txt, delay) {
-    if (delay == undefined) delay = 3000;
-    const $consoles = $('.console');
-    let $top = 0;
-    let $last = '';
-    if ($consoles.length) {
-      $last = $('.console').last();
-      $top = parseInt($last.css('top')) + $last.outerHeight();
-    }
-    $('#contents').append('<div class="console">' + txt + '</div>');
-    $last = $('.console').last();
-    if ($top > 0) $last.css('top', $top);
-    $last.delay(delay).fadeOut(500, function () {
-      $(this).remove();
-    });
-  },
-  title: function (string) {
-    const $title = document.title;
-    if ($title.indexOf(string) < 0) document.title = string + ' | ' + $title;
-    const $titleEl = '#header h1';
-
-    const setPageTitle = function () {
-      if ($($titleEl).length) $($titleEl).html(string);
-    };
-    setPageTitle();
-  },
-  gnbOutCont: '#header,#contents,.floating-bar,#footer',
-  gnb: function () {
-    if ($('#gnb').length) {
-      $(document)
-        .off('click', '.ui-gnb-open')
-        .on('click', '.ui-gnb-open', function (e) {
-          e.preventDefault();
-          if ($('#gnb').hasClass('show')) {
-            uiCommon.gnbClose();
-          } else {
-            uiCommon.gnbOpen();
-          }
-        });
-      $(document)
-        .off('click', '.gnb-close')
-        .on('click', '.gnb-close', function (e) {
-          e.preventDefault();
-          uiCommon.gnbClose();
-        });
-      $(document)
-        .off('click', '.gnb-dep1>ul>li>a')
-        .on('click', '.gnb-dep1>ul>li>a', function (e) {
-          e.preventDefault();
-          uiCommon.gnbActive(this);
-        });
-      $(document)
-        .off('click', '.gnb-content a.is-toggle')
-        .on('click', '.gnb-content a.is-toggle', function (e) {
-          e.preventDefault();
-          uiCommon.gnbActive(this, true);
-        });
-    }
-  },
-  gnbOpen: function () {
-    Body.lock();
-    $('#gnb').show().removeAttr('aria-hidden');
-    $(uiCommon.gnbOutCont).attr('aria-hidden', true);
-    $('#gnb').find($focusableEl).first().focus();
-    $('#gnb').addClass('show');
-    if (!isMobile.any()) Layer.focusMove('#gnb');
-
-    $('#gnb a').each(function () {
-      if ($(this).attr('role') == undefined) $(this).attr('role', 'button');
-    });
-    $('.gnb-dep1>ul')
-      .attr({
-        role: 'tablist'
-      })
-      .children('li')
-      .attr({
-        role: 'presentation'
-      })
-      .children('a')
-      .attr({
-        role: 'tab',
-        'aria-selected': false
-      });
-
-    const $dep1Active = $('.gnb-dep1>ul').children('.active');
-    if ($dep1Active.length) {
-      $dep1Active.addClass('open').children('a').attr('aria-selected', true);
-      const $dep2Active = $('.gnb-dep2>ul').children('.active');
-      if ($dep2Active.length) {
-        const $dep2ActiveTop = $dep2Active.position().top;
-        const $dep2ScrollTop = $('.open>.gnb-dep2').scrollTop();
-        $('.open>.gnb-dep2')
-          .stop(true, false)
-          .delay(300)
-          .animate({ scrollTop: $dep2ActiveTop + $dep2ScrollTop - 25 }, 300);
-      }
-    } else {
-      $('.gnb-dep1>ul>li').first().addClass('open').children('a').attr('aria-selected', true);
-    }
-    $('.gnb-dep2 li').each(function () {
-      if ($(this).children('div').length) {
-        $(this).addClass('open');
-        $(this).children('a').addClass('is-toggle').attr('aria-expanded', true);
-      }
-    });
-  },
-  gnbClose: function () {
-    Body.unlock();
-    $('.ui-gnb-open').focus();
-    $('#gnb').attr('aria-hidden', true);
-    $(uiCommon.gnbOutCont).removeAttr('aria-hidden');
-    $('#gnb').removeClass('show');
-
-    setTimeout(function () {
-      uiCommon.gnbDepthReset();
-    }, 610);
-  },
-  gnbDepthReset: function () {
-    $('#gnb').find('.open').removeClass('open').children('a').attr('aria-selected', false);
-    $('#gnb').find('.close').removeClass('close');
-    $('#gnb').find('.gnb-dep3').removeAttr('style');
-    $('#gnb .is-toggle').each(function () {
-      $(this).attr('aria-expanded', false);
-    });
-  },
-  gnbActiveIng: false,
-  gnbActive: function (target, isToggle) {
-    const $parent = $(target).parent();
-    const $slideSpeed = 300;
-    const $dep2 = $parent.find('.gnb-dep2');
-    //클릭시 메뉴 활성화
-    if (isToggle) {
-      //뎁스2
-      if (uiCommon.gnbActiveIng == false) {
-        uiCommon.gnbActiveIng = true;
-        if ($parent.hasClass('open')) {
-          $(target).attr('aria-expanded', false);
-          $parent.removeClass('open');
-          $(target)
-            .next()
-            .stop(true, false)
-            .slideUp($slideSpeed, function () {
-              uiCommon.gnbActiveIng = false;
-
-              const $dep1Height = $('.gnb-dep1').data('height');
-              const $dep2Height = $parent.closest('.gnb-dep2').outerHeight();
-              $('.gnb-dep1').animate({ height: Math.max($dep1Height, $dep2Height) }, 300);
-            });
-        } else {
-          $(target).attr('aria-expanded', true);
-          $parent.addClass('open');
-          $(target)
-            .next()
-            .stop(true, false)
-            .slideDown($slideSpeed, function () {
-              uiCommon.gnbInScroll(target, 'sub');
-              uiCommon.gnbActiveIng = false;
-
-              const $dep1Height = $('.gnb-dep1').data('height');
-              const $dep2Height = $parent.closest('.gnb-dep2').outerHeight();
-              $('.gnb-dep1').animate({ height: Math.max($dep1Height, $dep2Height) }, 300);
-            });
-        }
-      }
-    } else {
-      //뎁스1
-      $parent.addClass('open').children('a').attr('aria-selected', true);
-      $parent.siblings().removeClass('open').children('a').attr('aria-selected', false);
-      $parent
-        .siblings()
-        .find('.is-toggle')
-        .each(function () {
-          $(this).attr('aria-expanded', true).siblings('div').removeAttr('style');
-          $(this).parent().addClass('open');
-        });
-
-      if ($parent.hasClass('active')) {
-        const $dep2Active = $dep2.children('ul').children('.active');
-        if ($dep2Active.length) {
-          const $dep2ActiveTop = $dep2Active.position().top;
-          const $dep2ScrollTop = $dep2.scrollTop();
-          $dep2.scrollTop($dep2ActiveTop + $dep2ScrollTop - 25);
-        }
-      } else {
-        $dep2.scrollTop(0);
-      }
-
-      //$isScroll = true;
-      //uiCommon.gnbInScroll(target);
-    }
-  },
-  gnbInScroll: function (target, type) {
-    const $parent = $(target).parent();
-    const $wrap = $('.gnb-content');
-    const $wrapPdTop = parseInt($wrap.css('paddingTop'));
-    const $wrapHeight = $wrap.height();
-    let $sclWrap = $wrap.find('.gnb-dep1');
-    let $sclWrapTop = $sclWrap.scrollTop();
-    let $parentTop = $parent.position().top + $sclWrapTop - $wrapPdTop;
-    const $parentHeight = $parent.outerHeight();
-    let $scl = null;
-    let $sclSpeed = 200;
-
-    if (type == 'sub') {
-      //뎁스2,3
-      $sclWrap = $wrap.find('li.open>.gnb-dep2');
-      $sclWrapTop = $sclWrap.scrollTop();
-      $parentTop = $parent.position().top + $sclWrapTop;
-      $sclSpeed = 300;
-    } else {
-      $wrap.find('.gnb-dep2').scrollTop(0);
-    }
-
-    if ($wrapHeight + $sclWrapTop < $parentTop + $parentHeight) {
-      $scl = Math.min($parentTop, $parentTop + $parentHeight - $wrapHeight);
-    } else if ($parentTop < $sclWrapTop) {
-      $scl = $parentTop;
-    }
-    if ($scl != null) {
-      $sclWrap.stop(true, false).animate({ scrollTop: $scl }, $sclSpeed, function () {
-        $isScroll = false;
-      });
-    }
-  },
-  fixed: function (target) {
-    //고정(fixed)
-    const $target = $(target);
-    if ($target.length && $target.data('init') != true) {
-      $target.data('init', true);
-      $(window).on('scroll', function () {
-        if ($('html').hasClass('lock')) return false;
-        const $scrollTop = $(this).scrollTop();
-
-        $target.each(function () {
-          if ($(this).closest('.' + Layer.popClass).length) return;
-          const $this = $(this);
-          let $topMargin = 0;
-          if ($('.top-fixed').length) {
-            $('.top-fixed').each(function () {
-              if ($this[0] == $(this)[0]) return false;
-              $topMargin += $(this).children().outerHeight();
-            });
-          }
-          let $topEl = $this;
-          let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
-          if ($scrollTop + $topMargin > $offsetTop) {
-            $this.data('top', $offsetTop);
-            $this.addClass('top-fixed');
-            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
-            if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
-            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
-          } else {
-            $this.removeData('top');
-            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
-            $topEl.removeCss('top');
-            $this.removeClass('top-fixed');
-            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
-          }
-        });
-      });
-      // $(window).resize(function () {
-      //   $(window).scroll();
-      // });
-    }
-  },
-  header: function () {
-    const $header = $('#header');
-    if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
-  },
-  headerUI: function () {
-    $(document)
-      .off('click', '#header h1 .btn-category')
-      .on('click', '#header h1 .btn-category', function (e) {
-        e.preventDefault();
-        if ($('#header').hasClass('is-category-open')) {
-          $('#header').removeClass('is-category-open');
-        } else {
-          $('#header').addClass('is-category-open');
-        }
-      });
-    // if($('#header h1 .btn-category').length && $('#header .category-wrap').length){
-    $(document)
-      .on('click touchend', function (e) {
-        if ($('#header').hasClass('is-category-open')) $('#header').removeClass('is-category-open');
-      })
-      .on('click touchend', '#header', function (e) {
-        e.stopPropagation();
-      });
-    // }
-  },
-  footer: function () {
-    if ($('#footer').length && $('#container').find('.bottom-fixed-space').length) {
-      const $div = $('#container').find('.bottom-fixed-space');
-      $('body').append($div);
-    }
-
-    const $space = $('.bottom-fixed-space');
-    const fixedSpaceHeight = function () {
-      const $spaceArryHeight = [];
-      const $naviBar = $('.floating-bar');
-      if ($naviBar.length && $naviBar.height() != 0) {
-        $spaceArryHeight.push($naviBar.outerHeight());
-      }
-      $('.bottom-fixed').each(function () {
-        const $this = $(this);
-        const $height = $this.children().outerHeight();
-        if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
-        if ($this.hasClass('is-restore')) $this.css('height', $height);
-      });
-
-      const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
-      $space.css('height', $maxHeight);
-      if ($('.floating-btn').length) {
-        $('.floating-btn').css('bottom', $maxHeight + 20);
-      }
-    };
-    fixedSpaceHeight();
-    $(window).scroll(function () {
-      if ($space.length) {
-        fixedSpaceHeight();
-      }
-    });
-  },
-  step: function () {
-    //<ol class="step_state" role="img" aria-label="총 4단계 중 현재단계 2단계">
-    if ($('.ico-step').length) {
-      $('.ico-step').each(function () {
-        const $this = $(this);
-        const $length = $this.find('li').length;
-        const $onIdx = $this.find('li.on').index() + 1;
-        $this.attr({
-          role: 'img',
-          'aria-label': '총 ' + $length + '단계 중 현재단계 ' + $onIdx + '단계'
-        });
-      });
-    }
-  },
-  landscape: function () {
-    //가로모드 막기
-    if (isMobile.any()) {
-      const _landscapeDiv = '.landscape_lock';
-      if (!$(_landscapeDiv).length) {
-        const $landscapeHtml = '<div class="' + _landscapeDiv.substring(1) + '"><div class="tbl"><div class="td">이 사이트는 세로 전용입니다.<br>단말기를 세로모드로 변경해주세요.</div></div></div>';
-        $('body').append($landscapeHtml);
-      }
-      $(_landscapeDiv)
-        .unbind('touchmove')
-        .bind('touchmove', function (e) {
-          e.preventDefault();
-        });
-    }
-  },
-  isFloating: false,
-  floating: function () {
-    let isBtn = false;
-    if ($('.floating-btn').length) isBtn = true;
-    if ($('.floating-bar').length) {
-      uiCommon.isFloating = true;
-      if (isBtn && !$('.floating-bar .floating-btn').length) $('.floating-bar').prepend($('.floating-btn'));
-    }
-  },
-  top: function () {
-    //top 버튼
-    const settings = {
-      button: '#btnTop',
-      text: '컨텐츠 상단으로 이동',
-      min: 100,
-      onClass: 'on',
-      hoverClass: 'hover',
-      scrollSpeed: 300
-    };
-    let btnHtml = '';
-    if (!$('#container').length) return;
-    if (!$('.floating-btn').length) btnHtml += '<div class="floating-btn">';
-    btnHtml += '<a href="#" id="' + settings.button.substring(1) + '" class="btn btn-page-top" title="' + settings.text + '" role="button" aria-label="' + settings.text + '"></a>';
-    if (!$('.floating-btn').length) btnHtml += '</div>';
-
-    if (!$(settings.button).length) {
-      if ($('.floating-btn').length) {
-        $('.floating-btn').append(btnHtml);
-      } else if ($('.floating-bar').length && $('.floating-bar').is(':visible')) {
-        $('.floating-bar').prepend(btnHtml);
-      } else if ($('#container').length) {
-        $('#container').append(btnHtml);
-      } else {
-        $('body').append(btnHtml);
-      }
-
-      $(document)
-        .on('click', settings.button, function (e) {
-          e.preventDefault();
-          $('html, body').animate({ scrollTop: 0 }, settings.scrollSpeed);
-          $('#wrap').find($focusableEl).first().focus();
-        })
-        .on('mouseenter', function () {
-          $(settings.button).addClass(settings.hoverclass);
-        })
-        .on('mouseleave', function () {
-          $(settings.button).removeClass(settings.hoverClass);
-        });
-
-      const btnTopOn = function () {
-        $(settings.button).attr('aria-hidden', 'false').addClass(settings.onClass);
-        $('.floating-btn').addClass('top-on');
-      };
-
-      const btnTopOff = function () {
-        $(settings.button).attr('aria-hidden', 'true').removeClass(settings.onClass);
-        $('.floating-btn').removeClass('top-on');
-      };
-
-      /*
-      $(settings.button).swipe({
-        swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
-          const $this = $(this);
-          const $min = 0;
-          const $max = 150;
-          const $speed = 300;
-          const $isRight = direction == 'right'?true:false;
-          const $distance = $min-distance;
-          
-          if($isRight){
-            $this.css('right',$distance);
-            if(phase == 'end' || phase == 'cancel'){
-              if($distance < -10){
-                $this.stop(true,false).animate({'right':-$max},$speed,function(){
-                  $(this).removeCss('right');
-                  btnTopOff();
-                });
-              }else{
-                $this.stop(true,false).animate({'right':$min},$speed,function(){
-                  $(this).removeCss('right');
-                  btnTopOn();
-                });
-              }
-            }
-          }
-        },
-        cancleTreshold:0
-      });
-      */
-
-      let $lastSclTop = $(window).scrollTop();
-      const $scrollEvt = function () {
-        const $SclTop = $(window).scrollTop();
-        const $spaceH = $('.bottom-fixed-space').outerHeight();
-        const $bottom = parseInt($(settings.button).parent().css('bottom'));
-        const $margin = 20;
-        const $Height = window.innerHeight;
-        const $scrollHeight = $('body').get(0).scrollHeight;
-        if ($spaceH > 0 && $spaceH != $bottom - $margin) {
-          $('.floating-btn').css('bottom', $spaceH + $margin);
-        }
-
-        // if($SclTop > settings.min && $SclTop < $lastSclTop){  //최소보다 높고, 위로 스크롤할때
-        //   if($SclTop < $lastSclTop-(settings.min/2)){
-        //     btnTopOn();
-        //   }
-        // }else{
-        //   btnTopOff();
-        // }
-        if ($SclTop > settings.min) {
-          btnTopOn();
-        } else {
-          btnTopOff();
-        }
-        if (uiCommon.isFloating) {
-          if ($SclTop < $lastSclTop) {
-            //위로 스크롤할때
-            $('.floating-bar').removeClass('off');
-          } else {
-            $('.floating-bar').addClass('off');
-          }
-          if ($SclTop + $Height > $scrollHeight - 3) {
-            $('.floating-bar').removeClass('off').addClass('end');
-          } else {
-            $('.floating-bar').removeClass('end');
-          }
-        }
-        const $btnFixed = $('.btn-wrap.bottom-fixed');
-        if ($btnFixed.length) {
-          $btnFixed.each(function () {
-            const $this = $(this);
-            if ($this.hasClass('is-restore')) {
-              const $top = $this.offset().top;
-              const $bottom = $top + $this.children().outerHeight();
-              if ($SclTop + $Height > $bottom) {
-                $this.addClass('fixed-none');
-              } else {
-                $this.removeClass('fixed-none');
-              }
-            } else {
-              if ($SclTop + $Height > $scrollHeight - 3) {
-                $this.addClass('no-shadow');
-              } else {
-                $this.removeClass('no-shadow');
-              }
-            }
-          });
-        }
-
-        setTimeout(function () {
-          $lastSclTop = $SclTop;
-        }, 50);
-      };
-      const $scrollEndEvt = function () {
-        const $SclTop = $(window).scrollTop();
-        if ($SclTop > settings.min) {
-          btnTopOff();
-        }
-      };
-      $(window).on('scroll', $scrollEvt);
-      window.addEventListener('scroll', uiUtil.debounce($scrollEndEvt, 1500));
-    } else {
-      if ($('.floating-bar').length && !$('.floating-bar .btn-page-top').length) {
-        $('.floating-bar').prepend($('.floating-btn.btn-page-top'));
-      }
-    }
-  },
-  guide: function () {
-    const themeColorChange = function () {
-      const $path = location.pathname;
-      if ($path.indexOf('/html/guide') > -1) {
-        // if(!$('.gd__theme_color').length){
-        // }
-        let $html = '<div class="gd__theme_color">';
-        $html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></button>';
-        $html += '<dl>';
-        $html += '<dt>테마색상 변경확인</dt>';
-        $html += '<dd>';
-        $html += '<input type="color">';
-        $html += '<div>';
-        $html += '<div class="color"></div>';
-        $html += '<div class="reset"><button type="button">리셋</button></div>';
-        $html += '</div>';
-        $html += '</dd>';
-        $html += '</dl>';
-        $html += '</div>';
-        $('body').append($html);
-
-        const $baseThemeColor = '#3cc35b';
-        const $input = $('.gd__theme_color input');
-        const $color = $('.gd__theme_color .color');
-        const $openBtn = $('.gd__theme_btn');
-        const $resetBtn = $('.gd__theme_color .reset button');
-        const $themeColor = uiCookie.get('theme-color') !== '' ? uiCookie.get('theme-color') : $baseThemeColor;
-
-        const setColor = function (colorStr) {
-          $input.val(colorStr);
-          $color.text(colorStr);
-          if ($baseThemeColor !== colorStr) {
-            $('html').css('--theme-color', colorStr);
-            uiCookie.set('theme-color', colorStr);
-          } else {
-            $('html').removeCss('--theme-color');
-            uiCookie.set('theme-color', '');
-          }
-        };
-        setColor($themeColor);
-
-        $openBtn.on('click', function (e) {
-          e.preventDefault();
-          $('.gd__theme_color').toggleClass('open');
-        });
-
-        $input.on('input', function () {
-          const $val = $(this).val();
-          setColor($val);
-        });
-
-        $resetBtn.on('click', function (e) {
-          e.preventDefault();
-          setColor($baseThemeColor);
-        });
-      }
-    };
-    themeColorChange();
-  },
-  lottie: function () {
-    const $lottie = $('[data-lottie]');
-
-    $lottie.each(function () {
-      // $(this).empty();
-      if (!$(this).hasClass('lottie__init')) {
-        const $data = $(this).data('lottie');
-        $(this).addClass('lottie__init');
-        const isLoop = $(this).hasClass('loop');
-        const $lottieOpt = lottie.loadAnimation({
-          container: this,
-          renderer: 'svg',
-          loop: isLoop,
-          autoplay: true,
-          path: $data
-        });
-        $(this).data('lottie-opt', $lottieOpt);
-      }
-    });
-  },
-  init: function () {
-    if (!$('.bottom-fixed-space').length) {
-      let $wrap = $('body');
-      if (!$('#footer').length && $('#container').length) $wrap = $('#container');
-      if ($('#wrap').length) $wrap = $('#wrap');
-      $wrap.append('<div class="bottom-fixed-space" aria-hidden="true"></div>');
-    }
-    uiCommon.header();
-    uiCommon.headerUI();
-    uiCommon.gnb();
-    uiCommon.footer();
-    uiCommon.step();
-    uiCommon.floating();
-    uiCommon.top();
-    //uiCommon.landscape();
-
-    uiCommon.guide();
-    uiCommon.lottie();
-
-    uiCommon.fixed('#header');
-    uiCommon.fixed('.tab-navi-menu');
-    uiCommon.fixed('.tab-line-menu');
-
-    $(window).on('resize', function () {
-      uiCommon.vhChk();
-    });
-  }
-};
-
-const uiUtil = {
-  debounce: function (fn, delay) {
-    let timer;
-    return function () {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn.apply(this, arguments);
-      }, delay);
-    };
-  },
-  throttle: function (fn, delay) {
-    let timer;
-    return function () {
-      if (!timer) {
-        timer = setTimeout(() => {
-          timer = null;
-          fn.apply(this, arguments);
-        }, delay);
-      }
-    };
   }
 };
 
@@ -1977,7 +836,7 @@ const Layer = {
         }
 
         //팝업 in 포커스
-        if (!isMobile.any()) {
+        if (!ui.Mobile.any()) {
           //PC
           if ($(tar).hasClass(Layer.alertClass)) {
             $(tar).find('.pop_btn .button').last().focus();
@@ -2057,7 +916,7 @@ const Layer = {
           Layer.bottomTouch(tar);
         }
 
-        if (!isMobile.any()) Layer.focusMove(tar);
+        if (!ui.Mobile.any()) Layer.focusMove(tar);
         Layer.position(tar);
         if (!!callback) {
           callback();
@@ -2521,8 +1380,939 @@ const Layer = {
   }
 };
 
+/********************************
+ * front UI 함수 *
+ ********************************/
+const ui = new Object();
+
+//Html include
+ui.Html = {
+  include: function () {
+    const $elements = $.find('*[data-include-html]');
+    const $fileName = location.pathname.split('/').pop();
+    if ($elements.length) {
+      $.each($elements, function () {
+        const $this = $(this);
+        const $html = $this.data('include-html');
+        const $htmlAry = $html.split('/');
+        const $htmlFile = $htmlAry[$htmlAry.length - 1];
+        const $docTitle = document.title;
+        let $title = null;
+        if ($docTitle.indexOf(' | ') > -1) {
+          $title = $docTitle.split(' | ')[0];
+        }
+        $this.load($html, function (res, sta, xhr) {
+          if (sta == 'success') {
+            console.log('Include ' + $htmlFile + '!');
+            if ($htmlFile.indexOf('header') == 0) {
+              if ($title !== null) {
+                $('#header h1').html($title);
+              }
+              ui.Common.fixed('#header');
+              ui.Common.header();
+            }
+            if ($htmlFile == 'gnb.html') {
+              ui.Common.gnb();
+            }
+            if ($htmlFile == 'floating.html') {
+              ui.Common.floating();
+            }
+            if ($htmlFile == 'footer.html') {
+              ui.Common.footer();
+            }
+            $this.children().unwrap();
+          }
+        });
+      });
+    }
+  }
+};
+
+//PC 디바이스 체크
+ui.PC = {
+  window: function () {
+    return navigator.userAgent.match(/windows/i) == null ? false : true;
+  },
+  mac: function () {
+    return navigator.userAgent.match(/macintosh/i) == null ? false : true;
+  },
+  chrome: function () {
+    return navigator.userAgent.match(/chrome/i) == null ? false : true;
+  },
+  firefox: function () {
+    return navigator.userAgent.match(/firefox/i) == null ? false : true;
+  },
+  opera: function () {
+    return navigator.userAgent.match(/opera|OPR/i) == null ? false : true;
+  },
+  safari: function () {
+    return navigator.userAgent.match(/safari/i) == null ? false : true;
+  },
+  edge: function () {
+    return navigator.userAgent.match(/edge/i) == null ? false : true;
+  },
+  msie: function () {
+    return navigator.userAgent.match(/rv:11.0|msie/i) == null ? false : true;
+  },
+  ie11: function () {
+    return navigator.userAgent.match(/rv:11.0/i) == null ? false : true;
+  },
+  ie10: function () {
+    return navigator.userAgent.match(/msie 10.0/i) == null ? false : true;
+  },
+  ie9: function () {
+    return navigator.userAgent.match(/msie 9.0/i) == null ? false : true;
+  },
+  ie8: function () {
+    return navigator.userAgent.match(/msie 8.0/i) == null ? false : true;
+  },
+  any: function () {
+    return ui.PC.window() || ui.PC.mac();
+  },
+  check: function () {
+    if (ui.PC.any()) {
+      if (ui.PC.window()) $('html').addClass('window');
+      if (ui.PC.mac()) $('html').addClass('mac');
+      if (ui.PC.msie()) $('html').addClass('msie');
+      if (ui.PC.ie11()) $('html').addClass('ie11');
+      if (ui.PC.ie10()) $('html').addClass('ie10');
+      if (ui.PC.ie9()) $('html').addClass('ie9');
+      if (ui.PC.ie8()) $('html').addClass('ie8');
+      if (ui.PC.edge()) {
+        $('html').addClass('edge');
+      } else if (ui.PC.opera()) {
+        $('html').addClass('opera');
+      } else if (ui.PC.chrome()) {
+        $('html').addClass('chrome');
+      } else if (ui.PC.safari()) {
+        $('html').addClass('safari');
+      } else if (ui.PC.firefox()) {
+        $('html').addClass('firefox');
+      }
+    }
+  }
+};
+
+//모바일 디바이스 체크
+ui.Mobile = {
+  Android: function () {
+    return navigator.userAgent.match(/Android/i) == null ? false : true;
+  },
+  BlackBerry: function () {
+    return navigator.userAgent.match(/BlackBerry/i) == null ? false : true;
+  },
+  iOS: function () {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i) == null ? false : true;
+  },
+  iPhone: function () {
+    return navigator.userAgent.match(/iPhone/i) == null ? false : true;
+  },
+  iPad: function () {
+    return navigator.userAgent.match(/iPad/i) == null ? false : true;
+  },
+  iPhoneVersion: function () {
+    const $sliceStart = navigator.userAgent.indexOf('iPhone OS') + 10;
+    const $sliceEnd = $sliceStart + 2;
+    const $version = parseFloat(navigator.userAgent.slice($sliceStart, $sliceEnd));
+    return $version;
+  },
+  Opera: function () {
+    return navigator.userAgent.match(/Opera Mini/i) == null ? false : true;
+  },
+  Windows: function () {
+    return navigator.userAgent.match(/IEMobile/i) == null ? false : true;
+  },
+  tablet: function () {
+    if (ui.Mobile.any()) {
+      if (window.screen.width < window.screen.height) {
+        return window.screen.width > 760 ? true : false;
+      } else {
+        return window.screen.height > 760 ? true : false;
+      }
+    }
+  },
+  any: function () {
+    return ui.Mobile.Android() || ui.Mobile.iOS() || ui.Mobile.BlackBerry() || ui.Mobile.Opera() || ui.Mobile.Windows();
+  },
+  check: function () {
+    if (ui.Mobile.any()) {
+      $('html').addClass('mobile');
+      if (ui.Mobile.tablet()) $('html').addClass('tablet');
+    }
+    if (ui.Mobile.iOS()) $('html').addClass('ios');
+    if (ui.Mobile.Android()) $('html').addClass('android');
+    //if(ui.Mobile.iPhoneVersion() >= 12)$('html').addClass('ios12');
+  }
+};
+
+//디바이스체크 실행
+ui.Device = {
+  iPhone8PlusH: 736,
+  screenH: window.screen.height,
+  screenW: window.screen.width,
+  isIPhoneX: function () {
+    $('html').addClass('iPhone-X');
+  },
+  notIPhoneX: function () {
+    $('html').removeClass('iPhone-X');
+  },
+  check: function () {
+    ui.Mobile.check();
+    ui.PC.check();
+    if (ui.Mobile.any()) {
+      const $pixelRatio = Math.round(window.devicePixelRatio);
+      if (!!$pixelRatio) $('html').addClass('pixel-ratio-' + $pixelRatio);
+    }
+    const $isIPhoneX = ui.Mobile.iPhone() && ui.Device.screenH > ui.Device.iPhone8PlusH ? true : false;
+    if ($isIPhoneX) {
+      //첫로딩
+      if ($(window).width() < $(window).height()) {
+        ui.Device.isIPhoneX();
+      } else {
+        ui.Device.notIPhoneX();
+      }
+    }
+
+    //가로, 세로 회전시
+    if (ui.Mobile.any()) {
+      if (window.orientation == 0) {
+        $('html').removeClass('landscape');
+      } else {
+        $('html').addClass('landscape');
+      }
+      $(window).on('orientationchange', function () {
+        if (window.orientation == 0) {
+          $('html').removeClass('landscape');
+          if ($isIPhoneX) ui.Device.isIPhoneX();
+        } else {
+          $('html').addClass('landscape');
+          if ($isIPhoneX) ui.Device.notIPhoneX();
+        }
+      });
+    }
+  },
+  hide: function () {
+    if ($('[data-device-hide]').length) {
+      $('[data-device-hide]').each(function () {
+        const $device = $(this).data('device-hide');
+        if (ui.Mobile.any()) {
+          //모바일
+          if ($device == 'ios' && ui.Mobile.iOS()) {
+            $(this).hide();
+          } else if ($device == 'android' && ui.Mobile.Android()) {
+            $(this).hide();
+          }
+        } else {
+          //PC
+          if ($device == 'ios' && $('html').hasClass('safari')) {
+            $(this).hide();
+          } else if ($device == 'android' && !$('html').hasClass('safari')) {
+            $(this).hide();
+          }
+        }
+      });
+    }
+  }
+};
+
+//공통: 헤더, 레이아웃, 앱용플로팅버튼, 스킵네비, meta[og:image]
+ui.Common = {
+  winLoad: function () {
+    //hr태그 토크백 제외
+    $('hr').each(function () {
+      $(this).attr('aria-hidden', true);
+    });
+  },
+  dark: function () {
+    //다크모드 체크
+    try {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
+      if (prefersDark) $('html').addClass('dark');
+    } catch (e) {}
+  },
+  vhChk: function () {
+    const $vh = window.innerHeight * 0.01;
+    $('html').css('--vh', $vh + 'px');
+  },
+  path: function (type) {
+    let $path = location.pathname;
+    let $returnVal = $path;
+    if ($.isNumeric(type)) {
+      if ($path.indexOf('/') >= 0) {
+        $path = $path.split('/');
+        $returnVal = $path[type];
+      }
+    } else if (type === 'file') {
+      if ($path.indexOf('/') >= 0) $returnVal = $path.split('/').pop();
+    } else if (type === 'fileName') {
+      if ($path.indexOf('/') >= 0) $path = $path.split('/').pop();
+      if ($path.indexOf('.') >= 0) {
+        $returnVal = $path.split('.').shift();
+      } else {
+        $returnVal = $path;
+      }
+    } else if (type === 'fileType') {
+      if ($path.indexOf('/') >= 0) $path = $path.split('/').pop();
+      if ($path.indexOf('.') >= 0) {
+        $returnVal = $path.split('.').pop();
+      } else {
+        $returnVal = null;
+      }
+    }
+    return $returnVal;
+  },
+  console: function (txt, delay) {
+    if (delay == undefined) delay = 3000;
+    const $consoles = $('.console');
+    let $top = 0;
+    let $last = '';
+    if ($consoles.length) {
+      $last = $('.console').last();
+      $top = parseInt($last.css('top')) + $last.outerHeight();
+    }
+    $('#contents').append('<div class="console">' + txt + '</div>');
+    $last = $('.console').last();
+    if ($top > 0) $last.css('top', $top);
+    $last.delay(delay).fadeOut(500, function () {
+      $(this).remove();
+    });
+  },
+  title: function (string) {
+    const $title = document.title;
+    if ($title.indexOf(string) < 0) document.title = string + ' | ' + $title;
+    const $titleEl = '#header h1';
+
+    const setPageTitle = function () {
+      if ($($titleEl).length) $($titleEl).html(string);
+    };
+    setPageTitle();
+  },
+  gnbOutCont: '#header,#contents,.floating-bar,#footer',
+  gnb: function () {
+    if ($('#gnb').length) {
+      $(document)
+        .off('click', '.ui-gnb-open')
+        .on('click', '.ui-gnb-open', function (e) {
+          e.preventDefault();
+          if ($('#gnb').hasClass('show')) {
+            ui.Common.gnbClose();
+          } else {
+            ui.Common.gnbOpen();
+          }
+        });
+      $(document)
+        .off('click', '.gnb-close')
+        .on('click', '.gnb-close', function (e) {
+          e.preventDefault();
+          ui.Common.gnbClose();
+        });
+      $(document)
+        .off('click', '.gnb-dep1>ul>li>a')
+        .on('click', '.gnb-dep1>ul>li>a', function (e) {
+          e.preventDefault();
+          ui.Common.gnbActive(this);
+        });
+      $(document)
+        .off('click', '.gnb-content a.is-toggle')
+        .on('click', '.gnb-content a.is-toggle', function (e) {
+          e.preventDefault();
+          ui.Common.gnbActive(this, true);
+        });
+    }
+  },
+  gnbOpen: function () {
+    Body.lock();
+    $('#gnb').show().removeAttr('aria-hidden');
+    $(ui.Common.gnbOutCont).attr('aria-hidden', true);
+    $('#gnb').find($focusableEl).first().focus();
+    $('#gnb').addClass('show');
+    if (!ui.Mobile.any()) Layer.focusMove('#gnb');
+
+    $('#gnb a').each(function () {
+      if ($(this).attr('role') == undefined) $(this).attr('role', 'button');
+    });
+    $('.gnb-dep1>ul')
+      .attr({
+        role: 'tablist'
+      })
+      .children('li')
+      .attr({
+        role: 'presentation'
+      })
+      .children('a')
+      .attr({
+        role: 'tab',
+        'aria-selected': false
+      });
+
+    const $dep1Active = $('.gnb-dep1>ul').children('.active');
+    if ($dep1Active.length) {
+      $dep1Active.addClass('open').children('a').attr('aria-selected', true);
+      const $dep2Active = $('.gnb-dep2>ul').children('.active');
+      if ($dep2Active.length) {
+        const $dep2ActiveTop = $dep2Active.position().top;
+        const $dep2ScrollTop = $('.open>.gnb-dep2').scrollTop();
+        $('.open>.gnb-dep2')
+          .stop(true, false)
+          .delay(300)
+          .animate({ scrollTop: $dep2ActiveTop + $dep2ScrollTop - 25 }, 300);
+      }
+    } else {
+      $('.gnb-dep1>ul>li').first().addClass('open').children('a').attr('aria-selected', true);
+    }
+    $('.gnb-dep2 li').each(function () {
+      if ($(this).children('div').length) {
+        $(this).addClass('open');
+        $(this).children('a').addClass('is-toggle').attr('aria-expanded', true);
+      }
+    });
+  },
+  gnbClose: function () {
+    Body.unlock();
+    $('.ui-gnb-open').focus();
+    $('#gnb').attr('aria-hidden', true);
+    $(ui.Common.gnbOutCont).removeAttr('aria-hidden');
+    $('#gnb').removeClass('show');
+
+    setTimeout(function () {
+      ui.Common.gnbDepthReset();
+    }, 610);
+  },
+  gnbDepthReset: function () {
+    $('#gnb').find('.open').removeClass('open').children('a').attr('aria-selected', false);
+    $('#gnb').find('.close').removeClass('close');
+    $('#gnb').find('.gnb-dep3').removeAttr('style');
+    $('#gnb .is-toggle').each(function () {
+      $(this).attr('aria-expanded', false);
+    });
+  },
+  gnbActiveIng: false,
+  gnbActive: function (target, isToggle) {
+    const $parent = $(target).parent();
+    const $slideSpeed = 300;
+    const $dep2 = $parent.find('.gnb-dep2');
+    //클릭시 메뉴 활성화
+    if (isToggle) {
+      //뎁스2
+      if (ui.Common.gnbActiveIng == false) {
+        ui.Common.gnbActiveIng = true;
+        if ($parent.hasClass('open')) {
+          $(target).attr('aria-expanded', false);
+          $parent.removeClass('open');
+          $(target)
+            .next()
+            .stop(true, false)
+            .slideUp($slideSpeed, function () {
+              ui.Common.gnbActiveIng = false;
+
+              const $dep1Height = $('.gnb-dep1').data('height');
+              const $dep2Height = $parent.closest('.gnb-dep2').outerHeight();
+              $('.gnb-dep1').animate({ height: Math.max($dep1Height, $dep2Height) }, 300);
+            });
+        } else {
+          $(target).attr('aria-expanded', true);
+          $parent.addClass('open');
+          $(target)
+            .next()
+            .stop(true, false)
+            .slideDown($slideSpeed, function () {
+              ui.Common.gnbInScroll(target, 'sub');
+              ui.Common.gnbActiveIng = false;
+
+              const $dep1Height = $('.gnb-dep1').data('height');
+              const $dep2Height = $parent.closest('.gnb-dep2').outerHeight();
+              $('.gnb-dep1').animate({ height: Math.max($dep1Height, $dep2Height) }, 300);
+            });
+        }
+      }
+    } else {
+      //뎁스1
+      $parent.addClass('open').children('a').attr('aria-selected', true);
+      $parent.siblings().removeClass('open').children('a').attr('aria-selected', false);
+      $parent
+        .siblings()
+        .find('.is-toggle')
+        .each(function () {
+          $(this).attr('aria-expanded', true).siblings('div').removeAttr('style');
+          $(this).parent().addClass('open');
+        });
+
+      if ($parent.hasClass('active')) {
+        const $dep2Active = $dep2.children('ul').children('.active');
+        if ($dep2Active.length) {
+          const $dep2ActiveTop = $dep2Active.position().top;
+          const $dep2ScrollTop = $dep2.scrollTop();
+          $dep2.scrollTop($dep2ActiveTop + $dep2ScrollTop - 25);
+        }
+      } else {
+        $dep2.scrollTop(0);
+      }
+
+      //$isScroll = true;
+      //ui.Common.gnbInScroll(target);
+    }
+  },
+  gnbInScroll: function (target, type) {
+    const $parent = $(target).parent();
+    const $wrap = $('.gnb-content');
+    const $wrapPdTop = parseInt($wrap.css('paddingTop'));
+    const $wrapHeight = $wrap.height();
+    let $sclWrap = $wrap.find('.gnb-dep1');
+    let $sclWrapTop = $sclWrap.scrollTop();
+    let $parentTop = $parent.position().top + $sclWrapTop - $wrapPdTop;
+    const $parentHeight = $parent.outerHeight();
+    let $scl = null;
+    let $sclSpeed = 200;
+
+    if (type == 'sub') {
+      //뎁스2,3
+      $sclWrap = $wrap.find('li.open>.gnb-dep2');
+      $sclWrapTop = $sclWrap.scrollTop();
+      $parentTop = $parent.position().top + $sclWrapTop;
+      $sclSpeed = 300;
+    } else {
+      $wrap.find('.gnb-dep2').scrollTop(0);
+    }
+
+    if ($wrapHeight + $sclWrapTop < $parentTop + $parentHeight) {
+      $scl = Math.min($parentTop, $parentTop + $parentHeight - $wrapHeight);
+    } else if ($parentTop < $sclWrapTop) {
+      $scl = $parentTop;
+    }
+    if ($scl != null) {
+      $sclWrap.stop(true, false).animate({ scrollTop: $scl }, $sclSpeed, function () {
+        $isScroll = false;
+      });
+    }
+  },
+  fixed: function (target) {
+    //고정(fixed)
+    const $target = $(target);
+    if ($target.length && $target.data('init') != true) {
+      $target.data('init', true);
+      $(window).on('scroll', function () {
+        if ($('html').hasClass('lock')) return false;
+        const $scrollTop = $(this).scrollTop();
+
+        $target.each(function () {
+          if ($(this).closest('.' + Layer.popClass).length) return;
+          const $this = $(this);
+          let $topMargin = 0;
+          if ($('.top-fixed').length) {
+            $('.top-fixed').each(function () {
+              if ($this[0] == $(this)[0]) return false;
+              $topMargin += $(this).children().outerHeight();
+            });
+          }
+          let $topEl = $this;
+          let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
+          if ($scrollTop + $topMargin > $offsetTop) {
+            $this.data('top', $offsetTop);
+            $this.addClass('top-fixed');
+            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+            if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
+            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
+          } else {
+            $this.removeData('top');
+            if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+            $topEl.removeCss('top');
+            $this.removeClass('top-fixed');
+            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
+          }
+        });
+      });
+      // $(window).resize(function () {
+      //   $(window).scroll();
+      // });
+    }
+  },
+  header: function () {
+    const $header = $('#header');
+    if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
+  },
+  headerUI: function () {
+    $(document)
+      .off('click', '#header h1 .btn-category')
+      .on('click', '#header h1 .btn-category', function (e) {
+        e.preventDefault();
+        if ($('#header').hasClass('is-category-open')) {
+          $('#header').removeClass('is-category-open');
+        } else {
+          $('#header').addClass('is-category-open');
+        }
+      });
+    // if($('#header h1 .btn-category').length && $('#header .category-wrap').length){
+    $(document)
+      .on('click touchend', function (e) {
+        if ($('#header').hasClass('is-category-open')) $('#header').removeClass('is-category-open');
+      })
+      .on('click touchend', '#header', function (e) {
+        e.stopPropagation();
+      });
+    // }
+  },
+  footer: function () {
+    if ($('#footer').length && $('#container').find('.bottom-fixed-space').length) {
+      const $div = $('#container').find('.bottom-fixed-space');
+      $('body').append($div);
+    }
+
+    const $space = $('.bottom-fixed-space');
+    const fixedSpaceHeight = function () {
+      const $spaceArryHeight = [];
+      const $naviBar = $('.floating-bar');
+      if ($naviBar.length && $naviBar.height() != 0) {
+        $spaceArryHeight.push($naviBar.outerHeight());
+      }
+      $('.bottom-fixed').each(function () {
+        const $this = $(this);
+        const $height = $this.children().outerHeight();
+        if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
+        if ($this.hasClass('is-restore')) $this.css('height', $height);
+      });
+
+      const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
+      $space.css('height', $maxHeight);
+      if ($('.floating-btn').length) {
+        $('.floating-btn').css('bottom', $maxHeight + 20);
+      }
+    };
+    fixedSpaceHeight();
+    $(window).scroll(function () {
+      if ($space.length) {
+        fixedSpaceHeight();
+      }
+    });
+  },
+  step: function () {
+    //<ol class="step_state" role="img" aria-label="총 4단계 중 현재단계 2단계">
+    if ($('.ico-step').length) {
+      $('.ico-step').each(function () {
+        const $this = $(this);
+        const $length = $this.find('li').length;
+        const $onIdx = $this.find('li.on').index() + 1;
+        $this.attr({
+          role: 'img',
+          'aria-label': '총 ' + $length + '단계 중 현재단계 ' + $onIdx + '단계'
+        });
+      });
+    }
+  },
+  landscape: function () {
+    //가로모드 막기
+    if (ui.Mobile.any()) {
+      const _landscapeDiv = '.landscape_lock';
+      if (!$(_landscapeDiv).length) {
+        const $landscapeHtml = '<div class="' + _landscapeDiv.substring(1) + '"><div class="tbl"><div class="td">이 사이트는 세로 전용입니다.<br>단말기를 세로모드로 변경해주세요.</div></div></div>';
+        $('body').append($landscapeHtml);
+      }
+      $(_landscapeDiv)
+        .unbind('touchmove')
+        .bind('touchmove', function (e) {
+          e.preventDefault();
+        });
+    }
+  },
+  isFloating: false,
+  floating: function () {
+    let isBtn = false;
+    if ($('.floating-btn').length) isBtn = true;
+    if ($('.floating-bar').length) {
+      ui.Common.isFloating = true;
+      if (isBtn && !$('.floating-bar .floating-btn').length) $('.floating-bar').prepend($('.floating-btn'));
+    }
+  },
+  top: function () {
+    //top 버튼
+    const settings = {
+      button: '#btnTop',
+      text: '컨텐츠 상단으로 이동',
+      min: 100,
+      onClass: 'on',
+      hoverClass: 'hover',
+      scrollSpeed: 300
+    };
+    let btnHtml = '';
+    if (!$('#container').length) return;
+    if (!$('.floating-btn').length) btnHtml += '<div class="floating-btn">';
+    btnHtml += '<a href="#" id="' + settings.button.substring(1) + '" class="btn btn-page-top" title="' + settings.text + '" role="button" aria-label="' + settings.text + '"></a>';
+    if (!$('.floating-btn').length) btnHtml += '</div>';
+
+    if (!$(settings.button).length) {
+      if ($('.floating-btn').length) {
+        $('.floating-btn').append(btnHtml);
+      } else if ($('.floating-bar').length && $('.floating-bar').is(':visible')) {
+        $('.floating-bar').prepend(btnHtml);
+      } else if ($('#container').length) {
+        $('#container').append(btnHtml);
+      } else {
+        $('body').append(btnHtml);
+      }
+
+      $(document)
+        .on('click', settings.button, function (e) {
+          e.preventDefault();
+          $('html, body').animate({ scrollTop: 0 }, settings.scrollSpeed);
+          $('#wrap').find($focusableEl).first().focus();
+        })
+        .on('mouseenter', function () {
+          $(settings.button).addClass(settings.hoverclass);
+        })
+        .on('mouseleave', function () {
+          $(settings.button).removeClass(settings.hoverClass);
+        });
+
+      const btnTopOn = function () {
+        $(settings.button).attr('aria-hidden', 'false').addClass(settings.onClass);
+        $('.floating-btn').addClass('top-on');
+      };
+
+      const btnTopOff = function () {
+        $(settings.button).attr('aria-hidden', 'true').removeClass(settings.onClass);
+        $('.floating-btn').removeClass('top-on');
+      };
+
+      /*
+      $(settings.button).swipe({
+        swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
+          const $this = $(this);
+          const $min = 0;
+          const $max = 150;
+          const $speed = 300;
+          const $isRight = direction == 'right'?true:false;
+          const $distance = $min-distance;
+          
+          if($isRight){
+            $this.css('right',$distance);
+            if(phase == 'end' || phase == 'cancel'){
+              if($distance < -10){
+                $this.stop(true,false).animate({'right':-$max},$speed,function(){
+                  $(this).removeCss('right');
+                  btnTopOff();
+                });
+              }else{
+                $this.stop(true,false).animate({'right':$min},$speed,function(){
+                  $(this).removeCss('right');
+                  btnTopOn();
+                });
+              }
+            }
+          }
+        },
+        cancleTreshold:0
+      });
+      */
+
+      let $lastSclTop = $(window).scrollTop();
+      const $scrollEvt = function () {
+        const $SclTop = $(window).scrollTop();
+        const $spaceH = $('.bottom-fixed-space').outerHeight();
+        const $bottom = parseInt($(settings.button).parent().css('bottom'));
+        const $margin = 20;
+        const $Height = window.innerHeight;
+        const $scrollHeight = $('body').get(0).scrollHeight;
+        if ($spaceH > 0 && $spaceH != $bottom - $margin) {
+          $('.floating-btn').css('bottom', $spaceH + $margin);
+        }
+
+        // if($SclTop > settings.min && $SclTop < $lastSclTop){  //최소보다 높고, 위로 스크롤할때
+        //   if($SclTop < $lastSclTop-(settings.min/2)){
+        //     btnTopOn();
+        //   }
+        // }else{
+        //   btnTopOff();
+        // }
+        if ($SclTop > settings.min) {
+          btnTopOn();
+        } else {
+          btnTopOff();
+        }
+        if (ui.Common.isFloating) {
+          if ($SclTop < $lastSclTop) {
+            //위로 스크롤할때
+            $('.floating-bar').removeClass('off');
+          } else {
+            $('.floating-bar').addClass('off');
+          }
+          if ($SclTop + $Height > $scrollHeight - 3) {
+            $('.floating-bar').removeClass('off').addClass('end');
+          } else {
+            $('.floating-bar').removeClass('end');
+          }
+        }
+        const $btnFixed = $('.btn-wrap.bottom-fixed');
+        if ($btnFixed.length) {
+          $btnFixed.each(function () {
+            const $this = $(this);
+            if ($this.hasClass('is-restore')) {
+              const $top = $this.offset().top;
+              const $bottom = $top + $this.children().outerHeight();
+              if ($SclTop + $Height > $bottom) {
+                $this.addClass('fixed-none');
+              } else {
+                $this.removeClass('fixed-none');
+              }
+            } else {
+              if ($SclTop + $Height > $scrollHeight - 3) {
+                $this.addClass('no-shadow');
+              } else {
+                $this.removeClass('no-shadow');
+              }
+            }
+          });
+        }
+
+        setTimeout(function () {
+          $lastSclTop = $SclTop;
+        }, 50);
+      };
+      const $scrollEndEvt = function () {
+        const $SclTop = $(window).scrollTop();
+        if ($SclTop > settings.min) {
+          btnTopOff();
+        }
+      };
+      $(window).on('scroll', $scrollEvt);
+      window.addEventListener('scroll', ui.Util.debounce($scrollEndEvt, 1500));
+    } else {
+      if ($('.floating-bar').length && !$('.floating-bar .btn-page-top').length) {
+        $('.floating-bar').prepend($('.floating-btn.btn-page-top'));
+      }
+    }
+  },
+  guide: function () {
+    const themeColorChange = function () {
+      const $path = location.pathname;
+      if ($path.indexOf('/html/guide') > -1) {
+        // if(!$('.gd__theme_color').length){
+        // }
+        let $html = '<div class="gd__theme_color">';
+        $html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></button>';
+        $html += '<dl>';
+        $html += '<dt>테마색상 변경확인</dt>';
+        $html += '<dd>';
+        $html += '<input type="color">';
+        $html += '<div>';
+        $html += '<div class="color"></div>';
+        $html += '<div class="reset"><button type="button">리셋</button></div>';
+        $html += '</div>';
+        $html += '</dd>';
+        $html += '</dl>';
+        $html += '</div>';
+        $('body').append($html);
+
+        const $baseThemeColor = '#3cc35b';
+        const $input = $('.gd__theme_color input');
+        const $color = $('.gd__theme_color .color');
+        const $openBtn = $('.gd__theme_btn');
+        const $resetBtn = $('.gd__theme_color .reset button');
+        const $themeColor = uiCookie.get('theme-color') !== '' ? uiCookie.get('theme-color') : $baseThemeColor;
+
+        const setColor = function (colorStr) {
+          $input.val(colorStr);
+          $color.text(colorStr);
+          if ($baseThemeColor !== colorStr) {
+            $('html').css('--theme-color', colorStr);
+            uiCookie.set('theme-color', colorStr);
+          } else {
+            $('html').removeCss('--theme-color');
+            uiCookie.set('theme-color', '');
+          }
+        };
+        setColor($themeColor);
+
+        $openBtn.on('click', function (e) {
+          e.preventDefault();
+          $('.gd__theme_color').toggleClass('open');
+        });
+
+        $input.on('input', function () {
+          const $val = $(this).val();
+          setColor($val);
+        });
+
+        $resetBtn.on('click', function (e) {
+          e.preventDefault();
+          setColor($baseThemeColor);
+        });
+      }
+    };
+    themeColorChange();
+  },
+  lottie: function () {
+    const $lottie = $('[data-lottie]');
+
+    $lottie.each(function () {
+      // $(this).empty();
+      if (!$(this).hasClass('lottie__init')) {
+        const $data = $(this).data('lottie');
+        $(this).addClass('lottie__init');
+        const isLoop = $(this).hasClass('loop');
+        const $lottieOpt = lottie.loadAnimation({
+          container: this,
+          renderer: 'svg',
+          loop: isLoop,
+          autoplay: true,
+          path: $data
+        });
+        $(this).data('lottie-opt', $lottieOpt);
+      }
+    });
+  },
+  init: function () {
+    if (!$('.bottom-fixed-space').length) {
+      let $wrap = $('body');
+      if (!$('#footer').length && $('#container').length) $wrap = $('#container');
+      if ($('#wrap').length) $wrap = $('#wrap');
+      $wrap.append('<div class="bottom-fixed-space" aria-hidden="true"></div>');
+    }
+    ui.Common.header();
+    ui.Common.headerUI();
+    ui.Common.gnb();
+    ui.Common.footer();
+    ui.Common.step();
+    ui.Common.floating();
+    ui.Common.top();
+    //ui.Common.landscape();
+
+    ui.Common.guide();
+    ui.Common.lottie();
+
+    ui.Common.fixed('#header');
+    ui.Common.fixed('.tab-navi-menu');
+    ui.Common.fixed('.tab-line-menu');
+
+    $(window).on('resize', function () {
+      ui.Common.vhChk();
+    });
+  }
+};
+
+ui.Util = {
+  debounce: function (fn, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(this, arguments);
+      }, delay);
+    };
+  },
+  throttle: function (fn, delay) {
+    let timer;
+    return function () {
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          fn.apply(this, arguments);
+        }, delay);
+      }
+    };
+  }
+};
+
 //버튼 관련
-const uiButton = {
+ui.Button = {
   winLoad: function () {
     //링크없는 a태그 role=button 추가
     $('a').each(function (e) {
@@ -2572,7 +2362,7 @@ const uiButton = {
   disabledChk: function () {
     var checking = function () {
       setTimeout(function () {
-        uiButton.disabled();
+        ui.Button.disabled();
       }, 100);
     };
     $(document).on('click', 'a, button', function () {
@@ -2727,11 +2517,11 @@ const uiButton = {
       _tabInfoSave();
     });
 
-    uiButton.tabAria('.tab-navi-menu');
-    uiButton.tabAria('.tab-box-menu');
-    uiButton.tabAria('.tab-line-menu');
-    uiButton.tabAria('.tab-txt-menu');
-    // uiButton.tabAria('.ui-tab');
+    ui.Button.tabAria('.tab-navi-menu');
+    ui.Button.tabAria('.tab-box-menu');
+    ui.Button.tabAria('.tab-line-menu');
+    ui.Button.tabAria('.tab-txt-menu');
+    // ui.Button.tabAria('.ui-tab');
 
     const scrolledCheck = function (wrap) {
       if (!$(wrap).length) return;
@@ -2760,7 +2550,7 @@ const uiButton = {
           const $this = $(this);
           if (parseInt($this.css('left')) === 0) return;
           const $parent = $this.closest('.tab-inner').parent();
-          uiButton.tabLine($parent, false);
+          ui.Button.tabLine($parent, false);
         });
       }
     });
@@ -2799,8 +2589,8 @@ const uiButton = {
           setTimeout(function () {
             const $active = $this.find('.active');
             if ($active.length) {
-              uiScroll.center($active, $delay * 10);
-              uiButton.tabLine($this, isMove);
+              ui.Scroll.center($active, $delay * 10);
+              ui.Button.tabLine($this, isMove);
             }
           }, $delay);
         });
@@ -2816,7 +2606,7 @@ const uiButton = {
 
       $tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected', false);
       $btn.attr('aria-selected', true);
-      uiButton.tabLine($closest);
+      ui.Button.tabLine($closest);
     };
     const $panelActive = function (target, isAni) {
       if (isAni === undefined) isAni = false;
@@ -2909,11 +2699,11 @@ const uiButton = {
           $winScrollTop = $winScrollTop - $('#header').outerHeight();
           $scrollMove = $scrollMove - $('#header').outerHeight();
         }
-        if ($winScrollTop > $scrollMove) uiScroll.move($scrollMove);
+        if ($winScrollTop > $scrollMove) ui.Scroll.move($scrollMove);
       }
 
       if ($($href).length) {
-        //uiScrollIn
+        //ui.ScrollAnimation
         if ($($href).find('.animate__animated').length) {
           setTimeout(function () {
             $($href).find('.animate__animated').addClass('paused');
@@ -2947,7 +2737,7 @@ const uiButton = {
 
     $(document).on('click', '.ui-tab a', function (e) {
       e.preventDefault();
-      uiScroll.center($(this).parent());
+      ui.Scroll.center($(this).parent());
     });
 
     //select tab
@@ -3045,7 +2835,7 @@ const uiButton = {
         const $tarT = $($tar).offset().top;
         const $tarH = $($tar).outerHeight();
         const $gap = $tarT + $tarH + 10 - ($winT + $winH - $spaceH);
-        if ($gap > 0) uiScroll.move($winT + $gap);
+        if ($gap > 0) ui.Scroll.move($winT + $gap);
       } else {
         if ($($tar).hasClass('tab-panel')) {
           $($tar).removeClass('show');
@@ -3075,7 +2865,7 @@ const uiButton = {
       const $href = $this.attr('href');
       const $headH = $('#header').length ? $('#header').outerHeight() : 0;
       const $top = $($href).offset().top - $headH;
-      uiScroll.move($top);
+      ui.Scroll.move($top);
     });
   },
   star: function () {
@@ -3120,7 +2910,7 @@ const uiButton = {
       }
       return $append;
     };
-    const eventType = isMobile.any() ? 'touchstart' : 'click';
+    const eventType = ui.Mobile.any() ? 'touchstart' : 'click';
     $('.ui-tap-area').on(eventType, function (e) {
       // e.preventDefault();
       const $this = $(this);
@@ -3170,7 +2960,7 @@ const uiButton = {
       if (!$this.hasClass('open')) {
         $this.addClass('open');
         $wrap.addClass('expend');
-        uiScroll.move(0, 0);
+        ui.Scroll.move(0, 0);
         setTimeout(function () {
           Body.lock();
         }, 100);
@@ -3190,30 +2980,130 @@ const uiButton = {
     });
   },
   init: function () {
-    uiButton.default();
-    uiButton.disabledChk();
-    uiButton.effect();
-    uiButton.tab();
-    uiButton.star();
-    uiButton.imgBox();
-    uiButton.tap();
-    uiButton.etc();
+    ui.Button.default();
+    ui.Button.disabledChk();
+    ui.Button.effect();
+    ui.Button.tab();
+    ui.Button.star();
+    ui.Button.imgBox();
+    ui.Button.tap();
+    ui.Button.etc();
 
-    if ($('.ui-touch-rotate').length) uiTouch.init();
+    if ($('.ui-touch-rotate').length) ui.Touch.init();
   }
 };
 
-const reTabAria = function () {
-  if ($('.tab-navi-menu').length) uiButton.tabAria('.tab-navi-menu');
-  if ($('.tab-box-menu').length) uiButton.tabAria('.tab-box-menu');
-  if ($('.is-tab').length) uiButton.tabAria('.is-tab');
-  if ($('.ui-tab').length) uiButton.tabAria('.ui-tab');
+ui.reTabAria = function () {
+  if ($('.tab-navi-menu').length) ui.Button.tabAria('.tab-navi-menu');
+  if ($('.tab-box-menu').length) ui.Button.tabAria('.tab-box-menu');
+  if ($('.is-tab').length) ui.Button.tabAria('.is-tab');
+  if ($('.ui-tab').length) ui.Button.tabAria('.ui-tab');
 };
 
-const uiTouch = {
+//툴팁
+ui.Tooltip = {
+  position: function (tar) {
+    const $tar = $(tar);
+    const $btn = $tar.closest('.tooltip-wrap').find('.tooltip-btn');
+    if (!$tar.children('.tooltip-arr').length) $tar.prepend('<i class="tooltip-arr" aria-hidden="true"></i>');
+    if (!$tar.children('.tooltip-close').length) $tar.append('<a href="#" class="tooltip-close" role="button" aria-label="툴팁닫기"></a>');
+    $(window).resize(function () {
+      const $winW = $(window).width() - 40;
+      const $btnW = $btn.width();
+      const $btnX = Math.min($winW + $btnW / 2 - 2, $btn.offset().left) - 20;
+      let $scrollEnd = $(window).height() + $(window).scrollTop();
+      if ($('.bottom-fixed:visible').length) $scrollEnd = $scrollEnd - $('.bottom-fixed').children().outerHeight();
+      const $left = Math.max(-4, $btnX);
+      $tar.children('.tooltip-arr').css({
+        left: $left + $btnW / 2
+      });
+      $tar.css({
+        width: $winW,
+        left: -$left
+      });
+      const $tarY =
+        $tar.closest('.tooltip-wrap').offset().top + $tar.closest('.tooltip-wrap').outerHeight() + parseInt($tar.css('margin-top')) + parseInt($tar.css('margin-bottom')) + $tar.outerHeight();
+      if ($tar.hasClass('is-bottom')) {
+        $tar.addClass('bottom');
+      } else {
+        if ($scrollEnd - 10 < $tarY) {
+          $tar.addClass('bottom');
+        } else {
+          $tar.removeClass('bottom');
+        }
+      }
+    });
+  },
+  aria: function (element) {
+    $(element).each(function (e) {
+      const $btn = $(this).find('.tooltip-btn');
+      const $cont = $(this).find('.tooltip-cont');
+      let $contId = $cont.attr('id');
+      const $closeBtn = $(this).find('.tooltip-close');
+      if (!$contId) $contId = 'ttCont-' + e;
+      $btn.attr({
+        role: 'button',
+        'aria-describedby': $contId
+      });
+      $cont.attr({
+        id: $contId,
+        role: 'tooltip'
+      });
+      $closeBtn.attr('role', 'button');
+    });
+  },
+  init: function () {
+    ui.Tooltip.aria('.tooltip-wrap');
+
+    //열기
+    $(document).on('click', '.tooltip-wrap .tooltip-btn', function (e) {
+      e.preventDefault();
+      const $cont = $(this).closest('.tooltip-wrap').find('.tooltip-cont');
+      if ($(this).hasClass('is-pop')) {
+        const $popContent = $cont.html();
+        const $popTitle = $cont.attr('title');
+        if ($popTitle !== undefined) {
+          Layer.tooltip($popContent, $popTitle);
+        } else {
+          Layer.tooltip($popContent);
+        }
+      } else {
+        if ($(this).hasClass('on')) {
+          $cont.stop(true, false).fadeOut();
+          $(this).removeClass('on');
+        } else {
+          $(this).addClass('on');
+          $('.tooltip-cont').fadeOut();
+          $cont.stop(true, false).fadeIn();
+          setTimeout(function () {
+            ui.Tooltip.position($cont);
+            $(window).resize();
+          }, 30);
+        }
+      }
+    });
+    //닫기
+    $(document).on('click', '.tooltip-close', function (e) {
+      e.preventDefault();
+      const $cont = $(this).closest('.tooltip-cont');
+      $cont.stop(true, false).fadeOut();
+      $cont.siblings('.tooltip-btn').removeClass('on').focus();
+    });
+    $(document)
+      .on('click touchend', function (e) {
+        $('.tooltip-cont').stop(true, false).fadeOut();
+        $('.tooltip-wrap .tooltip-btn').removeClass('on');
+      })
+      .on('click touchend', '.tooltip-wrap', function (e) {
+        e.stopPropagation();
+      });
+  }
+};
+
+ui.Touch = {
   rotateWrap: '.ui-touch-rotate .rotate-items',
   rotateItem: function () {
-    const $wrap = $(uiTouch.rotateWrap);
+    const $wrap = $(ui.Touch.rotateWrap);
     const $items = $wrap.find('.rotate-item');
     const $radius = $wrap.outerWidth() / 2;
     const $total = $items.length;
@@ -3295,314 +3185,14 @@ const uiTouch = {
     document.addEventListener('touchend', _end, false);
   },
   init: function () {
-    uiTouch.rotateItem();
-    document.querySelectorAll(uiTouch.rotateWrap).forEach(uiTouch.rotate);
-    $(window).resize(uiTouch.rotateItem);
-  }
-};
-
-//툴팁
-const uiTooltip = {
-  position: function (tar) {
-    const $tar = $(tar);
-    const $btn = $tar.closest('.tooltip-wrap').find('.tooltip-btn');
-    if (!$tar.children('.tooltip-arr').length) $tar.prepend('<i class="tooltip-arr" aria-hidden="true"></i>');
-    if (!$tar.children('.tooltip-close').length) $tar.append('<a href="#" class="tooltip-close" role="button" aria-label="툴팁닫기"></a>');
-    $(window).resize(function () {
-      const $winW = $(window).width() - 40;
-      const $btnW = $btn.width();
-      const $btnX = Math.min($winW + $btnW / 2 - 2, $btn.offset().left) - 20;
-      let $scrollEnd = $(window).height() + $(window).scrollTop();
-      if ($('.bottom-fixed:visible').length) $scrollEnd = $scrollEnd - $('.bottom-fixed').children().outerHeight();
-      const $left = Math.max(-4, $btnX);
-      $tar.children('.tooltip-arr').css({
-        left: $left + $btnW / 2
-      });
-      $tar.css({
-        width: $winW,
-        left: -$left
-      });
-      const $tarY =
-        $tar.closest('.tooltip-wrap').offset().top + $tar.closest('.tooltip-wrap').outerHeight() + parseInt($tar.css('margin-top')) + parseInt($tar.css('margin-bottom')) + $tar.outerHeight();
-      if ($tar.hasClass('is-bottom')) {
-        $tar.addClass('bottom');
-      } else {
-        if ($scrollEnd - 10 < $tarY) {
-          $tar.addClass('bottom');
-        } else {
-          $tar.removeClass('bottom');
-        }
-      }
-    });
-  },
-  aria: function (element) {
-    $(element).each(function (e) {
-      const $btn = $(this).find('.tooltip-btn');
-      const $cont = $(this).find('.tooltip-cont');
-      let $contId = $cont.attr('id');
-      const $closeBtn = $(this).find('.tooltip-close');
-      if (!$contId) $contId = 'ttCont-' + e;
-      $btn.attr({
-        role: 'button',
-        'aria-describedby': $contId
-      });
-      $cont.attr({
-        id: $contId,
-        role: 'tooltip'
-      });
-      $closeBtn.attr('role', 'button');
-    });
-  },
-  init: function () {
-    uiTooltip.aria('.tooltip-wrap');
-
-    //열기
-    $(document).on('click', '.tooltip-wrap .tooltip-btn', function (e) {
-      e.preventDefault();
-      const $cont = $(this).closest('.tooltip-wrap').find('.tooltip-cont');
-      if ($(this).hasClass('is-pop')) {
-        const $popContent = $cont.html();
-        const $popTitle = $cont.attr('title');
-        if ($popTitle !== undefined) {
-          Layer.tooltip($popContent, $popTitle);
-        } else {
-          Layer.tooltip($popContent);
-        }
-      } else {
-        if ($(this).hasClass('on')) {
-          $cont.stop(true, false).fadeOut();
-          $(this).removeClass('on');
-        } else {
-          $(this).addClass('on');
-          $('.tooltip-cont').fadeOut();
-          $cont.stop(true, false).fadeIn();
-          setTimeout(function () {
-            uiTooltip.position($cont);
-            $(window).resize();
-          }, 30);
-        }
-      }
-    });
-    //닫기
-    $(document).on('click', '.tooltip-close', function (e) {
-      e.preventDefault();
-      const $cont = $(this).closest('.tooltip-cont');
-      $cont.stop(true, false).fadeOut();
-      $cont.siblings('.tooltip-btn').removeClass('on').focus();
-    });
-    $(document)
-      .on('click touchend', function (e) {
-        $('.tooltip-cont').stop(true, false).fadeOut();
-        $('.tooltip-wrap .tooltip-btn').removeClass('on');
-      })
-      .on('click touchend', '.tooltip-wrap', function (e) {
-        e.stopPropagation();
-      });
-  }
-};
-
-//스크롤 관련
-const uiScroll = {
-  inCheck: function (target) {
-    //스크린안에 있는지 확인
-    const $el = $(target);
-    const isPopup = $el.closest('.pop-body').length && $el.closest('.pop-wrap').length;
-    const $wrap = isPopup ? $el.closest('.pop-body') : $(window);
-    const $wHeight = $wrap.outerHeight();
-    const $scrollTop = $wrap.scrollTop();
-    const $winBottom = $scrollTop + $wHeight;
-    const $elHeight = $($el).outerHeight();
-    const $elTop = $($el).offset().top;
-    const $elCenter = $elTop + $elHeight / 2;
-    const $elBottom = $elTop + $elHeight;
-
-    if ($elCenter >= $scrollTop && $elCenter <= $winBottom) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  move: function (val, speed, callback) {
-    let $top = 0;
-    if (speed == undefined) speed = 300;
-    if ($.isNumeric(val)) {
-      $top = val;
-    } else {
-      if ($(val).length) $top = $(val).offset().top;
-    }
-    $('html,body')
-      .stop(true, false)
-      .animate({ scrollTop: $top }, speed, function () {
-        if (!!callback) callback();
-      });
-  },
-  center: function (el, speed, direction) {
-    let $parent = $(el).parent();
-    // let $parentTop = parseInt($parent.css('margin-top'));
-    // let $parentLeft = parseInt($parent.css('margin-left'));
-    // if($parent.css('position') === 'relative'){
-    //   $parentTop += $parent.position().top;
-    //   $parentLeft += $parent.position().left;
-    // }
-    while ($parent.css('overflow-x') !== 'auto' && !$parent.is('body')) {
-      $parent = $parent.parent();
-      // $parentTop += parseInt($parent.css('margin-top'));
-      // $parentLeft += parseInt($parent.css('margin-left'));
-      // if($parent.css('position') === 'relative'){
-      //   $parentTop += $parent.position().top;
-      //   $parentLeft += $parent.position().left;
-      // }
-    }
-    if (speed == undefined) speed = 200;
-    if (!!direction && direction == 'vertical') {
-      const $prtH = $parent.outerWidth();
-      // const $prtSclT = $parent.scrollTop();
-      const $prtSclH = $parent.get(0).scrollHeight;
-      const $thisT = Math.round($(el).position().top);
-      const $thisH = $(el).outerHeight();
-      // let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
-      let $sclT = $thisT - $prtH / 2 + $thisH / 2;
-      if ($sclT < 0) $sclT = 0;
-      if ($prtH < $prtSclH) $parent.stop(true, false).animate({ scrollTop: $sclT }, speed);
-    } else {
-      const $prtW = $parent.outerWidth();
-      // const $prtSclL = Math.round($parent.scrollLeft());
-      const $prtSclW = $parent.get(0).scrollWidth;
-      let $thisL = Math.round($(el).position().left);
-      const $thisW = $(el).outerWidth();
-      // let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
-      let $sclL = $thisL - $prtW / 2 + $thisW / 2;
-      if ($sclL < 0) $sclL = 0;
-      if ($prtW < $prtSclW) $parent.stop(true, false).animate({ scrollLeft: $sclL }, speed);
-    }
-  },
-  hidden: function () {
-    const $window = $(window);
-    let $position = $window.scrollTop();
-    const $floatingBar = $('#floatingBar');
-    let $isFloatingNav = false;
-    const $sclHidden = $('.btn_scl_hidden');
-
-    if (!$floatingBar.hasClass('hide')) $isFloatingNav = true;
-
-    $window.on('scroll', function () {
-      const $scrollTop = $(this).scrollTop();
-      const $wrapH = $('#wrap').height();
-      const $end = $wrapH - $(window).height() - 10;
-      if ($scrollTop >= $position) {
-        //아래로 스크롤하면 숨김
-        if ($scrollTop >= $end) {
-          //아래로 스크롤해도 마지막에 도달하면 보여줌
-          if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
-          $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
-        } else {
-          if ($isFloatingNav) $floatingBar.addClass('off');
-          $sclHidden.addClass('off');
-        }
-      } else {
-        //위로 스크롤하면 보여줌
-        if (!$('html').hasClass('lock')) {
-          if ($position - $scrollTop > 10) {
-            if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
-            $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
-          }
-        }
-      }
-    });
-    $window.scrollEnd(function () {
-      const $scrollTop = $(this).scrollTop();
-      $position = $scrollTop;
-    }, 300);
-    $sclHidden.find('a').on('focusin', function (e) {
-      $sclHidden.removeClass('off');
-    });
-  },
-  guide: function (element) {
-    const $el = $(element);
-    const $wrapClass = 'ui-scl-guide';
-    const $contClass = 'ui-scl-cont';
-    const $infoClass = 'ui-scl-info';
-    const $barClass = 'ui-scl-bar';
-    $el.each(function () {
-      const $this = $(this);
-      const $isSclGuide = $this.data('sclGuide');
-
-      if (!$this.hasClass($contClass)) $this.addClass($contClass);
-      if (!$this.parent().hasClass($wrapClass)) $this.wrap('<div class="' + $wrapClass + '"></div>');
-      if (!$this.siblings('.' + $infoClass).length) $this.before('<div class="' + $infoClass + '" role="img" aria-label="스크롤하면 아래 숨겨진 컨텐츠를 확인 할 수 있습니다."></div>');
-      if (!$this.siblings('.' + $barClass).length) $this.after('<div class="' + $barClass + '" aria-hidden="true"><div></div></div>');
-      const $info = $this.siblings('.' + $infoClass);
-      const $bar = $this.siblings('.' + $barClass);
-      let $percent = uiScroll.scrllPer(this);
-      if ($percent <= 0) {
-        $bar.hide();
-      } else {
-        $bar
-          .show()
-          .children()
-          .css('width', $percent + '%');
-      }
-      const $sclGap = $this.get(0).scrollHeight - $this.outerHeight();
-      if ($sclGap < 1) {
-        $info.hide();
-      } else {
-        $info.show();
-      }
-
-      if (!$isSclGuide) {
-        $this.data('sclGuide', true);
-        $this.on('scroll', function () {
-          $percent = uiScroll.scrllPer(this);
-          if ($percent <= 0) {
-            $bar.hide();
-          } else {
-            $bar
-              .show()
-              .children()
-              .css('width', $percent + '%');
-          }
-          if ($percent >= 100) {
-            $info.hide();
-          } else {
-            $info.show();
-          }
-        });
-      }
-    });
-  },
-  scrllPer: function (element, type) {
-    let $val = '';
-    if (type == undefined) type = 'vertical';
-    if (type == 'vertical') {
-      $val = Math.abs($(element).scrollTop() / ($(element).get(0).scrollHeight - $(element).outerHeight())) * 100;
-    } else if (type == 'horizon') {
-      $val = Math.abs($(element).scrollLeft() / ($(element).get(0).scrollWidth - $(element).outerHeight())) * 100;
-    }
-    return $val;
-  },
-  loading: function () {
-    $(window).scroll(function () {
-      $('.loading_area').each(function () {
-        const $this = $(this);
-        const $href = $this.data('href');
-        if (uiScroll.inCheck(this)) {
-          $this.load($href, function (res, sta, xhr) {
-            if (sta == 'success') {
-              $this.children().unwrap();
-            }
-          });
-        }
-      });
-    });
-  },
-  init: function () {
-    uiScroll.hidden();
-    uiScroll.loading();
+    ui.Touch.rotateItem();
+    document.querySelectorAll(ui.Touch.rotateWrap).forEach(ui.Touch.rotate);
+    $(window).resize(ui.Touch.rotateItem);
   }
 };
 
 //폼요소 관련
-const uiForm = {
+ui.Form = {
   winLoad: function () {
     //select off효과
     $('select').each(function () {
@@ -3627,7 +3217,7 @@ const uiForm = {
 
     //입력 텍스트 카운팅(로딩)
     $('[data-text-count]').each(function (e) {
-      uiForm.textCount(this);
+      ui.Form.textCount(this);
     });
   },
   focus: function () {
@@ -3872,7 +3462,7 @@ const uiForm = {
     });
   },
   textarea: function () {
-    // uiForm.textareaSpace();
+    // ui.Form.textareaSpace();
     const textareaHeight = function (elem) {
       const $val = $(elem).val();
       const $lines = $val.split(/\r|\r\n|\n/);
@@ -4387,7 +3977,7 @@ const uiForm = {
         //$header.find('.ui-datepicker-title').append('월');
         $header.find('.ui-datepicker-prev, .ui-datepicker-next').attr('href', '#');
         if (!$isInline) {
-          if (isMobile.any()) {
+          if (ui.Mobile.any()) {
             $($calendar).find('.title').attr('tabindex', -1).focus();
             if ($('#wrap').length) $('#wrap').attr('aria-hidden', true);
           } else {
@@ -4654,43 +4244,43 @@ const uiForm = {
     }
   },
   init: function () {
-    uiForm.focus();
-    uiForm.select();
-    // uiForm.select2();
-    uiForm.selectUI();
-    uiForm.input();
-    uiForm.inpBtn();
-    uiForm.textarea();
-    uiForm.agree();
-    uiForm.mail();
-    uiForm.etc();
+    ui.Form.focus();
+    ui.Form.select();
+    // ui.Form.select2();
+    ui.Form.selectUI();
+    ui.Form.input();
+    ui.Form.inpBtn();
+    ui.Form.textarea();
+    ui.Form.agree();
+    ui.Form.mail();
+    ui.Form.etc();
 
-    uiForm.spinnerUI();
-    uiForm.spinner();
-    uiForm.jqRange();
-    uiForm.jqCalendar('.datepicker');
+    ui.Form.spinnerUI();
+    ui.Form.spinner();
+    ui.Form.jqRange();
+    ui.Form.jqCalendar('.datepicker');
 
     //입력 텍스트 카운팅(입력)
     $(document).on('keypress keyup', '[data-text-count]', function (e) {
-      uiForm.textCount(this, e);
+      ui.Form.textCount(this, e);
     });
   }
 };
 
 //리스트 관련 UI
-const uiList = {
+ui.List = {
   winLoad: function () {
     //토글실행
-    uiFolding.list('.ui-folding', '.folding-head a', '.folding-panel');
-    uiFolding.btn('.ui-folding-btn');
-    uiFolding.close('.ui-folding-close');
+    ui.Folding.list('.ui-folding', '.folding-head a', '.folding-panel');
+    ui.Folding.btn('.ui-folding-btn');
+    ui.Folding.close('.ui-folding-close');
 
     //테이블 스크롤 가이드 실행
     if ($('.tbl-scroll-in').length) {
-      uiTable.guideScl('.tbl-scroll-in');
-      uiTable.guide('.tbl-scroll-in');
+      ui.Table.guideScl('.tbl-scroll-in');
+      ui.Table.guide('.tbl-scroll-in');
     }
-    uiList.detail();
+    ui.List.detail();
   },
   type: function () {
     if ($('.product-list').length && $('.list-type-btn').length) {
@@ -4769,13 +4359,13 @@ const uiList = {
     });
   },
   init: function () {
-    uiList.check();
-    uiList.type();
+    ui.List.check();
+    ui.List.type();
   }
 };
 
 //아코디언 함수
-const uiFolding = {
+ui.Folding = {
   listAria: function (list, btn, panel, addClass) {
     if (!addClass) addClass = 'open';
     if ($(list).length) {
@@ -4872,7 +4462,7 @@ const uiFolding = {
           .stop(true, false)
           .delay($openDelay)
           .slideDown(speed, function () {
-            uiFolding.scroll($this, this);
+            ui.Folding.scroll($this, this);
             slideCallback();
           });
         if ($this.children('span').length && $this.children('span').text() == '더보기') {
@@ -4881,7 +4471,7 @@ const uiFolding = {
       }
     });
 
-    uiFolding.listAria(list, btn, panel, addClass);
+    ui.Folding.listAria(list, btn, panel, addClass);
   },
   btnAria: function (btn, className) {
     if (className == undefined) className = 'open';
@@ -4953,13 +4543,13 @@ const uiFolding = {
           .removeAttr('aria-hidden')
           .stop(true, false)
           .slideDown(speed, function () {
-            uiFolding.scroll($this, this);
+            ui.Folding.scroll($this, this);
             slideCallback();
           });
       }
     });
 
-    uiFolding.btnAria(btn, className);
+    ui.Folding.btnAria(btn, className);
   },
   close: function (btn, className, speed) {
     if (!className) className = 'open';
@@ -5011,7 +4601,7 @@ const uiFolding = {
 };
 
 //테이블 스크롤 가이드
-const uiTable = {
+ui.Table = {
   guideScl: function (element) {
     $(element).each(function () {
       const $this = $(this);
@@ -5068,7 +4658,7 @@ const uiTable = {
             $this.removeAttr('title');
           } else {
             if (!$this.find('.tbl-guide').length) {
-              if (!isMobile.any()) {
+              if (!ui.Mobile.any()) {
                 $this.attr('tabindex', 0); //pc일땐 tabindex 사용
               }
               $this.prepend($guide);
@@ -5101,19 +4691,8 @@ const uiTable = {
   }
 };
 
-const uiSwiperUpdate = function (target) {
-  $(target).each(function () {
-    const $this = $(this);
-    const $swiper = $this.data('swiper');
-    if ($swiper !== undefined) $swiper.update();
-  });
-};
-
-/********************************
- * front 애니메이션함수 *
- ********************************/
 //완료 효과
-const uiConfetti = {
+ui.Confetti = {
   set: function (wrap) {
     const $wrap = $(wrap);
     let $itemLength = 12;
@@ -5235,14 +4814,214 @@ const uiConfetti = {
   init: function () {
     if ($('.ui-confetti').length) {
       $('.ui-confetti').each(function () {
-        uiConfetti.set($(this));
+        ui.Confetti.set($(this));
       });
     }
   }
 };
 
+//스크롤 관련
+ui.Scroll = {
+  inCheck: function (target) {
+    //스크린안에 있는지 확인
+    const $el = $(target);
+    const isPopup = $el.closest('.pop-body').length && $el.closest('.pop-wrap').length;
+    const $wrap = isPopup ? $el.closest('.pop-body') : $(window);
+    const $wHeight = $wrap.outerHeight();
+    const $scrollTop = $wrap.scrollTop();
+    const $winBottom = $scrollTop + $wHeight;
+    const $elHeight = $($el).outerHeight();
+    const $elTop = $($el).offset().top;
+    const $elCenter = $elTop + $elHeight / 2;
+    const $elBottom = $elTop + $elHeight;
+
+    if ($elCenter >= $scrollTop && $elCenter <= $winBottom) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  move: function (val, speed, callback) {
+    let $top = 0;
+    if (speed == undefined) speed = 300;
+    if ($.isNumeric(val)) {
+      $top = val;
+    } else {
+      if ($(val).length) $top = $(val).offset().top;
+    }
+    $('html,body')
+      .stop(true, false)
+      .animate({ scrollTop: $top }, speed, function () {
+        if (!!callback) callback();
+      });
+  },
+  center: function (el, speed, direction) {
+    let $parent = $(el).parent();
+    // let $parentTop = parseInt($parent.css('margin-top'));
+    // let $parentLeft = parseInt($parent.css('margin-left'));
+    // if($parent.css('position') === 'relative'){
+    //   $parentTop += $parent.position().top;
+    //   $parentLeft += $parent.position().left;
+    // }
+    while ($parent.css('overflow-x') !== 'auto' && !$parent.is('body')) {
+      $parent = $parent.parent();
+      // $parentTop += parseInt($parent.css('margin-top'));
+      // $parentLeft += parseInt($parent.css('margin-left'));
+      // if($parent.css('position') === 'relative'){
+      //   $parentTop += $parent.position().top;
+      //   $parentLeft += $parent.position().left;
+      // }
+    }
+    if (speed == undefined) speed = 200;
+    if (!!direction && direction == 'vertical') {
+      const $prtH = $parent.outerWidth();
+      // const $prtSclT = $parent.scrollTop();
+      const $prtSclH = $parent.get(0).scrollHeight;
+      const $thisT = Math.round($(el).position().top);
+      const $thisH = $(el).outerHeight();
+      // let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
+      let $sclT = $thisT - $prtH / 2 + $thisH / 2;
+      if ($sclT < 0) $sclT = 0;
+      if ($prtH < $prtSclH) $parent.stop(true, false).animate({ scrollTop: $sclT }, speed);
+    } else {
+      const $prtW = $parent.outerWidth();
+      // const $prtSclL = Math.round($parent.scrollLeft());
+      const $prtSclW = $parent.get(0).scrollWidth;
+      let $thisL = Math.round($(el).position().left);
+      const $thisW = $(el).outerWidth();
+      // let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
+      let $sclL = $thisL - $prtW / 2 + $thisW / 2;
+      if ($sclL < 0) $sclL = 0;
+      if ($prtW < $prtSclW) $parent.stop(true, false).animate({ scrollLeft: $sclL }, speed);
+    }
+  },
+  hidden: function () {
+    const $window = $(window);
+    let $position = $window.scrollTop();
+    const $floatingBar = $('#floatingBar');
+    let $isFloatingNav = false;
+    const $sclHidden = $('.btn_scl_hidden');
+
+    if (!$floatingBar.hasClass('hide')) $isFloatingNav = true;
+
+    $window.on('scroll', function () {
+      const $scrollTop = $(this).scrollTop();
+      const $wrapH = $('#wrap').height();
+      const $end = $wrapH - $(window).height() - 10;
+      if ($scrollTop >= $position) {
+        //아래로 스크롤하면 숨김
+        if ($scrollTop >= $end) {
+          //아래로 스크롤해도 마지막에 도달하면 보여줌
+          if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
+          $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
+        } else {
+          if ($isFloatingNav) $floatingBar.addClass('off');
+          $sclHidden.addClass('off');
+        }
+      } else {
+        //위로 스크롤하면 보여줌
+        if (!$('html').hasClass('lock')) {
+          if ($position - $scrollTop > 10) {
+            if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
+            $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
+          }
+        }
+      }
+    });
+    $window.scrollEnd(function () {
+      const $scrollTop = $(this).scrollTop();
+      $position = $scrollTop;
+    }, 300);
+    $sclHidden.find('a').on('focusin', function (e) {
+      $sclHidden.removeClass('off');
+    });
+  },
+  guide: function (element) {
+    const $el = $(element);
+    const $wrapClass = 'ui-scl-guide';
+    const $contClass = 'ui-scl-cont';
+    const $infoClass = 'ui-scl-info';
+    const $barClass = 'ui-scl-bar';
+    $el.each(function () {
+      const $this = $(this);
+      const $isSclGuide = $this.data('sclGuide');
+
+      if (!$this.hasClass($contClass)) $this.addClass($contClass);
+      if (!$this.parent().hasClass($wrapClass)) $this.wrap('<div class="' + $wrapClass + '"></div>');
+      if (!$this.siblings('.' + $infoClass).length) $this.before('<div class="' + $infoClass + '" role="img" aria-label="스크롤하면 아래 숨겨진 컨텐츠를 확인 할 수 있습니다."></div>');
+      if (!$this.siblings('.' + $barClass).length) $this.after('<div class="' + $barClass + '" aria-hidden="true"><div></div></div>');
+      const $info = $this.siblings('.' + $infoClass);
+      const $bar = $this.siblings('.' + $barClass);
+      let $percent = ui.Scroll.scrllPer(this);
+      if ($percent <= 0) {
+        $bar.hide();
+      } else {
+        $bar
+          .show()
+          .children()
+          .css('width', $percent + '%');
+      }
+      const $sclGap = $this.get(0).scrollHeight - $this.outerHeight();
+      if ($sclGap < 1) {
+        $info.hide();
+      } else {
+        $info.show();
+      }
+
+      if (!$isSclGuide) {
+        $this.data('sclGuide', true);
+        $this.on('scroll', function () {
+          $percent = ui.Scroll.scrllPer(this);
+          if ($percent <= 0) {
+            $bar.hide();
+          } else {
+            $bar
+              .show()
+              .children()
+              .css('width', $percent + '%');
+          }
+          if ($percent >= 100) {
+            $info.hide();
+          } else {
+            $info.show();
+          }
+        });
+      }
+    });
+  },
+  scrllPer: function (element, type) {
+    let $val = '';
+    if (type == undefined) type = 'vertical';
+    if (type == 'vertical') {
+      $val = Math.abs($(element).scrollTop() / ($(element).get(0).scrollHeight - $(element).outerHeight())) * 100;
+    } else if (type == 'horizon') {
+      $val = Math.abs($(element).scrollLeft() / ($(element).get(0).scrollWidth - $(element).outerHeight())) * 100;
+    }
+    return $val;
+  },
+  loading: function () {
+    $(window).scroll(function () {
+      $('.loading_area').each(function () {
+        const $this = $(this);
+        const $href = $this.data('href');
+        if (ui.Scroll.inCheck(this)) {
+          $this.load($href, function (res, sta, xhr) {
+            if (sta == 'success') {
+              $this.children().unwrap();
+            }
+          });
+        }
+      });
+    });
+  },
+  init: function () {
+    ui.Scroll.hidden();
+    ui.Scroll.loading();
+  }
+};
+
 //data-animation
-const uiScrollIn = {
+ui.ScrollAnimation = {
   index: 0,
   ready: function (target) {
     $.each(target, function () {
@@ -5319,17 +5098,17 @@ const uiScrollIn = {
       const $elCenter = $elTop + $elHeight / 2;
       const $elBottom = $elTop + $elHeight;
 
-      const $animationClass = uiScrollIn.typeChkClass($el);
+      const $animationClass = ui.ScrollAnimation.typeChkClass($el);
 
       if ($el.data('init')) return;
       if (($winTop <= $elTop && $elTop <= $winBottom) || ($winTop <= $elBottom && $elBottom <= $winBottom)) {
-        uiScrollIn.action($el);
+        ui.ScrollAnimation.action($el);
       } else {
         const $timer = $el.data('time');
         if ($timer !== undefined) {
           clearTimeout($timer);
           $el.removeData('time');
-          if (uiScrollIn.index > 0) uiScrollIn.index -= 1;
+          if (ui.ScrollAnimation.index > 0) ui.ScrollAnimation.index -= 1;
         }
       }
     });
@@ -5339,7 +5118,7 @@ const uiScrollIn = {
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.intersectionRatio > 0)) {
-          uiScrollIn.action($el);
+          ui.ScrollAnimation.action($el);
         }
       },
       {
@@ -5351,14 +5130,14 @@ const uiScrollIn = {
   },
   action: function (el) {
     const $el = $(el);
-    const $animationClass = uiScrollIn.typeChkClass(el);
+    const $animationClass = ui.ScrollAnimation.typeChkClass(el);
 
     if ($el.data('time') !== undefined) return;
-    uiScrollIn.index += 1;
-    const timer = uiScrollIn.index * 200;
+    ui.ScrollAnimation.index += 1;
+    const timer = ui.ScrollAnimation.index * 200;
     const initTimer = setTimeout(function () {
       $el.data('init', true);
-      if (uiScrollIn.index > 0) uiScrollIn.index -= 1;
+      if (ui.ScrollAnimation.index > 0) ui.ScrollAnimation.index -= 1;
       const $slide = $el.closest('.swiper-slide');
       if ($el.hasClass('animate__animated')) {
         if ($el.closest('.tab-panel').length && !$el.closest('.tab-panel').hasClass('active')) return;
@@ -5375,7 +5154,7 @@ const uiScrollIn = {
         if ($slide.length) {
           if ($slide.hasClass('swiper-slide-active')) $el.addClass($animationClass);
         } else {
-          if ($el.hasClass('count-number')) uiScrollIn.couterInit($el);
+          if ($el.hasClass('count-number')) ui.ScrollAnimation.couterInit($el);
           $el.addClass($animationClass);
         }
       }
@@ -5531,28 +5310,28 @@ const uiScrollIn = {
     if ($animations.length > 0) {
       $($animations).each(function () {
         const $dataAnimation = $(this).data('animation');
-        if ($dataAnimation === 'rolling-number') uiScrollIn.rollingReady(this);
-        if ($dataAnimation === 'count-number') uiScrollIn.couterReady(this);
+        if ($dataAnimation === 'rolling-number') ui.ScrollAnimation.rollingReady(this);
+        if ($dataAnimation === 'count-number') ui.ScrollAnimation.couterReady(this);
       });
 
-      uiScrollIn.ready($animations);
+      ui.ScrollAnimation.ready($animations);
       // $(window).on('scroll resize', function () {
-      //   uiScrollIn.checkInView($animations);
+      //   ui.ScrollAnimation.checkInView($animations);
       // });
-      uiScrollIn.checkInView();
-      window.addEventListener('scroll', uiUtil.debounce(uiScrollIn.checkInView, 100));
-      window.addEventListener('resize', uiUtil.debounce(uiScrollIn.checkInView, 100));
+      ui.ScrollAnimation.checkInView();
+      window.addEventListener('scroll', ui.Util.debounce(ui.ScrollAnimation.checkInView, 100));
+      window.addEventListener('resize', ui.Util.debounce(ui.ScrollAnimation.checkInView, 100));
 
       /*
       if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
         // IntersectionObserver 지원안할때 
         $(window).on('scroll resize',function(){
-          uiScrollIn.checkInView($animations);
+          ui.ScrollAnimation.checkInView($animations);
         });
       }else{
         // IntersectionObserver 지원될때 
         $($animations).each(function(){
-          uiScrollIn.aray.push(uiScrollIn.observer(this))
+          ui.ScrollAnimation.aray.push(ui.ScrollAnimation.observer(this))
         });
       }
       */
@@ -5560,11 +5339,231 @@ const uiScrollIn = {
   }
 };
 
+//SwiperUpdate
+ui.SwiperUpdate = function (target) {
+  $(target).each(function () {
+    const $this = $(this);
+    const $swiper = $this.data('swiper');
+    if ($swiper !== undefined) $swiper.update();
+  });
+};
+
+/********************************
+ * front 제작 플러그인 *
+ ********************************/
+//검색어 강조표시
+$.fn.highlightTxt = function (keyword) {
+  return this.each(function () {
+    let $firstHtml = $(this).data('html'),
+      $html = $(this).html();
+    if (!$firstHtml) {
+      $firstHtml = $(this).html();
+      $(this).data('html', $html);
+    }
+    if (keyword != '') {
+      if ($firstHtml.indexOf(keyword) >= 0) {
+        $html = $firstHtml.split(keyword).join('<em class="t-keyword">' + keyword + '</em>');
+      } else {
+        $html = $firstHtml;
+      }
+    } else {
+      $html = $firstHtml;
+    }
+    $(this).html($html);
+  });
+};
+
+//접근성 관련 플러그인
+//$(element).aria('hidden',true});
+//$(element).aria({'hidden':true,'selected':true});
+$.fn.aria = function (attr, val) {
+  const $ariaType = [
+    'hidden',
+    'label',
+    'live',
+    'expanded',
+    'controls',
+    'selected',
+    'checked',
+    'pressed',
+    'disabled',
+    'readonly',
+    'required',
+    'labelledby',
+    'describedby',
+    'invalid',
+    'secret',
+    'valuemax',
+    'valuemin',
+    'valuenow',
+    'level',
+    'multiline',
+    'multiselectable',
+    'datatype',
+    'autocomplete',
+    'owns',
+    'haspopup',
+    'relevant',
+    'atomic',
+    'busy',
+    'dropeffect',
+    'grabbed',
+    'activedescendant',
+    'colcount',
+    'colindex',
+    'colspan',
+    'details',
+    'errormessage',
+    'flowto',
+    'posinset',
+    'rowcount',
+    'rowindex',
+    'rowspan',
+    'setsize'
+  ];
+  return this.each(function () {
+    const $this = $(this);
+    if (typeof attr === 'string') {
+      if (arrayIndexOf($ariaType, attr)) {
+        $this.attr('aria-' + attr, val);
+      } else {
+        console.log('aria-' + attr + ': 확인안된 aria 속성 타입~~!\n$ariaType 및 철자 확인요망');
+      }
+    } else if (typeof attr == 'object') {
+      const $key = Object.keys(attr),
+        $length = $key.length;
+      for (let i = 0; i < $length; i++) {
+        if (arrayIndexOf($ariaType, $key[i])) {
+          $this.attr('aria-' + $key[i], attr[$key[i]]);
+        } else {
+          console.log('aria-' + $key[i] + ': 확인안된 aria 속성 타입~~!\n$ariaType 및 철자 확인요망');
+        }
+      }
+    }
+  });
+};
+
+//$(element).removeAria('hidden');
+//$(element).removeAria('hidden, selected');
+$.fn.removeAria = function (attr) {
+  return this.each(function () {
+    const $this = $(this);
+    const $arry = txtSpaceDel(attr).split(',');
+    for (let i = 0; i < $arry.length; i++) {
+      $this.removeAttr('aria-' + $arry[i]);
+    }
+  });
+};
+
+//$(element).role('button');
+$.fn.role = function (val) {
+  return this.each(function () {
+    const $this = $(this);
+    $this.attr('role', val);
+  });
+};
+
+//resize가 끝나면: resizeEnd
+//$(window).resizeEnd(function(){console.log('resizeEnd');},300);
+let resizeEndCnt = 0;
+$.fn.resizeEnd = function (callback, timeout) {
+  resizeEndCnt = resizeEndCnt + 1;
+  const cnt = resizeEndCnt;
+  return this.each(function () {
+    const $this = $(this);
+    $this.resize(function () {
+      if ($this.data('resizeTimeout' + cnt)) {
+        clearTimeout($this.data('resizeTimeout' + cnt));
+      }
+      $this.data('resizeTimeout' + cnt, setTimeout(callback, timeout));
+    });
+  });
+};
+
+//scroll이 끝나면: scrollEnd
+//$(window).scrollEnd(function(){console.log('scrollEnd');},300);
+let scrollEndCnt = 0;
+$.fn.scrollEnd = function (callback, timeout) {
+  scrollEndCnt = scrollEndCnt + 1;
+  const cnt = scrollEndCnt;
+  return this.each(function () {
+    const $this = $(this);
+    $this.scroll(function () {
+      if ($this.data('scrollTimeout' + cnt)) {
+        clearTimeout($this.data('scrollTimeout' + cnt));
+      }
+      $this.data('scrollTimeout' + cnt, setTimeout(callback, timeout));
+    });
+  });
+};
+
+//css 지우기
+// $('body').removeCss('background');
+// $('body').removeCss(['border','background']);
+// $('body').removeCss({color: 'white'});
+$.fn.removeCss = function (css) {
+  let properties = [];
+  const is = $.type(css);
+
+  if (is === 'array') properties = css;
+  if (is === 'object') for (let rule in css) properties.push(rule);
+  if (is === 'string') properties = css.replace(/,$/, '').split(',');
+
+  return this.each(function () {
+    const $this = $(this);
+    $.map(properties, function (prop) {
+      $this.css(prop, '');
+    });
+  });
+};
+
+//글자바꾸기: changeTxt(바꿀텍스트,바낄텍스트)
+//$('.txt').changeTxt('열기','닫기');
+$.fn.changeTxt = function (beforeTxt, afterTxt) {
+  return this.each(function () {
+    const element = $(this);
+    const $html = element.html();
+    if ($html != undefined && $html != '') {
+      element.html($html.split(beforeTxt).join(afterTxt));
+    }
+  });
+};
+$.fn.changeAriaLabel = function (beforeTxt, afterTxt) {
+  return this.each(function () {
+    const element = $(this);
+    const $ariaLabel = element.attr('aria-label');
+    if ($ariaLabel != undefined) {
+      const $ariaLabel2 = $ariaLabel.split(beforeTxt).join(afterTxt);
+      element.attr('aria-label', $ariaLabel2);
+    }
+  });
+};
+
+//클래스 넣었다 빼기: addRemoveClass(클래스명, 붙는 시간, 빼는 시간)
+//$(this).addRemoveClass('on', 500, 1000);
+$.fn.addRemoveClass = function (className, addTime, removeTime, callback) {
+  const element = this;
+  const addIt = function () {
+    element.addClass(className);
+  };
+  const removeIt = function () {
+    element.removeClass(className);
+    if (!!callback) {
+      callback();
+    }
+  };
+  setTimeout(function () {
+    addIt();
+    setTimeout(removeIt, removeTime);
+  }, addTime);
+  return this;
+};
+
 /********************************
  * front 유틸함수 *
  ********************************/
 //ie에서 startsWith,endsWith 작동되게
-if (isPC.msie()) {
+if (ui.PC.msie()) {
   String.prototype.startsWith = function (str) {
     if (this.length < str.length) return false;
     return this.indexOf(str) == 0;
