@@ -279,7 +279,7 @@
     background-color: #fff;
     transition: 0.45s cubic-bezier(0.22, 0.61, 0.2, 1);
     overflow: hidden;
-    transform: translate3d(-120%, 0, 0);
+    transform: translate3d(120%, 0, 0);
   }
   &.show {
     visibility: visible;
@@ -320,7 +320,7 @@
   .gnb-close {
     position: absolute;
     right: 16px;
-    top: 18px;
+    top: 9px;
     background: url(../images/icon/head-close@3x.png) no-repeat center center / 24px 24px;
   }
 }
