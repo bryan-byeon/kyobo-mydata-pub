@@ -447,6 +447,47 @@
                     <li><a href="#">탭메뉴3</a></li>
                   </ul>
                 </div>
+
+                <h2 class="gd__h2">다른 요소를 탭처럼 쓸때</h2>
+                <div>
+                  <h3 class="gd__h3">ui-tab-select</h3>
+                  <div>
+                    <div class="select">
+                      <select title="선택" class="ui-tab-select">
+                        <option value="1" data-show="#selectShow1">선택1</option>
+                        <option value="2" data-show="#selectShow2">선택2</option>
+                      </select>
+                    </div>
+                    <br />
+                    <!-- <div id="selectShow1" class="hide">선택1선택1</div>
+                    <div id="selectShow2" class="hide">선택2선택2</div> -->
+
+                    <div class="tab-panels">
+                      <div id="selectShow1" class="tab-panel">선택1선택1</div>
+                      <div id="selectShow2" class="tab-panel">선택2선택2<br />선택2선택2</div>
+                    </div>
+                  </div>
+                  <h3 class="gd__h3">ui-tab-radio</h3>
+                  <div>
+                    <!-- <div id="radioShow1" class="hide">선택1선택1</div>
+                    <div id="radioShow2" class="hide">선택2선택2</div> -->
+                    <div class="flex ui-tab-radio">
+                      <div class="radio btn">
+                        <input type="radio" id="rdo1" name="rdo1" data-show="#radioShow1" /><i aria-hidden="true"></i>
+                        <label for="rdo1" class="lbl">선택1</label>
+                      </div>
+                      <div class="radio btn">
+                        <input type="radio" id="rdo2" name="rdo1" data-show="#radioShow2" checked /><i aria-hidden="true"></i>
+                        <label for="rdo2" class="lbl">선택2</label>
+                      </div>
+                    </div>
+
+                    <div class="tab-panels">
+                      <div id="radioShow1" class="tab-panel">선택1선택1</div>
+                      <div id="radioShow2" class="tab-panel">선택2선택2<br />선택2선택2</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

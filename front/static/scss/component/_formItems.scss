@@ -64,13 +64,13 @@ i.require {
       }
     }
   }
-  &.is-success {
-    .input,
-    .select,
-    .textarea {
-      border-color: var(--theme-color);
-    }
-  }
+  // &.is-success {
+  //   .input,
+  //   .select,
+  //   .textarea {
+  //     border-color: var(--theme-color);
+  //   }
+  // }
   + .form-item,
   + .validate-item {
     margin-top: 6px;

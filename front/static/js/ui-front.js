@@ -2577,38 +2577,43 @@ ui.Tab = {
   },
   tabActive: function (target) {
     const $target = $(target);
-    const $closest = $target.closest('.ui-tab').length ? $target.closest('.ui-tab') : $target.closest('.tab-list');
+    const $closest = $target.closest('.tab-inner').length ? $target.closest('.tab-inner') : $target.closest('.tab-list');
     const $btn = $target.is('a') ? $target : $target.find('a');
     const $tab = $btn.closest('.tab').length ? $btn.closest('.tab') : $btn.closest('li');
 
     $tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected', false);
     $btn.attr('aria-selected', true);
-    ui.Tab.line($closest);
+    if ($closest.length) ui.Tab.line($closest);
   },
-  panelActive: function (target, isAni) {
+  panelActive: function (panel, siblings, isAni) {
     if (isAni === undefined) isAni = false;
-    const $target = $(target);
-    const $closest = $target.closest('.ui-tab');
-    const $siblings = $closest.data('target');
-    const $btn = $target.is('a') ? $target : $target.find('a');
-    const $href = $btn.attr('href');
-    const $panel = $($href);
+    const $panel = $(panel);
+    if (!$panel.length) return;
+    const $isPanel = $panel.hasClass('tab-panel');
     const $panelWrap = $panel.closest('.tab-panels');
     const $panelWrapH = $panelWrap.outerHeight();
     const $panelWrapGap = $panelWrapH - $panelWrap.height();
-    if (!$panel.length) return;
-    if ($siblings === undefined) {
-      $panel.addClass('active').attr('aria-expanded', true).siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+    if (siblings === undefined || siblings === false || siblings === '') {
+      if ($isPanel) {
+        $panel.addClass('active').attr('aria-expanded', true).siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+      } else {
+        $panel.show();
+      }
     } else {
-      $($siblings).attr('aria-expanded', false).removeClass('active');
-      $panel.addClass('active').attr('aria-expanded', true);
+      if ($isPanel) {
+        $(siblings).attr('aria-expanded', false).removeClass('active');
+        $panel.addClass('active').attr('aria-expanded', true);
+      } else {
+        $(siblings).hide();
+        $panel.show();
+      }
     }
-
     if (isAni && $panelWrap.length) {
       const $setHeight = $panel.outerHeight() + $panelWrapGap;
       if ($panelWrapH !== $setHeight) {
         $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
           $panelWrap.removeCss('height');
+          ui.Scroll.inScreen(panel);
         });
       }
     }
@@ -2617,26 +2622,25 @@ ui.Tab = {
     if ($('.ui-tab-select').length) {
       $('.ui-tab-select').each(function () {
         const $tarAry = [];
+        let $panel;
         $(this)
           .find('option')
           .each(function () {
             const $tar = $(this).data('show');
             if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
             if ($(this).is(':selected')) {
-              if ($($tar).hasClass('tab-panel')) {
-                $($tar).addClass('active');
-              } else {
-                $($tar).show();
-              }
+              $panel = $tar;
             }
           });
-        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
+        const $siblings = $tarAry.join(',');
+        if ($(this).data('hide') == undefined) $(this).data('hide', $siblings);
+        ui.Tab.panelActive($panel, $siblings);
       });
     }
   },
   radio: function () {
-    if ($('.ui-tab-rdo').length) {
-      $('.ui-tab-rdo').each(function () {
+    if ($('.ui-tab-radio').length) {
+      $('.ui-tab-radio').each(function () {
         const $tarAry = [];
         $(this)
           .find('input[type=radio]')
@@ -2644,14 +2648,13 @@ ui.Tab = {
             const $tar = $(this).data('show');
             if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
             if ($(this).prop('checked')) {
-              if ($($tar).hasClass('tab-panel')) {
-                $($tar).addClass('active');
-              } else {
-                $($tar).show();
-              }
+              $panel = $tar;
             }
           });
-        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
+        const $siblings = $tarAry.join(',');
+        if ($(this).data('hide') == undefined) $(this).data('hide', $siblings);
+        console.log($panel, $siblings);
+        ui.Tab.panelActive($panel, $siblings);
       });
     }
   },
@@ -2728,7 +2731,8 @@ ui.Tab = {
           $active = $this.find('li').eq(0).find('a');
         }
         ui.Tab.tabActive($active);
-        ui.Tab.panelActive($active);
+        const $href = $active.attr('href');
+        ui.Tab.panelActive($href);
       });
     }
 
@@ -2742,11 +2746,11 @@ ui.Tab = {
       e.preventDefault();
       const $this = $(this);
       ui.Tab.tabActive($this);
-      //if($(this).closest('.ui-tab').length) {
-      // e.preventDefault();
-      ui.Tab.panelActive($this, true);
-
       const $href = $this.attr('href');
+      const $closest = $this.closest('.ui-tab');
+      const $siblings = $closest.data('target');
+      ui.Tab.panelActive($href, $siblings, true);
+
       let $winScrollTop = $(window).scrollTop();
       const $topFixed = $this.closest('.top-fixed');
       if ($topFixed.length) {
@@ -2800,40 +2804,19 @@ ui.Tab = {
     $(document).on('change', '.ui-tab-select', function (e) {
       const $show = $(this).find(':selected').data('show');
       const $hide = $(this).data('hide');
-
-      if ($($hide).hasClass('tab-panel')) {
-        $($hide).removeClass('active');
-      } else {
-        $($hide).hide();
-      }
-
-      if ($($show).hasClass('tab-panel')) {
-        $($show).addClass('active');
-      } else {
-        $($show).show();
-      }
+      // ui.Tab.panelActive($show, $hide, true);
+      ui.Tab.panelActive($show, $hide);
     });
 
     //radio tab
-    $(document).on('change', '.ui-tab-rdo input', function (e) {
+    $(document).on('change', '.ui-tab-radio input', function (e) {
       const $show = $(this).data('show');
-      const $hide = $(this).closest('.ui-tab-rdo').data('hide');
-
-      if ($($hide).hasClass('tab-panel')) {
-        $($hide).removeClass('active');
-      } else {
-        $($hide).hide();
-      }
-
-      if ($($show).hasClass('tab-panel')) {
-        $($show).addClass('active');
-      } else {
-        $($show).show();
-      }
+      const $hide = $(this).closest('.ui-tab-radio').data('hide');
+      ui.Tab.panelActive($show, $hide, true);
     });
 
     //checkbox tab
-    $(document).on('change', '.ui-tab-chk input', function (e) {
+    $(document).on('change', '.ui-tab-check input', function (e) {
       let $tar = $(this).data('show');
 
       if ($(this).prop('checked')) {
@@ -4773,6 +4756,37 @@ ui.Scroll = {
         }
       });
     });
+  },
+  inScreen: function (target, callback) {
+    const $target = $(target);
+    const $scrollTop = $(window).scrollTop();
+    let $winHeight = $(window).height();
+    const $bottomMargin = $('.bottom-fixed-space').length ? $('.bottom-fixed-space').outerHeight() + 10 : 10;
+    let $topMargin = 10;
+    if ($('.top-fixed').length) {
+      $('.top-fixed').each(function () {
+        $topMargin = $topMargin + $(this).outerHeight();
+      });
+    }
+    const $winTop = $scrollTop + $topMargin;
+    const $winEnd = $scrollTop + $winHeight - $bottomMargin;
+    const $targetTop = $target.offset().top;
+    const $targetHeight = $target.outerHeight();
+    const $targetEnd = $targetTop + $targetHeight;
+    let $scroll = '';
+    if ($winEnd < $targetEnd) {
+      $scroll = Math.min($targetTop + $topMargin, $targetEnd - $winHeight + $bottomMargin);
+    } else if ($winTop > $targetTop) {
+      $scroll = $targetTop + $topMargin;
+    }
+
+    if ($scroll == '') {
+      if (!!callback) callback();
+    } else {
+      $('html,body').animate({ scrollTop: $scroll }, 200, function () {
+        if (!!callback) callback();
+      });
+    }
   },
   init: function () {
     ui.Scroll.hidden();
