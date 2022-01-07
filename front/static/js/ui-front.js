@@ -17,7 +17,7 @@ $(function () {
   ui.Form.init();
   ui.List.init();
 
-  ui.ScrollAnimation.init();
+  ui.Animation.init();
   Splitting();
 
   // $(window).scroll();
@@ -683,105 +683,6 @@ const Layer = {
         // $distanceAry = [];
       });
   },
-  bottomSwipe: function (tar) {
-    const $popup = $(tar);
-    const $wrap = $popup.find('.' + Layer.wrapClass);
-    const $body = $popup.find('.' + Layer.bodyClass);
-    const $bodyMinHeight = parseInt($body.css('padding-top')) + parseInt($body.css('padding-bottom'));
-    const $animateSpeed = 300;
-    let $popWrapH = '';
-    let $isFull = false;
-
-    $(tar)
-      .find('.' + Layer.headClass)
-      .on('touchstart', function () {
-        const $this = $(this);
-        $popWrapH = $this.closest('.' + Layer.wrapClass).outerHeight();
-        if ($this.data('first-height') === undefined) $this.data('first-height', $popWrapH);
-        $wrap.stop(false, true);
-      });
-
-    $(tar)
-      .find('.' + Layer.headClass)
-      .swipe({
-        swipeStatus: function (event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection) {
-          const $this = $(this);
-          const $firstHeight = $this.data('first-height');
-          // const $min = $(tar).hasClass('touch-move') ? $firstHeight:0;
-          const $min = $bodyMinHeight;
-          const $max = $(tar).hasClass('touch-move') ? $popup.height() : $popup.outerHeight();
-          const $isUp = direction == 'up' ? true : false;
-          const $isDown = direction == 'down' ? true : false;
-          const $distance = $isDown ? -distance : distance;
-          const $height = Math.max($min, Math.min($max, $popWrapH + $distance));
-          const $powerRatio = duration === 0 || distance === 0 ? 0 : distance / duration;
-          const $power = (1 + Math.round($powerRatio * 3)) * Math.round($powerRatio * 30);
-          const $powerDistance = Math.round(($distance / duration) * $power);
-          if ($isUp || $isDown) {
-            $wrap.stop(false, true).css('height', $height);
-            $body.css('max-height', $height);
-            if ($(tar).hasClass('touch-move')) {
-              //터치무브만큼 크기조절
-              if (phase == 'end' || phase == 'cancel') {
-                if ($powerDistance !== 0) {
-                  const $wrapHeight = $wrap.outerHeight();
-                  const $endHeight = Math.max($min, Math.min($max, $wrapHeight + $powerDistance));
-                  const $endSpeed = Math.min(2000, Math.abs($powerDistance * 10));
-                  // console.log($powerDistance, $endSpeed)
-                  $wrap.animate({ height: $endHeight }, $endSpeed, 'easeOutQuint', function () {
-                    $body.css('max-height', $endHeight);
-                  });
-                }
-              }
-            } else {
-              //터치무브로 상태값 바로 변경
-              if ($popup.hasClass('full')) {
-                $isFull = true;
-                $popup.removeClass('full').addClass('bottom');
-              }
-              if (phase == 'end' || phase == 'cancel') {
-                if (distance > 50) {
-                  if ($popup.hasClass('bottom') && !$isFull) {
-                    if ($isUp) {
-                      $wrap.animate({ height: '100%' }, $animateSpeed, function () {
-                        $wrap.removeCss('height');
-                        $body.removeCss('max-height');
-                        $popup.removeClass('bottom').addClass('full');
-                      });
-                    }
-                    if ($isDown) {
-                      Layer.close(tar);
-                    }
-                  }
-                  if ($isFull && $isDown) {
-                    $wrap.animate({ height: $firstHeight }, $animateSpeed, function () {
-                      $isFull = false;
-                      $wrap.removeCss('height');
-                      $this.removeData('first-height');
-                    });
-                  }
-                } else {
-                  if ($isFull) {
-                    $wrap.animate({ height: '100%' }, $animateSpeed, function () {
-                      $isFull = false;
-                      $wrap.removeCss('height');
-                      $popup.removeClass('bottom').addClass('full');
-                    });
-                  } else {
-                    $wrap.animate({ height: $firstHeight }, $animateSpeed, function () {
-                      $wrap.removeCss('height');
-                      $body.css('max-height', $firstHeight);
-                      $this.removeData('first-height');
-                    });
-                  }
-                }
-              }
-            }
-          }
-        },
-        cancleTreshold: 0
-      });
-  },
   reOpen: false,
   openEl: '',
   openPop: [],
@@ -900,7 +801,7 @@ const Layer = {
         //팝업안 고정탭
 
         //팝업안 swiper
-        if ($(tar).find('.ui-swiper').length) uiSwiperUpdate($(tar).find('.ui-swiper'));
+        if ($(tar).find('.ui-swiper').length) ui.SwiperUpdate($(tar).find('.ui-swiper'));
 
         //열기
         if (!$('html').hasClass('lock')) Body.lock();
@@ -912,7 +813,6 @@ const Layer = {
         //swipe 기능
         if ($(tar).hasClass('is-swipe') && !$(tar).hasClass('is-swipe__init')) {
           $(tar).addClass('is-swipe__init');
-          // Layer.bottomSwipe(tar);
           Layer.bottomTouch(tar);
         }
 
@@ -1273,10 +1173,10 @@ const Layer = {
         $(this).remove();
       });
     };
-    if ($('.bottom-fixed-space').length) {
-      const $bottom = parseInt($toast.css('bottom'));
-      const $spaceH = $('.bottom-fixed-space').outerHeight();
-      $toast.css('bottom', $bottom + $spaceH);
+    if ($('#header').length) {
+      const $top = parseInt($toast.css('top'));
+      const $spaceH = $('#header').outerHeight();
+      $toast.css('top', $top + $spaceH);
     }
     $toast.addClass('on');
     let $closeTime;
@@ -1831,37 +1731,6 @@ ui.Common = {
         $('.floating-btn').removeClass('top-on');
       };
 
-      /*
-      $(settings.button).swipe({
-        swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData,currentDirection){
-          const $this = $(this);
-          const $min = 0;
-          const $max = 150;
-          const $speed = 300;
-          const $isRight = direction == 'right'?true:false;
-          const $distance = $min-distance;
-          
-          if($isRight){
-            $this.css('right',$distance);
-            if(phase == 'end' || phase == 'cancel'){
-              if($distance < -10){
-                $this.stop(true,false).animate({'right':-$max},$speed,function(){
-                  $(this).removeCss('right');
-                  btnTopOff();
-                });
-              }else{
-                $this.stop(true,false).animate({'right':$min},$speed,function(){
-                  $(this).removeCss('right');
-                  btnTopOn();
-                });
-              }
-            }
-          }
-        },
-        cancleTreshold:0
-      });
-      */
-
       let $lastSclTop = $(window).scrollTop();
       const $scrollEvt = function () {
         const $SclTop = $(window).scrollTop();
@@ -1874,13 +1743,6 @@ ui.Common = {
           $('.floating-btn').css('bottom', $spaceH + $margin);
         }
 
-        // if($SclTop > settings.min && $SclTop < $lastSclTop){  //최소보다 높고, 위로 스크롤할때
-        //   if($SclTop < $lastSclTop-(settings.min/2)){
-        //     btnTopOn();
-        //   }
-        // }else{
-        //   btnTopOff();
-        // }
         if ($SclTop > settings.min) {
           btnTopOn();
         } else {
@@ -2417,461 +2279,7 @@ ui.Button = {
       }
     });
   },
-  tabAria: function (element) {
-    if ($(element).length) {
-      $(element).each(function () {
-        const $this = $(this);
-        let $tablist = null;
-        let isFirst = false;
-        if ($this.is('ul') || $this.hasClass('.tab-list')) {
-          $tablist = $this;
-        } else if ($this.find('.tab-list').length) {
-          $tablist = $this.find('.tab-list');
-        } else {
-          $tablist = $this.find('ul');
-        }
-        if ($tablist.attr('role') != 'tablist') isFirst = true;
-        if (isFirst) $tablist.attr('role', 'tablist');
 
-        let $tab = $(this).find('.tab');
-        if (!$tab.length) $tab = $(this).find('li');
-        $tab.each(function (f) {
-          const _a = $(this).find('a');
-          if (_a.length) {
-            if (isFirst) $(this).attr('role', 'presentation');
-            if (isFirst) _a.attr('role', 'tab');
-            if ($(this).hasClass('active')) {
-              _a.attr('aria-selected', true);
-            } else {
-              _a.attr('aria-selected', false);
-            }
-          }
-        });
-      });
-    }
-  },
-  tabLine: function (wrap, isAni) {
-    if (isAni === undefined) isAni = true;
-    let $wrap = $(wrap);
-    if ($wrap.hasClass('tab-inner')) $wrap = $wrap.parent();
-    if ($wrap.hasClass('tab-list')) $wrap = $wrap.closest('.tab-inner').parent();
-    const $line = $wrap.find('.tab-line');
-    if (!$line.length) return;
-    const $list = $wrap.find('.tab-list');
-    const $listLeft = parseInt($list.css('margin-left'));
-    const $active = $wrap.find('.active');
-    const $tabBtn = $active.find('a');
-    // const $tabWidth = $tabBtn.get(0).offsetWidth;
-    // const $tabLeft = $active.get(0).offsetLeft + $tabBtn.get(0).offsetLeft;
-    const $tabWidth = $tabBtn.outerWidth();
-    const $tabLeft = $listLeft + $active.position().left + $tabBtn.position().left;
-
-    if (isAni) $wrap.addClass('tab-line-moving');
-    $line.css({
-      width: $tabWidth,
-      left: $tabLeft
-    });
-    if (isAni) {
-      const transitionEndEvt = function () {
-        $wrap.removeClass('tab-line-moving');
-        $line.off('transitionend', transitionEndEvt);
-      };
-      $line.on('transitionend', transitionEndEvt);
-    }
-  },
-  tab: function () {
-    const $tabInfoSaveString = uiStorage.get('tabInfoSave');
-    const $tabInfoSaveAry = $tabInfoSaveString === null ? null : JSON.parse($tabInfoSaveString);
-
-    const _tabInnerTxt = function (wrap) {
-      let $wrap = $(wrap);
-      if ($wrap.hasClass('tab-inner')) $wrap = $wrap.parent();
-      if ($wrap.hasClass('tab-list')) $wrap = $wrap.parent().parent();
-      const $firstClass = $wrap.attr('class').split(' ')[0];
-      let $innerTxt = $firstClass;
-      $wrap.find('.tab').each(function () {
-        $innerTxt += ',' + $(this).text();
-      });
-      return $innerTxt;
-    };
-
-    const _tabInfoSave = function () {
-      if (!$('.tab-inner').length) {
-        uiStorage.remove('tabInfoSave');
-      } else {
-        const $saveAry = [];
-        $('.tab-inner').each(function () {
-          const stateObj = {};
-          const $innerTxt = _tabInnerTxt(this);
-          const $sclLeft = $(this).scrollLeft();
-          const $line = $(this).find('.tab-line');
-          const $lineLeft = parseInt($line.css('left'));
-          const $lineWidth = parseInt($line.css('width'));
-          stateObj.innerText = $innerTxt;
-          stateObj.lineLeft = $lineLeft;
-          stateObj.lineWidth = $lineWidth;
-          stateObj.sclLeft = $sclLeft;
-          $saveAry.push(stateObj);
-        });
-        if ($saveAry.length) uiStorage.set('tabInfoSave', JSON.stringify($saveAry));
-      }
-    };
-
-    window.addEventListener('unload', function (event) {
-      _tabInfoSave();
-    });
-
-    ui.Button.tabAria('.tab-navi-menu');
-    ui.Button.tabAria('.tab-box-menu');
-    ui.Button.tabAria('.tab-line-menu');
-    ui.Button.tabAria('.tab-txt-menu');
-    // ui.Button.tabAria('.ui-tab');
-
-    const scrolledCheck = function (wrap) {
-      if (!$(wrap).length) return;
-      $(wrap).each(function () {
-        const $this = $(this);
-        const $children = $this.children();
-        const $childrenWidth = $children.outerWidth();
-        const $scrollWidth = $children.get(0).scrollWidth;
-        const $btnClass = 'tab-expand-btn';
-        const $btn = '<div class="' + $btnClass + '"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>';
-        if ($childrenWidth < $scrollWidth) {
-          $this.addClass('scroll-able');
-          if ($this.hasClass('tab-navi-menu') && !$this.find('.' + $btnClass).length) $this.append($btn);
-        } else {
-          $this.removeClass('scroll-able');
-          if ($this.hasClass('tab-navi-menu') && $this.find('.' + $btnClass).length) $this.find('.' + $btnClass).remove();
-        }
-      });
-    };
-    scrolledCheck('.tab-navi-menu');
-    let isTabInit = false;
-    $(window).resize(function () {
-      scrolledCheck('.tab-navi-menu');
-      if ($('.tab-line').length && isTabInit) {
-        $('.tab-line').each(function () {
-          const $this = $(this);
-          if (parseInt($this.css('left')) === 0) return;
-          const $parent = $this.closest('.tab-inner').parent();
-          ui.Button.tabLine($parent, false);
-        });
-      }
-    });
-
-    const tabAcitveCenterScroll = function () {
-      if ($('.tab-inner').length) {
-        $('.tab-inner').each(function (i) {
-          const $this = $(this);
-          if (i === $('.tab-inner').length - 1) {
-            setTimeout(function () {
-              isTabInit = true;
-            }, 50);
-          }
-          if ($this.closest('.ui-tab').length) return;
-
-          const $line = $this.find('.tab-line');
-          let isMove = false;
-          let $delay = 1;
-
-          if ($line.length) {
-            const $innerTxt = _tabInnerTxt(this);
-            $.each($tabInfoSaveAry, function () {
-              if (this.innerText === $innerTxt) {
-                isMove = true;
-                $delay = 50;
-                $line.css({
-                  left: this.lineLeft,
-                  width: this.lineWidth
-                });
-                $this.scrollLeft(this.sclLeft);
-              }
-            });
-          }
-
-          if ($this.closest('.tab-navi-menu').length || $this.closest('.tab-box-menu').length) $delay = 50;
-          setTimeout(function () {
-            const $active = $this.find('.active');
-            if ($active.length) {
-              ui.Scroll.center($active, $delay * 10);
-              ui.Button.tabLine($this, isMove);
-            }
-          }, $delay);
-        });
-      }
-    };
-    tabAcitveCenterScroll();
-
-    const $tabActive = function (target) {
-      const $target = $(target);
-      const $closest = $target.closest('.ui-tab').length ? $target.closest('.ui-tab') : $target.closest('.tab-list');
-      const $btn = $target.is('a') ? $target : $target.find('a');
-      const $tab = $btn.closest('.tab').length ? $btn.closest('.tab') : $btn.closest('li');
-
-      $tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected', false);
-      $btn.attr('aria-selected', true);
-      ui.Button.tabLine($closest);
-    };
-    const $panelActive = function (target, isAni) {
-      if (isAni === undefined) isAni = false;
-      const $target = $(target);
-      const $closest = $target.closest('.ui-tab');
-      const $siblings = $closest.data('target');
-      const $btn = $target.is('a') ? $target : $target.find('a');
-      const $href = $btn.attr('href');
-      const $panel = $($href);
-      const $panelWrap = $panel.closest('.tab-panels');
-      const $panelWrapH = $panelWrap.outerHeight();
-      const $panelWrapGap = $panelWrapH - $panelWrap.height();
-      if (!$panel.length) return;
-      if ($siblings === undefined) {
-        $panel.addClass('active').attr('aria-expanded', true).siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
-      } else {
-        $($siblings).attr('aria-expanded', false).removeClass('active');
-        $panel.addClass('active').attr('aria-expanded', true);
-      }
-
-      if (isAni && $panelWrap.length) {
-        const $setHeight = $panel.outerHeight() + $panelWrapGap;
-        if ($panelWrapH !== $setHeight) {
-          $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
-            $panelWrap.removeCss('height');
-          });
-        }
-      }
-    };
-
-    const $uiTab = $('.ui-tab');
-    const $hash = location.hash;
-    if ($uiTab.length) {
-      $uiTab.each(function (e) {
-        const $this = $(this);
-        let $hashActive = null;
-        const $tarAry = [];
-        let $tab = $this.find('.tab');
-        if (!$tab.length) $tab = $this.find('li');
-        $tab.each(function (f) {
-          const _a = $(this).find('a');
-          let _aId = _a.attr('id');
-          const _href = _a.attr('href');
-          if (_a.length && $(_href).length) {
-            if (!_aId) _aId = 'tab_btn_' + e + '_' + f;
-            if (_href !== '' && _href !== '#') $tarAry.push(_href);
-            _a.attr({
-              id: _aId,
-              'aria-controls': _href.substring(1)
-            });
-            $(_href).attr({
-              role: 'tabpanel',
-              'aria-labelledby': _aId
-            });
-            if (_href === $hash || $(_href).find($hash).length) {
-              $hashActive = _a;
-            }
-          }
-        });
-        if ($tarAry.length) $this.data('target', $tarAry.join(','));
-
-        let $active;
-        if ($hashActive) {
-          $active = $hashActive;
-        } else if ($this.find('.active').length) {
-          $active = $this.find('.active').find('a');
-        } else {
-          $active = $this.find('li').eq(0).find('a');
-        }
-        $tabActive($active);
-        $panelActive($active);
-      });
-    }
-
-    // $(document).on('click','.ui-tab a, .tab-list a',function(e){
-    $(document).on('click', '.ui-tab a', function (e) {
-      e.preventDefault();
-      const $this = $(this);
-      $tabActive($this);
-      //if($(this).closest('.ui-tab').length) {
-      // e.preventDefault();
-      $panelActive($this, true);
-
-      const $href = $this.attr('href');
-      let $winScrollTop = $(window).scrollTop();
-      const $topFixed = $this.closest('.top-fixed');
-      if ($topFixed.length) {
-        let $scrollMove = getOffset($topFixed[0]).top;
-        if ($('#header').length) {
-          $winScrollTop = $winScrollTop - $('#header').outerHeight();
-          $scrollMove = $scrollMove - $('#header').outerHeight();
-        }
-        if ($winScrollTop > $scrollMove) ui.Scroll.move($scrollMove);
-      }
-
-      if ($($href).length) {
-        //ui.ScrollAnimation
-        if ($($href).find('.animate__animated').length) {
-          setTimeout(function () {
-            $($href).find('.animate__animated').addClass('paused');
-            $(window).scroll();
-          }, 100);
-        }
-
-        if ($($href).find('.ui-swiper').length) {
-          uiSwiperUpdate($($href).find('.ui-swiper'));
-        }
-      }
-      //}
-    });
-
-    $(document).on('click', '.tab-expand-btn button', function (e) {
-      e.preventDefault();
-      const $closest = $(this).closest('.tab-expand-btn');
-      const $list = $closest.siblings('.tab-inner').find('.tab-list').clone();
-      if ($(this).hasClass('on')) {
-        $(this).removeClass('on');
-        $closest.next('.tab-expand').remove();
-      } else {
-        $(this).addClass('on');
-        $closest.after('<div class="tab-expand"></div>');
-        const $expand = $closest.next('.tab-expand');
-        $expand.append($list);
-        $expand.find('.tab-list').removeClass('tab-list');
-        $expand.find('.tab').removeClass('tab');
-      }
-    });
-
-    $(document).on('click', '.ui-tab a', function (e) {
-      e.preventDefault();
-      ui.Scroll.center($(this).parent());
-    });
-
-    //select tab
-    $(document).on('change', '.ui-tab-select', function (e) {
-      const $show = $(this).find(':selected').data('show');
-      const $hide = $(this).data('hide');
-
-      if ($($hide).hasClass('tab-panel')) {
-        $($hide).removeClass('active');
-      } else {
-        $($hide).hide();
-      }
-
-      if ($($show).hasClass('tab-panel')) {
-        $($show).addClass('active');
-      } else {
-        $($show).show();
-      }
-    });
-    if ($('.ui-tab-select').length) {
-      $('.ui-tab-select').each(function () {
-        const $tarAry = [];
-        $(this)
-          .find('option')
-          .each(function () {
-            const $tar = $(this).data('show');
-            if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
-            if ($(this).is(':selected')) {
-              if ($($tar).hasClass('tab-panel')) {
-                $($tar).addClass('active');
-              } else {
-                $($tar).show();
-              }
-            }
-          });
-        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
-      });
-    }
-
-    //radio tab
-    $(document).on('change', '.ui-tab-rdo input', function (e) {
-      const $show = $(this).data('show');
-      const $hide = $(this).closest('.ui-tab-rdo').data('hide');
-
-      if ($($hide).hasClass('tab-panel')) {
-        $($hide).removeClass('active');
-      } else {
-        $($hide).hide();
-      }
-
-      if ($($show).hasClass('tab-panel')) {
-        $($show).addClass('active');
-      } else {
-        $($show).show();
-      }
-    });
-    if ($('.ui-tab-rdo').length) {
-      $('.ui-tab-rdo').each(function () {
-        const $tarAry = [];
-        $(this)
-          .find('input[type=radio]')
-          .each(function () {
-            const $tar = $(this).data('show');
-            if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
-            if ($(this).prop('checked')) {
-              if ($($tar).hasClass('tab-panel')) {
-                $($tar).addClass('active');
-              } else {
-                $($tar).show();
-              }
-            }
-          });
-        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
-      });
-    }
-
-    //checkbox tab
-    $(document).on('change', '.ui-tab-chk input', function (e) {
-      let $tar = $(this).data('show');
-
-      if ($(this).prop('checked')) {
-        if ($($tar).hasClass('tab-panel')) {
-          $($tar).addClass('show');
-        } else {
-          $($tar).show();
-        }
-
-        //보인영역 스크롤 안으로
-        if ($.trim($tar).indexOf(',')) {
-          $tar = $tar.split(',').pop();
-        }
-        const $winT = $(window).scrollTop();
-        const $winH = $(window).height();
-        const $spaceH = $('.bottom-fixed-space').outerHeight();
-        const $tarT = $($tar).offset().top;
-        const $tarH = $($tar).outerHeight();
-        const $gap = $tarT + $tarH + 10 - ($winT + $winH - $spaceH);
-        if ($gap > 0) ui.Scroll.move($winT + $gap);
-      } else {
-        if ($($tar).hasClass('tab-panel')) {
-          $($tar).removeClass('show');
-        } else {
-          $($tar).hide();
-        }
-      }
-    });
-    if ($('.ui-tab-chk').length) {
-      $('.ui-tab-chk').each(function () {
-        const $tar = $(this).data('show');
-
-        if ($(this).prop('checked')) {
-          if ($($tar).hasClass('tab-panel')) {
-            $($tar).addClass('show');
-          } else {
-            $($tar).show();
-          }
-        }
-      });
-    }
-
-    //scrollto
-    $(document).on('click', '.ui-tab-scrollto a', function (e) {
-      e.preventDefault();
-      const $this = $(this);
-      const $href = $this.attr('href');
-      const $headH = $('#header').length ? $('#header').outerHeight() : 0;
-      const $top = $($href).offset().top - $headH;
-      ui.Scroll.move($top);
-    });
-  },
   star: function () {
     $(document).on('click', '.ico-star-wrap > button', function (e) {
       e.preventDefault();
@@ -2987,23 +2395,491 @@ ui.Button = {
     ui.Button.default();
     ui.Button.disabledChk();
     ui.Button.effect();
-    ui.Button.tab();
     ui.Button.star();
     ui.Button.imgBox();
     ui.Button.tap();
     ui.Button.etc();
+    ui.Tab.init();
 
     if ($('.ui-touch-rotate').length) ui.Touch.init();
   }
 };
+// 탭
+ui.Tab = {
+  aria: function (element) {
+    if ($(element).length) {
+      $(element).each(function () {
+        const $this = $(this);
+        let $tablist = null;
+        let isFirst = false;
+        if ($this.is('ul') || $this.hasClass('.tab-list')) {
+          $tablist = $this;
+        } else if ($this.find('.tab-list').length) {
+          $tablist = $this.find('.tab-list');
+        } else {
+          $tablist = $this.find('ul');
+        }
+        if ($tablist.attr('role') != 'tablist') isFirst = true;
+        if (isFirst) $tablist.attr('role', 'tablist');
 
-ui.reTabAria = function () {
-  if ($('.tab-navi-menu').length) ui.Button.tabAria('.tab-navi-menu');
-  if ($('.tab-box-menu').length) ui.Button.tabAria('.tab-box-menu');
-  if ($('.is-tab').length) ui.Button.tabAria('.is-tab');
-  if ($('.ui-tab').length) ui.Button.tabAria('.ui-tab');
+        let $tab = $(this).find('.tab');
+        if (!$tab.length) $tab = $(this).find('li');
+        $tab.each(function (f) {
+          const _a = $(this).find('a');
+          if (_a.length) {
+            if (isFirst) $(this).attr('role', 'presentation');
+            if (isFirst) _a.attr('role', 'tab');
+            if ($(this).hasClass('active')) {
+              _a.attr('aria-selected', true);
+            } else {
+              _a.attr('aria-selected', false);
+            }
+          }
+        });
+      });
+    }
+  },
+  ariaSet: function () {
+    if ($('.tab-navi-menu').length) ui.Tab.aria('.tab-navi-menu');
+    if ($('.tab-box-menu').length) ui.Tab.aria('.tab-box-menu');
+    if ($('.is-tab').length) ui.Tab.aria('.is-tab');
+    if ($('.ui-tab').length) ui.Tab.aria('.ui-tab');
+  },
+  line: function (wrap, isAni) {
+    if (isAni === undefined) isAni = true;
+    let $wrap = $(wrap);
+    if ($wrap.hasClass('tab-inner')) $wrap = $wrap.parent();
+    if ($wrap.hasClass('tab-list')) $wrap = $wrap.closest('.tab-inner').parent();
+    const $line = $wrap.find('.tab-line');
+    if (!$line.length) return;
+    const $list = $wrap.find('.tab-list');
+    const $listLeft = parseInt($list.css('margin-left'));
+    const $active = $wrap.find('.active');
+    const $tabBtn = $active.find('a');
+    // const $tabWidth = $tabBtn.get(0).offsetWidth;
+    // const $tabLeft = $active.get(0).offsetLeft + $tabBtn.get(0).offsetLeft;
+    const $tabWidth = $tabBtn.outerWidth();
+    const $tabLeft = $listLeft + $active.position().left + $tabBtn.position().left;
+
+    if (isAni) $wrap.addClass('tab-line-moving');
+    $line.css({
+      width: $tabWidth,
+      left: $tabLeft
+    });
+    if (isAni) {
+      const transitionEndEvt = function () {
+        $wrap.removeClass('tab-line-moving');
+        $line.off('transitionend', transitionEndEvt);
+      };
+      $line.on('transitionend', transitionEndEvt);
+    }
+  },
+  getInnerTxt: function (wrap) {
+    let $wrap = $(wrap);
+    if ($wrap.hasClass('tab-inner')) $wrap = $wrap.parent();
+    if ($wrap.hasClass('tab-list')) $wrap = $wrap.parent().parent();
+    const $firstClass = $wrap.attr('class').split(' ')[0];
+    let $innerTxt = $firstClass;
+    $wrap.find('.tab').each(function () {
+      $innerTxt += ',' + $(this).text();
+    });
+    return $innerTxt;
+  },
+  tabInfoAry: null,
+  tabInfo: function () {
+    const $tabInfoSaveString = uiStorage.get('tabInfoSave');
+    if ($tabInfoSaveString !== null) ui.Tab.tabInfoAry = JSON.parse($tabInfoSaveString);
+
+    const _tabInfoSave = function () {
+      if (!$('.tab-inner').length) {
+        uiStorage.remove('tabInfoSave');
+      } else {
+        const $saveAry = [];
+        $('.tab-inner').each(function () {
+          const stateObj = {};
+          const $innerTxt = ui.Tab.getInnerTxt(this);
+          const $sclLeft = $(this).scrollLeft();
+          const $line = $(this).find('.tab-line');
+          const $lineLeft = parseInt($line.css('left'));
+          const $lineWidth = parseInt($line.css('width'));
+          stateObj.innerText = $innerTxt;
+          stateObj.lineLeft = $lineLeft;
+          stateObj.lineWidth = $lineWidth;
+          stateObj.sclLeft = $sclLeft;
+          $saveAry.push(stateObj);
+        });
+        if ($saveAry.length) uiStorage.set('tabInfoSave', JSON.stringify($saveAry));
+      }
+    };
+
+    window.addEventListener('unload', function (event) {
+      _tabInfoSave();
+    });
+  },
+  scrolledCheck: function (wrap) {
+    if (!$(wrap).length) return;
+    $(wrap).each(function () {
+      const $this = $(this);
+      const $children = $this.children();
+      const $childrenWidth = $children.outerWidth();
+      const $scrollWidth = $children.get(0).scrollWidth;
+      const $btnClass = 'tab-expand-btn';
+      const $btn = '<div class="' + $btnClass + '"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>';
+      if ($childrenWidth < $scrollWidth) {
+        $this.addClass('scroll-able');
+        if ($this.hasClass('tab-navi-menu') && !$this.find('.' + $btnClass).length) $this.append($btn);
+      } else {
+        $this.removeClass('scroll-able');
+        if ($this.hasClass('tab-navi-menu') && $this.find('.' + $btnClass).length) $this.find('.' + $btnClass).remove();
+      }
+    });
+  },
+  activeCenter: function () {
+    if ($('.tab-inner').length) {
+      $('.tab-inner').each(function (i) {
+        const $this = $(this);
+        if (i === $('.tab-inner').length - 1) {
+          setTimeout(function () {
+            isTabInit = true;
+          }, 50);
+        }
+        if ($this.closest('.ui-tab').length) return;
+
+        const $line = $this.find('.tab-line');
+        let isMove = false;
+        let $delay = 1;
+
+        if ($line.length) {
+          const $innerTxt = ui.Tab.getInnerTxt(this);
+          $.each(ui.Tab.tabInfoAry, function () {
+            if (this.innerText === $innerTxt) {
+              isMove = true;
+              $delay = 50;
+              $line.css({
+                left: this.lineLeft,
+                width: this.lineWidth
+              });
+              $this.scrollLeft(this.sclLeft);
+            }
+          });
+        }
+
+        if ($this.closest('.tab-navi-menu').length || $this.closest('.tab-box-menu').length) $delay = 50;
+        setTimeout(function () {
+          const $active = $this.find('.active');
+          if ($active.length) {
+            ui.Scroll.center($active, $delay * 10);
+            ui.Tab.line($this, isMove);
+          }
+        }, $delay);
+      });
+    }
+  },
+  tabActive: function (target) {
+    const $target = $(target);
+    const $closest = $target.closest('.ui-tab').length ? $target.closest('.ui-tab') : $target.closest('.tab-list');
+    const $btn = $target.is('a') ? $target : $target.find('a');
+    const $tab = $btn.closest('.tab').length ? $btn.closest('.tab') : $btn.closest('li');
+
+    $tab.addClass('active').siblings().removeClass('active').find('a').removeAttr('title').attr('aria-selected', false);
+    $btn.attr('aria-selected', true);
+    ui.Tab.line($closest);
+  },
+  panelActive: function (target, isAni) {
+    if (isAni === undefined) isAni = false;
+    const $target = $(target);
+    const $closest = $target.closest('.ui-tab');
+    const $siblings = $closest.data('target');
+    const $btn = $target.is('a') ? $target : $target.find('a');
+    const $href = $btn.attr('href');
+    const $panel = $($href);
+    const $panelWrap = $panel.closest('.tab-panels');
+    const $panelWrapH = $panelWrap.outerHeight();
+    const $panelWrapGap = $panelWrapH - $panelWrap.height();
+    if (!$panel.length) return;
+    if ($siblings === undefined) {
+      $panel.addClass('active').attr('aria-expanded', true).siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+    } else {
+      $($siblings).attr('aria-expanded', false).removeClass('active');
+      $panel.addClass('active').attr('aria-expanded', true);
+    }
+
+    if (isAni && $panelWrap.length) {
+      const $setHeight = $panel.outerHeight() + $panelWrapGap;
+      if ($panelWrapH !== $setHeight) {
+        $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
+          $panelWrap.removeCss('height');
+        });
+      }
+    }
+  },
+  select: function () {
+    if ($('.ui-tab-select').length) {
+      $('.ui-tab-select').each(function () {
+        const $tarAry = [];
+        $(this)
+          .find('option')
+          .each(function () {
+            const $tar = $(this).data('show');
+            if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
+            if ($(this).is(':selected')) {
+              if ($($tar).hasClass('tab-panel')) {
+                $($tar).addClass('active');
+              } else {
+                $($tar).show();
+              }
+            }
+          });
+        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
+      });
+    }
+  },
+  radio: function () {
+    if ($('.ui-tab-rdo').length) {
+      $('.ui-tab-rdo').each(function () {
+        const $tarAry = [];
+        $(this)
+          .find('input[type=radio]')
+          .each(function () {
+            const $tar = $(this).data('show');
+            if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
+            if ($(this).prop('checked')) {
+              if ($($tar).hasClass('tab-panel')) {
+                $($tar).addClass('active');
+              } else {
+                $($tar).show();
+              }
+            }
+          });
+        if ($(this).data('hide') == undefined) $(this).data('hide', $tarAry.join(','));
+      });
+    }
+  },
+  checkbox: function () {
+    if ($('.ui-tab-chk').length) {
+      $('.ui-tab-chk').each(function () {
+        const $tar = $(this).data('show');
+
+        if ($(this).prop('checked')) {
+          if ($($tar).hasClass('tab-panel')) {
+            $($tar).addClass('show');
+          } else {
+            $($tar).show();
+          }
+        }
+      });
+    }
+  },
+  ready: function () {
+    ui.Tab.scrolledCheck('.tab-navi-menu');
+
+    let isTabInit = false;
+    $(window).resize(function () {
+      ui.Tab.scrolledCheck('.tab-navi-menu');
+      if ($('.tab-line').length && isTabInit) {
+        $('.tab-line').each(function () {
+          const $this = $(this);
+          if (parseInt($this.css('left')) === 0) return;
+          const $parent = $this.closest('.tab-inner').parent();
+          ui.Tab.line($parent, false);
+        });
+      }
+    });
+
+    ui.Tab.activeCenter();
+
+    const $uiTab = $('.ui-tab');
+    const $hash = location.hash;
+    if ($uiTab.length) {
+      $uiTab.each(function (e) {
+        const $this = $(this);
+        let $hashActive = null;
+        const $tarAry = [];
+        let $tab = $this.find('.tab');
+        if (!$tab.length) $tab = $this.find('li');
+        $tab.each(function (f) {
+          const _a = $(this).find('a');
+          let _aId = _a.attr('id');
+          const _href = _a.attr('href');
+          if (_a.length && $(_href).length) {
+            if (!_aId) _aId = 'tab_btn_' + e + '_' + f;
+            if (_href !== '' && _href !== '#') $tarAry.push(_href);
+            _a.attr({
+              id: _aId,
+              'aria-controls': _href.substring(1)
+            });
+            $(_href).attr({
+              role: 'tabpanel',
+              'aria-labelledby': _aId
+            });
+            if (_href === $hash || $(_href).find($hash).length) {
+              $hashActive = _a;
+            }
+          }
+        });
+        if ($tarAry.length) $this.data('target', $tarAry.join(','));
+
+        let $active;
+        if ($hashActive) {
+          $active = $hashActive;
+        } else if ($this.find('.active').length) {
+          $active = $this.find('.active').find('a');
+        } else {
+          $active = $this.find('li').eq(0).find('a');
+        }
+        ui.Tab.tabActive($active);
+        ui.Tab.panelActive($active);
+      });
+    }
+
+    ui.Tab.select();
+    ui.Tab.radio();
+    ui.Tab.checkbox();
+  },
+  UI: function () {
+    // $(document).on('click','.ui-tab a, .tab-list a',function(e){
+    $(document).on('click', '.ui-tab a', function (e) {
+      e.preventDefault();
+      const $this = $(this);
+      ui.Tab.tabActive($this);
+      //if($(this).closest('.ui-tab').length) {
+      // e.preventDefault();
+      ui.Tab.panelActive($this, true);
+
+      const $href = $this.attr('href');
+      let $winScrollTop = $(window).scrollTop();
+      const $topFixed = $this.closest('.top-fixed');
+      if ($topFixed.length) {
+        let $scrollMove = getOffset($topFixed[0]).top;
+        if ($('#header').length) {
+          $winScrollTop = $winScrollTop - $('#header').outerHeight();
+          $scrollMove = $scrollMove - $('#header').outerHeight();
+        }
+        if ($winScrollTop > $scrollMove) ui.Scroll.move($scrollMove);
+      }
+
+      if ($($href).length) {
+        //ui.Animation
+        if ($($href).find('.animate__animated').length) {
+          setTimeout(function () {
+            $($href).find('.animate__animated').addClass('paused');
+            $(window).scroll();
+          }, 100);
+        }
+
+        if ($($href).find('.ui-swiper').length) {
+          ui.SwiperUpdate($($href).find('.ui-swiper'));
+        }
+      }
+      //}
+    });
+
+    $(document).on('click', '.tab-expand-btn button', function (e) {
+      e.preventDefault();
+      const $closest = $(this).closest('.tab-expand-btn');
+      const $list = $closest.siblings('.tab-inner').find('.tab-list').clone();
+      if ($(this).hasClass('on')) {
+        $(this).removeClass('on');
+        $closest.next('.tab-expand').remove();
+      } else {
+        $(this).addClass('on');
+        $closest.after('<div class="tab-expand"></div>');
+        const $expand = $closest.next('.tab-expand');
+        $expand.append($list);
+        $expand.find('.tab-list').removeClass('tab-list');
+        $expand.find('.tab').removeClass('tab');
+      }
+    });
+
+    $(document).on('click', '.ui-tab a', function (e) {
+      e.preventDefault();
+      ui.Scroll.center($(this).parent());
+    });
+
+    //select tab
+    $(document).on('change', '.ui-tab-select', function (e) {
+      const $show = $(this).find(':selected').data('show');
+      const $hide = $(this).data('hide');
+
+      if ($($hide).hasClass('tab-panel')) {
+        $($hide).removeClass('active');
+      } else {
+        $($hide).hide();
+      }
+
+      if ($($show).hasClass('tab-panel')) {
+        $($show).addClass('active');
+      } else {
+        $($show).show();
+      }
+    });
+
+    //radio tab
+    $(document).on('change', '.ui-tab-rdo input', function (e) {
+      const $show = $(this).data('show');
+      const $hide = $(this).closest('.ui-tab-rdo').data('hide');
+
+      if ($($hide).hasClass('tab-panel')) {
+        $($hide).removeClass('active');
+      } else {
+        $($hide).hide();
+      }
+
+      if ($($show).hasClass('tab-panel')) {
+        $($show).addClass('active');
+      } else {
+        $($show).show();
+      }
+    });
+
+    //checkbox tab
+    $(document).on('change', '.ui-tab-chk input', function (e) {
+      let $tar = $(this).data('show');
+
+      if ($(this).prop('checked')) {
+        if ($($tar).hasClass('tab-panel')) {
+          $($tar).addClass('show');
+        } else {
+          $($tar).show();
+        }
+
+        //보인영역 스크롤 안으로
+        if ($.trim($tar).indexOf(',')) {
+          $tar = $tar.split(',').pop();
+        }
+        const $winT = $(window).scrollTop();
+        const $winH = $(window).height();
+        const $spaceH = $('.bottom-fixed-space').outerHeight();
+        const $tarT = $($tar).offset().top;
+        const $tarH = $($tar).outerHeight();
+        const $gap = $tarT + $tarH + 10 - ($winT + $winH - $spaceH);
+        if ($gap > 0) ui.Scroll.move($winT + $gap);
+      } else {
+        if ($($tar).hasClass('tab-panel')) {
+          $($tar).removeClass('show');
+        } else {
+          $($tar).hide();
+        }
+      }
+    });
+
+    //scrollto
+    $(document).on('click', '.ui-tab-scrollto a', function (e) {
+      e.preventDefault();
+      const $this = $(this);
+      const $href = $this.attr('href');
+      const $headH = $('#header').length ? $('#header').outerHeight() : 0;
+      const $top = $($href).offset().top - $headH;
+      ui.Scroll.move($top);
+    });
+  },
+  init: function () {
+    ui.Tab.tabInfo();
+    ui.Tab.ariaSet();
+    ui.Tab.ready();
+    ui.Tab.UI();
+  }
 };
-
 //툴팁
 ui.Tooltip = {
   position: function (tar) {
@@ -4271,6 +4147,15 @@ ui.Form = {
   }
 };
 
+//SwiperUpdate
+ui.SwiperUpdate = function (target) {
+  $(target).each(function () {
+    const $this = $(this);
+    const $swiper = $this.data('swiper');
+    if ($swiper !== undefined) $swiper.update();
+  });
+};
+
 //리스트 관련 UI
 ui.List = {
   winLoad: function () {
@@ -4432,7 +4317,7 @@ ui.Folding = {
 
       const slideCallback = function () {
         if ($li.find(panel).find('.ui-swiper').length) {
-          uiSwiperUpdate($li.find(panel).find('.ui-swiper'));
+          ui.SwiperUpdate($li.find(panel).find('.ui-swiper'));
         }
       };
 
@@ -4528,7 +4413,7 @@ ui.Folding = {
 
       const slideCallback = function () {
         if ($($panel).find('.ui-swiper').length) {
-          uiSwiperUpdate($($panel).find('.ui-swiper'));
+          ui.SwiperUpdate($($panel).find('.ui-swiper'));
         }
       };
 
@@ -4692,135 +4577,6 @@ ui.Table = {
         }
       });
     });
-  }
-};
-
-//완료 효과
-ui.Confetti = {
-  set: function (wrap) {
-    const $wrap = $(wrap);
-    let $itemLength = 12;
-    let rdClass;
-    let rdLeft;
-    let rdTop;
-    let rdDelay;
-    let rdDirection;
-    let rdSpeed;
-    let $html = '';
-    const rdLeftAry = [];
-
-    if ($wrap.hasClass('type1')) $itemLength = 24;
-    // if($wrap.hasClass('type2'))$itemLength = 12;
-
-    for (let i = 0; i < $itemLength; i++) {
-      rdClass = randomNumber(1, 3, 0);
-      rdSize = randomNumber(1, 3, 0);
-      rdColor = (i % 5) + 1;
-      rdLeft = $itemLength <= 18 ? randomNumber(1, 19, 0) * 5 : randomNumber(1, $itemLength + 1, 0) * (90 / $itemLength);
-      rdTop = randomNumber(2, 14, 0) * 5;
-      rdDelay = randomNumber(0, 10, 0) * 400;
-      //rdDelay = (i%10) * 200;
-      rdDirection = randomNumber(1, 2, 0);
-      rdSpeed = randomNumber(35, 50, 0) * 150;
-
-      if (rdLeftAry.indexOf(rdLeft) >= 0) {
-        //left 랜덤값 겹치지않게
-        i--;
-      } else {
-        rdLeftAry.push(rdLeft);
-        if ($wrap.hasClass('type1')) {
-          //꽃가루(2가지 모션, 3가지 컬러, 3가지 사이즈, 6가지 모양)
-          rdClass = randomNumber(1, 6, 0);
-          // rdColor = (i%6) + 1;
-          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;';
-          $html += '-webkit-animation:confettiSwing' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiDrop ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
-          $html += 'animation:confettiSwing' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiDrop ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
-          $html += '" aria-hidden="true"><span></span></span>';
-        } else if ($wrap.hasClass('type2')) {
-          //코인(1가지 모양, 3가지 사이즈)
-          rdSpeed = randomNumber(10, 15, 0) * 200; //속도조절
-          $html = '<span class="confetti-item size' + rdSize + '" style="left:' + rdLeft + '%;';
-          $html += '-webkit-animation:confettiCoin ' + rdSpeed + 'ms linear ' + rdDelay + 'ms infinite;';
-          $html += 'animation:confettiCoin ' + rdSpeed + 'ms linear ' + rdDelay + 'ms infinite;';
-          $html += '"></span>';
-        } else if ($wrap.hasClass('type3')) {
-          //깜빡임(5가지 모양, 5가지 컬러)
-          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
-          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
-          rdClass = randomNumber(1, 5, 0);
-          const $rotate = randomNumber(0, 18, 0) * 5;
-          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
-          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"><i style="-webkit-transform:rotate(' + $rotate + 'deg);transform:rotate(' + $rotate + 'deg);"></i></span>';
-        } else if ($wrap.hasClass('type4')) {
-          //풍선(3가지 모양, 3가지 사이즈)
-          rdColor = (i % 3) + 1;
-          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;';
-          $html += '-webkit-animation:confettiBalloon' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiUp ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
-          $html += 'animation:confettiBalloon' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiUp ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
-          $html += '"></span>';
-        } else if ($wrap.hasClass('type5')) {
-          //불꽃(3가지 모양, 3가지 사이즈)
-          rdTop = randomNumber(0, 8, 0) * 5; //top값 조정
-          rdSpeed = randomNumber(15, 25, 0) * 150; //속도조절
-          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;">';
-          $html += '<span class="firework" style="';
-          $html += '-webkit-animation:confettiFirework ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFirework ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></span>';
-          $html += '<span class="fire-arr"><i style="';
-          $html += '-webkit-animation:confettiFireArr ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFireArr ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></i></span>';
-          $html += '</span>';
-        } else if ($wrap.hasClass('type6')) {
-          //하트(2가지 모양, 3가지 각도)
-          rdColor = (i % 2) + 1; //하트이미지 2종류
-          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
-          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
-          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
-          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></span>';
-        } else if ($wrap.hasClass('type7')) {
-          //별빛(1가지 모양, 4가지 크기)
-          rdTop = randomNumber(0, 10, 0) * 5; //top값 조정
-          rdSize = (i % 4) + 1; //크기 4가지
-          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
-          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
-          $html = '<span class="confetti-item size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
-          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></span>';
-        } else if ($wrap.hasClass('type8')) {
-          //불꽃2(5가지 모양, 3가지 크기)
-          rdTop = randomNumber(0, 14, 0) * 5; //top값 조정
-          rdSpeed = randomNumber(15, 25, 0) * 100; //속도조절
-          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;">';
-          $html += '<span class="dot" style="';
-          $html += '-webkit-animation:confettiFireworkDot ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFireworkDot ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></span>';
-          $html += '<span class="firework" style="';
-          $html += '-webkit-animation:confettiFirework2 ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += 'animation:confettiFirework2 ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
-          $html += '"></span>';
-          $html += '</span>';
-        } else {
-          console.log('인터렉션 타입 클래스를 적용해주세요');
-          break;
-        }
-        $wrap.prepend($html);
-      }
-    }
-  },
-  init: function () {
-    if ($('.ui-confetti').length) {
-      $('.ui-confetti').each(function () {
-        ui.Confetti.set($(this));
-      });
-    }
   }
 };
 
@@ -5025,10 +4781,11 @@ ui.Scroll = {
 };
 
 //data-animation
-ui.ScrollAnimation = {
-  index: 0,
-  ready: function (target) {
-    $.each(target, function () {
+ui.Animation = {
+  sclIdx: 0,
+  sclReady: function (target) {
+    const $animations = $.find('*[data-animation]');
+    $.each($animations, function () {
       const $el = $(this);
       const $delay = parseInt($el.data('delay'));
       const $duration = parseInt($el.data('duration'));
@@ -5036,6 +4793,9 @@ ui.ScrollAnimation = {
       const $addClassAry = ['on', 'active', 'checked', 'selected'];
       const $animateClassAry = ['rolling-number', 'count-number'];
       const $dataAnimation = $el.data('animation');
+      if ($dataAnimation === 'rolling-number') ui.Animation.rollingReady(this);
+      if ($dataAnimation === 'count-number') ui.Animation.countReady(this);
+
       let $animationClass = 'animate__' + $dataAnimation;
       if ($addClassAry.indexOf($dataAnimation) >= 0) {
         $el.data('animation-type', 2);
@@ -5065,7 +4825,7 @@ ui.ScrollAnimation = {
       }
     });
   },
-  typeChkClass: function (el) {
+  sclTypeChk: function (el) {
     let returnVal = null;
     const $el = el;
     const $type = $el.data('animation-type');
@@ -5079,7 +4839,7 @@ ui.ScrollAnimation = {
     }
     return returnVal;
   },
-  checkInView: function () {
+  sclCheckIn: function () {
     const $target = $.find('*[data-animation]');
     const $window = $(window);
     const $wHeight = $window.height();
@@ -5102,27 +4862,27 @@ ui.ScrollAnimation = {
       const $elCenter = $elTop + $elHeight / 2;
       const $elBottom = $elTop + $elHeight;
 
-      const $animationClass = ui.ScrollAnimation.typeChkClass($el);
+      const $animationClass = ui.Animation.sclTypeChk($el);
 
       if ($el.data('init')) return;
       if (($winTop <= $elTop && $elTop <= $winBottom) || ($winTop <= $elBottom && $elBottom <= $winBottom)) {
-        ui.ScrollAnimation.action($el);
+        ui.Animation.sclAction($el);
       } else {
         const $timer = $el.data('time');
         if ($timer !== undefined) {
           clearTimeout($timer);
           $el.removeData('time');
-          if (ui.ScrollAnimation.index > 0) ui.ScrollAnimation.index -= 1;
+          if (ui.Animation.sclIdx > 0) ui.Animation.sclIdx -= 1;
         }
       }
     });
   },
-  observer: function (el) {
+  sclObserver: function (el) {
     const $el = $(el);
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.intersectionRatio > 0)) {
-          ui.ScrollAnimation.action($el);
+          ui.Animation.sclAction($el);
         }
       },
       {
@@ -5132,16 +4892,16 @@ ui.ScrollAnimation = {
     io.observe(el);
     return io;
   },
-  action: function (el) {
+  sclAction: function (el) {
     const $el = $(el);
-    const $animationClass = ui.ScrollAnimation.typeChkClass(el);
+    const $animationClass = ui.Animation.sclTypeChk(el);
 
     if ($el.data('time') !== undefined) return;
-    ui.ScrollAnimation.index += 1;
-    const timer = ui.ScrollAnimation.index * 200;
+    ui.Animation.sclIdx += 1;
+    const timer = ui.Animation.sclIdx * 200;
     const initTimer = setTimeout(function () {
       $el.data('init', true);
-      if (ui.ScrollAnimation.index > 0) ui.ScrollAnimation.index -= 1;
+      if (ui.Animation.sclIdx > 0) ui.Animation.sclIdx -= 1;
       const $slide = $el.closest('.swiper-slide');
       if ($el.hasClass('animate__animated')) {
         if ($el.closest('.tab-panel').length && !$el.closest('.tab-panel').hasClass('active')) return;
@@ -5158,7 +4918,7 @@ ui.ScrollAnimation = {
         if ($slide.length) {
           if ($slide.hasClass('swiper-slide-active')) $el.addClass($animationClass);
         } else {
-          if ($el.hasClass('count-number')) ui.ScrollAnimation.couterInit($el);
+          if ($el.hasClass('count-number')) ui.Animation.countInit($el);
           $el.addClass($animationClass);
         }
       }
@@ -5205,14 +4965,14 @@ ui.ScrollAnimation = {
     }
     $this.html($html);
   },
-  couterReady: function (target) {
+  countReady: function (target) {
     const $el = $(target);
     const $text = $el.text();
     $el.aria('label', $text);
     $el.attr('title', $text);
     $el.text('0');
   },
-  couterInit: function (target) {
+  countInit: function (target) {
     const $el = $(target);
     const $title = $el.attr('title');
     const $number = onlyNumber($title);
@@ -5232,7 +4992,7 @@ ui.ScrollAnimation = {
       }
     );
   },
-  scrollChk: function (target) {
+  sclMove: function (target) {
     const $scrollTop = $(window).scrollTop();
     //console.log($scrollTop)
     $.each(target, function () {
@@ -5308,34 +5068,28 @@ ui.ScrollAnimation = {
       }
     });
   },
-  aray: [],
+  sclAray: [],
   init: function () {
     const $animations = $.find('*[data-animation]');
     if ($animations.length > 0) {
-      $($animations).each(function () {
-        const $dataAnimation = $(this).data('animation');
-        if ($dataAnimation === 'rolling-number') ui.ScrollAnimation.rollingReady(this);
-        if ($dataAnimation === 'count-number') ui.ScrollAnimation.couterReady(this);
-      });
-
-      ui.ScrollAnimation.ready($animations);
+      ui.Animation.sclReady();
       // $(window).on('scroll resize', function () {
-      //   ui.ScrollAnimation.checkInView($animations);
+      //   ui.Animation.sclCheckIn($animations);
       // });
-      ui.ScrollAnimation.checkInView();
-      window.addEventListener('scroll', ui.Util.debounce(ui.ScrollAnimation.checkInView, 100));
-      window.addEventListener('resize', ui.Util.debounce(ui.ScrollAnimation.checkInView, 100));
+      ui.Animation.sclCheckIn();
+      window.addEventListener('scroll', ui.Util.debounce(ui.Animation.sclCheckIn, 100));
+      window.addEventListener('resize', ui.Util.debounce(ui.Animation.sclCheckIn, 100));
 
       /*
       if (!'IntersectionObserver' in window && !'IntersectionObserverEntry' in window && !'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
         // IntersectionObserver 지원안할때 
         $(window).on('scroll resize',function(){
-          ui.ScrollAnimation.checkInView($animations);
+          ui.Animation.sclCheckIn($animations);
         });
       }else{
         // IntersectionObserver 지원될때 
         $($animations).each(function(){
-          ui.ScrollAnimation.aray.push(ui.ScrollAnimation.observer(this))
+          ui.Animation.sclAray.push(ui.Animation.sclObserver(this))
         });
       }
       */
@@ -5343,13 +5097,133 @@ ui.ScrollAnimation = {
   }
 };
 
-//SwiperUpdate
-ui.SwiperUpdate = function (target) {
-  $(target).each(function () {
-    const $this = $(this);
-    const $swiper = $this.data('swiper');
-    if ($swiper !== undefined) $swiper.update();
-  });
+//완료 효과
+ui.Confetti = {
+  set: function (wrap) {
+    const $wrap = $(wrap);
+    let $itemLength = 12;
+    let rdClass;
+    let rdLeft;
+    let rdTop;
+    let rdDelay;
+    let rdDirection;
+    let rdSpeed;
+    let $html = '';
+    const rdLeftAry = [];
+
+    if ($wrap.hasClass('type1')) $itemLength = 24;
+    // if($wrap.hasClass('type2'))$itemLength = 12;
+
+    for (let i = 0; i < $itemLength; i++) {
+      rdClass = randomNumber(1, 3, 0);
+      rdSize = randomNumber(1, 3, 0);
+      rdColor = (i % 5) + 1;
+      rdLeft = $itemLength <= 18 ? randomNumber(1, 19, 0) * 5 : randomNumber(1, $itemLength + 1, 0) * (90 / $itemLength);
+      rdTop = randomNumber(2, 14, 0) * 5;
+      rdDelay = randomNumber(0, 10, 0) * 400;
+      //rdDelay = (i%10) * 200;
+      rdDirection = randomNumber(1, 2, 0);
+      rdSpeed = randomNumber(35, 50, 0) * 150;
+
+      if (rdLeftAry.indexOf(rdLeft) >= 0) {
+        //left 랜덤값 겹치지않게
+        i--;
+      } else {
+        rdLeftAry.push(rdLeft);
+        if ($wrap.hasClass('type1')) {
+          //꽃가루(2가지 모션, 3가지 컬러, 3가지 사이즈, 6가지 모양)
+          rdClass = randomNumber(1, 6, 0);
+          // rdColor = (i%6) + 1;
+          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;';
+          $html += '-webkit-animation:confettiSwing' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiDrop ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
+          $html += 'animation:confettiSwing' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiDrop ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
+          $html += '" aria-hidden="true"><span></span></span>';
+        } else if ($wrap.hasClass('type2')) {
+          //코인(1가지 모양, 3가지 사이즈)
+          rdSpeed = randomNumber(10, 15, 0) * 200; //속도조절
+          $html = '<span class="confetti-item size' + rdSize + '" style="left:' + rdLeft + '%;';
+          $html += '-webkit-animation:confettiCoin ' + rdSpeed + 'ms linear ' + rdDelay + 'ms infinite;';
+          $html += 'animation:confettiCoin ' + rdSpeed + 'ms linear ' + rdDelay + 'ms infinite;';
+          $html += '"></span>';
+        } else if ($wrap.hasClass('type3')) {
+          //깜빡임(5가지 모양, 5가지 컬러)
+          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
+          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
+          rdClass = randomNumber(1, 5, 0);
+          const $rotate = randomNumber(0, 18, 0) * 5;
+          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
+          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"><i style="-webkit-transform:rotate(' + $rotate + 'deg);transform:rotate(' + $rotate + 'deg);"></i></span>';
+        } else if ($wrap.hasClass('type4')) {
+          //풍선(3가지 모양, 3가지 사이즈)
+          rdColor = (i % 3) + 1;
+          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;';
+          $html += '-webkit-animation:confettiBalloon' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiUp ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
+          $html += 'animation:confettiBalloon' + rdDirection + ' ' + rdSpeed / 4 + 'ms infinite ' + rdDelay + 'ms alternate, confettiUp ' + rdSpeed + 'ms infinite ease-out ' + rdDelay + 'ms;';
+          $html += '"></span>';
+        } else if ($wrap.hasClass('type5')) {
+          //불꽃(3가지 모양, 3가지 사이즈)
+          rdTop = randomNumber(0, 8, 0) * 5; //top값 조정
+          rdSpeed = randomNumber(15, 25, 0) * 150; //속도조절
+          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;">';
+          $html += '<span class="firework" style="';
+          $html += '-webkit-animation:confettiFirework ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFirework ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></span>';
+          $html += '<span class="fire-arr"><i style="';
+          $html += '-webkit-animation:confettiFireArr ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFireArr ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></i></span>';
+          $html += '</span>';
+        } else if ($wrap.hasClass('type6')) {
+          //하트(2가지 모양, 3가지 각도)
+          rdColor = (i % 2) + 1; //하트이미지 2종류
+          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
+          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
+          $html = '<span class="confetti-item item' + rdClass + ' color' + rdColor + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
+          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></span>';
+        } else if ($wrap.hasClass('type7')) {
+          //별빛(1가지 모양, 4가지 크기)
+          rdTop = randomNumber(0, 10, 0) * 5; //top값 조정
+          rdSize = (i % 4) + 1; //크기 4가지
+          rdSpeed = randomNumber(10, 15, 0) * 100; //속도조절
+          rdDelay = randomNumber(0, 5, 0) * 200; //딜레이조절
+          $html = '<span class="confetti-item size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;';
+          $html += '-webkit-animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFlash ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></span>';
+        } else if ($wrap.hasClass('type8')) {
+          //불꽃2(5가지 모양, 3가지 크기)
+          rdTop = randomNumber(0, 14, 0) * 5; //top값 조정
+          rdSpeed = randomNumber(15, 25, 0) * 100; //속도조절
+          $html = '<span class="confetti-item color' + rdColor + ' size' + rdSize + '" style="left:' + rdLeft + '%;top:' + rdTop + '%;">';
+          $html += '<span class="dot" style="';
+          $html += '-webkit-animation:confettiFireworkDot ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFireworkDot ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></span>';
+          $html += '<span class="firework" style="';
+          $html += '-webkit-animation:confettiFirework2 ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += 'animation:confettiFirework2 ' + rdSpeed + 'ms infinite ' + rdDelay + 'ms;';
+          $html += '"></span>';
+          $html += '</span>';
+        } else {
+          console.log('인터렉션 타입 클래스를 적용해주세요');
+          break;
+        }
+        $wrap.prepend($html);
+      }
+    }
+  },
+  init: function () {
+    if ($('.ui-confetti').length) {
+      $('.ui-confetti').each(function () {
+        ui.Confetti.set($(this));
+      });
+    }
+  }
 };
 
 /********************************
