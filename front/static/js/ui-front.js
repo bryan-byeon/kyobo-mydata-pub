@@ -5,16 +5,16 @@
 $(function () {
   const $elements = $.find('*[data-include-html]');
   if ($elements.length) {
-    ui.Html.include(function () {
-      ui.Init();
-    });
+    ui.Html.include(ui.Init);
   } else {
     ui.Init();
   }
 });
+// window.addEventListener('DOMContentLoaded', (event) => {
+// });
 
 $(window).on('load', function () {
-  ui.Load();
+  ui.LoadInit();
 });
 
 /********************************
@@ -27,20 +27,16 @@ const ui = {
     ui.Device.check();
     ui.Device.hide();
     ui.Common.init();
-    Layer.init();
     ui.Button.init();
     ui.Tooltip.init();
     ui.Scroll.init();
     ui.Form.init();
     ui.List.init();
-
     ui.Animation.init();
+    Layer.init();
     Splitting();
-
-    // $(window).scroll();
-    // $(window).resize();
   },
-  Load: function () {
+  LoadInit: function () {
     //console.log('window load complete');
     ui.Common.winLoad();
     ui.Form.winLoad();
