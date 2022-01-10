@@ -2588,32 +2588,42 @@ ui.Tab = {
   panelActive: function (panel, siblings, isAni) {
     if (isAni === undefined) isAni = false;
     const $panel = $(panel);
-    if (!$panel.length) return;
-    const $isPanel = $panel.hasClass('tab-panel');
-    const $panelWrap = $panel.closest('.tab-panels');
-    const $panelWrapH = $panelWrap.outerHeight();
-    const $panelWrapGap = $panelWrapH - $panelWrap.height();
+    const $siblings = $(siblings);
+    if (!$panel.length && !$siblings.length) return;
+    const $isPanel = $panel.hasClass('tab-panel') || $siblings.hasClass('tab-panel');
+    let $panelWrap = null;
+    if ($panel.length) $panelWrap = $panel.closest('.tab-panels');
+    if ($panelWrap === null) {
+      const $siblingsSpl = siblings.split(',');
+      if ($($siblingsSpl[0]).length) $panelWrap = $($siblingsSpl[0]).closest('.tab-panels');
+    }
+    const $panelWrapH = $panelWrap === null ? 0 : $panelWrap.outerHeight();
+    const $panelWrapGap = $panelWrap === null ? 0 : $panelWrapH - $panelWrap.height();
     if (siblings === undefined || siblings === false || siblings === '') {
       if ($isPanel) {
-        $panel.addClass('active').attr('aria-expanded', true).siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+        $panel.siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+        $panel.addClass('active').attr('aria-expanded', true);
       } else {
         $panel.show();
       }
     } else {
       if ($isPanel) {
-        $(siblings).attr('aria-expanded', false).removeClass('active');
+        $siblings.attr('aria-expanded', false).removeClass('active');
         $panel.addClass('active').attr('aria-expanded', true);
       } else {
-        $(siblings).hide();
+        $siblings.hide();
         $panel.show();
       }
     }
-    if (isAni && $panelWrap.length) {
-      const $setHeight = $panel.outerHeight() + $panelWrapGap;
+    if ($isPanel && isAni && $panelWrap.length) {
+      let $setHeight = $panelWrapGap;
+      $panelWrap.find('.tab-panel.active').each(function () {
+        $setHeight += $(this).outerHeight();
+      });
       if ($panelWrapH !== $setHeight) {
         $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
           $panelWrap.removeCss('height');
-          ui.Scroll.inScreen(panel);
+          if ($panel.length) ui.Scroll.inScreen(panel);
         });
       }
     }
@@ -2633,7 +2643,7 @@ ui.Tab = {
             }
           });
         const $siblings = $tarAry.join(',');
-        if ($(this).data('hide') == undefined) $(this).data('hide', $siblings);
+        $(this).data('hide', $siblings);
         ui.Tab.panelActive($panel, $siblings);
       });
     }
@@ -2641,6 +2651,7 @@ ui.Tab = {
   radio: function () {
     if ($('.ui-tab-radio').length) {
       $('.ui-tab-radio').each(function () {
+        let $panel;
         const $tarAry = [];
         $(this)
           .find('input[type=radio]')
@@ -2652,23 +2663,30 @@ ui.Tab = {
             }
           });
         const $siblings = $tarAry.join(',');
-        if ($(this).data('hide') == undefined) $(this).data('hide', $siblings);
-        console.log($panel, $siblings);
-        ui.Tab.panelActive($panel, $siblings);
+        $(this).data('hide', $siblings);
+        if ($panel) ui.Tab.panelActive($panel, $siblings);
       });
     }
   },
   checkbox: function () {
-    if ($('.ui-tab-chk').length) {
-      $('.ui-tab-chk').each(function () {
-        const $tar = $(this).data('show');
-
-        if ($(this).prop('checked')) {
-          if ($($tar).hasClass('tab-panel')) {
-            $($tar).addClass('show');
-          } else {
-            $($tar).show();
-          }
+    if ($('.ui-tab-check').length) {
+      $('.ui-tab-check').each(function () {
+        const $tarAry = [];
+        const $showAry = [];
+        $(this)
+          .find('input[type=checkbox]')
+          .each(function () {
+            const $tar = $(this).data('show');
+            if ($tarAry.indexOf($tar) < 0 && !!$tar) $tarAry.push($tar);
+            if ($(this).prop('checked')) {
+              if ($showAry.indexOf($tar) < 0 && !!$tar) $showAry.push($tar);
+            }
+          });
+        const $siblings = $tarAry.join(',');
+        $(this).data('hide', $siblings);
+        if ($showAry.length) {
+          const $panel = $showAry.join(',');
+          ui.Tab.panelActive($panel, $siblings);
         }
       });
     }
@@ -2741,7 +2759,6 @@ ui.Tab = {
     ui.Tab.checkbox();
   },
   UI: function () {
-    // $(document).on('click','.ui-tab a, .tab-list a',function(e){
     $(document).on('click', '.ui-tab a', function (e) {
       e.preventDefault();
       const $this = $(this);
@@ -2750,6 +2767,12 @@ ui.Tab = {
       const $closest = $this.closest('.ui-tab');
       const $siblings = $closest.data('target');
       ui.Tab.panelActive($href, $siblings, true);
+      const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
+      const $tabInner = $tab.closest('.tab-inner');
+      if ($tabInner.length) {
+        const isScroll = ui.Scroll.isVisible($tabInner);
+        if (isScroll) ui.Scroll.center($tab);
+      }
 
       let $winScrollTop = $(window).scrollTop();
       const $topFixed = $this.closest('.top-fixed');
@@ -2775,7 +2798,6 @@ ui.Tab = {
           ui.SwiperUpdate($($href).find('.ui-swiper'));
         }
       }
-      //}
     });
 
     $(document).on('click', '.tab-expand-btn button', function (e) {
@@ -2795,11 +2817,6 @@ ui.Tab = {
       }
     });
 
-    $(document).on('click', '.ui-tab a', function (e) {
-      e.preventDefault();
-      ui.Scroll.center($(this).parent());
-    });
-
     //select tab
     $(document).on('change', '.ui-tab-select', function (e) {
       const $show = $(this).find(':selected').data('show');
@@ -2817,32 +2834,20 @@ ui.Tab = {
 
     //checkbox tab
     $(document).on('change', '.ui-tab-check input', function (e) {
-      let $tar = $(this).data('show');
-
-      if ($(this).prop('checked')) {
-        if ($($tar).hasClass('tab-panel')) {
-          $($tar).addClass('show');
-        } else {
-          $($tar).show();
+      const $closest = $(this).closest('.ui-tab-check');
+      const $hide = $closest.data('hide');
+      const $showAry = [];
+      $closest.find('input[type=checkbox]').each(function () {
+        const $tar = $(this).data('show');
+        if ($(this).prop('checked')) {
+          if ($showAry.indexOf($tar) < 0 && !!$tar) $showAry.push($tar);
         }
-
-        //보인영역 스크롤 안으로
-        if ($.trim($tar).indexOf(',')) {
-          $tar = $tar.split(',').pop();
-        }
-        const $winT = $(window).scrollTop();
-        const $winH = $(window).height();
-        const $spaceH = $('.bottom-fixed-space').outerHeight();
-        const $tarT = $($tar).offset().top;
-        const $tarH = $($tar).outerHeight();
-        const $gap = $tarT + $tarH + 10 - ($winT + $winH - $spaceH);
-        if ($gap > 0) ui.Scroll.move($winT + $gap);
+      });
+      if ($showAry.length) {
+        const $panel = $showAry.join(',');
+        ui.Tab.panelActive($panel, $hide, true);
       } else {
-        if ($($tar).hasClass('tab-panel')) {
-          $($tar).removeClass('show');
-        } else {
-          $($tar).hide();
-        }
+        ui.Tab.panelActive(false, $hide, true);
       }
     });
 
@@ -4584,6 +4589,24 @@ ui.Scroll = {
       return false;
     }
   },
+  isCSS: function (val) {
+    const $type = ['auto', 'scroll', 'overlay', 'visible'];
+    if ($type.indexOf(val) > -1) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  isVisible: function (target) {
+    const $target = $(target);
+    if ($target.outerWidth() < $target.get(0).scrollWidth) {
+      return true;
+    } else if ($target.outerHeight() < $target.get(0).scrollHeight) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   move: function (val, speed, callback) {
     let $top = 0;
     if (speed == undefined) speed = 300;
@@ -4637,47 +4660,6 @@ ui.Scroll = {
       if ($sclL < 0) $sclL = 0;
       if ($prtW < $prtSclW) $parent.stop(true, false).animate({ scrollLeft: $sclL }, speed);
     }
-  },
-  hidden: function () {
-    const $window = $(window);
-    let $position = $window.scrollTop();
-    const $floatingBar = $('#floatingBar');
-    let $isFloatingNav = false;
-    const $sclHidden = $('.btn_scl_hidden');
-
-    if (!$floatingBar.hasClass('hide')) $isFloatingNav = true;
-
-    $window.on('scroll', function () {
-      const $scrollTop = $(this).scrollTop();
-      const $wrapH = $('#wrap').height();
-      const $end = $wrapH - $(window).height() - 10;
-      if ($scrollTop >= $position) {
-        //아래로 스크롤하면 숨김
-        if ($scrollTop >= $end) {
-          //아래로 스크롤해도 마지막에 도달하면 보여줌
-          if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
-          $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
-        } else {
-          if ($isFloatingNav) $floatingBar.addClass('off');
-          $sclHidden.addClass('off');
-        }
-      } else {
-        //위로 스크롤하면 보여줌
-        if (!$('html').hasClass('lock')) {
-          if ($position - $scrollTop > 10) {
-            if ($isFloatingNav) $floatingBar.removeClass('off'); //접근성 문제로 항상 보이게...
-            $sclHidden.removeClass('off'); //접근성 문제로 항상 보이게...
-          }
-        }
-      }
-    });
-    $window.scrollEnd(function () {
-      const $scrollTop = $(this).scrollTop();
-      $position = $scrollTop;
-    }, 300);
-    $sclHidden.find('a').on('focusin', function (e) {
-      $sclHidden.removeClass('off');
-    });
   },
   guide: function (element) {
     const $el = $(element);
@@ -4789,7 +4771,6 @@ ui.Scroll = {
     }
   },
   init: function () {
-    ui.Scroll.hidden();
     ui.Scroll.loading();
   }
 };

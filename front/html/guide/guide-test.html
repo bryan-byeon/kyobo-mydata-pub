@@ -24,15 +24,25 @@
         <!-- 컨텐츠 -->
         <section id="contents">
           <div class="section">
-            <div class="select">
-              <select title="선택" class="ui-tab-select">
-                <option value="1" data-show="#selectShow1">선택1</option>
-                <option value="2" data-show="#selectShow2">선택2</option>
-              </select>
-            </div>
-            <div class="tab-panels">
-              <div id="selectShow1" class="tab-panel">선택1선택1</div>
-              <div id="selectShow2" class="tab-panel">선택2선택2<br />선택2선택2</div>
+            <h3 class="gd__h3">ui-tab-check</h3>
+            <div>
+              <div class="flex ui-tab-check">
+                <div class="checkbox btn">
+                  <input type="checkbox" id="chk1" data-show="#checkShow1" checked /><i aria-hidden="true"></i>
+                  <label for="chk1" class="lbl">선택1</label>
+                </div>
+                <div class="checkbox btn">
+                  <input type="checkbox" id="chk2" name="rdo1" data-show="#checkShow2" checked /><i aria-hidden="true"></i>
+                  <label for="chk2" class="lbl">선택2</label>
+                </div>
+              </div>
+
+              <!-- <div id="checkShow1" class="hide">선택1선택1</div>
+                    <div id="checkShow2" class="hide">선택2선택2</div> -->
+              <div class="tab-panels">
+                <div id="checkShow1" class="tab-panel">선택1선택1</div>
+                <div id="checkShow2" class="tab-panel">선택2선택2<br />선택2선택2</div>
+              </div>
             </div>
             <h1>가나다라마바사</h1>
           </div>
