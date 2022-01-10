@@ -495,7 +495,7 @@
     .bg {
       visibility: visible;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      @include dimm;
       transition-delay: 0s, 0s, 0s;
     }
     .search-opt-panel {

@@ -3320,6 +3320,7 @@ ui.Form = {
         $this.prop('disabled') ||
         $this.hasClass('hasDatepicker') ||
         $this.hasClass('time') ||
+        $this.attr('type') === 'date' ||
         // $this.hasClass('t-right') ||
         // $this.hasClass('t-center') ||
         $this.hasClass('no-del')

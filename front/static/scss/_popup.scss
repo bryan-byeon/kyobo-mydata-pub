@@ -414,9 +414,8 @@
 
   //show
   &.show {
-    background: rgba(0, 0, 0, 0.7);
+    @include dimm;
     transition-delay: 0s;
-    backdrop-filter: blur(2px);
     .pop-wrap {
       transform: translate3d(0, 0, 0);
       transition-delay: 0.15s;

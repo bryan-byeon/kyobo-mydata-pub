@@ -40,6 +40,9 @@
       background-repeat: no-repeat;
       background-position: right 16px center;
       background-size: 24px auto;
+      &::-webkit-calendar-picker-indicator {
+        opacity: 0;
+      }
     }
   }
   input:-internal-autofill-selected {

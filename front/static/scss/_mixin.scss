@@ -105,6 +105,11 @@
   margin-right: auto;
 }
 
+@mixin dimm {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
 @mixin iosTop($key, $value, $miuns: false) {
   // #{$key}: $value;
   @if ($miuns) {
