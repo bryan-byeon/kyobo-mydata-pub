@@ -2452,6 +2452,12 @@ ui.Tab = {
     if ($wrap.hasClass('tab-list')) $wrap = $wrap.closest('.tab-inner').parent();
     const $line = $wrap.find('.tab-line');
     if (!$line.length) return;
+    const $LastLeft = $line.data('left') === undefined ? 0 : $line.data('left');
+    const $inner = $wrap.find('.tab-inner');
+    const $innerSclWidth = $inner.get(0).scrollWidth;
+    const $innerSclGap = $innerSclWidth - $inner.outerWidth();
+    // const $innerSclLeft = $inner.get(0).scrollLeft;
+    const $isTy2 = $line.hasClass('ty2');
     const $list = $wrap.find('.tab-list');
     const $listLeft = parseInt($list.css('margin-left'));
     const $active = $wrap.find('.active');
@@ -2460,12 +2466,57 @@ ui.Tab = {
     // const $tabLeft = $active.get(0).offsetLeft + $tabBtn.get(0).offsetLeft;
     const $tabWidth = $tabBtn.outerWidth();
     const $tabLeft = $listLeft + $active.position().left + $tabBtn.position().left;
+    const $tabRight = $innerSclWidth - $tabLeft - $tabWidth - $innerSclGap;
 
-    if (isAni) $wrap.addClass('tab-line-moving');
-    $line.css({
-      width: $tabWidth,
-      left: $tabLeft
-    });
+    if ($isTy2) {
+      if (isAni) {
+        const $delay = $innerSclGap < 10 ? 0 : 200;
+        if ($LastLeft < $tabLeft) {
+          $line
+            .stop(true, false)
+            .delay($delay)
+            .animate(
+              {
+                right: $tabRight
+              },
+              200,
+              function () {
+                $wrap.addClass('tab-line-moving');
+                $line.css({
+                  left: $tabLeft
+                });
+              }
+            );
+        } else {
+          $line
+            .stop(true, false)
+            .delay($delay)
+            .animate(
+              {
+                left: $tabLeft
+              },
+              200,
+              function () {
+                $wrap.addClass('tab-line-moving');
+                $line.css({
+                  right: $tabRight
+                });
+              }
+            );
+        }
+      } else {
+        $line.css({
+          left: $tabLeft,
+          right: $tabRight
+        });
+      }
+    } else {
+      if (isAni) $wrap.addClass('tab-line-moving');
+      $line.css({
+        width: $tabWidth,
+        left: $tabLeft
+      });
+    }
     if (isAni) {
       const transitionEndEvt = function () {
         $wrap.removeClass('tab-line-moving');
@@ -2473,6 +2524,7 @@ ui.Tab = {
       };
       $line.on('transitionend', transitionEndEvt);
     }
+    $line.data('left', $tabLeft);
   },
   getInnerTxt: function (wrap) {
     let $wrap = $(wrap);
@@ -2540,7 +2592,7 @@ ui.Tab = {
         const $this = $(this);
         if (i === $('.tab-inner').length - 1) {
           setTimeout(function () {
-            isTabInit = true;
+            ui.Tab.isTabInit = true;
           }, 50);
         }
         if ($this.closest('.ui-tab').length) return;
@@ -2585,8 +2637,9 @@ ui.Tab = {
     $btn.attr('aria-selected', true);
     if ($closest.length) ui.Tab.line($closest);
   },
-  panelActive: function (panel, siblings, isAni) {
+  panelActive: function (panel, siblings, isAni, isScroll) {
     if (isAni === undefined) isAni = false;
+    if (isScroll === undefined) isScroll = false;
     const $panel = $(panel);
     const $siblings = $(siblings);
     if (!$panel.length && !$siblings.length) return;
@@ -2623,7 +2676,7 @@ ui.Tab = {
       if ($panelWrapH !== $setHeight) {
         $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
           $panelWrap.removeCss('height');
-          if ($panel.length) ui.Scroll.inScreen(panel);
+          if ($panel.length && isScroll) ui.Scroll.inScreen(panel);
         });
       }
     }
@@ -2691,13 +2744,13 @@ ui.Tab = {
       });
     }
   },
+  isTabInit: false,
   ready: function () {
     ui.Tab.scrolledCheck('.tab-navi-menu');
 
-    let isTabInit = false;
     $(window).resize(function () {
       ui.Tab.scrolledCheck('.tab-navi-menu');
-      if ($('.tab-line').length && isTabInit) {
+      if ($('.tab-line').length && ui.Tab.isTabInit) {
         $('.tab-line').each(function () {
           const $this = $(this);
           if (parseInt($this.css('left')) === 0) return;
@@ -2766,7 +2819,7 @@ ui.Tab = {
       const $href = $this.attr('href');
       const $closest = $this.closest('.ui-tab');
       const $siblings = $closest.data('target');
-      ui.Tab.panelActive($href, $siblings, true);
+      ui.Tab.panelActive($href, $siblings, true, true);
       const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
       const $tabInner = $tab.closest('.tab-inner');
       if ($tabInner.length) {
@@ -2821,15 +2874,14 @@ ui.Tab = {
     $(document).on('change', '.ui-tab-select', function (e) {
       const $show = $(this).find(':selected').data('show');
       const $hide = $(this).data('hide');
-      // ui.Tab.panelActive($show, $hide, true);
-      ui.Tab.panelActive($show, $hide);
+      ui.Tab.panelActive($show, $hide, true);
     });
 
     //radio tab
     $(document).on('change', '.ui-tab-radio input', function (e) {
       const $show = $(this).data('show');
       const $hide = $(this).closest('.ui-tab-radio').data('hide');
-      ui.Tab.panelActive($show, $hide, true);
+      ui.Tab.panelActive($show, $hide, true, true);
     });
 
     //checkbox tab
