@@ -1314,12 +1314,14 @@ ui.Html = {
             if ($htmlFile == 'gnb.html') {
               ui.Gnb.init();
             }
+
             if ($htmlFile == 'floating.html') {
               ui.Common.floating();
             }
             if ($htmlFile == 'footer.html') {
               ui.Common.footer();
             }
+
             $this.children().unwrap();
           }
         });
