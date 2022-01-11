@@ -17,6 +17,19 @@ $(window).on('load', function () {
   ui.LoadInit();
 });
 
+$(window).on('resize', function () {
+  ui.Common.vhChk();
+  ui.Tab.resize();
+  ui.Tooltip.resize();
+  ui.Table.guide('.tbl-scroll-in');
+  ui.Touch.rotateItem();
+
+  Layer.resize();
+});
+$(window).on('scroll', function () {
+  ui.Common.space();
+});
+
 /********************************
  * front UI 함수 *
  ********************************/
@@ -45,6 +58,7 @@ const ui = {
 
     ui.Confetti.init();
     ui.Common.vhChk();
+    ui.Swiper.init();
 
     $(window).scroll();
     $(window).resize();
@@ -287,14 +301,13 @@ ui.Common = {
     $('html').css('--vh', $vh + 'px');
   },
   title: function (string) {
-    const $title = document.title;
-    if ($title.indexOf(string) < 0) document.title = string + ' | ' + $title;
+    let $title = document.title;
+    const $divide = ' | ';
+    if ($title.indexOf($divide) >= 0) $title = $title.split($divide)[1];
+    const $titString = string.replace(/<[^>]*>?/gm, '');
+    document.title = $titString + $divide + $title;
     const $titleEl = '#header h1';
-
-    const setPageTitle = function () {
-      if ($($titleEl).length) $($titleEl).html(string);
-    };
-    setPageTitle();
+    if ($($titleEl).length) $($titleEl).html(string);
   },
   fixed: function (target) {
     //고정(fixed)
@@ -332,14 +345,18 @@ ui.Common = {
           }
         });
       });
-      // $(window).resize(function () {
-      //   $(window).scroll();
-      // });
     }
   },
   header: function () {
     const $header = $('#header');
     if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
+    let $title = document.title;
+    const $divide = ' | ';
+    if ($title.indexOf($divide) >= 0) {
+      $title = $title.split($divide)[0];
+      const $titleEl = '#header h1';
+      if ($($titleEl).length) $($titleEl).html($title);
+    }
   },
   headerUI: function () {
     $(document)
@@ -362,38 +379,40 @@ ui.Common = {
       });
     // }
   },
-  footer: function () {
+  spaceAppend: function () {
+    if (!$('.bottom-fixed-space').length) {
+      let $wrap = $('body');
+      if (!$('#footer').length && $('#container').length) $wrap = $('#container');
+      if ($('#wrap').length) $wrap = $('#wrap');
+      $wrap.append('<div class="bottom-fixed-space" aria-hidden="true"></div>');
+    }
+    /*
     if ($('#footer').length && $('#container').find('.bottom-fixed-space').length) {
       const $div = $('#container').find('.bottom-fixed-space');
       $('body').append($div);
     }
-
+    */
+  },
+  space: function () {
     const $space = $('.bottom-fixed-space');
-    const fixedSpaceHeight = function () {
-      const $spaceArryHeight = [];
-      const $naviBar = $('.floating-bar');
-      if ($naviBar.length && $naviBar.height() != 0) {
-        $spaceArryHeight.push($naviBar.outerHeight());
-      }
-      $('.bottom-fixed').each(function () {
-        const $this = $(this);
-        const $height = $this.children().outerHeight();
-        if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
-        if ($this.hasClass('is-restore')) $this.css('height', $height);
-      });
-
-      const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
-      $space.css('height', $maxHeight);
-      if ($('.floating-btn').length) {
-        $('.floating-btn').css('bottom', $maxHeight + 20);
-      }
-    };
-    fixedSpaceHeight();
-    $(window).scroll(function () {
-      if ($space.length) {
-        fixedSpaceHeight();
-      }
+    if (!$('.bottom-fixed-space').length) return;
+    const $spaceArryHeight = [];
+    const $naviBar = $('.floating-bar');
+    if ($naviBar.length && $naviBar.height() != 0) {
+      $spaceArryHeight.push($naviBar.outerHeight());
+    }
+    $('.bottom-fixed').each(function () {
+      const $this = $(this);
+      const $height = $this.children().outerHeight();
+      if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
+      if ($this.hasClass('is-restore')) $this.css('height', $height);
     });
+
+    const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
+    $space.css('height', $maxHeight);
+    if ($('.floating-btn').length) {
+      $('.floating-btn').css('bottom', $maxHeight + 20);
+    }
   },
   step: function () {
     //<ol class="step_state" role="img" aria-label="총 4단계 중 현재단계 2단계">
@@ -633,16 +652,11 @@ ui.Common = {
     });
   },
   init: function () {
-    if (!$('.bottom-fixed-space').length) {
-      let $wrap = $('body');
-      if (!$('#footer').length && $('#container').length) $wrap = $('#container');
-      if ($('#wrap').length) $wrap = $('#wrap');
-      $wrap.append('<div class="bottom-fixed-space" aria-hidden="true"></div>');
-    }
     ui.Common.header();
     ui.Common.headerUI();
     ui.Gnb.init();
-    ui.Common.footer();
+    ui.Common.spaceAppend();
+    ui.Common.space();
     ui.Common.step();
     ui.Common.floating();
     ui.Common.top();
@@ -652,12 +666,7 @@ ui.Common = {
     ui.Common.lottie();
 
     ui.Common.fixed('#header');
-    ui.Common.fixed('.tab-navi-menu');
-    ui.Common.fixed('.tab-line-menu');
-
-    $(window).on('resize', function () {
-      ui.Common.vhChk();
-    });
+    ui.Common.fixed('.tab-fixed');
   }
 };
 
@@ -1498,20 +1507,7 @@ ui.Tab = {
   },
   isTabInit: false,
   ready: function () {
-    ui.Tab.scrolledCheck('.tab-navi-menu');
-
-    $(window).resize(function () {
-      ui.Tab.scrolledCheck('.tab-navi-menu');
-      if ($('.tab-line').length && ui.Tab.isTabInit) {
-        $('.tab-line').each(function () {
-          const $this = $(this);
-          if (parseInt($this.css('left')) === 0) return;
-          const $parent = $this.closest('.tab-inner').parent();
-          ui.Tab.line($parent, false);
-        });
-      }
-    });
-
+    if ($('.tab-navi-menu').length) ui.Tab.scrolledCheck('.tab-navi-menu');
     ui.Tab.activeCenter();
 
     const $uiTab = $('.ui-tab');
@@ -1563,6 +1559,17 @@ ui.Tab = {
     ui.Tab.radio();
     ui.Tab.checkbox();
   },
+  resize: function () {
+    if ($('.tab-navi-menu').length) ui.Tab.scrolledCheck('.tab-navi-menu');
+    if ($('.tab-line').length && ui.Tab.isTabInit) {
+      $('.tab-line').each(function () {
+        const $this = $(this);
+        if (parseInt($this.css('left')) === 0) return;
+        const $parent = $this.closest('.tab-inner').parent();
+        ui.Tab.line($parent, false);
+      });
+    }
+  },
   UI: function () {
     $(document).on('click', '.ui-tab a', function (e) {
       e.preventDefault();
@@ -1600,7 +1607,7 @@ ui.Tab = {
         }
 
         if ($($href).find('.ui-swiper').length) {
-          ui.SwiperUpdate($($href).find('.ui-swiper'));
+          ui.Swiper.update($($href).find('.ui-swiper'));
         }
       }
     });
@@ -1674,37 +1681,43 @@ ui.Tab = {
 };
 //툴팁
 ui.Tooltip = {
-  position: function (tar) {
-    const $tar = $(tar);
-    const $btn = $tar.closest('.tooltip-wrap').find('.tooltip-btn');
-    if (!$tar.children('.tooltip-arr').length) $tar.prepend('<i class="tooltip-arr" aria-hidden="true"></i>');
-    if (!$tar.children('.tooltip-close').length) $tar.append('<a href="#" class="tooltip-close" role="button" aria-label="툴팁닫기"></a>');
-    $(window).resize(function () {
+  resize: function () {
+    if (!$('.tooltip-btn.on').length) return;
+    $('.tooltip-btn.on').each(function () {
+      const $btn = $(this);
+      const $wrap = $btn.closest('.tooltip-wrap');
+      const $cont = $wrap.find('.tooltip-cont');
       const $winW = $(window).width() - 40;
       const $btnW = $btn.width();
       const $btnX = Math.min($winW + $btnW / 2 - 2, $btn.offset().left) - 20;
       let $scrollEnd = $(window).height() + $(window).scrollTop();
       if ($('.bottom-fixed:visible').length) $scrollEnd = $scrollEnd - $('.bottom-fixed').children().outerHeight();
       const $left = Math.max(-4, $btnX);
-      $tar.children('.tooltip-arr').css({
+      $cont.children('.tooltip-arr').css({
         left: $left + $btnW / 2
       });
-      $tar.css({
+      $cont.css({
         width: $winW,
         left: -$left
       });
-      const $tarY =
-        $tar.closest('.tooltip-wrap').offset().top + $tar.closest('.tooltip-wrap').outerHeight() + parseInt($tar.css('margin-top')) + parseInt($tar.css('margin-bottom')) + $tar.outerHeight();
-      if ($tar.hasClass('is-bottom')) {
-        $tar.addClass('bottom');
+      const $contY = $wrap.offset().top + $wrap.outerHeight() + parseInt($cont.css('margin-top')) + parseInt($cont.css('margin-bottom')) + $cont.outerHeight();
+      if ($cont.hasClass('is-bottom')) {
+        $cont.addClass('bottom');
       } else {
-        if ($scrollEnd - 10 < $tarY) {
-          $tar.addClass('bottom');
+        if ($scrollEnd - 10 < $contY) {
+          $cont.addClass('bottom');
         } else {
-          $tar.removeClass('bottom');
+          $cont.removeClass('bottom');
         }
       }
     });
+  },
+  position: function (tar) {
+    const $tar = $(tar);
+
+    if (!$tar.children('.tooltip-arr').length) $tar.prepend('<i class="tooltip-arr" aria-hidden="true"></i>');
+    if (!$tar.children('.tooltip-close').length) $tar.append('<a href="#" class="tooltip-close" role="button" aria-label="툴팁닫기"></a>');
+    ui.Tooltip.resize();
   },
   aria: function (element) {
     $(element).each(function (e) {
@@ -1744,12 +1757,12 @@ ui.Tooltip = {
           $cont.stop(true, false).fadeOut();
           $(this).removeClass('on');
         } else {
-          $(this).addClass('on');
+          $('.tooltip-btn').removeClass('on');
           $('.tooltip-cont').fadeOut();
+          $(this).addClass('on');
           $cont.stop(true, false).fadeIn();
           setTimeout(function () {
             ui.Tooltip.position($cont);
-            $(window).resize();
           }, 30);
         }
       }
@@ -1775,6 +1788,7 @@ ui.Tooltip = {
 ui.Touch = {
   rotateWrap: '.ui-touch-rotate .rotate-items',
   rotateItem: function () {
+    if (!$(ui.Touch.rotateWrap).length) return;
     const $wrap = $(ui.Touch.rotateWrap);
     const $items = $wrap.find('.rotate-item');
     const $radius = $wrap.outerWidth() / 2;
@@ -1859,7 +1873,6 @@ ui.Touch = {
   init: function () {
     ui.Touch.rotateItem();
     document.querySelectorAll(ui.Touch.rotateWrap).forEach(ui.Touch.rotate);
-    $(window).resize(ui.Touch.rotateItem);
   }
 };
 
@@ -2940,13 +2953,95 @@ ui.Form = {
   }
 };
 
-//SwiperUpdate
-ui.SwiperUpdate = function (target) {
-  $(target).each(function () {
-    const $this = $(this);
-    const $swiper = $this.data('swiper');
-    if ($swiper !== undefined) $swiper.update();
-  });
+//테이블 스크롤 가이드
+ui.Table = {
+  guideScl: function (element) {
+    if (!$(element).length) return;
+    $(element).each(function () {
+      const $this = $(this);
+      $this.data('first', true);
+      $this.data('direction', '좌우');
+      $(this).on('scroll', function () {
+        $this.data('first', false);
+        $this.find('.tbl-guide').remove();
+        //$this.removeAttr('title');
+
+        const $sclInfo = $this.next('.tbl_scroll_ifno');
+        if ($sclInfo.length) {
+          const $sclVerticalPercent = Math.abs($this.scrollTop() / ($this.get(0).scrollHeight - $this.height())) * 100;
+          const $sclHorizonPercent = Math.abs($this.scrollLeft() / ($this.get(0).scrollWidth - $this.width())) * 100;
+          $sclInfo
+            .find('.vertical')
+            .children()
+            .css('height', $sclVerticalPercent + '%');
+          $sclInfo
+            .find('.horizon')
+            .children()
+            .css('width', $sclHorizonPercent + '%');
+        }
+      });
+    });
+  },
+  guide: function (element) {
+    if (!$(element).length) return;
+    $(element).each(function () {
+      const $this = $(this);
+      const $direction = $this.data('direction');
+      let $changeDirection = '';
+      const $guide = '<div class="tbl-guide" title="해당영역은 테이블을 스크롤하면 사라집니다."><div><i class="icon" aria-hidden="true"></i>테이블을 ' + $direction + '로 이동하세요.</div></div>';
+      const $width = $this.outerWidth();
+      const $height = $this.outerHeight();
+      const $scrollW = $this.get(0).scrollWidth;
+      const $scrollH = $this.get(0).scrollHeight;
+      const $sclInfoHtml = '<div class="table tbl_scroll_ifno" aria-hidden="true"><div class="horizon"><div></div></div><div class="vertical"><div></div></div></div>';
+      let $sclIfno = $this.next('.tbl_scroll_ifno');
+      if ($this.data('first')) {
+        if ($width < $scrollW && $height < $scrollH) {
+          $changeDirection = '상하좌우';
+        } else if ($width < $scrollW) {
+          $changeDirection = '좌우';
+        } else if ($height < $scrollH) {
+          $changeDirection = '상하';
+        } else {
+          $changeDirection = '';
+        }
+
+        if ($changeDirection == '') {
+          $this.removeAttr('tabindex').find('.tbl-guide').remove();
+          $sclIfno.remove();
+          $this.removeAttr('title');
+        } else {
+          if (!$this.find('.tbl-guide').length) {
+            if (!ui.Mobile.any()) {
+              $this.attr('tabindex', 0); //pc일땐 tabindex 사용
+            }
+            $this.prepend($guide);
+          }
+          if (!$sclIfno.length) {
+            $this.after($sclInfoHtml);
+            $sclIfno = $this.next('.tbl_scroll_ifno');
+          }
+          if ($sclIfno.length) {
+            $sclIfno.find('.vertical').css('height', $height);
+            $sclIfno.find('.vertical').show();
+            $sclIfno.find('.horizon').show();
+            if ($changeDirection == '좌우') {
+              $sclIfno.find('.vertical').hide();
+            } else if ($changeDirection == '상하') {
+              $sclIfno.find('.horizon').hide();
+            }
+          }
+
+          $this.attr('title', '터치스크롤하여 숨겨진 테이블영역을 확인하세요');
+        }
+
+        if ($direction != $changeDirection && $this.find('.tbl-guide').length) {
+          $this.find('.tbl-guide').changeTxt($direction, $changeDirection);
+          $this.data('direction', $changeDirection);
+        }
+      }
+    });
+  }
 };
 
 //리스트 관련 UI
@@ -2958,10 +3053,8 @@ ui.List = {
     ui.Folding.close('.ui-folding-close');
 
     //테이블 스크롤 가이드 실행
-    if ($('.tbl-scroll-in').length) {
-      ui.Table.guideScl('.tbl-scroll-in');
-      ui.Table.guide('.tbl-scroll-in');
-    }
+    ui.Table.guideScl('.tbl-scroll-in');
+    ui.Table.guide('.tbl-scroll-in');
     ui.List.detail();
   },
   type: function () {
@@ -3110,7 +3203,7 @@ ui.Folding = {
 
       const slideCallback = function () {
         if ($li.find(panel).find('.ui-swiper').length) {
-          ui.SwiperUpdate($li.find(panel).find('.ui-swiper'));
+          ui.Swiper.update($li.find(panel).find('.ui-swiper'));
         }
       };
 
@@ -3206,7 +3299,7 @@ ui.Folding = {
 
       const slideCallback = function () {
         if ($($panel).find('.ui-swiper').length) {
-          ui.SwiperUpdate($($panel).find('.ui-swiper'));
+          ui.Swiper.update($($panel).find('.ui-swiper'));
         }
       };
 
@@ -3282,94 +3375,174 @@ ui.Folding = {
   }
 };
 
-//테이블 스크롤 가이드
-ui.Table = {
-  guideScl: function (element) {
-    $(element).each(function () {
+//Swiper
+ui.Swiper = {
+  base: function (tar) {
+    $(tar).each(function () {
       const $this = $(this);
-      $this.data('first', true);
-      $this.data('direction', '좌우');
-      $(this).on('scroll', function () {
-        $this.data('first', false);
-        $this.find('.tbl-guide').remove();
-        //$this.removeAttr('title');
+      const $swiper = $this.find('.swiper');
+      const $pagination = $this.find('.swiper-pagination');
 
-        const $sclInfo = $this.next('.tbl_scroll_ifno');
-        if ($sclInfo.length) {
-          const $sclVerticalPercent = Math.abs($this.scrollTop() / ($this.get(0).scrollHeight - $this.height())) * 100;
-          const $sclHorizonPercent = Math.abs($this.scrollLeft() / ($this.get(0).scrollWidth - $this.width())) * 100;
-          $sclInfo
-            .find('.vertical')
-            .children()
-            .css('height', $sclVerticalPercent + '%');
-          $sclInfo
-            .find('.horizon')
-            .children()
-            .css('width', $sclHorizonPercent + '%');
+      let $paginationType = 'bullets';
+      if ($this.hasClass('_fraction')) $paginationType = 'fraction';
+
+      let $navigation = false;
+      if ($this.hasClass('_navi')) {
+        let $btnHtml = '';
+        $btnHtml += '<button type="button" aria-label="이전 슬라이드" class="swiper-button-prev swiper-button">이전 슬라이드</button>';
+        $btnHtml += '<button type="button" aria-label="다음 슬라이드" class="swiper-button-next swiper-button">다음 슬라이드</button>';
+        $swiper.append($btnHtml);
+        $navigation = {
+          prevEl: $this.find('.swiper-button-prev')[0],
+          nextEl: $this.find('.swiper-button-next')[0]
+        };
+      }
+
+      let $slidesPerView = 'auto';
+      if ($this.data('view') !== undefined) {
+        $slidesPerView = $this.data('view');
+        $this.removeAttr('data-view');
+      }
+
+      let $loop = $this.hasClass('_loop') ? true : false;
+      let $autoHeight = $this.hasClass('_autoheight') ? true : false;
+      let $centeredSlides = $this.hasClass('_centeredSlides') ? true : false;
+
+      let $auto = false;
+      if ($this.data('auto') !== undefined) {
+        $auto = {
+          delay: $this.data('auto'),
+          disableOnInteraction: false
+        };
+        $this.removeAttr('data-auto');
+        if (!$this.find('.swiper-auto-ctl').length) {
+          if (!$this.find('.swiper-pagination-wrap').length) $pagination.wrap('<div class="swiper-pagination-wrap"></div>');
+          $pagination.before('<button type="button" class="swiper-auto-ctl" aria-label="슬라이드 자동롤링 중지"></button>');
         }
-      });
+      }
+      let $parallax = false;
+      if (
+        $this.find('[data-swiper-parallax]').length ||
+        $this.find('[data-swiper-parallax-x]').length ||
+        $this.find('[data-swiper-parallax-y]').length ||
+        $this.find('[data-swiper-parallax-scale]').length ||
+        // $this.find('[data-swiper-parallax-duration]').length ||
+        $this.find('[data-swiper-parallax-opacity]').length
+      ) {
+        $parallax = true;
+      }
+
+      let $zoom = false;
+      if ($this.find('.swiper-zoom-container').length) {
+        $zoom = {
+          maxRatio: 2,
+          toggle: true
+        };
+        $this.find('.swiper-zoom-container').each(function () {
+          let $btnHtml = '<div class="swiper-zoom-btn">';
+          $btnHtml += '<button type="button" role="button" class="swiper-zoom-in" aria-label="확대"></button>';
+          $btnHtml += '<button type="button" role="button" class="swiper-zoom-out" aria-label="축소"></button>';
+          $btnHtml += '</div>';
+          $(this).before($btnHtml);
+        });
+      }
+
+      let baseSwiper;
+      if ($swiper.hasClass('swiper-initialized')) {
+        baseSwiper = $this.data('swiper');
+        if (baseSwiper !== undefined) baseSwiper.update();
+      } else {
+        baseSwiper = new Swiper($swiper[0], {
+          pagination: {
+            el: $pagination[0],
+            type: $paginationType,
+            clickable: true,
+            renderBullet: function (index, className) {
+              return '<button type="button" class="' + className + '">' + (index + 1) + '번째 슬라이드</button>';
+            }
+          },
+          navigation: $navigation,
+          slidesPerView: $slidesPerView,
+          loop: $loop,
+          autoHeight: $autoHeight,
+          centeredSlides: $centeredSlides,
+          autoplay: $auto,
+          parallax: $parallax,
+          zoom: $zoom
+        });
+        $this.data('swiper', baseSwiper);
+      }
     });
   },
-  guide: function (element) {
-    $(window).on('resize', function () {
-      $(element).each(function () {
-        const $this = $(this);
-        const $direction = $this.data('direction');
-        let $changeDirection = '';
-        const $guide = '<div class="tbl-guide" title="해당영역은 테이블을 스크롤하면 사라집니다."><div><i class="icon" aria-hidden="true"></i>테이블을 ' + $direction + '로 이동하세요.</div></div>';
-        const $width = $this.outerWidth();
-        const $height = $this.outerHeight();
-        const $scrollW = $this.get(0).scrollWidth;
-        const $scrollH = $this.get(0).scrollHeight;
-        const $sclInfoHtml = '<div class="table tbl_scroll_ifno" aria-hidden="true"><div class="horizon"><div></div></div><div class="vertical"><div></div></div></div>';
-        let $sclIfno = $this.next('.tbl_scroll_ifno');
-        if ($this.data('first')) {
-          if ($width < $scrollW && $height < $scrollH) {
-            $changeDirection = '상하좌우';
-          } else if ($width < $scrollW) {
-            $changeDirection = '좌우';
-          } else if ($height < $scrollH) {
-            $changeDirection = '상하';
-          } else {
-            $changeDirection = '';
-          }
-
-          if ($changeDirection == '') {
-            $this.removeAttr('tabindex').find('.tbl-guide').remove();
-            $sclIfno.remove();
-            $this.removeAttr('title');
-          } else {
-            if (!$this.find('.tbl-guide').length) {
-              if (!ui.Mobile.any()) {
-                $this.attr('tabindex', 0); //pc일땐 tabindex 사용
-              }
-              $this.prepend($guide);
-            }
-            if (!$sclIfno.length) {
-              $this.after($sclInfoHtml);
-              $sclIfno = $this.next('.tbl_scroll_ifno');
-            }
-            if ($sclIfno.length) {
-              $sclIfno.find('.vertical').css('height', $height);
-              $sclIfno.find('.vertical').show();
-              $sclIfno.find('.horizon').show();
-              if ($changeDirection == '좌우') {
-                $sclIfno.find('.vertical').hide();
-              } else if ($changeDirection == '상하') {
-                $sclIfno.find('.horizon').hide();
-              }
-            }
-
-            $this.attr('title', '터치스크롤하여 숨겨진 테이블영역을 확인하세요');
-          }
-
-          if ($direction != $changeDirection && $this.find('.tbl-guide').length) {
-            $this.find('.tbl-guide').changeTxt($direction, $changeDirection);
-            $this.data('direction', $changeDirection);
-          }
+  ready: function (tar) {
+    const $target = $(tar);
+    $target.each(function () {
+      const $this = $(this);
+      if (!$this.find('.swiper-slide').length) {
+        let $children = $this.children();
+        while ($children.hasClass('swiper') || $children.hasClass('swiper-wrapper')) {
+          $children = $children.children();
         }
-      });
+        $children.addClass('swiper-slide');
+      }
+
+      if (!$this.find('.swiper-wrapper').length) {
+        if (!$this.find('.swiper').length) {
+          $this.wrapInner('<div class="swiper-wrapper"></div>');
+          $this.wrapInner('<div class="swiper"></div>');
+        } else {
+          $this.find('.swiper').wrapInner('<div class="swiper-wrapper"></div>');
+        }
+      } else if (!$this.find('.swiper').length) {
+        $this.find('.swiper-wrapper').parent().wrapInner('<div class="swiper"></div>');
+      }
+      if (!$this.find('.swiper-pagination').length) {
+        $this.append('<div class="swiper-pagination"></div>');
+      }
     });
+  },
+  UI: function () {
+    $(document).on('click', '.ui-swiper .swiper-auto-ctl', function (e) {
+      e.preventDefault();
+      const $this = $(this);
+      const $closest = $this.closest('.ui-swiper');
+      const $swiper = $closest.data('swiper');
+      if ($(this).hasClass('play')) {
+        $swiper.autoplay.start();
+        $(this).removeClass('play').changeAriaLabel('시작', '중지');
+      } else {
+        $swiper.autoplay.stop();
+        $(this).addClass('play').changeAriaLabel('중지', '시작');
+      }
+    });
+
+    $(document).on('click', '.ui-swiper .swiper-zoom-in', function (e) {
+      e.preventDefault();
+      const $this = $(this);
+      const $swiper = $this.closest('.ui-swiper').data('swiper');
+      $swiper.zoom.in();
+    });
+
+    $(document).on('click', '.ui-swiper .swiper-zoom-out', function (e) {
+      e.preventDefault();
+      const $this = $(this);
+      const $swiper = $this.closest('.ui-swiper').data('swiper');
+      $swiper.zoom.out();
+    });
+  },
+  update: function () {
+    $(target).each(function () {
+      const $this = $(this);
+      const $swiper = $this.data('swiper');
+      if ($swiper !== undefined) $swiper.update();
+    });
+  },
+  init: function () {
+    if ($('.ui-swiper').length) {
+      ui.Swiper.ready('.ui-swiper');
+      ui.Swiper.base('.ui-swiper');
+      ui.Swiper.UI();
+    }
   }
 };
 
@@ -4788,7 +4961,7 @@ const Layer = {
         //팝업안 고정탭
 
         //팝업안 swiper
-        if ($(tar).find('.ui-swiper').length) ui.SwiperUpdate($(tar).find('.ui-swiper'));
+        if ($(tar).find('.ui-swiper').length) ui.Swiper.update($(tar).find('.ui-swiper'));
 
         //열기
         if (!$('html').hasClass('lock')) Body.lock();
@@ -4912,38 +5085,9 @@ const Layer = {
       }, $closeDelay);
     }
   },
-  position: function (tar) {
-    let isWinPop = false;
-    if ($(tar).hasClass('win')) isWinPop = true; //win클래스로 윈도우팝업인지 체크
-    if (!$(tar).hasClass(Layer.showClass) && isWinPop == false) return false;
-    if ($(tar).data('popPosition') == true) return false;
-    $(tar).data('popPosition', true);
-    const $head = $(tar).find('.' + Layer.headClass);
-    const $tit = $head.find('h1');
-    const $content = $(tar).find('.' + Layer.bodyClass);
-    const $foot = $(tar).find('.' + Layer.footClass);
-
-    //shadow 넣기
-    const addShadow = function (el) {
-      const $contScrollTop = $(el).scrollTop();
-      const $contScrollHeight = $(el)[0].scrollHeight;
-      const $contHeight = $(el).outerHeight();
-      if ($head.length) {
-        if ($contScrollTop > 50) {
-          $head.addClass('shadow');
-        } else {
-          $head.removeClass('shadow');
-        }
-      }
-      if ($foot.length) {
-        if ($contScrollTop + $contHeight >= $contScrollHeight - 10) {
-          $foot.removeClass('shadow');
-        } else {
-          $foot.addClass('shadow');
-        }
-      }
-    };
-
+  resize: function () {
+    const $popup = $('.' + Layer.popClass + '.' + Layer.showClass);
+    if (!$popup.length) return;
     const headTitHeight = function (headCont, titCont, contentCont) {
       const $headH = headCont.outerHeight();
       const $titH = titCont.outerHeight();
@@ -4953,11 +5097,6 @@ const Layer = {
         contentCont.css('padding-top', $titH + ($padTop - $headH));
       }
     };
-
-    if ($foot.length)
-      $(tar)
-        .find('.' + Layer.bodyClass)
-        .addClass('next-foot');
     const footHeight = function (footCont, contentCont) {
       const $footH = footCont.children().outerHeight();
       const $padBottom = parseInt(contentCont.css('padding-bottom'));
@@ -4965,66 +5104,104 @@ const Layer = {
         contentCont.css('padding-bottom', $footH);
       }
     };
+    $popup.each(function () {
+      const $this = $(this);
+      const $wrap = $this.find('.' + Layer.wrapClass);
+      const $head = $wrap.find('.' + Layer.headClass);
+      const $tit = $head.find('h1');
+      const $foot = $wrap.find('.' + Layer.footClass);
+      const $body = $wrap.find('.' + Layer.bodyClass);
 
-    $(window).resize(function () {
       $head.removeAttr('style').removeClass('shadow');
-      $content.removeAttr('tabindex style');
+      $body.removeAttr('tabindex style');
 
       //타이틀이 두줄 이상이 될때
       //개발에서 스크립트로 제목제어 시 제대로된 높이값을 갖고올수 없어 setTimeout케이스 추가
       if ($.trim($tit.text()).length < 2) {
         setTimeout(function () {
-          headTitHeight($head, $tit, $content);
+          headTitHeight($head, $tit, $body);
         }, 200);
       } else {
-        headTitHeight($head, $tit, $content);
+        headTitHeight($head, $tit, $body);
       }
-      if ($foot.length) footHeight($foot, $content);
+      if ($foot.length) footHeight($foot, $body);
 
-      if (!isWinPop) {
-        //레이어팝업
-        //컨텐츠 스크롤이 필요할때
-        const $height = $(tar).height();
-        // const  $popHeight = $(tar).find('.'+Layer.wrapClass).outerHeight();
-        if ($(tar).hasClass('bottom') || $(tar).hasClass('modal')) $content.css('max-height', $height);
+      //레이어팝업
+      //컨텐츠 스크롤이 필요할때
+      const $height = $this.height();
+      // const  $popHeight = $this.find('.'+Layer.wrapClass).outerHeight();
+      if ($this.hasClass('bottom') || $this.hasClass('modal')) $body.css('max-height', $height);
 
-        //팝업 헤더 shadow
-        addShadow($content);
+      //팝업 헤더 shadow
+      Layer.shadow($body);
 
-        //바텀시트 선택요소로 스크롤
-        const $sclWrp = $(tar).find('.pop-body');
-        if ($(tar).hasClass(Layer.showClass) && $(tar).hasClass(Layer.selectClass) && $(tar).find('.selected').length && !$sclWrp.hasClass('scrolling')) {
-          const $sclWrpPdT = parseInt($sclWrp.css('padding-top'));
-          const $sclWrpH = $sclWrp.outerHeight();
-          const $sclWrpH2 = $sclWrp.get(0).scrollHeight;
-          const $selected = $sclWrp.find('.selected');
-          const $selectedH = $selected.outerHeight();
-          const $selectedTop = $selected.position().top;
+      //바텀시트 선택요소로 스크롤
+      if ($this.hasClass(Layer.selectClass) && $this.find('.selected').length && !$body.hasClass('scrolling')) {
+        const $bodyPdT = parseInt($body.css('padding-top'));
+        const $bodyH = $body.outerHeight();
+        const $bodyH2 = $body.get(0).scrollHeight;
+        const $selected = $body.find('.selected');
+        const $selectedH = $selected.outerHeight();
+        const $selectedTop = $selected.position().top;
 
-          if ($sclWrpH < $sclWrpH2) {
-            $sclWrp.addClass('scrolling');
-            const $sclTop = $selectedTop - $sclWrpH + $sclWrpH / 2 - $selectedH / 2 + $sclWrpPdT / 2;
-            $sclWrp.animate({ scrollTop: $sclTop }, 300, function () {
-              $sclWrp.removeClass('scrolling');
-            });
-          }
+        if ($bodyH < $bodyH2) {
+          $body.addClass('scrolling');
+          const $sclTop = $selectedTop - $bodyH + $bodyH / 2 - $selectedH / 2 + $bodyPdT / 2;
+          $body.animate({ scrollTop: $sclTop }, 300, function () {
+            $body.removeClass('scrolling');
+          });
         }
-      } else {
-        //윈도우팝업
-        addShadow(window);
       }
     });
+  },
+  shadow: function (el) {
+    const $wrap = $(el).closest('.' + Layer.wrapClass);
+    const $head = $wrap.find('.' + Layer.headClass);
+    const $foot = $wrap.find('.' + Layer.footClass);
+    const $contScrollTop = $(el).scrollTop();
+    const $contScrollHeight = $(el)[0].scrollHeight;
+    const $contHeight = $(el).outerHeight();
+    if ($head.length) {
+      if ($contScrollTop > 50) {
+        $head.addClass('shadow');
+      } else {
+        $head.removeClass('shadow');
+      }
+    }
+    if ($foot.length) {
+      if ($contScrollTop + $contHeight >= $contScrollHeight - 10) {
+        $foot.removeClass('shadow');
+      } else {
+        $foot.addClass('shadow');
+      }
+    }
+  },
+  position: function (tar) {
+    let isWinPop = false;
+    if ($(tar).hasClass('win')) isWinPop = true; //win클래스로 윈도우팝업인지 체크
+    if (!$(tar).hasClass(Layer.showClass) && isWinPop == false) return false;
+    if ($(tar).data('popPosition') == true) return false;
+    $(tar).data('popPosition', true);
+    const $content = $(tar).find('.' + Layer.bodyClass);
+    const $foot = $(tar).find('.' + Layer.footClass);
+
+    if ($foot.length)
+      $(tar)
+        .find('.' + Layer.bodyClass)
+        .addClass('next-foot');
+
+    Layer.resize();
 
     //팝업 헤더 shadow
     if (!isWinPop) {
       //레이어팝업
       $content.scroll(function () {
-        addShadow(this);
+        Layer.shadow(tar);
       });
     } else {
       //윈도우팝업
       $(window).scroll(function () {
-        addShadow(this);
+        Layer.shadow(tar);
       });
     }
   },

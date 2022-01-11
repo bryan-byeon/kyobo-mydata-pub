@@ -86,15 +86,11 @@
       }
     }
   }
-}
-.btn-swiper-autoplay {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  background: url(../images/icon/ico-banner-play@3x.png) no-repeat center center / contain;
-  &.stop {
-    background: url(../images/icon/ico-banner-stop@3x.png) no-repeat center center / contain;
+  .swiper-auto-ctl {
+    &:before,
+    &:after {
+      border-color: #fff;
+    }
   }
 }
 .btn-banner-more {

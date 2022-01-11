@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
     <style></style>
     <script>
-      ui.Common.title('테스트');
+      ui.Common.title('<strong>가이드</strong>');
     </script>
   </head>
   <body>
@@ -23,7 +23,7 @@
       <main id="container">
         <!-- 컨텐츠 -->
         <section id="contents">
-          <div class="tab-navi-menu">
+          <div class="tab-navi-menu tab-fixed">
             <div class="tab-inner">
               <i class="tab-line" aria-hidden="true"></i>
               <ul class="tab-list">
@@ -69,7 +69,7 @@
               </ul>
             </div>
           </div>
-          <div class="section">
+          <div class="section pt-30">
             <h2 class="gd__h1">ui-swiper</h2>
             <div>
               <h3 class="gd__h2">full</h3>
@@ -110,6 +110,23 @@
               </div>
               <h3 class="gd__h2">width</h3>
               <div>
+                <div class="ui-swiper" data-view="2">
+                  <div class="swiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <a href="#" class="img-box btn-click"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a href="#" class="img-box btn-click"><img src="../../static/images/temp/thumb-temp2.jpg" alt="" /></a>
+                      </div>
+                      <div class="swiper-slide">
+                        <a href="#" class="img-box btn-click"><img src="../../static/images/temp/thumb-temp3.jpg" alt="" /></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+                <br />
                 <div class="ui-swiper swiper-items">
                   <div class="swiper">
                     <div class="swiper-wrapper">
@@ -310,6 +327,32 @@
                 </div>
               </div>
 
+              <h3 class="gd__h2">zoom</h3>
+              <div>
+                <div class="ui-swiper">
+                  <div class="swiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                          <img src="../../static/images/temp/thumb-temp.jpg" alt="" />
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                          <img src="../../static/images/temp/thumb-temp2.jpg" alt="" />
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                          <img src="../../static/images/temp/thumb-temp3.jpg" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+
               <h3 class="gd__h2">기타</h3>
               <div>
                 <div class="ui-swiper _fraction _loop main-banner-swiper" data-view="1" data-auto="4000">
@@ -347,7 +390,7 @@
                   <div class="swiper-util">
                     <div class="left">
                       <div class="swiper-pagination"></div>
-                      <button type="button" class="btn-swiper-autoplay stop" aria-label="배너자동롤링제어"></button>
+                      <button type="button" class="swiper-auto-ctl" aria-label="슬라이드 자동롤링 중지"></button>
                     </div>
                     <div class="right">
                       <button type="button" class="btn-banner-more" aria-label="배너 전체보기"></button>
@@ -423,118 +466,6 @@
       </main>
       <!-- 컨테이너 -->
     </article>
-    <script>
-      ui.Swiper = {
-        base: function (tar) {
-          $(tar).each(function () {
-            const $this = $(this);
-            const $swiper = $this.find('.swiper');
-            const $pagination = $this.find('.swiper-pagination');
-
-            let $paginationType = 'bullets';
-            if ($this.hasClass('_fraction')) $paginationType = 'fraction';
-
-            let $navigation = false;
-            if ($this.hasClass('_navi')) {
-              let $btnHtml = '';
-              $btnHtml += '<button type="button" aria-label="이전 슬라이드" class="swiper-button-prev swiper-button">이전 슬라이드</button>';
-              $btnHtml += '<button type="button" aria-label="다음 슬라이드" class="swiper-button-next swiper-button">다음 슬라이드</button>';
-              $swiper.append($btnHtml);
-              $navigation = {
-                prevEl: $this.find('.swiper-button-prev')[0],
-                nextEl: $this.find('.swiper-button-next')[0]
-              };
-            }
-
-            let $slidesPerView = 'auto';
-            if ($this.data('view') !== undefined) $slidesPerView = $this.data('view');
-
-            let $loop = $this.hasClass('_loop') ? true : false;
-            let $autoHeight = $this.hasClass('_autoheight') ? true : false;
-            let $centeredSlides = $this.hasClass('_centeredSlides') ? true : false;
-
-            let $auto = false;
-            if ($this.data('auto') !== undefined) {
-              $auto = {
-                delay: $this.data('auto'),
-                disableOnInteraction: false
-              };
-              if (!$this.find('.btn-swiper-autoplay').length) {
-                if (!$this.find('.swiper-pagination-wrap').length) $pagination.wrap('<div class="swiper-pagination-wrap"></div>');
-                $pagination.before('<button type="button" class="btn-swiper-autoplay stop" aria-label="배너자동롤링제어"></button>');
-              }
-            }
-            let $parallax = false;
-            if (
-              $this.find('[data-swiper-parallax]').length ||
-              $this.find('[data-swiper-parallax-x]').length ||
-              $this.find('[data-swiper-parallax-y]').length ||
-              $this.find('[data-swiper-parallax-scale]').length ||
-              // $this.find('[data-swiper-parallax-scale]').length ||
-              $this.find('[data-swiper-parallax-duration]').length
-            ) {
-              $parallax = true;
-            }
-
-            let baseSwiper;
-            if ($swiper.hasClass('swiper-initialized')) {
-              baseSwiper = $this.data('swiper');
-              if (baseSwiper !== undefined) baseSwiper.update();
-            } else {
-              baseSwiper = new Swiper($swiper[0], {
-                pagination: {
-                  el: $pagination[0],
-                  type: $paginationType,
-                  clickable: true,
-                  renderBullet: function (index, className) {
-                    return '<button type="button" class="' + className + '">' + (index + 1) + '번째 슬라이드</button>';
-                  }
-                },
-                navigation: $navigation,
-                slidesPerView: $slidesPerView,
-                loop: $loop,
-                autoHeight: $autoHeight,
-                centeredSlides: $centeredSlides,
-                autoplay: $auto,
-                parallax: $parallax
-              });
-              $this.data('swiper', baseSwiper);
-            }
-          });
-        },
-        ready: function (tar) {
-          const $target = $(tar);
-          $target.each(function () {
-            const $this = $(this);
-            if (!$this.find('.swiper-slide').length) {
-              let $children = $this.children();
-              while ($children.hasClass('swiper') || $children.hasClass('swiper-wrapper')) {
-                $children = $children.children();
-              }
-              $children.addClass('swiper-slide');
-            }
-
-            if (!$this.find('.swiper-wrapper').length) {
-              if (!$this.find('.swiper').length) {
-                $this.wrapInner('<div class="swiper-wrapper"></div>');
-                $this.wrapInner('<div class="swiper"></div>');
-              } else {
-                $this.find('.swiper').wrapInner('<div class="swiper-wrapper"></div>');
-              }
-            } else if (!$this.find('.swiper').length) {
-              $this.find('.swiper-wrapper').parent().wrapInner('<div class="swiper"></div>');
-            }
-            if (!$this.find('.swiper-pagination').length) {
-              $this.append('<div class="swiper-pagination"></div>');
-            }
-          });
-        },
-        init: function () {
-          ui.Swiper.ready('.ui-swiper');
-          ui.Swiper.base('.ui-swiper');
-        }
-      };
-      ui.Swiper.init();
-    </script>
+    <script></script>
   </body>
 </html>
