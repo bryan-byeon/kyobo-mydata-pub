@@ -24,6 +24,27 @@
         <!-- 컨텐츠 -->
         <section id="contents">
           <div class="section">
+            <h1 class="gd__h1">scss 샘플</h1>
+            <div style="position: relative; overflow: hidden">
+              <div class="gd__box"></div>
+              <div class="gd__box-2"></div>
+              <section class="gd__box-2"></section>
+              <div class="gd__wrap2">
+                <div class="gd__box-2"></div>
+              </div>
+            </div>
+            <h1 class="gd__h1">스크롤 테스트</h1>
+            <div>
+              <h2 class="gd__h2">역방향</h2>
+              <div class="gd__scroll-area reverse-scroll-wrap">
+                <div class="reverse-scroll-inside scroll__area"></div>
+              </div>
+              <br />
+              <h2 class="gd__h2">overflow-anchor</h2>
+              <div class="gd__scroll-area scroll__area anchor__area" id="scrollArea">
+                <p class="anchor"></p>
+              </div>
+            </div>
             <div>
               <h2 class="gd__h1">tab-line 효과1</h2>
               <div class="tab-line-menu ui-tab">
@@ -97,5 +118,21 @@
       </main>
       <!-- 컨테이너 -->
     </article>
+    <script>
+      let appendIdx = 1;
+      const sclTimer = setInterval(function () {
+        const $html = '<p>' + appendIdx + '번째 메세지 입니다.</p>';
+        $('.scroll__area').each(function () {
+          const $this = $(this);
+          if ($this.find('.anchor').length) {
+            $this.find('.anchor').before($html);
+          } else {
+            $this.prepend($html);
+          }
+        });
+        appendIdx += 1;
+        if (appendIdx > 50) clearInterval(sclTimer);
+      }, 500);
+    </script>
   </body>
 </html>

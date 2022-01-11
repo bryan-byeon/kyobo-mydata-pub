@@ -1,13 +1,19 @@
-.section .ui-swiper.full {
-  @include outer;
-}
 .ui-swiper {
+  position: relative;
+  &.full {
+    .section & {
+      @include outer;
+    }
+    .img-box img {
+      border-radius: 0;
+    }
+  }
   img {
     max-width: 100%;
   }
-  .swiper {
-    background: rgba(0, 0, 0, 0.03);
-  }
+  // .swiper {
+  //   background: rgba(0, 0, 0, 0.03);
+  // }
   .swiper-pagination {
     position: relative;
     bottom: auto;
@@ -23,6 +29,10 @@
       margin: 0 4px;
       transition: 0.3s;
     }
+    &:not(.swiper-pagination-fraction) {
+      font-size: 0;
+      color: transparent;
+    }
     .swiper-pagination-bullet-active {
       width: 16px;
       opacity: 1;
@@ -30,6 +40,83 @@
     &.swiper-pagination-fraction {
       font-size: 12px;
       line-height: 1;
+    }
+  }
+  .swiper-button {
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    display: block;
+    font-size: 0;
+    color: transparent;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 2;
+    &:before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -5px 0 0 -3px;
+      border: 1px solid #111;
+      border-width: 0 0 2px 2px;
+      transform: rotate(45deg);
+      transition: 0.3s;
+    }
+    &:after {
+      content: none;
+    }
+    &.swiper-button-prev {
+      left: 0px;
+    }
+    &.swiper-button-next {
+      right: 0px;
+      &:before {
+        margin-left: -6px;
+        border-width: 2px 2px 0 0;
+      }
+    }
+    &.swiper-button-disabled {
+      -webkit-tap-highlight-color: transparent;
+      opacity: 0.6;
+      &:before {
+        border-color: #aaa;
+      }
+    }
+  }
+
+  .swiper-pagination-wrap {
+    text-align: center;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .swiper-pagination {
+      margin-top: 0;
+      margin-left: 4px;
+      width: auto;
+    }
+  }
+
+  .swiper-slide {
+    overflow: hidden;
+  }
+
+  &.swiper-items {
+    .section & {
+      @include outer;
+    }
+    .swiper {
+      padding: 0 19px;
+    }
+    .swiper-slide {
+      width: 95%;
+      padding: 0 5px;
     }
   }
 }

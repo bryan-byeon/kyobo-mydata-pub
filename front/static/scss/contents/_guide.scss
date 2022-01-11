@@ -235,6 +235,16 @@
   padding: 1rem;
   background: #f1f1f1;
   border: 1px solid #ddd;
+  overflow: auto;
+  &.anchor__area {
+    > p {
+      overflow-anchor: none;
+    }
+    .anchor {
+      height: 1px;
+      overflow-anchor: auto;
+    }
+  }
 }
 .gd__txt-box {
   border: 1px solid #ddd;
