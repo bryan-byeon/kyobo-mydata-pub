@@ -216,7 +216,7 @@
 // 통합검색
 .search-input {
   display: flex;
-  padding: 12px 20px !important;
+  padding: 12px 0;
   > .input {
     flex: 1 1 auto;
     border-radius: 22px;
@@ -249,7 +249,7 @@
   .button.keyword {
     display: block;
     width: 100%;
-    padding: 8px 24px;
+    padding: 8px 0 8px 24px;
     height: auto;
     font-size: 16px;
     line-height: 24px;
@@ -284,24 +284,14 @@
   }
   &.relate-keyword {
     .button.keyword {
-      &:before,
-      &:after {
+      &:before {
         content: '';
         position: absolute;
-      }
-      &:before {
         left: 0;
         top: 12px;
         width: 16px;
         height: 16px;
         background: url(../images/icon/ico-search-16@3x.png) no-repeat center center / contain;
-      }
-      &:after {
-        right: 0;
-        top: 8px;
-        width: 24px;
-        height: 24px;
-        background: url(../images/icon/ico-arrow-up-left@3x.png) no-repeat center center / contain;
       }
     }
   }

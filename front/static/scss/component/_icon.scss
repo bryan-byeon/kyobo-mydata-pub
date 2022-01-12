@@ -1,5 +1,6 @@
 // icon
 [class*='i-ico-'],
+[class*='i-ani-'],
 [class*='i-bar-'],
 [class*='i-pay-'],
 [class*='i-logo-'] {
@@ -326,8 +327,13 @@
   background-image: url(../images/icon/ico-error-user@3x.png);
 }
 
-.i-ico-success,
 .i-ico-warning {
+  width: 60px;
+  height: 60px;
+  background-image: url(../images/icon/ico-warning@3x.png);
+}
+.i-ani-success,
+.i-ani-warning {
   width: 60px;
   height: 60px;
   margin: 10px;
@@ -343,16 +349,22 @@
     height: 100%;
     border-radius: 50%;
     transform: scale(0);
+    box-sizing: border-box;
   }
   &:before {
     opacity: 0.2;
-    animation: icoAniBg1 2s ease-in-out;
   }
-  &:after {
-    animation: icoAniBg2 2s ease-in-out forwards;
+  &.on {
+    &:before {
+      opacity: 0.2;
+      animation: icoAniBg1 2s ease-in-out;
+    }
+    &:after {
+      animation: icoAniBg2 2s ease-in-out forwards;
+    }
   }
 }
-.i-ico-success {
+.i-ani-success {
   &:before,
   &:after {
     background: var(--theme-color);
@@ -369,12 +381,16 @@
     width: 28px;
     height: 16px;
     border-radius: 2px;
-    transform: translate(-50%, -70%) rotate(-45deg);
+    transform: translate(-45%, -70%) rotate(-45deg);
     z-index: 1;
-    animation: icoSuccess 2s ease-in-out;
+  }
+  &.on {
+    i {
+      animation: icoSuccess 2s ease-in-out;
+    }
   }
 }
-.i-ico-warning {
+.i-ani-warning {
   &:before,
   &:after {
     background: #f5045e;
@@ -406,13 +422,21 @@
     &:before {
       margin: 0 1px;
       height: calc(100% - 11px);
-      animation: icoWarning1 2s ease-in-out;
     }
     &:after {
       margin-top: 3px;
       width: 8px;
       height: 8px;
-      animation: icoWarning2 2s ease-in-out;
+    }
+  }
+  &.on {
+    i {
+      &:before {
+        animation: icoWarning1 2s ease-in-out;
+      }
+      &:after {
+        animation: icoWarning2 2s ease-in-out;
+      }
     }
   }
 }
@@ -461,7 +485,7 @@
   }
   65%,
   100% {
-    clip: rect(0, 26px, 16px, 0);
+    clip: rect(0, 28px, 16px, 0);
   }
 }
 @keyframes icoWarning1 {
