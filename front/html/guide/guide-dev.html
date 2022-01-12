@@ -217,21 +217,36 @@
               <h4 class="gd__h3">기본(약식)</h4>
               <div>
                 <a href="#" id="btnAlert" class="button line small">얼럿창 팝업 열기</a>
-                <a href="#" id="btnAlert1" class="button line small">얼럿창 팝업 열기(+버튼수정)</a>
+                <a href="#" id="btnAlert1" class="button line small">얼럿창 팝업 열기(+타이틀넣기)</a>
+                <a href="#" id="btnAlert2" class="button line small">얼럿창 팝업 열기(+버튼수정)</a>
+                <a href="#" id="btnAlert3" class="button line small">얼럿창 팝업 열기(+타이틀+버튼수정)</a>
+                <br />
                 <br />
                 <a href="#" id="btnConfirm" class="button line small">컨펌창 팝업 열기</a>
-                <a href="#" id="btnConfirm1" class="button line small">컨펌창 팝업 열기(+버튼수정)</a>
+                <a href="#" id="btnConfirm1" class="button line small">컨펌창 팝업 열기(+타이틀넣기)</a>
+                <a href="#" id="btnConfirm2" class="button line small">컨펌창 팝업 열기(+버튼수정)</a>
+                <a href="#" id="btnConfirm3" class="button line small">컨펌창 팝업 열기(+타이틀+버튼수정)</a>
                 <br />
                 <br />
                 <pre><code class="language-javascript">//얼럿 
 Layer.alert('얼럿 메세지');
 //얼럿 + 콜백
 Layer.alert('얼럿창입니다.',function(){
-	console.log('얼럿 확인');
+	console.log('얼럿 확인1');
 });
-//얼럿 + 콜백 + 버튼 텍스트변경
-Layer.alert('얼럿창입니다.','완료',function(){
-	console.log('얼럿 완료');
+//얼럿 + 콜백 + 타이틀추가
+Layer.alert('얼럿창입니다.', '얼럿제목', function () {
+  console.log('얼럿 확인2');
+});
+
+//얼럿 + 콜백 + 버튼 텍스트변경 (타이틀 필요없으면 '' 으로)
+Layer.alert('얼럿창입니다.', '', '완료', function () {
+  console.log('얼럿 완료1');
+});
+
+//얼럿 + 콜백 + 타이틀추가 + 버튼 텍스트변경
+Layer.alert('얼럿창입니다.', '얼럿제목', '완료', function () {
+  console.log('얼럿 완료2');
 });
 
 //컨펌
@@ -244,8 +259,24 @@ Layer.confirm('컨펌창입니다.',function(e){
 		console.log('컨펌 취소');
 	}
 });
+//컨펌 + 콜백 + 타이틀추가
+Layer.confirm('컨펌창입니다.','컨펌제목',function(e){
+	if(e){
+		console.log('컨펌 확인');
+	}else{
+		console.log('컨펌 취소');
+	}
+});
 //컨펌 + 콜백 + 버튼 텍스트변경
-Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
+Layer.confirm('컨펌창입니다.','','완료','넘기기',function(e){
+	if(e){
+		console.log('컨펌 완료');
+	}else{
+		console.log('컨펌 넘기기');
+	}
+});
+//컨펌 + 콜백 + 타이틀추가 + 버튼 텍스트변경
+Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function(e){
 	if(e){
 		console.log('컨펌 확인');
 	}else{
@@ -257,13 +288,25 @@ Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
                   $('#btnAlert').click(function (e) {
                     e.preventDefault();
                     Layer.alert('얼럿창입니다.', function () {
-                      console.log('얼럿 확인');
+                      console.log('얼럿 확인1');
                     });
                   });
                   $('#btnAlert1').click(function (e) {
                     e.preventDefault();
-                    Layer.alert('얼럿창입니다.', '완료', function () {
-                      console.log('얼럿 완료');
+                    Layer.alert('얼럿창입니다.', '얼럿제목', function () {
+                      console.log('얼럿 확인2');
+                    });
+                  });
+                  $('#btnAlert2').click(function (e) {
+                    e.preventDefault();
+                    Layer.alert('얼럿창입니다.', '', '완료', function () {
+                      console.log('얼럿 완료1');
+                    });
+                  });
+                  $('#btnAlert3').click(function (e) {
+                    e.preventDefault();
+                    Layer.alert('얼럿창입니다.', '얼럿제목', '완료', function () {
+                      console.log('얼럿 완료2');
                     });
                   });
                   $('#btnConfirm').click(function (e) {
@@ -278,7 +321,27 @@ Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
                   });
                   $('#btnConfirm1').click(function (e) {
                     e.preventDefault();
-                    Layer.confirm('컨펌창입니다.', '완료', '넘기기', function (e) {
+                    Layer.confirm('컨펌창입니다.', '컨펌제목', function (e) {
+                      if (e) {
+                        console.log('컨펌 완료');
+                      } else {
+                        console.log('컨펌 넘기기');
+                      }
+                    });
+                  });
+                  $('#btnConfirm2').click(function (e) {
+                    e.preventDefault();
+                    Layer.confirm('컨펌창입니다.', '', '완료', '넘기기', function (e) {
+                      if (e) {
+                        console.log('컨펌 완료');
+                      } else {
+                        console.log('컨펌 넘기기');
+                      }
+                    });
+                  });
+                  $('#btnConfirm3').click(function (e) {
+                    e.preventDefault();
+                    Layer.confirm('컨펌창입니다.', '컨펌제목', '완료', '넘기기', function (e) {
                       if (e) {
                         console.log('컨펌 완료');
                       } else {
@@ -290,8 +353,8 @@ Layer.confirm('컨펌창입니다.','완료','넘기기',function(e){
               </div>
               <h4 class="gd__h3">커스텀(옵션)</h4>
               <div>
-                <a href="#" id="btnAlert2" class="button line small">커스텀 얼럿창 팝업 열기</a>
-                <a href="#" id="btnConfirm2" class="button line small">커스텀 컨펌창 팝업 열기</a>
+                <a href="#" id="btnAlert10" class="button line small">커스텀 얼럿창 팝업 열기</a>
+                <a href="#" id="btnConfirm10" class="button line small">커스텀 컨펌창 팝업 열기</a>
                 <br />
                 <br />
                 <pre><code class="language-javascript">//커스텀 얼럿
@@ -329,7 +392,7 @@ Layer.confirm(
 });
 </code></pre>
                 <script>
-                  $('#btnAlert2').click(function (e) {
+                  $('#btnAlert10').click(function (e) {
                     e.preventDefault();
                     Layer.alert({
                       title: '얼럿창',
@@ -343,7 +406,7 @@ Layer.confirm(
                       }
                     });
                   });
-                  $('#btnConfirm2').click(function (e) {
+                  $('#btnConfirm10').click(function (e) {
                     e.preventDefault();
                     Layer.confirm({
                       title: '<strong class="fc_green">컨펌창</strong>',

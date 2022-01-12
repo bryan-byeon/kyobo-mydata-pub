@@ -1,7 +1,7 @@
 :root {
   --vh: 1vh;
-  --theme-color: #3cc35b;
-  --base-txt-color: #222;
+  --theme-color: #fe7d65;
+  --base-txt-color: #444;
   --base-font-size: 15px;
   --placeholder-txt-color: #bdbdbd;
 }
@@ -538,12 +538,12 @@ html.lock,
     }
   }
   > * + * {
-    margin-left: 6px;
+    margin-left: 8px;
   }
   + .input,
   + .select,
   + .textarea {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 }
 .overflow-hidden {
@@ -823,6 +823,11 @@ html.lock,
   }
   .bd-b-#{$i} {
     border-bottom-width: $i * 1px !important;
+  }
+}
+@for $i from 0 through 30 {
+  .bd-radius-#{$i} {
+    border-radius: $i * 1px !important;
   }
 }
 

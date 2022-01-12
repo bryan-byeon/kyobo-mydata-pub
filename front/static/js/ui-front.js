@@ -589,7 +589,7 @@ ui.Common = {
         $html += '</div>';
         $('body').append($html);
 
-        const $baseThemeColor = '#3cc35b';
+        const $baseThemeColor = '#fe7d65';
         const $input = $('.gd__theme_color input');
         const $color = $('.gd__theme_color .color');
         const $openBtn = $('.gd__theme_btn');
@@ -4352,9 +4352,9 @@ const Layer = {
     $html += '<div class="' + Layer.footClass + '">';
     $html += '<div class="flex">';
     if (type === 'confirm' || type === 'prompt') {
-      $html += '<button type="button" id="' + btnCancelId + '" class="button line">취소</button>';
+      $html += '<button type="button" id="' + btnCancelId + '" class="button gray h56 w-35fp">취소</button>';
     }
-    $html += '<button type="button" id="' + btnActionId + '" class="button primary">확인</button>';
+    $html += '<button type="button" id="' + btnActionId + '" class="button primary h56">확인</button>';
     $html += '</div>';
     $html += '</div>';
     $html += '</article>';
@@ -4366,7 +4366,7 @@ const Layer = {
       $('body').append($html);
     }
   },
-  alertEvt: function (type, option, callback, callback2, callback3) {
+  alertEvt: function (type, option, callback, callback2, callback3, callback4) {
     const $length = $('.' + Layer.alertClass).length;
     const $popId = Layer.id + 'Alert' + $length;
     const $actionId = $popId + 'ActionBtn';
@@ -4390,16 +4390,17 @@ const Layer = {
 
     //팝업그리기
     Layer.alertHtml(type, $popId, $actionId, $cancelId);
-    if (!!option.title) {
-      const $titleHtml = '<div class="' + Layer.headClass + '"><div><h1>' + option.title + '</h1></div></div>';
+    if (!!option.title || (typeof callback === 'string' && callback !== '')) {
+      const $insertTit = typeof callback === 'string' && callback !== '' ? callback : option.title;
+      const $titleHtml = '<div class="' + Layer.headClass + '"><div><h1>' + $insertTit + '</h1></div></div>';
       $('#' + $popId)
         .find('.' + Layer.wrapClass)
         .prepend($titleHtml);
     }
     if (!!option.actionTxt) $('#' + $actionId).text(option.actionTxt);
-    if (typeof callback === 'string') $('#' + $actionId).text(callback);
+    if (typeof callback2 === 'string' && callback2 !== '') $('#' + $actionId).text(callback2);
     if (!!option.cancelTxt) $('#' + $cancelId).text(option.cancelTxt);
-    if (typeof callback2 === 'string') $('#' + $cancelId).text(callback2);
+    if (typeof callback3 === 'string' && callback3 !== '') $('#' + $cancelId).text(callback3);
     const $htmlContent = Layer.content;
     if (type === 'prompt') {
       $('#' + $popId)
@@ -4439,12 +4440,14 @@ const Layer = {
           if (typeof callback === 'function') callback($result, $inpVal);
           if (typeof callback2 === 'function') callback2($result, $inpVal);
           if (typeof callback3 === 'function') callback3($result, $inpVal);
+          if (typeof callback4 === 'function') callback4($result, $inpVal);
         } else {
           if (!!option.action) option.action($result);
           if (!!option.callback) option.callback($result);
           if (typeof callback === 'function') callback($result);
           if (typeof callback2 === 'function') callback2($result);
           if (typeof callback3 === 'function') callback3($result);
+          if (typeof callback4 === 'function') callback4($result);
         }
       });
     });
@@ -4457,14 +4460,14 @@ const Layer = {
       });
     });
   },
-  alert: function (option, callback, callback2) {
-    Layer.alertEvt('alert', option, callback, callback2);
+  alert: function (option, callback, callback2, callback3) {
+    Layer.alertEvt('alert', option, callback, callback2, callback3);
   },
-  confirm: function (option, callback, callback2, callback3) {
-    Layer.alertEvt('confirm', option, callback, callback2, callback3);
+  confirm: function (option, callback, callback2, callback3, callback4) {
+    Layer.alertEvt('confirm', option, callback, callback2, callback3, callback4);
   },
-  prompt: function (option, callback, callback2, callback3) {
-    Layer.alertEvt('prompt', option, callback, callback2, callback3);
+  prompt: function (option, callback, callback2, callback3, callback4) {
+    Layer.alertEvt('prompt', option, callback, callback2, callback3, callback4);
   },
   keyEvt: function () {
     //컨펌팝업 버튼 좌우 방할기로 포거스 이동
@@ -5099,7 +5102,9 @@ const Layer = {
     if (!$popup.length) return;
     const headHeight = function (headCont, contentCont) {
       const $headH = headCont.children().outerHeight();
+      const $position = headCont.css('position');
       const $padTop = parseInt(contentCont.css('padding-top'));
+      console.log($headH, $padTop);
       if ($headH > $padTop) {
         contentCont.css('padding-top', $headH);
       }

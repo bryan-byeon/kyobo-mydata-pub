@@ -62,6 +62,7 @@
     line-height: 24px;
     margin: 0;
     width: 100%;
+    color: #222;
   }
   .pop-close {
     position: absolute;
@@ -89,7 +90,7 @@
 }
 .pop-body {
   position: relative;
-  padding: 20px 0;
+  padding: 24px 0;
   @include web-center;
   overflow: auto;
   box-sizing: border-box;
@@ -112,7 +113,7 @@
   background: #fff;
   z-index: 10;
   > div {
-    padding: 16px 20px 20px;
+    padding: 16px;
   }
   &.btn-wrap {
     margin-top: 0;
@@ -298,7 +299,7 @@
     }
   }
   &.modal {
-    padding: 20px;
+    padding: 32px;
     align-items: center;
     justify-content: center;
     .pop-head {
@@ -321,7 +322,7 @@
     .pop-wrap {
       width: 100%;
       max-width: 640px;
-      border-radius: 8px;
+      border-radius: 16px;
       margin: 50px auto 0;
       opacity: 0;
       transform: translate3d(0, 0, 0);
@@ -391,28 +392,33 @@
   //alert
   &.alert {
     z-index: 300;
-    .pop-wrap {
-      max-width: 300px;
-    }
-    .message {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: 80px;
-      font-size: 15px;
-      word-break: break-all;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      // text-align:left;
-    }
-    .section:first-child:before {
-      display: none !important;
-    }
-    // .pop-foot{
-    // 	.button.line:not(:last-child){
-    // 		border-color: #ddd;
-    // 	}
+    // .pop-wrap {
+    //   max-width: 300px;
     // }
+    .message {
+      word-break: break-all;
+      text-align: left;
+    }
+    .pop-head {
+      > div {
+        padding: 24px 24px 0;
+        min-height: auto;
+        text-align: left;
+      }
+      h1 {
+        text-align: left;
+        font-size: 20px;
+        line-height: 28px;
+      }
+      + .pop-body {
+        padding-top: 60px;
+      }
+    }
+    .pop-body {
+      &.next-foot {
+        padding-bottom: 96px;
+      }
+    }
   }
 
   //show
