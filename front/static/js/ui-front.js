@@ -21,7 +21,7 @@ $(window).on('resize', function () {
   ui.Common.vhChk();
   ui.Tab.resize();
   ui.Tooltip.resize();
-  ui.Table.guide('.tbl-scroll-in');
+  ui.Table.guideResize();
   ui.Touch.rotateItem();
 
   Layer.resize();
@@ -478,99 +478,95 @@ ui.Common = {
       } else {
         $('body').append(btnHtml);
       }
-
-      $(document)
-        .on('click', settings.button, function (e) {
-          e.preventDefault();
-          $('html, body').animate({ scrollTop: 0 }, settings.scrollSpeed);
-          $('#wrap').find($focusableEl).first().focus();
-        })
-        .on('mouseenter', function () {
-          $(settings.button).addClass(settings.hoverclass);
-        })
-        .on('mouseleave', function () {
-          $(settings.button).removeClass(settings.hoverClass);
-        });
-
-      const btnTopOn = function () {
-        $(settings.button).attr('aria-hidden', 'false').addClass(settings.onClass);
-        $('.floating-btn').addClass('top-on');
-      };
-
-      const btnTopOff = function () {
-        $(settings.button).attr('aria-hidden', 'true').removeClass(settings.onClass);
-        $('.floating-btn').removeClass('top-on');
-      };
-
-      let $lastSclTop = $(window).scrollTop();
-      const $scrollEvt = function () {
-        const $SclTop = $(window).scrollTop();
-        const $spaceH = $('.bottom-fixed-space').outerHeight();
-        const $bottom = parseInt($(settings.button).parent().css('bottom'));
-        const $margin = 20;
-        const $Height = window.innerHeight;
-        const $scrollHeight = $('body').get(0).scrollHeight;
-        if ($spaceH > 0 && $spaceH != $bottom - $margin) {
-          $('.floating-btn').css('bottom', $spaceH + $margin);
-        }
-
-        if ($SclTop > settings.min) {
-          btnTopOn();
-        } else {
-          btnTopOff();
-        }
-        if (ui.Common.isFloating) {
-          if ($SclTop < $lastSclTop) {
-            //위로 스크롤할때
-            $('.floating-bar').removeClass('off');
-          } else {
-            $('.floating-bar').addClass('off');
-          }
-          if ($SclTop + $Height > $scrollHeight - 3) {
-            $('.floating-bar').removeClass('off').addClass('end');
-          } else {
-            $('.floating-bar').removeClass('end');
-          }
-        }
-        const $btnFixed = $('.btn-wrap.bottom-fixed');
-        if ($btnFixed.length) {
-          $btnFixed.each(function () {
-            const $this = $(this);
-            if ($this.hasClass('is-restore')) {
-              const $top = $this.offset().top;
-              const $bottom = $top + $this.children().outerHeight();
-              if ($SclTop + $Height > $bottom) {
-                $this.addClass('fixed-none');
-              } else {
-                $this.removeClass('fixed-none');
-              }
-            } else {
-              if ($SclTop + $Height > $scrollHeight - 3) {
-                $this.addClass('no-shadow');
-              } else {
-                $this.removeClass('no-shadow');
-              }
-            }
-          });
-        }
-
-        setTimeout(function () {
-          $lastSclTop = $SclTop;
-        }, 50);
-      };
-      const $scrollEndEvt = function () {
-        const $SclTop = $(window).scrollTop();
-        if ($SclTop > settings.min) {
-          btnTopOff();
-        }
-      };
-      $(window).on('scroll', $scrollEvt);
-      window.addEventListener('scroll', ui.Util.debounce($scrollEndEvt, 1500));
-    } else {
-      if ($('.floating-bar').length && !$('.floating-bar .btn-page-top').length) {
-        $('.floating-bar').prepend($('.floating-btn.btn-page-top'));
-      }
     }
+
+    $(document)
+      .on('click', settings.button, function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0 }, settings.scrollSpeed);
+        $('#wrap').find($focusableEl).first().focus();
+      })
+      .on('mouseenter', function () {
+        $(settings.button).addClass(settings.hoverclass);
+      })
+      .on('mouseleave', function () {
+        $(settings.button).removeClass(settings.hoverClass);
+      });
+
+    const btnTopOn = function () {
+      $(settings.button).attr('aria-hidden', 'false').addClass(settings.onClass);
+      $('.floating-btn').addClass('top-on');
+    };
+
+    const btnTopOff = function () {
+      $(settings.button).attr('aria-hidden', 'true').removeClass(settings.onClass);
+      $('.floating-btn').removeClass('top-on');
+    };
+
+    let $lastSclTop = $(window).scrollTop();
+    const $scrollEvt = function () {
+      const $SclTop = $(window).scrollTop();
+      const $spaceH = $('.bottom-fixed-space').outerHeight();
+      const $bottom = parseInt($(settings.button).parent().css('bottom'));
+      const $margin = 20;
+      const $Height = window.innerHeight;
+      const $scrollHeight = $('body').get(0).scrollHeight;
+      if ($spaceH > 0 && $spaceH != $bottom - $margin) {
+        $('.floating-btn').css('bottom', $spaceH + $margin);
+      }
+
+      if ($SclTop > settings.min) {
+        btnTopOn();
+      } else {
+        btnTopOff();
+      }
+      if (ui.Common.isFloating) {
+        if ($SclTop < $lastSclTop) {
+          //위로 스크롤할때
+          $('.floating-bar').removeClass('off');
+        } else {
+          $('.floating-bar').addClass('off');
+        }
+        if ($SclTop + $Height > $scrollHeight - 3) {
+          $('.floating-bar').removeClass('off').addClass('end');
+        } else {
+          $('.floating-bar').removeClass('end');
+        }
+      }
+      const $btnFixed = $('.btn-wrap.bottom-fixed');
+      if ($btnFixed.length) {
+        $btnFixed.each(function () {
+          const $this = $(this);
+          if ($this.hasClass('is-restore')) {
+            const $top = $this.offset().top;
+            const $bottom = $top + $this.children().outerHeight();
+            if ($SclTop + $Height > $bottom) {
+              $this.addClass('fixed-none');
+            } else {
+              $this.removeClass('fixed-none');
+            }
+          } else {
+            if ($SclTop + $Height > $scrollHeight - 3) {
+              $this.addClass('no-shadow');
+            } else {
+              $this.removeClass('no-shadow');
+            }
+          }
+        });
+      }
+
+      setTimeout(function () {
+        $lastSclTop = $SclTop;
+      }, 50);
+    };
+    const $scrollEndEvt = function () {
+      const $SclTop = $(window).scrollTop();
+      if ($SclTop > settings.min) {
+        btnTopOff();
+      }
+    };
+    $(window).on('scroll', $scrollEvt);
+    window.addEventListener('scroll', ui.Util.debounce($scrollEndEvt, 1500));
   },
   guide: function () {
     const themeColorChange = function () {
@@ -2955,9 +2951,11 @@ ui.Form = {
 
 //테이블 스크롤 가이드
 ui.Table = {
-  guideScl: function (element) {
-    if (!$(element).length) return;
-    $(element).each(function () {
+  class: '.tbl-scroll-in',
+  guideScroll: function () {
+    const $tbl = $(ui.Table.class);
+    if (!$tbl.length) return;
+    $tbl.each(function () {
       const $this = $(this);
       $this.data('first', true);
       $this.data('direction', '좌우');
@@ -2982,9 +2980,10 @@ ui.Table = {
       });
     });
   },
-  guide: function (element) {
-    if (!$(element).length) return;
-    $(element).each(function () {
+  guideResize: function () {
+    const $tbl = $(ui.Table.class);
+    if (!$tbl.length) return;
+    $tbl.each(function () {
       const $this = $(this);
       const $direction = $this.data('direction');
       let $changeDirection = '';
@@ -3053,8 +3052,8 @@ ui.List = {
     ui.Folding.close('.ui-folding-close');
 
     //테이블 스크롤 가이드 실행
-    ui.Table.guideScl('.tbl-scroll-in');
-    ui.Table.guide('.tbl-scroll-in');
+    ui.Table.guideScroll();
+    ui.Table.guideResize();
     ui.List.detail();
   },
   type: function () {
@@ -3405,7 +3404,7 @@ ui.Swiper = {
       }
 
       let $loop = $this.hasClass('_loop') ? true : false;
-      let $autoHeight = $this.hasClass('_autoheight') ? true : false;
+      let $autoHeight = $this.hasClass('_autoHeight') ? true : false;
       let $centeredSlides = $this.hasClass('_centeredSlides') ? true : false;
 
       let $auto = false;
@@ -4982,7 +4981,7 @@ const Layer = {
           callback();
         }
         setTimeout(function () {
-          $(window).resize();
+          Layer.resize();
         }, 10);
         Layer.opening--;
       }, $openDelay);

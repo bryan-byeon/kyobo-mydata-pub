@@ -1,58 +1,9 @@
-.main {
-  #header {
-    > div {
-      padding: 0 20px;
-    }
-    .head-search-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-      flex: 1 1 auto;
-      margin-left: 22px;
-      width: auto;
-      height: 44px;
-      padding-right: 12px;
-      border-radius: 22px;
-      overflow: hidden;
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--theme-color);
-        opacity: 0.1;
-      }
-      .input {
-        position: relative;
-        border: 0 none;
-        height: 44px;
-        background: transparent;
-        input {
-          padding: 0 0 0 16px;
-        }
-        .btn-inp-del {
-          margin-right: 4px;
-        }
-      }
-      .head-search {
-        position: relative;
-        margin-right: 0;
-        background-image: url(../images/icon/icon-search-main@3x.png);
-      }
-    }
-  }
-  .tab-navi-menu {
-    border-bottom-color: transparent;
-  }
-}
-.section .main-banner-swiper {
-  @include outer;
-}
+// 메인 배너
 .main-banner-swiper {
   position: relative;
+  .section & {
+    @include outer;
+  }
   .swiper {
     background: none;
     padding: 0 10px;
@@ -150,67 +101,13 @@
     margin-top: 20px;
   }
 }
-.section .main-category {
-  @include outer;
-}
-.main-category {
-  margin-top: 24px;
-  > ul {
-    display: flex;
-    @include scroll-x;
-    @include scroll-hide;
-    > li {
-      padding: 0 6px;
-      &:first-child {
-        padding-left: 20px;
-      }
-      &:last-child {
-        padding-right: 20px;
-      }
-      a {
-        display: block;
-        width: 60px;
-        font-size: 13px;
-        text-align: center;
-        font-weight: 500;
-      }
-      img {
-        width: 100%;
-        pointer-events: none;
-      }
-      .txt {
-        margin-top: 6px;
-      }
-    }
-  }
-}
-.section .bar-banner {
-  @include outer;
-}
-.bar-banner {
-  margin-top: 14px;
-  > div,
-  > a {
-    position: relative;
-    display: block;
-    &:before {
-      content: '';
-      display: block;
-      // padding-top: 27.7778%;
-      height: 80px;
-    }
-    img {
-      @include img-fit(true);
-      max-width: none;
-      pointer-events: none;
-    }
-  }
-}
-.section .promotion-scl-list {
-  @include outer;
-}
+
+// 메인 프로모션 리스트
 .promotion-scl-list {
   margin-top: 20px;
+  .section & {
+    @include outer;
+  }
   > ul {
     display: flex;
     @include scroll-x;
@@ -262,45 +159,8 @@
     }
   }
 }
-.section .promotion-banner {
-  @include outer;
-}
-.promotion-banner {
-  margin-top: 48px;
-  > a,
-  > div {
-    position: relative;
-    display: block;
-    height: 100px;
-    text-align: right;
-    overflow: hidden;
-  }
-  img {
-    height: 100%;
-  }
-  .cont {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 100px 0 26px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    .sub {
-      color: #4a506f;
-      font-size: 12px;
-      line-height: 14px;
-    }
-    .tit {
-      font-size: 15px;
-      line-height: 20px;
-      font-weight: bold;
-    }
-  }
-}
+
+// 메인 공지
 .main-notice {
   margin-top: 48px;
   @include outer;
@@ -328,6 +188,7 @@
   }
 }
 
+//탑배너
 .top-banner {
   text-align: left;
   .section {
@@ -351,6 +212,8 @@
     background: url(../images/contents/top-banner-close@3x.png) no-repeat center center / contain;
   }
 }
+
+// 통합검색
 .search-input {
   display: flex;
   padding: 12px 20px !important;
@@ -499,24 +362,8 @@
     }
   }
 }
-.filter-list.folding-list {
-  border-width: 0px;
-  > li {
-    border-top-width: 0px;
-    + li {
-      &:before {
-        content: '';
-        display: block;
-        height: 1px;
-        margin: 0 20px;
-        background: #eee;
-      }
-    }
-  }
-  .folding-panel {
-    padding-bottom: 20px;
-  }
-}
+
+// 오류안내
 .col-flex-content {
   padding: 20px !important;
   min-height: -vh(100);
@@ -556,6 +403,7 @@
   }
 }
 
+//test
 .match-profile {
   position: sticky;
   top: 60px;

@@ -48,7 +48,7 @@
     line-height: 1.33;
     color: #666;
     font-weight: normal;
-    [class*="i-ico-"] {
+    [class*='i-ico-'] {
       margin: 0;
       vertical-align: top;
     }
@@ -68,43 +68,5 @@
         margin: 0 auto;
       }
     }
-  }
-}
-
-// 로그인 팝업
-.pop-login-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  // height: calc( 100vh - 108px);
-  height: -vh(100, -108);
-}
-
-//간편 로그인 미 연결 안내
-.simple-login-guide {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  .inner {
-    display: flex;
-    height: 100%;
-    flex: 1 1 auto;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    h2 {
-      font-size: 22px;
-      line-height: 30px;
-      color: #222;
-    }
-    p {
-      margin-top: 12px;
-      font-size: 13px;
-      line-height: 20px;
-      color: #666;
-    }
-  }
-  .btn-wrap {
-    padding-bottom: 20px;
   }
 }
