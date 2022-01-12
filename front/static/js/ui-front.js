@@ -951,8 +951,12 @@ ui.Button = {
           if (($href.startsWith('#') || $href.startsWith('javascript')) && $role == undefined) $(this).attr('role', 'button');
         }
       }
-      if ($(this).hasClass('tel') || ($href != undefined && $href.startsWith('tel'))) $(this).attr('title', '전화걸기');
-      if ($onclick != undefined && $onclick.startsWith('callMakeCall')) $(this).attr('title', '전화걸기');
+
+      if ($(this).attr('title') === undefined) {
+        if ($(this).attr('target') === '_blank') $(this).attr('title', '새창열기');
+        if ($(this).hasClass('tel') || ($href != undefined && $href.startsWith('tel'))) $(this).attr('title', '전화걸기');
+        // if ($onclick != undefined && $onclick.startsWith('callMakeCall')) $(this).attr('title', '전화걸기');
+      }
     });
 
     //type없는 button들 type 추가
@@ -1611,17 +1615,22 @@ ui.Tab = {
     $(document).on('click', '.tab-expand-btn button', function (e) {
       e.preventDefault();
       const $closest = $(this).closest('.tab-expand-btn');
+      const $wrap = $closest.parent();
       const $list = $closest.siblings('.tab-inner').find('.tab-list').clone();
       if ($(this).hasClass('on')) {
         $(this).removeClass('on');
+        $wrap.removeClass('is-expand');
         $closest.next('.tab-expand').remove();
       } else {
         $(this).addClass('on');
-        $closest.after('<div class="tab-expand"></div>');
-        const $expand = $closest.next('.tab-expand');
-        $expand.append($list);
-        $expand.find('.tab-list').removeClass('tab-list');
-        $expand.find('.tab').removeClass('tab');
+        if (!$wrap.find('.tab-expand').length) {
+          $closest.after('<div class="tab-expand"></div>');
+          const $expand = $closest.next('.tab-expand');
+          $expand.append($list);
+          $expand.find('.tab-list').removeClass('tab-list');
+          $expand.find('.tab').removeClass('tab');
+        }
+        $wrap.addClass('is-expand');
       }
     });
 

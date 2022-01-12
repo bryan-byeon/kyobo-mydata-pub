@@ -943,7 +943,6 @@ $bdTypes: (solid, dashed, dotted);
   img {
     pointer-events: none;
     @include img-fit(true);
-    border-radius: 4px;
   }
   .img-box-del {
     display: block;

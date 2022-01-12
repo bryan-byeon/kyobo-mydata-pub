@@ -93,6 +93,7 @@
     width: 34px;
     height: calc(100% - 1px);
     background: #fff;
+    z-index: 1;
     // box-shadow: -10px 0 10px rgba(255,255,255,1);
     &:before {
       content: '';
@@ -109,8 +110,6 @@
       align-items: center;
       width: 100%;
       height: 100%;
-      opacity: 0.4;
-      transition: 0.3s;
       &:before {
         content: '';
         display: block;

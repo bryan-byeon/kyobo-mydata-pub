@@ -67,6 +67,30 @@
     "complete": "9999-99-99"
   },
   {
+    "id":"guide-chart",
+    "url":"../../front/html/guide/guide-chart.html",
+    "type":"page",
+    "name": "차트",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
+    "id":"guide-animate",
+    "url":"../../front/html/guide/guide-animate.html",
+    "type":"page",
+    "name": "애니메이션",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
+    "id":"guide-swiper",
+    "url":"../../front/html/guide/guide-swiper.html",
+    "type":"page",
+    "name": "swiper",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
     "id":"guide-address",
     "url":"../../front/html/guide/guide-address.html",
     "type":"page",
@@ -83,10 +107,18 @@
     "complete": "9999-99-99"
   },
   {
-    "id":"guide-animate",
-    "url":"../../front/html/guide/guide-animate.html",
+    "id":"guide-search",
+    "url":"../../front/html/guide/guide-search.html",
     "type":"page",
-    "name": "애니메이션",
+    "name": "검색",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
+    "id":"guide-test",
+    "url":"../../front/html/guide/guide-test.html",
+    "type":"page",
+    "name": "테스트",
     "worker": "안효주",
     "complete": "9999-99-99"
   }
