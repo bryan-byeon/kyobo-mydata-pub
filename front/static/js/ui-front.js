@@ -3559,8 +3559,8 @@ ui.Scroll = {
   inCheck: function (target) {
     //스크린안에 있는지 확인
     const $el = $(target);
-    const isPopup = $el.closest('.pop-body').length && $el.closest('.pop-wrap').length;
-    const $wrap = isPopup ? $el.closest('.pop-body') : $(window);
+    const isPopup = $el.closest('.' + Layer.bodyClass).length && $el.closest('.' + Layer.wrapClass).length;
+    const $wrap = isPopup ? $el.closest('.' + Layer.bodyClass) : $(window);
     const $wHeight = $wrap.outerHeight();
     const $scrollTop = $wrap.scrollTop();
     const $winBottom = $scrollTop + $wHeight;
@@ -4297,6 +4297,7 @@ const Layer = {
   focusInClass: 'ui-focus-in',
   removePopClass: 'ui-pop-remove',
   popClass: 'popup',
+  pageClass: 'page',
   wrapClass: 'pop-wrap',
   headClass: 'pop-head',
   bodyClass: 'pop-body',
@@ -4348,7 +4349,7 @@ const Layer = {
     }
     $html += '</div>';
     $html += '</div>';
-    $html += '<div class="pop-foot">';
+    $html += '<div class="' + Layer.footClass + '">';
     $html += '<div class="flex">';
     if (type === 'confirm' || type === 'prompt') {
       $html += '<button type="button" id="' + btnCancelId + '" class="button line">취소</button>';
@@ -5096,13 +5097,11 @@ const Layer = {
   resize: function () {
     const $popup = $('.' + Layer.popClass + '.' + Layer.showClass);
     if (!$popup.length) return;
-    const headTitHeight = function (headCont, titCont, contentCont) {
-      const $headH = headCont.outerHeight();
-      const $titH = titCont.outerHeight();
+    const headHeight = function (headCont, contentCont) {
+      const $headH = headCont.children().outerHeight();
       const $padTop = parseInt(contentCont.css('padding-top'));
-      if ($headH < $titH && !headCont.hasClass('blind')) {
-        headCont.css('height', $titH + parseInt(headCont.css('paddingTop')));
-        contentCont.css('padding-top', $titH + ($padTop - $headH));
+      if ($headH > $padTop) {
+        contentCont.css('padding-top', $headH);
       }
     };
     const footHeight = function (footCont, contentCont) {
@@ -5123,15 +5122,7 @@ const Layer = {
       $head.removeAttr('style').removeClass('shadow');
       $body.removeAttr('tabindex style');
 
-      //타이틀이 두줄 이상이 될때
-      //개발에서 스크립트로 제목제어 시 제대로된 높이값을 갖고올수 없어 setTimeout케이스 추가
-      if ($.trim($tit.text()).length < 2) {
-        setTimeout(function () {
-          headTitHeight($head, $tit, $body);
-        }, 200);
-      } else {
-        headTitHeight($head, $tit, $body);
-      }
+      if ($head.length) headHeight($head, $body);
       if ($foot.length) footHeight($foot, $body);
 
       //레이어팝업
@@ -5166,9 +5157,9 @@ const Layer = {
     const $wrap = $(el).closest('.' + Layer.wrapClass);
     const $head = $wrap.find('.' + Layer.headClass);
     const $foot = $wrap.find('.' + Layer.footClass);
-    const $contScrollTop = $(el).scrollTop();
-    const $contScrollHeight = $(el)[0].scrollHeight;
-    const $contHeight = $(el).outerHeight();
+    const $contScrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $(el).scrollTop();
+    const $contScrollHeight = $wrap.hasClass(Layer.pageClass) ? $('body').get(0).scrollHeight : $(el)[0].scrollHeight;
+    const $contHeight = $wrap.hasClass(Layer.pageClass) ? $(window).height() : $(el).outerHeight();
     if ($head.length) {
       if ($contScrollTop > 50) {
         $head.addClass('shadow');
@@ -5185,33 +5176,19 @@ const Layer = {
     }
   },
   position: function (tar) {
-    let isWinPop = false;
-    if ($(tar).hasClass('win')) isWinPop = true; //win클래스로 윈도우팝업인지 체크
-    if (!$(tar).hasClass(Layer.showClass) && isWinPop == false) return false;
+    if (!$(tar).hasClass(Layer.showClass)) return false;
     if ($(tar).data('popPosition') == true) return false;
     $(tar).data('popPosition', true);
-    const $content = $(tar).find('.' + Layer.bodyClass);
+    const $body = $(tar).find('.' + Layer.bodyClass);
     const $foot = $(tar).find('.' + Layer.footClass);
 
-    if ($foot.length)
-      $(tar)
-        .find('.' + Layer.bodyClass)
-        .addClass('next-foot');
+    if ($foot.length) $body.addClass('next-foot');
 
     Layer.resize();
 
-    //팝업 헤더 shadow
-    if (!isWinPop) {
-      //레이어팝업
-      $content.scroll(function () {
-        Layer.shadow(tar);
-      });
-    } else {
-      //윈도우팝업
-      $(window).scroll(function () {
-        Layer.shadow(tar);
-      });
-    }
+    $body.scroll(function () {
+      Layer.shadow($body);
+    });
   },
   focusMove: function (tar) {
     if (!$(tar).hasClass(Layer.showClass)) return false;
@@ -5274,8 +5251,10 @@ const Layer = {
       }
     });
   },
-  page: function (elments) {
-    elments.each(function () {
+  page: function (elment) {
+    const $elment = $(elment);
+    /*
+    $elment.each(function () {
       const $this = $(this);
       if (!$this.closest('.popup').length) {
         $this.addClass('page');
@@ -5283,6 +5262,20 @@ const Layer = {
         const $foot = $this.find('.pop-foot');
         if ($body.length && $foot.length) $body.addClass('next-foot');
       }
+    });
+    */
+
+    if ($elment.closest('.' + Layer.popClass).length) {
+      $elment.removeClass(Layer.pageClass);
+      return;
+    }
+    const $body = $elment.find('.' + Layer.bodyClass);
+    const $foot = $elment.find('.' + Layer.footClass);
+    if ($body.length && $foot.length) $body.addClass('next-foot');
+
+    Layer.shadow($body);
+    $(window).scroll(function () {
+      Layer.shadow($body);
     });
   },
   loadIdx: 0,
@@ -5303,13 +5296,16 @@ const Layer = {
     $pop.load($url + ' ' + $loadId, function (res, sta, xhr) {
       if (sta == 'success') {
         const $popWrap = $('#' + popId).find($loadId);
-        if ($popWrap.hasClass('pop-wrap')) {
+        if ($popWrap.hasClass(Layer.wrapClass)) {
           $popWrap.removeAttr('id');
         } else {
           $popWrap.children().unwrap();
         }
         $('#' + popId)
-          .find('.pop-head .pop-close')
+          .find('.' + Layer.wrapClass)
+          .removeClass(Layer.pageClass);
+        $('#' + popId)
+          .find('.' + Layer.headClass + ' .pop-close')
           .addClass('ui-pop-close');
         Layer.open('#' + popId);
       } else {
@@ -5373,8 +5369,7 @@ const Layer = {
     if ($('.' + Layer.popClass + '.' + Layer.showClass).length) {
       Layer.open('.' + Layer.popClass + '.' + Layer.showClass);
     }
-
-    const $winpop = $('.' + Layer.wrapClass);
+    const $winpop = $('.' + Layer.wrapClass + '.' + Layer.pageClass);
     if ($winpop.length) {
       Layer.page($winpop);
     }

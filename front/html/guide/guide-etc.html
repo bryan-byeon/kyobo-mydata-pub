@@ -73,7 +73,8 @@
           <div class="section pt-30">
             <h2 class="gd__h1">통합검색</h2>
             <div class="flex">
-              <a href="guide-search.html" target="_blank" class="button line">통합검색 열기</a>
+              <a href="guide-search.html" target="_blank" class="button line">통합검색(페이지)</a>
+              <a href="#searchPopup" class="button line ui-pop-open">통합검색(팝업)</a>
             </div>
             <h2 class="gd__h1">ui-touch-rotate</h2>
             <div style="overflow: hidden">
@@ -225,8 +226,8 @@
               <div>
                 <div class="btn-wrap">
                   <div class="flex">
-                    <button class="button line" onclick="Layer.open('#bottomDialog1')">is-swipe</button>
-                    <button class="button line" onclick="Layer.open('#bottomDialog2')">is-swipe-move</button>
+                    <button class="button line" onclick="Layer.open('#bottomPopup1')">is-swipe</button>
+                    <button class="button line" onclick="Layer.open('#bottomPopup2')">is-swipe-move</button>
                   </div>
                 </div>
               </div>
@@ -236,7 +237,96 @@
         <!-- //컨텐츠 -->
 
         <!-- 팝업 -->
-        <div id="bottomDialog1" class="popup bottom is-swipe" role="dialog" aria-hidden="true">
+        <div id="searchPopup" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <div class="search-input">
+                  <div class="input">
+                    <input id="searchInput" type="text" title="검색어 입력" placeholder="검색어를 입력해주세요." autocomplete="off" />
+                    <button type="button" class="button small search" aria-label="검색"><i class="i-ico-search" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- 최근 검색어, 인기 검색어 -->
+                <div class="search-contents not__keyword">
+                  <div class="mb-32">
+                    <div class="title-bar mt-0">
+                      <div>
+                        <h2 class="tit-h3">최근검색어</h2>
+                      </div>
+                      <div class="right">
+                        <button class="btn-txt fz-14 fc-666">전체삭제</button>
+                      </div>
+                    </div>
+                    <ul class="keyword-list recent-keyword mt-8">
+                      <li>
+                        <button type="button" class="button keyword">교보</button>
+                        <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                      </li>
+                      <li>
+                        <button type="button" class="button keyword">교보증권</button>
+                        <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                      </li>
+                      <li>
+                        <button type="button" class="button keyword">삼성전자</button>
+                        <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                      </li>
+                      <li>
+                        <button type="button" class="button keyword">고수</button>
+                        <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                      </li>
+                      <li>
+                        <button type="button" class="button keyword">TOP 10</button>
+                        <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="title-bar mt-0">
+                      <div>
+                        <h2 class="tit-h3">인기검색어</h2>
+                      </div>
+                    </div>
+                    <div class="btn-inline-wrap search-ty mt-17">
+                      <a href="#" class="button line round">#카드</a>
+                      <a href="#" class="button line round">#주식</a>
+                      <a href="#" class="button line round">#교보</a>
+                      <a href="#" class="button line round">#교보증권</a>
+                      <a href="#" class="button line round">#고수</a>
+                      <a href="#" class="button line round">#투자</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 연관 검색어 -->
+                <div class="search-contents is__keyword" style="display: none">
+                  <ul class="keyword-list relate-keyword mt-8">
+                    <li>
+                      <button type="button" class="button keyword"><strong>교보</strong>증권</button>
+                    </li>
+                    <li>
+                      <button type="button" class="button keyword"><strong>교보</strong>증권 투자</button>
+                    </li>
+                    <li>
+                      <button type="button" class="button keyword"><strong>교보</strong>증권 분석</button>
+                    </li>
+                    <li>
+                      <button type="button" class="button keyword"><strong>교보</strong>증권 성향</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="bottomPopup1" class="popup bottom is-swipe" role="dialog" aria-hidden="true">
           <article class="pop-wrap">
             <div class="pop-head">
               <div>
@@ -255,7 +345,7 @@
           </article>
         </div>
 
-        <div id="bottomDialog2" class="popup bottom is-swipe touch-move" role="dialog" aria-hidden="true">
+        <div id="bottomPopup2" class="popup bottom is-swipe touch-move" role="dialog" aria-hidden="true">
           <article class="pop-wrap">
             <div class="pop-head">
               <div>
@@ -331,6 +421,18 @@
           $('.gd__confetti').addClass('dark');
         } else {
           $('.gd__confetti').removeClass('dark');
+        }
+      });
+
+      //검색 결과
+      $('#searchInput').keyup(function () {
+        const $val = $(this).val();
+        if ($val === '') {
+          $('.not__keyword').show();
+          $('.is__keyword').hide();
+        } else {
+          $('.not__keyword').hide();
+          $('.is__keyword').show();
         }
       });
     </script>
