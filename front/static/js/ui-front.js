@@ -5278,7 +5278,6 @@ const Layer = {
       const $pop = $input.data('agree-pop');
       $($pop).addClass(Layer.agreePopClass).data('agree-input', $inputId);
       setTimeout(function () {
-        console.log($pop);
         Layer.open($pop);
       }, i * 100);
     }
@@ -5316,7 +5315,7 @@ const Layer = {
           });
           $agreeChecked.one('click', function (e) {
             e.preventDefault();
-            $agreeInput.prop('checked', true);
+            $agreeInput.prop('checked', true).change();
           });
         }
       }
@@ -5591,6 +5590,24 @@ const Layer = {
       $box.on('transitionend', function () {
         $(this).remove();
       });
+    });
+
+    // 약관
+    $(document).on('click', '[data-agree-pop]', function (e) {
+      const $this = $(this);
+      const $thisId = $this.attr('id');
+      if ($this.prop('checked')) {
+        Layer.agree('#' + $thisId);
+        return false;
+      }
+    });
+    $(document).on('click', '[data-agree-check]', function (e) {
+      const $this = $(this);
+      const $check = $this.data('agree-check');
+      if ($this.prop('checked')) {
+        Layer.agree($check);
+        return false;
+      }
     });
   }
 };

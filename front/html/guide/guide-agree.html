@@ -15,7 +15,7 @@
   </head>
   <body>
     <article id="wrap">
-      <div data-include-html="../../include/header.html"></div>
+      <div class="header-space" data-include-html="../../include/header.html"></div>
       <div data-include-html="../../include/gnb.html"></div>
 
       <!-- 컨테이너 -->
@@ -119,33 +119,30 @@
 
               <h2 class="gd__h2">상세확인 필수</h2>
               <div class="ui-agree mt-24">
-                <div class="chk-item agree-item">
+                <div class="chk-item">
                   <div class="checkbox ty2">
-                    <input type="checkbox" id="agreeAll2" class="ui-all-agree-chk" /><i aria-hidden="true"></i>
+                    <input type="checkbox" id="agreeAll2" class="ui-all-agree-chk" data-agree-check="#agree2-1, #agree2-2, #agree2-3" /><i aria-hidden="true"></i>
                     <div class="lbl fz-16">
                       <label for="agreeAll2"><strong>약관 전체 동의</strong></label>
-                      <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-1, #agree2-2, #agree2-3')" aria-label="약관상세 확인"
-                        ><i class="i-ico-arrow-right-16" aria-hidden="true"></i
-                      ></a>
                     </div>
                   </div>
                 </div>
                 <div class="pd-16x mt-24">
-                  <div class="checkbox ty2 agree-item">
+                  <div class="checkbox ty2">
                     <input type="checkbox" id="agree2-1" class="ui-agree-chk" data-agree-pop="#agreeDetail1" /><i aria-hidden="true"></i>
                     <div class="lbl">
                       <label for="agree2-1">서비스 이용약관 동의 (필수)</label>
                       <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-1')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
                     </div>
                   </div>
-                  <div class="checkbox ty2 agree-item">
+                  <div class="checkbox ty2">
                     <input type="checkbox" id="agree2-2" class="ui-agree-chk" data-agree-pop="#agreeDetail2" /><i aria-hidden="true"></i>
                     <div class="lbl">
                       <label for="agree2-2">개인정보의 제공 및 활용 동의 (필수)</label>
                       <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-2')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
                     </div>
                   </div>
-                  <div class="checkbox ty2 agree-item">
+                  <div class="checkbox ty2">
                     <input type="checkbox" id="agree2-3" class="ui-agree-chk" data-agree-pop="#agreeDetail3" /><i aria-hidden="true"></i>
                     <div class="lbl">
                       <label for="agree2-3">마케팅 정보 제공 및 활용 동의(선택)</label>
