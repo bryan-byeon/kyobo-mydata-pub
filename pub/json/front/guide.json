@@ -51,6 +51,14 @@
     "complete": "9999-99-99"
   },
   {
+    "id":"guide-agree",
+    "url":"../../front/html/guide/guide-agree.html",
+    "type":"page",
+    "name": "기타 입력 UI",
+    "worker": "약관",
+    "complete": "9999-99-99"
+  },
+  {
     "id":"guide-table",
     "url":"../../front/html/guide/guide-table.html",
     "type":"page",
