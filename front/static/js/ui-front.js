@@ -37,6 +37,7 @@ const ui = {
   Init: function () {
     ui.Common.vhChk();
     ui.Common.dark();
+
     ui.Device.check();
     ui.Device.hide();
     ui.Common.init();
@@ -52,6 +53,7 @@ const ui = {
   LoadInit: function () {
     //console.log('window load complete');
     ui.Common.winLoad();
+    ui.Common.lottie();
     ui.Form.winLoad();
     ui.List.winLoad();
     ui.Button.winLoad();
@@ -71,25 +73,31 @@ ui.Html = {
     const $elements = $.find('*[data-include-html]');
     // const $fileName = location.pathname.split('/').pop();
     if ($elements.length) {
-      $.each($elements, function (i) {
-        const $this = $(this);
-        const $html = $this.data('include-html');
-        const $htmlAry = $html.split('/');
-        const $htmlFile = $htmlAry[$htmlAry.length - 1];
-        const $docTitle = document.title;
-        let $title = null;
-        if ($docTitle.indexOf(' | ') > -1) {
-          $title = $docTitle.split(' | ')[0];
-        }
-        $this.load($html, function (res, sta, xhr) {
-          if (sta == 'success') {
-            $this.children().unwrap();
+      // const $url = location.href;
+      //if ($url.indexOf('http') >= 0) {
+      if (location.host) {
+        $.each($elements, function (i) {
+          const $this = $(this);
+          const $html = $this.data('include-html');
+          const $htmlAry = $html.split('/');
+          const $htmlFile = $htmlAry[$htmlAry.length - 1];
+          const $docTitle = document.title;
+          let $title = null;
+          if ($docTitle.indexOf(' | ') > -1) {
+            $title = $docTitle.split(' | ')[0];
+          }
+          $this.load($html, function (res, sta, xhr) {
+            if (sta == 'success') {
+              $this.children().unwrap();
+            }
             if (i === $elements.length - 1) {
               if (!!fn) fn();
             }
-          }
+          });
         });
-      });
+      } else {
+        if (!!fn) fn();
+      }
     }
   }
 };
@@ -629,23 +637,38 @@ ui.Common = {
   },
   lottie: function () {
     const $lottie = $('[data-lottie]');
-
-    $lottie.each(function () {
-      // $(this).empty();
-      if (!$(this).hasClass('lottie__init')) {
-        const $data = $(this).data('lottie');
-        $(this).addClass('lottie__init');
-        const isLoop = $(this).hasClass('loop');
-        const $lottieOpt = lottie.loadAnimation({
-          container: this,
-          renderer: 'svg',
-          loop: isLoop,
-          autoplay: true,
-          path: $data
-        });
-        $(this).data('lottie-opt', $lottieOpt);
+    if (!$lottie.length) return;
+    if (!location.host) {
+      return console.log('lottie는 서버에서만 지원됩니다.');
+    }
+    const $lottieInit = function () {
+      $lottie.each(function () {
+        const $this = $(this);
+        // $(this).empty();
+        if (!$this.hasClass('lottie__init')) {
+          const $data = $this.data('lottie');
+          $this.addClass('lottie__init').removeAttr('data-lottie');
+          const isLoop = $this.hasClass('_loop');
+          const $lottieOpt = lottie.loadAnimation({
+            container: this,
+            renderer: 'svg',
+            loop: isLoop,
+            autoplay: true,
+            path: $data
+          });
+          $(this).data('lottie-opt', $lottieOpt);
+        }
+      });
+    };
+    if (typeof lottie === 'undefined') {
+      let $url = '/static/js/lib/lottie.5.7.13.min.js';
+      if (location.href.indexOf('/front/') > 0) {
+        $url = '/front' + $url;
       }
-    });
+      ui.Util.loadScript($url, $lottieInit);
+    } else {
+      $lottieInit();
+    }
   },
   init: function () {
     ui.Common.header();
@@ -659,7 +682,6 @@ ui.Common = {
     //ui.Common.landscape();
 
     ui.Common.guide();
-    ui.Common.lottie();
 
     ui.Common.fixed('#header');
     ui.Common.fixed('.tab-fixed');
@@ -931,6 +953,26 @@ ui.Util = {
         }, delay);
       }
     };
+  },
+  loadScript: function (url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    if (script.readyState) {
+      //IE
+      script.onreadystatechange = function () {
+        if (script.readyState == 'loaded' || script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else {
+      //Others
+      script.onload = function () {
+        callback();
+      };
+    }
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
   }
 };
 
