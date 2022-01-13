@@ -296,6 +296,10 @@
     }
   }
 }
+.product-name {
+  word-break: break-all;
+  @include ellipsis(2);
+}
 .product-scl-item {
   display: block;
   width: 12.8rem;

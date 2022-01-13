@@ -71,11 +71,490 @@
               </ul>
             </div>
           </div>
-          <div class="section pt-30"></div>
+          <div class="section pt-30">
+            <h1 class="gd__h1">약관</h1>
+            <div>
+              <h2 class="gd__h2">기본</h2>
+              <div class="ui-agree mt-24">
+                <div class="chk-item">
+                  <div class="checkbox ty2">
+                    <input type="checkbox" id="agreeAll1" class="ui-all-agree-chk" /><i aria-hidden="true"></i>
+                    <label for="agreeAll1" class="lbl fz-16"><strong>약관 전체 동의</strong></label>
+                  </div>
+                </div>
+                <div class="pd-16x mt-24">
+                  <div class="checkbox ty2">
+                    <input type="checkbox" id="agree1-1" class="ui-agree-chk" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree1-1">서비스 이용약관 동의 (필수)</label>
+                      <a href="#" role="button" onclick="Layer.open('#agreeDetail0')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="checkbox ty2">
+                    <input type="checkbox" id="agree1-2" class="ui-agree-chk" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree1-2">개인정보의 제공 및 활용 동의 (필수)</label>
+                      <a href="#" role="button" onclick="Layer.open('#agreeDetail0')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="checkbox ty2">
+                    <input type="checkbox" id="agree1-3" class="ui-agree-chk" data-agree-target="#agree1-3-sms, #agree1-3-mail" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree1-3">마케팅 정보 제공 및 활용 동의(선택)</label>
+                      <a href="#" role="button" onclick="Layer.open('#agreeDetail0')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="mt-14 pl-28">
+                    <span class="checkbox ty2">
+                      <input type="checkbox" id="agree1-3-sms" /><i aria-hidden="true"></i>
+                      <label for="agree1-3-sms" class="lbl fz-14">문자 수신</label>
+                    </span>
+                    <span class="checkbox ty2">
+                      <input type="checkbox" id="agree1-3-mail" /><i aria-hidden="true"></i>
+                      <label for="agree1-3-mail" class="lbl fz-14">메일 수신</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <h2 class="gd__h2">상세확인 필수</h2>
+              <div class="ui-agree mt-24">
+                <div class="chk-item agree-item">
+                  <div class="checkbox ty2">
+                    <input type="checkbox" id="agreeAll2" class="ui-all-agree-chk" /><i aria-hidden="true"></i>
+                    <div class="lbl fz-16">
+                      <label for="agreeAll2"><strong>약관 전체 동의</strong></label>
+                      <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-1, #agree2-2, #agree2-3')" aria-label="약관상세 확인"
+                        ><i class="i-ico-arrow-right-16" aria-hidden="true"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="pd-16x mt-24">
+                  <div class="checkbox ty2 agree-item">
+                    <input type="checkbox" id="agree2-1" class="ui-agree-chk" data-agree-pop="#agreeDetail1" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree2-1">서비스 이용약관 동의 (필수)</label>
+                      <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-1')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="checkbox ty2 agree-item">
+                    <input type="checkbox" id="agree2-2" class="ui-agree-chk" data-agree-pop="#agreeDetail2" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree2-2">개인정보의 제공 및 활용 동의 (필수)</label>
+                      <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-2')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="checkbox ty2 agree-item">
+                    <input type="checkbox" id="agree2-3" class="ui-agree-chk" data-agree-pop="#agreeDetail3" /><i aria-hidden="true"></i>
+                    <div class="lbl">
+                      <label for="agree2-3">마케팅 정보 제공 및 활용 동의(선택)</label>
+                      <a href="#" role="button" class="agree-arr" onclick="Layer.agree('#agree2-3')" aria-label="약관상세 확인"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         <!-- //컨텐츠 -->
 
         <!-- 팝업 -->
+        <div id="agreeDetail0" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>약관 상세</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button primary h56 ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="agreeDetail1" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>약관 상세</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button primary h56 ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="agreeDetail2" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>약관 상세</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button primary h56 ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="agreeDetail3" class="popup full" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>약관 상세</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                약관 상세 내용<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button primary h56 ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
 
         <!-- //팝업 -->
       </main>

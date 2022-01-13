@@ -491,7 +491,7 @@ ui.Common = {
     $(document)
       .on('click', settings.button, function (e) {
         e.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, settings.scrollSpeed);
+        ui.Scroll.top(0, settings.scrollSpeed);
         $('#wrap').find($focusableEl).first().focus();
       })
       .on('mouseenter', function () {
@@ -1175,7 +1175,7 @@ ui.Button = {
       if (!$this.hasClass('open')) {
         $this.addClass('open');
         $wrap.addClass('expend');
-        ui.Scroll.move(0, 0);
+        ui.Scroll.top(0, 0);
         setTimeout(function () {
           Body.lock();
         }, 100);
@@ -1678,7 +1678,7 @@ ui.Tab = {
           $winScrollTop = $winScrollTop - $('#header').outerHeight();
           $scrollMove = $scrollMove - $('#header').outerHeight();
         }
-        if ($winScrollTop > $scrollMove) ui.Scroll.move($scrollMove);
+        if ($winScrollTop > $scrollMove) ui.Scroll.top($scrollMove);
       }
 
       if ($($href).length) {
@@ -1758,7 +1758,7 @@ ui.Tab = {
       const $href = $this.attr('href');
       const $headH = $('#header').length ? $('#header').outerHeight() : 0;
       const $top = $($href).offset().top - $headH;
-      ui.Scroll.move($top);
+      ui.Scroll.top($top);
     });
   },
   init: function () {
@@ -3460,7 +3460,7 @@ ui.Folding = {
     if ($scroll == '') {
       if (!!callback) callback();
     } else {
-      $('html,body').animate({ scrollTop: $scroll }, 200, function () {
+      ui.Scroll.top($scroll, 200, function () {
         if (!!callback) callback();
       });
     }
@@ -3682,7 +3682,7 @@ ui.Scroll = {
       return false;
     }
   },
-  move: function (val, speed, callback) {
+  top: function (val, speed, callback) {
     let $top = 0;
     if (speed == undefined) speed = 300;
     if ($.isNumeric(val)) {
@@ -3690,7 +3690,7 @@ ui.Scroll = {
     } else {
       if ($(val).length) $top = $(val).offset().top;
     }
-    $('html,body')
+    $('html, body')
       .stop(true, false)
       .animate({ scrollTop: $top }, speed, function () {
         if (!!callback) callback();
@@ -3840,7 +3840,7 @@ ui.Scroll = {
     if ($scroll == '') {
       if (!!callback) callback();
     } else {
-      $('html,body').animate({ scrollTop: $scroll }, 200, function () {
+      ui.Scroll.top($scroll, 200, function () {
         if (!!callback) callback();
       });
     }
@@ -4385,6 +4385,7 @@ const Layer = {
   focusedClass: 'pop__focused',
   focusInClass: 'ui-focus-in',
   removePopClass: 'ui-pop-remove',
+  agreePopClass: 'ui-pop-agree',
   popClass: 'popup',
   pageClass: 'page',
   wrapClass: 'pop-wrap',
@@ -5193,7 +5194,6 @@ const Layer = {
       const $headH = headCont.children().outerHeight();
       const $position = headCont.css('position');
       const $padTop = parseInt(contentCont.css('padding-top'));
-      console.log($headH, $padTop);
       if ($headH > $padTop) {
         contentCont.css('padding-top', $headH);
       }
@@ -5248,7 +5248,8 @@ const Layer = {
     });
   },
   shadow: function (el) {
-    const $wrap = $(el).closest('.' + Layer.wrapClass);
+    const $wrap = $(el).hasClass(Layer.wrapClass) ? $(el) : $(el).closest('.' + Layer.wrapClass);
+    // const $popup = $wrap.closest('.' + Layer.popClass);
     const $head = $wrap.find('.' + Layer.headClass);
     const $foot = $wrap.find('.' + Layer.footClass);
     const $contScrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $(el).scrollTop();
@@ -5269,18 +5270,71 @@ const Layer = {
       }
     }
   },
+  agree: function (element) {
+    const $ary = element.split(',');
+    for (let i = 0; i < $ary.length; i++) {
+      const $inputId = $.trim($ary[$ary.length - i - 1]);
+      const $input = $($inputId);
+      const $pop = $input.data('agree-pop');
+      $($pop).addClass(Layer.agreePopClass).data('agree-input', $inputId);
+      setTimeout(function () {
+        console.log($pop);
+        Layer.open($pop);
+      }, i * 100);
+    }
+  },
   position: function (tar) {
-    if (!$(tar).hasClass(Layer.showClass)) return false;
-    if ($(tar).data('popPosition') == true) return false;
-    $(tar).data('popPosition', true);
-    const $body = $(tar).find('.' + Layer.bodyClass);
-    const $foot = $(tar).find('.' + Layer.footClass);
-
-    if ($foot.length) $body.addClass('next-foot');
+    const $pop = $(tar);
+    if (!$pop.hasClass(Layer.showClass)) return false;
+    if ($pop.data('popPosition') == true) return false;
+    $pop.data('popPosition', true);
+    let $body = $pop.find('.' + Layer.bodyClass);
+    const $foot = $pop.find('.' + Layer.footClass);
+    let $bodyH = $body.outerHeight();
+    const $isAgree = $pop.hasClass(Layer.agreePopClass);
+    const $agreeInput = $($pop.data('agree-input'));
+    let $bodySclH = $body[0].scrollHeight;
+    const $agreeBtnClassName = 'ui-pop-agree-btn';
+    const $agreeCheckedClassName = 'ui-pop-agree-checked';
+    const $agreeCheckedTxt = '동의하기';
+    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary h56">계속보기</button>';
+    let $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
+    if ($foot.length) {
+      $body.addClass('next-foot');
+      if ($isAgree) {
+        if ($agreeInput.prop('checked')) {
+          $foot.find('.flex').find('.button').text('확인');
+        } else if ($bodyH < $bodySclH) {
+          $foot.find('.flex').find('.button').text($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
+          $foot.find('.flex').prepend($agreeBtnhtml);
+          $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
+          $agreeChecked = $body.closest('.' + Layer.wrapClass).find('.' + $agreeCheckedClassName);
+          $agreeBtn.one('click', function (e) {
+            e.preventDefault();
+            const $sclMove = $body[0].scrollHeight - $body.outerHeight();
+            $body.animate({ scrollTop: $sclMove }, 300);
+          });
+          $agreeChecked.one('click', function (e) {
+            e.preventDefault();
+            $agreeInput.prop('checked', true);
+          });
+        }
+      }
+    }
 
     Layer.resize();
 
-    $body.scroll(function () {
+    $body.off('scroll').on('scroll', function () {
+      if ($isAgree && $agreeBtn.length) {
+        $body = $(this);
+        $bodyH = $body.outerHeight();
+        $bodySclH = $body[0].scrollHeight;
+        $bodySclTop = $body.scrollTop();
+        if ($bodySclTop + $bodyH >= $bodySclH - 10) {
+          $agreeBtn.next().show();
+          $agreeBtn.remove();
+        }
+      }
       Layer.shadow($body);
     });
   },

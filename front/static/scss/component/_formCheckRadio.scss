@@ -483,3 +483,34 @@ div.checkbox.ty2 + div.checkbox.ty2 {
     }
   }
 }
+.agree-item {
+  .checkbox,
+  &.checkbox {
+    > input:checked ~ .lbl {
+      .agree-arr {
+        &:before {
+          content: none;
+        }
+      }
+    }
+    .agree-arr {
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 3;
+      }
+    }
+  }
+  &.checkbox {
+    .agree-arr {
+      &:before {
+        left: -2rem;
+      }
+    }
+  }
+}
