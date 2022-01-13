@@ -1,8 +1,7 @@
 :root {
   --vh: 1vh;
   --primary-color: #fe7d65;
-  --base-txt-color: #444;
-  --base-font-size: 15px;
+  --base-txt-color: #666;
   --placeholder-txt-color: #bdbdbd;
 }
 html {
@@ -14,7 +13,7 @@ html {
   text-size-adjust: none;
 }
 body {
-  font: normal 15px/1.44 'Roboto', 'Noto Sans KR', 'Apple SD Gothic Neo', 'AppleSDGothicNeo', sans-serif;
+  font: normal 1.6rem/1.44 'Roboto', 'Noto Sans KR', 'Apple SD Gothic Neo', 'AppleSDGothicNeo', sans-serif;
   color: var(--base-txt-color);
   letter-spacing: -0.02em;
   word-break: keep-all;
@@ -22,6 +21,12 @@ body {
 }
 
 //s:reset
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 html,
 body,
 div,
@@ -105,7 +110,9 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  color: #222;
+}
 input,
 select,
 textarea {
@@ -127,15 +134,12 @@ section {
 legend,
 caption {
   overflow: hidden;
-  width: 0px;
-  height: 0px;
-  font-size: 5px;
-  line-height: 0;
-  text-indent: -9999px;
+  width: 0;
+  height: 0;
   color: transparent;
-  clip: rect(0px 0px 0px 0px);
+  clip: rect(0 0 0 0);
   opacity: 0;
-  text-indent: -9999rem;
+  @include text-blind;
 }
 li {
   list-style: none;
@@ -175,9 +179,9 @@ em {
   font-style: normal;
 }
 hr {
-  margin: 20px 0;
+  margin: 2rem 0;
   border: 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.1rem solid #ddd;
 }
 sub {
   vertical-align: 0;
@@ -389,7 +393,7 @@ html.lock,
 /* 폰트 사이즈 */
 @for $i from 6 through 40 {
   .fz-#{$i} {
-    font-size: $i * 1px !important;
+    font-size: $i * 0.1rem !important;
   }
 }
 
@@ -510,13 +514,13 @@ html.lock,
   flex-direction: column !important;
   &.flex > div + div {
     margin-left: 0;
-    margin-top: 6px;
+    margin-top: 0.8rem;
   }
 }
 .flex {
   display: flex;
   & + .flex {
-    margin-top: 6px;
+    margin-top: 0.8rem;
   }
   &:not([class*='space-']):not([class*='flex-']):not([class*='justify-']):not([class*='not-full']) {
     > *:not(.unit) {
@@ -526,9 +530,9 @@ html.lock,
   > .unit {
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 1.5rem;
     color: #666;
-    padding: 0 2px;
+    padding: 0 0.2rem;
   }
   > .input,
   > .select {
@@ -538,12 +542,12 @@ html.lock,
     }
   }
   > * + * {
-    margin-left: 8px;
+    margin-left: 0.8rem;
   }
   + .input,
   + .select,
   + .textarea {
-    margin-top: 8px;
+    margin-top: 0.8rem;
   }
 }
 .overflow-hidden {
@@ -578,18 +582,18 @@ html.lock,
 // width
 @for $i from 0 through 100 {
   .w-#{$i} {
-    width: $i * 1px !important;
+    width: $i * 0.1rem !important;
   }
   .w-#{$i}f {
-    flex: 0 0 $i * 1px !important;
+    flex: 0 0 $i * 0.1rem !important;
   }
 }
 @for $i from 1 through 40 {
   .w-#{$i*5 + 100} {
-    width: $i * 5px+100px !important;
+    width: $i * 0.5rem + 10rem !important;
   }
   .w-#{$i*5 + 100}f {
-    flex: 0 0 $i * 5px+100px !important;
+    flex: 0 0 $i * 0.5rem + 10rem !important;
   }
 }
 @for $i from 0 through 100 {
@@ -627,12 +631,12 @@ html.lock,
 // height
 @for $i from 0 through 100 {
   .h-#{$i} {
-    height: $i * 1px !important;
+    height: $i * 0.1rem !important;
   }
 }
 @for $i from 1 through 40 {
   .h-#{$i*5 + 100} {
-    height: $i * 5px+100px !important;
+    height: $i * 0.5rem + 10rem !important;
   }
 }
 @for $i from 0 through 100 {
@@ -673,109 +677,109 @@ html.lock,
 }
 @for $i from 0 through 50 {
   .mg-#{$i} {
-    margin: $i * 1px !important;
+    margin: $i * 0.1rem !important;
   }
   .mg-#{$i}x {
-    margin-left: $i * 1px !important;
-    margin-right: $i * 1px !important;
+    margin-left: $i * 0.1rem !important;
+    margin-right: $i * 0.1rem !important;
   }
   .mg-#{$i}y {
-    margin-top: $i * 1px !important;
-    margin-bottom: $i * 1px !important;
+    margin-top: $i * 0.1rem !important;
+    margin-bottom: $i * 0.1rem !important;
   }
   .mt-#{$i} {
-    margin-top: $i * 1px !important;
+    margin-top: $i * 0.1rem !important;
   }
   .mb-#{$i} {
-    margin-bottom: $i * 1px !important;
+    margin-bottom: $i * 0.1rem !important;
   }
   .ml-#{$i} {
-    margin-left: $i * 1px !important;
+    margin-left: $i * 0.1rem !important;
   }
   .mr-#{$i} {
-    margin-right: $i * 1px !important;
+    margin-right: $i * 0.1rem !important;
   }
 }
 @for $i from 11 through 20 {
   .mg-#{$i*5} {
-    margin: $i * 5px !important;
+    margin: $i * 0.5rem !important;
   }
   .mg-#{$i*5}x {
-    margin-left: $i * 5px !important;
-    margin-right: $i * 5px !important;
+    margin-left: $i * 0.5rem !important;
+    margin-right: $i * 0.5rem !important;
   }
   .mg-#{$i*5}y {
-    margin-top: $i * 5px !important;
-    margin-bottom: $i * 5px !important;
+    margin-top: $i * 0.5rem !important;
+    margin-bottom: $i * 0.5rem !important;
   }
   .mt-#{$i*5} {
-    margin-top: $i * 5px !important;
+    margin-top: $i * 0.5rem !important;
   }
   .mb-#{$i*5} {
-    margin-bottom: $i * 5px !important;
+    margin-bottom: $i * 0.5rem !important;
   }
   .ml-#{$i*5} {
-    margin-left: $i * 5px !important;
+    margin-left: $i * 0.5rem !important;
   }
   .mr-#{$i*5} {
-    margin-right: $i * 5px !important;
+    margin-right: $i * 0.5rem !important;
   }
 }
 @for $i from 1 through 10 {
   .mt-m#{$i} {
-    margin-top: -$i * 1px !important;
+    margin-top: -$i * 0.1rem !important;
   }
 }
 
 // padding
 @for $i from 0 through 50 {
   .pd-#{$i} {
-    padding: $i * 1px !important;
+    padding: $i * 0.1rem !important;
   }
   .pd-#{$i}x {
-    padding-left: $i * 1px !important;
-    padding-right: $i * 1px !important;
+    padding-left: $i * 0.1rem !important;
+    padding-right: $i * 0.1rem !important;
   }
   .pd-#{$i}y {
-    padding-top: $i * 1px !important;
-    padding-bottom: $i * 1px !important;
+    padding-top: $i * 0.1rem !important;
+    padding-bottom: $i * 0.1rem !important;
   }
   .pt-#{$i} {
-    padding-top: $i * 1px !important;
+    padding-top: $i * 0.1rem !important;
   }
   .pb-#{$i} {
-    padding-bottom: $i * 1px !important;
+    padding-bottom: $i * 0.1rem !important;
   }
   .pl-#{$i} {
-    padding-left: $i * 1px !important;
+    padding-left: $i * 0.1rem !important;
   }
   .pr-#{$i} {
-    padding-right: $i * 1px !important;
+    padding-right: $i * 0.1rem !important;
   }
 }
 @for $i from 11 through 20 {
   .pd-#{$i*5} {
-    padding: $i * 5px !important;
+    padding: $i * 0.5rem !important;
   }
   .pd-#{$i*5}x {
-    padding-left: $i * 5px !important;
-    padding-right: $i * 5px !important;
+    padding-left: $i * 0.5rem !important;
+    padding-right: $i * 0.5rem !important;
   }
   .pd-#{$i*5}y {
-    padding-top: $i * 5px !important;
-    padding-bottom: $i * 5px !important;
+    padding-top: $i * 0.5rem !important;
+    padding-bottom: $i * 0.5rem !important;
   }
   .pt-#{$i*5} {
-    padding-top: $i * 5px !important;
+    padding-top: $i * 0.5rem !important;
   }
   .pb-#{$i*5} {
-    padding-bottom: $i * 5px !important;
+    padding-bottom: $i * 0.5rem !important;
   }
   .pl-#{$i*5} {
-    padding-left: $i * 5px !important;
+    padding-left: $i * 0.5rem !important;
   }
   .pr-#{$i*5} {
-    padding-right: $i * 5px !important;
+    padding-right: $i * 0.5rem !important;
   }
 }
 
@@ -810,24 +814,24 @@ html.lock,
 }
 @for $i from 0 through 10 {
   .bd-#{$i} {
-    border-width: $i * 1px !important;
+    border-width: $i * 0.1rem !important;
   }
   .bd-l-#{$i} {
-    border-left-width: $i * 1px !important;
+    border-left-width: $i * 0.1rem !important;
   }
   .bd-r-#{$i} {
-    border-right-width: $i * 1px !important;
+    border-right-width: $i * 0.1rem !important;
   }
   .bd-t-#{$i} {
-    border-top-width: $i * 1px !important;
+    border-top-width: $i * 0.1rem !important;
   }
   .bd-b-#{$i} {
-    border-bottom-width: $i * 1px !important;
+    border-bottom-width: $i * 0.1rem !important;
   }
 }
 @for $i from 0 through 30 {
   .bd-radius-#{$i} {
-    border-radius: $i * 1px !important;
+    border-radius: $i * 0.1rem !important;
   }
 }
 
@@ -887,10 +891,9 @@ $bdTypes: (solid, dashed, dotted);
 .blind {
   position: absolute;
   overflow: hidden;
-  width: 0px;
-  height: 0px;
-  text-indent: -9999px;
-  color: transparent;
+  width: 0;
+  height: 0;
+  @include text-blind;
 }
 .break-all {
   word-break: break-all;
@@ -918,13 +921,13 @@ $bdTypes: (solid, dashed, dotted);
   background: #ccc;
   padding: 4em 1em;
   text-align: center;
-  font-size: 22px;
+  font-size: 2.2rem;
 }
 .console {
   position: fixed;
-  padding: 10px;
+  padding: 1rem;
   line-height: 2;
-  font-size: 15px;
+  font-size: 1.5rem;
   top: 0;
   left: 0;
   width: 100%;
@@ -952,10 +955,10 @@ $bdTypes: (solid, dashed, dotted);
   .img-box-del {
     display: block;
     position: absolute;
-    right: -4px;
-    top: -4px;
-    width: 20px;
-    height: 20px;
+    right: -0.4rem;
+    top: -0.4rem;
+    width: 2rem;
+    height: 2rem;
     background: url(../images/icon/ico-round-close@3x.png) no-repeat center center / contain;
   }
 }
@@ -1001,7 +1004,7 @@ $bdTypes: (solid, dashed, dotted);
   &.ty2 {
     height: 0;
     background: none;
-    border-top: 1px solid #eee;
+    border-top: 0.1rem solid #eee;
     &.dashed {
       border-style: dashed;
     }

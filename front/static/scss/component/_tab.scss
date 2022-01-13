@@ -33,19 +33,19 @@
   }
   --tab-active: var(--primary-color);
   position: relative;
-  height: 50px;
+  height: 5rem;
   background: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.1rem solid #ddd;
   transition: 0.3s;
   @include web-center;
   &.tab-fixed {
     position: sticky;
-    top: 50px;
+    top: 4rem;
     z-index: 10;
   }
   &.top-fixed {
-    border-bottom-width: 0px;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+    border-bottom-width: 0;
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
   }
   .tab-line {
     z-index: 1;
@@ -53,17 +53,17 @@
       content: '';
       display: block;
       position: absolute;
-      bottom: 11px;
+      bottom: 1.1rem;
       left: 50%;
-      width: 4px;
-      height: 4px;
-      margin-left: -2px;
+      width: 0.4rem;
+      height: 0.4rem;
+      margin-left: -0.2rem;
       border-radius: 50%;
       background: var(--tab-active);
     }
   }
   .tab-list {
-    padding: 0 12px;
+    padding: 0 1.2rem;
   }
   .tab {
     width: 100%;
@@ -72,13 +72,13 @@
     & > a {
       position: relative;
       display: block;
-      padding: 10px 8px 17px;
-      height: 50px;
+      padding: 1rem 0.8rem 1.7rem;
+      height: 5rem;
       text-align: center;
       color: #000;
       font-weight: 500;
-      font-size: 15px;
-      line-height: 22px;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
       overflow: hidden;
       transition: 0.3s;
     }
@@ -90,17 +90,17 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 34px;
-    height: calc(100% - 1px);
+    width: 3.4rem;
+    height: calc(100% - 0.1rem);
     background: #fff;
     z-index: 1;
-    // box-shadow: -10px 0 10px rgba(255,255,255,1);
+    // box-shadow: -1rem 0 1rem rgba(255,255,255,1);
     &:before {
       content: '';
       position: absolute;
       right: 100%;
       top: 0;
-      width: 20px;
+      width: 2rem;
       height: 100%;
       background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
       pointer-events: none;
@@ -113,9 +113,9 @@
       &:before {
         content: '';
         display: block;
-        width: 24px;
-        height: 24px;
-        margin-top: -5px;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-top: -0.5rem;
         background: url(../images/icon/tab-navi-arr@3x.png) no-repeat center center / contain;
         transform: rotate3d(1, 0, 0, 0deg);
         transition: 0.3s;
@@ -130,20 +130,20 @@
   }
   .tab-expand {
     position: absolute;
-    top: 49px;
+    top: 4.9rem;
     left: 0;
     width: 100%;
-    border-top: 1px solid #eee;
+    border-top: 0.1rem solid #eee;
     background: #f7f7f7;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.2);
     ul {
       display: flex;
       flex-wrap: wrap;
-      padding: 21px 10px;
+      padding: 2.1rem 1rem;
       li {
-        padding: 6px 10px;
+        padding: 0.6rem 1rem;
         a {
-          font-size: 17px;
+          font-size: 1.7rem;
           font-weight: 500;
           color: #000;
         }
@@ -161,14 +161,14 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 20px;
+      width: 2rem;
       height: 100%;
       background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
       z-index: 1;
       pointer-events: none;
     }
     .tab-list {
-      padding-right: 46px;
+      padding-right: 4.6rem;
     }
   }
 }
@@ -196,26 +196,26 @@
     @include outer;
   }
   .tab-line {
-    border: 1px solid #222;
+    border: 0.1rem solid #222;
     background: #fff;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     height: 100%;
     z-index: 1;
   }
   .tab-list {
-    padding: 0 20px;
+    padding: 0 2rem;
     &:before {
       content: '';
       display: block;
       position: absolute;
-      left: 20px;
+      left: 2rem;
       top: 0;
-      right: 20px;
+      right: 2rem;
       bottom: 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      border: 0.1rem solid #ddd;
+      border-radius: 0.4rem;
       background: #f8f8f8;
-      border-radius: 4px;
+      border-radius: 0.4rem;
     }
   }
   .tab {
@@ -226,16 +226,16 @@
     & > a {
       position: relative;
       display: block;
-      padding: 12px 10px;
+      padding: 1.2rem 1rem;
       text-align: center;
       color: #666;
-      font-size: 15px;
-      line-height: 24px;
+      font-size: 1.5rem;
+      line-height: 2.4rem;
       overflow: hidden;
       transition: color 0.3s;
     }
     &.active > a {
-      font-size: 16px;
+      font-size: 1.6rem;
       font-weight: bold;
       color: #222;
     }
@@ -250,7 +250,7 @@
     @include outer;
   }
   position: relative;
-  height: 50px;
+  height: 5rem;
   background: #fff;
   transition: 0.3s;
   &:before {
@@ -260,40 +260,40 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 1px;
+    height: 0.1rem;
     background: #f4f4f4;
   }
   &.tab-fixed {
     position: sticky;
-    top: 50px;
+    top: 4rem;
     z-index: 10;
   }
   &.top-fixed {
     border-top-color: #f4f4f4;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
     z-index: 10;
   }
   .tab-line {
-    height: 1px;
+    height: 0.1rem;
     background: #000;
   }
   .tab-list {
     justify-content: space-evenly;
-    padding: 0 12px;
+    padding: 0 1.2rem;
   }
   .tab {
     position: relative;
     text-align: center;
-    padding: 0 8px;
+    padding: 0 0.8rem;
     & > a {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 50px;
+      height: 5rem;
       color: #666;
-      font-size: 14px;
-      line-height: 20px;
+      font-size: 1.4rem;
+      line-height: 2rem;
       overflow: hidden;
       transition: 0.3s;
     }
@@ -314,22 +314,22 @@
     @include outer;
   }
   .tab-list {
-    padding: 0 17px;
+    padding: 0 1.7rem;
   }
   .tab {
     position: relative;
-    padding: 0 3px;
+    padding: 0 0.3rem;
     & > a {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 44px;
-      padding: 0 20px;
+      height: 4.4rem;
+      padding: 0 2rem;
       background: #eee;
-      border-radius: 22px;
+      border-radius: 2.2rem;
       color: #222;
-      font-size: 14px;
+      font-size: 1.4rem;
       overflow: hidden;
       transition: 0.3s;
     }
@@ -347,17 +347,17 @@
   flex-wrap: wrap;
   > li {
     position: relative;
-    padding-right: 1px;
-    margin: 4px 0;
+    padding-right: 0.1rem;
+    margin: 0.4rem 0;
     &:after {
       content: '';
       display: block;
-      width: 1px;
-      height: 12px;
+      width: 0.1rem;
+      height: 1.2rem;
       position: absolute;
       right: 0;
       top: 50%;
-      margin-top: -6px;
+      margin-top: -0.6rem;
       background: #ddd;
     }
     &:first-child {
@@ -375,9 +375,9 @@
     }
     > a {
       display: block;
-      padding: 0 12px;
-      font-size: 14px;
-      line-height: 20px;
+      padding: 0 1.2rem;
+      font-size: 1.4rem;
+      line-height: 2rem;
       color: #999;
       white-space: nowrap;
     }

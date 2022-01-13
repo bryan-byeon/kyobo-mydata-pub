@@ -1,7 +1,7 @@
 // 타이틀
 .title-bar {
   display: flex;
-  margin-top: 20px;
+  margin-top: 2rem;
   h1,
   h2,
   h3,
@@ -16,20 +16,20 @@
     flex: 1 1 auto;
   }
   > .right {
-    margin-left: 20px;
+    margin-left: 2rem;
     white-space: nowrap;
     align-self: flex-end;
   }
   &.line-gray {
     @include outer(true);
     background: #f8f8f8;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     margin-top: 0;
     .tit {
-      font-size: 12px;
+      font-size: 1.2rem;
       font-weight: 500;
-      line-height: 20px;
+      line-height: 2rem;
     }
   }
 }
@@ -39,13 +39,13 @@
   margin: 0;
 }
 .tit-h1 {
-  font-size: 20px;
+  font-size: 2rem;
 }
 .tit-h2 {
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 .tit-h3 {
-  font-size: 15px;
+  font-size: 1.5rem;
 }
 .line-title {
   position: relative;
@@ -57,14 +57,14 @@
     display: block;
     width: 100%;
     flex: 1 1 auto;
-    height: 1px;
+    height: 0.1rem;
     background: #eee;
   }
   div {
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.57;
     color: #666;
-    padding: 0 16px;
+    padding: 0 1.6rem;
     flex: 0 0 auto;
   }
 }
@@ -77,30 +77,30 @@
   &:before {
     content: '';
     display: block;
-    height: 1px;
+    height: 0.1rem;
     position: absolute;
     top: 50%;
-    left: 4px;
-    right: 4px;
+    left: 0.4rem;
+    right: 0.4rem;
     background: #ddd;
   }
   li {
     @include text-blind;
     position: relative;
-    width: 8px;
-    height: 8px;
+    width: 0.8rem;
+    height: 0.8rem;
     border-radius: 50%;
     overflow: hidden;
     background: #888;
     + li {
-      margin-left: 12px;
+      margin-left: 1.2rem;
     }
     &.on {
-      width: 24px;
-      height: 24px;
+      width: 2.4rem;
+      height: 2.4rem;
       background: #000;
-      font-size: 11px;
-      line-height: 24px;
+      font-size: 1.1rem;
+      line-height: 2.4rem;
       text-align: center;
       color: #fff;
     }
@@ -108,12 +108,12 @@
 }
 
 .txt-info-1 {
-  font-size: 14px;
-  line-height: 22px;
-  margin-top: 8px;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  margin-top: 0.8rem;
   > div,
   > p {
-    margin-bottom: 4px;
+    margin-bottom: 0.4rem;
     &:first-child {
       margin-top: 0;
     }
@@ -121,23 +121,23 @@
 }
 // 텍스트리스트
 .txt-list {
-  font-size: 13px;
+  font-size: 1.3rem;
   color: #666;
   line-height: 1.54;
   & + .txt_list {
-    margin-top: 15px;
+    margin-top: 1.5rem;
   }
   &.box {
-    padding: 20px;
+    padding: 2rem;
     background: #f6f6f6;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   & > *:first-child {
     margin-top: 0;
   }
   > ul > li,
   > li {
-    margin-top: 8px;
+    margin-top: 0.8rem;
     &:first-child {
       margin-top: 0;
     }
@@ -150,15 +150,15 @@
   .dot,
   .dash {
     position: relative;
-    padding-left: 10px;
+    padding-left: 1rem;
     &:before {
       content: '';
       display: block;
       position: absolute;
       left: 0;
       top: 0.7em;
-      width: 3px;
-      height: 3px;
+      width: 0.3rem;
+      height: 0.3rem;
       background-color: #666;
     }
   }
@@ -166,14 +166,14 @@
     border-radius: 50%;
   }
   .dash:before {
-    width: 4px;
-    height: 1px;
-    margin-top: 1px;
+    width: 0.4rem;
+    height: 0.1rem;
+    margin-top: 0.1rem;
   }
   &.fz-14 {
     > ul > li,
     > li {
-      margin-top: 12px;
+      margin-top: 1.2rem;
       &:first-child {
         margin-top: 0;
       }
@@ -182,40 +182,40 @@
   .txt-list {
     > ul > li,
     > li {
-      margin-top: 4px !important;
+      margin-top: 0.4rem !important;
     }
   }
 }
 .txt-dl-list {
-  font-size: 14px;
+  font-size: 1.4rem;
   > li {
     display: flex;
     > .dt {
       width: 31.25%;
-      max-width: 150px;
-      padding-right: 10px;
+      max-width: 15rem;
+      padding-right: 1rem;
       opacity: 0.65;
       flex-shrink: 0;
-      font-size: 13px;
-      padding-top: 1px;
+      font-size: 1.3rem;
+      padding-top: 0.1rem;
     }
     > .dd {
       flex: 1 1 auto;
     }
     + li {
-      margin-top: 8px;
+      margin-top: 0.8rem;
     }
   }
   .btn-txt {
-    padding: 1px 0;
+    padding: 0.1rem 0;
   }
 }
 .text-content {
-  font-size: 14px;
+  font-size: 1.4rem;
   line-height: 1.57;
   h2 {
-    margin: 32px 0 8px;
-    font-size: 15px;
+    margin: 3.2rem 0 0.8rem;
+    font-size: 1.5rem;
     line-height: 1.47;
     &:first-child {
       margin-top: 0;
@@ -230,48 +230,48 @@
     display: flex;
     align-items: center;
     .badge {
-      margin-left: 8px;
+      margin-left: 0.8rem;
     }
     .button {
       margin-left: auto;
     }
   }
   .dd {
-    margin-top: 7px;
-    font-size: 14px;
+    margin-top: 0.7rem;
+    font-size: 1.4rem;
     word-break: break-all;
     p + p {
-      margin-top: 4px;
+      margin-top: 0.4rem;
     }
   }
 }
 .txt-line-list-1 {
   > li {
-    padding: 24px 0;
+    padding: 2.4rem 0;
     + li {
-      border-top: 1px solid #eee;
+      border-top: 0.1rem solid #eee;
     }
   }
 }
 
 // 약관
 .text-contents {
-  padding: 20px 0;
-  font-size: 15px;
+  padding: 2rem 0;
+  font-size: 1.5rem;
   line-height: 1.5;
   color: #222;
   h1,
   h2,
   h3 {
-    margin: 24px 0 8px;
-    font-size: 16px;
+    margin: 2.4rem 0 0.8rem;
+    font-size: 1.6rem;
     &:first-child {
       margin-top: 0;
     }
   }
   div + div,
   li + li {
-    margin-top: 8px;
+    margin-top: 0.8rem;
   }
   ul > li {
     padding-left: 0.75em;

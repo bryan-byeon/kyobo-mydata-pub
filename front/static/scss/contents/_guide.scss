@@ -60,10 +60,10 @@
   overflow: hidden;
 }
 .gd__box {
-  margin: 20px auto;
+  margin: 2rem auto;
   display: flex;
-  width: 150px;
-  height: 150px;
+  width: 15rem;
+  height: 15rem;
   background: #eee;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
   //@extend 샘플
   &-2 {
     @extend .gd__box;
-    border: 5px solid red;
+    border: 0.5rem solid red;
     //at-root 샘플
     @include unify-parent('section') {
       background-color: blue;
@@ -112,10 +112,10 @@
   &.fixed {
     .inner {
       position: fixed;
-      top: 56px;
+      top: 5.6rem;
       left: 0;
       width: 100%;
-      height: 100px;
+      height: 10rem;
       overflow: hidden;
       z-index: 10;
     }
@@ -134,29 +134,29 @@
   overflow-y: hidden;
   th,
   td {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 1rem;
+    border: 0.1rem solid #ddd;
     white-space: nowrap;
   }
 }
 .gd__code {
-  margin: 10px 0;
-  padding: 15px;
+  margin: 1rem 0;
+  padding: 1.5rem;
   padding-top: 0;
   background: #f3f3f3;
-  font-size: 12px;
+  font-size: 1.2rem;
   white-space: pre-line;
 }
 .gd__theme_color {
   position: fixed;
-  left: 0px;
-  bottom: 20px;
+  left: 0;
+  bottom: 2rem;
   text-align: center;
   transform: translateX(-100%);
   transition: 0.3s;
   z-index: 10;
   &.open {
-    left: 20px;
+    left: 2rem;
     transform: translateX(0);
     .gd__theme_btn {
       i {
@@ -172,33 +172,33 @@
     left: 100%;
     bottom: 0;
     display: flex;
-    width: 25px;
-    height: 30px;
-    border-radius: 0 8px 8px 0;
+    width: 2.5rem;
+    height: 3rem;
+    border-radius: 0 0.8rem 0.8rem 0;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(2px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
     i {
       transform: rotate3d(0, 1, 0, 0deg);
       transition: 0.3s;
     }
   }
   dl {
-    margin-right: 10px;
-    padding: 10px;
-    border-radius: 8px 8px 0 8px;
+    margin-right: 1rem;
+    padding: 1rem;
+    border-radius: 0.8rem 0.8rem 0 0.8rem;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(2px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   }
   dd {
-    margin-top: 10px;
+    margin-top: 1rem;
     > div {
-      margin-top: 3px;
+      margin-top: 0.3rem;
       display: flex;
-      font-size: 12px;
+      font-size: 1.2rem;
       align-items: center;
       .color {
         width: 100%;
@@ -207,9 +207,9 @@
       }
       .reset {
         button {
-          border: 1px solid #ddd;
-          padding: 0 5px;
-          border-radius: 5px;
+          border: 0.1rem solid #ddd;
+          padding: 0 0.5rem;
+          border-radius: 0.5rem;
           background: #fff;
         }
       }
@@ -220,34 +220,34 @@
   }
 }
 .gd__lottie-box {
-  width: 200px;
-  height: 200px;
+  width: 20rem;
+  height: 20rem;
   margin: 0 auto;
 }
 .gd__lottie-confetti,
 .gd__lottie-complete {
-  width: 300px;
-  height: 100px;
+  width: 30rem;
+  height: 10rem;
   margin: 0 auto;
 }
 .gd__scroll-area {
-  max-height: 250px;
+  max-height: 25rem;
   padding: 1rem;
   background: #f1f1f1;
-  border: 1px solid #ddd;
+  border: 0.1rem solid #ddd;
   overflow: auto;
   &.anchor__area {
     > p {
       overflow-anchor: none;
     }
     .anchor {
-      height: 1px;
+      height: 0.1rem;
       overflow-anchor: auto;
     }
   }
 }
 .gd__txt-box {
-  border: 1px solid #ddd;
+  border: 0.1rem solid #ddd;
   word-break: break-all;
   > div {
     padding: 1em;
@@ -260,8 +260,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 400px;
-  padding: 20px 20px 32px;
+  height: 40rem;
+  padding: 2rem 2rem 3.2rem;
   color: #fff;
   background: linear-gradient(156.21deg, #5f6fff 0%, #a26cff 100%);
   .section & {
@@ -271,12 +271,12 @@
     background: none;
     height: auto;
     padding: 0;
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
   }
   .chart {
-    height: 100px;
+    height: 10rem;
   }
   + .gd__chart-wrap {
-    margin-top: 30px;
+    margin-top: 3rem;
   }
 }

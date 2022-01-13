@@ -9,14 +9,14 @@
       top: 0;
       width: 100%;
       > div {
-        padding-left: 50px;
+        padding-left: 5rem;
         text-align: center;
         // white-space:nowrap;
         // overflow:hidden;
         // text-overflow:ellipsis;
       }
       &:not(.no-title) + .pop-body {
-        padding-top: 50px;
+        padding-top: 5rem;
       }
     }
     .pop-body {
@@ -42,13 +42,13 @@
     }
   }
   &:not(.no-title).shadow {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   }
   > div {
     display: flex;
     align-items: center;
-    min-height: 50px;
-    padding: 10px 50px 10px 24px;
+    min-height: 5rem;
+    padding: 1rem 5rem 1rem 2.4rem;
     text-align: left;
     margin: 0;
     transition: border 0.5s;
@@ -58,8 +58,8 @@
   }
   h1 {
     @include ellipsis(2);
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
     margin: 0;
     width: 100%;
     color: #222;
@@ -67,8 +67,8 @@
   .pop-close {
     position: absolute;
     top: 50%;
-    right: 20px;
-    margin-top: -12px;
+    right: 2rem;
+    margin-top: -1.2rem;
   }
 }
 .pop-bg-close {
@@ -83,14 +83,14 @@
   @include text-blind;
   position: relative;
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 2.4rem;
+  height: 2.4rem;
   overflow: hidden;
   background: url(../images/icon/head-close@3x.png) no-repeat center center / contain;
 }
 .pop-body {
   position: relative;
-  padding: 24px 0;
+  padding: 2.4rem 0;
   @include web-center;
   overflow: auto;
   box-sizing: border-box;
@@ -102,7 +102,7 @@
     clear: both;
   }
   &.next-foot {
-    padding-bottom: 84px;
+    padding-bottom: 8.4rem;
   }
 }
 .pop-foot {
@@ -113,14 +113,14 @@
   background: #fff;
   z-index: 10;
   > div {
-    padding: 16px;
+    padding: 1.6rem;
   }
   &.btn-wrap {
     margin-top: 0;
   }
   &.shadow {
-    box-shadow: 0 -3px 6px 0 rgba(0, 0, 0, 0.08);
-    // box-shadow:0 -6px 10px 1px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 -0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+    // box-shadow:0 -0.6rem 1rem 0.1rem rgba(255, 255, 255, 0.8);
   }
 }
 .popup {
@@ -149,13 +149,13 @@
     top: 0;
     width: 100%;
     &:not(.no-title) + .pop-body {
-      padding-top: 50px;
+      padding-top: 5rem;
     }
   }
   .pop-body {
     max-height: 100%;
     .bottom-fixed {
-      height: 61px;
+      height: 6.1rem;
     }
   }
   .pop-foot {
@@ -181,7 +181,7 @@
         padding-bottom: 0;
       }
       .daum-zipcode {
-        border-top: 1px solid #363636;
+        border-top: 0.1rem solid #363636;
         height: 100%;
       }
     }
@@ -190,16 +190,16 @@
         background: transparent;
       }
       .pop-body {
-        padding: 60px 0;
+        padding: 6rem 0;
         height: 100%;
         overflow: hidden;
       }
       .pop-close {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 48px;
-        height: 48px;
+        top: 1rem;
+        right: 1rem;
+        width: 4.8rem;
+        height: 4.8rem;
         background-image: url(../images/icon/ico-close-w-48@3x.png);
       }
     }
@@ -208,20 +208,20 @@
   // &.bottom,
   // &.modal {
   //   .pop-head {
-  //     padding-top: 12px;
+  //     padding-top: 1.2rem;
   //     > div {
-  //       min-height: 48px;
-  //       padding: 0px 50px 0px 20px;
+  //       min-height: 4.8rem;
+  //       padding: 0 5rem 0 2rem;
   //       text-align: left;
   //     }
   //     h1 {
-  //       font-size: 16px;
+  //       font-size: 1.6rem;
   //     }
   //     .pop-close {
-  //       top: 24px;
+  //       top: 2.4rem;
   //     }
   //     &:not(.no-title) + .pop-body {
-  //       padding-top: 50px;
+  //       padding-top: 5rem;
   //     }
   //   }
   // }
@@ -230,7 +230,7 @@
     .pop-wrap {
       position: fixed;
       bottom: 0;
-      border-radius: 16px 16px 0 0;
+      border-radius: 1.6rem 1.6rem 0 0;
       max-height: 100%;
     }
     &.ty2 {
@@ -245,36 +245,36 @@
         }
       }
       .pop-head {
-        padding-top: 24px;
-        padding-bottom: 16px;
+        padding-top: 2.4rem;
+        padding-bottom: 1.6rem;
         > div {
-          padding-right: 20px;
+          padding-right: 2rem;
         }
         .pop-close {
           top: 0;
           left: 50%;
-          width: 32px;
-          height: 24x;
-          margin-left: -16px;
+          width: 3.2rem;
+          height: 2.4rem;
+          margin-left: -1.6rem;
           background: url(../images/icon/pop-close2@3x.png) no-repeat center center / contain;
         }
         + .pop-body {
-          padding-top: 88px;
+          padding-top: 8.8rem;
         }
       }
       .pop-head-product {
         display: flex;
         font-weight: normal;
         .product-img {
-          width: 40px;
+          width: 4rem;
           flex-shrink: 0;
-          border-radius: 4px;
+          border-radius: 0.4rem;
         }
         .product-name {
           flex: 1 1 auto;
-          margin-left: 12px;
-          font-size: 13px;
-          line-height: 20px;
+          margin-left: 1.2rem;
+          font-size: 1.3rem;
+          line-height: 2rem;
         }
       }
       .pop-foot {
@@ -289,46 +289,37 @@
         display: block;
         position: absolute;
         left: 50%;
-        top: 5px;
-        height: 3px;
-        width: 30px;
-        margin-left: -15px;
+        top: 0.5rem;
+        height: 0.3rem;
+        width: 3rem;
+        margin-left: -1.5rem;
         background: #ddd;
-        border-radius: 3px;
+        border-radius: 0.3rem;
       }
     }
   }
   &.modal {
-    padding: 32px;
+    padding: 3.2rem;
     align-items: center;
     justify-content: center;
     .pop-head {
       > div {
-        padding-left: 50px;
+        padding-left: 5rem;
       }
       h1 {
         text-align: center;
-      }
-      &.no-title + .pop-body > .section:first-child:before {
-        content: '';
-        display: block;
-        width: 32px;
-        height: 24px;
-        float: right;
-        margin: -4px 2px 0 0;
       }
     }
 
     .pop-wrap {
       width: 100%;
-      max-width: 640px;
-      border-radius: 16px;
-      margin: 50px auto 0;
+      max-width: 64rem;
+      border-radius: 1.6rem;
+      margin: 5rem auto 0;
       opacity: 0;
       transform: translate3d(0, 0, 0);
       transition-property: margin, opacity, visibility;
     }
-    // .pop-foot{border-radius:8px;}
 
     &.tooltip {
       .pop-head {
@@ -337,18 +328,18 @@
         }
       }
       .pop-body {
-        font-size: 14px;
+        font-size: 1.4rem;
         color: #666;
         line-height: 1.57;
         word-break: break-all;
         .pop-close {
           float: right;
-          margin-left: 8px;
+          margin-left: 0.8rem;
           z-index: 10;
         }
         .tit {
-          margin-bottom: 12px;
-          font-size: 16px;
+          margin-bottom: 1.2rem;
+          font-size: 1.6rem;
           color: #222;
           font-weight: bold;
           line-height: 1.5;
@@ -367,7 +358,7 @@
   &[class*='side-'] {
     .pop-wrap {
       width: 67%;
-      max-width: 400px;
+      max-width: 40rem;
       height: 100%;
     }
   }
@@ -393,7 +384,7 @@
   &.alert {
     z-index: 300;
     // .pop-wrap {
-    //   max-width: 300px;
+    //   max-width: 30rem;
     // }
     .message {
       word-break: break-all;
@@ -401,22 +392,22 @@
     }
     .pop-head {
       > div {
-        padding: 24px 24px 0;
+        padding: 2.4rem 2.4rem 0;
         min-height: auto;
         text-align: left;
       }
       h1 {
         text-align: left;
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 2rem;
+        line-height: 2.8rem;
       }
       + .pop-body {
-        padding-top: 60px;
+        padding-top: 6rem;
       }
     }
     .pop-body {
       &.next-foot {
-        padding-bottom: 96px;
+        padding-bottom: 9.6rem;
       }
     }
   }
@@ -433,8 +424,8 @@
   }
   .pop-close.last-focus {
     position: absolute;
-    top: 9px;
-    right: 15px;
+    top: 0.9rem;
+    right: 1.5rem;
   }
 }
 .msie .popup.show {
@@ -451,14 +442,14 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 8px 30 8px 0;
-    min-height: 48px;
+    padding: 0.8rem 3rem 0.8rem 0;
+    min-height: 4.8rem;
     word-break: break-all;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     .checkbox {
       position: absolute;
       right: 0;
-      top: 12px;
+      top: 1.2rem;
       & > i:after {
         border-color: #f1f1f1;
       }
@@ -483,12 +474,12 @@
   }
 }
 .select-item-wrap {
-  padding: 0 17px 17px;
+  padding: 0 1.7rem 1.7rem;
   > li {
     display: inline-block;
     vertical-align: top;
     width: 100%;
-    padding: 3px;
+    padding: 0.3rem;
   }
   &.col2 > li {
     width: 50%;
@@ -519,12 +510,12 @@
     }
   }
   .txt {
-    margin-top: 30px;
+    margin-top: 3rem;
   }
 }
 .loading-icon {
-  height: 50px;
-  width: 50px;
+  height: 5rem;
+  width: 5rem;
   margin: auto;
   background: url('data:image/gif;base64,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')
     50% 50% no-repeat;
@@ -534,34 +525,34 @@
 .toast-box,
 .alarm-box {
   position: fixed;
-  top: 20px;
-  left: 20px;
-  right: 20px;
+  top: 2rem;
+  left: 2rem;
+  right: 2rem;
   z-index: 120;
   // overflow: hidden;
   opacity: 0;
-  font-size: 13px;
-  transform: translateY(-10px);
+  font-size: 1.3rem;
+  transform: translateY(-1rem);
   transition: opacity 0.5s, transform 0.5s;
   > div {
     display: flex;
     align-items: center;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   .txt {
     display: block;
     flex: 1 1 auto;
-    padding: 15px 5px 15px 0;
+    padding: 1.5rem 0.5rem 1.5rem 0;
     &:first-child {
-      padding-left: 15px;
+      padding-left: 1.5rem;
     }
     &:last-child {
-      padding-right: 15px;
+      padding-right: 1.5rem;
     }
   }
   .close {
     display: block;
-    padding: 15px 15px 15px 5px;
+    padding: 1.5rem 1.5rem 1.5rem 0.5rem;
     flex-shrink: 0;
   }
   &.on {
@@ -579,7 +570,7 @@
 .alarm-box {
   > div {
     background: #fff;
-    box-shadow: 0px 3px 7px rgba(51, 51, 51, 0.3);
+    box-shadow: 0 0.3rem 0.7rem rgba(51, 51, 51, 0.3);
   }
 }
 @include mediaMinWidth(1024) {
@@ -593,7 +584,7 @@
       .pop-wrap {
         @include web-center;
         left: 50%;
-        margin-left: -512px;
+        margin-left: -51.2rem;
       }
     }
   }

@@ -5,8 +5,8 @@
   }
 }
 .folding-list {
-  border: 1px solid #eee;
-  border-width: 1px 0;
+  border: 0.1rem solid #eee;
+  border-width: 0.1rem 0;
   overflow: hidden;
   &.line-none {
     border-width: 0;
@@ -17,29 +17,29 @@
   > li,
   > .folding-head {
     position: relative;
-    border-top: 1px solid #eee;
+    border-top: 0.1rem solid #eee;
     &:first-child {
       border-top-width: 0;
     }
   }
   .folding-head {
     background: #fff;
-    font-size: 15px;
+    font-size: 1.5rem;
     line-height: 1.47;
     a,
     .inner {
       display: block;
       position: relative;
-      padding: 21px 54px 21px 20px;
+      padding: 2.1rem 5.4rem 2.1rem 2rem;
       overflow: hidden;
       &:after {
         content: '';
         display: block;
         position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 24px;
-        height: 24px;
+        top: 2rem;
+        right: 2rem;
+        width: 2.4rem;
+        height: 2.4rem;
         background: url(../images/icon/ico-arrow-down@3x.png) no-repeat center center / contain;
         transform: rotate3d(1, 0, 0, 0deg);
         transition: 0.3s;
@@ -53,7 +53,7 @@
       }
     }
     div.inner {
-      padding-right: 20px;
+      padding-right: 2rem;
       &:after {
         content: none;
       }
@@ -76,12 +76,12 @@
   .folding-panel {
     display: none;
     position: relative;
-    padding: 0 20px 30px;
+    padding: 0 2rem 3rem;
   }
   &.folding-dl {
     .folding-panel {
-      padding-top: 30px;
-      border-top: 1px solid #eee;
+      padding-top: 3rem;
+      border-top: 0.1rem solid #eee;
     }
   }
 }

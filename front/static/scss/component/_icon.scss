@@ -6,16 +6,16 @@
 [class*='i-logo-'] {
   position: relative;
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 2.4rem;
+  height: 2.4rem;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
   flex-shrink: 0;
 }
 [class*='i-logo-'] {
-  width: 32px;
-  height: 32px;
+  width: 3.2rem;
+  height: 3.2rem;
 }
 .i-logo-bc {
   background-image: url(../images/icon/logo-bc@3x.png);
@@ -51,8 +51,8 @@
   background-image: url(../images/icon/logo-woori@3x.png);
 }
 [class*='i-pay-'] {
-  width: 60px;
-  height: 28px;
+  width: 6rem;
+  height: 2.8rem;
 }
 .i-pay-card {
   background-image: url(../images/icon/pay-creditcard@3x.png);
@@ -89,11 +89,11 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    border-width: 0 0 2px 2px;
+    border-width: 0 0 0.2rem 0.2rem;
     border-style: solid;
     border-color: #222;
-    width: 14.6px;
-    height: 8px;
+    width: 1.46rem;
+    height: 0.8rem;
     flex: 0 0 auto;
     transform: translate(-50%, -70%) rotate(-45deg) scale(0.9);
   }
@@ -112,8 +112,8 @@
 }
 .i-ico-search-16,
 .i-ico-search-w-16 {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 .i-bar-home {
   background-image: url(../images/icon/bar-home@3x.png);
@@ -128,33 +128,33 @@
   background-image: url(../images/icon/bar-cart@3x.png);
 }
 .i-ico-naver {
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   background-image: url(../images/icon/sns-naver@3x.png);
 }
 .i-ico-kakao {
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   background-image: url(../images/icon/sns-kakao@3x.png);
 }
 .i-ico-facebook {
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   background-image: url(../images/icon/sns-facebook@3x.png);
 }
 .i-ico-twitter {
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   background-image: url(../images/icon/sns-twitter@3x.png);
 }
 .i-ico-urlcopy {
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   background-image: url(../images/icon/sns-urlcopy@3x.png);
 }
 .i-ico-welcome {
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
   background-image: url(../images/icon/icon-welcome@3x.png);
 }
 .i-ico-list-bar {
@@ -164,57 +164,57 @@
   background-image: url(../images/icon/ico-list-grid@3x.png);
 }
 .i-ico-star {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-star-off@3x.png);
   &.on {
     background-image: url(../images/icon/ico-star-on@3x.png);
   }
   &.size24 {
-    width: 24px;
-    height: 24px;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 
 .i-ico-lock {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-lock@3x.png);
 }
 
 .i-ico-spinner-minus {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-spinner-minus@3x.png);
 }
 .i-ico-spinner-plus {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-spinner-plus@3x.png);
 }
 .i-ico-round-close {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   background-image: url(../images/icon/ico-round-close@3x.png);
 }
 .i-ico-arrow-right-16 {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-arrow-right-16@3x.png);
 }
 .i-ico-arrow-down-16 {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-arrow-down-16@3x.png);
 }
 .i-ico-share {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   background-image: url(../images/icon/ico-share@3x.png);
 }
 .i-ico-cart-empty {
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
   background-image: url(../images/icon/ico-cart-empty@3x.png);
 }
 .i-ico-my-order {
@@ -260,28 +260,28 @@
   background-image: url(../images/icon/ico-my-pay@3x.png);
 }
 .i-ico-point {
-  width: 36px;
-  height: 36px;
+  width: 3.6rem;
+  height: 3.6rem;
   background-image: url(../images/icon/ico-point-36@3x.png);
 }
 .i-ico-zeropay {
-  width: 36px;
-  height: 36px;
+  width: 3.6rem;
+  height: 3.6rem;
   background-image: url(../images/icon/ico-zeropay@3x.png);
 }
 .i-ico-pay {
-  width: 36px;
-  height: 36px;
+  width: 3.6rem;
+  height: 3.6rem;
   background-image: url(../images/icon/ico-pay@3x.png);
 }
 .i-ico-banking {
-  width: 36px;
-  height: 36px;
+  width: 3.6rem;
+  height: 3.6rem;
   background-image: url(../images/icon/ico-banking@3x.png);
 }
 .i-ico-creditcard {
-  width: 36px;
-  height: 36px;
+  width: 3.6rem;
+  height: 3.6rem;
   background-image: url(../images/icon/ico-creditcard@3x.png);
 }
 
@@ -289,8 +289,8 @@
   background-image: url(../images/icon/ico-camera@3x.png);
 }
 .i-ico-file {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   background-image: url(../images/icon/ico-file@3x.png);
 }
 .i-ico-cs-info {
@@ -303,19 +303,19 @@
   background-image: url(../images/icon/ico-cs-terms@3x.png);
 }
 .i-ico-trash-16 {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(../images/icon/ico-trash-16@3x.png);
 }
 .i-ico-filter {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   background-image: url(../images/icon/ico-filter@3x.png);
 }
 
 [class*='i-ico-error-'] {
-  width: 100px;
-  height: 80px;
+  width: 10rem;
+  height: 8rem;
 }
 .i-ico-error-warning {
   background-image: url(../images/icon/ico-error-warning@3x.png);
@@ -328,15 +328,15 @@
 }
 
 .i-ico-warning {
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
   background-image: url(../images/icon/ico-warning@3x.png);
 }
 .i-ani-success,
 .i-ani-warning {
-  width: 60px;
-  height: 60px;
-  margin: 10px;
+  width: 6rem;
+  height: 6rem;
+  margin: 1rem;
   border-radius: 50%;
   &:before,
   &:after {
@@ -368,19 +368,19 @@
   &:before,
   &:after {
     background: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
   }
   i {
     display: block;
     position: absolute;
     left: 50%;
     top: 50%;
-    border-width: 0 0 5px 5px;
+    border-width: 0 0 0.5rem 0.5rem;
     border-style: solid;
     border-color: #fff;
-    width: 28px;
-    height: 16px;
-    border-radius: 2px;
+    width: 2.8rem;
+    height: 1.6rem;
+    border-radius: 0.2rem;
     transform: translate(-45%, -70%) rotate(-45deg);
     z-index: 1;
   }
@@ -394,39 +394,39 @@
   &:before,
   &:after {
     background: #f5045e;
-    border: 1px solid #f5045e;
+    border: 0.1rem solid #f5045e;
   }
   &.gray {
     &:before,
     &:after {
       background: #ddd;
-      border: 1px solid #ddd;
+      border: 0.1rem solid #ddd;
     }
   }
   i {
     display: block;
     position: absolute;
-    top: 12px;
-    bottom: 12px;
-    width: 8px;
+    top: 1.2rem;
+    bottom: 1.2rem;
+    width: 0.8rem;
     left: 50%;
-    margin-left: -4px;
+    margin-left: -0.4rem;
     z-index: 1;
     &:before,
     &:after {
       content: '';
       display: block;
       background: #fff;
-      border-radius: 4px;
+      border-radius: 0.4rem;
     }
     &:before {
-      margin: 0 1px;
-      height: calc(100% - 11px);
+      margin: 0 0.1rem;
+      height: calc(100% - 1.1rem);
     }
     &:after {
-      margin-top: 3px;
-      width: 8px;
-      height: 8px;
+      margin-top: 0.3rem;
+      width: 0.8rem;
+      height: 0.8rem;
     }
   }
   &.on {
@@ -478,14 +478,14 @@
 @keyframes icoSuccess {
   0%,
   45% {
-    clip: rect(0, 5px, 0, 0);
+    clip: rect(0, 0.5rem, 0, 0);
   }
   50% {
-    clip: rect(0, 5px, 16px, 0);
+    clip: rect(0, 0.5rem, 1.6rem, 0);
   }
   65%,
   100% {
-    clip: rect(0, 28px, 16px, 0);
+    clip: rect(0, 2.8rem, 1.6rem, 0);
   }
 }
 @keyframes icoWarning1 {
@@ -500,21 +500,21 @@
   }
   65%,
   100% {
-    height: calc(100% - 11px);
+    height: calc(100% - 1.1rem);
   }
 }
 @keyframes icoWarning2 {
   0%,
   35% {
     opacity: 0;
-    margin-top: -6px;
+    margin-top: -0.6rem;
   }
   40% {
     opacity: 1;
-    margin-top: -6px;
+    margin-top: -0.6rem;
   }
   70%,
   100% {
-    margin-top: 3px;
+    margin-top: 0.3rem;
   }
 }

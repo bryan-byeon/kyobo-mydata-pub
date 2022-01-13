@@ -23,7 +23,7 @@
 }
 
 @function -absPX($add) {
-  @return abs($add) * 1px;
+  @return abs($add) * 0.1rem;
 }
 
 @function strip-unit($number) {

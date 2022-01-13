@@ -3,18 +3,18 @@
 .btn-select {
   position: relative;
   width: 100%;
-  line-height: 36px;
-  padding: 5px 41px 5px 11px;
-  border: 1px solid #ddd;
-  font-size: 15px;
+  line-height: 3.6rem;
+  padding: 0.5rem 4.1rem 0.5rem 1.1rem;
+  border: 0.1rem solid #ddd;
+  font-size: 1.5rem;
   color: #222;
   vertical-align: middle;
   box-sizing: border-box;
   -webkit-appearance: none;
   appearance: none;
   transition: border 0.3s;
-  border-radius: 4px;
-  height: 48px;
+  border-radius: 0.4rem;
+  height: 4.8rem;
   white-space: nowrap;
   background-color: #fff;
   overflow: hidden;
@@ -30,7 +30,7 @@
   position: relative;
   width: 100%;
   select {
-    background: #fff url(../images/icon/ico-arrow-down@3x.png) no-repeat right 12px center / 24px auto;
+    background: #fff url(../images/icon/ico-arrow-down@3x.png) no-repeat right 1.2rem center / 2.4rem auto;
   }
   &:not(.inline) {
     select:disabled,
@@ -82,17 +82,17 @@
     top: 100%;
     left: 50%;
     min-width: 100%;
-    padding: 12px 0;
-    border-radius: 8px;
+    padding: 1.2rem 0;
+    border-radius: 0.8rem;
     background: #fff;
     z-index: 100;
-    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0.1rem 0.1rem 0.6rem 0 rgba(0, 0, 0, 0.2);
     transform: translateX(-50%);
     .option {
       display: block;
-      padding: 4px 20px 4px 16px;
-      font-size: 13px;
-      line-height: 20px;
+      padding: 0.4rem 2rem 0.4rem 1.6rem;
+      font-size: 1.3rem;
+      line-height: 2rem;
       color: #666;
       &.selected {
         color: var(--primary-color);
@@ -104,7 +104,7 @@
   & + .input,
   & + .select,
   & + .textarea {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 
   &.inline {
@@ -113,36 +113,36 @@
     select,
     .btn-select {
       border: 0 none;
-      height: 24px;
-      font-size: 14px;
-      padding: 0 20px 0 0;
+      height: 2.4rem;
+      font-size: 1.4rem;
+      padding: 0 2rem 0 0;
       &.fz-15 {
-        padding-right: 28px;
+        padding-right: 2.8rem;
       }
     }
     .btn-select {
       &:after {
-        width: 16px;
-        height: 16px;
+        width: 1.6rem;
+        height: 1.6rem;
         right: 0;
-        margin-top: -8px;
+        margin-top: -0.8rem;
         background-image: url(../images/icon/ico-arrow-down-24@3x.png);
       }
       &.fz-15:after {
-        width: 24px;
-        height: 24px;
-        margin-top: -12px;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-top: -1.2rem;
       }
     }
     select:disabled ~ .btn-select {
       opacity: 0.4;
     }
     .option-wrap {
-      margin-top: 10px;
+      margin-top: 1rem;
     }
     + .select.inline {
       margin-top: 0;
-      margin-left: 12px;
+      margin-left: 1.2rem;
     }
   }
   &.inline select,
@@ -163,11 +163,11 @@
     content: '';
     display: block;
     position: absolute;
-    right: 12px;
+    right: 1.2rem;
     top: 50%;
-    width: 24px;
-    height: 24px;
-    margin-top: -12px;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-top: -1.2rem;
     transform: rotate3d(1, 0, 0, 0deg);
     transition: 0.3s;
     background: url(../images/icon/ico-arrow-down@3x.png) no-repeat center center / contain;
@@ -179,19 +179,19 @@
     }
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 32rem) {
   .select select,
   .btn-select {
-    padding-right: 36px;
+    padding-right: 3.6rem;
   }
   .select {
     select {
-      background-position: right 7px center;
+      background-position: right 0.7rem center;
     }
   }
   .btn-select {
     &:after {
-      right: 7px;
+      right: 0.7rem;
     }
   }
 }

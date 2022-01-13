@@ -1,18 +1,18 @@
 .spinner {
   display: inline-flex;
-  width: 96px;
-  height: 36px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 9.6rem;
+  height: 3.6rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.4rem;
   background: #fff;
   .button {
-    height: 34px;
-    width: 34px;
+    height: 3.4rem;
+    width: 3.4rem;
     padding: 0;
     flex-shrink: 0;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 16px auto;
+    background-size: 1.6rem auto;
     &.minus {
       background-image: url(../images/icon/ico-spinner-minus@3x.png);
     }
@@ -26,11 +26,11 @@
   input {
     width: 100%;
     flex: 1 1 auto;
-    height: 34px;
+    height: 3.4rem;
     text-align: center;
     padding: 0;
     border: 0 none;
-    font-size: 14px;
+    font-size: 1.4rem;
     outline: none;
   }
 }

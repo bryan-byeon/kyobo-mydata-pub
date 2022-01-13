@@ -2,24 +2,24 @@
 i.require {
   display: inline-flex;
   align-items: center;
-  margin-left: 4px;
+  margin-left: 0.4rem;
   &:first-child {
     margin-left: 0;
-    margin-right: 4px;
+    margin-right: 0.4rem;
   }
   &:after {
     content: '';
-    width: 4px;
-    height: 4px;
+    width: 0.4rem;
+    height: 0.4rem;
     border-radius: 50%;
     background-color: #f0431a;
   }
 }
 .form-lbl {
-  margin-top: 24px;
+  margin-top: 2.4rem;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 1.4rem;
   line-height: 1.71;
   color: #666;
   font-weight: 500;
@@ -32,20 +32,20 @@ i.require {
   > .right {
     display: flex;
     flex: 0 0 auto;
-    margin-left: 20px;
+    margin-left: 2rem;
     align-items: center;
     font-weight: normal;
   }
   + .form-item,
   + .validate-item {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 }
 .form-item {
   position: relative;
   + .form-item,
   + .validate-item {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 }
 .validate-item {
@@ -59,8 +59,8 @@ i.require {
       input {
         background-image: url(../images/icon/ico-error@3x.png);
         background-repeat: no-repeat;
-        background-position: right 12px center;
-        background-size: 16px auto;
+        background-position: right 1.2rem center;
+        background-size: 1.6rem auto;
       }
     }
   }
@@ -73,13 +73,13 @@ i.require {
   // }
   + .form-item,
   + .validate-item {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 }
 .validate-txt {
-  margin-top: 4px;
-  font-size: 12px;
-  line-height: 16px;
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
   &.is-error {
     color: #dc512f;
   }
@@ -90,12 +90,12 @@ i.require {
   + .input,
   + .select,
   + .textare {
-    margin-top: 6px;
+    margin-top: 0.6rem;
   }
 }
 .help-txt {
-  margin-top: 6px;
-  font-size: 12px;
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
   line-height: 1.33;
   color: #666;
 }

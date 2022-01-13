@@ -34,7 +34,7 @@
 }
 
 @mixin text-blind() {
-  font-size: 3px;
+  font-size: 0.3rem;
   color: transparent;
 }
 
@@ -68,11 +68,11 @@
 }
 
 @mixin outer($isPadding: false) {
-  margin-left: -24px;
-  margin-right: -24px;
+  margin-left: -2.4rem;
+  margin-right: -2.4rem;
   @if $isPadding {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
   }
 }
 
@@ -94,13 +94,13 @@
 }
 
 @mixin line {
-  height: 8px;
-  border-top: 1px solid #dbdbdb;
+  height: 0.8rem;
+  border-top: 0.1rem solid #dbdbdb;
   background: #f4f4f4;
 }
 
 @mixin web-center {
-  max-width: 1024px;
+  max-width: 102.4rem;
   margin-left: auto;
   margin-right: auto;
 }

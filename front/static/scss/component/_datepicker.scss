@@ -6,9 +6,9 @@ jq-Datepicker
   @include text-blind;
   position: absolute;
   top: 0;
-  right: 11px;
-  width: 24px;
-  height: 46px;
+  right: 1.1rem;
+  width: 2.4rem;
+  height: 4.6rem;
   overflow: hidden;
   background: url(../images/icon/ico-calendar@3x.png) no-repeat center center / contain;
 }
@@ -26,7 +26,7 @@ jq-Datepicker
 }
 .ui-icon {
   display: block;
-  text-indent: -99999px;
+  @include text-blind;
   overflow: hidden;
   background-repeat: no-repeat;
 }
@@ -41,21 +41,21 @@ jq-Datepicker
 }
 .ui-datepicker {
   position: relative;
-  padding: 0 15px;
+  padding: 0 1.5rem;
   background: #ffffff;
   &:not(.ui-datepicker-inline) {
     position: fixed;
     top: 50% !important;
     left: 50% !important;
-    width: 320px;
+    width: 32rem;
     display: none;
-    padding: 20px 20px 20px;
+    padding: 2rem 2rem 2rem;
     transform: translateY(-50%);
-    margin-left: -160px;
+    margin-left: -16rem;
     z-index: 300 !important;
     border-radius: 0;
     border: 0 none;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     overflow: hidden;
   }
   .swipe-arr {
@@ -63,7 +63,7 @@ jq-Datepicker
     left: 0;
     right: 0;
     bottom: 0;
-    top: 53px;
+    top: 5.3rem;
     overflow: hidden;
     .txt {
       position: absolute;
@@ -75,40 +75,40 @@ jq-Datepicker
     }
     .arr {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 5rem;
+      height: 5rem;
       background: url(../images/common/icon-calendar-swiper.png) no-repeat left top;
-      background-size: 50px auto;
+      background-size: 5rem auto;
       animation-duration: 1.5s;
       animation-timing-function: ease;
       &.top,
       &.bottom {
         left: 50%;
-        margin-left: -25px;
+        margin-left: -2.5rem;
       }
       &.top {
-        top: 20px;
-        background-position: 0 -50px;
+        top: 2rem;
+        background-position: 0 -5rem;
         animation-name: bounceInDown;
       }
       &.bottom {
-        bottom: 20px;
+        bottom: 2rem;
         background-position: 0 0;
         animation-name: bounceInUp;
       }
       &.left,
       &.right {
         top: 50%;
-        margin-top: -25px;
+        margin-top: -2.5rem;
       }
       &.left {
-        left: 20px;
-        background-position: 0 -150px;
+        left: 2rem;
+        background-position: 0 -15rem;
         animation-name: bounceInLeft;
       }
       &.right {
-        right: 20px;
-        background-position: 0 -100px;
+        right: 2rem;
+        background-position: 0 -10rem;
         animation-name: bounceInRight;
       }
       &.off {
@@ -118,13 +118,13 @@ jq-Datepicker
     }
   }
   &.add-guide .swipe-arr {
-    bottom: 50px;
+    bottom: 5rem;
   }
   .ui-datepicker-header {
     position: relative;
     display: flex;
-    height: 48px;
-    margin-bottom: 5px;
+    height: 4.8rem;
+    margin-bottom: 0.5rem;
     align-items: center;
     justify-content: center;
     .ui-state-disabled {
@@ -137,8 +137,8 @@ jq-Datepicker
   .ui-datepicker-next {
     display: block;
     padding: 0;
-    width: 24px;
-    height: 48px;
+    width: 2.4rem;
+    height: 4.8rem;
     background: none !important;
     border-radius: 0;
     overflow: hidden;
@@ -148,7 +148,7 @@ jq-Datepicker
       display: block;
       width: 100%;
       height: 100%;
-      font-size: 3px;
+      font-size: 0.3rem;
       color: transparent;
       background-repeat: no-repeat;
       background-position: center center;
@@ -184,21 +184,21 @@ jq-Datepicker
     position: relative;
     display: flex;
     align-items: center;
-    line-height: 48px;
-    height: 48px;
+    line-height: 4.8rem;
+    height: 4.8rem;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 500;
     order: 3;
     z-index: 1;
-    margin: 0 20px;
+    margin: 0 2rem;
     select {
       background: transparent;
-      font-size: 18px;
+      font-size: 1.8rem;
       margin: 0;
       width: auto;
-      height: 48px;
-      line-height: 48px;
+      height: 4.8rem;
+      line-height: 4.8rem;
       padding: 0;
       border: 0 none;
       -webkit-appearance: none;
@@ -226,10 +226,10 @@ jq-Datepicker
     position: relative;
     z-index: 1;
     th {
-      height: 40px;
-      padding-bottom: 4px;
+      height: 4rem;
+      padding-bottom: 0.4rem;
       text-align: center;
-      font-size: 13px;
+      font-size: 1.3rem;
       border: 0 none;
       font-weight: normal;
       span {
@@ -237,11 +237,11 @@ jq-Datepicker
       }
     }
     td {
-      height: 40px;
+      height: 4rem;
       margin: 0;
       padding: 0;
       border: 0 none;
-      font-size: 14px;
+      font-size: 1.4rem;
       text-align: center;
       white-space: nowrap;
       font-weight: 500;
@@ -250,9 +250,9 @@ jq-Datepicker
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
+        width: 3.6rem;
+        height: 3.6rem;
+        font-size: 1.4rem;
         color: #222;
         text-decoration: none;
         border-radius: 50%;
@@ -276,7 +276,7 @@ jq-Datepicker
     }
     .ui-state-default {
       &.ui-state-highlight {
-        border: 1px solid #222;
+        border: 0.1rem solid #222;
         background-color: #222;
         font-weight: bold;
         color: #fff !important;
@@ -302,17 +302,17 @@ jq-Datepicker
     button {
       display: block;
       position: absolute;
-      top: 36px;
-      width: 25px;
-      height: 25px;
+      top: 3.6rem;
+      width: 2.5rem;
+      height: 2.5rem;
       cursor: pointer;
       z-index: 2;
       &.ui-datepicker-current {
         display: none;
-        left: 20px;
+        left: 2rem;
         color: #666;
         font-size: 1.3rem;
-        line-height: 25px;
+        line-height: 2.5rem;
         text-align: center;
         background: none;
       }
@@ -321,13 +321,13 @@ jq-Datepicker
 }
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-close {
   display: none;
-  top: 32px;
-  right: 20px;
-  width: 24px;
-  height: 24px;
+  top: 3.2rem;
+  right: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   padding: 0;
-  text-indent: -9999px;
   background: url(../images/icon/head-close@3x.png) no-repeat center center / contain;
+  @include text-blind;
 }
 
 /* with multiple calendars */
@@ -369,18 +369,18 @@ jq-Datepicker
 .ui-datepicker-rtl {
   direction: rtl;
   .ui-datepicker-prev {
-    right: 2px;
+    right: 0.2rem;
     left: auto;
     &:hover {
-      right: 1px;
+      right: 0.1rem;
       left: auto;
     }
   }
   .ui-datepicker-next {
-    left: 2px;
+    left: 0.2rem;
     right: auto;
     &:hover {
-      left: 1px;
+      left: 0.1rem;
       right: auto;
     }
   }
@@ -397,13 +397,13 @@ jq-Datepicker
   .ui-datepicker-group-last .ui-datepicker-header,
   .ui-datepicker-group-middle .ui-datepicker-header {
     border-right-width: 0;
-    border-left-width: 1px;
+    border-left-width: 0.1rem;
   }
 }
 .datepicker-guide {
-  height: 50px;
-  padding: 9px 20px;
-  margin: 25px -20px -20px;
+  height: 5rem;
+  padding: 0.9rem 2rem;
+  margin: 2.5rem -2rem -2rem;
   font-size: 1.1rem;
   text-align: center;
   background: #f0f0f0;
