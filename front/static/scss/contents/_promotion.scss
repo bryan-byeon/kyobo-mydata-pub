@@ -154,19 +154,8 @@
         position: relative;
         color: var(--primary-color);
         font-weight: bold;
-        padding-left: 2.4rem;
         font-size: 1.5rem;
         line-height: 2.2rem;
-        &:before {
-          content: '';
-          display: block;
-          width: 2rem;
-          height: 2rem;
-          position: absolute;
-          left: 0;
-          top: 0.1rem;
-          background: url(../images/icon/ico-evt-notice@3x.png) no-repeat 0 0 / contain;
-        }
       }
       > dd {
         margin-top: 0.8rem;

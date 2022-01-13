@@ -233,54 +233,6 @@
       border-radius: 1.6rem 1.6rem 0 0;
       max-height: 100%;
     }
-    &.ty2 {
-      .pop-wrap {
-        transform: none;
-        transition-delay: 0s;
-        margin-bottom: -100%;
-      }
-      &.show {
-        .pop-wrap {
-          margin-bottom: 0;
-        }
-      }
-      .pop-head {
-        padding-top: 2.4rem;
-        padding-bottom: 1.6rem;
-        > div {
-          padding-right: 2rem;
-        }
-        .pop-close {
-          top: 0;
-          left: 50%;
-          width: 3.2rem;
-          height: 2.4rem;
-          margin-left: -1.6rem;
-          background: url(../images/icon/pop-close2@3x.png) no-repeat center center / contain;
-        }
-        + .pop-body {
-          padding-top: 8.8rem;
-        }
-      }
-      .pop-head-product {
-        display: flex;
-        font-weight: normal;
-        .product-img {
-          width: 4rem;
-          flex-shrink: 0;
-          border-radius: 0.4rem;
-        }
-        .product-name {
-          flex: 1 1 auto;
-          margin-left: 1.2rem;
-          font-size: 1.3rem;
-          line-height: 2rem;
-        }
-      }
-      .pop-foot {
-        position: fixed;
-      }
-    }
   }
   &.is-swipe {
     .pop-head {

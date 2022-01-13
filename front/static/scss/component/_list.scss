@@ -71,17 +71,6 @@
     font-size: 1.2rem;
     color: #666;
   }
-  &.notice {
-    &:before {
-      content: '공지';
-      display: block;
-      font-weight: 500;
-      color: #f0431a;
-      margin-bottom: 0.4rem;
-      padding-left: 2rem;
-      background: url(../images/icon/ico-notice@3x.png) no-repeat left center / 1.6rem auto;
-    }
-  }
 }
 .list-count-bar {
   font-size: 1.3rem;

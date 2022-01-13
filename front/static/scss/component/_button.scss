@@ -23,8 +23,8 @@
   -webkit-tap-highlight-color: transparent;
   &.disabled,
   &:disabled {
-    opacity: 0.3;
-    -webkit-tap-highlight-color: transparent;
+    opacity: 0.2;
+    // -webkit-tap-highlight-color: transparent;
   }
 
   &.icon {
@@ -188,11 +188,11 @@
 }
 
 .btn-wrap {
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
   text-align: center;
   clear: both;
   > .button + .button {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
   .button {
     width: 100%;
@@ -276,7 +276,7 @@
       flex-direction: column;
       > * + * {
         margin-left: 0;
-        margin-top: 0.6rem;
+        margin-top: 0.8rem;
       }
     }
   }
@@ -285,7 +285,7 @@
   + .select,
   + .textare,
   + .flex {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
   &.bottom-fixed {
     margin-top: 0;

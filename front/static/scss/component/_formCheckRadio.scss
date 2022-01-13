@@ -36,16 +36,16 @@ div.checkbox.ty2 + div.checkbox.ty2 {
     margin: 0;
     z-index: 2;
     &:checked + i {
-      background: #222;
-      border-color: #222;
+      background: var(--primary-color);
+      border-color: var(--primary-color);
     }
     &:disabled + i {
       background-color: #f8f8f8;
       // +.lbl{color:#666;}
     }
     &:checked:disabled + i {
-      background: #222;
-      border-color: #222;
+      background: var(--primary-color);
+      border-color: var(--primary-color);
       opacity: 0.3;
       // &:after{
       // 	border-color:#fff;
@@ -61,7 +61,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
     height: 2.4rem;
     border: 0.1rem solid #ccc;
     box-sizing: border-box;
-    border-radius: 0.4rem;
+    border-radius: 50%;
     vertical-align: top;
     transition: 0.3s;
     z-index: 1;
@@ -69,9 +69,8 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       content: '';
       display: block;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      border-style: solid;
+      left: 0;
+      top: 0;
     }
     + .lbl {
       margin-left: 2.4rem;
@@ -82,11 +81,11 @@ div.checkbox.ty2 + div.checkbox.ty2 {
     position: relative;
     display: block;
     line-height: 2.2rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     padding: 0.1rem 0;
     &:first-child {
       margin-right: 2.4rem;
-      padding-right: 0.8rem;
+      padding-right: 1rem;
       ~ input,
       ~ i {
         left: auto;
@@ -220,6 +219,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       &:after {
         width: 2rem;
         height: 2rem;
+        margin: 0;
         border: 0 none;
         left: 0.2rem;
         top: 0.2rem;
@@ -278,90 +278,42 @@ div.checkbox.ty2 + div.checkbox.ty2 {
 .checkbox {
   > i {
     &:after {
-      // width:1.1rem;
-      // height:0.6rem;
-      width: 1.46rem;
-      height: 0.8rem;
-      border-width: 0 0 0.2rem 0.2rem;
-      border-color: #ccc;
-      transform: translate(-50%, -70%) rotate(-45deg) scale(0.75);
+      width: 100%;
+      height: 100%;
+      background: url(../images/icon/ico-check-off.png) no-repeat center center / 1.4rem auto;
     }
   }
   > input:checked + i:after {
-    border-color: #fff;
+    background-image: url(../images/icon/ico-check-on.png);
     animation: chkeckboxAni 0.25s linear;
   }
   &.small:not(.btn, .switch) {
     > i {
       &:after {
-        width: 1.2rem;
-        height: 0.6rem;
+        background-size: 1rem auto;
       }
     }
   }
   &.ty2 {
-    min-width: 2rem;
-    min-height: 2rem;
-    > input {
-      width: 2rem;
-      height: 2rem;
-    }
     > i {
-      width: 2rem;
-      height: 2rem;
       border-width: 0;
-      &:after {
-        transform: translate(-50%, -70%) rotate(-45deg) scale(0.9);
-      }
-      + .lbl {
-        margin-left: 2rem;
-      }
     }
     > input:checked + i {
-      // border-color: #000;
       background-color: transparent;
       &:after {
-        border-color: #222;
-      }
-    }
-    .lbl {
-      line-height: 2rem;
-      padding-top: 0;
-      padding-bottom: 0;
-      [class*='i-ico-'] {
-        margin-top: 0.2rem;
-      }
-    }
-    &.small {
-      min-width: 1.6rem;
-      min-height: 1.6rem;
-      > input {
-        width: 1.6rem;
-        height: 1.6rem;
-      }
-      > i {
-        width: 1.6rem;
-        height: 1.6rem;
-        + .lbl {
-          margin-left: 1.6rem;
-        }
-      }
-      .lbl {
-        line-height: 1.6rem;
+        background-image: url(../images/icon/ico-check-2-on.png);
       }
     }
   }
 }
 .radio {
   > i {
-    border-radius: 50%;
     &:after {
       left: 50%;
       top: 50%;
       border-radius: 50%;
       background-color: #ccc;
-      border-color: #ccc;
-      border-width: 0.6rem;
+      border: 0.6rem solid #ccc;
       margin: -0.6rem 0 0 -0.6rem;
     }
   }
@@ -383,13 +335,10 @@ div.checkbox.ty2 + div.checkbox.ty2 {
 }
 @keyframes chkeckboxAni {
   0% {
-    clip: rect(0, 0.3rem, 0, 0);
-  }
-  50% {
-    clip: rect(0, 0.3rem, 1rem, 0);
+    clip: rect(0, 0, 2.4rem, 0);
   }
   100% {
-    clip: rect(0, 1.5rem, 1rem, 0);
+    clip: rect(0, 2.4rem, 2.4rem, 0);
   }
 }
 @keyframes radioAni {
@@ -405,7 +354,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
 }
 .chk-item-list {
   .chk-item + .chk-item {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
 }
 .chk-item {
@@ -413,7 +362,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
   border-radius: 0.4rem;
   transition: border 0.3s;
   &.checked {
-    border-color: #222;
+    border-color: var(--primary-color);
   }
   > .checkbox,
   > .radio {
@@ -480,6 +429,26 @@ div.checkbox.ty2 + div.checkbox.ty2 {
     + .radio,
     + .checkbox {
       margin-top: 1.6rem;
+    }
+  }
+}
+.agree-dl {
+  .agree-dt {
+    padding-bottom: 2rem;
+    + .agree-dd {
+      border-top: 0.1rem solid #ebebeb;
+      padding-top: 2rem;
+    }
+  }
+  .checkbox {
+    .lbl {
+      padding-right: 30px;
+    }
+    .i-ico-arr-right-16 {
+      position: absolute;
+      top: 0.4rem;
+      right: 0;
+      margin-top: 0;
     }
   }
 }

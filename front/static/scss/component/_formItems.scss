@@ -38,14 +38,14 @@ i.require {
   }
   + .form-item,
   + .validate-item {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
 }
 .form-item {
   position: relative;
   + .form-item,
   + .validate-item {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
 }
 .validate-item {
@@ -73,7 +73,7 @@ i.require {
   // }
   + .form-item,
   + .validate-item {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
 }
 .validate-txt {
@@ -90,11 +90,11 @@ i.require {
   + .input,
   + .select,
   + .textare {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
   }
 }
 .help-txt {
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
   font-size: 1.2rem;
   line-height: 1.33;
   color: #666;
