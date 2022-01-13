@@ -600,10 +600,10 @@ ui.Common = {
           $input.val(colorStr);
           $color.text(colorStr);
           if ($baseThemeColor !== colorStr) {
-            $('html').css('--theme-color', colorStr);
+            $('html').css('--primary-color', colorStr);
             uiCookie.set('theme-color', colorStr);
           } else {
-            $('html').removeCss('--theme-color');
+            $('html').removeCss('--primary-color');
             uiCookie.set('theme-color', '');
           }
         };
@@ -1411,34 +1411,42 @@ ui.Tab = {
       const $siblingsSpl = siblings.split(',');
       if ($($siblingsSpl[0]).length) $panelWrap = $($siblingsSpl[0]).closest('.tab-panels');
     }
-    const $panelWrapH = $panelWrap === null ? 0 : $panelWrap.outerHeight();
-    const $panelWrapGap = $panelWrap === null ? 0 : $panelWrapH - $panelWrap.height();
-    if (siblings === undefined || siblings === false || siblings === '') {
-      if ($isPanel) {
-        $panel.siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
-        $panel.addClass('active').attr('aria-expanded', true);
-      } else {
-        $panel.show();
+    if ($panelWrap.hasClass('tab-swipe-panels')) {
+      const $swiper = $panelWrap.data('swiper');
+      if ($swiper !== undefined && isAni) {
+        // $swiper.slideTo($panel.index(), isAni ? 500 : 0);
+        $swiper.slideTo($panel.index(), 300);
       }
     } else {
-      if ($isPanel) {
-        $siblings.attr('aria-expanded', false).removeClass('active');
-        $panel.addClass('active').attr('aria-expanded', true);
+      const $panelWrapH = $panelWrap === null ? 0 : $panelWrap.outerHeight();
+      const $panelWrapGap = $panelWrap === null ? 0 : $panelWrapH - $panelWrap.height();
+      if (siblings === undefined || siblings === false || siblings === '') {
+        if ($isPanel) {
+          $panel.siblings('.tab-panel').attr('aria-expanded', false).removeClass('active');
+          $panel.addClass('active').attr('aria-expanded', true);
+        } else {
+          $panel.show();
+        }
       } else {
-        $siblings.hide();
-        $panel.show();
+        if ($isPanel) {
+          $siblings.attr('aria-expanded', false).removeClass('active');
+          $panel.addClass('active').attr('aria-expanded', true);
+        } else {
+          $siblings.hide();
+          $panel.show();
+        }
       }
-    }
-    if ($isPanel && isAni && $panelWrap.length) {
-      let $setHeight = $panelWrapGap;
-      $panelWrap.find('.tab-panel.active').each(function () {
-        $setHeight += $(this).outerHeight();
-      });
-      if ($panelWrapH !== $setHeight) {
-        $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
-          $panelWrap.removeCss('height');
-          if ($panel.length && isScroll) ui.Scroll.inScreen(panel);
+      if ($isPanel && isAni && $panelWrap.length) {
+        let $setHeight = $panelWrapGap;
+        $panelWrap.find('.tab-panel.active').each(function () {
+          $setHeight += $(this).outerHeight();
         });
+        if ($panelWrapH !== $setHeight) {
+          $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
+            $panelWrap.removeCss('height');
+            if ($panel.length && isScroll) ui.Scroll.inScreen(panel);
+          });
+        }
       }
     }
   },
@@ -1505,10 +1513,44 @@ ui.Tab = {
       });
     }
   },
+  swipe: function (element) {
+    const $element = $(element);
+    $element.each(function () {
+      const $this = $(this);
+      $this.addClass('_autoHeight');
+      $this.attr('data-view', 1);
+      ui.Swiper.ready($this);
+
+      const $tabChageEvt = function (e) {
+        const $index = e.realIndex;
+        const $activePanel = $(e.slides[$index]);
+        const $activePanelId = $activePanel.attr('id');
+        const $activeBtn = $('[href="#' + $activePanelId + '"]');
+
+        $this.find('.swiper-slide').attr({
+          'aria-expanded': false,
+          'aria-hidden': true
+        });
+        $activePanel.attr('aria-expanded', true).removeAttr('aria-hidden');
+        if ($activeBtn.length) ui.Tab.tabActive($activeBtn);
+      };
+      ui.Swiper.base($this, $tabChageEvt);
+
+      $this.find('.swiper-slide').attr({
+        'aria-expanded': false,
+        'aria-hidden': true
+      });
+      $this.find('.swiper-slide.swiper-slide-active').attr('aria-expanded', true).removeAttr('aria-hidden');
+    });
+  },
   isTabInit: false,
   ready: function () {
     if ($('.tab-navi-menu').length) ui.Tab.scrolledCheck('.tab-navi-menu');
     ui.Tab.activeCenter();
+
+    if ($('.tab-swipe-panels').length) {
+      ui.Tab.swipe('.tab-swipe-panels');
+    }
 
     const $uiTab = $('.ui-tab');
     const $hash = location.hash;
@@ -3385,7 +3427,7 @@ ui.Folding = {
 
 //Swiper
 ui.Swiper = {
-  base: function (tar) {
+  base: function (tar, changeEvt) {
     $(tar).each(function () {
       const $this = $(this);
       const $swiper = $this.find('.swiper');
@@ -3476,7 +3518,12 @@ ui.Swiper = {
           centeredSlides: $centeredSlides,
           autoplay: $auto,
           parallax: $parallax,
-          zoom: $zoom
+          zoom: $zoom,
+          on: {
+            slideChangeTransitionEnd: function (e) {
+              if (!!changeEvt) changeEvt(e);
+            }
+          }
         });
         $this.data('swiper', baseSwiper);
       }
@@ -4352,7 +4399,7 @@ const Layer = {
     $html += '<div class="' + Layer.footClass + '">';
     $html += '<div class="flex">';
     if (type === 'confirm' || type === 'prompt') {
-      $html += '<button type="button" id="' + btnCancelId + '" class="button gray h56 w-35fp">취소</button>';
+      $html += '<button type="button" id="' + btnCancelId + '" class="button gray h56">취소</button>';
     }
     $html += '<button type="button" id="' + btnActionId + '" class="button primary h56">확인</button>';
     $html += '</div>';

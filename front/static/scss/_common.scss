@@ -1,6 +1,6 @@
 :root {
   --vh: 1vh;
-  --theme-color: #fe7d65;
+  --primary-color: #fe7d65;
   --base-txt-color: #444;
   --base-font-size: 15px;
   --placeholder-txt-color: #bdbdbd;
@@ -312,7 +312,7 @@ html.lock,
 /* bg-color */
 .bg-primary,
 .bg-green {
-  background-color: var(--theme-color) !important;
+  background-color: var(--primary-color) !important;
 }
 .bg-primary-2,
 .bg-yellow {
@@ -343,7 +343,7 @@ html.lock,
 /*color*/
 .fc-primary,
 .fc-green {
-  color: var(--theme-color) !important;
+  color: var(--primary-color) !important;
 }
 .fc-primary-2,
 .fc-yellow {

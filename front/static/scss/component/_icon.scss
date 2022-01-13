@@ -367,8 +367,8 @@
 .i-ani-success {
   &:before,
   &:after {
-    background: var(--theme-color);
-    border: 1px solid var(--theme-color);
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
   }
   i {
     display: block;

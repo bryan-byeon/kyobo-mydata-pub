@@ -472,13 +472,13 @@
     }
   }
   &.selected > a {
-    color: var(--theme-color);
+    color: var(--primary-color);
     &:before {
-      border-color: var(--theme-color);
-      color: var(--theme-color);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
     }
     .checkbox > i:after {
-      border-color: var(--theme-color);
+      border-color: var(--primary-color);
     }
   }
 }

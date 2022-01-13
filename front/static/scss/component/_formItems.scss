@@ -68,7 +68,7 @@ i.require {
   //   .input,
   //   .select,
   //   .textarea {
-  //     border-color: var(--theme-color);
+  //     border-color: var(--primary-color);
   //   }
   // }
   + .form-item,
@@ -84,7 +84,7 @@ i.require {
     color: #dc512f;
   }
   &.is-success {
-    color: var(--theme-color);
+    color: var(--primary-color);
   }
   + .flex,
   + .input,

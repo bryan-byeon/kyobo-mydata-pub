@@ -31,7 +31,7 @@
   .section & {
     @include outer;
   }
-  --tab-active: var(--theme-color);
+  --tab-active: var(--primary-color);
   position: relative;
   height: 50px;
   background: #fff;
@@ -179,6 +179,14 @@
     &.flex {
       display: flex;
     }
+  }
+}
+.tab-swipe-panels {
+  .tab-panel {
+    display: block;
+  }
+  .swiper-pagination {
+    display: none;
   }
 }
 

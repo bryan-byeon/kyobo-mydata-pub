@@ -74,7 +74,7 @@
   }
 
   &.primary {
-    background: var(--theme-color);
+    background: var(--primary-color);
     color: #fff;
   }
   &.secondary {
@@ -105,8 +105,8 @@
     background: #fff;
     &.primary,
     &.green {
-      border-color: var(--theme-color);
-      color: var(--theme-color);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
     }
     &.secondary,
     &.red {
@@ -209,8 +209,8 @@
           width: calc(100% + 1px);
         }
         &.checked {
-          border-color: var(--theme-color);
-          color: var(--theme-color);
+          border-color: var(--primary-color);
+          color: var(--primary-color);
           z-index: 1;
         }
       }

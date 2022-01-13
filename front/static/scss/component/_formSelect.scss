@@ -67,7 +67,7 @@
   &.is-success {
     select,
     .btn-select {
-      border-color: var(--theme-color);
+      border-color: var(--primary-color);
     }
   }
   &.option-open {
@@ -95,7 +95,7 @@
       line-height: 20px;
       color: #666;
       &.selected {
-        color: var(--theme-color);
+        color: var(--primary-color);
       }
     }
   }
