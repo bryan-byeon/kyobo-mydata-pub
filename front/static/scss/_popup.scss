@@ -155,17 +155,17 @@
     .pop-wrap {
       pointer-events: auto;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
-    &.zipcode {
-      .pop-body {
-        background: #ececec;
-        padding-bottom: 0;
-      }
-      .daum-zipcode {
-        border-top: 0.1rem solid #363636;
-        height: 100%;
-      }
+    .pop-head {
+      flex-shrink: 0;
     }
+    .pop-body {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
     &.pop-img-box {
       .pop-wrap {
         background: transparent;
@@ -182,6 +182,17 @@
         width: 4.8rem;
         height: 4.8rem;
         background-image: url(../images/icon/ico-close-w-48@3x.png);
+      }
+    }
+
+    &.zipcode {
+      .pop-body {
+        background: #ececec;
+        padding: 0;
+      }
+      .daum-zipcode {
+        border-top: 0.1rem solid #363636;
+        height: 100%;
       }
     }
   }

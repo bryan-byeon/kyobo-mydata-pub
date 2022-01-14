@@ -35,7 +35,7 @@
   height: 5rem;
   background: #fff;
   border-bottom: 0.1rem solid #ddd;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
   @include web-center;
   &.tab-fixed {
     position: sticky;
@@ -258,7 +258,7 @@
   position: relative;
   height: 5rem;
   background: #fff;
-  transition: 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
   &:before {
     content: '';
     display: block;

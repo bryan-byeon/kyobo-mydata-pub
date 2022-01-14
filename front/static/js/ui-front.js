@@ -553,12 +553,30 @@ ui.Common = {
       } else {
         btnTopOff();
       }
+
+      // 스크롤시 헤더 숨기기
+      const $header = $('#header');
+      if ($SclTop < $lastSclTop) {
+        if ($('.top-fixed.off').length) {
+          $('.top-fixed').removeClass('off').removeCss('transform');
+        }
+      } else {
+        if ($('.top-fixed').length && $header.length) {
+          const $headerH = $header.outerHeight();
+          $('.top-fixed')
+            .addClass('off')
+            .css('transform', 'translateY(-' + $headerH + 'px)');
+        }
+      }
+
       if (ui.Common.isFloating) {
         if ($SclTop < $lastSclTop) {
           //위로 스크롤할때
           $('.floating-bar').removeClass('off');
+          if ($('.top-fixed').length) $('.top-fixed').removeClass('off');
         } else {
           $('.floating-bar').addClass('off');
+          if ($('.top-fixed').length) $('.top-fixed').addClass('off');
         }
         if ($SclTop + $Height > $scrollHeight - 3) {
           $('.floating-bar').removeClass('off').addClass('end');

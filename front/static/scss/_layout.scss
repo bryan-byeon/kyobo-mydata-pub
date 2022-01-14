@@ -14,7 +14,7 @@
   height: 4rem;
   flex-shrink: 0;
   z-index: 50;
-  transition: z-index 0s 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
   html.ios & {
     @include iosTop(top);
   }
