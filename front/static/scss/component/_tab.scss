@@ -31,12 +31,11 @@
   .section & {
     @include outer;
   }
-  --tab-active: var(--primary-color);
   position: relative;
   height: 5rem;
   background: #fff;
   border-bottom: 0.1rem solid #ddd;
-  transition: 0.3s;
+  transition: box-shadow 0.3s;
   @include web-center;
   &.tab-fixed {
     position: sticky;
@@ -60,7 +59,7 @@
       height: 0.4rem;
       margin-left: -0.2rem;
       border-radius: 50%;
-      background: var(--tab-active);
+      background: var(--primary-color);
     }
   }
   .tab-list {
@@ -84,7 +83,7 @@
       transition: 0.3s;
     }
     &.active > a {
-      color: var(--tab-active);
+      color: var(--primary-color);
     }
   }
   .tab-expand-btn {
@@ -150,7 +149,7 @@
         }
         &.active {
           a {
-            color: var(--tab-active);
+            color: var(--primary-color);
           }
         }
       }
@@ -210,14 +209,14 @@
     z-index: 1;
   }
   .tab-list {
-    padding: 0 2rem;
+    padding: 0 2.4rem;
     &:before {
       content: '';
       display: block;
       position: absolute;
-      left: 2rem;
+      left: 2.4rem;
       top: 0;
-      right: 2rem;
+      right: 2.4rem;
       bottom: 0;
       border: 0.1rem solid #ddd;
       border-radius: 0.4rem;

@@ -317,6 +317,37 @@ ui.Common = {
     const $titleEl = '#header h1';
     if ($($titleEl).length) $($titleEl).html(string);
   },
+  getTopFixedHeight: function (element) {
+    let $element = $(element);
+    let $topFixedHeight = 0;
+    const $plusHeight = function (target) {
+      let $height = $(target).outerHeight();
+      if ($(target).css('position') !== 'sticky') $height = $(target).children().outerHeight();
+      $topFixedHeight += $height;
+    };
+    if ($('.top-fixed').length) {
+      while (!$element.is('body')) {
+        const $prevAll = $element.prevAll();
+        if ($prevAll.length) {
+          $prevAll.each(function () {
+            const $this = $(this);
+            if ($this.hasClass('top-fixed')) {
+              $plusHeight($this);
+            } else {
+              const $child = $this.find('.top-fixed');
+              if ($child.length) {
+                $child.each(function () {
+                  $plusHeight(this);
+                });
+              }
+            }
+          });
+        }
+        $element = $element.parent();
+      }
+    }
+    return $topFixedHeight;
+  },
   fixed: function (target) {
     //고정(fixed)
     const $target = $(target);
@@ -329,13 +360,7 @@ ui.Common = {
         $target.each(function () {
           if ($(this).closest('.' + Layer.popClass).length) return;
           const $this = $(this);
-          let $topMargin = 0;
-          if ($('.top-fixed').length) {
-            $('.top-fixed').each(function () {
-              if ($this[0] == $(this)[0]) return false;
-              $topMargin += $(this).children().outerHeight();
-            });
-          }
+          let $topMargin = ui.Common.getTopFixedHeight($this);
           let $topEl = $this;
           let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
           if ($scrollTop + $topMargin > $offsetTop) {
@@ -1669,14 +1694,12 @@ ui.Tab = {
       }
 
       let $winScrollTop = $(window).scrollTop();
+
       const $topFixed = $this.closest('.top-fixed');
       if ($topFixed.length) {
-        let $scrollMove = getOffset($topFixed[0]).top;
-        if ($('#header').length) {
-          $winScrollTop = $winScrollTop - $('#header').outerHeight();
-          $scrollMove = $scrollMove - $('#header').outerHeight();
-        }
-        if ($winScrollTop > $scrollMove) ui.Scroll.top($scrollMove);
+        const $topMargin = ui.Common.getTopFixedHeight($this);
+        const $scrollMove = getOffset($topFixed[0]).top;
+        if ($winScrollTop + $topMargin > $scrollMove) ui.Scroll.top($scrollMove - $topMargin);
       }
 
       if ($($href).length) {
@@ -3437,12 +3460,7 @@ ui.Folding = {
     const $scrollTop = $(window).scrollTop();
     let $winHeight = $(window).height();
     if ($('.bottom-fixed').length) $winHeight = $winHeight - $('.bottom-fixed').children().outerHeight();
-    let $topMargin = 10;
-    if ($('.top-fixed').length) {
-      $('.top-fixed').each(function () {
-        $topMargin = $topMargin + $(this).outerHeight();
-      });
-    }
+    const $topMargin = 10 + ui.Common.getTopFixedHeight(btn);
     const $winEnd = $scrollTop + $winHeight;
     const $btnTop = $(btn).offset().top - $topMargin;
     const $thisTop = $(panel).offset().top;
@@ -3817,12 +3835,7 @@ ui.Scroll = {
     const $scrollTop = $(window).scrollTop();
     let $winHeight = $(window).height();
     const $bottomMargin = $('.bottom-fixed-space').length ? $('.bottom-fixed-space').outerHeight() + 10 : 10;
-    let $topMargin = 10;
-    if ($('.top-fixed').length) {
-      $('.top-fixed').each(function () {
-        $topMargin = $topMargin + $(this).outerHeight();
-      });
-    }
+    const $topMargin = 10 + ui.Common.getTopFixedHeight(target);
     const $winTop = $scrollTop + $topMargin;
     const $winEnd = $scrollTop + $winHeight - $bottomMargin;
     const $targetTop = $target.offset().top;

@@ -301,7 +301,7 @@
               height: 2.4rem;
               position: absolute;
               top: 1.2rem;
-              right: 2rem;
+              right: 2.4rem;
               background: url(../images/common/gnb-toggle@3x.png) no-repeat center center / contain;
               transform: rotate3d(1, 0, 0, 0deg);
               transition: 0.3s;
@@ -427,7 +427,7 @@
   flex-direction: column;
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  right: 2.4rem;
   z-index: 50;
   transition: padding 0.3s, bottom 0.3s;
   &.top-on {
