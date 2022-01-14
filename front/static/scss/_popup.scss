@@ -169,7 +169,9 @@
 
   //type
   &.full {
+    pointer-events: none;
     .pop-wrap {
+      pointer-events: auto;
       height: 100%;
     }
     .pop-body {

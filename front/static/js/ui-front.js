@@ -4963,7 +4963,7 @@ const Layer = {
       }
       if (Layer.openPop.indexOf('#' + $id) < 0) Layer.openPop.push('#' + $id);
 
-      if (!$(tar).hasClass('alert') && !$(tar).hasClass('bg-no-click')) {
+      if (!$(tar).hasClass('alert') && !$(tar).hasClass('full') && !$(tar).hasClass('bg-no-click')) {
         const $bgClick = '<div class="pop-bg-close ui-pop-close" role="button" aria-label="팝업창 닫기"></div>';
         if (!$(tar).find('.pop-bg-close').length) $(tar).prepend($bgClick);
       }
@@ -5103,7 +5103,7 @@ const Layer = {
   close: function (tar, callback) {
     if (!$(tar).hasClass(Layer.showClass)) return console.log(tar, '해당팝업 안열려있음');
     const $id = $(tar).attr('id');
-    let $closeDelay = 710;
+    let $closeDelay = 610;
     let $lastPop = '';
     const $visible = $('.' + Layer.popClass + '.' + Layer.showClass).length;
 
@@ -5143,7 +5143,8 @@ const Layer = {
     $(tar).removeClass(Layer.showClass).data('focusMove', false).data('popPosition', false);
     $(tar).attr('aria-hidden', 'true').removeAttr('tabindex aria-labelledby');
     if ($(tar).hasClass('no_motion')) $closeDelay = 10;
-    setTimeout(function () {
+
+    const $closeAfter = function () {
       $(tar).removeAttr('style');
       if ($(tar).hasClass('is-swipe')) {
         $(tar)
@@ -5164,26 +5165,33 @@ const Layer = {
         .find('.' + Layer.focusInClass)
         .removeAttr('tabindex');
       if ($(tar).find('.pop-close.last_focus').length) $(tar).find('.pop-close.last_focus').remove();
-    }, $closeDelay);
 
-    //알럿창
-    if ($(tar).hasClass(Layer.alertClass) || $(tar).hasClass(Layer.selectClass) || $(tar).hasClass(Layer.removePopClass)) {
-      setTimeout(function () {
+      //알럿창
+      if ($(tar).hasClass(Layer.alertClass) || $(tar).hasClass(Layer.selectClass) || $(tar).hasClass(Layer.removePopClass)) {
         if ($(tar).hasClass(Layer.selectClass)) Layer.isSelectOpen = false;
         if ($(tar).hasClass(Layer.alertClass)) {
           const $content = $(tar).find('.message>div').html();
           Layer.beforeCont.splice(Layer.beforeCont.indexOf($content), 1);
         }
         $(tar).remove();
-      }, $closeDelay);
-    }
+      }
 
-    //callback
-    if (!!callback) {
-      setTimeout(function () {
+      //callback
+      if (!!callback) {
         callback();
-      }, $closeDelay);
-    }
+      }
+    };
+
+    setTimeout(function () {
+      $closeAfter();
+    }, $closeDelay);
+    /*
+    const $wrap = $(tar).find('.' + Layer.wrapClass);
+    $wrap.on('transitionend', function () {
+      $closeAfter();
+      $wrap.off('transitionend');
+    });
+    */
   },
   resize: function () {
     const $popup = $('.' + Layer.popClass + '.' + Layer.showClass);

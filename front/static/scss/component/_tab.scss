@@ -182,6 +182,12 @@
   }
 }
 .tab-swipe-panels {
+  .section & {
+    @include outer;
+    .tab-panel {
+      padding: 0 24px;
+    }
+  }
   .tab-panel {
     display: block;
   }
