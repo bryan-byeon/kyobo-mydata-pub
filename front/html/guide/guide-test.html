@@ -24,23 +24,6 @@
         <!-- 컨텐츠 -->
         <section id="contents">
           <div class="section">
-            <h2 class="gd__h2">tab-box-menu</h2>
-            <div>
-              <div class="tab-box-menu ui-tab">
-                <div class="tab-inner">
-                  <i class="tab-line" aria-hidden="true"></i>
-                  <ul class="tab-list">
-                    <li class="tab"><a href="#tabBox1">텝메뉴1</a></li>
-                    <li class="tab"><a href="#tabBox2">텝메뉴2</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-panels tab-swipe-panels mt-20">
-                <!-- .tab-panels 영역 없어도 됨(전환될때 인터렉션용) -->
-                <div id="tabBox1" class="tab-panel">텝메뉴1텝메뉴1<br />텝메뉴1텝메뉴1</div>
-                <div id="tabBox2" class="tab-panel">텝메뉴2텝메뉴2<br />텝메뉴2텝메뉴2<br />텝메뉴2텝메뉴2<br />텝메뉴2텝메뉴2</div>
-              </div>
-            </div>
             <h1 class="gd__h1">scss 샘플</h1>
             <div style="position: relative; overflow: hidden">
               <div class="gd__box"></div>
@@ -50,7 +33,7 @@
                 <div class="gd__box-2"></div>
               </div>
             </div>
-
+            <!--
             <h1 class="gd__h1">스크롤 테스트</h1>
             <div>
               <h2 class="gd__h2">역방향</h2>
@@ -126,6 +109,7 @@
                 </div>
               </div>
             </div>
+            -->
             <br />
             <br />
             <br />
@@ -133,6 +117,50 @@
           </div>
         </section>
         <!-- //컨텐츠 -->
+
+        <div id="fullPopup" class="popup full show" role="dialog" aria-hidden="true">
+          <article class="pop-wrap">
+            <div class="pop-head">
+              <div>
+                <h1>전체팝업</h1>
+                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+              </div>
+            </div>
+            <div class="pop-body">
+              <div class="section">
+                <!-- CMS 영역 -->
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                <div class="tab-navi-menu ui-tab tab-fixed">
+                  <div class="tab-inner">
+                    <i class="tab-line" aria-hidden="true"></i>
+                    <ul class="tab-list">
+                      <li class="tab">
+                        <a href="#"><span>popup 속 탭1</span></a>
+                      </li>
+                      <li class="tab">
+                        <a href="#"><span>popup 속 탭1</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
+                팝업 컨텐츠<br />
+                팝업 컨텐츠<br />
+                <!-- //CMS 영역 -->
+              </div>
+            </div>
+            <div class="pop-foot">
+              <div>
+                <div class="flex">
+                  <a href="#" class="button primary h60 ui-pop-close">확인</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
       </main>
       <!-- 컨테이너 -->
     </article>

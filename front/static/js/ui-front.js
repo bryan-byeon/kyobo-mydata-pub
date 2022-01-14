@@ -1646,7 +1646,7 @@ ui.Tab = {
     if ($('.tab-line').length && ui.Tab.isTabInit) {
       $('.tab-line').each(function () {
         const $this = $(this);
-        if (parseInt($this.css('left')) === 0) return;
+        // if (parseInt($this.css('left')) === 0) return;
         const $parent = $this.closest('.tab-inner').parent();
         ui.Tab.line($parent, false);
       });
@@ -5083,6 +5083,7 @@ const Layer = {
         }
         setTimeout(function () {
           Layer.resize();
+          ui.Tab.resize();
         }, 10);
         Layer.opening--;
       }, $openDelay);
