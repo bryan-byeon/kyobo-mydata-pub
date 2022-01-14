@@ -33,7 +33,7 @@
 
   @return $number;
 }
-@function -iosConstant($value, $top: true, $miuns: false) {
+@function -iosConstant($value: 0, $top: true, $miuns: false) {
   @if ($value==0) {
     @if ($top) {
       @return constant(safe-area-inset-top);
@@ -56,7 +56,7 @@
     }
   }
 }
-@function -iosEnv($value, $top: true, $miuns: false) {
+@function -iosEnv($value: 0, $top: true, $miuns: false) {
   @if ($value==0) {
     @if ($top) {
       @return env(safe-area-inset-top);

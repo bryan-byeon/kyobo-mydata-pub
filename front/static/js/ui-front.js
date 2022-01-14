@@ -1366,7 +1366,7 @@ ui.Tab = {
         if ($saveAry.length) uiStorage.set('tabInfoSave', JSON.stringify($saveAry));
       }
     };
-    setTimeout(_tabInfoSave, 1000);
+    setTimeout(_tabInfoSave, 500);
     window.addEventListener('unload', _tabInfoSave);
   },
   scrolledCheck: function (wrap) {

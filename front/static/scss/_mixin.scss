@@ -93,12 +93,6 @@
   }
 }
 
-@mixin line {
-  height: 0.8rem;
-  border-top: 0.1rem solid #dbdbdb;
-  background: #f4f4f4;
-}
-
 @mixin web-center {
   max-width: 102.4rem;
   margin-left: auto;
@@ -110,7 +104,7 @@
   backdrop-filter: blur(1px);
 }
 
-@mixin iosTop($key, $value, $miuns: false) {
+@mixin iosTop($key, $value: 0, $miuns: false) {
   // #{$key}: $value;
   @if ($miuns) {
     #{$key}: -iosConstant($value, true, true);
@@ -120,7 +114,7 @@
     #{$key}: -iosEnv($value, true, false);
   }
 }
-@mixin iosBottom($key, $value, $miuns: false) {
+@mixin iosBottom($key, $value: 0, $miuns: false) {
   // #{$key}: $value;
   @if ($miuns) {
     #{$key}: -iosConstant($value, false, true);

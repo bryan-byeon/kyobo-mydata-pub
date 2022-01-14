@@ -992,13 +992,16 @@ $bdTypes: (solid, dashed, dotted);
 
 .hr-line {
   display: block;
-  border: 0 none;
   margin: 0;
-  @include line;
+  height: 0;
+  border: 0 none;
+  background: #f3f3f3;
+  border-top: 0.8rem solid #f3f3f3;
+  border-bottom: 0.1rem solid #ebebeb;
   &.ty2 {
     height: 0;
     background: none;
-    border-top: 0.1rem solid #eee;
+    border-top-width: 0;
     &.dashed {
       border-style: dashed;
     }

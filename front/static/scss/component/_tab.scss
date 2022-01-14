@@ -103,7 +103,7 @@
       top: 0;
       width: 2rem;
       height: 100%;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9) 50%, #fff 100%);
       pointer-events: none;
     }
     button {
@@ -164,7 +164,7 @@
       top: 0;
       width: 2rem;
       height: 100%;
-      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 60%, #fff 100%);
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9) 50%, #fff 100%);
       z-index: 1;
       pointer-events: none;
     }

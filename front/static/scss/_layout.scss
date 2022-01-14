@@ -3,15 +3,21 @@
   min-height: -vh(100);
   flex-direction: column;
   // min-width: 32rem;
+  html.ios & {
+    @include iosTop(padding-top);
+  }
 }
 #header,
 .header-space {
   position: sticky;
   top: 0;
   height: 4rem;
-  flex: 0 0 4rem;
+  flex-shrink: 0;
   z-index: 50;
   transition: z-index 0s 0.3s;
+  html.ios & {
+    @include iosTop(top);
+  }
   > div {
     position: relative;
     display: flex;
@@ -408,15 +414,6 @@
   }
   &.last {
     padding-bottom: 6rem;
-  }
-  &.top-line {
-    position: relative;
-    &:before {
-      content: '';
-      display: block;
-      @include line;
-      @include outer;
-    }
   }
 }
 // @media (min-width:1024px) {
