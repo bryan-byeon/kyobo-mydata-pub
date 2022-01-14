@@ -42,7 +42,8 @@
     }
   }
   &:not(.no-title).shadow {
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
   }
   > div {
     display: flex;
@@ -57,7 +58,7 @@
     }
   }
   h1 {
-    @include ellipsis(2);
+    // @include ellipsis(2);
     font-size: 1.8rem;
     line-height: 2.4rem;
     margin: 0;
@@ -114,13 +115,14 @@
   z-index: 10;
   > div {
     padding: 2.4rem;
+    padding-top: 0.8rem;
   }
   &.btn-wrap {
     margin-top: 0;
   }
   &.shadow {
-    box-shadow: 0 -0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
-    // box-shadow:0 -0.6rem 1rem 0.1rem rgba(255, 255, 255, 0.8);
+    // box-shadow: 0 -0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -0.8rem 1.6rem 0.8rem rgba(255, 255, 255, 1);
   }
 }
 .popup {
@@ -228,12 +230,28 @@
   //   }
   // }
   &.bottom {
-    padding-top: -vh(20);
+    padding-top: -vh(15);
     .pop-wrap {
       position: fixed;
       bottom: 0;
-      border-radius: 1.6rem 1.6rem 0 0;
+      border-radius: 2rem 2rem 0 0;
       max-height: 100%;
+    }
+    .pop-head {
+      > div {
+        padding: 3.2rem 5rem 3.2rem 2.4rem;
+      }
+      h1 {
+        font-size: 2rem;
+        line-height: 2.9rem;
+      }
+      .pop-close {
+        top: 3.4rem;
+        margin-top: 0;
+      }
+      + .pop-body {
+        padding-top: 9.3rem;
+      }
     }
   }
   &.is-swipe {

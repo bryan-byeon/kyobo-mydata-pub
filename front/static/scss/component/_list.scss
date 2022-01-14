@@ -26,11 +26,11 @@
   padding: 10rem 0;
   text-align: center;
   [class*='i-ico-'] {
-    margin-bottom: 1.6rem;
+    vertical-align: top;
+    margin-bottom: 1.2rem;
   }
   p {
-    font-size: 1.4rem;
-    color: #666;
+    color: #999;
   }
 }
 .file-list {
@@ -142,7 +142,7 @@
       &:after {
         top: 50%;
         margin-top: -1.2rem;
-        background-image: url(../images/icon/ico-arrow-down-24@3x.png);
+        background-image: url(../images/icon/ico-arr-down-24.png);
       }
     }
   }

@@ -583,7 +583,7 @@ ui.Common = {
         // if(!$('.gd__theme_color').length){
         // }
         let $html = '<div class="gd__theme_color">';
-        $html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arrow-right-16" aria-hidden="true"></i></button>';
+        $html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arr-right-16" aria-hidden="true"></i></button>';
         $html += '<dl>';
         $html += '<dt>테마색상 변경확인</dt>';
         $html += '<dd>';
@@ -5302,7 +5302,7 @@ const Layer = {
     const $agreeBtnClassName = 'ui-pop-agree-btn';
     const $agreeCheckedClassName = 'ui-pop-agree-checked';
     const $agreeCheckedTxt = '동의하기';
-    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary h56">계속보기</button>';
+    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary h60">계속보기</button>';
     let $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
     if ($foot.length) {
       $body.addClass('next-foot');

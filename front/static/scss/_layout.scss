@@ -28,7 +28,8 @@
       // left: 0;
       // top: 0;
       // width: 100%;
-      box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+      // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+      box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
     }
   }
   &.no-shadow {
@@ -387,13 +388,24 @@
 }
 #contents {
   position: relative;
-  > .section:last-child {
-    padding-bottom: 6rem;
+  > .section {
+    &:first-child {
+      padding-top: 2.4rem;
+    }
+    &:last-child {
+      padding-bottom: 6rem;
+    }
+  }
+  > div:first-child:not(.section) + .section {
+    padding-top: 2.4rem;
   }
 }
 .section {
   padding: 0 2.4rem;
   @include web-center;
+  &.first {
+    padding-top: 2.4rem;
+  }
   &.last {
     padding-bottom: 6rem;
   }
