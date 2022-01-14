@@ -5067,7 +5067,7 @@ const Layer = {
         if (!$('html').hasClass('lock')) Body.lock();
         $(tar).addClass(Layer.showClass);
         $(tar)
-          .find('.' + Layer.bodyClass)
+          .find('.' + Layer.wrapClass)
           .scrollTop(0);
 
         //swipe 기능
@@ -5222,32 +5222,32 @@ const Layer = {
       $head.removeAttr('style').removeClass('shadow');
       $body.removeAttr('tabindex style');
 
-      if ($head.length) headHeight($head, $body);
+      // if ($head.length) headHeight($head, $body);
       if ($foot.length) footHeight($foot, $body);
 
       //레이어팝업
       //컨텐츠 스크롤이 필요할때
       const $height = $this.height();
       // const  $popHeight = $this.find('.'+Layer.wrapClass).outerHeight();
-      if ($this.hasClass('bottom') || $this.hasClass('modal')) $body.css('max-height', $height);
+      if ($this.hasClass('bottom') || $this.hasClass('modal')) $wrap.css('max-height', $height);
 
       //팝업 헤더 shadow
       Layer.shadow($body);
 
       //바텀시트 선택요소로 스크롤
-      if ($this.hasClass(Layer.selectClass) && $this.find('.selected').length && !$body.hasClass('scrolling')) {
-        const $bodyPdT = parseInt($body.css('padding-top'));
-        const $bodyH = $body.outerHeight();
-        const $bodyH2 = $body.get(0).scrollHeight;
-        const $selected = $body.find('.selected');
+      if ($this.hasClass(Layer.selectClass) && $this.find('.selected').length && !$wrap.hasClass('scrolling')) {
+        const $headH = $head.outerHeight();
+        const $wrapH = $wrap.outerHeight();
+        const $wrapH2 = $wrap.get(0).scrollHeight;
+        const $selected = $wrap.find('.selected');
         const $selectedH = $selected.outerHeight();
         const $selectedTop = $selected.position().top;
 
-        if ($bodyH < $bodyH2) {
-          $body.addClass('scrolling');
-          const $sclTop = $selectedTop - $bodyH + $bodyH / 2 - $selectedH / 2 + $bodyPdT / 2;
-          $body.animate({ scrollTop: $sclTop }, 300, function () {
-            $body.removeClass('scrolling');
+        if ($wrapH < $wrapH2) {
+          $wrap.addClass('scrolling');
+          const $sclTop = $selectedTop - $wrapH + $wrapH / 2 - $selectedH / 2 + $headH / 2;
+          $wrap.animate({ scrollTop: $sclTop }, 300, function () {
+            $wrap.removeClass('scrolling');
           });
         }
       }
@@ -5258,18 +5258,18 @@ const Layer = {
     // const $popup = $wrap.closest('.' + Layer.popClass);
     const $head = $wrap.find('.' + Layer.headClass);
     const $foot = $wrap.find('.' + Layer.footClass);
-    const $contScrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $(el).scrollTop();
-    const $contScrollHeight = $wrap.hasClass(Layer.pageClass) ? $('body').get(0).scrollHeight : $(el)[0].scrollHeight;
-    const $contHeight = $wrap.hasClass(Layer.pageClass) ? $(window).height() : $(el).outerHeight();
+    const $scrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $wrap.scrollTop();
+    const $scrollHeight = $wrap.hasClass(Layer.pageClass) ? $('body').get(0).scrollHeight : $wrap[0].scrollHeight;
+    const $wrapHeight = $wrap.hasClass(Layer.pageClass) ? $(window).height() : $wrap.outerHeight();
     if ($head.length) {
-      if ($contScrollTop > 50) {
+      if ($scrollTop > 0) {
         $head.addClass('shadow');
       } else {
         $head.removeClass('shadow');
       }
     }
     if ($foot.length) {
-      if ($contScrollTop + $contHeight >= $contScrollHeight - 10) {
+      if ($scrollTop + $wrapHeight >= $scrollHeight - 10) {
         $foot.removeClass('shadow');
       } else {
         $foot.addClass('shadow');
@@ -5293,12 +5293,13 @@ const Layer = {
     if (!$pop.hasClass(Layer.showClass)) return false;
     if ($pop.data('popPosition') == true) return false;
     $pop.data('popPosition', true);
-    let $body = $pop.find('.' + Layer.bodyClass);
+    let $wrap = $pop.find('.' + Layer.wrapClass);
+    let $wrapH = $wrap.outerHeight();
+    let $wrapSclH = $wrap[0].scrollHeight;
+    const $body = $pop.find('.' + Layer.bodyClass);
     const $foot = $pop.find('.' + Layer.footClass);
-    let $bodyH = $body.outerHeight();
     const $isAgree = $pop.hasClass(Layer.agreePopClass);
     const $agreeInput = $($pop.data('agree-input'));
-    let $bodySclH = $body[0].scrollHeight;
     const $agreeBtnClassName = 'ui-pop-agree-btn';
     const $agreeCheckedClassName = 'ui-pop-agree-checked';
     const $agreeCheckedTxt = '동의하기';
@@ -5309,15 +5310,15 @@ const Layer = {
       if ($isAgree) {
         if ($agreeInput.prop('checked')) {
           $foot.find('.flex').find('.button').text('확인');
-        } else if ($bodyH < $bodySclH) {
+        } else if ($wrapH < $wrapSclH) {
           $foot.find('.flex').find('.button').text($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
           $foot.find('.flex').prepend($agreeBtnhtml);
           $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
           $agreeChecked = $body.closest('.' + Layer.wrapClass).find('.' + $agreeCheckedClassName);
           $agreeBtn.one('click', function (e) {
             e.preventDefault();
-            const $sclMove = $body[0].scrollHeight - $body.outerHeight();
-            $body.animate({ scrollTop: $sclMove }, 300);
+            const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
+            $wrap.animate({ scrollTop: $sclMove }, 300);
           });
           $agreeChecked.one('click', function (e) {
             e.preventDefault();
@@ -5329,13 +5330,13 @@ const Layer = {
 
     Layer.resize();
 
-    $body.off('scroll').on('scroll', function () {
+    $wrap.off('scroll').on('scroll', function () {
       if ($isAgree && $agreeBtn.length) {
-        $body = $(this);
-        $bodyH = $body.outerHeight();
-        $bodySclH = $body[0].scrollHeight;
-        $bodySclTop = $body.scrollTop();
-        if ($bodySclTop + $bodyH >= $bodySclH - 10) {
+        $wrap = $(this);
+        $wrapH = $wrap.outerHeight();
+        $wrapSclH = $wrap[0].scrollHeight;
+        $wrapSclTop = $wrap.scrollTop();
+        if ($wrapSclTop + $wrapH >= $wrapSclH - 10) {
           $agreeBtn.next().show();
           $agreeBtn.remove();
         }
