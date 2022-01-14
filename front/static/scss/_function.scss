@@ -8,14 +8,12 @@
   @return mix(black, $color, $percentage);
 }
 
-@function -vh($val: 1, $add: null) {
+@function -vh($val: 1, $add: null, $isMinus: false) {
   @if ($add) {
-    $num: strip-unit($add);
-    $num2: -absPX($num);
-    @if ($num < 0) {
-      @return calc((var(--vh) * #{$val}) - #{$num2});
+    @if ($isMinus) {
+      @return calc((var(--vh) * #{$val}) - #{$add});
     } @else {
-      @return calc((var(--vh) * #{$val}) + #{$num2});
+      @return calc((var(--vh) * #{$val}) + #{$add});
     }
   } @else {
     @return calc(var(--vh) * #{$val});

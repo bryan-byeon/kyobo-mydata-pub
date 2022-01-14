@@ -160,3 +160,135 @@
     }
   }
 }
+
+.qna-list {
+  line-height: 1.33;
+  > ul {
+    > li {
+      border-bottom: 0.1rem solid #eee;
+      &.no-line {
+        border-bottom-width: 0;
+      }
+    }
+  }
+  &.no-last-line {
+    > ul {
+      > li:last-child {
+        border-bottom-width: 0;
+      }
+    }
+  }
+  &.ty2 {
+    > ul {
+      > li {
+        border-bottom-width: 0;
+        + li {
+          margin-top: 2.4rem;
+        }
+      }
+    }
+    .qna-list-item {
+      padding-bottom: 0;
+    }
+    .folding-panel {
+      padding-top: 1.6rem;
+      padding-bottom: 0;
+    }
+  }
+  .product-info {
+    padding: 1.6rem;
+    border: 0.1rem solid #eee;
+    border-radius: 0.8rem;
+  }
+  .qna-list-item {
+    position: relative;
+    display: block;
+    padding: 1.6rem 0;
+    overflow: hidden;
+    .info {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      color: #666;
+      .badge {
+        margin-right: 1.2rem;
+      }
+      > div {
+        margin-right: 0.6rem;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    .tit {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-top: 1.2rem;
+      position: relative;
+      color: #222;
+      &.in-chk {
+        padding-left: 3.2rem;
+        line-height: 2.2rem;
+        .checkbox {
+          position: absolute;
+          left: 0;
+          top: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .qna-list-question {
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    color: #666;
+    + .qna-list-answer {
+      margin-top: 2rem;
+    }
+  }
+  .qna-list-answer {
+    padding: 1.6rem;
+    border-radius: 0.4rem;
+    background-color: #f6f6f6;
+    .date {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 1.2rem;
+    }
+  }
+  .folding-head {
+    .qna-list-item {
+      &:before {
+        content: '';
+        display: block;
+        width: 2.4rem;
+        height: 2.4rem;
+        position: absolute;
+        top: 1.6rem;
+        right: 0;
+        background: url(../images/icon/ico-arr-down-24.png) no-repeat center center / contain;
+        transition: 0.3s;
+      }
+      .info {
+        padding-right: 2.5rem;
+      }
+    }
+  }
+  li.open {
+    .folding-head {
+      .qna-list-item:before {
+        transform: rotate3d(1, 0, 0, 180deg);
+      }
+    }
+  }
+  .folding-panel {
+    display: none;
+    padding-bottom: 1.6rem;
+  }
+}
+.qna-textarea {
+  textarea {
+    padding: 1.3rem 1.6rem;
+    height: -vh(100, 20rem, true);
+  }
+}
