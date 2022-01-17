@@ -44,6 +44,7 @@
 }
 .tit-h2 {
   font-size: 1.8rem;
+  line-height: 2.6rem;
 }
 .tit-h3 {
   font-size: 1.5rem;
@@ -122,9 +123,9 @@
 }
 // 텍스트리스트
 .txt-list {
-  font-size: 1.3rem;
-  color: #666;
-  line-height: 1.54;
+  font-size: 1.4rem;
+  color: #888;
+  line-height: 1.4286;
   & + .txt_list {
     margin-top: 1.5rem;
   }
@@ -138,7 +139,7 @@
   }
   > ul > li,
   > li {
-    margin-top: 0.8rem;
+    margin-top: 0.858em;
     &:first-child {
       margin-top: 0;
     }
@@ -151,23 +152,23 @@
   .dot,
   .dash {
     position: relative;
-    padding-left: 1rem;
+    padding-left: 1.2rem;
     &:before {
       content: '';
       display: block;
       position: absolute;
       left: 0;
-      top: 0.7em;
-      width: 0.3rem;
-      height: 0.3rem;
-      background-color: #666;
+      top: 0.65em;
+      background-color: #888;
     }
   }
   .dot:before {
+    width: 0.4rem;
+    height: 0.4rem;
     border-radius: 50%;
   }
   .dash:before {
-    width: 0.4rem;
+    width: 0.6rem;
     height: 0.1rem;
     margin-top: 0.1rem;
   }
@@ -189,26 +190,24 @@
 }
 .txt-dl-list {
   font-size: 1.4rem;
+  line-height: 2rem;
   > li {
     display: flex;
     > .dt {
       width: 31.25%;
       max-width: 15rem;
       padding-right: 1rem;
-      opacity: 0.65;
       flex-shrink: 0;
-      font-size: 1.3rem;
-      padding-top: 0.1rem;
+      color: #888;
     }
     > .dd {
       flex: 1 1 auto;
+      text-align: right;
+      color: #222;
     }
     + li {
-      margin-top: 0.8rem;
+      margin-top: 1.2rem;
     }
-  }
-  .btn-txt {
-    padding: 0.1rem 0;
   }
 }
 .text-content {
