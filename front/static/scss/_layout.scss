@@ -422,6 +422,16 @@
   > div:first-child:not(.section) + .section {
     padding-top: 2.4rem;
   }
+  .center-contents {
+    height: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > * {
+      width: 100%;
+    }
+  }
   .bottom-contents {
     margin-top: auto;
   }
