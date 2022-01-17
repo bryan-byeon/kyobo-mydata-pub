@@ -656,6 +656,12 @@ ui.Common = {
           transform: 'translateY(' + (100 - $opacityVal * 100) + '%)'
         });
       }
+    } else {
+      $headerTit.css({
+        opacity: 1,
+        transform: 'translateY(0%)'
+      });
+      // if ($headerTit.hasClass('scl-title-hide')) $headerTit.removeClass('scl-title-hide').removeAttr('style');
     }
   },
   guide: function () {
