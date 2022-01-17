@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+    <title>교보증권 마이데이타</title>
+    <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-front.js"></script>
+    <style></style>
+    <script>
+      ui.Common.title('테스트');
+    </script>
+  </head>
+  <body>
+    <article id="wrap">
+      <div class="header-space" data-include-html="../../include/header.html"></div>
+      <div data-include-html="../../include/gnb.html"></div>
+
+      <!-- 컨테이너 -->
+      <main id="container">
+        <!-- 컨텐츠 -->
+        <section id="contents">
+          <div class="section mb-30">
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <!-- <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1>
+            <h1>상단 컨텐츠</h1> -->
+          </div>
+          <div class="section bottom-contents">
+            <h1>하단 컨텐츠</h1>
+          </div>
+          <div class="btn-wrap bottom-fixed">
+            <div class="flex">
+              <a href="#" class="button h60 gray w-30fp">부정</a>
+              <a href="#" class="button h60 primary">긍정</a>
+            </div>
+          </div>
+        </section>
+        <!-- //컨텐츠 -->
+      </main>
+      <!-- 컨테이너 -->
+    </article>
+    <script>
+      let appendIdx = 1;
+      const sclTimer = setInterval(function () {
+        const $html = '<p>' + appendIdx + '번째 메세지 입니다.</p>';
+        $('.scroll__area').each(function () {
+          const $this = $(this);
+          if ($this.find('.anchor').length) {
+            $this.find('.anchor').before($html);
+          } else {
+            $this.prepend($html);
+          }
+        });
+        appendIdx += 1;
+        if (appendIdx > 50) clearInterval(sclTimer);
+      }, 500);
+    </script>
+  </body>
+</html>
