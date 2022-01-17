@@ -375,7 +375,7 @@ ui.Common = {
             if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
             $topEl.removeCss('top');
             $this.removeClass('top-fixed');
-            if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) $('#header').removeClass('no-shadow');
+            if (($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed') && $('.top-fixed').length === 1) || !$('.top-fixed').length) $('#header').removeClass('no-shadow');
           }
         });
       });
@@ -5378,7 +5378,7 @@ const Layer = {
           if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
           $topEl.removeCss('top');
           $this.removeClass($topClassName);
-          if ($head.hasClass($topClassName) && $wrap.find('.' + $topClassName).length === 1) $head.removeClass('no-shadow');
+          if (($head.hasClass($topClassName) && $wrap.find('.' + $topClassName).length === 1) || !$wrap.find('.' + $topClassName).length) $head.removeClass('no-shadow');
         }
       });
     }
