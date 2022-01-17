@@ -26,6 +26,7 @@
     padding: 0 1.7rem;
     background: #fff;
     transition: 0.3s;
+    overflow: hidden;
     @include web-center;
   }
   &.top-fixed {
@@ -146,7 +147,10 @@
     }
   }
 }
-
+.scl-title-hide {
+  opacity: 0;
+  transform: translateY(100%);
+}
 #gnb {
   visibility: hidden;
   position: fixed;

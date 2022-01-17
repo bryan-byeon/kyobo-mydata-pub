@@ -386,11 +386,12 @@ ui.Common = {
     if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
     let $title = document.title;
     const $divide = ' | ';
+    const $titleEl = '#header h1';
     if ($title.indexOf($divide) >= 0) {
       $title = $title.split($divide)[0];
-      const $titleEl = '#header h1';
       if ($($titleEl).length) $($titleEl).html($title);
     }
+    if ($('.' + ui.Common.scrollShowTitleClass).length) $($titleEl).addClass('scl-title-hide');
   },
   headerUI: function () {
     $(document)
@@ -486,9 +487,9 @@ ui.Common = {
       if (isBtn && !$('.floating-bar .floating-btn').length) $('.floating-bar').prepend($('.floating-btn'));
     }
   },
-  top: function () {
+  scroll: function () {
     //top 버튼
-    const settings = {
+    const btnTop = {
       button: '#btnTop',
       text: '컨텐츠 상단으로 이동',
       min: 100,
@@ -499,10 +500,10 @@ ui.Common = {
     let btnHtml = '';
     if (!$('#container').length) return;
     if (!$('.floating-btn').length) btnHtml += '<div class="floating-btn">';
-    btnHtml += '<a href="#" id="' + settings.button.substring(1) + '" class="btn btn-page-top" title="' + settings.text + '" role="button" aria-label="' + settings.text + '"></a>';
+    btnHtml += '<a href="#" id="' + btnTop.button.substring(1) + '" class="btn btn-page-top" title="' + btnTop.text + '" role="button" aria-label="' + btnTop.text + '"></a>';
     if (!$('.floating-btn').length) btnHtml += '</div>';
 
-    if (!$(settings.button).length) {
+    if (!$(btnTop.button).length) {
       if ($('.floating-btn').length) {
         $('.floating-btn').append(btnHtml);
       } else if ($('.floating-bar').length && $('.floating-bar').is(':visible')) {
@@ -515,33 +516,35 @@ ui.Common = {
     }
 
     $(document)
-      .on('click', settings.button, function (e) {
+      .on('click', btnTop.button, function (e) {
         e.preventDefault();
-        ui.Scroll.top(0, settings.scrollSpeed);
+        ui.Scroll.top(0, btnTop.scrollSpeed);
         $('#wrap').find($focusableEl).first().focus();
       })
       .on('mouseenter', function () {
-        $(settings.button).addClass(settings.hoverclass);
+        $(btnTop.button).addClass(btnTop.hoverclass);
       })
       .on('mouseleave', function () {
-        $(settings.button).removeClass(settings.hoverClass);
+        $(btnTop.button).removeClass(btnTop.hoverClass);
       });
 
     const btnTopOn = function () {
-      $(settings.button).attr('aria-hidden', 'false').addClass(settings.onClass);
+      $(btnTop.button).attr('aria-hidden', 'false').addClass(btnTop.onClass);
       $('.floating-btn').addClass('top-on');
     };
 
     const btnTopOff = function () {
-      $(settings.button).attr('aria-hidden', 'true').removeClass(settings.onClass);
+      $(btnTop.button).attr('aria-hidden', 'true').removeClass(btnTop.onClass);
       $('.floating-btn').removeClass('top-on');
     };
 
     let $lastSclTop = $(window).scrollTop();
     const $scrollEvt = function () {
       const $SclTop = $(window).scrollTop();
+      const $header = $('#header');
+      const $headerH = $header.outerHeight();
       const $spaceH = $('.bottom-fixed-space').outerHeight();
-      const $bottom = parseInt($(settings.button).parent().css('bottom'));
+      const $bottom = parseInt($(btnTop.button).parent().css('bottom'));
       const $margin = 20;
       const $Height = window.innerHeight;
       const $scrollHeight = $('body').get(0).scrollHeight;
@@ -549,27 +552,32 @@ ui.Common = {
         $('.floating-btn').css('bottom', $spaceH + $margin);
       }
 
-      if ($SclTop > settings.min) {
+      if ($SclTop > btnTop.min) {
         btnTopOn();
       } else {
         btnTopOff();
       }
+      const $fadeTitle = $('.' + ui.Common.scrollShowTitleClass);
+      const $headerTit = $header.find('h1');
+      if ($fadeTitle.length && $headerTit.length) ui.Common.scrollShowTitle($fadeTitle[0], window, $header[0], $headerTit[0]);
 
       // 스크롤시 헤더 숨기기
-      const $header = $('#header');
+      /*
       if ($SclTop < $lastSclTop) {
         if ($('.top-fixed.fixed-off').length) {
           $('.top-fixed').removeClass('fixed-off').removeCss('transform');
         }
       } else {
         if ($('.top-fixed').length && $header.length) {
-          const $headerH = $header.outerHeight();
           $('.top-fixed')
             .addClass('fixed-off')
             .css('transform', 'translateY(-' + $headerH + 'px)');
         }
       }
+      */
 
+      // 플로팅 바 스크롤시 숨기기
+      /*
       if (ui.Common.isFloating) {
         if ($SclTop < $lastSclTop) {
           //위로 스크롤할때
@@ -585,6 +593,7 @@ ui.Common = {
           $('.floating-bar').removeClass('end');
         }
       }
+      */
       const $btnFixed = $('.btn-wrap.bottom-fixed');
       if ($btnFixed.length) {
         $btnFixed.each(function () {
@@ -613,12 +622,41 @@ ui.Common = {
     };
     const $scrollEndEvt = function () {
       const $SclTop = $(window).scrollTop();
-      if ($SclTop > settings.min) {
+      if ($SclTop > btnTop.min) {
         btnTopOff();
       }
     };
     $(window).on('scroll', $scrollEvt);
     window.addEventListener('scroll', ui.Util.debounce($scrollEndEvt, 1500));
+  },
+  scrollShowTitleClass: 'page-fade-title',
+  scrollShowTitle: function (target, wrap, header, titleEl) {
+    const $fadeTitle = $(target);
+    if (!$fadeTitle.length) return;
+    const $wrap = $(wrap);
+    const $header = $(header);
+    const $headerTit = $(titleEl);
+    const $SclTop = $wrap.scrollTop();
+    const $headerH = $header.outerHeight();
+    if (!$headerTit.hasClass('scl-title-hide')) $headerTit.addClass('scl-title-hide');
+
+    const $fadeTitleTop = getOffset($fadeTitle[0]).top;
+    const $fadeTitleHeight = $fadeTitle.outerHeight();
+    const $fadeTitleEnd = $fadeTitleTop + $fadeTitleHeight;
+    if ($SclTop < $fadeTitleEnd) {
+      const $topMargin = Math.max(ui.Common.getTopFixedHeight($fadeTitle), $headerH);
+      let $opacityVal = Math.max(0, $SclTop + $topMargin - $fadeTitleTop) / $fadeTitleHeight;
+      $opacityVal = Math.max(0, Math.min(1, Math.round(($opacityVal + Number.EPSILON) * 100) / 100));
+
+      if ($opacityVal === 0) {
+        $headerTit.removeAttr('style');
+      } else {
+        $headerTit.css({
+          opacity: $opacityVal,
+          transform: 'translateY(' + (100 - $opacityVal * 100) + '%)'
+        });
+      }
+    }
   },
   guide: function () {
     const themeColorChange = function () {
@@ -722,7 +760,7 @@ ui.Common = {
     ui.Common.space();
     ui.Common.step();
     ui.Common.floating();
-    ui.Common.top();
+    ui.Common.scroll();
     //ui.Common.landscape();
 
     ui.Common.guide();
@@ -5008,6 +5046,11 @@ const Layer = {
         $(tar).show();
       }
 
+      if ($(tar).find('.' + Layer.scrollShowTitleClass).length)
+        $(tar)
+          .find('.' + Layer.headClass + ' h1')
+          .addClass('scl-title-hide');
+
       setTimeout(function () {
         //리턴 포커스
         let $focusEl = '';
@@ -5289,7 +5332,6 @@ const Layer = {
   fixed: function (el) {
     //  pop fixed
     const $wrap = $(el).hasClass(Layer.wrapClass) ? $(el) : $(el).closest('.' + Layer.wrapClass);
-    // const $popup = $wrap.closest('.' + Layer.popClass);
     const $head = $wrap.find('.' + Layer.headClass);
     const $foot = $wrap.find('.' + Layer.footClass);
     const $scrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $wrap.scrollTop();
@@ -5357,6 +5399,7 @@ const Layer = {
     let $wrap = $pop.find('.' + Layer.wrapClass);
     let $wrapH = $wrap.outerHeight();
     let $wrapSclH = $wrap[0].scrollHeight;
+    const $head = $pop.find('.' + Layer.headClass);
     const $body = $pop.find('.' + Layer.bodyClass);
     const $foot = $pop.find('.' + Layer.footClass);
     const $isAgree = $pop.hasClass(Layer.agreePopClass);
@@ -5403,8 +5446,13 @@ const Layer = {
         }
       }
       Layer.fixed($wrap);
+
+      const $fadeTitle = $wrap.find('.' + Layer.scrollShowTitleClass);
+      const $headerTit = $head.find('h1');
+      if ($fadeTitle.length && $headerTit.length) ui.Common.scrollShowTitle($fadeTitle[0], $wrap[0], $head[0], $headerTit[0]);
     });
   },
+  scrollShowTitleClass: 'pop-fade-title',
   focusMove: function (tar) {
     if (!$(tar).hasClass(Layer.showClass)) return false;
     if ($(tar).data('focusMove') == true) return false;
