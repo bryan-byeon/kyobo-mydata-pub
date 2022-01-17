@@ -22,7 +22,7 @@
   position: sticky;
   top: 0;
   background: #fff;
-  z-index: 10;
+  z-index: 20;
   transition: box-shadow 0.5s;
   &.no-title {
     height: 0 !important;
@@ -32,10 +32,6 @@
       height: 0 !important;
       overflow: hidden;
     }
-  }
-  &:not(.no-title).shadow {
-    // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
   }
   > div {
     display: flex;
@@ -109,12 +105,16 @@
   &.btn-wrap {
     margin-top: 0;
   }
-  &.shadow {
+  &.pop-bottom-fixed {
     // box-shadow: 0 -0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
     // box-shadow: 0 -0.8rem 1.6rem 0.8rem rgba(255, 255, 255, 1);
     background-color: transparent;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 16px, #fff 100%);
   }
+}
+.pop-top-fixed:not(.no-shadow) {
+  // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
 }
 .popup {
   display: none;

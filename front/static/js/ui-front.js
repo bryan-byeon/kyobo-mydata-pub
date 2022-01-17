@@ -317,7 +317,8 @@ ui.Common = {
     const $titleEl = '#header h1';
     if ($($titleEl).length) $($titleEl).html(string);
   },
-  getTopFixedHeight: function (element) {
+  getTopFixedHeight: function (element, className) {
+    if (className == undefined) className = 'top-fixed';
     let $element = $(element);
     let $topFixedHeight = 0;
     const $plusHeight = function (target) {
@@ -325,16 +326,16 @@ ui.Common = {
       if ($(target).css('position') !== 'sticky') $height = $(target).children().outerHeight();
       $topFixedHeight += $height;
     };
-    if ($('.top-fixed').length) {
+    if ($('.' + className).length) {
       while (!$element.is('body')) {
         const $prevAll = $element.prevAll();
         if ($prevAll.length) {
           $prevAll.each(function () {
             const $this = $(this);
-            if ($this.hasClass('top-fixed')) {
+            if ($this.hasClass(className)) {
               $plusHeight($this);
             } else {
-              const $child = $this.find('.top-fixed');
+              const $child = $this.find('.' + className);
               if ($child.length) {
                 $child.each(function () {
                   $plusHeight(this);
@@ -360,9 +361,9 @@ ui.Common = {
         $target.each(function () {
           if ($(this).closest('.' + Layer.popClass).length) return;
           const $this = $(this);
-          let $topMargin = ui.Common.getTopFixedHeight($this);
+          const $topMargin = ui.Common.getTopFixedHeight($this);
           let $topEl = $this;
-          let $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
+          const $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
           if ($scrollTop + $topMargin > $offsetTop) {
             $this.data('top', $offsetTop);
             $this.addClass('top-fixed');
@@ -557,14 +558,14 @@ ui.Common = {
       // 스크롤시 헤더 숨기기
       const $header = $('#header');
       if ($SclTop < $lastSclTop) {
-        if ($('.top-fixed.off').length) {
-          $('.top-fixed').removeClass('off').removeCss('transform');
+        if ($('.top-fixed.fixed-off').length) {
+          $('.top-fixed').removeClass('fixed-off').removeCss('transform');
         }
       } else {
         if ($('.top-fixed').length && $header.length) {
           const $headerH = $header.outerHeight();
           $('.top-fixed')
-            .addClass('off')
+            .addClass('fixed-off')
             .css('transform', 'translateY(-' + $headerH + 'px)');
         }
       }
@@ -5255,7 +5256,7 @@ const Layer = {
       $body.removeAttr('tabindex style');
 
       // if ($head.length) headHeight($head, $body);
-      if ($foot.length) footHeight($foot, $body);
+      // if ($foot.length) footHeight($foot, $body);
 
       //레이어팝업
       //컨텐츠 스크롤이 필요할때
@@ -5264,7 +5265,7 @@ const Layer = {
       if ($this.hasClass('bottom') || $this.hasClass('modal')) $wrap.css('max-height', $height);
 
       //팝업 헤더 shadow
-      Layer.shadow($body);
+      Layer.fixed($wrap);
 
       //바텀시트 선택요소로 스크롤
       if ($this.hasClass(Layer.selectClass) && $this.find('.selected').length && !$wrap.hasClass('scrolling')) {
@@ -5285,7 +5286,8 @@ const Layer = {
       }
     });
   },
-  shadow: function (el) {
+  fixed: function (el) {
+    //  pop fixed
     const $wrap = $(el).hasClass(Layer.wrapClass) ? $(el) : $(el).closest('.' + Layer.wrapClass);
     // const $popup = $wrap.closest('.' + Layer.popClass);
     const $head = $wrap.find('.' + Layer.headClass);
@@ -5293,19 +5295,46 @@ const Layer = {
     const $scrollTop = $wrap.hasClass(Layer.pageClass) ? $(window).scrollTop() : $wrap.scrollTop();
     const $scrollHeight = $wrap.hasClass(Layer.pageClass) ? $('body').get(0).scrollHeight : $wrap[0].scrollHeight;
     const $wrapHeight = $wrap.hasClass(Layer.pageClass) ? $(window).height() : $wrap.outerHeight();
+    const $topClassName = 'pop-top-fixed';
+    const $bottomClassName = 'pop-bottom-fixed';
     if ($head.length) {
       if ($scrollTop > 0) {
-        $head.addClass('shadow');
+        $head.addClass($topClassName);
       } else {
-        $head.removeClass('shadow');
+        $head.removeClass($topClassName);
       }
     }
+
     if ($foot.length) {
       if ($scrollTop + $wrapHeight >= $scrollHeight - 10) {
-        $foot.removeClass('shadow');
+        $foot.removeClass($bottomClassName);
       } else {
-        $foot.addClass('shadow');
+        $foot.addClass($bottomClassName);
       }
+    }
+    const $fixed = $wrap.find('.pop-fixed');
+    const $wrapTop = $wrap.position().top;
+    if ($fixed.length) {
+      $fixed.each(function () {
+        const $this = $(this);
+        const $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
+        const $topMargin = ui.Common.getTopFixedHeight($this, $topClassName);
+        let $topEl = $this;
+        const $top = $offsetTop - $wrapTop;
+        if ($scrollTop + $topMargin > $top) {
+          $this.data('top', $offsetTop);
+          $this.addClass($topClassName);
+          if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+          if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
+          if ($head.hasClass($topClassName)) $head.addClass('no-shadow');
+        } else {
+          $this.removeData('top');
+          if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
+          $topEl.removeCss('top');
+          $this.removeClass($topClassName);
+          if ($head.hasClass($topClassName) && $wrap.find('.' + $topClassName).length === 1) $head.removeClass('no-shadow');
+        }
+      });
     }
   },
   agree: function (element) {
@@ -5373,7 +5402,7 @@ const Layer = {
           $agreeBtn.remove();
         }
       }
-      Layer.shadow($body);
+      Layer.fixed($wrap);
     });
   },
   focusMove: function (tar) {
@@ -5455,13 +5484,14 @@ const Layer = {
       $elment.removeClass(Layer.pageClass);
       return;
     }
-    const $body = $elment.find('.' + Layer.bodyClass);
-    const $foot = $elment.find('.' + Layer.footClass);
+    const $wrap = $elment.hasClass(Layer.wrapClass) ? $elment : $elment.find('.' + Layer.wrapClass);
+    const $body = $wrap.find('.' + Layer.bodyClass);
+    const $foot = $wrap.find('.' + Layer.footClass);
     if ($body.length && $foot.length) $body.addClass('next-foot');
 
-    Layer.shadow($body);
+    Layer.fixed($wrap);
     $(window).scroll(function () {
-      Layer.shadow($body);
+      Layer.fixed($wrap);
     });
   },
   loadIdx: 0,

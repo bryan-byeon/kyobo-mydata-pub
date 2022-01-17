@@ -30,19 +30,6 @@
             <h1>가나다라마바사</h1>
             <h1>가나다라마바사</h1>
             <h1>가나다라마바사</h1>
-            <div class="tab-navi-menu ui-tab tab-fixed">
-              <div class="tab-inner">
-                <i class="tab-line" aria-hidden="true"></i>
-                <ul class="tab-list">
-                  <li class="tab">
-                    <a href="#"><span>popup 속 탭1</span></a>
-                  </li>
-                  <li class="tab">
-                    <a href="#"><span>popup 속 탭1</span></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
             <h1 class="gd__h1">scss 샘플</h1>
             <div style="position: relative; overflow: hidden">
@@ -134,11 +121,12 @@
             <br />
             <br />
             <h1>가나다라마바사</h1>
+            <button class="button line" onclick="Layer.open('#fullPopup')">팝업열기</button>
           </div>
         </section>
         <!-- //컨텐츠 -->
 
-        <div id="fullPopup" class="popup full show" role="dialog" aria-hidden="true">
+        <div id="fullPopup" class="popup full" role="dialog" aria-hidden="true">
           <article class="pop-wrap">
             <div class="pop-head">
               <div>
@@ -151,7 +139,7 @@
                 <!-- CMS 영역 -->
                 팝업 컨텐츠<br />
                 팝업 컨텐츠<br />
-                <div class="tab-navi-menu ui-tab tab-fixed">
+                <div class="tab-navi-menu ui-tab pop-fixed">
                   <div class="tab-inner">
                     <i class="tab-line" aria-hidden="true"></i>
                     <ul class="tab-list">
@@ -159,13 +147,26 @@
                         <a href="#"><span>popup 속 탭1</span></a>
                       </li>
                       <li class="tab">
-                        <a href="#"><span>popup 속 탭1</span></a>
+                        <a href="#"><span>popup 속 탭2</span></a>
                       </li>
                     </ul>
                   </div>
                 </div>
                 팝업 컨텐츠<br />
                 팝업 컨텐츠<br />
+                <div class="tab-navi-menu ui-tab pop-fixed">
+                  <div class="tab-inner">
+                    <i class="tab-line" aria-hidden="true"></i>
+                    <ul class="tab-list">
+                      <li class="tab">
+                        <a href="#"><span>popup 속 탭1</span></a>
+                      </li>
+                      <li class="tab">
+                        <a href="#"><span>popup 속 탭2</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
                 팝업 컨텐츠<br />
                 팝업 컨텐츠<br />

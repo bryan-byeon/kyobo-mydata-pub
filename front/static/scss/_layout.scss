@@ -29,14 +29,17 @@
     @include web-center;
   }
   &.top-fixed {
-    > div {
-      // position: fixed;
-      // left: 0;
-      // top: 0;
-      // width: 100%;
-      // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
-      box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+    box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+    &.fixed-off {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
+    // > div {
+    // position: fixed;
+    // left: 0;
+    // top: 0;
+    // width: 100%;
+    // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+    // }
   }
   &.no-shadow {
     > div {
