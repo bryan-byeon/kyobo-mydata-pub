@@ -268,6 +268,8 @@
     @include outer;
   }
   .match-profile {
+    position: relative;
+    top: 0;
     background: none;
     height: auto;
     padding: 0;

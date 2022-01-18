@@ -759,13 +759,13 @@ ui.Common = {
   init: function () {
     ui.Common.header();
     ui.Common.headerUI();
-    ui.Gnb.init();
+    // ui.Gnb.init();
     ui.Common.spaceAppend();
     ui.Common.space();
     ui.Common.step();
     ui.Common.floating();
     ui.Common.scroll();
-    //ui.Common.landscape();
+    // ui.Common.landscape();
 
     ui.Common.guide();
 
