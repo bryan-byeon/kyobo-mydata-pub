@@ -3,20 +3,22 @@
   min-height: -vh(100);
   flex-direction: column;
   // min-width: 32rem;
-  html.ios & {
-    @include iosTop(padding-top);
-  }
 }
-#header,
 .header-space {
   position: sticky;
   top: 0;
   height: 4rem;
   flex-shrink: 0;
+}
+#header {
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
   z-index: 50;
+  background: #fff;
   transition: box-shadow 0.3s, transform 0.3s;
   html.ios & {
-    @include iosTop(top);
+    @include iosTop(padding-top);
   }
   > div {
     position: relative;
@@ -24,7 +26,6 @@
     height: 4rem;
     align-items: center;
     padding: 0 1.7rem;
-    background: #fff;
     transition: 0.3s;
     overflow: hidden;
     @include web-center;
@@ -47,6 +48,19 @@
       box-shadow: none !important;
     }
   }
+  &.head-ty2 {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.3s, transform 0.3s;
+    &.top-fixed {
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(2px);
+    }
+  }
+
   h1 {
     flex: 1 1 auto;
     font-size: 1.8rem;

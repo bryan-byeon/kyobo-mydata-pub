@@ -17,8 +17,6 @@
   <body>
     <article id="wrap">
       <div class="header-space" data-include-html="../../include/header.html"></div>
-      <div data-include-html="../../include/gnb.html"></div>
-
       <!-- 컨테이너 -->
       <main id="container">
         <!-- 컨텐츠 -->
@@ -63,21 +61,5 @@
       </main>
       <!-- 컨테이너 -->
     </article>
-    <script>
-      let appendIdx = 1;
-      const sclTimer = setInterval(function () {
-        const $html = '<p>' + appendIdx + '번째 메세지 입니다.</p>';
-        $('.scroll__area').each(function () {
-          const $this = $(this);
-          if ($this.find('.anchor').length) {
-            $this.find('.anchor').before($html);
-          } else {
-            $this.prepend($html);
-          }
-        });
-        appendIdx += 1;
-        if (appendIdx > 50) clearInterval(sclTimer);
-      }, 500);
-    </script>
   </body>
 </html>

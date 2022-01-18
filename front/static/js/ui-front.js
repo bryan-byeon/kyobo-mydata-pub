@@ -368,7 +368,7 @@ ui.Common = {
             $this.data('top', $offsetTop);
             $this.addClass('top-fixed');
             if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
-            if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
+            if ($topMargin !== parseInt($topEl.css('top')) && $topEl.css('position') === 'fixed') $topEl.css('top', $topMargin);
             if ($this.attr('id') !== 'header' && $('#header').hasClass('top-fixed')) $('#header').addClass('no-shadow');
           } else {
             $this.removeData('top');
@@ -1452,8 +1452,8 @@ ui.Tab = {
         if ($saveAry.length) uiStorage.set('tabInfoSave', JSON.stringify($saveAry));
       }
     };
-    setTimeout(_tabInfoSave, 500);
-    window.addEventListener('unload', _tabInfoSave);
+    window.addEventListener('beforeunload', _tabInfoSave);
+    // window.addEventListener('unload', _tabInfoSave); //모바일에서 잘안됨
   },
   scrolledCheck: function (wrap) {
     if (!$(wrap).length) return;
@@ -5371,7 +5371,7 @@ const Layer = {
           $this.data('top', $offsetTop);
           $this.addClass($topClassName);
           if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();
-          if ($topMargin !== parseInt($topEl.css('top'))) $topEl.css('top', $topMargin);
+          if ($topMargin !== parseInt($topEl.css('top')) && $topEl.css('position') === 'fixed') $topEl.css('top', $topMargin);
           if ($head.hasClass($topClassName)) $head.addClass('no-shadow');
         } else {
           $this.removeData('top');

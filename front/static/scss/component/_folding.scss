@@ -43,6 +43,11 @@
         transform: rotate3d(1, 0, 0, 0deg);
         transition: 0.3s;
       }
+      &.reverse-arr {
+        &:after {
+          transform: rotate3d(1, 0, 0, 180deg);
+        }
+      }
       &.disabled {
         background: #f0f0f0;
         color: #858585;
@@ -53,6 +58,9 @@
     }
     div.folding-btn {
       padding-right: 2.4rem;
+      &:after {
+        content: none;
+      }
     }
   }
   > li.open {
@@ -68,6 +76,10 @@
   li.open .folding-head .folding-btn:after,
   .folding-head .folding-btn.open:after {
     transform: rotate3d(1, 0, 0, 180deg);
+  }
+  li.open .folding-head .folding-btn.reverse-arr:after,
+  .folding-head .folding-btn.reverse-arr.open:after {
+    transform: rotate3d(1, 0, 0, 0deg);
   }
   .folding-panel {
     display: none;
