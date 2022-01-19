@@ -231,6 +231,21 @@
     }
   }
 }
+.ui-pop-agree-swiper {
+  .swiper-pagination {
+    // display: none;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    margin: 0;
+    &.swiper-pagination-progressbar {
+      background: #fefefe;
+      .swiper-pagination-progressbar-fill {
+        background: var(--primary-color);
+      }
+    }
+  }
+}
 
 //micro-slider
 .micro-slider {

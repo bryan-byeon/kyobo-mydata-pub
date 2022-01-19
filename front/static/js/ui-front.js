@@ -4458,6 +4458,7 @@ const Layer = {
   focusInClass: 'ui-focus-in',
   removePopClass: 'ui-pop-remove',
   agreePopClass: 'ui-pop-agree',
+  agreePopSwiperClass: 'ui-pop-agree-swiper',
   popClass: 'popup',
   pageClass: 'page',
   wrapClass: 'pop-wrap',
@@ -4711,6 +4712,7 @@ const Layer = {
         },
         zoom: true
       });
+      $popup.find('.img-box-swiper').data('swiper', imgSwiper);
     });
     $popup.find('.pop-close').click(function (e) {
       e.preventDefault();
@@ -5258,6 +5260,12 @@ const Layer = {
         $(tar).remove();
       }
 
+      // 약관
+      if ($(tar).hasClass(Layer.agreePopClass)) {
+        $(tar).find('.ui-pop-agree-btn').remove();
+        $(tar).find('.ui-pop-agree-checked').removeClass('ui-pop-agree-checked');
+      }
+
       //callback
       if (!!callback) {
         callback();
@@ -5385,16 +5393,133 @@ const Layer = {
       });
     }
   },
+  agreeAllIdx: 0,
+  agreeAll: function ($ary) {
+    const $setPopup = function (targetId) {
+      const $input = $(targetId);
+      const $pop = $input.data('agree-pop');
+      $($pop)
+        .addClass(Layer.agreePopClass)
+        .find('.' + Layer.footClass + ' .button')
+        .data('agree-input', targetId);
+      return $pop;
+    };
+    const $popAry = [];
+    for (let i = 0; i < $ary.length; i++) {
+      const $inputId = $.trim($ary[i]);
+      const $pop = $setPopup($inputId);
+      const $obj = {
+        input: $inputId,
+        pop: $pop
+      };
+      $popAry.push($obj);
+    }
+
+    const agreePopId = 'uiPopAgreeAll' + Layer.agreeAllIdx;
+    let $html =
+      '<div id="' + agreePopId + '" class="' + Layer.popClass + ' full ' + Layer.agreePopClass + ' ' + Layer.agreePopSwiperClass + ' ' + Layer.removePopClass + '" role="dialog" aria-hidden="true">';
+    $html += '<article class="' + Layer.wrapClass + '">';
+    $html += '<div class="' + Layer.headClass + '">';
+    $html += '  <div class="pop-agree-tit">';
+    $html += '    <div class="swiper-pagination" aria-hidden="true"></div>';
+    $html += '    <h1></h1>';
+    $html += '    <a href="#none" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>';
+    $html += '  </div>';
+    $html += '</div>';
+    $html += '<div class="' + Layer.bodyClass + '">';
+    $html += '  <div class="ui-swiper agree-swiper">';
+    $html += '    <div class="swiper">';
+    $html += '      <div class="swiper-wrapper"></div>';
+    $html += '      </div>';
+    $html += '  </div>';
+    $html += '</div>';
+    $html += '<div class="' + Layer.footClass + '">';
+    $html += '  <div>';
+    // $html += '    <div class="flex">';
+    // $html += '      <a href="#none" class="button primary ui-pop-agree-all-btn" role="button"></a>';
+    // $html += '    </div>';
+    $html += '  </div>';
+    $html += '</div>';
+    $html += '</article>';
+    $html += '</div>';
+
+    if ($('#container').length) {
+      $('#container').append($html);
+    } else {
+      $('body').append($html);
+    }
+    Layer.agreeAllIdx += 1;
+    const $popup = $('#' + agreePopId);
+    const $popupTit = $popup.find('.' + Layer.headClass + ' .pop-agree-tit h1');
+    const $popupWrapper = $popup.find('.swiper-wrapper');
+    const $popupFoot = $popup.find('.' + Layer.footClass);
+    for (let i = 0; i < $popAry.length; i++) {
+      const $inp = $popAry[i].input;
+      const $inpPop = $($popAry[i].pop);
+      const $inpPopTit = $inpPop.find('.' + Layer.headClass + ' h1').html();
+      $popupTit.append('<span>' + $inpPopTit + '</span>');
+      const $btnHtml = '<div class="flex"><a href="#none" class="button primary ui-pop-agree-checked" role="button" data-agree-input="' + $inp + '" data-index="' + i + '">확인</a></div>';
+      $popupFoot.find('>div').append($btnHtml);
+      const $slideHtml = '<div class="swiper-slide"></div>';
+      $popupWrapper.append($slideHtml);
+      const $inpPopBody = $inpPop
+        .find('.' + Layer.bodyClass)
+        .children()
+        .clone();
+      $popupWrapper.find('.swiper-slide').last().append($inpPopBody);
+      if (i !== 0) {
+        $popupTit.find('>span').eq(i).hide();
+        $popupFoot.find('.flex').eq(i).hide();
+      }
+    }
+
+    let agreeSwiper;
+    Layer.open($popup, function () {
+      const $popWrap = $popup.find('.' + Layer.wrapClass);
+      const $popSwiper = $popup.find('.agree-swiper .swiper');
+      const $popSwiperPagination = $popup.find('.swiper-pagination');
+      agreeSwiper = new Swiper($popSwiper[0], {
+        pagination: {
+          el: $popSwiperPagination[0],
+          type: 'progressbar',
+          clickable: false
+        },
+        // allowTouchMove: false,
+        autoHeight: true,
+        on: {
+          slideChangeTransitionEnd: function (e) {
+            const $idx = e.realIndex;
+            $popupTit.find('>span').eq($idx).show().siblings('span').hide();
+            $popupFoot.find('.flex').eq($idx).show().siblings().hide();
+            $popWrap.animate({ scrollTop: 0 }, 100);
+            Layer.resize();
+          }
+        }
+      });
+      $popup.find('.agree-swiper').data('swiper', agreeSwiper);
+    });
+    $popup.find('.pop-close').click(function (e) {
+      e.preventDefault();
+      Layer.close('#' + agreePopId, function () {
+        agreeSwiper.destroy();
+      });
+    });
+  },
   agree: function (element) {
     const $ary = element.split(',');
     const $setPopup = function (targetId) {
       const $input = $(targetId);
       const $pop = $input.data('agree-pop');
-      $($pop).addClass(Layer.agreePopClass).data('agree-input', targetId);
+      $($pop)
+        .addClass(Layer.agreePopClass)
+        .find('.' + Layer.footClass + ' .button')
+        .data('agree-input', targetId);
       return $pop;
     };
 
     if ($ary.length > 1) {
+      Layer.agreeAll($ary);
+      /*
       for (let i = 0; i < $ary.length; i++) {
         const $inputId = $.trim($ary[$ary.length - i - 1]);
         const $pop = $setPopup($inputId);
@@ -5402,6 +5527,7 @@ const Layer = {
           Layer.open($pop);
         }, i * 100);
       }
+      */
     } else {
       const $pop = $setPopup($ary[0]);
       Layer.open($pop);
@@ -5420,55 +5546,84 @@ const Layer = {
     const $foot = $pop.find('.' + Layer.footClass);
 
     const $isAgree = $pop.hasClass(Layer.agreePopClass);
-    const $footBtn = $foot.find('.flex').find('.button');
-    const $agreeInput = $($pop.data('agree-input'));
+    const $isAgreeSwiper = $pop.hasClass(Layer.agreePopSwiperClass);
     const $agreeBtnClassName = 'ui-pop-agree-btn';
     const $agreeCheckedClassName = 'ui-pop-agree-checked';
     const $agreeScrollTxt = '계속보기';
     const $agreeCheckedTxt = '동의하기';
-    const $agreeCheckedTxt2 = $footBtn.data('txt');
+    const $footBtn = $foot.find('.button');
+
     const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary">' + $agreeScrollTxt + '</button>';
-    let $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
+    let $agreeBtn = $pop.find('.' + $agreeBtnClassName);
+    let $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
 
     if ($foot.length) {
       $body.addClass('next-foot');
       if ($isAgree) {
-        if ($agreeInput.prop('checked')) {
-          if ($agreeCheckedTxt2) {
-            if ($footBtn.html() !== $agreeCheckedTxt2) $footBtn.html($agreeCheckedTxt2);
-            $footBtn.removeData('txt');
+        $footBtn.each(function () {
+          const $this = $(this);
+          let $agreeInput = $($this.data('agree-input'));
+          console.log($this, $agreeInput);
+          const $agreeCheckedTxt2 = $footBtn.data('txt');
+          if ($agreeInput.prop('checked')) {
+            if ($agreeCheckedTxt2) {
+              if ($this.html() !== $agreeCheckedTxt2) $this.html($agreeCheckedTxt2);
+              $this.removeData('txt');
+            }
+          } else if ($wrapH < $wrapSclH) {
+            if (!$agreeCheckedTxt2) $this.data('txt', $footBtn.html());
+
+            $this.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
+            $this.before($agreeBtnhtml);
+            $agreeBtn = $pop.find('.' + $agreeBtnClassName);
+            $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
           }
-        } else if ($wrapH < $wrapSclH) {
-          if (!$agreeCheckedTxt2) $footBtn.data('txt', $footBtn.html());
-          $footBtn.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
-          $foot.find('.flex').prepend($agreeBtnhtml);
-          $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
-          $agreeChecked = $body.closest('.' + Layer.wrapClass).find('.' + $agreeCheckedClassName);
-          $agreeBtn.one('click', function (e) {
-            e.preventDefault();
-            const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
-            $wrap.animate({ scrollTop: $sclMove }, 300);
-          });
-          $agreeChecked.one('click', function (e) {
-            e.preventDefault();
-            $agreeInput.prop('checked', true).change();
-          });
-        }
+        });
+
+        $agreeBtn = $pop.find('.' + $agreeBtnClassName);
+        $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
+
+        $agreeBtn.one('click', function (e) {
+          e.preventDefault();
+          const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
+          $wrap.animate({ scrollTop: $sclMove }, 300);
+        });
+        $agreeChecked.one('click', function (e) {
+          e.preventDefault();
+          const $btnInput = $($(this).data('agree-input'));
+          $btnInput.prop('checked', true).change();
+          if ($isAgreeSwiper) {
+            const $swiper = $pop.find('.agree-swiper').data('swiper');
+            const $swiperIdx = $swiper.realIndex;
+            if ($swiperIdx < $swiper.slides.length - 1) {
+              $swiper.slideTo($swiperIdx + 1, 300);
+            } else {
+              Layer.close($pop);
+            }
+          }
+        });
       }
     }
 
     Layer.resize();
 
+    let $lastSclTop = 0;
     $wrap.off('scroll').on('scroll', function () {
       if ($isAgree && $agreeBtn.length) {
         $wrap = $(this);
         $wrapH = $wrap.outerHeight();
         $wrapSclH = $wrap[0].scrollHeight;
         $wrapSclTop = $wrap.scrollTop();
-        if ($wrapSclTop + $wrapH >= $wrapSclH - 10) {
-          $agreeBtn.next().show();
-          $agreeBtn.remove();
+        if ($wrapSclTop + $wrapH >= $wrapSclH - 10 && $lastSclTop < $wrapSclTop) {
+          $agreeBtn.each(function () {
+            const $parent = $(this).parent();
+            if ($(this).parent().is(':visible')) {
+              $(this).next().show();
+              $(this).remove();
+            }
+          });
         }
+        $lastSclTop = $wrapSclTop;
       }
       Layer.fixed($wrap);
 
