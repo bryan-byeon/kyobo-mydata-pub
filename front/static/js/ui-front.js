@@ -5260,8 +5260,12 @@ const Layer = {
 
       // 약관
       if ($(tar).hasClass(Layer.agreePopClass)) {
-        $(tar).find('.ui-pop-agree-btn').remove();
-        $(tar).find('.ui-pop-agree-checked').removeClass('ui-pop-agree-checked');
+        $(tar)
+          .find('.' + Layer.agreeBtnClassName)
+          .remove();
+        $(tar)
+          .find('.' + Layer.agreeCheckedClassName)
+          .removeClass(Layer.agreeCheckedClassName);
       }
 
       //callback
@@ -5392,6 +5396,10 @@ const Layer = {
     }
   },
   agreeAllIdx: 0,
+  agreeTitClassName: 'pop-agree-tit',
+  agreeBtnClassName: 'ui-pop-agree-btn',
+  agreeCheckedClassName: 'ui-pop-agree-checked',
+  agreeCheckboxClassName: 'ui-pop-agree-chk',
   agreeAll: function ($ary) {
     const $setPopup = function (targetId) {
       const $input = $(targetId);
@@ -5418,7 +5426,7 @@ const Layer = {
       '<div id="' + agreePopId + '" class="' + Layer.popClass + ' full ' + Layer.agreePopClass + ' ' + Layer.agreePopSwiperClass + ' ' + Layer.removePopClass + '" role="dialog" aria-hidden="true">';
     $html += '<article class="' + Layer.wrapClass + '">';
     $html += '<div class="' + Layer.headClass + '">';
-    $html += '  <div class="pop-agree-tit">';
+    $html += '  <div class="' + Layer.agreeTitClassName + '">';
     $html += '    <div class="swiper-pagination" aria-hidden="true"></div>';
     $html += '    <h1></h1>';
     $html += '    <a href="#none" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>';
@@ -5448,7 +5456,7 @@ const Layer = {
     }
     Layer.agreeAllIdx += 1;
     const $popup = $('#' + agreePopId);
-    const $popupTit = $popup.find('.' + Layer.headClass + ' .pop-agree-tit h1');
+    const $popupTit = $popup.find('.' + Layer.headClass + ' .' + Layer.agreeTitClassName + ' h1');
     const $popupWrapper = $popup.find('.swiper-wrapper');
     const $popupFoot = $popup.find('.' + Layer.footClass);
     for (let i = 0; i < $popAry.length; i++) {
@@ -5456,7 +5464,8 @@ const Layer = {
       const $inpPop = $($popAry[i].pop);
       const $inpPopTit = $inpPop.find('.' + Layer.headClass + ' h1').html();
       $popupTit.append('<span>' + $inpPopTit + '</span>');
-      const $btnHtml = '<div class="flex"><button type="button" class="button primary ui-pop-agree-checked" role="button" data-agree-input="' + $inp + '" data-index="' + i + '">확인</button></div>';
+      const $btnHtml =
+        '<div class="flex"><button type="button" class="button primary ' + Layer.agreeCheckedClassName + '" role="button" data-agree-input="' + $inp + '" data-index="' + i + '">확인</button></div>';
       $popupFoot.find('>div').append($btnHtml);
       const $slideHtml = '<div class="swiper-slide"></div>';
       $popupWrapper.append($slideHtml);
@@ -5549,16 +5558,12 @@ const Layer = {
 
     const $isAgree = $pop.hasClass(Layer.agreePopClass);
     const $isAgreeSwiper = $pop.hasClass(Layer.agreePopSwiperClass);
-    const $agreeBtnClassName = 'ui-pop-agree-btn';
-    const $agreeCheckedClassName = 'ui-pop-agree-checked';
     const $agreeScrollTxt = '끝까지 내려보기';
     const $agreeCheckedTxt = '동의하기';
     const $footBtn = $foot.find('.button');
 
-    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary">' + $agreeScrollTxt + '</button>';
-    let $agreeBtn = $pop.find('.' + $agreeBtnClassName);
-    let $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
-    let $agreeBodyChk = $body.find('.ui-pop-agree-chk');
+    const $agreeBtnhtml = '<button type="button" class="' + Layer.agreeBtnClassName + ' button primary">' + $agreeScrollTxt + '</button>';
+    let $agreeBodyChk = $body.find('.' + Layer.agreeCheckboxClassName);
 
     if ($foot.length) {
       $body.addClass('next-foot');
@@ -5574,45 +5579,14 @@ const Layer = {
             }
           } else {
             if (!$agreeCheckedTxt2) $this.data('txt', $footBtn.html());
-            $this.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide().before($agreeBtnhtml);
+            $this.html($agreeCheckedTxt).addClass(Layer.agreeCheckedClassName).hide().before($agreeBtnhtml);
             // if ($wrapH < $wrapSclH)$this.hide().before($agreeBtnhtml);
             let $agreeBody = $body;
             if ($isAgreeSwiper) $agreeBody = $body.find('.swiper-slide').eq(i);
-            $agreeBodyChk = $agreeBody.find('.ui-pop-agree-chk');
-            const $agreeBodyChkChecked = $agreeBody.find('.ui-pop-agree-chk:checked');
+            $agreeBodyChk = $agreeBody.find('.' + Layer.agreeCheckboxClassName);
+            const $agreeBodyChkChecked = $agreeBody.find('.' + Layer.agreeCheckboxClassName + ':checked');
             if ($agreeBodyChk.length && $agreeBodyChk.length !== $agreeBodyChkChecked.length) {
               $this.prop('disabled', true);
-            }
-
-            $agreeBtn = $pop.find('.' + $agreeBtnClassName);
-            $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
-          }
-        });
-
-        $agreeBtn = $pop.find('.' + $agreeBtnClassName);
-        $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
-
-        $agreeBtn.one('click', function (e) {
-          e.preventDefault();
-          const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
-          $wrap.animate({ scrollTop: $sclMove }, 300);
-          $(this)
-            .parent()
-            .find('.' + $agreeCheckedClassName)
-            .show();
-          $(this).remove();
-        });
-        $agreeChecked.one('click', function (e) {
-          e.preventDefault();
-          const $btnInput = $($(this).data('agree-input'));
-          $btnInput.prop('checked', true).change();
-          if ($isAgreeSwiper) {
-            const $swiper = $pop.find('.agree-swiper').data('swiper');
-            const $swiperIdx = $swiper.realIndex;
-            if ($swiperIdx < $swiper.slides.length - 1) {
-              $swiper.slideTo($swiperIdx + 1, 300);
-            } else {
-              Layer.close($pop);
             }
           }
         });
@@ -5623,6 +5597,7 @@ const Layer = {
 
     let $lastSclTop = 0;
     $wrap.off('scroll').on('scroll', function () {
+      const $agreeBtn = $wrap.find('.' + Layer.agreeBtnClassName);
       if ($isAgree && $agreeBtn.length) {
         $wrap = $(this);
         $wrapH = $wrap.outerHeight();
@@ -5908,9 +5883,13 @@ const Layer = {
     $(document).on('click', '[data-agree-pop]', function (e) {
       const $this = $(this);
       const $thisId = $this.attr('id');
+      const $pop = $this.data('agree-pop');
       if ($this.prop('checked')) {
         Layer.agree('#' + $thisId);
         return false;
+      } else {
+        const $popChk = $($pop).find('.' + Layer.agreeCheckboxClassName);
+        if ($popChk.length) $popChk.prop('checked', false);
       }
     });
     $(document).on('click', '[data-agree-check]', function (e) {
@@ -5922,19 +5901,47 @@ const Layer = {
       }
     });
 
-    $(document).on('change', '.ui-pop-agree-chk', function () {
+    $(document).on('change', '.' + Layer.agreeCheckboxClassName, function () {
       const $this = $(this);
       const $chkBody = $this.closest('.swiper-slide').length ? $this.closest('.swiper-slide') : $this.closest('.' + Layer.bodyClass);
       const $idx = $chkBody.hasClass('swiper-slide') ? $chkBody.index('.swiper-slide') : 0;
-      const $chk = $chkBody.find('.ui-pop-agree-chk');
-      const $chkChecked = $chkBody.find('.ui-pop-agree-chk:checked');
+      const $chk = $chkBody.find('.' + Layer.agreeCheckboxClassName);
+      const $chkChecked = $chkBody.find('.' + Layer.agreeCheckboxClassName + ':checked');
       const $popup = $chkBody.closest('.' + Layer.popClass);
-      const $footBtn = $popup.find('.ui-pop-agree-checked');
+      const $footBtn = $popup.find('.' + Layer.agreeCheckedClassName);
       const $chkBtn = $footBtn.eq($idx);
       if ($chk.length === $chkChecked.length) {
         $chkBtn.prop('disabled', false);
       } else {
         $chkBtn.prop('disabled', true);
+      }
+    });
+
+    $(document).on('click', '.' + Layer.agreeBtnClassName, function (e) {
+      e.preventDefault();
+      const $wrap = $(this).closest('.' + Layer.wrapClass);
+      const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
+      $wrap.animate({ scrollTop: $sclMove }, 300);
+      $(this)
+        .parent()
+        .find('.' + Layer.agreeCheckedClassName)
+        .show();
+      $(this).remove();
+    });
+    $(document).on('click', '.' + Layer.agreeCheckedClassName, function (e) {
+      e.preventDefault();
+      const $pop = $(this).closest('.' + Layer.popClass);
+      const $isAgreeSwiper = $pop.hasClass(Layer.agreePopSwiperClass);
+      const $btnInput = $($(this).data('agree-input'));
+      $btnInput.prop('checked', true).change();
+      if ($isAgreeSwiper) {
+        const $swiper = $pop.find('.agree-swiper').data('swiper');
+        const $swiperIdx = $swiper.realIndex;
+        if ($swiperIdx < $swiper.slides.length - 1) {
+          $swiper.slideTo($swiperIdx + 1, 300);
+        } else {
+          Layer.close($pop);
+        }
       }
     });
   }
