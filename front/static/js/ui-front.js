@@ -1129,7 +1129,7 @@ ui.Button = {
   },
   effect: function () {
     //버튼 클릭 효과
-    const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .radio.btn input, .checkbox.btn input, .ui-folding-btn, .ui-folding .folding-head a';
+    const btnInEfList = 'a.button, button.button, a.btn-click, button.btn-click, .radio.btn input, .checkbox.btn input, .ui-folding-btn, .ui-folding .folding-head .folding-btn';
     $(document).on('click', btnInEfList, function (e) {
       const $this = $(this);
       let $btnEl = $this;
@@ -3222,7 +3222,7 @@ ui.Table = {
 ui.List = {
   winLoad: function () {
     //토글실행
-    ui.Folding.list('.ui-folding', '.folding-head a', '.folding-panel');
+    ui.Folding.list('.ui-folding', '.folding-head .folding-btn', '.folding-panel');
     ui.Folding.btn('.ui-folding-btn');
     ui.Folding.close('.ui-folding-close');
 
@@ -3704,7 +3704,7 @@ ui.Swiper = {
       $swiper.zoom.out();
     });
   },
-  update: function () {
+  update: function (target) {
     $(target).each(function () {
       const $this = $(this);
       const $swiper = $this.data('swiper');
@@ -4671,12 +4671,13 @@ const Layer = {
     }
     Layer.open('#' + tooltipPopId);
   },
+  imgBoxIdx: 0,
   imgBox: function (contents) {
-    const imgPopId = 'uiPopImgBox';
+    const imgPopId = 'uiPopImgBox' + Layer.imgBoxIdx;
     let $html = '<div id="' + imgPopId + '" class="' + Layer.popClass + ' full pop-img-box ' + Layer.removePopClass + '" role="dialog" aria-hidden="true">';
     $html += '<article class="' + Layer.wrapClass + '">';
     $html += '<div class="' + Layer.bodyClass + '">';
-    $html += '<div class="ui-swiper img-box-swiper">';
+    $html += '<div class="ui-swiper _zoom img-box-swiper">';
     $html += '<div class="swiper">';
     $html += '<div class="swiper-wrapper"></div>';
     $html += '</div>';
@@ -4692,31 +4693,31 @@ const Layer = {
     } else {
       $('body').append($html);
     }
-    $('#' + imgPopId)
-      .find('.swiper-wrapper')
-      .append(contents);
-    $('#' + imgPopId)
-      .find('.swiper-wrapper')
-      .children()
-      .addClass('swiper-slide');
+    Layer.imgBoxIdx += 1;
+    const $popup = $('#' + imgPopId);
+    $popup.find('.swiper-wrapper').append(contents);
+    $popup.find('.swiper-wrapper').children().addClass('swiper-zoom-container').wrap('<div class="swiper-slide"></div>');
 
     let imgSwiper;
-    Layer.open('#' + imgPopId, function () {
-      imgSwiper = new Swiper('.img-box-swiper .swiper', {
+    Layer.open($popup, function () {
+      // const $popSwiper = $popup.find('.img-box-swiper');
+      // ui.Swiper.base($popSwiper);
+      const $popSwiper = $popup.find('.img-box-swiper .swiper');
+      const $popSwiperPagination = $popup.find('.img-box-swiper .swiper-pagination');
+      imgSwiper = new Swiper($popSwiper[0], {
         pagination: {
-          el: '.img-box-swiper .swiper-pagination',
+          el: $popSwiperPagination[0],
           clickable: true
-        }
+        },
+        zoom: true
       });
     });
-    $('#' + imgPopId)
-      .find('.pop-close')
-      .click(function (e) {
-        e.preventDefault();
-        Layer.close('#' + imgPopId, function () {
-          imgSwiper.destroy();
-        });
+    $popup.find('.pop-close').click(function (e) {
+      e.preventDefault();
+      Layer.close('#' + imgPopId, function () {
+        imgSwiper.destroy();
       });
+    });
   },
   selectId: 'uiSelectLayer',
   selectIdx: 0,

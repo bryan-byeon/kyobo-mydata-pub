@@ -20,7 +20,6 @@
   vertical-align: middle;
   transition: opacity 0.3s;
   // white-space:nowrap;
-  -webkit-tap-highlight-color: transparent;
   &.disabled,
   &:disabled {
     opacity: 0.2;
@@ -160,6 +159,13 @@
   vertical-align: middle;
 }
 
+.button,
+.ui-folding-btn,
+.ui-folding .folding-head .folding-btn,
+a.btn-click,
+button.btn-click {
+  -webkit-tap-highlight-color: transparent;
+}
 .btn-click {
   position: relative;
   overflow: hidden;

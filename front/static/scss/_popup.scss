@@ -172,7 +172,8 @@
         background: transparent;
       }
       .pop-body {
-        padding: 6rem 0;
+        // padding: 6rem 0;
+        padding: 0;
         height: 100%;
         overflow: hidden;
       }
@@ -183,6 +184,7 @@
         width: 4.8rem;
         height: 4.8rem;
         background-image: url(../images/icon/ico-close-w-48@3x.png);
+        z-index: 10;
       }
     }
 

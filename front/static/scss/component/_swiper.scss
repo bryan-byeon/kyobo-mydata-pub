@@ -223,6 +223,9 @@
     }
   }
   .swiper-pagination {
+    position: absolute;
+    bottom: 3rem;
+    margin-top: 0;
     .swiper-pagination-bullet {
       background: #fff;
     }
