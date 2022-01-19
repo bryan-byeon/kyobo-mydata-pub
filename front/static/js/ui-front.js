@@ -5456,7 +5456,7 @@ const Layer = {
       const $inpPop = $($popAry[i].pop);
       const $inpPopTit = $inpPop.find('.' + Layer.headClass + ' h1').html();
       $popupTit.append('<span>' + $inpPopTit + '</span>');
-      const $btnHtml = '<div class="flex"><a href="#none" class="button primary ui-pop-agree-checked" role="button" data-agree-input="' + $inp + '" data-index="' + i + '">확인</a></div>';
+      const $btnHtml = '<div class="flex"><button type="button" class="button primary ui-pop-agree-checked" role="button" data-agree-input="' + $inp + '" data-index="' + i + '">확인</button></div>';
       $popupFoot.find('>div').append($btnHtml);
       const $slideHtml = '<div class="swiper-slide"></div>';
       $popupWrapper.append($slideHtml);
@@ -5558,11 +5558,12 @@ const Layer = {
     const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary">' + $agreeScrollTxt + '</button>';
     let $agreeBtn = $pop.find('.' + $agreeBtnClassName);
     let $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
+    let $agreeBodyChk = $body.find('.ui-pop-agree-chk');
 
     if ($foot.length) {
       $body.addClass('next-foot');
       if ($isAgree) {
-        $footBtn.each(function () {
+        $footBtn.each(function (i) {
           const $this = $(this);
           let $agreeInput = $($this.data('agree-input'));
           const $agreeCheckedTxt2 = $footBtn.data('txt');
@@ -5575,6 +5576,14 @@ const Layer = {
             if (!$agreeCheckedTxt2) $this.data('txt', $footBtn.html());
             $this.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide().before($agreeBtnhtml);
             // if ($wrapH < $wrapSclH)$this.hide().before($agreeBtnhtml);
+            let $agreeBody = $body;
+            if ($isAgreeSwiper) $agreeBody = $body.find('.swiper-slide').eq(i);
+            $agreeBodyChk = $agreeBody.find('.ui-pop-agree-chk');
+            const $agreeBodyChkChecked = $agreeBody.find('.ui-pop-agree-chk:checked');
+            if ($agreeBodyChk.length && $agreeBodyChk.length !== $agreeBodyChkChecked.length) {
+              $this.prop('disabled', true);
+            }
+
             $agreeBtn = $pop.find('.' + $agreeBtnClassName);
             $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
           }
@@ -5910,6 +5919,22 @@ const Layer = {
       if ($this.prop('checked')) {
         Layer.agree($check);
         return false;
+      }
+    });
+
+    $(document).on('change', '.ui-pop-agree-chk', function () {
+      const $this = $(this);
+      const $chkBody = $this.closest('.swiper-slide').length ? $this.closest('.swiper-slide') : $this.closest('.' + Layer.bodyClass);
+      const $idx = $chkBody.hasClass('swiper-slide') ? $chkBody.index('.swiper-slide') : 0;
+      const $chk = $chkBody.find('.ui-pop-agree-chk');
+      const $chkChecked = $chkBody.find('.ui-pop-agree-chk:checked');
+      const $popup = $chkBody.closest('.' + Layer.popClass);
+      const $footBtn = $popup.find('.ui-pop-agree-checked');
+      const $chkBtn = $footBtn.eq($idx);
+      if ($chk.length === $chkChecked.length) {
+        $chkBtn.prop('disabled', false);
+      } else {
+        $chkBtn.prop('disabled', true);
       }
     });
   }
