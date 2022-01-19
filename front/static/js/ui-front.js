@@ -1135,9 +1135,8 @@ ui.Button = {
       let $btnEl = $this;
       if ($btnEl.is('input')) $btnEl = $btnEl.siblings('.lbl');
       const $delay = 650;
-
       if (!$btnEl.is('.disabled')) {
-        let $bgColor = rgba2hex($btnEl.css('background-color'));
+        let $bgColor = $btnEl.css('background-color') ? rgba2hex($btnEl.css('background-color')) : '#ffffff';
         let $bgAlpha = 0;
         if ($bgColor.length > 7) {
           const $tempColor = $bgColor;
@@ -5490,12 +5489,12 @@ const Layer = {
             const $idx = e.realIndex;
             $popupTit.find('>span').eq($idx).show().siblings('span').hide();
             $popupFoot.find('.flex').eq($idx).show().siblings().hide();
-            $popWrap.animate({ scrollTop: 0 }, 100);
-            Layer.resize();
+            $popWrap.animate({ scrollTop: 0 }, 100).scroll();
           }
         }
       });
       $popup.find('.agree-swiper').data('swiper', agreeSwiper);
+      $popWrap.scroll();
     });
     $popup.find('.pop-close').click(function (e) {
       e.preventDefault();
@@ -5529,7 +5528,11 @@ const Layer = {
       */
     } else {
       const $pop = $setPopup($ary[0]);
-      Layer.open($pop);
+      Layer.open($pop, function () {
+        $($pop)
+          .find('.' + Layer.bodyClass)
+          .scroll();
+      });
     }
   },
   position: function (tar) {
@@ -5548,7 +5551,7 @@ const Layer = {
     const $isAgreeSwiper = $pop.hasClass(Layer.agreePopSwiperClass);
     const $agreeBtnClassName = 'ui-pop-agree-btn';
     const $agreeCheckedClassName = 'ui-pop-agree-checked';
-    const $agreeScrollTxt = '계속보기';
+    const $agreeScrollTxt = '끝까지 내려보기';
     const $agreeCheckedTxt = '동의하기';
     const $footBtn = $foot.find('.button');
 
@@ -5568,11 +5571,10 @@ const Layer = {
               if ($this.html() !== $agreeCheckedTxt2) $this.html($agreeCheckedTxt2);
               $this.removeData('txt');
             }
-          } else if ($wrapH < $wrapSclH) {
+          } else {
             if (!$agreeCheckedTxt2) $this.data('txt', $footBtn.html());
-
-            $this.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
-            $this.before($agreeBtnhtml);
+            $this.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide().before($agreeBtnhtml);
+            // if ($wrapH < $wrapSclH)$this.hide().before($agreeBtnhtml);
             $agreeBtn = $pop.find('.' + $agreeBtnClassName);
             $agreeChecked = $pop.find('.' + $agreeCheckedClassName);
           }
@@ -5585,6 +5587,11 @@ const Layer = {
           e.preventDefault();
           const $sclMove = $wrap[0].scrollHeight - $wrap.outerHeight();
           $wrap.animate({ scrollTop: $sclMove }, 300);
+          $(this)
+            .parent()
+            .find('.' + $agreeCheckedClassName)
+            .show();
+          $(this).remove();
         });
         $agreeChecked.one('click', function (e) {
           e.preventDefault();
@@ -5612,6 +5619,7 @@ const Layer = {
         $wrapH = $wrap.outerHeight();
         $wrapSclH = $wrap[0].scrollHeight;
         $wrapSclTop = $wrap.scrollTop();
+        if ($lastSclTop === 0) $lastSclTop = -1;
         if ($wrapSclTop + $wrapH >= $wrapSclH - 10 && $lastSclTop < $wrapSclTop) {
           $agreeBtn.each(function () {
             const $parent = $(this).parent();
