@@ -4988,7 +4988,7 @@ const Layer = {
                 Layer.close(tar);
               }
             }
-            console.log($isFull, $directionY, $firstHeight);
+            // console.log($isFull, $directionY, $firstHeight);
             if ($isFull && $directionY === 'down') {
               $wrap.animate({ height: $firstHeight }, $animateSpeed, function () {
                 // $isFull = false;
@@ -5006,7 +5006,6 @@ const Layer = {
                 $popup.removeClass('bottom').addClass('full');
               });
             } else {
-              console.log('bbb', $firstHeight);
               $wrap.animate({ height: $firstHeight }, $animateSpeed, function () {
                 $wrap.removeCss('height');
                 $body.css('max-height', $firstHeight);
@@ -5563,7 +5562,6 @@ const Layer = {
         $footBtn.each(function () {
           const $this = $(this);
           let $agreeInput = $($this.data('agree-input'));
-          console.log($this, $agreeInput);
           const $agreeCheckedTxt2 = $footBtn.data('txt');
           if ($agreeInput.prop('checked')) {
             if ($agreeCheckedTxt2) {
