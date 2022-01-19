@@ -4514,9 +4514,9 @@ const Layer = {
     $html += '<div class="' + Layer.footClass + '">';
     $html += '<div class="flex">';
     if (type === 'confirm' || type === 'prompt') {
-      $html += '<button type="button" id="' + btnCancelId + '" class="button gray h56">취소</button>';
+      $html += '<button type="button" id="' + btnCancelId + '" class="button gray">취소</button>';
     }
-    $html += '<button type="button" id="' + btnActionId + '" class="button primary h56">확인</button>';
+    $html += '<button type="button" id="' + btnActionId + '" class="button primary">확인</button>';
     $html += '</div>';
     $html += '</div>';
     $html += '</article>';
@@ -5037,7 +5037,8 @@ const Layer = {
       }
       if (Layer.openPop.indexOf('#' + $id) < 0) Layer.openPop.push('#' + $id);
 
-      if (!$(tar).hasClass('alert') && !$(tar).hasClass('full') && !$(tar).hasClass('bg-no-click')) {
+      //  && !$(tar).hasClass('full')
+      if (!$(tar).hasClass('alert') && !$(tar).hasClass('bg-no-click')) {
         const $bgClick = '<div class="pop-bg-close ui-pop-close" role="button" aria-label="팝업창 닫기"></div>';
         if (!$(tar).find('.pop-bg-close').length) $(tar).prepend($bgClick);
       }
@@ -5385,14 +5386,24 @@ const Layer = {
   },
   agree: function (element) {
     const $ary = element.split(',');
-    for (let i = 0; i < $ary.length; i++) {
-      const $inputId = $.trim($ary[$ary.length - i - 1]);
-      const $input = $($inputId);
+    const $setPopup = function (targetId) {
+      const $input = $(targetId);
       const $pop = $input.data('agree-pop');
-      $($pop).addClass(Layer.agreePopClass).data('agree-input', $inputId);
-      setTimeout(function () {
-        Layer.open($pop);
-      }, i * 100);
+      $($pop).addClass(Layer.agreePopClass).data('agree-input', targetId);
+      return $pop;
+    };
+
+    if ($ary.length > 1) {
+      for (let i = 0; i < $ary.length; i++) {
+        const $inputId = $.trim($ary[$ary.length - i - 1]);
+        const $pop = $setPopup($inputId);
+        setTimeout(function () {
+          Layer.open($pop);
+        }, i * 100);
+      }
+    } else {
+      const $pop = $setPopup($ary[0]);
+      Layer.open($pop);
     }
   },
   position: function (tar) {
@@ -5406,20 +5417,29 @@ const Layer = {
     const $head = $pop.find('.' + Layer.headClass);
     const $body = $pop.find('.' + Layer.bodyClass);
     const $foot = $pop.find('.' + Layer.footClass);
+
     const $isAgree = $pop.hasClass(Layer.agreePopClass);
+    const $footBtn = $foot.find('.flex').find('.button');
     const $agreeInput = $($pop.data('agree-input'));
     const $agreeBtnClassName = 'ui-pop-agree-btn';
     const $agreeCheckedClassName = 'ui-pop-agree-checked';
+    const $agreeScrollTxt = '계속보기';
     const $agreeCheckedTxt = '동의하기';
-    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary h60">계속보기</button>';
+    const $agreeCheckedTxt2 = $footBtn.data('txt');
+    const $agreeBtnhtml = '<button type="button" class="' + $agreeBtnClassName + ' button primary">' + $agreeScrollTxt + '</button>';
     let $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
+
     if ($foot.length) {
       $body.addClass('next-foot');
       if ($isAgree) {
         if ($agreeInput.prop('checked')) {
-          $foot.find('.flex').find('.button').text('확인');
+          if ($agreeCheckedTxt2) {
+            if ($footBtn.html() !== $agreeCheckedTxt2) $footBtn.html($agreeCheckedTxt2);
+            $footBtn.removeData('txt');
+          }
         } else if ($wrapH < $wrapSclH) {
-          $foot.find('.flex').find('.button').text($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
+          if (!$agreeCheckedTxt2) $footBtn.data('txt', $footBtn.html());
+          $footBtn.html($agreeCheckedTxt).addClass($agreeCheckedClassName).hide();
           $foot.find('.flex').prepend($agreeBtnhtml);
           $agreeBtn = $body.closest('.' + Layer.wrapClass).find('.' + $agreeBtnClassName);
           $agreeChecked = $body.closest('.' + Layer.wrapClass).find('.' + $agreeCheckedClassName);
