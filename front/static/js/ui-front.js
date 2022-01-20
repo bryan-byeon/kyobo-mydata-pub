@@ -349,7 +349,8 @@ ui.Common = {
     }
     return $topFixedHeight;
   },
-  fixed: function (target) {
+  fixed: function (target, isBottom) {
+    if (isBottom === undefined) isBottom = false;
     //고정(fixed)
     const $target = $(target);
     if ($target.length && $target.data('init') != true) {
@@ -364,7 +365,9 @@ ui.Common = {
           const $topMargin = ui.Common.getTopFixedHeight($this);
           let $topEl = $this;
           const $offsetTop = $this.data('top') !== undefined ? $this.data('top') : Math.max(0, getOffset(this).top);
-          if ($scrollTop + $topMargin > $offsetTop) {
+          const $thisH = $this.outerHeight();
+          const $isFixed = isBottom ? $scrollTop + $topMargin > $offsetTop + $thisH : $scrollTop + $topMargin > $offsetTop;
+          if ($isFixed) {
             $this.data('top', $offsetTop);
             $this.addClass('top-fixed');
             if ($topEl.css('position') !== 'fixed' && $topEl.css('position') !== 'sticky') $topEl = $topEl.children();

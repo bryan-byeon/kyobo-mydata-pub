@@ -23,7 +23,7 @@
       <main id="container">
         <!-- 컨텐츠 -->
         <section id="contents">
-          <div class="tab-navi-menu tab-fixed">
+          <div class="tab-navi-menu tab-fixed no-shadow">
             <div class="tab-inner">
               <i class="tab-line" aria-hidden="true"></i>
               <ul class="tab-list">
@@ -72,54 +72,79 @@
               </ul>
             </div>
           </div>
-          <div class="section">
-            <div class="gd__chart-wrap">
-              <div class="match-profile">
-                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
-                <div class="cont">
-                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
-                  <div>가나다라마바사</div>
+          <div class="section pt-0">
+            <div id="chart" class="gd__chart-wrap">
+              <div>
+                <div class="match-profile">
+                  <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  <div class="cont">
+                    <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                    <div>가나다라마바사</div>
+                  </div>
                 </div>
+                <div class="price">
+                  <div class="dt">월자산</div>
+                  <div class="dd"><strong data-animation="rolling-number">82,645,020</strong>원</div>
+                </div>
+                <div id="chart1" class="chart"></div>
               </div>
-              <div class="t-center"><strong class="fz-38 fw-500" data-animation="rolling-number">82,645,020</strong>원</div>
-              <div id="chart1" class="chart"></div>
             </div>
 
             <div class="gd__chart-wrap">
-              <div class="match-profile">
-                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
-                <div class="cont">
-                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
-                  <div>가나다라마바사</div>
+              <div>
+                <div class="match-profile">
+                  <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  <div class="cont">
+                    <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                    <div>가나다라마바사</div>
+                  </div>
                 </div>
+                <div class="price">
+                  <div class="dt">월자산</div>
+                  <div class="dd"><strong data-animation="count-number">82,645,020</strong>원</div>
+                </div>
+                <div id="chart2" class="chart"></div>
               </div>
-              <div class="t-center"><strong class="fz-38 fw-500" data-animation="count-number">82,645,020</strong>원</div>
-              <div id="chart2" class="chart"></div>
             </div>
 
             <div class="gd__chart-wrap">
-              <div class="match-profile">
-                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
-                <div class="cont">
-                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
-                  <div>가나다라마바사</div>
+              <div>
+                <div class="match-profile">
+                  <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  <div class="cont">
+                    <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                    <div>가나다라마바사</div>
+                  </div>
                 </div>
+                <div class="price">
+                  <div class="dt">월자산</div>
+                  <div class="dd"><strong data-animation="rolling-number">82,645,020</strong>원</div>
+                </div>
+                <div id="chart4" class="chart"></div>
               </div>
-              <div class="t-center"><strong class="fz-38 fw-500" data-animation="rolling-number">82,645,020</strong>원</div>
-              <div id="chart4" class="chart"></div>
             </div>
 
             <div class="gd__chart-wrap">
-              <div class="match-profile">
-                <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
-                <div class="cont">
-                  <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
-                  <div>가나다라마바사</div>
+              <div>
+                <div class="match-profile">
+                  <div class="img-box"><img src="../../static/images/temp/thumb-temp.jpg" alt="" /></div>
+                  <div class="cont">
+                    <div data-splitting data-animation="active"><strong class="fz-18">입질만삼년째</strong></div>
+                    <div>가나다라마바사</div>
+                  </div>
                 </div>
+                <div class="price">
+                  <div class="dt">월자산</div>
+                  <div class="dd"><strong data-animation="count-number">82,645,020</strong>원</div>
+                </div>
+                <div id="chart3" class="chart"></div>
               </div>
-              <div class="t-center"><strong class="fz-38 fw-500" data-animation="count-number">82,645,020</strong>원</div>
-              <div id="chart3" class="chart"></div>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </section>
         <!-- //컨텐츠 -->
@@ -127,6 +152,8 @@
       <!-- 컨테이너 -->
     </article>
     <script>
+      ui.Common.fixed('.gd__chart-wrap', true);
+
       const $chartData = [2, 1.8, 3.5, 2, 4.3, 5.5, 6.5, 6.8, 6.4, 6.2, 8, 6];
       const $chartData2 = [2000000, 1800000, 3500000, 2000000, 4300000, 5500000, 6500000, 6800000, 6400000, 6200000, 8000000, 6000000];
       const $max = Math.max.apply(null, $chartData);
