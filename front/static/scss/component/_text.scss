@@ -210,71 +210,29 @@
     }
   }
 }
-.text-content {
-  font-size: 1.4rem;
-  line-height: 1.57;
-  h2 {
-    margin: 3.2rem 0 0.8rem;
-    font-size: 1.5rem;
-    line-height: 1.47;
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-  .blind + h2 {
-    margin-top: 0;
-  }
-}
-.txt-info-dl {
-  .dt {
-    display: flex;
-    align-items: center;
-    .badge {
-      margin-left: 0.8rem;
-    }
-    .button {
-      margin-left: auto;
-    }
-  }
-  .dd {
-    margin-top: 0.7rem;
-    font-size: 1.4rem;
-    word-break: break-all;
-    p + p {
-      margin-top: 0.4rem;
-    }
-  }
-}
-.txt-line-list-1 {
+.num-list-1 {
+  color: #424242;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
   > li {
-    padding: 2.4rem 0;
+    position: relative;
+    padding-left: 3rem;
+    > i {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      line-height: 1.8rem;
+      font-size: 1.2rem;
+      color: #fff;
+      text-align: center;
+      background: #424242;
+      border-radius: 50%;
+    }
     + li {
-      border-top: 0.1rem solid #eee;
+      margin-top: 1.2rem;
     }
-  }
-}
-
-// 약관
-.text-contents {
-  padding: 2rem 0;
-  font-size: 1.5rem;
-  line-height: 1.5;
-  color: #222;
-  h1,
-  h2,
-  h3 {
-    margin: 2.4rem 0 0.8rem;
-    font-size: 1.6rem;
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-  div + div,
-  li + li {
-    margin-top: 0.8rem;
-  }
-  ul > li {
-    padding-left: 0.75em;
-    text-indent: -0.75em;
   }
 }
