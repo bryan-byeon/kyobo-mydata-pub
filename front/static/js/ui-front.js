@@ -748,9 +748,8 @@ ui.Common = {
     };
     if (typeof lottie === 'undefined') {
       let $url = '/static/js/lib/lottie.5.7.13.min.js';
-      if (location.href.indexOf('/front/') > 0) {
-        $url = '/front' + $url;
-      }
+      if (location.pathname.indexOf('/front/') > -1) $url = '/front' + $url;
+      if (location.pathname.indexOf('/kyobo-mydata-pub/') > -1) $url = '/kyobo-mydata-pub' + $url;
       ui.Util.loadScript($url, $lottieInit);
     } else {
       $lottieInit();
