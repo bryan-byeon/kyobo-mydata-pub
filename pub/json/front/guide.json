@@ -3,8 +3,24 @@
     "depth1": "코딩가이드"
   },
   {
+    "id":"guide-layout",
+    "url":"../../front/html/guide/",
+    "type":"page",
+    "name": "레이아웃",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
+    "id":"guide-layout2",
+    "url":"../../front/html/guide/",
+    "type":"page",
+    "name": "레이아웃2",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
     "id":"guide-dev",
-    "url":"../../front/html/guide/guide-dev.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "개발 참고 퍼블가이드",
     "worker": "안효주",
@@ -12,31 +28,32 @@
   },
   {
     "id":"guide-txt",
-    "url":"../../front/html/guide/guide-txt.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "텍스트 가이드",
     "worker": "안효주",
     "complete": "9999-99-99"
   },
   {
+    "id":"guide-font",
+    "url":"../../front/html/guide/",
+    "type":"page",
+    "name": "폰트 가이드",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
     "id":"guide-btn",
-    "url":"../../front/html/guide/guide-btn.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "버튼 가이드",
     "worker": "안효주",
     "complete": "9999-99-99"
   },
-  {
-    "id":"guide-list",
-    "url":"../../front/html/guide/guide-list.html",
-    "type":"page",
-    "name": "리스트 가이드",
-    "worker": "안효주",
-    "complete": "9999-99-99"
-  },
+  
   {
     "id":"guide-form",
-    "url":"../../front/html/guide/guide-form.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "form 가이드",
     "worker": "안효주",
@@ -44,7 +61,7 @@
   },
   {
     "id":"guide-form2",
-    "url":"../../front/html/guide/guide-form2.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "기타 입력 UI",
     "worker": "안효주",
@@ -52,15 +69,23 @@
   },
   {
     "id":"guide-agree",
-    "url":"../../front/html/guide/guide-agree.html",
+    "url":"../../front/html/guide/",
     "type":"page",
-    "name": "기타 입력 UI",
-    "worker": "약관",
+    "name": "약관",
+    "worker": "안효주",
+    "complete": "9999-99-99"
+  },
+  {
+    "id":"guide-list",
+    "url":"../../front/html/guide/",
+    "type":"page",
+    "name": "리스트 가이드",
+    "worker": "안효주",
     "complete": "9999-99-99"
   },
   {
     "id":"guide-table",
-    "url":"../../front/html/guide/guide-table.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "테이블 가이드",
     "worker": "안효주",
@@ -68,7 +93,7 @@
   },
   {
     "id":"guide-popup",
-    "url":"../../front/html/guide/guide-popup.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "팝업 가이드",
     "worker": "안효주",
@@ -76,7 +101,7 @@
   },
   {
     "id":"guide-chart",
-    "url":"../../front/html/guide/guide-chart.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "차트",
     "worker": "안효주",
@@ -84,7 +109,7 @@
   },
   {
     "id":"guide-animate",
-    "url":"../../front/html/guide/guide-animate.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "애니메이션",
     "worker": "안효주",
@@ -92,7 +117,7 @@
   },
   {
     "id":"guide-swiper",
-    "url":"../../front/html/guide/guide-swiper.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "swiper",
     "worker": "안효주",
@@ -100,7 +125,7 @@
   },
   {
     "id":"guide-address",
-    "url":"../../front/html/guide/guide-address.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "우편번호",
     "worker": "안효주",
@@ -108,7 +133,7 @@
   },
   {
     "id":"guide-etc",
-    "url":"../../front/html/guide/guide-etc.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "기타",
     "worker": "안효주",
@@ -116,7 +141,7 @@
   },
   {
     "id":"guide-search",
-    "url":"../../front/html/guide/guide-search.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "검색",
     "worker": "안효주",
@@ -124,7 +149,7 @@
   },
   {
     "id":"guide-test",
-    "url":"../../front/html/guide/guide-test.html",
+    "url":"../../front/html/guide/",
     "type":"page",
     "name": "테스트",
     "worker": "안효주",
