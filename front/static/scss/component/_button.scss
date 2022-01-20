@@ -166,7 +166,8 @@ a.btn-click,
 button.btn-click {
   -webkit-tap-highlight-color: transparent;
 }
-.btn-click {
+.btn-click,
+.ui-folding-btn {
   position: relative;
   overflow: hidden;
 }

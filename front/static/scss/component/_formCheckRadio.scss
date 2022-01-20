@@ -431,7 +431,7 @@ div.checkbox.ty2 + div.checkbox.ty2 {
 }
 .agree-dl {
   .agree-dt {
-    padding-bottom: 2rem;
+    padding: 2rem 0;
     + .agree-dd {
       border-top: 0.1rem solid #ebebeb;
       padding-top: 2rem;
@@ -446,6 +446,26 @@ div.checkbox.ty2 + div.checkbox.ty2 {
       top: 0.4rem;
       right: 0;
       margin-top: 0;
+    }
+  }
+  &.folding {
+    .agree-dt {
+      .ui-folding-btn {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        i {
+          vertical-align: top;
+          transform: rotate3d(1, 0, 0, 0);
+          transition: 0.3s;
+        }
+        &.open {
+          i {
+            transform: rotate3d(1, 0, 0, 180deg);
+          }
+        }
+      }
     }
   }
 }

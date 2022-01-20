@@ -2396,10 +2396,21 @@ ui.Form = {
       const $this = $(this);
       const $wrap = $this.closest($wrapClass);
       const $items = $wrap.find($agreeChkClass);
+      const $isFolding = $wrap.hasClass('folding');
+      const $foldingBtn = $wrap.find('.ui-folding-btn');
+      const $foldingPanel = $wrap.find('.folding-panel');
       if ($(this).prop('checked')) {
         $items.prop('checked', true).change();
+        if ($isFolding && $foldingBtn.hasClass('open')) {
+          $foldingBtn.removeClass('open');
+          $foldingPanel.stop(true, false).slideUp(200);
+        }
       } else {
         $items.prop('checked', false).change();
+        if ($isFolding && !$foldingBtn.hasClass('open')) {
+          $foldingBtn.addClass('open');
+          $foldingPanel.stop(true, false).slideDown(200);
+        }
       }
     });
     $($wrapClass + ' ' + $agreeChkClass).change(function () {
@@ -3431,10 +3442,12 @@ ui.Folding = {
         let $panelId = $href === undefined ? null : $btn.attr('href').substring(1);
         let $panel = $('#' + $panelId);
         //if($btn.attr('aria-expanded') != undefined) return false;
-        if (($panelId == '' || $panelId == 'none' || $panelId == null) && $btn.closest('.folding-list').length) {
-          $panel = $btn.closest('.folding-list').find('.folding-panel');
+        const $closest = $btn.closest('.folding-list').length ? $btn.closest('.folding-list') : $btn.closest('.folding');
+        if ((!$panelId || $panelId == 'none') && $closest.length) {
+          $panel = $closest.find('.folding-panel');
           if ($panel.attr('id')) $panelId = $panel.attr('id');
         }
+        if (!$panel.length) return;
         if (!$btnId) $btnId = 'fdBtn_' + e;
         if ($panelId == '' || $panelId == 'none' || $panelId == null) $panelId = 'fdPanel_' + e;
         $btn.attr({
