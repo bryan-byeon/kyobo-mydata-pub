@@ -5491,7 +5491,7 @@ const Layer = {
           type: 'progressbar',
           clickable: false
         },
-        // allowTouchMove: false,
+        allowTouchMove: false,
         autoHeight: true,
         on: {
           slideChangeTransitionEnd: function (e) {
