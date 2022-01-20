@@ -3,17 +3,25 @@ input[type='checkbox'],
 input[type='radio'] {
   margin: 0;
 }
+.radio.block,
+.checkbox.block,
 div.radio,
 div.checkbox {
   display: block;
   margin-right: 0;
+  + .radio.block,
+  + .checkbox.block,
   + div.radio,
   + div.checkbox {
     margin-top: 1.8rem;
   }
 }
-div.checkbox.ty2 + div.checkbox.ty2 {
-  margin-top: 1.6rem;
+.checkbox.ty2.block,
+div.checkbox.ty2 {
+  + .checkbox.ty2.block,
+  + div.checkbox.ty2 {
+    margin-top: 1.6rem;
+  }
 }
 .radio,
 .checkbox {
