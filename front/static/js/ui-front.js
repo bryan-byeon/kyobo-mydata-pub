@@ -1461,11 +1461,10 @@ ui.Tab = {
     $(wrap).each(function () {
       const $this = $(this);
       const $children = $this.children();
-      const $childrenWidth = $children.outerWidth();
-      const $scrollWidth = $children.get(0).scrollWidth;
+      const $isScrollX = ui.Scroll.is($children).x;
       const $btnClass = 'tab-expand-btn';
       const $btn = '<div class="' + $btnClass + '"><button type="button" aria-label="펼쳐보기" aria-expanded="false"></button></div>';
-      if ($childrenWidth < $scrollWidth) {
+      if ($isScrollX) {
         $this.addClass('scroll-able');
         if ($this.hasClass('tab-navi-menu') && !$this.find('.' + $btnClass).length) $this.append($btn);
       } else {
@@ -1751,7 +1750,7 @@ ui.Tab = {
       const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
       const $tabInner = $tab.closest('.tab-inner');
       if ($tabInner.length) {
-        const isScroll = ui.Scroll.isVisible($tabInner);
+        const isScroll = ui.Scroll.is($tabInner).x;
         if (isScroll) ui.Scroll.center($tab);
       }
 
@@ -3151,18 +3150,14 @@ ui.Table = {
         $this.find('.tbl-guide').remove();
         //$this.removeAttr('title');
 
-        const $sclInfo = $this.next('.tbl_scroll_ifno');
+        const $sclInfo = $this.next('.tbl-scroll-ifno');
         if ($sclInfo.length) {
-          const $sclVerticalPercent = Math.abs($this.scrollTop() / ($this.get(0).scrollHeight - $this.height())) * 100;
-          const $sclHorizonPercent = Math.abs($this.scrollLeft() / ($this.get(0).scrollWidth - $this.width())) * 100;
-          $sclInfo
-            .find('.vertical')
-            .children()
-            .css('height', $sclVerticalPercent + '%');
-          $sclInfo
-            .find('.horizon')
-            .children()
-            .css('width', $sclHorizonPercent + '%');
+          const $sclPercentX = ui.Scroll.sclPer($this).x;
+          const $sclPercentY = ui.Scroll.sclPer($this).y;
+          const $horizon = $sclInfo.find('.horizon');
+          const $vertical = $sclInfo.find('.vertical');
+          if ($horizon.is(':visible')) $horizon.children().css('width', $sclPercentX + '%');
+          if ($vertical.is(':visible')) $vertical.children().css('height', $sclPercentY + '%');
         }
       });
     });
@@ -3174,19 +3169,19 @@ ui.Table = {
       const $this = $(this);
       const $direction = $this.data('direction');
       let $changeDirection = '';
-      const $guide = '<div class="tbl-guide" title="해당영역은 테이블을 스크롤하면 사라집니다."><div><i class="icon" aria-hidden="true"></i>테이블을 ' + $direction + '로 이동하세요.</div></div>';
-      const $width = $this.outerWidth();
+      const $guide = '<div class="tbl-guide" title="해당영역은 테이블을 스크롤하면 사라집니다."><div><i class="icon" aria-hidden="true"></i>테이블을 ' + $direction + '로 스크롤하세요.</div></div>';
       const $height = $this.outerHeight();
-      const $scrollW = $this.get(0).scrollWidth;
-      const $scrollH = $this.get(0).scrollHeight;
-      const $sclInfoHtml = '<div class="table tbl_scroll_ifno" aria-hidden="true"><div class="horizon"><div></div></div><div class="vertical"><div></div></div></div>';
-      let $sclIfno = $this.next('.tbl_scroll_ifno');
+
+      const $isScrollX = ui.Scroll.is($this).x;
+      const $isScrollY = ui.Scroll.is($this).y;
+      const $sclInfoHtml = '<div class="tbl-scroll-ifno" aria-hidden="true"><div class="horizon"><div></div></div><div class="vertical"><div></div></div></div>';
+      let $sclIfno = $this.next('.tbl-scroll-ifno');
       if ($this.data('first')) {
-        if ($width < $scrollW && $height < $scrollH) {
+        if ($isScrollX && $isScrollY) {
           $changeDirection = '상하좌우';
-        } else if ($width < $scrollW) {
+        } else if ($isScrollX) {
           $changeDirection = '좌우';
-        } else if ($height < $scrollH) {
+        } else if ($isScrollY) {
           $changeDirection = '상하';
         } else {
           $changeDirection = '';
@@ -3737,15 +3732,23 @@ ui.Scroll = {
       return false;
     }
   },
-  isVisible: function (target) {
+  is: function (target) {
+    const $obj = {
+      x: false,
+      width: 0,
+      y: false,
+      height: 0
+    };
     const $target = $(target);
     if ($target.outerWidth() < $target.get(0).scrollWidth) {
-      return true;
-    } else if ($target.outerHeight() < $target.get(0).scrollHeight) {
-      return true;
-    } else {
-      return false;
+      $obj.x = true;
+      $obj.width = $target.get(0).scrollWidth - $target.outerWidth();
     }
+    if ($target.outerHeight() < $target.get(0).scrollHeight) {
+      $obj.y = true;
+      $obj.height = $target.get(0).scrollHeight - $target.outerHeight();
+    }
+    return $obj;
   },
   top: function (val, speed, callback) {
     let $top = 0;
@@ -3763,42 +3766,26 @@ ui.Scroll = {
   },
   center: function (el, speed, direction) {
     let $parent = $(el).parent();
-    // let $parentTop = parseInt($parent.css('margin-top'));
-    // let $parentLeft = parseInt($parent.css('margin-left'));
-    // if($parent.css('position') === 'relative'){
-    //   $parentTop += $parent.position().top;
-    //   $parentLeft += $parent.position().left;
-    // }
     while ($parent.css('overflow-x') !== 'auto' && !$parent.is('body')) {
       $parent = $parent.parent();
-      // $parentTop += parseInt($parent.css('margin-top'));
-      // $parentLeft += parseInt($parent.css('margin-left'));
-      // if($parent.css('position') === 'relative'){
-      //   $parentTop += $parent.position().top;
-      //   $parentLeft += $parent.position().left;
-      // }
     }
     if (speed == undefined) speed = 200;
     if (!!direction && direction == 'vertical') {
       const $prtH = $parent.outerWidth();
-      // const $prtSclT = $parent.scrollTop();
-      const $prtSclH = $parent.get(0).scrollHeight;
       const $thisT = Math.round($(el).position().top);
       const $thisH = $(el).outerHeight();
-      // let $sclT = $thisT - ($prtH/2) + ($thisH/2) + $parentTop;
+      const $isScrollY = ui.Scroll.is($parent).y;
       let $sclT = $thisT - $prtH / 2 + $thisH / 2;
       if ($sclT < 0) $sclT = 0;
-      if ($prtH < $prtSclH) $parent.stop(true, false).animate({ scrollTop: $sclT }, speed);
+      if ($isScrollY) $parent.stop(true, false).animate({ scrollTop: $sclT }, speed);
     } else {
       const $prtW = $parent.outerWidth();
-      // const $prtSclL = Math.round($parent.scrollLeft());
-      const $prtSclW = $parent.get(0).scrollWidth;
-      let $thisL = Math.round($(el).position().left);
+      const $thisL = Math.round($(el).position().left);
       const $thisW = $(el).outerWidth();
-      // let $sclL = $thisL - ($prtW/2) + ($thisW/2) + $parentLeft;
+      const $isScrollX = ui.Scroll.is($parent).x;
       let $sclL = $thisL - $prtW / 2 + $thisW / 2;
       if ($sclL < 0) $sclL = 0;
-      if ($prtW < $prtSclW) $parent.stop(true, false).animate({ scrollLeft: $sclL }, speed);
+      if ($isScrollX) $parent.stop(true, false).animate({ scrollLeft: $sclL }, speed);
     }
   },
   guide: function (element) {
@@ -3817,7 +3804,7 @@ ui.Scroll = {
       if (!$this.siblings('.' + $barClass).length) $this.after('<div class="' + $barClass + '" aria-hidden="true"><div></div></div>');
       const $info = $this.siblings('.' + $infoClass);
       const $bar = $this.siblings('.' + $barClass);
-      let $percent = ui.Scroll.scrllPer(this);
+      let $percent = ui.Scroll.sclPer(this).x;
       if ($percent <= 0) {
         $bar.hide();
       } else {
@@ -3836,7 +3823,7 @@ ui.Scroll = {
       if (!$isSclGuide) {
         $this.data('sclGuide', true);
         $this.on('scroll', function () {
-          $percent = ui.Scroll.scrllPer(this);
+          $percent = ui.Scroll.sclPer(this).x;
           if ($percent <= 0) {
             $bar.hide();
           } else {
@@ -3854,15 +3841,14 @@ ui.Scroll = {
       }
     });
   },
-  scrllPer: function (element, type) {
-    let $val = '';
-    if (type == undefined) type = 'vertical';
-    if (type == 'vertical') {
-      $val = Math.abs($(element).scrollTop() / ($(element).get(0).scrollHeight - $(element).outerHeight())) * 100;
-    } else if (type == 'horizon') {
-      $val = Math.abs($(element).scrollLeft() / ($(element).get(0).scrollWidth - $(element).outerHeight())) * 100;
-    }
-    return $val;
+  sclPer: function (element, type) {
+    const $obj = {
+      x: 0,
+      y: 0
+    };
+    $obj.x = Math.abs($(element).scrollLeft() / ui.Scroll.is(element).width) * 100;
+    $obj.y = Math.abs($(element).scrollTop() / ui.Scroll.is(element).height) * 100;
+    return $obj;
   },
   loading: function () {
     $(window).scroll(function () {
@@ -6534,17 +6520,6 @@ const bytePrint = function (tar) {
     $txt = $(tar).val();
   }
   return $txt.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1').length;
-};
-
-//스크롤바 여부확인
-const isScrollbar = function (target, direction) {
-  if (!!direction) direction = 'vertical';
-  if (direction === 'vertical') {
-    return $(target).get(0) ? $(target).get(0).scrollHeight > $(target).innerHeight() : false;
-  }
-  if (direction === 'horizon') {
-    return $(target).get(0) ? $(target).get(0).scrollWidth > $(target).innerWidth() : false;
-  }
 };
 
 //숫자만

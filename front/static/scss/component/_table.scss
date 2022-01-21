@@ -88,6 +88,7 @@
     position: relative;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    @include scroll-hide;
   }
   .table {
     padding: 0 2rem;
@@ -97,6 +98,43 @@
     }
   }
 }
+
+.tbl-scroll-ifno {
+  position: relative;
+  margin: 0 2.4rem !important;
+  border: 0 none;
+  pointer-events: none;
+  > div {
+    border-radius: 0.3rem;
+    overflow: hidden;
+    opacity: 0.3;
+    > div {
+      border-radius: 0.3rem;
+      background: var(--primary-color);
+    }
+  }
+  .horizon {
+    position: absolute;
+    top: 0.3rem;
+    left: 0;
+    width: 100%;
+    > div {
+      height: 0.3rem;
+      width: 0;
+    }
+  }
+  .vertical {
+    position: absolute;
+    left: 100%;
+    bottom: 100%;
+    margin-left: 0.3rem;
+    > div {
+      width: 0.3rem;
+      height: 0;
+    }
+  }
+}
+
 .tbl-guide {
   position: absolute;
   top: 0;
