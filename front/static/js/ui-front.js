@@ -386,15 +386,44 @@ ui.Common = {
   },
   header: function () {
     const $header = $('#header');
-    if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
+    if (!$header.length) return;
+    // if ($header.outerHeight() < $header.children('div').outerHeight()) $header.css('height', $header.children('div').outerHeight());
     let $title = document.title;
     const $divide = ' | ';
-    const $titleEl = '#header h1';
+    const $titleEl = $('#header h1');
     if ($title.indexOf($divide) >= 0) {
       $title = $title.split($divide)[0];
-      if ($($titleEl).length) $($titleEl).html($title);
+      if ($titleEl.length) $titleEl.html($title);
     }
-    if ($('.' + ui.Common.scrollShowTitleClass).length) $($titleEl).addClass('scl-title-hide');
+    if ($('.' + ui.Common.scrollShowTitleClass).length) $titleEl.addClass('scl-title-hide');
+
+    if (!$titleEl.length) return;
+    /*
+    const $headLeft = $header.find('.head-left');
+    const $headLeftW = $headLeft.length ? $headLeft.outerWidth() : 0;
+    const $headRight = $header.find('.head-right');
+    const $headRightW = $headRight.length ? $headRight.outerWidth() : 0;
+    const $h1Padding = $headLeftW < $headRightW ? $headRightW : $headLeftW;
+    if ($h1Padding > 0) {
+      $titleEl.css({
+        'padding-left': $h1Padding + 10,
+        'padding-right': $h1Padding + 10
+      });
+    }
+    */
+    const $headLeft = $header.find('.head-left');
+    const $headLeftW = $headLeft.outerWidth();
+    const $headRight = $header.find('.head-right');
+    const $headRightW = $headRight.outerWidth();
+    if (!$headLeft.length) {
+      $titleEl.before('<div class="head-left" style="width:' + $headRightW + 'px;" aria-hidden="true"></div>');
+    } else if (!$headRight.length) {
+      $titleEl.after('<div class="head-right" style="width:' + $headLeftW + 'px;" aria-hidden="true"></div>');
+    } else if ($headLeftW > $headRightW) {
+      $headRight.css('width', $headLeftW);
+    } else if ($headRight > $headLeftW) {
+      $headLeft.css('width', $headRightW);
+    }
   },
   headerUI: function () {
     $(document)
