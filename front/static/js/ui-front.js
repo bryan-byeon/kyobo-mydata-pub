@@ -3423,7 +3423,7 @@ ui.Folding = {
           .stop(true, false)
           .delay($openDelay)
           .slideDown(speed, function () {
-            ui.Folding.scroll($this, this);
+            ui.Scroll.inScreen($this, this);
             slideCallback();
           });
         if ($this.children('span').length && $this.children('span').text() == '더보기') {
@@ -3506,7 +3506,7 @@ ui.Folding = {
           .removeAttr('aria-hidden')
           .stop(true, false)
           .slideDown(speed, function () {
-            ui.Folding.scroll($this, this);
+            ui.Scroll.inScreen($this, this);
             slideCallback();
           });
       }
@@ -3529,32 +3529,6 @@ ui.Folding = {
             .attr('aria-expanded', false);
       }
     });
-  },
-  scroll: function (btn, panel, callback) {
-    //아코디언 열릴때 스크롤 함수
-    const $scrollTop = $(window).scrollTop();
-    let $winHeight = $(window).height();
-    if ($('.bottom-fixed').length) $winHeight = $winHeight - $('.bottom-fixed').children().outerHeight();
-    const $topMargin = 10 + ui.Common.getTopFixedHeight(btn);
-    const $winEnd = $scrollTop + $winHeight;
-    const $btnTop = $(btn).offset().top - $topMargin;
-    const $thisTop = $(panel).offset().top;
-    const $thisHeight = $(panel).outerHeight();
-    const $thisEnd = $thisTop + $thisHeight;
-    let $scroll = '';
-    if ($winEnd < $thisEnd) {
-      $scroll = Math.min($btnTop, $thisEnd - $winHeight);
-    } else if ($scrollTop > $btnTop) {
-      $scroll = $btnTop;
-    }
-
-    if ($scroll == '') {
-      if (!!callback) callback();
-    } else {
-      ui.Scroll.top($scroll, 200, function () {
-        if (!!callback) callback();
-      });
-    }
   }
 };
 
@@ -3905,6 +3879,7 @@ ui.Scroll = {
       });
     });
   },
+  /*
   inScreen: function (target, callback) {
     const $target = $(target);
     const $scrollTop = $(window).scrollTop();
@@ -3921,6 +3896,34 @@ ui.Scroll = {
       $scroll = Math.min($targetTop + $topMargin, $targetEnd - $winHeight + $bottomMargin);
     } else if ($winTop > $targetTop) {
       $scroll = $targetTop + $topMargin;
+    }
+
+    if ($scroll == '') {
+      if (!!callback) callback();
+    } else {
+      ui.Scroll.top($scroll, 200, function () {
+        if (!!callback) callback();
+      });
+    }
+  },
+  */
+  inScreen: function (topEl, bototomEl, callback) {
+    if (!bototomEl) bototomEl = topEl;
+    console.log(bototomEl);
+    const $scrollTop = $(window).scrollTop();
+    let $winHeight = $(window).height();
+    const $topMargin = ui.Common.getTopFixedHeight(topEl) > 0 ? ui.Common.getTopFixedHeight(topEl) + 10 : 0;
+    const $bottomMargin = $('.bottom-fixed-space').length ? $('.bottom-fixed-space').outerHeight() + 10 : 0;
+    const $winEnd = $scrollTop + $winHeight - $bottomMargin;
+    const $topElTop = $(topEl).offset().top - $topMargin;
+    const $bototomElTop = $(bototomEl).offset().top;
+    const $bototomElHeight = $(bototomEl).outerHeight();
+    const $bototomElEnd = $bototomElTop + $bototomElHeight;
+    let $scroll = '';
+    if ($winEnd < $bototomElEnd) {
+      $scroll = Math.min($topElTop, $bototomElEnd - $winHeight);
+    } else if ($scrollTop > $topElTop) {
+      $scroll = $topElTop;
     }
 
     if ($scroll == '') {
