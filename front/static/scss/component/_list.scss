@@ -1,3 +1,47 @@
+.list-empty {
+  padding: 10rem 0;
+  text-align: center;
+  [class*='i-ico-'] {
+    vertical-align: top;
+    margin-bottom: 1.2rem;
+  }
+  p {
+    color: #999;
+  }
+}
+
+.logo-info-txt {
+  display: flex;
+  align-items: center;
+  .ico-logo {
+    margin-right: 0.8rem;
+  }
+  .txt-name {
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: #222;
+  }
+}
+.round-box-item {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 1.4rem;
+  background: #fafafa;
+  > div:first-child {
+    flex: 1 1 auto;
+  }
+  > .right {
+    margin-left: auto;
+    padding-left: 10px;
+    .btn-txt {
+      &:last-child {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
 .section .line-list-1 {
   @include outer;
 }
@@ -22,17 +66,7 @@
     }
   }
 }
-.list-empty {
-  padding: 10rem 0;
-  text-align: center;
-  [class*='i-ico-'] {
-    vertical-align: top;
-    margin-bottom: 1.2rem;
-  }
-  p {
-    color: #999;
-  }
-}
+
 .file-list {
   > li + li {
     margin-top: 0.8rem;

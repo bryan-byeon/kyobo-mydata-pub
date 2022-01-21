@@ -1,4 +1,21 @@
 // icon
+.ico-logo {
+  position: relative;
+  width: 3.2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f1f1f1;
+  flex-shrink: 0;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  img {
+    @include img-fit(true);
+  }
+}
+
 [class*='i-ico-'],
 [class*='i-ani-'] {
   position: relative;
