@@ -543,6 +543,12 @@ html.lock,
   + .textarea {
     margin-top: 0.8rem;
   }
+  > .button {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    // flex: 1 1 auto;
+    // width: auto !important;
+  }
 }
 .overflow-hidden {
   overflow: hidden;
