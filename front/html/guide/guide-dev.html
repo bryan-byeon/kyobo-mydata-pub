@@ -242,7 +242,7 @@ Layer.alert('얼럿창입니다.', '얼럿제목', function () {
 });
 
 //얼럿 + 콜백 + 버튼 텍스트변경 (타이틀 필요없으면 '' 으로)
-Layer.alert('얼럿창입니다.', '', '완료', function () {
+Layer.alert('얼럿창입니다.', null, '완료', function () {
   console.log('얼럿 완료1');
 });
 
@@ -270,7 +270,7 @@ Layer.confirm('컨펌창입니다.','컨펌제목',function(e){
 	}
 });
 //컨펌 + 콜백 + 버튼 텍스트변경
-Layer.confirm('컨펌창입니다.','','완료','넘기기',function(e){
+Layer.confirm('컨펌창입니다.', null,'완료','넘기기',function(e){
 	if(e){
 		console.log('컨펌 완료');
 	}else{
@@ -301,7 +301,7 @@ Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function
                   });
                   $('#btnAlert2').click(function (e) {
                     e.preventDefault();
-                    Layer.alert('얼럿창입니다.', '', '완료', function () {
+                    Layer.alert('얼럿창입니다.', null, '완료', function () {
                       console.log('얼럿 완료1');
                     });
                   });
@@ -315,9 +315,9 @@ Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function
                     e.preventDefault();
                     Layer.confirm('컨펌창입니다.', function (e) {
                       if (e) {
-                        console.log('컨펌 확인');
+                        console.log('컨펌 확인1');
                       } else {
-                        console.log('컨펌 취소');
+                        console.log('컨펌 취소2');
                       }
                     });
                   });
@@ -325,19 +325,19 @@ Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function
                     e.preventDefault();
                     Layer.confirm('컨펌창입니다.', '컨펌제목', function (e) {
                       if (e) {
-                        console.log('컨펌 완료');
+                        console.log('컨펌 확인2');
                       } else {
-                        console.log('컨펌 넘기기');
+                        console.log('컨펌 취소2');
                       }
                     });
                   });
                   $('#btnConfirm2').click(function (e) {
                     e.preventDefault();
-                    Layer.confirm('컨펌창입니다.', '', '완료', '넘기기', function (e) {
+                    Layer.confirm('컨펌창입니다.', null, '완료', '넘기기', function (e) {
                       if (e) {
-                        console.log('컨펌 완료');
+                        console.log('컨펌 완료1');
                       } else {
-                        console.log('컨펌 넘기기');
+                        console.log('컨펌 넘기기1');
                       }
                     });
                   });
@@ -345,9 +345,9 @@ Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function
                     e.preventDefault();
                     Layer.confirm('컨펌창입니다.', '컨펌제목', '완료', '넘기기', function (e) {
                       if (e) {
-                        console.log('컨펌 완료');
+                        console.log('컨펌 완료2');
                       } else {
-                        console.log('컨펌 넘기기');
+                        console.log('컨펌 넘기기2');
                       }
                     });
                   });

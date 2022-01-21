@@ -4499,6 +4499,7 @@ const Layer = {
   alertHtml: function (type, popId, btnActionId, btnCancelId) {
     let $html = '<div id="' + popId + '" class="' + Layer.popClass + ' modal alert ' + Layer.alertClass + '" role="dialog" aria-hidden="true">';
     $html += '<article class="' + Layer.wrapClass + '">';
+    $html += '<div class="' + Layer.headClass + '"><div><h1>안내</h1></div></div>';
     $html += '<div class="' + Layer.bodyClass + '">';
     $html += '<div class="' + Layer.innerClass + '">';
     if (type === 'prompt') {
@@ -4558,10 +4559,9 @@ const Layer = {
     Layer.alertHtml(type, $popId, $actionId, $cancelId);
     if (!!option.title || (typeof callback === 'string' && callback !== '')) {
       const $insertTit = typeof callback === 'string' && callback !== '' ? callback : option.title;
-      const $titleHtml = '<div class="' + Layer.headClass + '"><div><h1>' + $insertTit + '</h1></div></div>';
       $('#' + $popId)
-        .find('.' + Layer.wrapClass)
-        .prepend($titleHtml);
+        .find('.' + Layer.wrapClass + ' h1')
+        .html($insertTit);
     }
     if (!!option.actionTxt) $('#' + $actionId).text(option.actionTxt);
     if (typeof callback2 === 'string' && callback2 !== '') $('#' + $actionId).text(callback2);
@@ -4620,9 +4620,11 @@ const Layer = {
     $cancelBtn.on('click', function () {
       $result = false;
       Layer.close('#' + $popId, function () {
-        if (!!option.cancel) option.cancel($result);
         if (!!option.callback) option.callback($result);
-        if (!!callback) callback($result);
+        if (typeof callback === 'function') callback($result);
+        if (typeof callback2 === 'function') callback2($result);
+        if (typeof callback3 === 'function') callback3($result);
+        if (typeof callback4 === 'function') callback4($result);
       });
     });
   },
