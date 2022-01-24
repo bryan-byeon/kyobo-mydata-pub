@@ -538,8 +538,8 @@ ui.Common = {
         $('.floating-btn').append(btnHtml);
       } else if ($('.floating-bar').length && $('.floating-bar').is(':visible')) {
         $('.floating-bar').prepend(btnHtml);
-      } else if ($('#container').length) {
-        $('#container').append(btnHtml);
+      } else if ($('#wrap').length) {
+        $('#wrap').append(btnHtml);
       } else {
         $('body').append(btnHtml);
       }
@@ -1164,6 +1164,9 @@ ui.Button = {
     $(document).on('click', btnInEfList, function (e) {
       const $this = $(this);
       let $btnEl = $this;
+      const $popup = $btnEl.closest('.' + Layer.popClass);
+      const $popWrap = $popup.find('.' + Layer.wrapClass);
+      const $isBottomPop = $popup.length && $popup.hasClass('bottom');
       if ($btnEl.is('input')) $btnEl = $btnEl.siblings('.lbl');
       const $delay = 650;
       if (!$btnEl.is('.disabled')) {
@@ -1176,6 +1179,7 @@ ui.Button = {
         }
         const $bgColorVal = Math.max($bgAlpha, Math.round(getBgBrightValue($bgColor)));
         const isBalck = $bgColorVal < 50 ? true : false;
+        if ($isBottomPop && !$popWrap.hasClass('overflow-hidden')) $popWrap.addClass('overflow-hidden');
         if (!$btnEl.find('.btn-click-in').length) $btnEl.append('<i class="btn-click-in"></i>');
         const $btnIn = $btnEl.find('.btn-click-in');
         const $btnMax = Math.max($btnEl.outerWidth(), $btnEl.outerHeight());
@@ -1193,6 +1197,7 @@ ui.Button = {
           .delay($delay)
           .queue(function (next) {
             $btnIn.remove();
+            if ($isBottomPop) $popWrap.removeClass('overflow-hidden');
             next();
           });
       }
@@ -3924,7 +3929,6 @@ ui.Scroll = {
   */
   inScreen: function (topEl, bototomEl, callback) {
     if (!bototomEl) bototomEl = topEl;
-    console.log(bototomEl);
     const $scrollTop = $(window).scrollTop();
     let $winHeight = $(window).height();
     const $topMargin = ui.Common.getTopFixedHeight(topEl) > 0 ? ui.Common.getTopFixedHeight(topEl) + 10 : 0;

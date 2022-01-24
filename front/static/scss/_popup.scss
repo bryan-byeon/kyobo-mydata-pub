@@ -114,6 +114,13 @@
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 16px, #fff 100%);
   }
 }
+.pop-foot-close {
+  text-align: center;
+  color: var(--primary-color);
+  div + & {
+    margin-top: 0.8rem;
+  }
+}
 .pop-top-fixed:not(.no-shadow) {
   // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
@@ -217,8 +224,8 @@
   &.bottom {
     padding-top: -vh(20);
     .pop-wrap {
-      position: fixed;
-      bottom: 0;
+      // position: fixed;
+      // bottom: 0;
       border-radius: 2rem 2rem 0 0;
       max-height: 100%;
     }
@@ -227,6 +234,7 @@
         padding: 3.2rem 5rem 2.4rem 2.4rem;
       }
       .pop-close {
+        display: none;
         top: 3.4rem;
       }
     }

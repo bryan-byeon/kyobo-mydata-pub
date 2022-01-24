@@ -463,6 +463,7 @@
   position: fixed;
   bottom: 2rem;
   right: 2.4rem;
+  width: auto !important;
   z-index: 50;
   transition: padding 0.3s, bottom 0.3s;
   &.top-on {

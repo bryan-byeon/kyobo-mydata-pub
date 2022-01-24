@@ -554,22 +554,22 @@ html.lock,
   }
 }
 .overflow-hidden {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .overflow-auto {
-  overflow: auto;
+  overflow: auto !important;
 }
 .overflow-x-hidden {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 .overflow-x-auto {
-  overflow-x: auto;
+  overflow-x: auto !important;
 }
 .overflow-y-hidden {
-  overflow-y: hidden;
+  overflow-y: hidden !important;
 }
 .overflow-y-auto {
-  overflow-y: auto;
+  overflow-y: auto !important;
 }
 
 // div:table
