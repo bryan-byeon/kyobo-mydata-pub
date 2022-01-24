@@ -172,14 +172,13 @@ button.btn-click {
   overflow: hidden;
 }
 .btn-clicking-active {
-  backface-visibility: hidden;
+  overflow: hidden;
 }
 .btn-click-in {
   display: block;
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 100%;
-  -webkit-transform: scale(0);
   transform: scale(0);
   &.animate {
     animation: btnClickEf 0.65s linear;

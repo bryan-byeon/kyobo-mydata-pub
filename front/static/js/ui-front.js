@@ -1165,9 +1165,6 @@ ui.Button = {
     $(document).on('click', btnInEfList, function (e) {
       const $this = $(this);
       let $btnEl = $this;
-      const $popup = $btnEl.closest('.' + Layer.popClass);
-      const $popWrap = $popup.find('.' + Layer.wrapClass);
-      const $isBottomPop = $popup.length && $popup.hasClass('bottom');
       if ($btnEl.is('input')) $btnEl = $btnEl.siblings('.lbl');
       const $delay = 650;
       if (!$btnEl.is('.disabled')) {
@@ -1180,13 +1177,42 @@ ui.Button = {
         }
         const $bgColorVal = Math.max($bgAlpha, Math.round(getBgBrightValue($bgColor)));
         const isBalck = $bgColorVal < 50 ? true : false;
-        // if ($isBottomPop && !$popWrap.hasClass('overflow-hidden')) $popWrap.addClass('overflow-hidden');
         if (!$btnEl.find('.btn-click-in').length) $btnEl.addClass('btn-clicking-active').append('<i class="btn-click-in"></i>');
-        const $btnIn = $btnEl.find('.btn-click-in');
+        // $btnEl.append('<i class="btn-click-in"></i>');
+        const $btnIn = $btnEl.find('.btn-click-in').last();
+        if (isBalck) $btnIn.addClass('white');
         const $btnMax = Math.max($btnEl.outerWidth(), $btnEl.outerHeight());
+        /*
+        const $btnX = e.pageX - $btnEl.offset().left;
+        const $btnY = e.pageY - $btnEl.offset().top;
+        
+        $btnIn
+          .stop(true, false)
+          .css({
+            left: $btnX,
+            top: $btnY,
+            width: 0,
+            height: 0,
+            opacity: 1
+          })
+          .animate(
+            {
+              left: -$btnMax + $btnX,
+              top: -$btnMax + $btnY,
+              width: $btnMax * 2,
+              height: $btnMax * 2,
+              opacity: 0
+            },
+            $delay,
+            function () {
+              // $btnEl.removeClass('btn-clicking-active');
+              $btnIn.remove();
+            }
+          );
+        */
+
         const $btnX = e.pageX - $btnEl.offset().left - $btnMax / 2;
         const $btnY = e.pageY - $btnEl.offset().top - $btnMax / 2;
-        if (isBalck) $btnIn.addClass('white');
         $btnIn
           .css({
             left: $btnX,
@@ -1199,7 +1225,6 @@ ui.Button = {
           .queue(function (next) {
             $btnEl.removeClass('btn-clicking-active');
             $btnIn.remove();
-            // if ($isBottomPop) $popWrap.removeClass('overflow-hidden');
             next();
           });
       }
@@ -5091,7 +5116,7 @@ const Layer = {
       const $openDelay = 50 * Layer.opening;
 
       // pop-scl-wrap
-      if ($popup.hasClass('modal') || ($popup.hasClass('bottom') && !$popup.find('.' + Layer.sclWrapClass).length)) {
+      if (ui.PC.any() && ($popup.hasClass('modal') || ($popup.hasClass('bottom') && !$popup.find('.' + Layer.sclWrapClass).length))) {
         $popWrap.wrap('<div class="' + Layer.sclWrapClass + '"></div>');
       }
 

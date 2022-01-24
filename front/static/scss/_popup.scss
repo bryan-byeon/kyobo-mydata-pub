@@ -137,28 +137,23 @@
   background: rgba(0, 0, 0, 0);
   transition: background 0.45s 0.15s;
   .pop-wrap {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pop-scl-wrap {
+    overflow: hidden;
+  }
+  > .pop-scl-wrap,
+  > .pop-wrap {
     width: 100%;
     max-height: 100%;
     background-color: #fff;
     transform: translate3d(0, 120%, 0);
     transition: transform 0.45s, margin 0.45s, visibility 0.45s;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     visibility: hidden;
   }
-  .pop-scl-wrap {
-    width: 100%;
-    max-height: 100%;
-    visibility: hidden;
-    overflow: hidden;
-    transform: translate3d(0, 120%, 0);
-    transition: transform 0.45s, margin 0.45s, visibility 0.45s;
-    .pop-wrap {
-      transform: none !important;
-      visibility: visible !important;
-    }
-  }
+
   .pop-body {
     .bottom-fixed {
       height: 6.1rem;
@@ -173,7 +168,7 @@
   //full
   &.full {
     pointer-events: none;
-    .pop-wrap {
+    > .pop-wrap {
       pointer-events: auto;
       height: 100%;
       display: flex;
@@ -188,7 +183,7 @@
     }
 
     &.pop-img-box {
-      .pop-wrap {
+      > .pop-wrap {
         background: transparent;
       }
       .pop-body {
@@ -235,19 +230,15 @@
   // bottom
   &.bottom {
     padding-top: -vh(20);
-    .pop-wrap {
+    > .pop-scl-wrap,
+    > .pop-wrap {
       position: fixed;
       bottom: 0;
       border-radius: 2rem 2rem 0 0;
     }
-    .pop-scl-wrap {
-      position: fixed;
-      bottom: 0;
-      border-radius: 2rem 2rem 0 0;
-      .pop-wrap {
-        position: relative !important;
-        bottom: auto !important;
-        max-width: none !important;
+    > .pop-wrap {
+      html.mobile & {
+        border-top: 1px solid transparent;
       }
     }
     .pop-head {
@@ -305,7 +296,8 @@
     align-items: center;
     justify-content: center;
 
-    .pop-wrap {
+    > .pop-scl-wrap,
+    > .pop-wrap {
       width: 100%;
       max-width: 64rem;
       border-radius: 1.6rem;
@@ -313,20 +305,6 @@
       opacity: 0;
       transform: translate3d(0, 0, 0);
       transition-property: margin, opacity, visibility;
-    }
-    .pop-scl-wrap {
-      max-width: 64rem;
-      border-radius: 1.6rem;
-      margin: 3rem auto 0;
-      opacity: 0;
-      transform: translate3d(0, 0, 0);
-      transition-property: margin, opacity, visibility;
-      .pop-wrap {
-        max-width: none !important;
-        border-radius: 0 !important;
-        opacity: 1 !important;
-        margin-top: 0 !important;
-      }
     }
     .pop-head {
       > div {
@@ -385,8 +363,8 @@
 
     &.show {
       // display:flex !important;
-      .pop-scl-wrap,
-      .pop-wrap {
+      > .pop-scl-wrap,
+      > .pop-wrap {
         opacity: 1;
         margin-top: 0;
       }
@@ -394,14 +372,23 @@
   }
 
   &[class*='side-'] {
-    .pop-wrap {
+    > .pop-wrap {
       width: 67%;
       max-width: 40rem;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .pop-head {
+      flex-shrink: 0;
+    }
+    .pop-body {
+      flex: 1 1 auto;
+      width: 100%;
     }
   }
   &.side-left {
-    .pop-wrap {
+    > .pop-wrap {
       transform: translate3d(-120%, 0, 0);
     }
     &.show {
@@ -409,7 +396,7 @@
     }
   }
   &.side-right {
-    .pop-wrap {
+    > .pop-wrap {
       float: right;
       transform: translate3d(120%, 0, 0);
     }
@@ -422,8 +409,8 @@
   &.show {
     @include dimm;
     transition-delay: 0s;
-    .pop-wrap,
-    .pop-scl-wrap {
+    > .pop-scl-wrap,
+    > .pop-wrap {
       transform: translate3d(0, 0, 0);
       transition-delay: 0.15s;
       visibility: visible;
@@ -574,30 +561,17 @@
 @include mediaMinWidth(1024) {
   .popup {
     &.full {
-      .pop-wrap {
+      > .pop-scl-wrap,
+      > .pop-wrap {
         @include web-center;
-      }
-      .pop-scl-wrap {
-        @include web-center;
-        .pop-wrap {
-          margin: 0;
-        }
       }
     }
     &.bottom {
-      .pop-wrap {
+      > .pop-scl-wrap,
+      > .pop-wrap {
         @include web-center;
         left: 50%;
         margin-left: -51.2rem;
-      }
-      .pop-scl-wrap {
-        @include web-center;
-        left: 50%;
-        margin-left: -51.2rem;
-        .pop-wrap {
-          margin: 0 !important;
-          left: auto;
-        }
       }
     }
   }
