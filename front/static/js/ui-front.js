@@ -806,7 +806,7 @@ ui.Common = {
 };
 
 ui.Gnb = {
-  outCont: '#header,#contents,.floating-bar,#footer',
+  outCont: '#header,#container,,#footer',
   open: function () {
     Body.lock();
     $('#gnb').show().removeAttr('aria-hidden');
@@ -1016,7 +1016,7 @@ ui.Util = {
       $last = $('.console').last();
       $top = parseInt($last.css('top')) + $last.outerHeight();
     }
-    const $wrap = $('#contents').length ? $('#contents') : $('body');
+    const $wrap = $('#container').length ? $('#container') : $('body');
     $wrap.append('<div class="console">' + txt + '</div>');
     $last = $('.console').last();
     if ($top > 0) $last.css('top', $top);
@@ -4482,7 +4482,7 @@ const Loading = {
   }
 };
 
-//레이어팝업(Layer): 레이어 팝업은 #contents 밖에 위치해야함
+//레이어팝업(Layer): 레이어 팝업은 #container 밖에 위치해야함
 const Layer = {
   id: 'uiLayer',
   alertClass: 'ui-alert',
@@ -4499,7 +4499,7 @@ const Layer = {
   footClass: 'pop-foot',
   innerClass: 'section',
   showClass: 'show',
-  etcCont: '#header,#gnb,#contents,.floating-bar,#footer',
+  etcCont: '#header,#gnb,#container,#footer',
   beforeCont: [],
   content: '',
   like: function () {
@@ -5252,7 +5252,7 @@ const Layer = {
         }
       } else {
         $(tar).find(':focus').blur();
-        $('#contents').find($focusableEl).first().focus();
+        $('#container').find($focusableEl).first().focus();
       }
     }
 
@@ -5802,7 +5802,7 @@ const Layer = {
     }
     $boxHtml += '</div>';
     $boxHtml += '</div>';
-    $('#contents').before($boxHtml);
+    $('#container').before($boxHtml);
     const $toast = $($className).last();
     const $toastClose = function () {
       $toast.removeClass('on');

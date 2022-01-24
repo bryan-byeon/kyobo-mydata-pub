@@ -15,330 +15,328 @@
   </head>
   <body>
     <article id="wrap">
+      <!-- 헤더 -->
       <div class="header-space" data-include-html="../../include/header.html"></div>
+      <!-- //헤더 -->
 
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
       <main id="container">
-        <!-- 컨텐츠 -->
-        <section id="contents">
-          <div class="tab-navi-menu tab-fixed">
-            <div class="tab-inner">
-              <i class="tab-line" aria-hidden="true"></i>
-              <ul class="tab-list">
-                <li class="tab">
-                  <a href="guide-dev.html"><span>개발자참고</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-txt.html"><span>텍스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-btn.html"><span>버튼</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-form.html"><span>폼요소</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-form2.html"><span>입력 UI</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-agree.html"><span>약관</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-list.html"><span>리스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-table.html"><span>테이블</span></a>
-                </li>
-                <li class="tab active">
-                  <a href="guide-popup.html"><span>팝업</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-chart.html"><span>차트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-animate.html"><span>애니메이션</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-swiper.html"><span>swiper</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-address.html"><span>주소검색</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-etc.html"><span>기타</span></a>
-                </li>
-              </ul>
-            </div>
+        <div class="tab-navi-menu tab-fixed">
+          <div class="tab-inner">
+            <i class="tab-line" aria-hidden="true"></i>
+            <ul class="tab-list">
+              <li class="tab">
+                <a href="guide-dev.html"><span>개발자참고</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-txt.html"><span>텍스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-btn.html"><span>버튼</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-form.html"><span>폼요소</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-form2.html"><span>입력 UI</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-agree.html"><span>약관</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-list.html"><span>리스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-table.html"><span>테이블</span></a>
+              </li>
+              <li class="tab active">
+                <a href="guide-popup.html"><span>팝업</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-chart.html"><span>차트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-animate.html"><span>애니메이션</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-swiper.html"><span>swiper</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-address.html"><span>주소검색</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-etc.html"><span>기타</span></a>
+              </li>
+            </ul>
           </div>
-          <div class="section">
-            <h2 class="gd__h1">팝업</h2>
+        </div>
+        <div class="section">
+          <h2 class="gd__h1">팝업</h2>
+          <div>
+            <h3 class="gd__h2">레이어</h3>
             <div>
-              <h3 class="gd__h2">레이어</h3>
-              <div>
-                <div class="btn-wrap">
-                  <div class="flex">
-                    <a href="#" class="button line" onclick="Layer.open('#fullPopup')">풀팝업</a>
-                    <a href="#" class="button line" onclick="Layer.open('#modalPopup')">모달팝업</a>
-                  </div>
-                </div>
-                <div class="btn-wrap">
-                  <div class="flex">
-                    <a href="#" class="button line" onclick="Layer.open('#bottomPopup1')">하단팝업(짧음)</a>
-                    <a href="#" class="button line" onclick="Layer.open('#bottomPopup2')">하단팝업(길때)</a>
-                  </div>
-                </div>
-                <div class="btn-wrap">
-                  <div class="flex">
-                    <a href="#" class="button line" onclick="Layer.open('#sidePopup1')">사이드팝업(왼쪽)</a>
-                    <a href="#" class="button line" onclick="Layer.open('#sidePopup2')">사이드팝업(오른쪽)</a>
-                  </div>
-                </div>
-              </div>
-              <h3 class="gd__h2">팝업불러오기</h3>
-              <div>
-                <div class="btn-wrap">
-                  <div class="flex">
-                    <a href="win-pop.html" class="button line" target="_blank">(윈도우)팝업페이지</a>
-                    <a href="#" data-popup-full="win-pop.html" class="button line">팝업불러오기(full)</a>
-                  </div>
-                  <div class="flex">
-                    <a href="#" data-popup-modal="win-pop.html" class="button line">팝업불러오기(modal)</a>
-                    <a href="#" data-popup-bottom="win-pop.html" class="button line">팝업불러오기(bottom)</a>
-                  </div>
-                  <div class="flex">
-                    <a href="#" data-popup-left="win-pop.html" class="button line">팝업불러오기(side-left)</a>
-                    <a href="#" data-popup-right="win-pop.html" class="button line">팝업불러오기(side-right)</a>
-                  </div>
-                </div>
-              </div>
-              <h3 class="gd__h2">select</h3>
-              <div>
-                <div class="form-lbl">
-                  <label for="select1">옵션 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="select">
-                    <select id="select1" title="옵션 선택">
-                      <option value="">옵션선택</option>
-                      <option value="1">옵션1</option>
-                      <option value="2">옵션2</option>
-                      <option value="3">옵션3</option>
-                      <option value="4">옵션4</option>
-                      <option value="5">옵션5</option>
-                      <option value="6">옵션6</option>
-                      <option value="7">옵션7</option>
-                      <option value="8">옵션8</option>
-                      <option value="9">옵션9</option>
-                      <option value="10">옵션10</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <h3 class="gd__h2">기타</h3>
-              <div>
+              <div class="btn-wrap">
                 <div class="flex">
-                  <a href="#" class="button line" onclick="Layer.toast('토스트 팝업 입니다.');">토스트 팝업</a>
-                  <a href="#" class="button line" onclick="Layer.alarm('알람 팝업 입니다.');">알람 팝업</a>
+                  <a href="#" class="button line" onclick="Layer.open('#fullPopup')">풀팝업</a>
+                  <a href="#" class="button line" onclick="Layer.open('#modalPopup')">모달팝업</a>
+                </div>
+              </div>
+              <div class="btn-wrap">
+                <div class="flex">
+                  <a href="#" class="button line" onclick="Layer.open('#bottomPopup1')">하단팝업(짧음)</a>
+                  <a href="#" class="button line" onclick="Layer.open('#bottomPopup2')">하단팝업(길때)</a>
+                </div>
+              </div>
+              <div class="btn-wrap">
+                <div class="flex">
+                  <a href="#" class="button line" onclick="Layer.open('#sidePopup1')">사이드팝업(왼쪽)</a>
+                  <a href="#" class="button line" onclick="Layer.open('#sidePopup2')">사이드팝업(오른쪽)</a>
                 </div>
               </div>
             </div>
-
-            <h2 class="gd__h1">로딩</h2>
-
-            <div class="btn-wrap">
+            <h3 class="gd__h2">팝업불러오기</h3>
+            <div>
+              <div class="btn-wrap">
+                <div class="flex">
+                  <a href="win-pop.html" class="button line" target="_blank">(윈도우)팝업페이지</a>
+                  <a href="#" data-popup-full="win-pop.html" class="button line">팝업불러오기(full)</a>
+                </div>
+                <div class="flex">
+                  <a href="#" data-popup-modal="win-pop.html" class="button line">팝업불러오기(modal)</a>
+                  <a href="#" data-popup-bottom="win-pop.html" class="button line">팝업불러오기(bottom)</a>
+                </div>
+                <div class="flex">
+                  <a href="#" data-popup-left="win-pop.html" class="button line">팝업불러오기(side-left)</a>
+                  <a href="#" data-popup-right="win-pop.html" class="button line">팝업불러오기(side-right)</a>
+                </div>
+              </div>
+            </div>
+            <h3 class="gd__h2">select</h3>
+            <div>
+              <div class="form-lbl">
+                <label for="select1">옵션 선택</label>
+              </div>
+              <div class="form-item">
+                <div class="select">
+                  <select id="select1" title="옵션 선택">
+                    <option value="">옵션선택</option>
+                    <option value="1">옵션1</option>
+                    <option value="2">옵션2</option>
+                    <option value="3">옵션3</option>
+                    <option value="4">옵션4</option>
+                    <option value="5">옵션5</option>
+                    <option value="6">옵션6</option>
+                    <option value="7">옵션7</option>
+                    <option value="8">옵션8</option>
+                    <option value="9">옵션9</option>
+                    <option value="10">옵션10</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <h3 class="gd__h2">기타</h3>
+            <div>
               <div class="flex">
-                <a href="#" class="button line" onclick="Loading.open();$(this).next().next().css('z-index',10000)">로딩창열기</a>
-                <a href="#" class="button line" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000)">로딩창열기 + 텍스트</a>
-                <a href="#" class="button line" onclick="Loading.close();$(this).removeAttr('style');">로딩창닫기</a>
-              </div>
-            </div>
-
-            <h2 class="gd__h1">메세지창</h2>
-            <div class="btn-wrap">
-              <div>
-                <div class="flex">
-                  <a href="#" id="btnAlert" class="button line">얼럿</a>
-                  <a href="#" id="btnConfirm" class="button line">컨펌</a>
-                  <a href="#" id="btnPrompt" class="button line">입력</a>
-                </div>
+                <a href="#" class="button line" onclick="Layer.toast('토스트 팝업 입니다.');">토스트 팝업</a>
+                <a href="#" class="button line" onclick="Layer.alarm('알람 팝업 입니다.');">알람 팝업</a>
               </div>
             </div>
           </div>
-        </section>
-        <!-- //컨텐츠 -->
 
-        <!-- 팝업 -->
-        <div id="fullPopup" class="popup full" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>전체팝업</h1>
-                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-              </div>
-            </div>
-            <div class="pop-body">
-              <div class="section">
-                <!-- CMS 영역 -->
-                <h1 class="tit-h1 pop-fade-title">
-                  스크롤을 내려서 <br />
-                  해당글자가 안보이면 <br />
-                  헤더에 타이틀이 보입니다.
-                </h1>
-                팝업 컨텐츠<br />
-                팝업 컨텐츠<br />
-                팝업 컨텐츠<br />
-                팝업 컨텐츠<br />
-                <div class="tab-navi-menu ui-tab pop-fixed">
-                  <div class="tab-inner">
-                    <i class="tab-line" aria-hidden="true"></i>
-                    <ul class="tab-list">
-                      <li class="tab">
-                        <a href="#"><span>popup 속 탭1</span></a>
-                      </li>
-                      <li class="tab">
-                        <a href="#"><span>popup 속 탭1</span></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                팝업 컨텐츠<br />
-                팝업 컨텐츠<br />
-                <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
-                팝업 컨텐츠<br />
-                팝업 컨텐츠<br />
-                <!-- //CMS 영역 -->
-              </div>
-            </div>
-            <div class="pop-foot">
-              <div>
-                <div class="flex">
-                  <a href="#" class="button primary ui-pop-close">확인</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+          <h2 class="gd__h1">로딩</h2>
 
-        <div id="modalPopup" class="popup modal" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>팝업 타이틀</h1>
-                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-              </div>
+          <div class="btn-wrap">
+            <div class="flex">
+              <a href="#" class="button line" onclick="Loading.open();$(this).next().next().css('z-index',10000)">로딩창열기</a>
+              <a href="#" class="button line" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000)">로딩창열기 + 텍스트</a>
+              <a href="#" class="button line" onclick="Loading.close();$(this).removeAttr('style');">로딩창닫기</a>
             </div>
-            <div class="pop-body">
-              <div class="section">팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용</div>
-            </div>
-            <div class="pop-foot">
-              <div>
-                <div class="flex">
-                  <a href="#" class="button primary" onclick="Layer.close('#modalPopup');">확인</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+          </div>
 
-        <div id="bottomPopup1" class="popup bottom" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>하단팝업제목</h1>
-                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+          <h2 class="gd__h1">메세지창</h2>
+          <div class="btn-wrap">
+            <div>
+              <div class="flex">
+                <a href="#" id="btnAlert" class="button line">얼럿</a>
+                <a href="#" id="btnConfirm" class="button line">컨펌</a>
+                <a href="#" id="btnPrompt" class="button line">입력</a>
               </div>
             </div>
-            <div class="pop-body">
-              <div class="section">
-                텍스트 <br />
-                텍스트 <br />
-                텍스트 <br />
-                텍스트 <br />
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
-
-        <div id="bottomPopup2" class="popup bottom" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목</h1>
-                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-              </div>
-            </div>
-            <div class="pop-body">
-              <div class="section">
-                텍스트 <br />
-                텍스트 <br />
-                <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
-                텍스트 <br />
-                텍스트 <br />
-              </div>
-            </div>
-            <div class="pop-foot">
-              <div>
-                <div class="flex">
-                  <a href="#" class="button primary" onclick="Layer.close('#bottomPopup2');">확인</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div id="sidePopup1" class="popup side-left" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>왼쪽사이드팝업제목</h1>
-              </div>
-            </div>
-            <div class="pop-body">
-              <div class="section">
-                텍스트 <br />
-                텍스트 <br />
-                텍스트 <br />
-                텍스트 <br />
-              </div>
-            </div>
-            <div class="pop-foot">
-              <div>
-                <div class="flex">
-                  <a href="#" class="button primary ui-pop-close">확인</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div id="sidePopup2" class="popup side-right" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>왼쪽사이드팝업제목</h1>
-              </div>
-            </div>
-            <div class="pop-body">
-              <div class="section">
-                텍스트 <br />
-                텍스트 <br />
-                <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
-                텍스트 <br />
-                텍스트 <br />
-              </div>
-            </div>
-            <div class="pop-foot">
-              <div>
-                <div class="flex">
-                  <a href="#" class="button primary ui-pop-close">확인</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <!-- //팝업 -->
       </main>
-      <!-- //컨테이너 -->
+      <!-- //컨테이너(컨텐츠) -->
+
+      <!-- 팝업 -->
+      <div id="fullPopup" class="popup full" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>전체팝업</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              <!-- CMS 영역 -->
+              <h1 class="tit-h1 pop-fade-title">
+                스크롤을 내려서 <br />
+                해당글자가 안보이면 <br />
+                헤더에 타이틀이 보입니다.
+              </h1>
+              팝업 컨텐츠<br />
+              팝업 컨텐츠<br />
+              팝업 컨텐츠<br />
+              팝업 컨텐츠<br />
+              <div class="tab-navi-menu ui-tab pop-fixed">
+                <div class="tab-inner">
+                  <i class="tab-line" aria-hidden="true"></i>
+                  <ul class="tab-list">
+                    <li class="tab">
+                      <a href="#"><span>popup 속 탭1</span></a>
+                    </li>
+                    <li class="tab">
+                      <a href="#"><span>popup 속 탭1</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              팝업 컨텐츠<br />
+              팝업 컨텐츠<br />
+              <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
+              팝업 컨텐츠<br />
+              팝업 컨텐츠<br />
+              <!-- //CMS 영역 -->
+            </div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <a href="#" class="button primary ui-pop-close">확인</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="modalPopup" class="popup modal" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>팝업 타이틀</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용 팝업내용</div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <a href="#" class="button primary" onclick="Layer.close('#modalPopup');">확인</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="bottomPopup1" class="popup bottom" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>하단팝업제목</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              텍스트 <br />
+              텍스트 <br />
+              텍스트 <br />
+              텍스트 <br />
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="bottomPopup2" class="popup bottom" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목 하단팝업제목</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              텍스트 <br />
+              텍스트 <br />
+              <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
+              텍스트 <br />
+              텍스트 <br />
+            </div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <a href="#" class="button primary" onclick="Layer.close('#bottomPopup2');">확인</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="sidePopup1" class="popup side-left" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>왼쪽사이드팝업제목</h1>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              텍스트 <br />
+              텍스트 <br />
+              텍스트 <br />
+              텍스트 <br />
+            </div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <a href="#" class="button primary ui-pop-close">확인</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="sidePopup2" class="popup side-right" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>왼쪽사이드팝업제목</h1>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              텍스트 <br />
+              텍스트 <br />
+              <div style="height: 1500px; background: #f1f1f1; text-align: center">스크롤을 위한 임시영역</div>
+              텍스트 <br />
+              텍스트 <br />
+            </div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <a href="#" class="button primary ui-pop-close">확인</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- //팝업 -->
     </article>
 
     <script>

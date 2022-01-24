@@ -15,96 +15,94 @@
   </head>
   <body>
     <article id="wrap">
+      <!-- 헤더 -->
       <div class="header-space" data-include-html="../../include/header.html"></div>
+      <!-- //헤더 -->
 
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
       <main id="container">
-        <!-- 컨텐츠 -->
-        <section id="contents">
-          <div class="tab-navi-menu tab-fixed">
-            <div class="tab-inner">
-              <i class="tab-line" aria-hidden="true"></i>
-              <ul class="tab-list">
-                <li class="tab">
-                  <a href="guide-dev.html"><span>개발자참고</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-txt.html"><span>텍스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-btn.html"><span>버튼</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-form.html"><span>폼요소</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-form2.html"><span>입력 UI</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-agree.html"><span>약관</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-list.html"><span>리스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-table.html"><span>테이블</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-popup.html"><span>팝업</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-chart.html"><span>차트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-animate.html"><span>애니메이션</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-swiper.html"><span>swiper</span></a>
-                </li>
-                <li class="tab active">
-                  <a href="guide-address.html"><span>주소검색</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-etc.html"><span>기타</span></a>
-                </li>
-              </ul>
-            </div>
+        <div class="tab-navi-menu tab-fixed">
+          <div class="tab-inner">
+            <i class="tab-line" aria-hidden="true"></i>
+            <ul class="tab-list">
+              <li class="tab">
+                <a href="guide-dev.html"><span>개발자참고</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-txt.html"><span>텍스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-btn.html"><span>버튼</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-form.html"><span>폼요소</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-form2.html"><span>입력 UI</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-agree.html"><span>약관</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-list.html"><span>리스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-table.html"><span>테이블</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-popup.html"><span>팝업</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-chart.html"><span>차트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-animate.html"><span>애니메이션</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-swiper.html"><span>swiper</span></a>
+              </li>
+              <li class="tab active">
+                <a href="guide-address.html"><span>주소검색</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-etc.html"><span>기타</span></a>
+              </li>
+            </ul>
           </div>
-          <div class="section">
-            <h1 class="gd__h1">주소검색(다음 우편번호 API)</h1>
-            <div class="form-lbl">
-              <label for="userAdr1">주소</label>
-              <i class="require" aria-label="필수"></i>
-            </div>
-            <div class="form-item">
-              <div class="input">
-                <input type="tel" id="userAdr1" title="우편번호 입력" placeholder="우편번호" readonly onclick="openZipcode()" />
-                <button type="button" class="button small search" aria-label="검색" onclick="openZipcode()"><i class="i-ico-search-24" aria-hidden="true"></i></button>
-              </div>
-              <div class="input"><input type="text" id="userAdr2" title="기본주소 입력" placeholder="기본주소" readonly onclick="openZipcode()" /></div>
-              <div class="input"><input type="text" id="userAdr3" title="상세주소 입력" placeholder="상세주소" /></div>
-            </div>
-          </div>
-        </section>
-        <!-- //컨텐츠 -->
-
-        <!-- 팝업 -->
-        <div id="popZipcode" class="popup full zipcode" role="dialog" aria-hidden="true">
-          <article class="pop-wrap">
-            <div class="pop-head">
-              <div>
-                <h1>주소검색</h1>
-                <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-              </div>
-            </div>
-            <div class="pop-body">
-              <div class="daum-zipcode"></div>
-            </div>
-          </article>
         </div>
-        <!-- //팝업 -->
+        <div class="section">
+          <h1 class="gd__h1">주소검색(다음 우편번호 API)</h1>
+          <div class="form-lbl">
+            <label for="userAdr1">주소</label>
+            <i class="require" aria-label="필수"></i>
+          </div>
+          <div class="form-item">
+            <div class="input">
+              <input type="tel" id="userAdr1" title="우편번호 입력" placeholder="우편번호" readonly onclick="openZipcode()" />
+              <button type="button" class="button small search" aria-label="검색" onclick="openZipcode()"><i class="i-ico-search-24" aria-hidden="true"></i></button>
+            </div>
+            <div class="input"><input type="text" id="userAdr2" title="기본주소 입력" placeholder="기본주소" readonly onclick="openZipcode()" /></div>
+            <div class="input"><input type="text" id="userAdr3" title="상세주소 입력" placeholder="상세주소" /></div>
+          </div>
+        </div>
       </main>
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
+
+      <!-- 팝업 -->
+      <div id="popZipcode" class="popup full zipcode" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>주소검색</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="daum-zipcode"></div>
+          </div>
+        </article>
+      </div>
+      <!-- //팝업 -->
     </article>
 
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>

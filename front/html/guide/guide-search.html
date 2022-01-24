@@ -15,95 +15,92 @@
   </head>
   <body>
     <article id="wrap">
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
       <main id="container">
-        <!-- 컨텐츠 -->
-        <section id="contents">
-          <div class="section">
-            <div class="search-input">
-              <div class="input">
-                <input id="searchInput" type="text" title="검색어 입력" placeholder="검색어를 입력해주세요." autocomplete="off" />
-                <button type="button" class="button small search" aria-label="검색"><i class="i-ico-search-24" aria-hidden="true"></i></button>
-              </div>
-              <button type="button" class="button">취소</button>
+        <div class="section">
+          <div class="search-input">
+            <div class="input">
+              <input id="searchInput" type="text" title="검색어 입력" placeholder="검색어를 입력해주세요." autocomplete="off" />
+              <button type="button" class="button small search" aria-label="검색"><i class="i-ico-search-24" aria-hidden="true"></i></button>
             </div>
+            <button type="button" class="button">취소</button>
+          </div>
 
-            <!-- 최근 검색어, 인기 검색어 -->
-            <div class="search-contents not__keyword">
-              <div class="mb-32">
-                <div class="title-bar mt-0">
-                  <div>
-                    <h2 class="tit-h3">최근검색어</h2>
-                  </div>
-                  <div class="right">
-                    <button class="btn-txt fz-14 fc-666">전체삭제</button>
-                  </div>
+          <!-- 최근 검색어, 인기 검색어 -->
+          <div class="search-contents not__keyword">
+            <div class="mb-32">
+              <div class="title-bar mt-0">
+                <div>
+                  <h2 class="tit-h3">최근검색어</h2>
                 </div>
-                <ul class="keyword-list recent-keyword mt-8">
-                  <li>
-                    <button type="button" class="button keyword">교보</button>
-                    <button type="button" class="button delete" aria-label="검색어삭제"></button>
-                  </li>
-                  <li>
-                    <button type="button" class="button keyword">교보증권</button>
-                    <button type="button" class="button delete" aria-label="검색어삭제"></button>
-                  </li>
-                  <li>
-                    <button type="button" class="button keyword">삼성전자</button>
-                    <button type="button" class="button delete" aria-label="검색어삭제"></button>
-                  </li>
-                  <li>
-                    <button type="button" class="button keyword">고수</button>
-                    <button type="button" class="button delete" aria-label="검색어삭제"></button>
-                  </li>
-                  <li>
-                    <button type="button" class="button keyword">TOP 10</button>
-                    <button type="button" class="button delete" aria-label="검색어삭제"></button>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <div class="title-bar mt-0">
-                  <div>
-                    <h2 class="tit-h3">인기검색어</h2>
-                  </div>
-                </div>
-                <div class="btn-inline-wrap search-ty mt-17">
-                  <a href="#" class="button line round">#카드</a>
-                  <a href="#" class="button line round">#주식</a>
-                  <a href="#" class="button line round">#교보</a>
-                  <a href="#" class="button line round">#교보증권</a>
-                  <a href="#" class="button line round">#고수</a>
-                  <a href="#" class="button line round">#투자</a>
+                <div class="right">
+                  <button class="btn-txt fz-14 fc-666">전체삭제</button>
                 </div>
               </div>
-            </div>
-
-            <!-- 연관 검색어 -->
-            <div class="search-contents is__keyword" style="display: none">
-              <ul class="keyword-list relate-keyword mt-8">
+              <ul class="keyword-list recent-keyword mt-8">
                 <li>
-                  <button type="button" class="button keyword"><strong>교보</strong>증권</button>
+                  <button type="button" class="button keyword">교보</button>
+                  <button type="button" class="button delete" aria-label="검색어삭제"></button>
                 </li>
                 <li>
-                  <button type="button" class="button keyword"><strong>교보</strong>증권 투자</button>
+                  <button type="button" class="button keyword">교보증권</button>
+                  <button type="button" class="button delete" aria-label="검색어삭제"></button>
                 </li>
                 <li>
-                  <button type="button" class="button keyword"><strong>교보</strong>증권 분석</button>
+                  <button type="button" class="button keyword">삼성전자</button>
+                  <button type="button" class="button delete" aria-label="검색어삭제"></button>
                 </li>
                 <li>
-                  <button type="button" class="button keyword"><strong>교보</strong>증권 성향</button>
+                  <button type="button" class="button keyword">고수</button>
+                  <button type="button" class="button delete" aria-label="검색어삭제"></button>
+                </li>
+                <li>
+                  <button type="button" class="button keyword">TOP 10</button>
+                  <button type="button" class="button delete" aria-label="검색어삭제"></button>
                 </li>
               </ul>
             </div>
-          </div>
-        </section>
-        <!-- //컨텐츠 -->
-      </main>
-      <!-- 컨테이너 -->
 
-      <!-- 푸터없음 -->
+            <div>
+              <div class="title-bar mt-0">
+                <div>
+                  <h2 class="tit-h3">인기검색어</h2>
+                </div>
+              </div>
+              <div class="btn-inline-wrap search-ty mt-17">
+                <a href="#" class="button line round">#카드</a>
+                <a href="#" class="button line round">#주식</a>
+                <a href="#" class="button line round">#교보</a>
+                <a href="#" class="button line round">#교보증권</a>
+                <a href="#" class="button line round">#고수</a>
+                <a href="#" class="button line round">#투자</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 연관 검색어 -->
+          <div class="search-contents is__keyword" style="display: none">
+            <ul class="keyword-list relate-keyword mt-8">
+              <li>
+                <button type="button" class="button keyword"><strong>교보</strong>증권</button>
+              </li>
+              <li>
+                <button type="button" class="button keyword"><strong>교보</strong>증권 투자</button>
+              </li>
+              <li>
+                <button type="button" class="button keyword"><strong>교보</strong>증권 분석</button>
+              </li>
+              <li>
+                <button type="button" class="button keyword"><strong>교보</strong>증권 성향</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <!-- 컨테이너(컨텐츠) -->
+
+      <!-- 팝업 -->
+      <!-- //팝업 -->
     </article>
     <script>
       //검색 결과

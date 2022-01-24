@@ -412,18 +412,8 @@
   display: flex;
   flex-direction: column;
   // height: 100%;
-  > section {
-    width: 100%;
-  }
-  #contents {
-    flex: 1 1 auto;
-  }
-}
-#contents {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  > * {
+  > section,
+  > div {
     width: 100%;
   }
   > .section {
@@ -434,21 +424,18 @@
       padding-bottom: 2.4rem;
     }
   }
-  > div:first-child:not(.section) + .section {
-    padding-top: 2.4rem;
+}
+.center-contents {
+  height: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  > * {
+    width: 100%;
   }
-  .center-contents {
-    height: 100%;
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    > * {
-      width: 100%;
-    }
-  }
-  .bottom-contents {
-    margin-top: auto;
-  }
+}
+.bottom-contents {
+  margin-top: auto;
 }
 .section {
   padding: 0 2.4rem;

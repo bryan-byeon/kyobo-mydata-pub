@@ -15,182 +15,183 @@
   </head>
   <body>
     <article id="wrap">
+      <!-- 헤더 -->
       <div class="header-space" data-include-html="../../include/header.html"></div>
+      <!-- //헤더 -->
 
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
       <main id="container">
-        <!-- 컨텐츠 -->
-        <section id="contents">
-          <div class="tab-navi-menu tab-fixed">
-            <div class="tab-inner">
-              <i class="tab-line" aria-hidden="true"></i>
-              <ul class="tab-list">
-                <li class="tab">
-                  <a href="guide-dev.html"><span>개발자참고</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-txt.html"><span>텍스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-btn.html"><span>버튼</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-form.html"><span>폼요소</span></a>
-                </li>
-                <li class="tab active">
-                  <a href="guide-form2.html"><span>입력 UI</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-agree.html"><span>약관</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-list.html"><span>리스트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-table.html"><span>테이블</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-popup.html"><span>팝업</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-chart.html"><span>차트</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-animate.html"><span>애니메이션</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-swiper.html"><span>swiper</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-address.html"><span>주소검색</span></a>
-                </li>
-                <li class="tab">
-                  <a href="guide-etc.html"><span>기타</span></a>
-                </li>
-              </ul>
-            </div>
+        <div class="tab-navi-menu tab-fixed">
+          <div class="tab-inner">
+            <i class="tab-line" aria-hidden="true"></i>
+            <ul class="tab-list">
+              <li class="tab">
+                <a href="guide-dev.html"><span>개발자참고</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-txt.html"><span>텍스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-btn.html"><span>버튼</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-form.html"><span>폼요소</span></a>
+              </li>
+              <li class="tab active">
+                <a href="guide-form2.html"><span>입력 UI</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-agree.html"><span>약관</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-list.html"><span>리스트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-table.html"><span>테이블</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-popup.html"><span>팝업</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-chart.html"><span>차트</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-animate.html"><span>애니메이션</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-swiper.html"><span>swiper</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-address.html"><span>주소검색</span></a>
+              </li>
+              <li class="tab">
+                <a href="guide-etc.html"><span>기타</span></a>
+              </li>
+            </ul>
           </div>
-          <div class="section">
-            <h1 class="gd__h1">달력</h1>
-            <div>
-              <h2 class="gd__h2">디바이스 제공 달력</h2>
-              <div class="input date">
-                <input type="date" name="" id="" />
-              </div>
+        </div>
+        <div class="section">
+          <h1 class="gd__h1">달력</h1>
+          <div>
+            <h2 class="gd__h2">디바이스 제공 달력</h2>
+            <div class="input date">
+              <input type="date" name="" id="" />
+            </div>
 
-              <h2 class="gd__h2">기본(제이쿼리 달력)</h2>
+            <h2 class="gd__h2">기본(제이쿼리 달력)</h2>
+            <div class="form-lbl">
+              <label for="inpDate1">기간입력</label>
+            </div>
+            <div class="form-item">
+              <div class="input"><input type="tel" id="inpDate1" class="datepicker" title="날짜 입력" /></div>
+            </div>
+
+            <h2 class="gd__h2">달력 선택제한(data-min,data-max 활용)</h2>
+            <div>
               <div class="form-lbl">
-                <label for="inpDate1">기간입력</label>
+                <label for="inpDate2">오늘 이전 선택</label>
               </div>
               <div class="form-item">
-                <div class="input"><input type="tel" id="inpDate1" class="datepicker" title="날짜 입력" /></div>
+                <div class="input"><input type="tel" id="inpDate2" class="datepicker" data-max="today" title="날짜 입력" /></div>
               </div>
 
-              <h2 class="gd__h2">달력 선택제한(data-min,data-max 활용)</h2>
-              <div>
-                <div class="form-lbl">
-                  <label for="inpDate2">오늘 이전 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="input"><input type="tel" id="inpDate2" class="datepicker" data-max="today" title="날짜 입력" /></div>
-                </div>
-
-                <div class="form-lbl">
-                  <label for="inpDate3">오늘 이후 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="input"><input type="tel" id="inpDate3" class="datepicker" data-min="today" title="날짜 입력" /></div>
-                </div>
-
-                <div class="form-lbl">
-                  <label for="inpDate4">-5일 이전 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="input"><input type="tel" id="inpDate4" class="datepicker" data-max="-5d" title="날짜 입력" /></div>
-                </div>
-
-                <div class="form-lbl">
-                  <label for="inpDate5">+3달 이후 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="input"><input type="tel" id="inpDate5" class="datepicker" data-min="+3m" title="날짜 입력" /></div>
-                </div>
-
-                <div class="form-lbl">
-                  <label for="inpDate6">-2주 ~ +1년 사이 선택</label>
-                </div>
-                <div class="form-item">
-                  <div class="input"><input type="tel" id="inpDate6" class="datepicker" data-min="-2w" data-max="+1y" title="날짜 입력" /></div>
-                </div>
+              <div class="form-lbl">
+                <label for="inpDate3">오늘 이후 선택</label>
               </div>
-            </div>
-
-            <h1 class="gd__h1">range</h1>
-            <div>
-              <h2 class="gd__h2">기본</h2>
-              <div class="form-lbl">기간선택</div>
               <div class="form-item">
-                <div class="range-slider">
-                  <div class="slider" data-min="0" data-max="5" data-step="1" data-value="1" aria-hidden="true"></div>
-                  <div class="list" title="기간을 선택해주세요" data-unit="년"></div>
-                  <input type="hidden" id="slider1" title="선택한 기간" />
-                </div>
+                <div class="input"><input type="tel" id="inpDate3" class="datepicker" data-min="today" title="날짜 입력" /></div>
               </div>
 
-              <h2 class="gd__h2">multiple</h2>
-              <div class="form-lbl">기간선택</div>
+              <div class="form-lbl">
+                <label for="inpDate4">-5일 이전 선택</label>
+              </div>
               <div class="form-item">
-                <div class="range-slider multiple">
-                  <div class="slider" data-min="0" data-max="5" data-step="1" data-value="[1,3]" aria-hidden="true"></div>
-                  <div class="list" title="기간을 선택해주세요" data-unit="년"></div>
-                  <input type="hidden" id="slider2" title="선택한 기간" />
-                </div>
+                <div class="input"><input type="tel" id="inpDate4" class="datepicker" data-max="-5d" title="날짜 입력" /></div>
               </div>
-            </div>
 
-            <h1 class="gd__h1">spinner</h1>
-            <div>
-              <div class="spinner" data-min="1" data-max="10">
-                <button type="button" class="button minus" aria-label="빼기"></button>
-                <input type="tel" />
-                <button type="button" class="button plus" aria-label="더하기"></button>
+              <div class="form-lbl">
+                <label for="inpDate5">+3달 이후 선택</label>
+              </div>
+              <div class="form-item">
+                <div class="input"><input type="tel" id="inpDate5" class="datepicker" data-min="+3m" title="날짜 입력" /></div>
+              </div>
+
+              <div class="form-lbl">
+                <label for="inpDate6">-2주 ~ +1년 사이 선택</label>
+              </div>
+              <div class="form-item">
+                <div class="input"><input type="tel" id="inpDate6" class="datepicker" data-min="-2w" data-max="+1y" title="날짜 입력" /></div>
               </div>
             </div>
           </div>
-        </section>
-        <!-- //컨텐츠 -->
+
+          <h1 class="gd__h1">range</h1>
+          <div>
+            <h2 class="gd__h2">기본</h2>
+            <div class="form-lbl">기간선택</div>
+            <div class="form-item">
+              <div class="range-slider">
+                <div class="slider" data-min="0" data-max="5" data-step="1" data-value="1" aria-hidden="true"></div>
+                <div class="list" title="기간을 선택해주세요" data-unit="년"></div>
+                <input type="hidden" id="slider1" title="선택한 기간" />
+              </div>
+            </div>
+
+            <h2 class="gd__h2">multiple</h2>
+            <div class="form-lbl">기간선택</div>
+            <div class="form-item">
+              <div class="range-slider multiple">
+                <div class="slider" data-min="0" data-max="5" data-step="1" data-value="[1,3]" aria-hidden="true"></div>
+                <div class="list" title="기간을 선택해주세요" data-unit="년"></div>
+                <input type="hidden" id="slider2" title="선택한 기간" />
+              </div>
+            </div>
+          </div>
+
+          <h1 class="gd__h1">spinner</h1>
+          <div>
+            <div class="spinner" data-min="1" data-max="10">
+              <button type="button" class="button minus" aria-label="빼기"></button>
+              <input type="tel" />
+              <button type="button" class="button plus" aria-label="더하기"></button>
+            </div>
+          </div>
+        </div>
       </main>
-      <!-- 컨테이너 -->
+      <!-- 컨테이너(컨텐츠) -->
+
+      <!-- 팝업 -->
+      <div id="popGiftCardPreview" class="popup full" role="dialog" aria-hidden="true">
+        <article class="pop-wrap">
+          <div class="pop-head">
+            <div>
+              <h1>선물 메시지 미리보기</h1>
+              <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
+            </div>
+          </div>
+          <div class="pop-body">
+            <div class="section">
+              <div class="gift-card ty-1">
+                <!-- .ty-1 ~ .ty-8 클래스로 타입구분 -->
+                <div class="gift-card-img"></div>
+                <div class="gift-card-msg">
+                  <div class="gift-card-txt"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pop-foot">
+            <div>
+              <div class="flex">
+                <button type="button" class="button primary h60 ui-pop-close">확인</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- //팝업 -->
     </article>
 
-    <div id="popGiftCardPreview" class="popup full" role="dialog" aria-hidden="true">
-      <article class="pop-wrap">
-        <div class="pop-head">
-          <div>
-            <h1>선물 메시지 미리보기</h1>
-            <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
-          </div>
-        </div>
-        <div class="pop-body">
-          <div class="section">
-            <div class="gift-card ty-1">
-              <!-- .ty-1 ~ .ty-8 클래스로 타입구분 -->
-              <div class="gift-card-img"></div>
-              <div class="gift-card-msg">
-                <div class="gift-card-txt"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pop-foot">
-          <div>
-            <div class="flex">
-              <button type="button" class="button primary h60 ui-pop-close">확인</button>
-            </div>
-          </div>
-        </div>
-      </article>
-    </div>
     <script>
       //선물 메시지 설정
       $('.gift-thumb-list .gift-thumb').click(function (e) {
