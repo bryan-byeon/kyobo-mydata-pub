@@ -171,6 +171,9 @@ button.btn-click {
   position: relative;
   overflow: hidden;
 }
+.btn-clicking-active {
+  backface-visibility: hidden;
+}
 .btn-click-in {
   display: block;
   position: absolute;

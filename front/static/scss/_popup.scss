@@ -147,6 +147,18 @@
     -webkit-overflow-scrolling: touch;
     visibility: hidden;
   }
+  .pop-scl-wrap {
+    width: 100%;
+    max-height: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    transform: translate3d(0, 120%, 0);
+    transition: transform 0.45s, margin 0.45s, visibility 0.45s;
+    .pop-wrap {
+      transform: none !important;
+      visibility: visible !important;
+    }
+  }
   .pop-body {
     .bottom-fixed {
       height: 6.1rem;
@@ -224,10 +236,19 @@
   &.bottom {
     padding-top: -vh(20);
     .pop-wrap {
-      // position: fixed;
-      // bottom: 0;
+      position: fixed;
+      bottom: 0;
       border-radius: 2rem 2rem 0 0;
-      max-height: 100%;
+    }
+    .pop-scl-wrap {
+      position: fixed;
+      bottom: 0;
+      border-radius: 2rem 2rem 0 0;
+      .pop-wrap {
+        position: relative !important;
+        bottom: auto !important;
+        max-width: none !important;
+      }
     }
     .pop-head {
       > div {
@@ -280,7 +301,7 @@
 
   //modal
   &.modal {
-    padding: 3.2rem;
+    padding: 6rem 3.2rem;
     align-items: center;
     justify-content: center;
 
@@ -288,10 +309,24 @@
       width: 100%;
       max-width: 64rem;
       border-radius: 1.6rem;
-      margin: 5rem auto 0;
+      margin: 3rem auto 0;
       opacity: 0;
       transform: translate3d(0, 0, 0);
       transition-property: margin, opacity, visibility;
+    }
+    .pop-scl-wrap {
+      max-width: 64rem;
+      border-radius: 1.6rem;
+      margin: 3rem auto 0;
+      opacity: 0;
+      transform: translate3d(0, 0, 0);
+      transition-property: margin, opacity, visibility;
+      .pop-wrap {
+        max-width: none !important;
+        border-radius: 0 !important;
+        opacity: 1 !important;
+        margin-top: 0 !important;
+      }
     }
     .pop-head {
       > div {
@@ -350,6 +385,7 @@
 
     &.show {
       // display:flex !important;
+      .pop-scl-wrap,
       .pop-wrap {
         opacity: 1;
         margin-top: 0;
@@ -386,7 +422,8 @@
   &.show {
     @include dimm;
     transition-delay: 0s;
-    .pop-wrap {
+    .pop-wrap,
+    .pop-scl-wrap {
       transform: translate3d(0, 0, 0);
       transition-delay: 0.15s;
       visibility: visible;

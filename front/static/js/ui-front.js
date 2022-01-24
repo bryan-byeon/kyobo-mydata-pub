@@ -145,6 +145,7 @@ ui.PC = {
   },
   check: function () {
     if (ui.PC.any()) {
+      $('html').addClass('pc');
       if (ui.PC.window()) $('html').addClass('window');
       if (ui.PC.mac()) $('html').addClass('mac');
       if (ui.PC.msie()) $('html').addClass('msie');
@@ -1179,8 +1180,8 @@ ui.Button = {
         }
         const $bgColorVal = Math.max($bgAlpha, Math.round(getBgBrightValue($bgColor)));
         const isBalck = $bgColorVal < 50 ? true : false;
-        if ($isBottomPop && !$popWrap.hasClass('overflow-hidden')) $popWrap.addClass('overflow-hidden');
-        if (!$btnEl.find('.btn-click-in').length) $btnEl.append('<i class="btn-click-in"></i>');
+        // if ($isBottomPop && !$popWrap.hasClass('overflow-hidden')) $popWrap.addClass('overflow-hidden');
+        if (!$btnEl.find('.btn-click-in').length) $btnEl.addClass('btn-clicking-active').append('<i class="btn-click-in"></i>');
         const $btnIn = $btnEl.find('.btn-click-in');
         const $btnMax = Math.max($btnEl.outerWidth(), $btnEl.outerHeight());
         const $btnX = e.pageX - $btnEl.offset().left - $btnMax / 2;
@@ -1196,8 +1197,9 @@ ui.Button = {
           .addClass('animate')
           .delay($delay)
           .queue(function (next) {
+            $btnEl.removeClass('btn-clicking-active');
             $btnIn.remove();
-            if ($isBottomPop) $popWrap.removeClass('overflow-hidden');
+            // if ($isBottomPop) $popWrap.removeClass('overflow-hidden');
             next();
           });
       }
@@ -4493,17 +4495,19 @@ const Layer = {
   focusedClass: 'pop__focused',
   focusInClass: 'ui-focus-in',
   removePopClass: 'ui-pop-remove',
-  agreePopClass: 'ui-pop-agree',
-  agreePopSwiperClass: 'ui-pop-agree-swiper',
   popClass: 'popup',
   pageClass: 'page',
   wrapClass: 'pop-wrap',
+  sclWrapClass: 'pop-scl-wrap',
   headClass: 'pop-head',
   bodyClass: 'pop-body',
   footClass: 'pop-foot',
   innerClass: 'section',
   showClass: 'show',
   etcCont: '#header,#gnb,#container,#footer',
+  agreePopClass: 'ui-pop-agree',
+  agreePopSwiperClass: 'ui-pop-agree-swiper',
+  scrollShowTitleClass: 'pop-fade-title',
   beforeCont: [],
   content: '',
   like: function () {
@@ -4861,29 +4865,29 @@ const Layer = {
       }
     });
     /*
-     const $maxTxtLength = Math.max.apply(null, $txtLengthArry);
+    const $maxTxtLength = Math.max.apply(null, $txtLengthArry);
  
      //들어갈수 있는 글자수 체크
-     const inWidthTxt = function(width,col){
-       const  _fontSize = 14;
-       const _paddingBorder = 28;
-       const _val = ((width/col)-_paddingBorder)/(_fontSize*0.9);
-       return Math.floor(_val);
-     };
-     const $winW = $(window).width();
-     const $contW = $winW - (17*2);
-     const $inTxt1 = inWidthTxt($contW,3);
-     const $inTxt2 = inWidthTxt($contW,2);
- 
-     //글자수에따른 팝업 분류
-     if($maxTxtLength <= $inTxt1){
-       Layer.select($select,3);
-     }else if($maxTxtLength <= $inTxt2){
-       Layer.select($select,2);
-     }else{
-       Layer.select($select);
-     }
-     */
+    const inWidthTxt = function(width,col){
+      const  _fontSize = 14;
+      const _paddingBorder = 28;
+      const _val = ((width/col)-_paddingBorder)/(_fontSize*0.9);
+      return Math.floor(_val);
+    };
+    const $winW = $(window).width();
+    const $contW = $winW - (17*2);
+    const $inTxt1 = inWidthTxt($contW,3);
+    const $inTxt2 = inWidthTxt($contW,2);
+
+    //글자수에따른 팝업 분류
+    if($maxTxtLength <= $inTxt1){
+      Layer.select($select,3);
+    }else if($maxTxtLength <= $inTxt2){
+      Layer.select($select,2);
+    }else{
+      Layer.select($select);
+    }
+    */
     Layer.select($select);
 
     const $pop = $select.data('popup');
@@ -4977,10 +4981,10 @@ const Layer = {
           }
         }
         /*
-       if($duration%10 === 0){
-         const $lastVal = $distanceAry.length ? $distanceAry[$distanceAry.length-1] : 0;
-         $distanceAry.push($distanceY - $lastVal);
-       }*/
+        if($duration%10 === 0){
+          const $lastVal = $distanceAry.length ? $distanceAry[$distanceAry.length-1] : 0;
+          $distanceAry.push($distanceY - $lastVal);
+        }*/
       });
 
     $(tar)
@@ -5062,39 +5066,44 @@ const Layer = {
   openPop: [],
   opening: 0,
   open: function (tar, callback) {
-    if ($(tar).length && $(tar).children('.' + Layer.wrapClass).length) {
+    const $popup = $(tar);
+    const $popWrap = $popup.find('.' + Layer.wrapClass);
+    if ($popup.length && $popWrap.length) {
       Layer.opening++;
-      const $idx = $(tar).index('.' + Layer.popClass);
+      const $idx = $popup.index('.' + Layer.popClass);
       const $show = $('.' + Layer.popClass + '.' + Layer.showClass).length;
-      let $id = $(tar).attr('id');
+      let $id = $popup.attr('id');
       let $lastPop = '';
 
       if (Layer.openPop.length) $lastPop = Layer.openPop[Layer.openPop.length - 1];
-      if ($show > 0) $(tar).css('z-index', '+=' + $show);
+      if ($show > 0) $popup.css('z-index', '+=' + $show);
       if ($id == undefined) {
         $id = Layer.id + $idx;
-        $(tar).attr('id', $id);
+        $popup.attr('id', $id);
       }
       if (Layer.openPop.indexOf('#' + $id) < 0) Layer.openPop.push('#' + $id);
 
-      //  && !$(tar).hasClass('full')
-      if (!$(tar).hasClass('alert') && !$(tar).hasClass('bg-no-click')) {
+      //  && !$popup.hasClass('full')
+      if (!$popup.hasClass('alert') && !$popup.hasClass('bg-no-click')) {
         const $bgClick = '<div class="pop-bg-close ui-pop-close" role="button" aria-label="팝업창 닫기"></div>';
-        if (!$(tar).find('.pop-bg-close').length) $(tar).prepend($bgClick);
+        if (!$popup.find('.pop-bg-close').length) $popup.prepend($bgClick);
       }
       const $openDelay = 50 * Layer.opening;
 
-      $(tar).attr('aria-hidden', false);
-      if ($(tar).hasClass('modal')) {
-        $(tar).css('display', 'flex');
-      } else {
-        $(tar).show();
+      // pop-scl-wrap
+      if ($popup.hasClass('modal') || ($popup.hasClass('bottom') && !$popup.find('.' + Layer.sclWrapClass).length)) {
+        $popWrap.wrap('<div class="' + Layer.sclWrapClass + '"></div>');
       }
 
-      if ($(tar).find('.' + Layer.scrollShowTitleClass).length)
-        $(tar)
-          .find('.' + Layer.headClass + ' h1')
-          .addClass('scl-title-hide');
+      //scl-title-hide
+      if ($popup.find('.' + Layer.scrollShowTitleClass).length) $popup.find('.' + Layer.headClass + ' h1').addClass('scl-title-hide');
+
+      $popup.attr('aria-hidden', false);
+      if ($popup.hasClass('modal')) {
+        $popup.css('display', 'flex');
+      } else {
+        $popup.show();
+      }
 
       setTimeout(function () {
         //리턴 포커스
@@ -5112,26 +5121,26 @@ const Layer = {
         if (Layer.openEl != '' && !$focusEl.is($focusableEl)) $focusEl = $(Layer.openEl);
         if ($($lastPop).data('returnFocus') == $focusEl) $focusEl = $(Layer.openEl);
         if ($($focusEl).is($focusableEl)) {
-          $(tar).data('returnFocus', $focusEl);
+          $popup.data('returnFocus', $focusEl);
           $focusEl.addClass(Layer.focusedClass);
         }
 
         //팝업 in 포커스
         if (!ui.Mobile.any()) {
           //PC
-          if ($(tar).hasClass(Layer.alertClass)) {
-            $(tar).find('.pop_btn .button').last().focus();
+          if ($popup.hasClass(Layer.alertClass)) {
+            $popup.find('.pop_btn .button').last().focus();
           } else {
-            $(tar).attr({ tabindex: 0 }).focus();
+            $popup.attr({ tabindex: 0 }).focus();
           }
         } else {
           let $first = '';
-          let $focusInEl = $(tar).find('.' + Layer.focusInClass);
+          let $focusInEl = $popup.find('.' + Layer.focusInClass);
           let $thisTxt = '';
           let $childrenTxt = '';
           //모바일
-          if ($(tar).find('.' + Layer.headClass).length) {
-            $first = $(tar)
+          if ($popup.find('.' + Layer.headClass).length) {
+            $first = $popup
               .find('.' + Layer.headClass)
               .children()
               .first();
@@ -5139,7 +5148,7 @@ const Layer = {
             $first.focus();
           } else {
             if (!$focusInEl.length) {
-              $focusInEl = $(tar).find('.' + Layer.bodyClass);
+              $focusInEl = $popup.find('.' + Layer.bodyClass);
               $first = $focusInEl.children().not('br').first();
               if ($first.text() == '' || $first.attr('aria-hidden') == 'true') $first = $first.next();
               $thisTxt = $.trim($focusInEl.text());
@@ -5163,36 +5172,34 @@ const Layer = {
         if ($lastPop != '' && $lastPop != tar) $($lastPop).attr('aria-hidden', true);
 
         //웹접근성
-        const $tit = $(tar).find('.' + Layer.headClass + ' h1');
+        const $tit = $popup.find('.' + Layer.headClass + ' h1');
         if ($tit.length) {
           if ($tit.attr('id') == undefined) {
             $tit.attr('id', $id + 'Label');
-            $(tar).attr('aria-labelledby', $id + 'Label');
+            $popup.attr('aria-labelledby', $id + 'Label');
           } else {
-            $(tar).attr('aria-labelledby', $tit.attr('id'));
+            $popup.attr('aria-labelledby', $tit.attr('id'));
           }
         }
 
         //popup(bottom:select)의 여러개의 tab-panel 높이 동일하게(안그럼 탭클릭시 왔다리 갔다리함)
-        if ($(tar).hasClass('bottom') && $(tar).find('.tab-panel').length > 1) {
-          $(tar).sameHeight('.tab-panel');
+        if ($popup.hasClass('bottom') && $popup.find('.tab-panel').length > 1) {
+          // $popup.sameHeight('.tab-panel');
         }
 
         //팝업안 고정탭
 
         //팝업안 swiper
-        if ($(tar).find('.ui-swiper').length) ui.Swiper.update($(tar).find('.ui-swiper'));
+        if ($popup.find('.ui-swiper').length) ui.Swiper.update($popup.find('.ui-swiper'));
 
         //열기
         if (!$('html').hasClass('lock')) Body.lock();
-        $(tar).addClass(Layer.showClass);
-        $(tar)
-          .find('.' + Layer.wrapClass)
-          .scrollTop(0);
+        $popup.addClass(Layer.showClass);
+        $popWrap.scrollTop(0);
 
         //swipe 기능
-        if ($(tar).hasClass('is-swipe') && !$(tar).hasClass('is-swipe__init')) {
-          $(tar).addClass('is-swipe__init');
+        if ($popup.hasClass('is-swipe') && !$popup.hasClass('is-swipe__init')) {
+          $popup.addClass('is-swipe__init');
           Layer.bottomTouch(tar);
         }
 
@@ -5222,8 +5229,9 @@ const Layer = {
     }
   },
   close: function (tar, callback) {
-    if (!$(tar).hasClass(Layer.showClass)) return console.log(tar, '해당팝업 안열려있음');
-    const $id = $(tar).attr('id');
+    const $popup = $(tar);
+    if (!$popup.hasClass(Layer.showClass)) return console.log(tar, '해당팝업 안열려있음');
+    const $id = $popup.attr('id');
     let $closeDelay = 610;
     let $lastPop = '';
     const $visible = $('.' + Layer.popClass + '.' + Layer.showClass).length;
@@ -5237,7 +5245,7 @@ const Layer = {
     if ($lastPop != '') $($lastPop).attr('aria-hidden', false);
 
     //포커스
-    const $returnFocus = $(tar).data('returnFocus');
+    const $returnFocus = $popup.data('returnFocus');
     if ($returnFocus != undefined) {
       $returnFocus.removeClass(Layer.focusedClass).focus();
       //플루팅 버튼
@@ -5255,56 +5263,46 @@ const Layer = {
           $('#header').focus();
         }
       } else {
-        $(tar).find(':focus').blur();
+        $popup.find(':focus').blur();
         $('#container').find($focusableEl).first().focus();
       }
     }
 
     //닫기
-    $(tar).removeClass(Layer.showClass).data('focusMove', false).data('popPosition', false);
-    $(tar).attr('aria-hidden', 'true').removeAttr('tabindex aria-labelledby');
-    if ($(tar).hasClass('no_motion')) $closeDelay = 10;
+    $popup.removeClass(Layer.showClass).data('focusMove', false).data('popPosition', false);
+    $popup.attr('aria-hidden', 'true').removeAttr('tabindex aria-labelledby');
+    if ($popup.hasClass('no_motion')) $closeDelay = 10;
 
     const $closeAfter = function () {
-      $(tar).removeAttr('style');
-      if ($(tar).hasClass('is-swipe')) {
-        $(tar)
-          .find('.' + Layer.wrapClass)
-          .removeCss('height');
-        if ($(tar).hasClass('full')) $(tar).removeClass('full').addClass('bottom');
+      $popup.removeAttr('style');
+      if ($popup.hasClass('is-swipe')) {
+        $popup.find('.' + Layer.wrapClass).removeCss('height');
+        if ($popup.hasClass('full')) $popup.removeClass('full').addClass('bottom');
       }
-      $(tar)
+      $popup
         .find('.' + Layer.headClass)
         .removeAttr('style')
         .removeClass('shadow')
         .find('h1')
         .removeAttr('tabindex');
-      $(tar)
-        .find('.' + Layer.bodyClass)
-        .removeAttr('tabindex style');
-      $(tar)
-        .find('.' + Layer.focusInClass)
-        .removeAttr('tabindex');
-      if ($(tar).find('.pop-close.last_focus').length) $(tar).find('.pop-close.last_focus').remove();
+      $popup.find('.' + Layer.bodyClass).removeAttr('tabindex style');
+      $popup.find('.' + Layer.focusInClass).removeAttr('tabindex');
+      if ($popup.find('.pop-close.last_focus').length) $popup.find('.pop-close.last_focus').remove();
 
       //알럿창
-      if ($(tar).hasClass(Layer.alertClass) || $(tar).hasClass(Layer.selectClass) || $(tar).hasClass(Layer.removePopClass)) {
-        if ($(tar).hasClass(Layer.selectClass)) Layer.isSelectOpen = false;
-        if ($(tar).hasClass(Layer.alertClass)) {
-          const $content = $(tar).find('.message>div').html();
+      if ($popup.hasClass(Layer.alertClass) || $popup.hasClass(Layer.selectClass) || $popup.hasClass(Layer.removePopClass)) {
+        if ($popup.hasClass(Layer.selectClass)) Layer.isSelectOpen = false;
+        if ($popup.hasClass(Layer.alertClass)) {
+          const $content = $popup.find('.message>div').html();
           Layer.beforeCont.splice(Layer.beforeCont.indexOf($content), 1);
         }
-        $(tar).remove();
+        $popup.remove();
       }
 
       // 약관
-      if ($(tar).hasClass(Layer.agreePopClass)) {
-        $(tar)
-          .find('.' + Layer.agreeBtnClassName)
-          .remove();
-        $(tar)
-          .find('.' + Layer.agreeCheckedClassName)
-          .removeClass(Layer.agreeCheckedClassName);
+      if ($popup.hasClass(Layer.agreePopClass)) {
+        $popup.find('.' + Layer.agreeBtnClassName).remove();
+        $popup.find('.' + Layer.agreeCheckedClassName).removeClass(Layer.agreeCheckedClassName);
       }
 
       //callback
@@ -5317,7 +5315,7 @@ const Layer = {
       $closeAfter();
     }, $closeDelay);
     /*
-    const $wrap = $(tar).find('.' + Layer.wrapClass);
+    const $wrap = $popup.find('.' + Layer.wrapClass);
     $wrap.on('transitionend', function () {
       $closeAfter();
       $wrap.off('transitionend');
@@ -5584,19 +5582,19 @@ const Layer = {
     }
   },
   position: function (tar) {
-    const $pop = $(tar);
-    if (!$pop.hasClass(Layer.showClass)) return false;
-    if ($pop.data('popPosition') == true) return false;
-    $pop.data('popPosition', true);
-    let $wrap = $pop.find('.' + Layer.wrapClass);
+    const $popup = $(tar);
+    if (!$popup.hasClass(Layer.showClass)) return false;
+    if ($popup.data('popPosition') == true) return false;
+    $popup.data('popPosition', true);
+    let $wrap = $popup.find('.' + Layer.wrapClass);
     let $wrapH = $wrap.outerHeight();
     let $wrapSclH = $wrap[0].scrollHeight;
-    const $head = $pop.find('.' + Layer.headClass);
-    const $body = $pop.find('.' + Layer.bodyClass);
-    const $foot = $pop.find('.' + Layer.footClass);
+    const $head = $popup.find('.' + Layer.headClass);
+    const $body = $popup.find('.' + Layer.bodyClass);
+    const $foot = $popup.find('.' + Layer.footClass);
 
-    const $isAgree = $pop.hasClass(Layer.agreePopClass);
-    const $isAgreeSwiper = $pop.hasClass(Layer.agreePopSwiperClass);
+    const $isAgree = $popup.hasClass(Layer.agreePopClass);
+    const $isAgreeSwiper = $popup.hasClass(Layer.agreePopSwiperClass);
     const $agreeScrollTxt = '끝까지 내려보기';
     const $agreeCheckedTxt = '동의하기';
     const $footBtn = $foot.find('.button');
@@ -5661,7 +5659,6 @@ const Layer = {
       if ($fadeTitle.length && $headerTit.length) ui.Common.scrollShowTitle($fadeTitle[0], $wrap[0], $head[0], $headerTit[0]);
     });
   },
-  scrollShowTitleClass: 'pop-fade-title',
   focusMove: function (tar) {
     if (!$(tar).hasClass(Layer.showClass)) return false;
     if ($(tar).data('focusMove') == true) return false;
