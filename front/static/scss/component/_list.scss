@@ -34,11 +34,15 @@
   > .right {
     margin-left: auto;
     padding-left: 10px;
+    font-size: 1.4rem;
     .btn-txt {
-      &:last-child {
-        margin-right: 8px;
-      }
+      color: var(--primary-color);
+      padding: 0 0.8rem;
+      text-decoration: underline;
     }
+  }
+  + .round-box-item {
+    margin-top: 0.8rem;
   }
 }
 

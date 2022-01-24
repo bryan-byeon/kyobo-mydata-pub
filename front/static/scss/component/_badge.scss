@@ -1,112 +1,30 @@
 //badge
 .badge {
   display: inline-flex;
-  background: #ccc;
-  font-size: 1rem;
-  height: 2rem;
-  color: #fff;
-  padding: 0 0.6rem;
+  font-size: 1.4rem;
+  height: 2.4rem;
+  padding: 0 0.8rem;
   vertical-align: middle;
   white-space: nowrap;
   align-items: center;
+  border-radius: 0.6rem;
 
   &.red {
-    background: #e3635f;
-  }
-  &.blue {
-    background: #425fa5;
-  }
-  &.primary {
-    background: var(--primary-color);
-  }
-  &.green {
-    background: #2e9b4c;
-  }
-  &.yellow {
-    background: #ffe626;
-    color: #222;
+    background: #ffebee;
+    color: #e43333;
   }
   &.gray {
-    background: #3b3f47;
-  }
-  &.black {
-    background: #222;
+    background: #ebebeb;
+    color: #979797;
   }
 
-  &.pink {
-    background: #f35aa9;
-  }
-  &.purple {
-    background: #a87af4;
-  }
   &.line {
     background: #fff;
     color: #222;
     border-radius: 0;
     border: 0.1rem solid #eee;
-    &.red {
-      color: #e3635f;
-      border-color: #e3635f;
-    }
-    &.blue {
-      color: #425fa5;
-      border-color: #425fa5;
-    }
-    &.green {
-      color: #2e9b4c;
-      border-color: #2e9b4c;
-    }
   }
   &.round {
     border-radius: 1.5rem;
-    &.gold,
-    &.lv-1 {
-      background-color: #f2cd00;
-      border-color: #f2cd00;
-    }
-    &.silver,
-    &.lv-2 {
-      background-color: #cbcbcb;
-      border-color: #cbcbcb;
-    }
-    &.bronze,
-    &.lv-3 {
-      background-color: #a57c5d;
-      border-color: #a57c5d;
-    }
-    &.point,
-    &.lv-4 {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
-  }
-  &.h24 {
-    height: 2.4rem;
-    padding: 0 1.2rem;
-  }
-  &.h28 {
-    height: 2.8rem;
-    padding: 0 1.2rem;
-    font-size: 1.2rem;
-  }
-
-  &.recommend {
-    width: 4.8rem;
-    height: 4.8rem;
-    padding: 0;
-    border-radius: 50%;
-    background: var(--primary-color);
-    justify-content: center;
-    font-size: 1.2rem;
-    line-height: 1;
-    color: #fff;
-  }
-  &.sale {
-    background: #fff;
-    padding: 0.8rem 1.2rem;
-    border-radius: 0.4rem;
-    font-size: 1.4rem;
-    line-height: 1.6rem;
-    color: #222;
   }
 }
