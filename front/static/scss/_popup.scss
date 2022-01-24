@@ -577,12 +577,27 @@
       .pop-wrap {
         @include web-center;
       }
+      .pop-scl-wrap {
+        @include web-center;
+        .pop-wrap {
+          margin: 0;
+        }
+      }
     }
     &.bottom {
       .pop-wrap {
         @include web-center;
         left: 50%;
         margin-left: -51.2rem;
+      }
+      .pop-scl-wrap {
+        @include web-center;
+        left: 50%;
+        margin-left: -51.2rem;
+        .pop-wrap {
+          margin: 0 !important;
+          left: auto;
+        }
       }
     }
   }
