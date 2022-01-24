@@ -427,6 +427,9 @@
       padding-bottom: 2.4rem;
     }
   }
+  > div:first-child:not(.section) + .section {
+    padding-top: 2.4rem;
+  }
 }
 .center-contents {
   height: 100%;
