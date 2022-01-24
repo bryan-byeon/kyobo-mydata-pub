@@ -238,16 +238,26 @@
     }
     > .pop-wrap {
       html.mobile & {
-        border-top: 1px solid transparent;
+        border-top: 0.1rem solid transparent;
       }
     }
     .pop-head {
       > div {
         padding: 3.2rem 5rem 2.4rem 2.4rem;
+        html.mobile & {
+          padding-top: 3.1rem;
+        }
       }
       .pop-close {
         display: none;
         top: 3.4rem;
+      }
+    }
+    .pop-body {
+      &:first-child {
+        html.mobile & {
+          padding-top: 2.3rem;
+        }
       }
     }
     // &.ui-pop-select {
