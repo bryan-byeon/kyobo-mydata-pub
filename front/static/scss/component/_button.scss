@@ -311,7 +311,7 @@ button.btn-click {
       transition: box-shadow 0.3s;
       z-index: 50;
       html.ios & {
-        @include iosBottom(padding-bottom, 2.4rem);
+        @include ios-bottom(padding-bottom, 2.4rem);
       }
     }
     &.no-shadow {

@@ -49,7 +49,8 @@
   width: 3.2rem;
   height: 3.2rem;
   flex-shrink: 0;
-  background: url(../images/icon/ico-banner-more@3x.png) no-repeat center center / contain;
+  border-radius: 50%;
+  background: red;
 }
 .main-banner-img {
   display: block;

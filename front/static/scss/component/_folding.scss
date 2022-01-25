@@ -39,7 +39,9 @@
         right: 2.4rem;
         width: 2.4rem;
         height: 2.4rem;
-        background: url(../images/icon/ico-arrow-down@3x.png) no-repeat center center / contain;
+        @include bg-etc;
+        // background-image: url(../images/icon/ico-arr-down-24.png);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.707 8.2929C19.0977 8.6834 19.0977 9.31658 18.707 9.70708L12.3428 16.0711C12.1426 16.2717 11.8774 16.3692 11.6147 16.3637C11.3521 16.3692 11.0869 16.2717 10.8867 16.0711L4.52246 9.70709C4.13184 9.31658 4.13184 8.6834 4.52246 8.2929C4.91309 7.90237 5.54639 7.90237 5.93652 8.2929L11.6147 13.9708L17.293 8.2929C17.6831 7.90237 18.3164 7.90237 18.707 8.2929Z' fill='%23666666'/%3E%3C/svg%3E");
         transform: rotate3d(1, 0, 0, 0deg);
         transition: 0.3s;
       }

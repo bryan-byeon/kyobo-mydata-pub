@@ -1000,9 +1000,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
+      @include bg-etc;
     }
     &:before {
       background-image: url(../images/guide/charater-mouse.png);
@@ -1241,8 +1239,8 @@
     margin-top: 3rem;
   }
   html.ios & {
-    @include iosTop(padding-top, 0);
-    @include iosBottom(padding-bottom, 0);
+    @include ios-top(padding-top, 0);
+    @include ios-bottom(padding-bottom, 0);
   }
   &.ty2 {
     height: -vh(30);

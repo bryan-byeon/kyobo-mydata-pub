@@ -7,33 +7,33 @@
   }
 }
 
-@mixin mediaMinWidth($size) {
+@mixin media-min-width($size) {
   @media (min-width:#{$size}px) {
     @content;
   }
 }
-@mixin mediaMaxWidth($size) {
+@mixin media-max-width($size) {
   @media (max-width:#{$size}px) {
     @content;
   }
 }
-@mixin mediaMinHeight($size) {
+@mixin media-min-height($size) {
   @media (min-height:#{$size}px) {
     @content;
   }
 }
-@mixin mediaMaxHeight($size) {
+@mixin media-max-height($size) {
   @media (max-height:#{$size}px) {
     @content;
   }
 }
-@mixin sticky {
+@mixin sticky-supports {
   @supports ((position: -webkit-sticky) or (position: sticky)) {
     @content;
   }
 }
 
-@mixin text-blind() {
+@mixin text-blind {
   font-size: 0.3rem;
   color: transparent;
 }
@@ -54,6 +54,11 @@
   content: '';
   display: block;
   clear: both;
+}
+@mixin bg-etc($size: contain, $position: center center) {
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-size: $size;
 }
 
 @mixin img-fit($isAbsolute: false, $type: cover) {
@@ -104,7 +109,7 @@
   backdrop-filter: blur(1px);
 }
 
-@mixin iosTop($key, $value: 0, $miuns: false) {
+@mixin ios-top($key, $value: 0, $miuns: false) {
   // #{$key}: $value;
   @if ($miuns) {
     #{$key}: -iosConstant($value, true, true);
@@ -114,7 +119,7 @@
     #{$key}: -iosEnv($value, true, false);
   }
 }
-@mixin iosBottom($key, $value: 0, $miuns: false) {
+@mixin ios-bottom($key, $value: 0, $miuns: false) {
   // #{$key}: $value;
   @if ($miuns) {
     #{$key}: -iosConstant($value, false, true);

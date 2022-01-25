@@ -148,35 +148,32 @@ jq-Datepicker
       display: block;
       width: 100%;
       height: 100%;
-      font-size: 0.3rem;
-      color: transparent;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
+      @include text-blind;
+      @include bg-etc;
     }
   }
   .ui-datepicker-prev-y {
     order: 1;
     span {
-      background-image: url(../images/icon/ico-datepicker-prev-y@3x.png);
+      background-image: url(../images/icon/btn-datepicker-prev-y.png);
     }
   }
   .ui-datepicker-prev {
     order: 2;
     span {
-      background-image: url(../images/icon/ico-datepicker-prev@3x.png);
+      background-image: url(../images/icon/btn-datepicker-prev.png);
     }
   }
   .ui-datepicker-next {
     order: 4;
     span {
-      background-image: url(../images/icon/ico-datepicker-next@3x.png);
+      background-image: url(../images/icon/btn-datepicker-next.png);
     }
   }
   .ui-datepicker-next-y {
     order: 5;
     span {
-      background-image: url(../images/icon/ico-datepicker-next-y@3x.png);
+      background-image: url(../images/icon/btn-datepicker-next-y.png);
     }
   }
 
@@ -326,8 +323,10 @@ jq-Datepicker
   width: 2.4rem;
   height: 2.4rem;
   padding: 0;
-  background: url(../images/icon/head-close@3x.png) no-repeat center center / contain;
   @include text-blind;
+  @include bg-etc;
+  // background-image: url(../images/icon/btn-close-24.png);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.98954 4.67878C5.69665 4.38588 5.22178 4.38588 4.92888 4.67878C4.63599 4.97167 4.63599 5.44654 4.92888 5.73944L10.9395 11.75L4.92884 17.7606C4.63594 18.0535 4.63594 18.5284 4.92884 18.8213C5.22173 19.1142 5.6966 19.1142 5.9895 18.8213L12.0001 12.8107L18.0104 18.8209C18.3033 19.1138 18.7781 19.1138 19.071 18.8209C19.3639 18.528 19.3639 18.0531 19.071 17.7603L13.0608 11.75L19.071 5.73981C19.3639 5.44692 19.3639 4.97204 19.071 4.67915C18.7781 4.38626 18.3032 4.38626 18.0103 4.67915L12.0001 10.6893L5.98954 4.67878Z' fill='%23222222'/%3E%3C/svg%3E");
 }
 
 /* with multiple calendars */

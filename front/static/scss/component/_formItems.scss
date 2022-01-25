@@ -57,10 +57,8 @@ i.require {
     }
     .input:not(.focus) {
       input {
+        @include bg-etc(1.6rem auto, right 1.2rem center);
         background-image: url(../images/icon/ico-error@3x.png);
-        background-repeat: no-repeat;
-        background-position: right 1.2rem center;
-        background-size: 1.6rem auto;
       }
     }
   }
