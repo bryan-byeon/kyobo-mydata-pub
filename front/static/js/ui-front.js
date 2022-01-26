@@ -4516,10 +4516,6 @@ const Loading = {
 //레이어팝업(Layer): 레이어 팝업은 #container 밖에 위치해야함
 const Layer = {
   id: 'uiLayer',
-  alertClass: 'ui-alert',
-  focusedClass: 'pop__focused',
-  focusInClass: 'ui-focus-in',
-  removePopClass: 'ui-pop-remove',
   popClass: 'popup',
   pageClass: 'page',
   wrapClass: 'pop-wrap',
@@ -4530,6 +4526,11 @@ const Layer = {
   innerClass: 'section',
   showClass: 'show',
   etcCont: '#header,#gnb,#container,#footer',
+  alertClass: 'ui-alert',
+  focusedClass: 'pop__focused',
+  focusInClass: 'ui-focus-in',
+  removePopClass: 'ui-pop-remove',
+  closeRemoveClass: 'ui-pop-close-remove',
   agreePopClass: 'ui-pop-agree',
   agreePopSwiperClass: 'ui-pop-agree-swiper',
   scrollShowTitleClass: 'pop-fade-title',
@@ -5108,11 +5109,27 @@ const Layer = {
       }
       if (Layer.openPop.indexOf('#' + $id) < 0) Layer.openPop.push('#' + $id);
 
+      // bg close
       //  && !$popup.hasClass('full')
       if (!$popup.hasClass('alert') && !$popup.hasClass('bg-no-click')) {
         const $bgClick = '<div class="pop-bg-close ui-pop-close" role="button" aria-label="팝업창 닫기"></div>';
         if (!$popup.find('.pop-bg-close').length) $popup.prepend($bgClick);
       }
+
+      // bottom foot close
+      if ($popup.hasClass('bottom') && $popup.find('.' + Layer.headClass + ' .pop-close').length) {
+        let $footCloseBtnHtml = '';
+        if (!$popup.find('.' + Layer.footClass).length) {
+          $footCloseBtnHtml += '<div class="pop-foot ' + Layer.closeRemoveClass + '"><div>';
+          $footCloseBtnHtml += '<div class="pop-foot-close"><button type="button" class="button ui-pop-close">닫기</button></div>';
+          $footCloseBtnHtml += '</div></div>';
+          $popWrap.append($footCloseBtnHtml);
+        } else {
+          $footCloseBtnHtml += '<div class="pop-foot-close ' + Layer.closeRemoveClass + '"><button type="button" class="button ui-pop-close">닫기</button></div>';
+          $popup.find('.' + Layer.footClass + ' > div').append($footCloseBtnHtml);
+        }
+      }
+
       const $openDelay = 50 * Layer.opening;
 
       // pop-scl-wrap
@@ -5314,7 +5331,10 @@ const Layer = {
       $popup.find('.' + Layer.focusInClass).removeAttr('tabindex');
       if ($popup.find('.pop-close.last_focus').length) $popup.find('.pop-close.last_focus').remove();
 
-      //알럿창
+      // 닫을 때 없어져야하는 요소
+      if ($popup.find('.' + Layer.closeRemoveClass).length) $popup.find('.' + Layer.closeRemoveClass).remove();
+
+      // 닫기 후 팝업 자체가 없어지는 케이스
       if ($popup.hasClass(Layer.alertClass) || $popup.hasClass(Layer.selectClass) || $popup.hasClass(Layer.removePopClass)) {
         if ($popup.hasClass(Layer.selectClass)) Layer.isSelectOpen = false;
         if ($popup.hasClass(Layer.alertClass)) {

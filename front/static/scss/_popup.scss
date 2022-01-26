@@ -117,12 +117,14 @@
   }
 }
 .pop-foot-close {
+  margin-top: 0.8rem;
   text-align: center;
   color: var(--primary-color);
-  div + & {
-    margin-top: 0.8rem;
+  &:first-child {
+    margin-top: 0;
   }
   .button {
+    width: 100%;
     font-size: 1.6rem !important;
     height: auto !important;
   }
