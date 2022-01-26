@@ -265,6 +265,15 @@ ui.Device = {
         }
       });
     }
+
+    // 최소기준 디바이스(가로)크기보다 작으면 meta[name="viewport"] 수정
+    const deviceMinWidth = 320;
+    if ($(window).width() < deviceMinWidth) {
+      const $viewport = $('meta[name="viewport"]');
+      // const $content = $viewport.attr('content');
+      const $newContent = 'width=' + deviceMinWidth + ',user-scalable=no,viewport-fit=cover';
+      $viewport.attr('content', $newContent);
+    }
   },
   hide: function () {
     if ($('[data-device-hide]').length) {
@@ -5406,7 +5415,7 @@ const Layer = {
       if ($this.hasClass('bottom') || $this.hasClass('modal')) $wrap.css('max-height', $height);
 
       //팝업 헤더 shadow
-      Layer.fixed($wrap);
+      // Layer.fixed($wrap);
 
       //바텀시트 선택요소로 스크롤
       if ($this.hasClass(Layer.selectClass) && $this.find('.selected').length && !$wrap.hasClass('scrolling')) {
