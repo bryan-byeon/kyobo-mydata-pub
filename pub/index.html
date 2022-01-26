@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>퍼블리싱 index</title>
-	<link rel="stylesheet" href="./static/css/pub_guide.css">
-  <link rel="stylesheet" href="./static/css/index.min.css">
-  <link rel="stylesheet" href="./static/css/splitting.css">
-  <link rel="stylesheet" href="./static/css/splitting-cells.css">
-</head>
-<body>
-<div class="index-logo"></div>
-<div class="index">
-	<div>
-		<div class="text" data-splitting><strong>교보증권 마이데이타</strong><br>퍼블리싱 코딩리스트</div>
-		<div class="index-btn">
-			<a href="./html/front.html">front</a>
-			<a href="./html/admin.html">admin</a>
-		</div>
-	</div>
-</div>
-<script src="./static/js/lib/jquery-3.6.0.min.js"></script>
-<script src="./static/js/lib/mo-0.288.1.min.js"></script>
-<script src="./static/js/lib/mojs-player-0.43.15.min.js"></script>
-<script src="./static/js/lib/splitting.min.js"></script>
-<script>
-document.addEventListener("click", (event) => {
-  bursty(event.pageX, event.pageY);
-});
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퍼블리싱 index</title>
+    <link rel="stylesheet" href="./static/css/pub_guide.css" />
+    <link rel="stylesheet" href="./static/css/index.min.css" />
+    <link rel="stylesheet" href="./static/css/splitting.css" />
+    <link rel="stylesheet" href="./static/css/splitting-cells.css" />
+  </head>
+  <body>
+    <div class="index-logo"></div>
+    <div class="index">
+      <div>
+        <div class="text" data-splitting><strong>교보증권 마이데이타</strong><br />퍼블리싱 코딩리스트</div>
+        <div class="index-btn">
+          <a href="./html/front.html">front</a>
+          <a href="./html/admin.html">admin</a>
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="./static/js/lib/mo-0.288.1.min.js"></script>
+    <script src="./static/js/lib/mojs-player-0.43.15.min.js"></script>
+    <script src="./static/js/lib/splitting.min.js"></script>
+    <script>
+      document.addEventListener('click', (event) => {
+        bursty(event.pageX, event.pageY);
+        setTimeout(() => removeBursty(), 2200);
+      });
 
-setInterval(() => randomizedConfetti(), 500);
+      setInterval(() => randomizedConfetti(), 500);
+      setTimeout(() => {
+        setInterval(() => removeBursty(), 500);
+      }, 2200);
 
-function bursty(x, y) {
-  const burst = new mojs.Burst({
-    left: 0,
-    top: 0,
-    radius: { 0: 200 },
-    count: 20,
-    degree: 360,
-    children: {
-      fill: { white: "#34E1FF" },
-      duration: 2000
-    }
-  }).tune({
-    x: x,
-    y: y
-  });
+      function bursty(x, y) {
+        const burst = new mojs.Burst({
+          left: 0,
+          top: 0,
+          radius: { 0: 200 },
+          count: 20,
+          degree: 360,
+          children: {
+            fill: { white: '#34E1FF' },
+            duration: 2000
+          }
+        })
+          .tune({
+            x: x,
+            y: y
+          })
+          .replay();
+      }
+      function removeBursty() {
+        const $mojsEl = document.querySelector('[data-name="mojs-shape"]');
+        if ($mojsEl) $mojsEl.remove();
+      }
 
-  burst.replay();
-}
+      function randomizedConfetti() {
+        let randomX = Math.floor(Math.random() * (document.body.clientWidth - 100) + 0);
+        let randomY = Math.floor(Math.random() * (window.innerHeight - 200) + 0);
+        bursty(randomX, randomY);
+      }
 
-function randomizedConfetti() {
-  let randomX = Math.floor(Math.random() * (document.body.clientWidth-100) + 0);
-  let randomY = Math.floor(Math.random() * (window.innerHeight-200) + 0);
-  const burst = new mojs.Burst({
-    left: 0,
-    top: 0,
-    radius: { 0: 200 },
-    count: 20,
-    degree: 360,
-    children: {
-      fill: { white: "#34E1FF" },
-      duration: 2000
-    }
-  }).tune({
-    x: randomX,
-    y: randomY
-  });
-
-  burst.replay();
-}
-
-const $spl = Splitting();
-
-</script>
-</body>
+      const $spl = Splitting();
+    </script>
+  </body>
 </html>
