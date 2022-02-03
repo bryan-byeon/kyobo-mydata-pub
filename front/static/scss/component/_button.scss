@@ -18,7 +18,8 @@
   font-size: 1.4rem;
   font-weight: 500;
   vertical-align: middle;
-  transition: opacity 0.3s;
+  opacity: 1;
+  transition: opacity 0.3s, visibility 0s;
   // white-space:nowrap;
   &.disabled,
   &:disabled {
@@ -88,11 +89,10 @@
 
   &.gray {
     background: #f2f4f6;
-    color: #222;
+    color: var(--strong-txt-color);
   }
   &.gray2 {
     background: #f6f6f6;
-    color: #666;
   }
   &.black {
     background: #000;
@@ -151,6 +151,12 @@
       color: #888;
       margin-left: 0.4rem;
     }
+  }
+
+  &.hidden-btn {
+    visibility: hidden;
+    opacity: 0;
+    transition-delay: 0s, 0.3s;
   }
 }
 .btn-txt {
@@ -333,6 +339,17 @@ button.btn-click {
     }
   }
 }
+@include media-min-width(1024) {
+  .btn-wrap {
+    &.bottom-fixed {
+      > div {
+        @include web-center;
+        left: 50%;
+        margin-left: -51.2rem;
+      }
+    }
+  }
+}
 .btn-inline-wrap {
   .button {
     margin: 0 0.4rem 0.8rem 0;
@@ -367,7 +384,7 @@ button.btn-click {
 }
 .button.add-address {
   height: 6.4rem;
-  color: #666;
+
   font-weight: 500;
   border-color: #eee;
 }

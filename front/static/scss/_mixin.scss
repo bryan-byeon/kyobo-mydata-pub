@@ -1,5 +1,8 @@
 /* @mixin */
 @use 'sass:selector';
+// $base-color: #606060;
+// $strong-color: #212121;
+// $strong-color2: #424242;
 
 @mixin unify-parent($child) {
   @at-root #{selector.unify(&, $child)} {

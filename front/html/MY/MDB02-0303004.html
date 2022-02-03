@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/images/favicon.png" />
+    <meta property="og:image" content="https://anoju.github.io/kyobo-mydata-pub/front/static/images/og_image_1200x630.png" />
+    <title>교보증권 마이데이타</title>
+    <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-front.js"></script>
+    <style></style>
+    <script>
+      ui.Common.title('개인(신용)정보 제공 동의서');
+    </script>
+  </head>
+  <body>
+    <article id="wrap">
+      <!-- 헤더 -->
+      <header id="header">
+        <div>
+          <div class="head-left">
+            <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
+          </div>
+          <h1></h1>
+          <div class="head-right">
+            <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
+          </div>
+        </div>
+      </header>
+      <!-- //헤더 -->
+
+      <!-- 컨테이너(컨텐츠) -->
+      <main id="container">
+        <div class="section">
+          <article class="terms-content">
+            <h1 class="page-fade-title">개인(신용)정보 제공 동의서</h1>
+
+            <p>
+              귀하는 개인(신용)정보 수집·이용에 관한 동의를 거부하실 수 있습니다. 다만, 개인(신용)정보의 제공에 관한 동의는 본인신용정보 통합조회, 데이터분석 서비스 이용과 직접적으로 관련된 필수적
+              사항이므로 아래의 사항에 동의하셔야만 본인신용정보 통합조회, 데이터분석 서비스, 마이데이터서비스 가입현황 안내 및 전송요구내역 통합조회 서비스의 제공이 가능합니다.
+            </p>
+
+            <h2>제공받는 자</h2>
+            <h3>정보제공기관</h3>
+            <p>KB국민은행, 신한은행</p>
+            <h3>한국신용정보원</h3>
+            <p>한국신용정보원</p>
+
+            <h2>제공받는자의 이용목적</h2>
+            <h3>정보제공기관</h3>
+            <p>본인 확인 및 개인(신용)정보의 전송</p>
+            <h3>한국신용정보원</h3>
+            <p>마이데이터서비스 가입현황 안내 및 정손요구내역 통합 조회 서비스 제공</p>
+
+            <h2>보유 및 이용기간</h2>
+            <h3>정보제공기관</h3>
+            <p>본인 확인 및 개인(신용)정보의 전송 목적 달성시까지</p>
+            <h3>한국신용정보원</h3>
+            <p>한국신용정보원의 마이데이터서비스 가입현황 안내 및 전송요구내역 통합조회 서비스 목적 달성시까지</p>
+
+            <h2>제공항목</h2>
+            <div class="chk-item">
+              <div class="lbl-child">
+                <h3>정보제공기관</h3>
+                <p>전자서명, CI, 인증서, 전송요구서</p>
+                <h3>한국신용정보원</h3>
+                <p>회원 가입여부, 서비스목록수, 서비스목록, 클라이언트ID, 전송요구내역수, 전송요구내역목록, 정보제곤자 기관코드,권한범위, 전송요구일자, 전송요구종료시점</p>
+              </div>
+              <div class="checkbox ty2">
+                <input type="checkbox" id="agreeChk" /><i aria-hidden="true"></i>
+                <label for="agreeChk" class="lbl fz-16 fc-424242">[필수] 개인(신용)정보 제공에 동의합니다.</label>
+              </div>
+            </div>
+          </article>
+
+          <div class="btn-wrap bottom-fixed">
+            <div class="flex">
+              <button type="button" class="button h60 primary ui-scroll-btn">계속 읽기</button>
+              <button type="button" id="mainBtn" class="button h60 primary" disabled style="display: none">다음</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- 컨테이너(컨텐츠) -->
+
+      <!-- 팝업 -->
+      <!-- //팝업 -->
+    </article>
+    <script>
+      $('.head-close').click(function () {
+        Layer.confirm('마이데이터 서비스 가입을 종료하고 홈 화면으로 이동할까요?', null, '아니요, 계속할게요', '예', function (e) {
+          if (e) {
+            console.log('아니요');
+          } else {
+            console.log('예');
+          }
+        });
+      });
+
+      $('#agreeChk').change(function () {
+        const $this = $(this);
+        const $mainBtn = $('#mainBtn');
+        if ($this.prop('checked')) {
+          $mainBtn.prop('disabled', false);
+        } else {
+          $mainBtn.prop('disabled', true);
+        }
+      });
+    </script>
+  </body>
+</html>

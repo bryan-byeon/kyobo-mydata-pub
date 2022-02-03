@@ -105,13 +105,13 @@
         position: absolute;
         top: 0;
         right: -1.5rem;
-        color: #666;
+
         z-index: 1;
       }
       &.on span,
       &.on a {
         font-weight: 500;
-        color: #222;
+        color: var(--strong-txt-color);
       }
     }
   }

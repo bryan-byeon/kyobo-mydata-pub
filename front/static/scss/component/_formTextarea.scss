@@ -5,7 +5,7 @@
   min-height: 4.8rem;
   background: #fff;
   &.focus {
-    border-color: #222;
+    border-color: var(--strong-txt-color);
   }
   textarea {
     border-radius: 0.4rem;

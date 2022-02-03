@@ -139,7 +139,7 @@ div.checkbox.ty2 {
       &:checked ~ .lbl {
         // font-weight: bold;
         border-color: var(--primary-color);
-        color: #222;
+        color: var(--strong-txt-color);
       }
       &:checked:not(:disabled) ~ .lbl {
         z-index: 1;
@@ -169,7 +169,7 @@ div.checkbox.ty2 {
       vertical-align: middle;
       margin: 0;
       border: 0.1rem solid #ebebeb;
-      color: #222;
+      color: var(--strong-txt-color);
       background: #fff;
       transition: 0.3s;
       font-size: 1.4rem;
@@ -368,7 +368,7 @@ div.checkbox.ty2 {
 }
 .chk-item {
   border: 0.1rem solid #eee;
-  border-radius: 0.4rem;
+  border-radius: 1.2rem;
   transition: border 0.3s;
   &.checked {
     border-color: var(--primary-color);
@@ -381,19 +381,28 @@ div.checkbox.ty2 {
       left: 1.6rem;
       top: 1.4rem;
     }
-    > i + .lbl {
+    > .lbl {
       padding: 1.2rem 2rem 1.2rem 4.6rem;
       margin-left: 0;
       line-height: 2.4rem;
+      font-size: 1.6rem;
+      color: #424242;
+      + .lbl-child {
+        border-top-width: 0.1rem;
+        border-bottom-width: 0;
+      }
     }
-    .lbl-child {
-      padding: 1.4rem 0;
-      margin: 0 1.6rem;
-      border-top: 0.1rem solid #eee;
-      line-height: 1.5;
-      font-size: 1.2rem;
-      color: #333;
+    + .lbl-child {
+      border-top-width: 0.1rem;
+      border-bottom-width: 0;
     }
+  }
+  .lbl-child {
+    padding: 1.4rem 0;
+    margin: 0 1.6rem;
+    color: #333;
+    border: 0px solid #eee;
+    border-bottom-width: 0.1rem;
   }
   &.ty2 {
     > .checkbox,

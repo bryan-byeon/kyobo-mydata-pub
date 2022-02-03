@@ -7,7 +7,7 @@
   padding: 0.5rem 4.1rem 0.5rem 1.1rem;
   border: 0.1rem solid #ddd;
   font-size: 1.5rem;
-  color: #222;
+  color: var(--strong-txt-color);
   vertical-align: middle;
   box-sizing: border-box;
   -webkit-appearance: none;
@@ -22,7 +22,7 @@
     color: var(--placeholder-txt-color);
   }
   option {
-    color: #222;
+    color: var(--strong-txt-color);
   }
 }
 .select {
@@ -50,7 +50,7 @@
   &.focus {
     select,
     .btn-select {
-      border-color: #222;
+      border-color: var(--strong-txt-color);
     }
   }
   &.disabled {
@@ -63,7 +63,7 @@
   &.is-error {
     select,
     .btn-select {
-      border-color: #dc512f;
+      border-color: var(--alert-txt-color);
     }
   }
   &.is-success {
@@ -95,7 +95,7 @@
       padding: 0.4rem 2rem 0.4rem 1.6rem;
       font-size: 1.3rem;
       line-height: 2rem;
-      color: #666;
+
       &.selected {
         color: var(--primary-color);
       }

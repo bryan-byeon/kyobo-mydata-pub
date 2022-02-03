@@ -19,7 +19,7 @@
   .txt-name {
     font-weight: 500;
     font-size: 1.6rem;
-    color: #222;
+    color: var(--strong-txt-color);
   }
 }
 .round-box-item {
@@ -107,7 +107,6 @@
   .date {
     margin-top: 0.4rem;
     font-size: 1.2rem;
-    color: #666;
   }
 }
 .list-count-bar {
@@ -130,7 +129,7 @@
     display: flex;
     font-size: 1.2rem;
     line-height: 1.6rem;
-    color: #666;
+
     margin-top: 1.2rem;
     .right {
       margin-left: auto;
@@ -142,7 +141,7 @@
     border-top: 0.1rem solid #eee;
     font-size: 1.4rem;
     line-height: 2.2rem;
-    color: #666;
+
     min-height: 20.1rem;
   }
 }
@@ -174,7 +173,7 @@
         top: 2rem;
         left: 2rem;
         font-size: 1.6rem;
-        color: #666;
+
         font-weight: 500;
       }
       &:after {
@@ -248,7 +247,7 @@
       display: flex;
       align-items: center;
       font-size: 1.2rem;
-      color: #666;
+
       .badge {
         margin-right: 1.2rem;
       }
@@ -264,7 +263,7 @@
       line-height: 2rem;
       margin-top: 1.2rem;
       position: relative;
-      color: #222;
+      color: var(--strong-txt-color);
       &.in-chk {
         padding-left: 3.2rem;
         line-height: 2.2rem;
@@ -280,7 +279,7 @@
   .qna-list-question {
     font-size: 1.5rem;
     line-height: 2.2rem;
-    color: #666;
+
     + .qna-list-answer {
       margin-top: 2rem;
     }
@@ -291,7 +290,7 @@
     background-color: #f6f6f6;
     .date {
       font-size: 1.2rem;
-      color: #666;
+
       margin-bottom: 1.2rem;
     }
   }

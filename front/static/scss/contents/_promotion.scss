@@ -54,7 +54,6 @@
     margin-top: 0.4rem;
     font-size: 1.3rem;
     line-height: 1.9rem;
-    color: #666;
   }
   &.line-type {
     li {
@@ -92,7 +91,6 @@
     margin-top: 0.4rem;
     font-size: 1.4rem;
     line-height: 2rem;
-    color: #666;
   }
   .event-img {
     position: relative;
@@ -116,7 +114,7 @@
     }
     .txt-list {
       font-size: 1.4rem;
-      color: #222;
+      color: var(--strong-txt-color);
     }
     &.ty2 {
       margin-top: 2.4rem;
@@ -124,7 +122,6 @@
       border-top: 0.1rem solid #eee;
       font-size: 1.5rem;
       line-height: 2.2rem;
-      color: #666;
     }
   }
   .btn-wrap {
@@ -142,7 +139,6 @@
       text-align: center;
       font-size: 1.4rem;
       line-height: 2.2rem;
-      color: #666;
     }
     .event-form-dl {
       margin-top: 2rem;
@@ -193,7 +189,7 @@
       display: flex;
       align-items: center;
       font-size: 1.2rem;
-      color: #666;
+
       > div {
         margin-right: 0.6rem;
       }

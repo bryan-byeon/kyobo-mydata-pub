@@ -3989,8 +3989,35 @@ ui.Scroll = {
       });
     }
   },
+  agree: function () {
+    if (!$('.ui-scroll-btn').length) return;
+    $('.ui-scroll-btn').click(function () {
+      const $innerHeight = $(window).height();
+      const $scrollTop = $(window).scrollTop();
+      const $scrollHeight = $('body')[0].scrollHeight;
+      const $scrollMove = $scrollHeight - $innerHeight - $scrollTop;
+      const $speed = Math.min(1000, Math.max(200, $scrollMove / 4));
+      ui.Scroll.top($scrollMove, $speed);
+    });
+
+    const $scrollEvt = function () {
+      const $innerHeight = $(window).height();
+      const $scrollTop = $(window).scrollTop();
+      const $scrollHeight = $('body')[0].scrollHeight;
+      const $scrollBtn = $('.ui-scroll-btn');
+      const $mainBtn = $scrollBtn.next('.button');
+      if ($scrollBtn.length && $innerHeight + $scrollTop + 10 > $scrollHeight) {
+        $scrollBtn.remove();
+        $mainBtn.show();
+      }
+    };
+    $scrollEvt();
+
+    $(window).scroll($scrollEvt);
+  },
   init: function () {
     ui.Scroll.loading();
+    ui.Scroll.agree();
   }
 };
 
@@ -4635,10 +4662,17 @@ const Layer = {
         .find('.' + Layer.wrapClass + ' h1')
         .html($insertTit);
     }
-    if (!!option.actionTxt) $('#' + $actionId).text(option.actionTxt);
-    if (typeof callback2 === 'string' && callback2 !== '') $('#' + $actionId).text(callback2);
-    if (!!option.cancelTxt) $('#' + $cancelId).text(option.cancelTxt);
-    if (typeof callback3 === 'string' && callback3 !== '') $('#' + $cancelId).text(callback3);
+    let $actionTxt;
+    if (!!option.actionTxt) $actionTxt = option.actionTxt;
+    if (typeof callback2 === 'string' && callback2 !== '') $actionTxt = callback2;
+    if ($actionTxt) $('#' + $actionId).text($actionTxt);
+
+    let $cancelTxt;
+    if (!!option.cancelTxt) $cancelTxt = option.cancelTxt;
+    if (typeof callback3 === 'string' && callback3 !== '') $cancelTxt = callback3;
+    if ($cancelTxt) $('#' + $cancelId).text($cancelTxt);
+    // if ($actionTxt && $cancelTxt && $actionTxt.length > $cancelTxt.length + 4) $('#' + $cancelId).addClass('w-33fp');
+
     const $htmlContent = Layer.content;
     if (type === 'prompt') {
       $('#' + $popId)
@@ -4671,7 +4705,8 @@ const Layer = {
       $inpVal = $('#' + $popId)
         .find('.input input')
         .val();
-      Layer.close('#' + $popId, function () {
+
+      const $actionEvt = function () {
         if (type === 'prompt') {
           if (!!option.action) option.action($result, $inpVal);
           if (!!option.callback) option.callback($result, $inpVal);
@@ -4687,17 +4722,23 @@ const Layer = {
           if (typeof callback3 === 'function') callback3($result);
           if (typeof callback4 === 'function') callback4($result);
         }
-      });
+      };
+      Layer.close('#' + $popId, $actionEvt);
+      // Layer.close('#' + $popId);
+      // setTimeout($actionEvt, 100);
     });
     $cancelBtn.on('click', function () {
       $result = false;
-      Layer.close('#' + $popId, function () {
+      const $cancelEvt = function () {
         if (!!option.callback) option.callback($result);
         if (typeof callback === 'function') callback($result);
         if (typeof callback2 === 'function') callback2($result);
         if (typeof callback3 === 'function') callback3($result);
         if (typeof callback4 === 'function') callback4($result);
-      });
+      };
+      Layer.close('#' + $popId, $cancelEvt);
+      // Layer.close('#' + $popId);
+      // setTimeout($cancelEvt, 100);
     });
   },
   alert: function (option, callback, callback2, callback3) {

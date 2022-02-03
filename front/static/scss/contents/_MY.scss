@@ -1,0 +1,43 @@
+.line-round-btn {
+  position: relative;
+  display: block;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  border-radius: 1.6rem;
+  padding: 2.4rem;
+  transition: border 0.3s;
+  &:active {
+    border-color: var(--primary-color);
+  }
+  + .line-round-btn {
+    margin-top: 0.8rem;
+  }
+  > .inner {
+    position: relative;
+    > .tit {
+      color: var(--strong-txt-color);
+    }
+    > .txt {
+      padding-right: 7.6rem;
+      min-height: 4.6rem;
+      margin-top: 1rem;
+    }
+    > .ico {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 48px;
+      height: 48px;
+      @include bg-etc;
+      img {
+        @include img-fit;
+      }
+      &.ico-1 {
+        background-image: url(../images/MY/connect-ico-1.png);
+      }
+      &.ico-2 {
+        background-image: url(../images/MY/connect-ico-2.png);
+      }
+    }
+  }
+}

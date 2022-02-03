@@ -1,7 +1,10 @@
 :root {
   --vh: 1vh;
   --primary-color: #fe7d65;
-  --base-txt-color: #666;
+  --alert-txt-color: #dc512f;
+  --base-txt-color: #606060;
+  --strong-txt-color: #212121;
+  --strong-txt-color2: #424242;
   --placeholder-txt-color: #ccc;
 }
 html {
@@ -111,7 +114,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #222;
+  color: var(--strong-txt-color);
 }
 input,
 select,
@@ -371,7 +374,7 @@ html.lock,
   color: #3b3f47 !important;
 }
 .fc-red {
-  color: #e43333 !important;
+  color: var(--alert-txt-color) !important;
 }
 .fc-blue {
   color: #0087e1 !important;
@@ -387,22 +390,16 @@ html.lock,
 .fc-000 {
   color: #000 !important;
 }
-.fc-222 {
-  color: #222 !important;
+.fc-212121 {
+  color: #212121 !important;
 }
-.fc-444 {
-  color: #444 !important;
+.fc-424242 {
+  color: #424242 !important;
 }
-.fc-555 {
-  color: #555 !important;
+.fc-606060 {
+  color: #606060 !important;
 }
-.fc-666 {
-  color: #666 !important;
-}
-.fc-888 {
-  color: #888 !important;
-}
-.fc-97 {
+.fc-979797 {
   color: #979797 !important;
 }
 
@@ -547,7 +544,6 @@ html.lock,
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-    color: #666;
     padding: 0 0.2rem;
   }
   > .input,
@@ -602,20 +598,12 @@ html.lock,
 }
 
 // width
-@for $i from 0 through 100 {
+@for $i from 0 through 300 {
   .w-#{$i} {
     width: $i * 0.1rem !important;
   }
   .w-#{$i}f {
     flex: 0 0 $i * 0.1rem !important;
-  }
-}
-@for $i from 1 through 40 {
-  .w-#{$i*5 + 100} {
-    width: $i * 0.5rem + 10rem !important;
-  }
-  .w-#{$i*5 + 100}f {
-    flex: 0 0 $i * 0.5rem + 10rem !important;
   }
 }
 @for $i from 0 through 100 {
@@ -685,6 +673,10 @@ html.lock,
 }
 
 // margin
+.mg-autox {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 .ml-auto {
   margin-left: auto !important;
 }
@@ -697,7 +689,7 @@ html.lock,
 .mb-auto {
   margin-bottom: auto !important;
 }
-@for $i from 0 through 50 {
+@for $i from 0 through 100 {
   .mg-#{$i} {
     margin: $i * 0.1rem !important;
   }
@@ -722,29 +714,29 @@ html.lock,
     margin-right: $i * 0.1rem !important;
   }
 }
-@for $i from 11 through 20 {
-  .mg-#{$i*5} {
-    margin: $i * 0.5rem !important;
+@for $i from 1 through 20 {
+  .mg-#{$i*5 + 100} {
+    margin: $i * 0.5rem + 10rem !important;
   }
-  .mg-#{$i*5}x {
-    margin-left: $i * 0.5rem !important;
-    margin-right: $i * 0.5rem !important;
+  .mg-#{$i*5 + 100}x {
+    margin-left: $i * 0.5rem + 10rem !important;
+    margin-right: $i * 0.5rem + 10rem !important;
   }
-  .mg-#{$i*5}y {
-    margin-top: $i * 0.5rem !important;
-    margin-bottom: $i * 0.5rem !important;
+  .mg-#{$i*5 + 100}y {
+    margin-top: $i * 0.5rem + 10rem !important;
+    margin-bottom: $i * 0.5rem + 10rem !important;
   }
-  .mt-#{$i*5} {
-    margin-top: $i * 0.5rem !important;
+  .mt-#{$i*5 + 100} {
+    margin-top: $i * 0.5rem + 10rem !important;
   }
-  .mb-#{$i*5} {
-    margin-bottom: $i * 0.5rem !important;
+  .mb-#{$i*5 + 100} {
+    margin-bottom: $i * 0.5rem + 10rem !important;
   }
-  .ml-#{$i*5} {
-    margin-left: $i * 0.5rem !important;
+  .ml-#{$i*5 + 100} {
+    margin-left: $i * 0.5rem + 10rem !important;
   }
-  .mr-#{$i*5} {
-    margin-right: $i * 0.5rem !important;
+  .mr-#{$i*5 + 100} {
+    margin-right: $i * 0.5rem + 10rem !important;
   }
 }
 @for $i from 1 through 10 {
@@ -754,7 +746,7 @@ html.lock,
 }
 
 // padding
-@for $i from 0 through 50 {
+@for $i from 0 through 100 {
   .pd-#{$i} {
     padding: $i * 0.1rem !important;
   }
@@ -779,29 +771,29 @@ html.lock,
     padding-right: $i * 0.1rem !important;
   }
 }
-@for $i from 11 through 20 {
-  .pd-#{$i*5} {
-    padding: $i * 0.5rem !important;
+@for $i from 1 through 20 {
+  .pd-#{$i*5 + 100} {
+    padding: $i * 0.5rem + 10rem !important;
   }
-  .pd-#{$i*5}x {
-    padding-left: $i * 0.5rem !important;
-    padding-right: $i * 0.5rem !important;
+  .pd-#{$i*5 + 100}x {
+    padding-left: $i * 0.5rem + 10rem !important;
+    padding-right: $i * 0.5rem + 10rem !important;
   }
-  .pd-#{$i*5}y {
-    padding-top: $i * 0.5rem !important;
-    padding-bottom: $i * 0.5rem !important;
+  .pd-#{$i*5 + 100}y {
+    padding-top: $i * 0.5rem + 10rem !important;
+    padding-bottom: $i * 0.5rem + 10rem !important;
   }
-  .pt-#{$i*5} {
-    padding-top: $i * 0.5rem !important;
+  .pt-#{$i*5 + 100} {
+    padding-top: $i * 0.5rem + 10rem !important;
   }
-  .pb-#{$i*5} {
-    padding-bottom: $i * 0.5rem !important;
+  .pb-#{$i*5 + 100} {
+    padding-bottom: $i * 0.5rem + 10rem !important;
   }
-  .pl-#{$i*5} {
-    padding-left: $i * 0.5rem !important;
+  .pl-#{$i*5 + 100} {
+    padding-left: $i * 0.5rem + 10rem !important;
   }
-  .pr-#{$i*5} {
-    padding-right: $i * 0.5rem !important;
+  .pr-#{$i*5 + 100} {
+    padding-right: $i * 0.5rem + 10rem !important;
   }
 }
 
@@ -982,6 +974,9 @@ $bdTypes: (solid, dashed, dotted);
     width: 2rem;
     height: 2rem;
     background: url(../images/icon/ico-round-close@3x.png) no-repeat center center / contain;
+  }
+  &.TBD {
+    background: rgba(255, 0, 0, 0.2);
   }
 }
 

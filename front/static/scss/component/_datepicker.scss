@@ -200,12 +200,12 @@ jq-Datepicker
       border: 0 none;
       -webkit-appearance: none;
       appearance: none;
-      color: #222;
+      color: var(--strong-txt-color);
       vertical-align: top;
       font-weight: 500;
       text-align: left;
       option {
-        color: #222;
+        color: var(--strong-txt-color);
       }
       &.ui-datepicker-month,
       &.ui-datepicker-year {
@@ -229,9 +229,6 @@ jq-Datepicker
       font-size: 1.3rem;
       border: 0 none;
       font-weight: normal;
-      span {
-        color: #666;
-      }
     }
     td {
       height: 4rem;
@@ -250,7 +247,7 @@ jq-Datepicker
         width: 3.6rem;
         height: 3.6rem;
         font-size: 1.4rem;
-        color: #222;
+        color: var(--strong-txt-color);
         text-decoration: none;
         border-radius: 50%;
         margin: 0 auto;
@@ -273,8 +270,8 @@ jq-Datepicker
     }
     .ui-state-default {
       &.ui-state-highlight {
-        border: 0.1rem solid #222;
-        background-color: #222;
+        border: 0.1rem solid var(--strong-txt-color);
+        background-color: var(--strong-txt-color);
         font-weight: bold;
         color: #fff !important;
       }
@@ -307,7 +304,7 @@ jq-Datepicker
       &.ui-datepicker-current {
         display: none;
         left: 2rem;
-        color: #666;
+
         font-size: 1.3rem;
         line-height: 2.5rem;
         text-align: center;

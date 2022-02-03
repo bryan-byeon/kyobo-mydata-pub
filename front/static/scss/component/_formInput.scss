@@ -6,7 +6,7 @@
   background: #fff;
   border: 0.1rem solid #ddd;
   border-radius: 0.4rem;
-  color: #222;
+  color: var(--strong-txt-color);
   align-items: center;
   transition: border 0.3s;
   &.readonly,
@@ -14,10 +14,10 @@
     background: #f8f8f8;
   }
   &.focus {
-    border-color: #222;
+    border-color: var(--strong-txt-color);
   }
   &.is-error {
-    border-color: #dc512f;
+    border-color: var(--alert-txt-color);
     &:not(.focus) {
       input {
         background-image: url(../images/icon/ico-error@3x.png);

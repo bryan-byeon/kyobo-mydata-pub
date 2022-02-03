@@ -238,7 +238,7 @@
       display: block;
       padding: 1.2rem 1rem;
       text-align: center;
-      color: #666;
+
       font-size: 1.5rem;
       line-height: 2.4rem;
       overflow: hidden;
@@ -247,7 +247,7 @@
     &.active > a {
       font-size: 1.6rem;
       font-weight: bold;
-      color: #222;
+      color: var(--strong-txt-color);
     }
   }
   .section &.scroll-able {
@@ -306,7 +306,7 @@
       align-items: center;
       justify-content: center;
       height: 5rem;
-      color: #666;
+
       font-size: 1.4rem;
       line-height: 2rem;
       overflow: hidden;
@@ -314,7 +314,7 @@
     }
     &.active > a {
       font-weight: bold;
-      color: #222;
+      color: var(--strong-txt-color);
       &:after {
         left: 0;
         width: 100%;
@@ -343,7 +343,7 @@
       padding: 0 2rem;
       background: #eee;
       border-radius: 2.2rem;
-      color: #222;
+      color: var(--strong-txt-color);
       font-size: 1.4rem;
       overflow: hidden;
       transition: 0.3s;
@@ -398,7 +398,7 @@
     }
     &.active {
       > a {
-        color: #222;
+        color: var(--strong-txt-color);
       }
     }
   }

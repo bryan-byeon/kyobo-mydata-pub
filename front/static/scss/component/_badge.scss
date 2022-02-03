@@ -20,7 +20,7 @@
 
   &.line {
     background: #fff;
-    color: #222;
+    color: var(--strong-txt-color);
     border-radius: 0;
     border: 0.1rem solid #eee;
   }
