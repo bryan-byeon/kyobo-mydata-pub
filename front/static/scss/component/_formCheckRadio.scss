@@ -382,10 +382,10 @@ div.checkbox.ty2 {
       top: 1.4rem;
     }
     > .lbl {
-      padding: 1.2rem 2rem 1.2rem 4.6rem;
+      padding: 1.4rem 2rem 1.4rem 4.6rem;
       margin-left: 0;
       line-height: 2.4rem;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: #424242;
       + .lbl-child {
         border-top-width: 0.1rem;
@@ -417,6 +417,26 @@ div.checkbox.ty2 {
     + .chk-item {
       margin-top: 1.2rem;
     }
+  }
+  &.folding {
+    > .checkbox,
+    > .radio {
+      > .lbl {
+        padding-right: 4.6rem;
+      }
+      .ui-folding-btn {
+        display: block;
+        padding-top: 1.4rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding-right: 1.6rem;
+      }
+    }
+  }
+  .folding-panel {
+    display: none;
   }
 }
 .chk-wrap {
@@ -476,17 +496,19 @@ div.checkbox.ty2 {
         position: absolute;
         top: 0;
         right: 0;
-        i {
-          vertical-align: top;
-          transform: rotate3d(1, 0, 0, 0);
-          transition: 0.3s;
-        }
-        &.open {
-          i {
-            transform: rotate3d(1, 0, 0, 180deg);
-          }
-        }
       }
+    }
+  }
+}
+.ui-folding-btn {
+  i {
+    display: block;
+    transform: rotate3d(1, 0, 0, 0);
+    transition: 0.3s;
+  }
+  &.open {
+    i {
+      transform: rotate3d(1, 0, 0, 180deg);
     }
   }
 }

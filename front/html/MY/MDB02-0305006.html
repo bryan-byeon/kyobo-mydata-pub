@@ -24,7 +24,6 @@
           <div class="head-left">
             <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
           </div>
-          <h1></h1>
           <div class="head-right">
             <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
           </div>
@@ -36,8 +35,8 @@
       <main id="container">
         <div class="section">
           <article class="terms-content">
-            <h1 class="mb-0 page-fade-title">개인(신용)정보 수집·이용 동의서</h1>
-            <div>(상세정보 정송 개별인증용)</div>
+            <h1 class="mb-0">개인(신용)정보 수집·이용 동의서</h1>
+            <div>(상세정보 전송용)</div>
 
             <p>(주)교보증권은 「신용정보의 이용 및 보호에 관현법률」,「개인정보보호법」 등 관련 법령에 따라 다음과 같이 귀하의 개인(신용)정보를 처리합니다.</p>
 
@@ -55,44 +54,37 @@
             </p>
 
             <h2>개인(신용)정보 수집·이용 항목</h2>
-
             <div class="chk-item">
               <div class="lbl-child">
                 <h3>개인(식별)정보</h3>
-                <p>접근토큰, 인증서</p>
+                <p>전자서명, 접근토큰, 인증서, 전송요구서</p>
                 <h3>신용거래정보</h3>
+                <ul class="txt-list">
+                  <li class="dash">
+                    <strong>은행</strong>
+                    <div class="dot">
+                      수신계좌 정보
+                      <div>기본정보(저축방법, 계좌개설일자, 만기일, 통화코드, 약정액, 월 납입액)</div>
+                      <div>추가(장액 등)정보(통화코드, 현재잔액, 출금 가능액, 적용금리, 최종납입회차)</div>
+                      <div>거래내역(거래일시 또는 거래일자, 거래번호, 거래유형(코드), 거래구분, 통화코드 거래금액, 거래 후잔액, 납입회차, 적요)</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div class="checkbox ty2">
                 <input type="checkbox" id="agreeChk" /><i aria-hidden="true"></i>
-                <label for="agreeChk" class="lbl fz-16 fc-424242">[필수] 개인(신용)정보 수집·이용에 동의합니다.</label>
+                <label for="agreeChk" class="lbl">[필수] 개인(신용)정보 수집·이용에 동의합니다.</label>
               </div>
-            </div>
-            <div class="chk-item mt-20">
-              <div class="checkbox ty2">
-                <input type="checkbox" id="agreeChk1" /><i aria-hidden="true"></i>
-                <label for="agreeChk1" class="lbl">[선택] 적요 또는 거래메모정보 수집·이용에 동의</label>
-              </div>
-              <div class="lbl-child">송금인/수취인명 정보 등 본인의 사생활 및 경제활동등에 관련된 상세한 정보입니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.</div>
             </div>
 
-            <div class="chk-item mt-20">
-              <div class="checkbox ty2">
-                <input type="checkbox" id="agreeChk2" /><i aria-hidden="true"></i>
-                <label for="agreeChk2" class="lbl">[선택] 가명점명 전송요구 여부</label>
-              </div>
-              <div class="lbl-child">
-                '카드청구 및 결제정보의 가맹점명 항목'에는 본인의 소비생활 등에 관련된 상세한 정보가 포함되어 있습니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.
-              </div>
-            </div>
-            <div class="chk-item mt-20">
-              <div class="checkbox ty2">
-                <input type="checkbox" id="agreeChk3" /><i aria-hidden="true"></i>
-                <label for="agreeChk3" class="lbl">[선택] 상품구매정보 카테고리 정보</label>
-              </div>
-              <div class="lbl-child">
-                선불전자지급수단의 상품구매정보 항목으로 실제 구매한 상품이 아닌 해당 상품의 카테고리(13개 항목)입니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.
-              </div>
-            </div>
+            <h2>적요 또는 거래메모정보 수집·이용에 동의</h2>
+            <p>동의</p>
+
+            <h2>가맹점명 전송요구 여부</h2>
+            <p>미동의</p>
+
+            <h2>상품구매정보 카테고리 정보</h2>
+            <p>동의</p>
           </article>
 
           <div class="btn-wrap bottom-fixed">

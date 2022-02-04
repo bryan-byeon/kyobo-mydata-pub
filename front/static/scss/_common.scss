@@ -986,7 +986,7 @@ $bdTypes: (solid, dashed, dotted);
   cursor: pointer;
   color: transparent !important;
   word-break: break-all !important;
-  background: linear-gradient(to bottom, transparent 0% 25%, #ddd 25% 75%, transparent 75% 100%);
+  background: linear-gradient(to bottom, transparent 0% 25%, #eee 25% 75%, transparent 75% 100%);
   animation: emptyOpacity 2s linear infinite alternate;
   * {
     opacity: 0 !important;
@@ -996,20 +996,42 @@ $bdTypes: (solid, dashed, dotted);
   pointer-events: none;
   cursor: pointer;
   color: transparent !important;
-  background: #ddd !important;
-  border-color: #ddd !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
   word-break: break-all !important;
+  background: #eee !important;
   animation: emptyOpacity 2s linear infinite alternate;
+  /*
+  background-image: linear-gradient(to right, rgba(221, 221, 221, 1) 0% 5%, rgba(221, 221, 221, 0.1) 45% 55%, rgba(221, 221, 221, 1) 95% 100%) !important;
+  background-position: 0 50%;
+  background-size: 200% auto !important;
+  animation: emptyOpacity2 3s linear infinite;
+  */
   * {
     opacity: 0 !important;
   }
+  @for $i from 2 through 5 {
+    &:nth-child(#{$i}) {
+      animation-delay: ($i - 1) * 300ms;
+    }
+  }
 }
 @keyframes emptyOpacity {
-  from {
+  0%,
+  5% {
     opacity: 1;
   }
+  95%,
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes emptyOpacity2 {
+  from {
+    background-position: 0 50%;
+  }
   to {
-    opacity: 0.5;
+    background-position: -200% 50%;
   }
 }
 

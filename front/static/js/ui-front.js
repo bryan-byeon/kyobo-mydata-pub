@@ -3571,7 +3571,8 @@ ui.Folding = {
           .removeAttr('aria-hidden')
           .stop(true, false)
           .slideDown(speed, function () {
-            ui.Scroll.inScreen($this, this);
+            console.log('aa');
+            ui.Scroll.inScreen($this, $($panel));
             slideCallback();
           });
       }
@@ -3964,6 +3965,7 @@ ui.Scroll = {
   },
   */
   inScreen: function (topEl, bototomEl, callback) {
+    console.log(topEl, bototomEl);
     if (!bototomEl) bototomEl = topEl;
     const $scrollTop = $(window).scrollTop();
     let $winHeight = $(window).height();
@@ -3976,7 +3978,7 @@ ui.Scroll = {
     const $bototomElEnd = $bototomElTop + $bototomElHeight;
     let $scroll = '';
     if ($winEnd < $bototomElEnd) {
-      $scroll = Math.min($topElTop, $bototomElEnd - $winHeight);
+      $scroll = Math.min($topElTop, $bototomElEnd - $winHeight + $bottomMargin);
     } else if ($scrollTop > $topElTop) {
       $scroll = $topElTop;
     }
@@ -3993,9 +3995,8 @@ ui.Scroll = {
     if (!$('.ui-scroll-btn').length) return;
     $('.ui-scroll-btn').click(function () {
       const $innerHeight = $(window).height();
-      const $scrollTop = $(window).scrollTop();
       const $scrollHeight = $('body')[0].scrollHeight;
-      const $scrollMove = $scrollHeight - $innerHeight - $scrollTop;
+      const $scrollMove = $scrollHeight - $innerHeight;
       const $speed = Math.min(1000, Math.max(200, $scrollMove / 4));
       ui.Scroll.top($scrollMove, $speed);
     });

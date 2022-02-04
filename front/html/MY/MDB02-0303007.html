@@ -13,7 +13,7 @@
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
     <style></style>
     <script>
-      ui.Common.title('마이데이터 서비스 이용약관');
+      ui.Common.title('인증서 본인확인서비스 이용약관');
     </script>
   </head>
   <body>
@@ -24,9 +24,6 @@
           <div class="head-left">
             <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
           </div>
-          <div class="head-right">
-            <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
-          </div>
         </div>
       </header>
       <!-- //헤더 -->
@@ -35,19 +32,13 @@
       <main id="container">
         <div class="section">
           <article class="terms-content">
-            <h1>교보증권 마이테이터 <br />서비스 이용약관</h1>
+            <h1>[필수] 인증서 본인확인서비스 이용약관</h1>
             <div style="height: 5000px; background: #eee; margin-top: 20px">약관 들어갈 자리</div>
-
-            <div class="checkbox mt-20">
-              <input type="checkbox" id="agreeChk" /><i aria-hidden="true"></i>
-              <label for="agreeChk" class="lbl">교보증권 마이데이터 서비스 이용약관에 동의합니다.</label>
-            </div>
           </article>
 
           <div class="btn-wrap bottom-fixed">
             <div class="flex">
-              <button type="button" class="button h60 primary ui-scroll-btn">계속 읽기</button>
-              <button type="button" id="mainBtn" class="button h60 primary" disabled style="display: none">다음</button>
+              <button type="button" id="mainBtn" class="button h60 primary">동의</button>
             </div>
           </div>
         </div>
@@ -57,26 +48,5 @@
       <!-- 팝업 -->
       <!-- //팝업 -->
     </article>
-    <script>
-      $('.head-close').click(function () {
-        Layer.confirm('마이데이터 서비스 가입을 종료하고 홈 화면으로 이동할까요?', null, '아니요, 계속할게요', '예', function (e) {
-          if (e) {
-            console.log('아니요');
-          } else {
-            console.log('예');
-          }
-        });
-      });
-
-      $('#agreeChk').change(function () {
-        const $this = $(this);
-        const $mainBtn = $('#mainBtn');
-        if ($this.prop('checked')) {
-          $mainBtn.prop('disabled', false);
-        } else {
-          $mainBtn.prop('disabled', true);
-        }
-      });
-    </script>
   </body>
 </html>

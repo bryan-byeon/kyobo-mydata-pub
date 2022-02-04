@@ -9,13 +9,17 @@
   align-items: center;
   border-radius: 0.6rem;
 
+  &.gray {
+    background: #ebebeb;
+    color: #979797;
+  }
   &.red {
     background: #ffebee;
     color: #e43333;
   }
-  &.gray {
-    background: #ebebeb;
-    color: #979797;
+  &.green {
+    background: #e5f5ed;
+    color: #15b071;
   }
 
   &.line {

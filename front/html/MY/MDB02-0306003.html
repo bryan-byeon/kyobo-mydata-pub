@@ -13,7 +13,7 @@
     <script type="text/javascript" src="../../static/js/ui-front.js"></script>
     <style></style>
     <script>
-      ui.Common.title('개인(신용)정보 수집·이용 동의');
+      ui.Common.title('개인(신용)정보 수집·이용 동의서');
     </script>
   </head>
   <body>
@@ -24,6 +24,7 @@
           <div class="head-left">
             <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
           </div>
+          <h1></h1>
           <div class="head-right">
             <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
           </div>
@@ -35,16 +36,16 @@
       <main id="container">
         <div class="section">
           <article class="terms-content">
-            <h1 class="mb-0">개인(신용)정보 수집·이용 동의서</h1>
+            <h1 class="mb-0 page-fade-title">개인(신용)정보 수집·이용 동의서</h1>
             <div>(상세정보 전송 개별인증용)</div>
 
             <p>(주)교보증권은 「신용정보의 이용 및 보호에 관현법률」,「개인정보보호법」 등 관련 법령에 따라 다음과 같이 귀하의 개인(신용)정보를 처리합니다.</p>
 
             <h2>수집 이용 목적</h2>
-            <p>상세정보 전송요구를 위한 사입상품목록 조회</p>
+            <p>전송요구를 통한 본인신용정보 통합조회, 데이터분석 서비스의 이용</p>
 
             <h2>보유 및 이용기간</h2>
-            <p>상세정보 전송요구시까지 또는 7일 중 짧은 기간</p>
+            <p>서비스 이용 종료 시 또는 삭제 요구 시 까지</p>
 
             <h2>거부 권리 및 불이익</h2>
             <p>
@@ -54,21 +55,20 @@
             </p>
 
             <h2>개인(신용)정보 수집·이용 항목</h2>
+
             <div class="chk-item">
               <div class="lbl-child">
                 <h3>개인(식별)정보</h3>
-                <p>전자서명, 접근토큰, 인증서, 전송요구서</p>
+                <p>접근토큰, 인증서</p>
                 <h3>신용거래정보</h3>
                 <ul class="txt-list">
                   <li class="dash">
                     <strong>은행</strong>
                     <div class="dot">
-                      계좌(수신/투자상품/대출상품) 목록
-                      <div>고객정보 최초생성일시, 계좌번호, 회차번호, 상품명, 외화계좌여부, 마이너스 약정 여부, 계저번호 별 구분코드, 계좌번호 별 상태코드</div>
-                    </div>
-                    <div class="dot">
-                      개인형 IRP 계좌목록
-                      <div>개인형 IRP계좌의 상품명, 계좌번호</div>
+                      수신계좌 정보
+                      <div>기본정보(저축방법, 계좌개설일자, 만기일, 통화코드, 약정액, 월 납입액)</div>
+                      <div>추가(장액 등)정보(통화코드, 현재잔액, 출금 가능액, 적용금리, 최종납입회차)</div>
+                      <div>거래내역(거래일시 또는 거래일자, 거래번호, 거래유형(코드), 거래구분, 통화코드 거래금액, 거래 후잔액, 납입회차, 적요)</div>
                     </div>
                   </li>
                 </ul>
@@ -76,6 +76,38 @@
               <div class="checkbox ty2">
                 <input type="checkbox" id="agreeChk" /><i aria-hidden="true"></i>
                 <label for="agreeChk" class="lbl">[필수] 개인(신용)정보 수집·이용에 동의합니다.</label>
+              </div>
+            </div>
+            <div class="chk-item folding mt-10">
+              <div class="checkbox ty2">
+                <input type="checkbox" id="agreeChk1" /><i aria-hidden="true"></i>
+                <label for="agreeChk1" class="lbl">[선택] 적요 또는 거래메모정보 수집·이용에 동의</label>
+                <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>
+              </div>
+              <div class="lbl-child folding-panel">
+                송금인/수취인명 정보 등 본인의 사생활 및 경제활동등에 관련된 상세한 정보입니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.
+              </div>
+            </div>
+
+            <div class="chk-item folding mt-10">
+              <div class="checkbox ty2">
+                <input type="checkbox" id="agreeChk2" /><i aria-hidden="true"></i>
+                <label for="agreeChk2" class="lbl">[선택] 가명점명 전송요구 여부</label>
+                <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>
+              </div>
+              <div class="lbl-child folding-panel">
+                '카드청구 및 결제정보의 가맹점명 항목'에는 본인의 소비생활 등에 관련된 상세한 정보가 포함되어 있습니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.
+              </div>
+            </div>
+
+            <div class="chk-item folding mt-10">
+              <div class="checkbox ty2">
+                <input type="checkbox" id="agreeChk3" /><i aria-hidden="true"></i>
+                <label for="agreeChk3" class="lbl">[선택] 상품구매정보 카테고리 정보</label>
+                <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>
+              </div>
+              <div class="lbl-child folding-panel">
+                선불전자지급수단의 상품구매정보 항목으로 실제 구매한 상품이 아닌 해당 상품의 카테고리(13개 항목)입니다. 정보 전송은 본인의 책임과 판단 하에 신중하게 결정하여 주시기 바랍니다.
               </div>
             </div>
           </article>
@@ -95,11 +127,27 @@
     </article>
     <script>
       $('.head-close').click(function () {
-        Layer.confirm('마이데이터 서비스 가입을 종료하고 홈 화면으로 이동할까요?', null, '아니요, 계속할게요', '예', function (e) {
+        Layer.confirm('종료하시면 처음부터 다시 시작해야해요.', '자산 연결을 종료하시겠어요?', '아니요, 계속할게요', '예', function (e) {
           if (e) {
             console.log('아니요');
           } else {
             console.log('예');
+          }
+        });
+      });
+
+      $('#mainBtn').click(function () {
+        let $msg = '<p>정보 수집·이용에 동의하고 자산 분석 서비스를 꼭 이용해보세요.</p>';
+        $msg += '<ul class="txt-list mt-15">';
+        $msg += '<li class="dot">나와 비슷한 그룹의 자산 비교</li>';
+        $msg += '<li class="dot">보다 정확한 지출 분석</li>';
+        $msg += '<li class="dot">소비내역의 자동분류</li>';
+        $msg += '</ul>';
+        Layer.confirm($msg, null, '동의', '다음에 할게요', function (e) {
+          if (e) {
+            console.log('동의');
+          } else {
+            console.log('다음');
           }
         });
       });

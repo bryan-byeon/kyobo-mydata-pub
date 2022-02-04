@@ -95,6 +95,67 @@
     "complete": "",
     "etc": "현재 디자인 없음"
   },
+  {
+    "id":"MDB02-0303007",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "통합인증",
+    "name": "인증서 본인확인서비스 이용약관",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음, 약관 상세 없음"
+  },
+  {
+    "id":"MDB02-0303008",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "통합인증",
+    "name": "개인(신용)정보 제공 동의서",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음, 약관 상세 없음"
+  },
+  {
+    "id":"MDB02-0303009",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "통합인증",
+    "name": "고유식별정보 수집·이용 및 위탁 동의",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음, 약관 상세 없음"
+  },
+  {
+    "id":"MDB02-0305004",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "상세정보전송",
+    "name": "상세정보 전송요구서",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음"
+  },
+  {
+    "id":"MDB02-0305006",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "상세정보전송",
+    "name": "개인(신용)정보 수집·이용 동의",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음"
+  },
+  
   
   {
     "id":"MDB02-0306001",
@@ -108,13 +169,37 @@
     "complete": "2022-02-03"
   },
   {
-    "id":"MDB02-0606003",
+    "id":"MDB02-0306003",
     "url":"../../front/html/MY/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
     "depth4": "개별인증",
     "name": "개인정보수집 이용동의",
+    "worker": "안효주",
+    "complete": "",
+    "etc": "현재 디자인 없음"
+  },
+  {
+    "id":"MDB02-0306005",
+    "url":"../../front/html/MY/MDB02-0306001.html",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "개별인증",
+    "name": "선택한 기관목록 처리결과",
+    "worker": "안효주",
+    "complete": "2022-02-03",
+    "etc": "MDB02-0306001과 동일화면"
+  },
+  {
+    "id":"MDB02-0502002",
+    "url":"../../front/html/MY/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "마이데이터 설정",
+    "depth4": "개별인증 연결변경",
+    "name": "변경 완료",
     "worker": "안효주",
     "complete": "",
     "etc": "현재 디자인 없음"

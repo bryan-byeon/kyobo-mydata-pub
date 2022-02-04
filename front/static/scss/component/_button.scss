@@ -19,13 +19,8 @@
   font-weight: 500;
   vertical-align: middle;
   opacity: 1;
-  transition: opacity 0.3s, visibility 0s;
+  transition: 0.3s, visibility 0s;
   // white-space:nowrap;
-  &.disabled,
-  &:disabled {
-    opacity: 0.2;
-    // -webkit-tap-highlight-color: transparent;
-  }
 
   &.icon {
     width: 2.4rem;
@@ -122,6 +117,19 @@
     opacity: 1;
     background: #f8f8f8;
     border-color: #eee;
+  }
+
+  &.disabled,
+  &:disabled {
+    // opacity: 0.3;
+    &:not(.line) {
+      background-color: #dedede;
+      color: #b0b0b0;
+    }
+    &.line {
+      border-color: #dedede;
+      color: #b0b0b0;
+    }
   }
   .i-ico-checked {
     margin-right: 0.8rem;

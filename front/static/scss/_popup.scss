@@ -378,6 +378,9 @@
         word-break: break-all;
         text-align: left;
         color: #424242;
+        .txt-list {
+          color: inherit;
+        }
       }
     }
 

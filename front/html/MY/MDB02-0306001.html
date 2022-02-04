@@ -24,7 +24,6 @@
           <div class="head-left">
             <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
           </div>
-          <h1></h1>
           <div class="head-right">
             <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
           </div>
@@ -35,8 +34,26 @@
       <!-- 컨테이너(컨텐츠) -->
       <main id="container">
         <div class="section">
-          <h1 class="tit-h1 page-fade-title">선택한 기관을 <br />하나씩 연결해 주세요</h1>
+          <h1 class="tit-h1">선택한 기관을 <br />하나씩 연결해 주세요</h1>
           <div class="mt-32">
+            <!-- 로딩 전 -->
+            <div class="round-box-item empty-bg">
+              <div class="logo-info-txt">
+                <i class="ico-logo"></i>
+              </div>
+            </div>
+            <div class="round-box-item empty-bg">
+              <div class="logo-info-txt">
+                <i class="ico-logo"></i>
+              </div>
+            </div>
+            <div class="round-box-item empty-bg">
+              <div class="logo-info-txt">
+                <i class="ico-logo"></i>
+              </div>
+            </div>
+            <!-- //로딩 전 -->
+            <!-- 로딩 후 -->
             <div class="round-box-item">
               <div class="logo-info-txt">
                 <i class="ico-logo"><img src="../../static/images/temp/KB-logo.png" alt="" /></i>
@@ -61,9 +78,10 @@
                 <strong class="txt-name">카카오뱅크</strong>
               </div>
               <div class="right">
-                <i class="badge gray">연결완료</i>
+                <i class="badge green">연결완료</i>
               </div>
             </div>
+            <!-- //로딩 후 -->
           </div>
         </div>
       </main>
