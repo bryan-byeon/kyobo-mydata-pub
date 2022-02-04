@@ -2111,9 +2111,72 @@ ui.Touch = {
     document.addEventListener('touchmove', _move, false);
     document.addEventListener('touchend', _end, false);
   },
+  refresh: function () {
+    if (!$('#container.refresh').length) return;
+
+    let _startY = 0;
+    let _distansY = 0;
+    let isRefresh = false;
+    const getPos = function (ev) {
+      // console.log(ev.type);
+      const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+      const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+
+      return {
+        X: clientX,
+        Y: clientY
+      };
+    };
+    const _min = 20;
+    const _reset = function () {
+      isRefresh = false;
+      _startY = 0;
+      _distansY = 0;
+      $('html').removeClass('refresh');
+    };
+    const _className = 'page-refresh';
+    let _html = '<div class="' + _className + '" role="img" aria-label>';
+    _html += '<div aria-hidden="true" class="ico"><div class="ico-in"></div></div>';
+    _html += '</div>';
+    const _ready = function () {
+      isRefresh = true;
+      _startY = _Y;
+    };
+    const _refresh = function (_distansY) {
+      $('html').addClass('refresh');
+    };
+
+    const _start = function (e) {
+      const _Y = getPos(e).Y;
+      const _sclTop = $(window).scrollTop();
+      if (_sclTop !== 0) return;
+      _ready();
+    };
+
+    const _move = function (e) {
+      if (!isRefresh) return;
+      const _Y = getPos(e).Y;
+      _distansY = _Y - _startY;
+      if (_distansY < 0) {
+        _reset();
+      } else if (_distansY > _min) {
+        _refresh(_distansY - _min);
+      }
+    };
+    const _end = function (e) {
+      if (!isRefresh) return;
+      _reset();
+    };
+
+    document.addEventListener('touchstart', _start, false);
+    document.addEventListener('touchmove', _move, false);
+    document.addEventListener('touchend', _end, false);
+  },
   init: function () {
     ui.Touch.rotateItem();
     document.querySelectorAll(ui.Touch.rotateWrap).forEach(ui.Touch.rotate);
+
+    ui.Touch.refresh();
   }
 };
 
