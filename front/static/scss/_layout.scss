@@ -32,10 +32,14 @@
     @include web-center;
   }
   &.top-fixed {
-    box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
-    &.fixed-off {
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-    }
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
+
+    // box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+    // &.fixed-off {
+    //   box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    // }
+
     // > div {
     // position: fixed;
     // left: 0;
@@ -55,11 +59,11 @@
     width: 100%;
     background: rgba(255, 255, 255, 0);
     transition: background 0.3s, transform 0.3s;
-    &.top-fixed {
-      box-shadow: none;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(2px);
-    }
+    // &.top-fixed {
+    //   box-shadow: none;
+    //   background: rgba(255, 255, 255, 0.8);
+    //   backdrop-filter: blur(2px);
+    // }
   }
 
   h1 {

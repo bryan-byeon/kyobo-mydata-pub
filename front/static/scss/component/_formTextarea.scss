@@ -18,15 +18,9 @@
     line-height: 2.2rem;
   }
   .btn-inp-del {
-    @include text-blind;
     position: absolute;
-    display: block;
     top: 1.5rem;
     right: 1.2rem;
-    width: 1.6rem;
-    height: 1.6rem;
-    overflow: hidden;
-    background: url(../images/icon/btn-input-del.png) no-repeat center center / contain;
   }
   &.auto-height {
     textarea {

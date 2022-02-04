@@ -13,13 +13,34 @@
 .logo-info-txt {
   display: flex;
   align-items: center;
+  strong {
+    font-weight: 500;
+  }
   .ico-logo {
     margin-right: 0.8rem;
+    + .txt-name,
+    + div {
+      flex: 1 1 auto;
+    }
+  }
+  > .txt-wrap {
+    flex: 1 1 auto;
+    line-height: 1;
+    .txt-sub {
+      + .txt-name {
+        margin-top: 4px;
+      }
+    }
+  }
+  .txt-sub {
+    font-size: 1.2rem;
+    color: #979797;
   }
   .txt-name {
-    font-weight: 500;
+    display: block;
     font-size: 1.6rem;
     color: var(--strong-txt-color);
+    @include ellipsis(1);
   }
 }
 .round-box-item {

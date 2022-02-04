@@ -5168,6 +5168,7 @@ const Layer = {
       }
 
       // bottom foot close
+      /*
       if ($popup.hasClass('bottom') && $popup.find('.' + Layer.headClass + ' .pop-close').length) {
         let $footCloseBtnHtml = '';
         if (!$popup.find('.' + Layer.footClass).length) {
@@ -5180,6 +5181,7 @@ const Layer = {
           $popup.find('.' + Layer.footClass + ' > div').append($footCloseBtnHtml);
         }
       }
+      */
 
       const $openDelay = 50 * Layer.opening;
 
@@ -5727,6 +5729,7 @@ const Layer = {
     }
 
     Layer.resize();
+    Layer.fixed($wrap);
 
     let $lastSclTop = 0;
     $wrap.off('scroll').on('scroll', function () {
@@ -5907,15 +5910,15 @@ const Layer = {
         $(this).remove();
       });
     };
-    if ($('#header').length) {
-      const $top = parseInt($toast.css('top'));
-      const $spaceH = $('#header').outerHeight();
-      $toast.css('top', $top + $spaceH);
+    const $spaceH = $('.bottom-fixed-space').outerHeight();
+    if ($spaceH) {
+      const $top = parseInt($toast.css('bottom'));
+      $toast.css('bottom', $top + $spaceH);
     }
     $toast.addClass('on');
     let $closeTime;
     if (!$isAlarm) {
-      $closeTime = setTimeout($toastClose, delayTime);
+      // $closeTime = setTimeout($toastClose, delayTime);
     }
     if ($isFn) {
       $toast.find('a.txt').one('click', function (e) {

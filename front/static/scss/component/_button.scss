@@ -41,25 +41,27 @@
     font-size: 1.2rem;
     font-weight: 500;
   }
-  &.h34 {
-    height: 3.4rem;
-    font-size: 1.3rem;
-    &.round {
-      font-weight: normal;
-      padding: 0 1.6rem;
-    }
+  &.h38 {
+    height: 3.8rem;
+    font-size: 1.4rem;
   }
   .popup.modal .pop-foot &,
   &.h56 {
     height: 5.6rem;
     font-size: 1.6rem;
     border-radius: 1rem;
+    + .button {
+      margin-left: 0.8rem;
+    }
   }
   .pop-foot &,
   &.h60 {
     height: 6rem;
     font-size: 1.8rem;
     border-radius: 1.2rem;
+    + .button {
+      margin-left: 1.2rem;
+    }
   }
 
   &.round {
@@ -74,17 +76,17 @@
     background: var(--primary-color);
     color: #fff;
   }
-  &.secondary {
-    background: #f5045e;
-    color: #fff;
-  }
-  &.triad {
-    background: #fee525;
-  }
+  // &.secondary {
+  //   background: #f5045e;
+  //   color: #fff;
+  // }
+  // &.triad {
+  //   background: #fee525;
+  // }
 
   &.gray {
     background: #f2f4f6;
-    color: var(--strong-txt-color);
+    // color: var(--strong-txt-color);
   }
   &.gray2 {
     background: #f6f6f6;
@@ -96,27 +98,13 @@
 
   &.line {
     border-width: 0.1rem;
-    border-color: #eee;
-    color: #777;
+    border-color: #dedede;
+    color: var(--base-txt-color);
     background: #fff;
-    &.primary,
-    &.green {
+    &.primary {
       border-color: var(--primary-color);
       color: var(--primary-color);
     }
-    &.secondary,
-    &.red {
-      border-color: #f5045e;
-      color: #f5045e;
-    }
-    &.gray {
-      border-color: #eee;
-    }
-  }
-  &.checked {
-    opacity: 1;
-    background: #f8f8f8;
-    border-color: #eee;
   }
 
   &.disabled,
@@ -221,8 +209,8 @@ button.btn-click {
   }
   .button {
     width: 100%;
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   &.group {

@@ -45,11 +45,12 @@
   }
   &.top-fixed,
   &.pop-top-fixed {
-    border-bottom-width: 0;
-    // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
-    &:not(.no-shadow) {
-      box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
-    }
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
+    // border-bottom-width: 0;
+    // &:not(.no-shadow) {
+    //   box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+    // }
   }
   .tab-line {
     z-index: 1;
@@ -282,11 +283,13 @@
   &.top-fixed,
   &.pop-top-fixed {
     border-top-color: #f4f4f4;
-    // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
     z-index: 10;
-    &:not(.no-shadow) {
-      box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
-    }
+    // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+    // &:not(.no-shadow) {
+    //   box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+    // }
   }
   .tab-line {
     height: 0.1rem;
