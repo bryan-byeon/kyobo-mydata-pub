@@ -2112,8 +2112,8 @@ ui.Touch = {
     document.addEventListener('touchend', _end, false);
   },
   isRefreshing: false,
-  refresh: function (isInit) {
-    if (isInit === undefined) isInit = true;
+  refreshEnd: null,
+  refresh: function () {
     if (!$('#container.refresh').length) return;
     const _speed = 200;
     const _min = 20;
@@ -2178,12 +2178,14 @@ ui.Touch = {
       const $dashoffset = parseInt($path.css('stroke-dasharray'));
       $path.css('stroke-dashoffset', $dashoffset);
     };
+    ui.Touch.refreshEnd = _reset;
 
     const _start = function (e) {
       if (ui.Touch.isRefreshing) return;
       const _Y = getPos(e).Y;
       const _sclTop = $(window).scrollTop();
-      if (_sclTop !== 0) return;
+      if (_sclTop !== 0 || $html.hasClass('lock')) return;
+      $html.addClass('not-refresh');
       _ready(_Y);
     };
 
@@ -2248,17 +2250,11 @@ ui.Touch = {
         _reset();
       }
     };
-    if (!isInit) {
-      _reset();
-    } else {
-      document.addEventListener('touchstart', _start, false);
-      document.addEventListener('touchmove', _move, false);
-      document.addEventListener('touchend', _end, false);
-    }
+    document.addEventListener('touchstart', _start, false);
+    document.addEventListener('touchmove', _move, false);
+    document.addEventListener('touchend', _end, false);
   },
-  refreshEnd: function () {
-    ui.Touch.refresh(false);
-  },
+
   init: function () {
     ui.Touch.rotateItem();
     document.querySelectorAll(ui.Touch.rotateWrap).forEach(ui.Touch.rotate);
