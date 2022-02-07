@@ -13,6 +13,7 @@
   }
   img {
     @include img-fit(true);
+    pointer-events: none;
   }
   &.line {
     border: 1px solid #f2f2f2;

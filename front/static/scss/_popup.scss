@@ -308,6 +308,7 @@
       }
       .pop-close {
         margin-top: 0;
+        display: none;
       }
       &:not(.no-title) + .pop-body {
         padding-top: 0;
