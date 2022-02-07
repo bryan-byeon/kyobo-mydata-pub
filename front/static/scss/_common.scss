@@ -1050,22 +1050,18 @@ $bdTypes: (solid, dashed, dotted);
 //     .btn-toggle{transform:translateZ(0);}
 // }
 
-.ios-img {
-  display: none;
-}
-.ios-content {
-  display: none;
-}
-html.ios,
-html.safari {
+html:not(.ios, .safari) {
   .ios-img {
-    display: inline;
-  }
-  .android-img {
     display: none;
   }
   .ios-content {
-    display: block;
+    display: none;
+  }
+}
+html.ios,
+html.safari {
+  .android-img {
+    display: none;
   }
   .android-content {
     display: none;
