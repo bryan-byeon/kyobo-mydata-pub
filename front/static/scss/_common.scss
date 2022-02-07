@@ -16,7 +16,7 @@ html {
   text-size-adjust: none;
   &.not-refresh,
   &.refreshing {
-    overscroll-behavior: contain;
+    height: 100%;
     overflow: hidden;
     body {
       height: 100%;
@@ -33,6 +33,7 @@ body {
   letter-spacing: -0.02em;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: contain; // 당겨서 새로고침 막기
 }
 
 //s:reset
