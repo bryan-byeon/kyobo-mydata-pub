@@ -1523,8 +1523,11 @@ ui.Tab = {
         if ($saveAry.length) uiStorage.set('tabInfoSave', JSON.stringify($saveAry));
       }
     };
-    window.addEventListener('beforeunload', _tabInfoSave);
-    // window.addEventListener('unload', _tabInfoSave); //모바일에서 잘안됨
+    window.addEventListener('beforeunload', _tabInfoSave); // 안드로이드 크롬
+    // window.addEventListener('unload', _tabInfoSave);
+    if(ui.Mobile.iOS()){
+      window.addEventListener('pagehide', _tabInfoSave); //ios safari
+    }
   },
   scrolledCheck: function (wrap) {
     if (!$(wrap).length) return;
@@ -2162,8 +2165,8 @@ ui.Touch = {
       _startY = 0;
       _distansY = 0;
       _moveTop = 0;
-      // $html.removeClass('not-refresh refreshing');
-      $html.removeClass('refreshing');
+      $html.removeClass('not-refresh refreshing');
+      // $html.removeClass('refreshing');
       $wrap.stop(true, false).animate({ top: 0 }, _speed, function () {
         $wrap.removeAttr('style');
       });
@@ -2184,14 +2187,14 @@ ui.Touch = {
     const _start = function (e) {
       if (ui.Touch.isRefreshing) return;
       const _Y = getPos(e).Y;
-      const _sclTop = $(window).scrollTop();
-      if (_sclTop > 1 || $html.hasClass('lock')) return;
+      const _sclTop = window.pageYOffset;
+      if (_sclTop > (_min / 2) || $html.hasClass('lock')) return;
       // $html.addClass('not-refresh');
       _ready(_Y);
     };
 
     const _wrapTop = function (val) {
-      // $html.addClass('not-refresh');
+      $html.addClass('not-refresh');
       _moveTop = Math.min(_maxTop, val / 2);
       $wrap.stop(true, false).css('top', _moveTop);
       $refresh.stop(true, false).css('height', _moveTop);

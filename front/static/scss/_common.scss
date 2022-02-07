@@ -23,6 +23,15 @@ html {
       overflow: hidden;
     }
   }
+  // &.not-refresh{
+  //   touch-action: none;
+  // }
+  // &.not-refresh{
+  //   position: fixed;
+  //   left: 0;
+  //   top: 0;
+  //   width: 100%;
+  // }
   &.refreshing {
     pointer-events: none;
   }
