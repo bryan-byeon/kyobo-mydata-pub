@@ -297,6 +297,9 @@
   &.bottom,
   &.modal {
     .pop-head {
+      div {
+        padding-right: 2.4rem !important;
+      }
       h1 {
         text-align: left;
         font-size: 2rem;
@@ -382,7 +385,10 @@
         text-align: left;
         color: #424242;
         .txt-list {
-          color: inherit;
+          margin-top: 1rem;
+          li + li {
+            margin-top: 0.4rem;
+          }
         }
       }
     }

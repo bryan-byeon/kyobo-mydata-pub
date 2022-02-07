@@ -30,19 +30,17 @@
 
       <!-- 컨테이너(컨텐츠) -->
       <main id="container">
-        <div class="section pt-40">
+        <div class="section pt-44">
           <div class="pd-16">
-            <!-- 디자인 안나옴 -->
-            <div class="img-box w-144 mg-autox TBD"></div>
-            <!-- // 디자인 안나옴 -->
-            <h1 class="tit-h1 t-center mt-16">소중한 내 정보를 지키기 위해 <br />다음을 꼭 확인해주세요</h1>
+            <div class="img-box w-144 mg-autox end-img-check" aria-hidden="true"></div>
+            <h1 class="tit-h1 t-center mt-24">소중한 내 정보를 지키기 위해 <br />다음을 꼭 확인해주세요</h1>
             <ol class="num-list-1 mt-24">
               <li><i>1</i>내게 꼭 필요한지 한 번 더 생각해보세요.</li>
               <li><i>2</i>필요한 서비스만 가입하세요.</li>
               <li><i>3</i>잘 이용하지 않는다고 생각되는 서비스는 해지하세요.</li>
             </ol>
           </div>
-          <ul class="txt-list fc-979797 mt-32">
+          <ul class="txt-list mt-40">
             <li class="dot">너무 많은 마이데이터 서비스 가입은 내 정보의 과도한 전송과 집적이 발생할 수 있습니다.</li>
             <li class="dot">이용 중인 마이데이터 서비스 현황은 <a href="#" class="fw-500 fc-212121 underline">마이데이터종합포털</a>에서 확인할 수 있습니다.</li>
           </ul>
@@ -61,7 +59,7 @@
     </article>
     <script>
       $('.head-close').click(function () {
-        Layer.confirm('마이데이터 서비스 가입을 종료하고 홈 화면으로 이동할까요?', null, '아니요, 계속할게요', '예', function (e) {
+        Layer.confirm('마이데이터 서비스 가입을 종료하고 홈 화면으로 이동할까요?', null, '아니요', '예', function (e) {
           if (e) {
             console.log('아니요');
           } else {

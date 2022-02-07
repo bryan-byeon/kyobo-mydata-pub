@@ -35,9 +35,9 @@
       <main id="container">
         <div class="section">
           <h1 class="tit-h1">선택한 기관을 <br />하나씩 연결해 주세요</h1>
-          <div class="mt-32">
+          <div class="mt-24">
             <!-- 로딩 전 -->
-            <div class="round-box-item empty-bg">
+            <!-- <div class="round-box-item empty-bg">
               <div class="logo-info-txt">
                 <i class="ico-logo"></i>
               </div>
@@ -51,12 +51,12 @@
               <div class="logo-info-txt">
                 <i class="ico-logo"></i>
               </div>
-            </div>
+            </div> -->
             <!-- //로딩 전 -->
             <!-- 로딩 후 -->
             <div class="round-box-item">
               <div class="logo-info-txt">
-                <i class="ico-logo"><img src="../../static/images/temp/KB-logo.png" alt="" /></i>
+                <i class="ico-logo"><img src="../../static/images/temp/logo-KB.png" alt="" /></i>
                 <strong class="txt-name">KB국민은행</strong>
               </div>
               <div class="right">
@@ -65,7 +65,25 @@
             </div>
             <div class="round-box-item">
               <div class="logo-info-txt">
-                <i class="ico-logo"><img src="../../static/images/temp/NH-logo.png" alt="" /></i>
+                <i class="ico-logo"><img src="../../static/images/temp/logo-KT.png" alt="" /></i>
+                <strong class="txt-name">KT</strong>
+              </div>
+              <div class="right">
+                <button class="btn-txt">연결하기</button>
+              </div>
+            </div>
+            <div class="round-box-item">
+              <div class="logo-info-txt">
+                <i class="ico-logo"><img src="../../static/images/temp/logo-samsung.png" alt="" /></i>
+                <strong class="txt-name">삼성생명</strong>
+              </div>
+              <div class="right">
+                <button class="btn-txt">연결하기</button>
+              </div>
+            </div>
+            <div class="round-box-item">
+              <div class="logo-info-txt">
+                <i class="ico-logo"><img src="../../static/images/temp/logo-NH.png" alt="" /></i>
                 <strong class="txt-name">NH농협은행</strong>
               </div>
               <div class="right">
@@ -74,7 +92,7 @@
             </div>
             <div class="round-box-item">
               <div class="logo-info-txt">
-                <i class="ico-logo"><img src="../../static/images/temp/KAKAOBANK-logo.png" alt="" /></i>
+                <i class="ico-logo"><img src="../../static/images/temp/logo-KAKAOBANK.png" alt="" /></i>
                 <strong class="txt-name">카카오뱅크</strong>
               </div>
               <div class="right">
@@ -94,7 +112,7 @@
       let $closeType = true;
       $('.head-close').click(function () {
         if ($closeType) {
-          Layer.confirm('종료하시면 처음부터 다시 시작해야해요.', '자산 연결을 종료하시겠어요?', '아니요, 계속할게요', '예', function (e) {
+          Layer.confirm('종료하시면 처음부터 다시 시작해야해요.', '자산 연결을 종료하시겠어요?', '종료하기', function (e) {
             if (e) {
               console.log('아니요');
             } else {

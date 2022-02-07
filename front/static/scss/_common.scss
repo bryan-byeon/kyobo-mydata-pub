@@ -33,7 +33,7 @@ body {
   letter-spacing: -0.02em;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
-  overscroll-behavior: contain; // 당겨서 새로고침 막기
+  overscroll-behavior-y: contain; // 당겨서 새로고침 막기
 }
 
 //s:reset
@@ -964,33 +964,6 @@ $bdTypes: (solid, dashed, dotted);
   background: rgba(255, 0, 0, 0.7);
   z-index: 1000;
   word-break: break-all;
-}
-
-// img
-.img-box {
-  position: relative;
-  display: block;
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
-  img {
-    pointer-events: none;
-    @include img-fit(true);
-  }
-  .img-box-del {
-    display: block;
-    position: absolute;
-    right: -0.4rem;
-    top: -0.4rem;
-    width: 2rem;
-    height: 2rem;
-    background: url(../images/icon/ico-round-close@3x.png) no-repeat center center / contain;
-  }
-  &.TBD {
-    background: rgba(255, 0, 0, 0.2);
-  }
 }
 
 // empty

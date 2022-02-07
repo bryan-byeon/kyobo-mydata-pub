@@ -1,0 +1,33 @@
+// img
+.img-box {
+  position: relative;
+  display: block;
+  @include bg-etc;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  img {
+    pointer-events: none;
+    @include img-fit(true);
+  }
+  .img-box-del {
+    display: block;
+    position: absolute;
+    right: -0.4rem;
+    top: -0.4rem;
+    width: 2rem;
+    height: 2rem;
+    background: url(../images/icon/ico-round-close@3x.png) no-repeat center center / contain;
+  }
+  &.TBD {
+    background: rgba(255, 0, 0, 0.2);
+  }
+  &.end-img-check {
+    background-image: url(../images/end/end-img-check.png);
+  }
+  &.end-img-complate {
+    background-image: url(../images/end/end-img-complate.png);
+  }
+}
