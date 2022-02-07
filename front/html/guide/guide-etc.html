@@ -383,6 +383,13 @@
       <!-- //팝업 -->
     </article>
     <script>
+      ui.Refresh = function () {
+        console.log('ui.Refresh');
+        setTimeout(function () {
+          ui.Touch.refreshEnd();
+        }, 1000);
+      };
+
       document.addEventListener('DOMContentLoaded', () => {
         microSliderInit();
       });

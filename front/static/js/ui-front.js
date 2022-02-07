@@ -2111,12 +2111,19 @@ ui.Touch = {
     document.addEventListener('touchmove', _move, false);
     document.addEventListener('touchend', _end, false);
   },
-  refresh: function () {
+  isRefreshing: false,
+  refresh: function (isInit) {
+    if (isInit === undefined) isInit = true;
     if (!$('#container.refresh').length) return;
-
+    const _speed = 200;
+    const _min = 20;
     let _startY = 0;
     let _distansY = 0;
-    let isRefresh = false;
+    let _moveTop = 0;
+    let _maxTop = 150;
+    let _isRefresh = false;
+    const $html = $('html');
+    const $wrap = $('#wrap');
     const getPos = function (ev) {
       // console.log(ev.type);
       const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
@@ -2127,50 +2134,130 @@ ui.Touch = {
         Y: clientY
       };
     };
-    const _min = 20;
+
+    const _className = 'page-refresh';
+    let $refresh = $('.' + _className);
+    const _ready = function (val) {
+      let _html = '<div class="' + _className + '" role="img" aria-label="새로고침">';
+      _html += '<div aria-hidden="true" class="ico">';
+      // _html += '<div class="ico-in"></div>';
+      _html +=
+        '<svg class="svg" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="svg-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>';
+      _html += '</div>';
+      _html += '</div>';
+
+      _isRefresh = true;
+      _startY = val;
+      $refresh = $('.' + _className);
+      if (!$refresh.length) {
+        $wrap.before(_html);
+        $refresh = $('.' + _className);
+      }
+      // if ($refresh.outerHeight() !== _maxTop) $refresh.css('height', _maxTop);
+    };
+
     const _reset = function () {
-      isRefresh = false;
+      ui.Touch.isRefreshing = false;
+      _isRefresh = false;
       _startY = 0;
       _distansY = 0;
-      $('html').removeClass('refresh');
-    };
-    const _className = 'page-refresh';
-    let _html = '<div class="' + _className + '" role="img" aria-label>';
-    _html += '<div aria-hidden="true" class="ico"><div class="ico-in"></div></div>';
-    _html += '</div>';
-    const _ready = function () {
-      isRefresh = true;
-      _startY = _Y;
-    };
-    const _refresh = function (_distansY) {
-      $('html').addClass('refresh');
+      _moveTop = 0;
+      $html.removeClass('not-refresh refreshing');
+      $wrap.stop(true, false).animate({ top: 0 }, _speed, function () {
+        $wrap.removeAttr('style');
+      });
+      $refresh.stop(true, false).animate({ height: 0 }, _speed, function () {
+        $refresh.remove();
+      });
+      const $ico = $refresh.find('.ico');
+      $ico.addClass('ing').css({
+        opacity: 0,
+        transform: 'scale(0) rotate(0deg)'
+      });
+      const $path = $refresh.find('.svg-path');
+      const $dashoffset = parseInt($path.css('stroke-dasharray'));
+      $path.css('stroke-dashoffset', $dashoffset);
     };
 
     const _start = function (e) {
+      if (ui.Touch.isRefreshing) return;
       const _Y = getPos(e).Y;
       const _sclTop = $(window).scrollTop();
       if (_sclTop !== 0) return;
-      _ready();
+      _ready(_Y);
+    };
+
+    const _wrapTop = function (val) {
+      $html.addClass('not-refresh');
+      _moveTop = Math.min(_maxTop, val / 2);
+      $wrap.stop(true, false).css('top', _moveTop);
+      $refresh.stop(true, false).css('height', _moveTop);
+      const $ratio = _moveTop / _maxTop;
+      const $ico = $refresh.find('.ico');
+      $ico.css({
+        opacity: $ratio,
+        transform: 'scale(' + $ratio + ') rotate(' + $ratio * 720 + 'deg)'
+      });
+      const $path = $refresh.find('.svg-path');
+      const $dashoffset = $ratio * parseInt($path.css('stroke-dasharray'));
+      $path.css('stroke-dashoffset', $dashoffset);
     };
 
     const _move = function (e) {
-      if (!isRefresh) return;
+      if (!_isRefresh || ui.Touch.isRefreshing) return;
       const _Y = getPos(e).Y;
       _distansY = _Y - _startY;
       if (_distansY < 0) {
         _reset();
       } else if (_distansY > _min) {
-        _refresh(_distansY - _min);
+        _wrapTop(_distansY - _min);
       }
     };
-    const _end = function (e) {
-      if (!isRefresh) return;
-      _reset();
+
+    const _refreshing = function () {
+      ui.Touch.isRefreshing = true;
+      $html.addClass('refreshing');
+      $wrap.stop(true, false).animate({ top: _maxTop }, _speed);
+
+      const $ico = $refresh.find('.ico');
+      $ico.addClass('ing').css({
+        opacity: 1,
+        transform: 'scale(1) rotate(720deg)'
+      });
+      const $path = $refresh.find('.svg-path');
+      const $dashoffset = parseInt($path.css('stroke-dasharray'));
+      $path.css('stroke-dashoffset', $dashoffset);
+      $refresh.stop(true, false).animate({ height: _maxTop }, _speed, function () {
+        $ico.removeClass('ing');
+        $path.removeAttr('style');
+        if (ui.Refresh && typeof ui.Refresh === 'function') {
+          ui.Refresh();
+        } else {
+          location.reload(true);
+          // location.href = location.href;
+          // history.go(0);
+        }
+      });
     };
 
-    document.addEventListener('touchstart', _start, false);
-    document.addEventListener('touchmove', _move, false);
-    document.addEventListener('touchend', _end, false);
+    const _end = function (e) {
+      if (!_isRefresh || ui.Touch.isRefreshing) return;
+      if (_moveTop > 100) {
+        _refreshing();
+      } else {
+        _reset();
+      }
+    };
+    if (!isInit) {
+      _reset();
+    } else {
+      document.addEventListener('touchstart', _start, false);
+      document.addEventListener('touchmove', _move, false);
+      document.addEventListener('touchend', _end, false);
+    }
+  },
+  refreshEnd: function () {
+    ui.Touch.refresh(false);
   },
   init: function () {
     ui.Touch.rotateItem();
@@ -2179,6 +2266,7 @@ ui.Touch = {
     ui.Touch.refresh();
   }
 };
+ui.Refresh = null;
 
 //폼요소 관련
 ui.Form = {

@@ -1,5 +1,6 @@
 #wrap,
 .page {
+  position: relative;
   display: flex;
   min-height: -vh(100);
   flex-direction: column;
@@ -581,26 +582,103 @@
     }
   }
 }
+
+$refresh-offset: 187;
+$refresh-duration: 1.4s;
 .page-refresh {
   position: fixed;
   top: 0;
-  left: 50%;
-  width: 40px;
-  height: 40px;
+  left: 0;
+  width: 100%;
+  height: 150px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -110%);
   > .ico {
-    opacity: 0;
-    transform: scale(0);
-  }
-  .ico-in {
+    position: relative;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transform: scale(0);
+    &.ing {
+      transition: 0.2s;
+      .svg-path {
+        transition: stroke-dashoffset 0.2s;
+      }
+    }
+  }
+  .ico-in {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background: url(../images/common/page-refresh.png) no-repeat center center / contain;
+  }
+  .svg {
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    width: 70%;
+    height: 70%;
+    stroke: #fff;
+  }
+  .svg-path {
+    stroke-dasharray: $refresh-offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+  }
+
+  html.refreshing & {
+    .svg {
+      animation: refresh-rotator $refresh-duration linear infinite;
+    }
+    .svg-path {
+      animation: refresh-dash $refresh-duration ease-in-out infinite, refresh-colors ($refresh-duration * 4) ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes refresh-rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes refresh-colors {
+  0% {
+    stroke: #4285f4;
+  }
+  25% {
+    stroke: #de3e35;
+  }
+  50% {
+    stroke: #f7c223;
+  }
+  75% {
+    stroke: #1b9a59;
+  }
+  100% {
+    stroke: #4285f4;
+  }
+}
+
+@keyframes refresh-dash {
+  0% {
+    stroke-dashoffset: $refresh-offset;
+  }
+  50% {
+    stroke-dashoffset: $refresh-offset/4;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: $refresh-offset;
+    transform: rotate(450deg);
   }
 }
