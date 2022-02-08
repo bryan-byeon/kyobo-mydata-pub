@@ -1102,6 +1102,7 @@ ui.Util = {
     document.getElementsByTagName('head')[0].appendChild(script);
   },
   paint: function () {
+    if (!$('.smooth-corners').length) return;
     let $url = '/static/js/lib/paint.min.js';
     if (location.pathname.indexOf('/front/') > -1) $url = '/front' + $url;
     if (location.pathname.indexOf('/kyobo-mydata-pub/') > -1) $url = '/kyobo-mydata-pub' + $url;
