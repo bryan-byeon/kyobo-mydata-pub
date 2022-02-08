@@ -459,7 +459,6 @@ ui.Common = {
   spaceAppend: function () {
     if (!$('.bottom-fixed-space').length) {
       let $wrap = $('body');
-      if (!$('#footer').length && $('#container').length) $wrap = $('#container');
       if ($('#wrap').length) $wrap = $('#wrap');
       $wrap.append('<div class="bottom-fixed-space" aria-hidden="true"></div>');
     }
@@ -1026,7 +1025,7 @@ ui.Util = {
       $last = $('.console').last();
       $top = parseInt($last.css('top')) + $last.outerHeight();
     }
-    const $wrap = $('#container').length ? $('#container') : $('body');
+    const $wrap = $('#wrap').length ? $('#wrap') : $('body');
     $wrap.append('<div class="console">' + txt + '</div>');
     $last = $('.console').last();
     if ($top > 0) $last.css('top', $top);
@@ -1525,7 +1524,7 @@ ui.Tab = {
     };
     window.addEventListener('beforeunload', _tabInfoSave); // 안드로이드 크롬
     // window.addEventListener('unload', _tabInfoSave);
-    if(ui.Mobile.iOS()){
+    if (ui.Mobile.iOS()) {
       window.addEventListener('pagehide', _tabInfoSave); //ios safari
     }
   },
@@ -2188,7 +2187,7 @@ ui.Touch = {
       if (ui.Touch.isRefreshing) return;
       const _Y = getPos(e).Y;
       const _sclTop = window.pageYOffset;
-      if (_sclTop > (_min / 2) || $html.hasClass('lock')) return;
+      if (_sclTop > _min / 2 || $html.hasClass('lock')) return;
       // $html.addClass('not-refresh');
       _ready(_Y);
     };
@@ -4726,7 +4725,7 @@ const Layer = {
   content: '',
   like: function () {
     const $delayTime = 2000;
-    const $wrap = $('#container').length ? $('#container') : $('body');
+    const $wrap = $('#wrap').length ? $('#wrap') : $('body');
     const $html = '<div class="layer_like" aria-hidden="true"><div></div></div>';
     if (!$('.layer_like').length) $wrap.append($html);
     if (!$('.layer_like').hasClass('show')) $('.layer_like').addRemoveClass('show', 0, $delayTime);
@@ -4778,8 +4777,8 @@ const Layer = {
     $html += '</article>';
     $html += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($html);
+    if ($('#wrap').length) {
+      $('#wrap').append($html);
     } else {
       $('body').append($html);
     }
@@ -4935,8 +4934,8 @@ const Layer = {
     $html += '</article>';
     $html += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($html);
+    if ($('#wrap').length) {
+      $('#wrap').append($html);
     } else {
       $('body').append($html);
     }
@@ -4959,8 +4958,8 @@ const Layer = {
     $html += '</article>';
     $html += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($html);
+    if ($('#wrap').length) {
+      $('#wrap').append($html);
     } else {
       $('body').append($html);
     }
@@ -5058,8 +5057,8 @@ const Layer = {
     $popHtml += '</article>';
     $popHtml += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($popHtml);
+    if ($('#wrap').length) {
+      $('#wrap').append($popHtml);
     } else {
       $('body').append($popHtml);
     }
@@ -5735,8 +5734,8 @@ const Layer = {
     $html += '</article>';
     $html += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($html);
+    if ($('#wrap').length) {
+      $('#wrap').append($html);
     } else {
       $('body').append($html);
     }
@@ -6005,8 +6004,8 @@ const Layer = {
     let $html = '<div id="' + popId + '" class="' + Layer.popClass + ' ' + $type + ' ' + Layer.removePopClass + '" role="dialog" aria-hidden="true">';
     $html += '</div>';
 
-    if ($('#container').length) {
-      $('#container').append($html);
+    if ($('#wrap').length) {
+      $('#wrap').append($html);
     } else {
       $('body').append($html);
     }
@@ -6069,7 +6068,7 @@ const Layer = {
     $toast.addClass('on');
     let $closeTime;
     if (!$isAlarm) {
-      // $closeTime = setTimeout($toastClose, delayTime);
+      $closeTime = setTimeout($toastClose, delayTime);
     }
     if ($isFn) {
       $toast.find('a.txt').one('click', function (e) {
