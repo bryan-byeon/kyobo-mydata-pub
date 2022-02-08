@@ -4,12 +4,14 @@
   width: 3.2rem;
   border-radius: 50%;
   overflow: hidden;
-  background: #f1f1f1;
+  background: #fff;
   flex-shrink: 0;
   &:before {
     content: '';
     display: block;
     padding-top: 100%;
+    border-radius: 50%;
+    border: 1px solid #f2f2f2;
   }
   img {
     @include img-fit(true);
