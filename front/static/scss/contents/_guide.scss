@@ -328,3 +328,12 @@
     vertical-align: middle;
   }
 }
+.gd__img-box-wrap {
+  text-align: center;
+  .img-box {
+    display: inline-block;
+    width: 100px;
+    margin: 15px;
+    vertical-align: top;
+  }
+}

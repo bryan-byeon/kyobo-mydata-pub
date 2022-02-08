@@ -31,3 +31,6 @@
     background-image: url(../images/end/end-img-complate.png);
   }
 }
+.smooth-corners {
+  mask-image: paint(smooth-corners);
+}

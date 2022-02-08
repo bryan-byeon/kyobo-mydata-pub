@@ -49,6 +49,7 @@ const ui = {
     ui.Animation.init();
     Layer.init();
     Splitting();
+    ui.Util.paint();
   },
   LoadInit: function () {
     //console.log('window load complete');
@@ -1099,6 +1100,12 @@ ui.Util = {
     }
     script.src = url;
     document.getElementsByTagName('head')[0].appendChild(script);
+  },
+  paint: function () {
+    let $url = '/static/js/lib/paint.min.js';
+    if (location.pathname.indexOf('/front/') > -1) $url = '/front' + $url;
+    if (location.pathname.indexOf('/kyobo-mydata-pub/') > -1) $url = '/kyobo-mydata-pub' + $url;
+    if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule($url);
   }
 };
 
