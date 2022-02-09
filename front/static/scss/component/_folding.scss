@@ -90,9 +90,9 @@
   }
   &.notice-dl {
     border-top: 8px solid #f3f3f3;
-    border-bottom-color: #ebebeb;
+    border-bottom-color: var(--line-color);
     .folding-head {
-      border-top: 1px solid #ebebeb;
+      border-top: 1px solid var(--line-color);
       .folding-btn {
         display: flex;
         align-items: center;

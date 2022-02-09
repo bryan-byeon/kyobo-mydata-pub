@@ -191,6 +191,10 @@
 .txt-dl-list {
   font-size: 1.4rem;
   line-height: 2rem;
+  &.top-line {
+    padding-top: 2.4rem;
+    border-top: 1px solid var(--line-color);
+  }
   > li {
     display: flex;
     > .dt {
@@ -198,7 +202,6 @@
       max-width: 15rem;
       padding-right: 1rem;
       flex-shrink: 0;
-      color: #888;
     }
     > .dd {
       flex: 1 1 auto;
@@ -211,7 +214,7 @@
   }
 }
 .num-list-1 {
-  color: #424242;
+  color: var(--strong-txt-color2);
   font-size: 1.6rem;
   line-height: 2.3rem;
   > li {
@@ -228,7 +231,7 @@
       font-size: 1.2rem;
       color: #fff;
       text-align: center;
-      background: #424242;
+      background: var(--strong-txt-color2);
       border-radius: 50%;
     }
     + li {

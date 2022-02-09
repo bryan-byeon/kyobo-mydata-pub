@@ -10,7 +10,7 @@
   border-radius: 0.6rem;
 
   &.gray {
-    background: #ebebeb;
+    background: var(--line-color);
     color: #979797;
   }
   &.red {

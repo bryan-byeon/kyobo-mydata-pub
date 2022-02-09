@@ -5,7 +5,8 @@
   --base-txt-color: #606060;
   --strong-txt-color: #212121;
   --strong-txt-color2: #424242;
-  --placeholder-txt-color: #ccc;
+  --placeholder-txt-color: #b9c1c9;
+  --line-color: #ebebeb;
 }
 html {
   height: 100%;
@@ -1037,7 +1038,7 @@ $bdTypes: (solid, dashed, dotted);
   border: 0 none;
   background: #f3f3f3;
   border-top: 0.8rem solid #f3f3f3;
-  border-bottom: 0.1rem solid #ebebeb;
+  border-bottom: 0.1rem solid var(--line-color);
   &.ty2 {
     height: 0;
     background: none;
