@@ -1239,8 +1239,8 @@ ui.Button = {
           .addClass('animate')
           .delay($delay)
           .queue(function (next) {
-            $btnEl.removeClass('btn-clicking-active');
             $btnIn.remove();
+            $btnEl.removeClass('btn-clicking-active');
             next();
           });
       }

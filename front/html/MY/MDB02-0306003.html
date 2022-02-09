@@ -35,50 +35,66 @@
       <main id="container">
         <div class="section">
           <article class="terms-content">
-            <h1 class="mb-0 page-fade-title">개인(신용)정보 수집·이용 동의서</h1>
-            <div>(상세정보 전송 개별인증용)</div>
+            <h1>개인(신용)정보 수집·이용 동의서</h1>
+            <p class="terms-sub"><strong>(상세정보 전송 개별인증용)</strong></p>
 
             <p>(주)교보증권은 「신용정보의 이용 및 보호에 관현법률」,「개인정보보호법」 등 관련 법령에 따라 다음과 같이 귀하의 개인(신용)정보를 처리합니다.</p>
 
-            <h2>수집 이용 목적</h2>
+            <h4>수집 이용 목적</h4>
             <p>전송요구를 통한 본인신용정보 통합조회, 데이터분석 서비스의 이용</p>
 
-            <h2>보유 및 이용기간</h2>
+            <h4>보유 및 이용기간</h4>
             <p>서비스 이용 종료 시 또는 삭제 요구 시 까지</p>
 
-            <h2>거부 권리 및 불이익</h2>
+            <h4>거부 권리 및 불이익</h4>
             <p>
               귀하는 개인(신용)정보 수집·이용에 관한 동의를 거부하실 수 있습니다. 다만 "필수 항목에 대한 수집·이용에 관한 동의"는 본인 신용정보 통합 조회, 데이터 분석 서비스의 이용을 위한 필수적
               사항이므로 동의를 거부하실 경우 본인 신용정보 통합조회, 데이터분석 서비스의 이용이 제한될 수 있으며, "선택 항목에 대한 수집·이용에 관한 동의"는 거부하실 경우 해당 선택 항목에 대한
               본인신용정보 통합조회, 데이터분석 서비스의 이용이 제한 될 수 있습니다.
             </p>
 
-            <h2>개인(신용)정보 수집·이용 항목</h2>
+            <h3>개인(신용)정보 수집·이용 항목</h3>
 
-            <div class="chk-item">
-              <div class="lbl-child">
-                <h3>개인(식별)정보</h3>
-                <p>접근토큰, 인증서</p>
-                <h3>신용거래정보</h3>
-                <ul class="txt-list">
-                  <li class="dash">
-                    <strong>은행</strong>
-                    <div class="dot">
-                      수신계좌 정보
+            <div class="terms-box">
+              <h4>개인(식별)정보</h4>
+              <p>접근토큰, 인증서</p>
+              <h4>신용거래정보</h4>
+              <dl class="terms-dl">
+                <dt><strong class="fc-primary">은행</strong></dt>
+                <dd>
+                  <ul class="txt-list">
+                    <li class="dot">
+                      <strong>계좌(수신/투자상품/대출상품) 목록</strong>
+                      <div>고객정보 최초생성일시, 계좌번호, 회차번호, 상품명, 외화계좌여부, 마이너스약정 여부, 계좌번호 별 구분코드, 계좌번호 별 상태 코드</div>
+                    </li>
+                    <li class="dot">
+                      <strong>개인형IRP 계좌 목록</strong>
+                      <div>개인형IRP 계좌의 상품명, 계좌번호</div>
+                    </li>
+                  </ul>
+                </dd>
+                <dt><strong class="fc-primary">은행</strong></dt>
+                <dd>
+                  <ul class="txt-list">
+                    <li class="dot">
+                      <strong>수신계좌 정보</strong>
                       <div>기본정보(저축방법, 계좌개설일자, 만기일, 통화코드, 약정액, 월 납입액)</div>
                       <div>추가(장액 등)정보(통화코드, 현재잔액, 출금 가능액, 적용금리, 최종납입회차)</div>
                       <div>거래내역(거래일시 또는 거래일자, 거래번호, 거래유형(코드), 거래구분, 통화코드 거래금액, 거래 후잔액, 납입회차, 적요)</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="checkbox ty2">
+                    </li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
+            <div class="chk-item">
+              <div class="checkbox">
                 <input type="checkbox" id="agreeChk" /><i aria-hidden="true"></i>
                 <label for="agreeChk" class="lbl">[필수] 개인(신용)정보 수집·이용에 동의합니다.</label>
               </div>
             </div>
-            <div class="chk-item folding mt-10">
-              <div class="checkbox ty2">
+            <h4>고객권리보호 안내</h4>
+            <div class="chk-item folding">
+              <div class="checkbox">
                 <input type="checkbox" id="agreeChk1" /><i aria-hidden="true"></i>
                 <label for="agreeChk1" class="lbl">[선택] 적요 또는 거래메모정보 수집·이용에 동의</label>
                 <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>
@@ -88,8 +104,8 @@
               </div>
             </div>
 
-            <div class="chk-item folding mt-10">
-              <div class="checkbox ty2">
+            <div class="chk-item folding">
+              <div class="checkbox">
                 <input type="checkbox" id="agreeChk2" /><i aria-hidden="true"></i>
                 <label for="agreeChk2" class="lbl">[선택] 가명점명 전송요구 여부</label>
                 <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>
@@ -99,8 +115,8 @@
               </div>
             </div>
 
-            <div class="chk-item folding mt-10">
-              <div class="checkbox ty2">
+            <div class="chk-item folding">
+              <div class="checkbox">
                 <input type="checkbox" id="agreeChk3" /><i aria-hidden="true"></i>
                 <label for="agreeChk3" class="lbl">[선택] 상품구매정보 카테고리 정보</label>
                 <a href="#" role="button" class="ui-folding-btn" aria-label="약관상세내용 확인"><i class="i-ico-arr-down-24" aria-hidden="true"></i></a>

@@ -61,6 +61,7 @@ div.checkbox.ty2:not(.btn) {
     width: 2.4rem;
     height: 2.4rem;
     border: 0.1rem solid #ccc;
+    background: #fff;
     box-sizing: border-box;
     border-radius: 50%;
     vertical-align: top;
@@ -375,25 +376,28 @@ div.checkbox.ty2:not(.btn) {
   }
 }
 .chk-item {
-  border: 0.1rem solid #eee;
   border-radius: 1.2rem;
-  transition: border 0.3s;
-  &.checked {
-    border-color: var(--primary-color);
-  }
+  background: #f2f4f6;
+  // border: 0.1rem solid #eee;
+  // transition: border 0.3s;
+  // &.checked {
+  //   border-color: var(--primary-color);
+  // }
   > .checkbox,
   > .radio {
     display: block;
     > input,
     > i {
-      left: 1.6rem;
-      top: 1.4rem;
+      left: 2rem;
+      top: 50%;
+      margin-top: -1.2rem;
     }
     > .lbl {
-      padding: 1.4rem 2rem 1.4rem 4.6rem;
+      padding: 1.6rem 2rem 1.6rem 5.4rem;
       margin-left: 0;
-      line-height: 2.4rem;
-      font-size: 1.5rem;
+      line-height: 2.3rem;
+      font-size: 1.6rem;
+      font-weight: 500;
       color: var(--strong-txt-color2);
       + .lbl-child {
         border-top-width: 0.1rem;
@@ -403,14 +407,17 @@ div.checkbox.ty2:not(.btn) {
     + .lbl-child {
       border-top-width: 0.1rem;
       border-bottom-width: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
     }
   }
   .lbl-child {
-    padding: 1.4rem 0;
-    margin: 0 1.6rem;
-    color: #333;
-    border: 0px solid #eee;
+    padding: 2rem 0 1rem;
+    margin: 0 2rem;
+    border: 0px solid var(--line-color);
     border-bottom-width: 0.1rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
   }
   &.ty2 {
     > .checkbox,
@@ -430,16 +437,16 @@ div.checkbox.ty2:not(.btn) {
     > .checkbox,
     > .radio {
       > .lbl {
-        padding-right: 4.6rem;
+        padding-right: 5.2rem;
       }
       .ui-folding-btn {
-        display: block;
-        padding-top: 1.4rem;
+        display: flex;
+        align-items: center;
         position: absolute;
         right: 0;
         top: 0;
         height: 100%;
-        padding-right: 1.6rem;
+        padding-right: 2rem;
       }
     }
   }
@@ -509,13 +516,13 @@ div.checkbox.ty2:not(.btn) {
   }
 }
 .ui-folding-btn {
-  i {
+  [class*='i-ico-'] {
     display: block;
     transform: rotate3d(1, 0, 0, 0);
     transition: 0.3s;
   }
   &.open {
-    i {
+    [class*='i-ico-'] {
       transform: rotate3d(1, 0, 0, 180deg);
     }
   }

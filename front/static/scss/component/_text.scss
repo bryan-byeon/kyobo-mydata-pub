@@ -241,28 +241,37 @@
 }
 .terms-content {
   font-size: 1.4rem;
-  p {
-    margin-top: 1rem;
+  color: var(--base-txt-color);
+
+  ul,
+  ol {
+    margin-top: 0.8rem;
     &:first-child {
       margin-top: 0;
     }
   }
+  p {
+    margin-top: 1.6rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  strong {
+    font-weight: 500;
+  }
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    margin: 1.5em 0 1rem;
+  h4 {
+    margin-top: 3.2rem;
+    color: var(--strong-txt-color2);
     &:first-child {
       margin-top: 0;
     }
     + h1,
     + h2,
     + h3,
-    + h4,
-    + h5,
-    + h6 {
+    + h4 {
       margin-top: 1rem;
     }
   }
@@ -273,9 +282,54 @@
     font-size: 1.8rem;
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+  h4 {
+    font-size: 1.4rem;
+    font-weight: 500;
   }
   .txt-list {
-    color: inherit;
+    color: var(--base-txt-color);
+    .dot:before,
+    .dash:before {
+      background-color: var(--base-txt-color);
+    }
+  }
+  .terms-sub {
+    font-size: 1.8rem;
+    color: var(--strong-txt-color2);
+    + p {
+      margin-top: 2.4rem;
+    }
+  }
+  .terms-box {
+    margin-top: 0.8rem;
+    border: 1px solid var(--line-color);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    h4:not(:first-child) {
+      margin-top: 1.6rem;
+    }
+    p:not(:first-child) {
+      margin-top: 0.8rem;
+    }
+  }
+  .terms-dl {
+    > dt {
+      font-size: 1.6rem;
+    }
+    > dt,
+    > dd {
+      margin-top: 0.8rem;
+    }
+  }
+  .chk-item {
+    margin-top: 2.4rem;
+    h4 + & {
+      margin-top: 1.6rem;
+    }
+    + .chk-item {
+      margin-top: 0.8rem;
+    }
   }
 }
