@@ -4,21 +4,18 @@
   width: 3.2rem;
   border-radius: 50%;
   overflow: hidden;
-  background: #fff;
+  background: #f1f1f1;
   flex-shrink: 0;
   &:before {
     content: '';
     display: block;
     padding-top: 100%;
-    border-radius: 50%;
-    border: 1px solid #f2f2f2;
+    // border-radius: 50%;
+    // border: 1px solid #f2f2f2;
   }
   img {
     @include img-fit(true);
     pointer-events: none;
-  }
-  &.line {
-    border: 1px solid #f2f2f2;
   }
 }
 
