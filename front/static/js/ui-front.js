@@ -2122,7 +2122,6 @@ ui.Touch = {
     document.addEventListener('touchend', _end, false);
   },
   isRefreshing: false,
-  refreshEnd: null,
   refresh: function () {
     if (!$('#container.refresh').length) return;
     const _speed = 200;
@@ -2189,7 +2188,7 @@ ui.Touch = {
       const $dashoffset = parseInt($path.css('stroke-dasharray'));
       $path.css('stroke-dashoffset', $dashoffset);
     };
-    ui.Touch.refreshEnd = _reset;
+    ui.RefreshEnd = _reset;
 
     const _start = function (e) {
       if (ui.Touch.isRefreshing) return;
@@ -2274,6 +2273,7 @@ ui.Touch = {
   }
 };
 ui.Refresh = null;
+ui.RefreshEnd = null;
 
 //폼요소 관련
 ui.Form = {
