@@ -192,7 +192,8 @@ button.btn-click {
   }
 }
 
-.btn-wrap {
+.btn-wrap,
+.tg-btn-wrap {
   margin-top: 0.8rem;
   text-align: center;
   clear: both;
@@ -204,7 +205,6 @@ button.btn-click {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-
   &.group {
     .button {
       border-radius: 0;

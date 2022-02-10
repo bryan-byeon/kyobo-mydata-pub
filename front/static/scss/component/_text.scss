@@ -33,7 +33,7 @@
     }
   }
 }
-[class*='tit-'] {
+[class^='tit-'] {
   color: var(--strong-txt-color);
   line-height: 1.4;
   margin: 0;
@@ -259,7 +259,6 @@
   strong {
     font-weight: 500;
   }
-  h1,
   h2,
   h3,
   h4 {
@@ -268,49 +267,90 @@
     &:first-child {
       margin-top: 0;
     }
-    + h1,
-    + h2,
-    + h3,
-    + h4 {
-      margin-top: 1rem;
-    }
   }
   h1 {
     font-size: 2.2rem;
+    color: var(--strong-txt-color);
+    + p {
+      margin-top: 2.4rem;
+      + h3 {
+        margin-top: 3.8rem;
+      }
+    }
+    + .terms-box {
+      margin-top: 2.4rem;
+    }
+    + .terms-h1-sub {
+      margin-top: 1.6rem;
+    }
   }
   h2 {
     font-size: 1.8rem;
   }
   h3 {
     font-size: 1.6rem;
+    + h4 {
+      margin-top: 1.6rem;
+    }
   }
   h4 {
     font-size: 1.4rem;
     font-weight: 500;
+    + .chk-item {
+      margin-top: 1.6rem;
+    }
   }
   .txt-list {
     color: var(--base-txt-color);
+    margin-top: 1.6rem;
     .dot:before,
     .dash:before {
       background-color: var(--base-txt-color);
     }
+    li:not(:first-child) {
+      margin-top: 0.8rem;
+    }
   }
-  .terms-sub {
+  .terms-ol {
+    margin-top: 2.4rem;
+    > p:not(:first-child) {
+      margin-top: 1.7rem;
+    }
+  }
+  .terms-h1-sub {
     font-size: 1.8rem;
-    color: var(--strong-txt-color2);
+    color: var(--strong-txt-color);
     + p {
       margin-top: 2.4rem;
     }
+  }
+  .terms-txt-point {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+  }
+  .terms-txt-sub {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: #979797;
   }
   .terms-box {
     margin-top: 0.8rem;
     border: 1px solid var(--line-color);
     border-radius: 1.2rem;
     padding: 2rem;
+  }
+  .terms-text {
+    margin-top: 1.6rem;
+  }
+  h3 + .terms-box,
+  .terms-text {
     h4:not(:first-child) {
       margin-top: 1.6rem;
     }
     p:not(:first-child) {
+      margin-top: 0.8rem;
+    }
+    .txt-list {
       margin-top: 0.8rem;
     }
   }
@@ -325,11 +365,12 @@
   }
   .chk-item {
     margin-top: 2.4rem;
-    h4 + & {
-      margin-top: 1.6rem;
-    }
     + .chk-item {
       margin-top: 0.8rem;
     }
+  }
+  .btn-wrap,
+  .tg-btn-wrap {
+    margin-top: 1.6rem;
   }
 }
