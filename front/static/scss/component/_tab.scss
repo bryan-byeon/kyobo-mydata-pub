@@ -190,7 +190,7 @@
   .section & {
     @include outer;
     .tab-panel {
-      padding: 0 2.4rem;
+      padding: 0 var(--base-padding);
     }
   }
   .tab-panel {
@@ -214,14 +214,14 @@
     z-index: 1;
   }
   .tab-list {
-    padding: 0 2.4rem;
+    padding: 0 var(--base-padding);
     &:before {
       content: '';
       display: block;
       position: absolute;
-      left: 2.4rem;
+      left: var(--base-padding);
       top: 0;
-      right: 2.4rem;
+      right: var(--base-padding);
       bottom: 0;
       border: 0.1rem solid #ddd;
       border-radius: 0.4rem;

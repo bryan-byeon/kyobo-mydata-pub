@@ -85,6 +85,9 @@
   overflow: hidden;
   flex-shrink: 0;
   @include bg-etc(2.4rem auto);
+  .btn-click-in {
+    display: none;
+  }
   + [class*='head-'] {
     margin-left: 0.4rem;
   }
@@ -427,14 +430,14 @@
   }
   > .section {
     &:first-child {
-      padding-top: 2.4rem;
+      padding-top: var(--base-padding);
     }
     &:last-child {
-      padding-bottom: 2.4rem;
+      padding-bottom: var(--base-padding);
     }
   }
   > div:first-child:not(.section) + .section {
-    padding-top: 2.4rem;
+    padding-top: var(--base-padding);
   }
 }
 .center-contents {
@@ -450,10 +453,10 @@
   margin-top: auto;
 }
 .section {
-  padding: 0 2.4rem;
+  padding: 0 var(--base-padding);
   @include web-center;
   &.first {
-    padding-top: 2.4rem;
+    padding-top: var(--base-padding);
   }
   &.last {
     padding-bottom: 6rem;

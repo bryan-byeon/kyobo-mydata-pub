@@ -4123,7 +4123,6 @@ ui.Scroll = {
   },
   */
   inScreen: function (topEl, bototomEl, callback) {
-    console.log(topEl, bototomEl);
     if (!bototomEl) bototomEl = topEl;
     const $scrollTop = $(window).scrollTop();
     let $winHeight = $(window).height();
@@ -5053,7 +5052,7 @@ const Layer = {
         $popHtml += '<a href="#" class="ui-pop-select-btn' + ($opDisabled ? ' disabled' : '') + '" role="button" data-value="' + $opVal + '"';
         if ($targetVal == $opVal) $popHtml += ' title="' + ($opTxt.length > 20 ? $opTxt.substring(20, $opTxt.lastIndexOf('(')) : $opTxt) + ' 선택됨"';
         $popHtml += '>';
-        $popHtml += '<div class="checkbox ty2"><i aria-hidden="true"></i></div>';
+        // $popHtml += '<div class="checkbox ty2"><i aria-hidden="true"></i></div>';
         $popHtml += '<div>' + $opTxt + '</div>';
         $popHtml += '</a>';
         $popHtml += '</div>';

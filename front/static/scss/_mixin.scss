@@ -77,11 +77,11 @@
 }
 
 @mixin outer($isPadding: false) {
-  margin-left: -2.4rem;
-  margin-right: -2.4rem;
+  margin-left: var(--outer-padding);
+  margin-right: var(--outer-padding);
   @if $isPadding {
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    padding-left: var(--base-padding);
+    padding-right: var(--base-padding);
   }
 }
 

@@ -100,7 +100,7 @@
 
 .tbl-scroll-ifno {
   position: relative;
-  margin: 0 2.4rem !important;
+  margin: 0 var(--base-padding) !important;
   border: 0 none;
   pointer-events: none;
   > div {

@@ -134,13 +134,14 @@ div.checkbox.ty2:not(.btn) {
       height: 100%;
       &:disabled ~ .lbl {
         opacity: 1;
-        background-color: #dedede;
-        border-color: #dedede;
-        color: #b0b0b0;
+        color: var(--disabled-color);
+        background-color: var(--disabled-bg-color);
+        border-color: var(--disabled-bg-color);
       }
       &:checked ~ .lbl {
         border-color: var(--primary-color);
         color: var(--strong-txt-color);
+        font-weight: 500;
       }
       &:checked:not(:disabled) ~ .lbl {
         z-index: 1;
@@ -200,16 +201,20 @@ div.checkbox.ty2:not(.btn) {
     }
   }
   &.switch {
-    min-width: 4.2rem;
-    min-height: 2.4rem;
+    $switch-width: 5.1rem;
+    $switch-height: 3.1rem;
+    $switch-padding: 0.2rem;
+
+    min-width: $switch-width;
+    min-height: $switch-height;
     > input {
-      width: 4.2rem;
-      height: 2.4rem;
+      width: $switch-width;
+      height: $switch-height;
       // top:0;
       &:checked {
         + i {
           &:after {
-            left: 2rem;
+            left: $switch-width - $switch-height + $switch-padding;
             animation: none;
           }
           + .lbl {
@@ -224,70 +229,156 @@ div.checkbox.ty2:not(.btn) {
       }
     }
     > i {
-      width: 4.2rem;
-      height: 2.4rem;
+      width: $switch-width;
+      height: $switch-height;
       border: 0 none;
-      border-radius: 1.2rem;
-      background-color: #ccc;
+      border-radius: $switch-height / 2;
+      background-color: #efeff4;
       transition: background 0.3s ease;
+      overflow: hidden;
       &:after {
-        width: 2rem;
-        height: 2rem;
+        width: $switch-height - ($switch-padding * 2);
+        height: $switch-height - ($switch-padding * 2);
         margin: 0;
         border: 0 none;
-        left: 0.2rem;
-        top: 0.2rem;
+        left: $switch-padding;
+        top: $switch-padding;
         border-radius: 50%;
         background: #fff;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
         transition: left 0.3s ease;
         transform: none;
       }
       + .lbl {
-        margin-left: 4.2rem;
-        // white-space:nowrap;
+        margin-left: $switch-width;
       }
     }
     .lbl {
+      padding-top: $switch-padding * 2;
+      padding-bottom: $switch-padding * 2;
+      line-height: $switch-height - ($switch-padding * 4);
       &:first-child {
-        margin-right: 4.2rem;
+        margin-right: $switch-width;
       }
     }
     &.small {
-      min-width: 2.8rem;
-      min-height: 1.6rem;
+      $switch-small-width: 2.8rem;
+      $switch-small-height: 1.6rem;
+
+      min-width: $switch-small-width;
+      min-height: $switch-small-height;
       > input {
-        width: 2.8rem;
-        height: 1.6rem;
+        width: $switch-small-width;
+        height: $switch-small-height;
         &:checked {
           + i {
             &:after {
-              left: 1.4rem;
+              left: $switch-small-width - $switch-small-height + $switch-padding;
             }
           }
         }
       }
       > i {
-        width: 2.8rem;
-        height: 1.6rem;
+        width: $switch-small-width;
+        height: $switch-small-height;
         &:after {
-          width: 1.2rem;
-          height: 1.2rem;
+          width: $switch-small-height - ($switch-padding * 2);
+          height: $switch-small-height - ($switch-padding * 2);
         }
         + .lbl {
-          margin-left: 2.8rem;
+          margin-left: $switch-small-width;
         }
       }
       .lbl {
-        font-size: 1.4rem;
-        line-height: 1.6rem;
         padding-top: 0;
         padding-bottom: 0;
+        line-height: $switch-small-height;
+        font-size: 1.4rem;
         &:first-child {
-          margin-right: 2.8rem;
+          margin-right: $switch-small-width;
         }
       }
     }
   }
+
+  // 안드로이드 타입
+  /*
+  &.switch {
+    $switch-width: 3.5rem;
+    $switch-height: 2rem;
+    $switch-padding: 0.3rem;
+
+    min-width: $switch-width;
+    min-height: $switch-height;
+    > input {
+      width: $switch-width;
+      height: $switch-height;
+      // top:0;
+      &:checked {
+        + i {
+          background: none;
+          &:before {
+            background-color: rgba(254, 125, 101, 0.4);
+          }
+          &:after {
+            left: 1.5rem;
+            animation: none;
+            background: var(--primary-color);
+          }
+          + .lbl {
+            .off {
+              display: none;
+            }
+            .on {
+              display: inline;
+            }
+          }
+        }
+      }
+    }
+    > i {
+      min-width: $switch-width;
+      height: $switch-height;
+      padding: $switch-padding;
+      border: 0 none;
+      border-radius: 1.2rem;
+      transition: background 0.3s ease;
+      &:before {
+        content: '';
+        display: block;
+        height: $switch-height - ($switch-padding * 2);
+        border-radius: ($switch-height - ($switch-padding * 2)) / 2;
+        background: #b0b0b0;
+        transition: 0.3s ease;
+      }
+      &:after {
+        width: $switch-height;
+        height: $switch-height;
+        margin: 0;
+        border: 0 none;
+        left: 0;
+        top: 0;
+        border-radius: 50%;
+        background: #ebebeb;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.237602);
+        transition: 0.3s ease;
+        transform: none;
+      }
+      + .lbl {
+        margin-left: $switch-width;
+        // white-space:nowrap;
+      }
+    }
+    .lbl {
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: $switch-height;
+      &:first-child {
+        margin-right: $switch-width;
+      }
+    }
+  }
+  */
 }
 .checkbox {
   > i {
@@ -514,18 +605,6 @@ div.checkbox.ty2:not(.btn) {
         top: 0;
         right: 0;
       }
-    }
-  }
-}
-.ui-folding-btn {
-  [class*='i-ico-'] {
-    display: block;
-    transform: rotate3d(1, 0, 0, 0);
-    transition: 0.3s;
-  }
-  &.open {
-    [class*='i-ico-'] {
-      transform: rotate3d(1, 0, 0, 180deg);
     }
   }
 }

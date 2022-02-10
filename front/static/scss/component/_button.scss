@@ -103,12 +103,12 @@
   &:disabled {
     // opacity: 0.3;
     &:not(.line) {
-      background-color: #dedede;
-      color: #b0b0b0;
+      color: var(--disabled-color);
+      background-color: var(--disabled-bg-color);
     }
     &.line {
-      border-color: #dedede;
-      color: #b0b0b0;
+      color: var(--disabled-color);
+      border-color: var(--disabled-bg-color);
     }
   }
   .i-ico-checked {
