@@ -492,10 +492,6 @@ div.checkbox.ty2:not(.btn) {
       font-size: 1.6rem;
       font-weight: 500;
       color: var(--strong-txt-color2);
-      + .lbl-child {
-        border-top-width: 0.1rem;
-        border-bottom-width: 0;
-      }
     }
     + .lbl-child {
       border-top-width: 0.1rem;
