@@ -88,17 +88,6 @@
     color: #fff;
   }
 
-  &.line {
-    border-width: 0.1rem;
-    border-color: #dedede;
-    color: var(--base-txt-color);
-    background: #fff;
-    &.primary {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-    }
-  }
-
   &.disabled,
   &:disabled {
     // opacity: 0.3;
@@ -111,7 +100,22 @@
       border-color: var(--disabled-bg-color);
     }
   }
-  .i-ico-checked {
+
+  &.line {
+    border-width: 0.1rem;
+    border-color: #dedede;
+    color: var(--base-txt-color);
+    background: #fff;
+    &.primary {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+    &.checked {
+      color: var(--primary-color);
+    }
+  }
+
+  [class*='i-ico-check-'] {
     margin-right: 0.8rem;
   }
 

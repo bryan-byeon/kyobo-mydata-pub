@@ -25,7 +25,7 @@
     border-color: var(--primary-color);
   }
   &.is-error {
-    // border-color: var(--alert-txt-color);
+    border-color: var(--alert-txt-color);
     &:not(.focus) {
       input {
         background-image: url(../images/icon/ico-error@3x.png);
@@ -109,10 +109,10 @@
     margin-right: 0.8rem;
   }
   .timer {
-    color: #f0431a;
+    // color: #f0431a;
+    color: #979797;
     font-size: 1.2rem;
     white-space: nowrap;
-    font-weight: bold;
     margin-right: 1.2rem;
   }
   .btn-inp-del {

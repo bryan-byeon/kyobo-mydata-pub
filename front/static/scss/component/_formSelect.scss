@@ -61,12 +61,12 @@
       background-color: #f8f8f8;
     }
   }
-  // &.is-error {
-  //   select,
-  //   .btn-select {
-  //     border-color: var(--alert-txt-color);
-  //   }
-  // }
+  &.is-error {
+    select,
+    .btn-select {
+      border-color: var(--alert-txt-color);
+    }
+  }
   &.is-success {
     select,
     .btn-select {

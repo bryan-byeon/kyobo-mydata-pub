@@ -713,7 +713,7 @@ ui.Common = {
         let $html = '<div class="gd__theme_color">';
         $html += '<button type="button" class="gd__theme_btn"><i class="i-ico-arr-right-16" aria-hidden="true"></i></button>';
         $html += '<dl>';
-        $html += '<dt>테마색상 변경확인</dt>';
+        $html += '<dt>메인컬러 변경</dt>';
         $html += '<dd>';
         $html += '<input type="color">';
         $html += '<div>';
@@ -737,9 +737,12 @@ ui.Common = {
           $color.text(colorStr);
           if ($baseThemeColor !== colorStr) {
             $('html').css('--primary-color', colorStr);
+            const $rgb = hexToRgb(colorStr.substring(1));
+            $('html').css('--primary-color-rgb', $rgb);
             uiCookie.set('theme-color', colorStr);
           } else {
             $('html').removeCss('--primary-color');
+            $('html').removeCss('--primary-color-rgb');
             uiCookie.set('theme-color', '');
           }
         };
