@@ -25,12 +25,13 @@ div.checkbox.ty2:not(.btn) {
 }
 .radio,
 .checkbox {
+  --chk-size: 2.4rem;
   position: relative;
   display: inline-block;
-  min-width: 2.4rem;
-  min-height: 2.4rem;
+  min-width: var(--chk-size);
+  min-height: var(--chk-size);
   vertical-align: middle;
-  margin-right: 2.4rem;
+  margin-right: var(--chk-size);
   &:last-child {
     margin-right: 0;
   }
@@ -38,18 +39,22 @@ div.checkbox.ty2:not(.btn) {
     position: absolute;
     left: 0;
     top: 0;
-    width: 2.4rem;
-    height: 2.4rem;
+    width: var(--chk-size);
+    height: var(--chk-size);
     opacity: 0;
     margin: 0;
     z-index: 2;
-    &:checked + i {
-      border-color: var(--primary-color);
+    &:checked {
+      + i {
+        border-color: var(--primary-color);
+      }
     }
-    &:disabled + i {
-      opacity: 0.3;
-      + .lbl {
-        opacity: 0.5;
+    &:disabled {
+      + i {
+        opacity: 0.4;
+      }
+      ~ .lbl {
+        color: #c2c2c2;
       }
     }
   }
@@ -58,8 +63,8 @@ div.checkbox.ty2:not(.btn) {
     left: 0;
     top: 0;
     display: inline-block;
-    width: 2.4rem;
-    height: 2.4rem;
+    width: var(--chk-size);
+    height: var(--chk-size);
     border: 0.1rem solid #ccc;
     background: #fff;
     box-sizing: border-box;
@@ -75,7 +80,7 @@ div.checkbox.ty2:not(.btn) {
       top: 0;
     }
     + .lbl {
-      margin-left: 2.4rem;
+      margin-left: var(--chk-size);
       padding-left: 0.8rem;
     }
   }
@@ -86,7 +91,7 @@ div.checkbox.ty2:not(.btn) {
     font-size: 1.4rem;
     padding: 0.1rem 0;
     &:first-child {
-      margin-right: 2.4rem;
+      margin-right: var(--chk-size);
       padding-right: 1rem;
       ~ input,
       ~ i {
@@ -100,30 +105,17 @@ div.checkbox.ty2:not(.btn) {
     }
   }
   &.small:not(.btn, .switch, .switch2) {
-    min-width: 2rem;
-    min-height: 2rem;
-    margin-right: 2rem;
-    &:last-child {
-      margin-right: 0;
-    }
-    > input {
-      width: 2rem;
-      height: 2rem;
-    }
+    --chk-size: 2rem;
     > i {
-      width: 2rem;
-      height: 2rem;
       + .lbl {
-        margin-left: 2rem;
         padding-left: 0.6rem;
       }
     }
     > .lbl {
-      line-height: 2rem;
+      line-height: var(--chk-size);
       font-size: 1.4rem;
       padding: 0;
       &:first-child {
-        margin-right: 2rem;
         padding-left: 0.4rem;
       }
     }
@@ -219,13 +211,17 @@ div.checkbox.ty2:not(.btn) {
             left: calc(var(--switch-width) - var(--switch-height) + var(--switch-padding));
             animation: none;
           }
-          + .lbl {
-            .off {
-              display: none;
-            }
-            .on {
-              display: inline;
-            }
+        }
+        ~ .lbl {
+          .off {
+            display: none;
+          }
+        }
+      }
+      &:not(:checked) {
+        ~ .lbl {
+          .on {
+            display: none;
           }
         }
       }
@@ -298,13 +294,17 @@ div.checkbox.ty2:not(.btn) {
             animation: none;
             background: var(--primary-color);
           }
-          + .lbl {
-            .off {
-              display: none;
-            }
-            .on {
-              display: inline;
-            }
+        }
+        ~ .lbl {
+          .off {
+            display: none;
+          }
+        }
+      }
+      &:not(:checked) {
+        ~ .lbl {
+          .on {
+            display: none;
           }
         }
       }

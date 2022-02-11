@@ -2474,7 +2474,7 @@ ui.Form = {
   },
   inpBtn: function () {
     //input 삭제버튼
-    $(document).on('keyup focusin', '.input input', function () {
+    $(document).on('keyup focusin', '.input input, .input2 input', function () {
       const $this = $(this);
       const $val = $this.val();
       if ($this.data('removeDelBtn') !== undefined) clearTimeout($this.data('removeDelBtn'));
@@ -2491,13 +2491,14 @@ ui.Form = {
       ) {
         return false;
       }
+      const $closest = $this.closest('.input');
       if ($val != '') {
         if (!$this.siblings('.btn-inp-del').length && !$this.siblings('.datepicker').length) {
           $this.after('<a href="#" class="btn-inp-del" role="button" aria-label="입력내용삭제"></a>');
         }
 
-        if ($this.closest('.input').hasClass('password') && !$this.closest('.input').find('.btn-inp-pwd').length) {
-          $this.closest('.input').append('<a href="#" class="btn-inp-pwd" role="button" aria-label="비밀번호 입력확인"></a>');
+        if ($closest.hasClass('password') && !$closest.find('.btn-inp-pwd').length) {
+          $closest.append('<a href="#" class="btn-inp-pwd" role="button" aria-label="비밀번호 입력확인"></a>');
         }
       } else {
         if ($this.siblings('.btn-inp-del').length) {
