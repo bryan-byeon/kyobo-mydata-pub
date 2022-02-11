@@ -99,7 +99,7 @@ div.checkbox.ty2:not(.btn) {
       margin-top: 0.4rem;
     }
   }
-  &.small:not(.btn, .switch) {
+  &.small:not(.btn, .switch, .switch2) {
     min-width: 2rem;
     min-height: 2rem;
     margin-right: 2rem;
@@ -200,21 +200,23 @@ div.checkbox.ty2:not(.btn) {
       }
     }
   }
-  &.switch {
-    $switch-width: 5.1rem;
-    $switch-height: 3.1rem;
-    $switch-padding: 0.2rem;
 
-    min-width: $switch-width;
-    min-height: $switch-height;
+  // 아아폰 타입
+  &.switch {
+    --switch-width: 5.1rem;
+    --switch-height: 3.1rem;
+    --switch-padding: 0.2rem;
+
+    min-width: var(--switch-width);
+    min-height: var(--switch-height);
     > input {
-      width: $switch-width;
-      height: $switch-height;
+      width: var(--switch-width);
+      height: var(--switch-height);
       // top:0;
       &:checked {
         + i {
           &:after {
-            left: $switch-width - $switch-height + $switch-padding;
+            left: calc(var(--switch-width) - var(--switch-height) + var(--switch-padding));
             animation: none;
           }
           + .lbl {
@@ -229,20 +231,20 @@ div.checkbox.ty2:not(.btn) {
       }
     }
     > i {
-      width: $switch-width;
-      height: $switch-height;
+      width: var(--switch-width);
+      height: var(--switch-height);
       border: 0 none;
-      border-radius: $switch-height / 2;
+      border-radius: calc(var(--switch-height) / 2);
       background-color: #efeff4;
       transition: background 0.3s ease;
       overflow: hidden;
       &:after {
-        width: $switch-height - ($switch-padding * 2);
-        height: $switch-height - ($switch-padding * 2);
+        width: calc(var(--switch-height) - (var(--switch-padding) * 2));
+        height: calc(var(--switch-height) - (var(--switch-padding) * 2));
         margin: 0;
         border: 0 none;
-        left: $switch-padding;
-        top: $switch-padding;
+        left: var(--switch-padding);
+        top: var(--switch-padding);
         border-radius: 50%;
         background: #fff;
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
@@ -250,75 +252,46 @@ div.checkbox.ty2:not(.btn) {
         transform: none;
       }
       + .lbl {
-        margin-left: $switch-width;
+        margin-left: var(--switch-width);
       }
     }
     .lbl {
-      padding-top: $switch-padding * 2;
-      padding-bottom: $switch-padding * 2;
-      line-height: $switch-height - ($switch-padding * 4);
+      padding-top: calc(var(--switch-padding) * 2);
+      padding-bottom: calc(var(--switch-padding) * 2);
+      line-height: calc(var(--switch-height) - (var(--switch-padding) * 4));
       &:first-child {
-        margin-right: $switch-width;
+        margin-right: var(--switch-width);
       }
     }
     &.small {
-      $switch-small-width: 2.8rem;
-      $switch-small-height: 1.6rem;
-
-      min-width: $switch-small-width;
-      min-height: $switch-small-height;
-      > input {
-        width: $switch-small-width;
-        height: $switch-small-height;
-        &:checked {
-          + i {
-            &:after {
-              left: $switch-small-width - $switch-small-height + $switch-padding;
-            }
-          }
-        }
-      }
-      > i {
-        width: $switch-small-width;
-        height: $switch-small-height;
-        &:after {
-          width: $switch-small-height - ($switch-padding * 2);
-          height: $switch-small-height - ($switch-padding * 2);
-        }
-        + .lbl {
-          margin-left: $switch-small-width;
-        }
-      }
+      --switch-width: 2.8rem;
+      --switch-height: 1.6rem;
       .lbl {
         padding-top: 0;
         padding-bottom: 0;
-        line-height: $switch-small-height;
+        line-height: var(--switch-height);
         font-size: 1.4rem;
-        &:first-child {
-          margin-right: $switch-small-width;
-        }
       }
     }
   }
 
   // 안드로이드 타입
-  /*
-  &.switch {
-    $switch-width: 3.5rem;
-    $switch-height: 2rem;
-    $switch-padding: 0.3rem;
+  &.switch2 {
+    --switch-width: 3.5rem;
+    --switch-height: 2rem;
+    --switch-padding: 0.3rem;
 
-    min-width: $switch-width;
-    min-height: $switch-height;
+    min-width: var(--switch-width);
+    min-height: var(--switch-height);
     > input {
-      width: $switch-width;
-      height: $switch-height;
-      // top:0;
+      width: var(--switch-width);
+      height: var(--switch-height);
       &:checked {
         + i {
           background: none;
           &:before {
-            background-color: rgba(254, 125, 101, 0.4);
+            background: var(--primary-color);
+            opacity: 0.4;
           }
           &:after {
             left: 1.5rem;
@@ -337,23 +310,23 @@ div.checkbox.ty2:not(.btn) {
       }
     }
     > i {
-      min-width: $switch-width;
-      height: $switch-height;
-      padding: $switch-padding;
+      min-width: var(--switch-width);
+      height: var(--switch-height);
+      padding: var(--switch-padding);
       border: 0 none;
-      border-radius: 1.2rem;
-      transition: background 0.3s ease;
+      border-radius: 0;
       &:before {
         content: '';
         display: block;
-        height: $switch-height - ($switch-padding * 2);
-        border-radius: ($switch-height - ($switch-padding * 2)) / 2;
+        height: calc(var(--switch-height) - (var(--switch-padding) * 2));
+        border-radius: calc((var(--switch-height) - (var(--switch-padding) * 2)) / 2);
         background: #b0b0b0;
+        opacity: 1;
         transition: 0.3s ease;
       }
       &:after {
-        width: $switch-height;
-        height: $switch-height;
+        width: var(--switch-height);
+        height: var(--switch-height);
         margin: 0;
         border: 0 none;
         left: 0;
@@ -365,20 +338,18 @@ div.checkbox.ty2:not(.btn) {
         transform: none;
       }
       + .lbl {
-        margin-left: $switch-width;
-        // white-space:nowrap;
+        margin-left: var(--switch-width);
       }
     }
     .lbl {
       padding-top: 0;
       padding-bottom: 0;
-      line-height: $switch-height;
+      line-height: var(--switch-height);
       &:first-child {
-        margin-right: $switch-width;
+        margin-right: var(--switch-width);
       }
     }
   }
-  */
 }
 .checkbox {
   > i {
