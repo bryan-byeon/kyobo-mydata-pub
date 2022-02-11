@@ -5376,6 +5376,7 @@ const Layer = {
         if ($($focusEl).is($focusableEl)) {
           $popup.data('returnFocus', $focusEl);
           $focusEl.addClass(Layer.focusedClass);
+          if ($focusEl.hasClass('btn-select')) $focusEl.closest('.select').addClass('focused');
         }
 
         //팝업 in 포커스
@@ -5501,6 +5502,7 @@ const Layer = {
     const $returnFocus = $popup.data('returnFocus');
     if ($returnFocus != undefined) {
       $returnFocus.removeClass(Layer.focusedClass).focus();
+      if ($returnFocus.hasClass('btn-select')) $returnFocus.closest('.select').removeClass('focused');
       //플루팅 버튼
       if ($returnFocus.closest('.floating-btn').length && $returnFocus.closest('.floating-btn').hasClass('pop-on')) {
         $returnFocus.closest('.floating-btn').removeCss('z-index').removeClass('pop-on');
