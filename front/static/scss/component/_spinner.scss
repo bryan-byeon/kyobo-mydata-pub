@@ -10,6 +10,7 @@
     width: 3.4rem;
     padding: 0;
     flex-shrink: 0;
+    border-radius: 0;
     @include bg-etc(1.6rem auto);
     &.minus {
       background-image: url(../images/icon/ico-spinner-minus@3x.png);
@@ -19,6 +20,7 @@
     }
     &:disabled {
       opacity: 0.3;
+      background-color: transparent;
     }
   }
   input {
