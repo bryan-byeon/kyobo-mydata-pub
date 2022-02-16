@@ -452,6 +452,23 @@
     top: 0.9rem;
     right: 1.5rem;
   }
+
+  @include media-min-width(1024) {
+    &.full {
+      > .pop-scl-wrap,
+      > .pop-wrap {
+        @include web-center;
+      }
+    }
+    &.bottom {
+      > .pop-scl-wrap,
+      > .pop-wrap {
+        @include web-center;
+        left: 50%;
+        margin-left: -51.2rem;
+      }
+    }
+  }
 }
 .msie .popup.show {
   display: block;
@@ -587,23 +604,5 @@
   > div {
     background: #fff;
     box-shadow: 0 0.3rem 0.7rem rgba(33, 33, 33, 0.3);
-  }
-}
-@include media-min-width(1024) {
-  .popup {
-    &.full {
-      > .pop-scl-wrap,
-      > .pop-wrap {
-        @include web-center;
-      }
-    }
-    &.bottom {
-      > .pop-scl-wrap,
-      > .pop-wrap {
-        @include web-center;
-        left: 50%;
-        margin-left: -51.2rem;
-      }
-    }
   }
 }
