@@ -28,10 +28,8 @@
     border-color: var(--alert-txt-color);
     &:not(.focus) {
       input {
+        @include bg-etc(1.6rem auto, right 1.2rem center);
         background-image: url(../images/icon/ico-error@3x.png);
-        background-repeat: no-repeat;
-        background-position: right 1.2rem center;
-        background-size: 1.6rem auto;
       }
     }
   }
@@ -41,10 +39,8 @@
 
   &.date {
     input {
+      @include bg-etc(2.4rem auto, right 1.6rem center);
       background-image: url(../images/icon/ico-calendar@3x.png);
-      background-repeat: no-repeat;
-      background-position: right 1.6rem center;
-      background-size: 2.4rem auto;
       &::-webkit-calendar-picker-indicator {
         opacity: 0;
       }
