@@ -6,18 +6,12 @@
 @import url('../lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css');
 
 $pc-full-size: 1200;
-$tablet-size: 1140;
+$tablet-size: 1024;
 $mobile-size: 768;
-$mobile-small-size: 380;
 
 /* @mixin */
 @mixin media($size) {
   @media (max-width:#{$size}px) {
-    @content;
-  }
-}
-@mixin sticky {
-  @supports ((position:-webkit-sticky) or (position:sticky)) {
     @content;
   }
 }
@@ -272,6 +266,7 @@ html:not(.mobile) {
         padding-top: 0.938rem;
         padding-bottom: 0.938rem;
         line-height: 1.25rem;
+        font-size: 1rem;
       }
     }
   }
@@ -590,7 +585,7 @@ html:not(.mobile) {
 }
 
 .kb-container {
-  padding-top: 5rem;
+  padding-top: 5.625rem;
   min-height: calc(100vh - 2.5rem);
 }
 .kb-content {
@@ -617,7 +612,7 @@ html:not(.mobile) {
   }
   &.fixed > div {
     position: fixed;
-    top: 3.75rem;
+    top: 5.625rem;
     left: 1.875rem;
     right: 1.875rem;
     z-index: 1106;
@@ -682,14 +677,6 @@ html:not(.mobile) {
   .kb-page-title.fixed > div {
     left: 0.938rem;
     right: 0.938rem;
-  }
-}
-@include media($tablet-size) {
-  .kb-container {
-    padding-top: 5.625rem;
-  }
-  .kb-page-title.fixed > div {
-    top: 5.625rem;
   }
 }
 @include media($mobile-size) {
