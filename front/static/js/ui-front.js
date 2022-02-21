@@ -2651,10 +2651,17 @@ ui.Form = {
       const $wrap = $this.closest($wrapClass);
       const $allchk = $wrap.find($allAgreeChkClass);
       const $items = $wrap.find($agreeChkClass);
+      const $isFolding = $wrap.hasClass('folding');
+      const $foldingBtn = $wrap.find('.ui-folding-btn');
+      const $foldingPanel = $wrap.find('.folding-panel');
       const $itemsLength = $items.length;
       const $itemsChecked = $wrap.find($agreeChkClass + ':checked').length;
       if ($itemsLength === $itemsChecked) {
         $allchk.prop('checked', true);
+        if ($isFolding && $foldingBtn.hasClass('open')) {
+          $foldingBtn.removeClass('open');
+          $foldingPanel.stop(true, false).slideUp(200);
+        }
       } else {
         $allchk.prop('checked', false);
       }
