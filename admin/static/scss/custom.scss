@@ -183,15 +183,9 @@ html:not(.mobile) {
     background: url(../images/common/logo.png) no-repeat center center;
     background-size: contain;
   }
-  .navbar-nav-scroll {
-    width: auto;
-    height: 2.5rem;
-    overflow: hidden;
-    margin-right: -0.5rem;
-    margin-left: -0.5rem;
-    background: #222;
-  }
+  
   .navbar-nav {
+    padding: 0;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -205,7 +199,6 @@ html:not(.mobile) {
       padding-left: .5rem;
       color: rgba(255, 255, 255, .85);
       align-items: center;
-      font-size: 1rem;
       &.active,
       &:not(span):hover {
         font-weight: 600;
@@ -241,6 +234,16 @@ html:not(.mobile) {
       }
     }
   }
+  .navbar-nav-scroll {
+    width: auto;
+    height: 3.125rem;
+    overflow: hidden;
+    background: #222;
+    .nav-link{
+      padding: 0.938rem 0.625rem;
+      font-size: 1.125rem;
+      line-height: 1.25rem;}
+  }
 }
 
 @include media($mobile-size) {
@@ -248,27 +251,13 @@ html:not(.mobile) {
     overflow: hidden;
   }
   .kb-navbar {
-    height: 6.25rem;
     .navbar-top{
       padding:0 0.5rem 0 0;
-      height: 3.125rem;
     }
     .kb-navbar-btn {
       display: block;
     }
-    .navbar-nav {
-      &.kb-navbar-util {
-        height: 3.125rem;
-      }
-      .nav-link {
-        padding-top: 0.938rem;
-        padding-bottom: 0.938rem;
-        line-height: 1.25rem;
-        
-      }
-    }
     .navbar-nav-scroll {
-      height: 3.125rem;
       .navbar-nav {
         .nav-item{
           &:first-child{
@@ -279,6 +268,11 @@ html:not(.mobile) {
           }
         }
       }
+      .nav-link {
+        padding-top: 0.938rem;
+        padding-bottom: 0.938rem;
+        line-height: 1.25rem;
+      }
     }
   }
 }
@@ -287,7 +281,7 @@ html:not(.mobile) {
 /* .kb-sidebar */
 .kb-sidebar {
   position: fixed;
-  top: 5rem;
+  top: 5.625rem;
   width: 15.625rem;
   height: calc(100vh - 5rem);
   background: #f9f9f9;
@@ -307,21 +301,21 @@ html:not(.mobile) {
     left: 0;
     width: 100%;
     background: #444;
-    height: 3.125rem;
+    height: 2.5rem;
   }
   .kb-sidebar-close {
     display: none;
     position: absolute;
-    top: 0.313rem;
-    left: 0.313rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    padding:  0.438rem;
+    top: 0.438rem;
+    left: 0.5rem;
+    width: 1.625rem;
+    height: 1.625rem;
+    padding: 0.188rem;
     &:before {
       content: '';
       display: block;
-      width:  1.625rem;
-      height:  1.625rem;
+      width:  1.25rem;
+      height:  1.25rem;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='60px' height='60px'%3E%3Cpath fill-rule='evenodd' opacity='0.012' fill='rgb(255, 255, 255)' d='M0.000,0.000 L60.000,0.000 L60.000,60.000 L0.000,60.000 L0.000,0.000 Z'/%3E%3Cpath fill-rule='evenodd' fill='rgb(255, 255, 255)' d='M2.829,0.617 L58.975,56.451 C59.510,56.983 59.510,57.845 58.975,58.377 C58.441,58.909 57.574,58.909 57.039,58.377 L0.893,2.542 C0.358,2.010 0.358,1.148 0.893,0.617 C1.427,0.085 2.294,0.085 2.829,0.617 Z'/%3E%3Cpath fill-rule='evenodd' fill='rgb(255, 255, 255)' d='M57.633,1.393 L1.079,57.633 C0.540,58.169 0.540,59.037 1.079,59.572 C1.617,60.108 2.490,60.108 3.029,59.572 L59.583,3.332 C60.122,2.797 60.122,1.928 59.583,1.393 C59.045,0.857 58.172,0.857 57.633,1.393 Z'/%3E%3C/svg%3E") no-repeat center center;
       background-size: 100% auto;
     }
@@ -435,7 +429,7 @@ html:not(.mobile) {
     top: 0;
     width: 100%;
     height: 100%;
-    padding-top: 3.125rem;
+    padding-top: 2.5rem;
     z-index: 1110;
     transform: translateX(-110%);
     box-shadow: 0.063em 0 0.313em rgba(0, 0, 0, .3);
@@ -692,16 +686,15 @@ html:not(.mobile) {
 }
 @include media($tablet-size) {
   .kb-container {
-    padding-top: 5rem;
+    padding-top: 5.625rem;
   }
   .kb-page-title.fixed > div {
-    top: 5rem;
+    top: 5.625rem;
   }
 }
 @include media($mobile-size) {
   .kb-container {
     min-height: 100vh;
-    padding-top: 6.25rem;
   }
   .kb-content {
     padding: 1rem 0.938rem;
