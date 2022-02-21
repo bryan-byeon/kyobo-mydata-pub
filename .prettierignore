@@ -1,5 +1,6 @@
 **/node_modules/*
 **/*.min.*
+**/admin/static/*
 **/admin/static/**/*
 **/lib/*
 _font.scss
