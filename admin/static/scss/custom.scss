@@ -92,11 +92,11 @@ html:not(.mobile) {
   width: 2.5rem;
   padding: 0;
   height: 2.5rem;
-  background: #ddd;
+  background: #222;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  color: #111;
+  color: #fff;
   overflow: hidden;
   visibility: hidden;
   opacity: 0;
@@ -104,10 +104,10 @@ html:not(.mobile) {
   z-index: 100;
   &.on {
     visibility: visible;
-    opacity: 1;
+    opacity: 0.6;
   }
   &:hover {
-    color: #111;
+    opacity: 1;
     text-decoration: none;
   }
   .bi {
@@ -122,7 +122,7 @@ html:not(.mobile) {
 }
 @include media($mobile-size) {
   .btn-scl-top {
-    bottom: 4.25rem;
+    bottom: 5rem;
   }
 }
 
@@ -137,47 +137,68 @@ html:not(.mobile) {
   display: block;
 }
 .kb-navbar {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3.75rem;
-  background-color: #222;
+  height: 5rem;
+  padding: 0;
   box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05), inset 0 -0.063rem 0 rgba(0, 0, 0, .1);
   z-index: 1109;
+  .navbar-top{
+    background-color: #444;
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    padding: 0 1rem;
+  }
   .navbar-brand-wrap {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex: 0 0 calc(15.625rem - 1rem);
-    padding-right: 1rem;
   }
   .kb-navbar-btn {
     position: relative;
     display: none;
     width: 2.5rem;
     height: 2.5rem;
+    margin-right: 0.5rem;
     i {
       display: block;
-      width: 2rem;
-      height: 2rem;
+      width: 1.625rem;
+      height: 1.625rem;
       position: absolute;
       left: 50%;
       top: 50%;
-      margin: -1rem 0 0 -1rem;
+      margin: -0.8125rem 0 0 -0.8125rem;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23fff' stroke-width='1.5'%3E%3Cg%3E%3Cg%3E%3Cpath d='M2 6L22 6M2 12L22 12M2 18L22 18' transform='translate(-556 -412) translate(240 396) translate(316 16)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A") center center no-repeat;
       background-size: 100% 100%;
     }
   }
   .navbar-brand {
-    width: 7.625rem;
+    width: 5.313rem;
     height: 1.75rem;
     padding: 0;
     margin: 0;
     background: url(../images/common/logo.png) no-repeat center center;
     background-size: contain;
   }
+  .navbar-nav-scroll {
+    width: auto;
+    height: 2.5rem;
+    overflow: hidden;
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+    background: #222;
+  }
   .navbar-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    .nav-item {
+      width: 100%;
+      text-align: center;
+    }
     .nav-link {
       display: inline-flex;
       padding-right: .5rem;
@@ -200,6 +221,7 @@ html:not(.mobile) {
       margin-right: 0.313rem;
     }
     &.kb-navbar-util {
+      margin-left: auto;
       .nav-item {
         position: relative;
         & + .nav-item:before {
@@ -220,71 +242,15 @@ html:not(.mobile) {
     }
   }
 }
-@include media($pc-full-size) {
-  .kb-navbar {
-    .navbar-brand-wrap {
-      flex: 0 0 calc(22% - 1rem);
-    }
-  }
-}
-@include media($tablet-size) {
-  .kb-navbar {
-    display: block;
-    padding: 0 .5rem;
-    height: 5rem;
-    .navbar-brand-wrap {
-      height: 2.5rem;
-      padding-right: 0;
-      flex: none;
-      justify-content: flex-start;
-    }
-    .navbar-nav-scroll {
-      width: auto;
-      height: 2.5rem;
-      overflow: hidden;
-      margin-right: -0.5rem;
-      margin-left: -0.5rem;
-      background: #666;
-      .navbar-nav {
-        // padding-bottom: 2rem;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        .nav-item {
-          width: 100%;
-          text-align: center;
-          &:first-child {
-            padding-left: 0.5rem;
-          }
-          &:last-child {
-            padding-right: 0.5rem;
-          }
-        }
-      }
-    }
-    .navbar-nav.kb-navbar-util {
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 2.5rem;
-      display: flex;
-      align-items: center;
-      .nav-link {
-        padding: .5rem
-      }
-    }
-  }
-}
+
 @include media($mobile-size) {
   body.gnb-open {
     overflow: hidden;
   }
   .kb-navbar {
     height: 6.25rem;
-    .navbar-brand-wrap {
-      height: 3.125rem;
-    }
-    .navbar-nav-scroll {
+    .navbar-top{
+      padding:0 0.5rem 0 0;
       height: 3.125rem;
     }
     .kb-navbar-btn {
@@ -298,19 +264,32 @@ html:not(.mobile) {
         padding-top: 0.938rem;
         padding-bottom: 0.938rem;
         line-height: 1.25rem;
+        
+      }
+    }
+    .navbar-nav-scroll {
+      height: 3.125rem;
+      .navbar-nav {
+        .nav-item{
+          &:first-child{
+            padding-left: 1rem;
+          }
+          &:last-child{
+            padding-right: 1rem;
+          }
+        }
       }
     }
   }
 }
-@include media($mobile-small-size) {}
 
 
 /* .kb-sidebar */
 .kb-sidebar {
   position: fixed;
-  top: 3.75rem;
+  top: 5rem;
   width: 15.625rem;
-  height: calc(100vh - 3.75rem);
+  height: calc(100vh - 5rem);
   background: #f9f9f9;
   z-index: 1107;
   &.hide {
@@ -449,12 +428,6 @@ html:not(.mobile) {
     width: 22%;
   }
 }
-@include media($tablet-size) {
-  .kb-sidebar {
-    top: 5rem;
-    height: calc(100vh - 5rem)
-  }
-}
 @include media($mobile-size) {
   .kb-sidebar {
     position: fixed;
@@ -581,6 +554,7 @@ html:not(.mobile) {
   .kb-footer {
     text-align: center;
     padding: 1rem;
+    font-size: 0.75rem;
     &:not(.full) {
       margin-left: 0;
     }
@@ -595,7 +569,7 @@ html:not(.mobile) {
       content: '';
       display: block;
       clear: both;
-      height: 3.625rem;
+      height: 4.375rem;
     }
   }
 }
@@ -622,7 +596,7 @@ html:not(.mobile) {
 }
 
 .kb-container {
-  padding-top: 3.75rem;
+  padding-top: 5rem;
   min-height: calc(100vh - 2.5rem);
 }
 .kb-content {
@@ -765,7 +739,7 @@ html:not(.mobile) {
       z-index: 1100;
       .btn {
         width: 100%;
-        padding: .375rem .75rem;
+        padding: 0.75rem 0.313rem;
         font-size: 1rem;
         line-height: 1.5;
         border-radius: .25rem;
