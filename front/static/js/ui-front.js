@@ -5033,11 +5033,13 @@ const Layer = {
         if ($imgW > $imgH) {
           $this.after('<canvas></canvas>');
           const $canvas = $this.next();
-          $this.remove();
           ui.Util.canvasRotateImg($canvas[0], $src, 270);
+          setTimeout(function () {
+            $this.remove();
+          }, 5);
         }
       });
-    }, 10);
+    }, 5);
 
     let imgSwiper;
     Layer.open($popup, function () {
