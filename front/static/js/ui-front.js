@@ -1110,6 +1110,42 @@ ui.Util = {
     if (location.pathname.indexOf('/front/') > -1) $url = '/front' + $url;
     if (location.pathname.indexOf('/kyobo-mydata-pub/') > -1) $url = '/kyobo-mydata-pub' + $url;
     if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule($url);
+  },
+  canvasRotateImg: function (target, src, deg) {
+    const image = document.createElement('img');
+    image.onload = function () {
+      drawRotated(deg);
+    };
+    image.src = src;
+
+    const canvas = target;
+
+    const drawRotated = function (degrees) {
+      // if (canvas) document.body.removeChild(canvas);
+      // canvas = document.createElement("canvas");
+      // var canvas = document.getElementById("canvas");
+
+      const ctx = canvas.getContext('2d');
+
+      if (degrees == 90 || degrees == 270) {
+        canvas.width = image.height;
+        canvas.height = image.width;
+      } else {
+        canvas.width = image.width;
+        canvas.height = image.height;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (degrees == 90 || degrees == 270) {
+        ctx.translate(image.height / 2, image.width / 2);
+      } else {
+        ctx.translate(image.width / 2, image.height / 2);
+      }
+      ctx.rotate((degrees * Math.PI) / 180);
+      ctx.drawImage(image, -image.width / 2, -image.height / 2);
+
+      // document.body.appendChild(canvas);
+    };
   }
 };
 
@@ -4985,6 +5021,23 @@ const Layer = {
     const $popup = $('#' + imgPopId);
     $popup.find('.swiper-wrapper').append(contents);
     $popup.find('.swiper-wrapper').children().addClass('swiper-zoom-container').wrap('<div class="swiper-slide"></div>');
+
+    // img rotate
+    setTimeout(function () {
+      const $img = $popup.find('img');
+      $img.each(function () {
+        const $this = $(this);
+        const $imgW = $this[0].naturalWidth;
+        const $imgH = $this[0].naturalHeight;
+        const $src = $this.attr('src');
+        if ($imgW > $imgH) {
+          $this.after('<canvas></canvas>');
+          const $canvas = $this.next();
+          $this.remove();
+          ui.Util.canvasRotateImg($canvas[0], $src, 270);
+        }
+      });
+    }, 10);
 
     let imgSwiper;
     Layer.open($popup, function () {
