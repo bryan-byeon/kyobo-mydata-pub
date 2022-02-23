@@ -12,5 +12,16 @@
     "worker": "안효주",
     "complete": "2022-02-23",
     "etc": "임시 화면 ID"
+  },
+  {
+    "id":"AD03D002",
+    "url":"../../admin/html/03/",
+    "type":"page",
+    "depth2": "게시판관리",
+    "depth3": "공지사항",
+    "name": "공지사항 상세(등록)",
+    "worker": "안효주",
+    "complete": "2022-02-23",
+    "etc": "임시 화면 ID"
   }
 ]

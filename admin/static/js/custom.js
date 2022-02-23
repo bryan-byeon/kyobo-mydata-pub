@@ -434,7 +434,7 @@
           $(this)
             .datepicker({
               language: 'ko',
-              format: 'yyyy/mm/dd',
+              format: 'yyyy.mm.dd',
               autoclose: true,
               todayHighlight: true,
               toggleActive: true
@@ -448,7 +448,7 @@
         $('.input-daterange').each(function () {
           $(this).datepicker({
             language: 'ko',
-            format: 'yyyy/mm/dd',
+            format: 'yyyy.mm.dd',
             autoclose: true,
             todayHighlight: true,
             toggleActive: true
