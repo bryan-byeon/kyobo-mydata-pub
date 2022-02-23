@@ -13,7 +13,7 @@
     <link href="../../static/css/custom.min.css" rel="stylesheet" />
 
     <!-- 에디터 서머노트로?? -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />
+    <link href="../../static/lib/summernote/summernote-0.8.20.min.css" rel="stylesheet" />
   </head>
   <body>
     <!-- wrap -->
@@ -192,9 +192,11 @@
     <script src="../../static/js/custom.js"></script>
 
     <!-- 에디터 서머노트로?? -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="../../static/lib/summernote/summernote-0.8.20.min.js"></script>
+    <script src="../../static/lib/summernote/summernote-ko-KR.js"></script>
     <script>
       $('.summernote').summernote({
+        lang: 'ko-KR',
         height: 300,
         codemirror: {
           // codemirror options
