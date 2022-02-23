@@ -467,7 +467,7 @@ html:not(.mobile) {
 }
 @include media($pc-full-size) {
   .kb-sidebar {
-    width: 22%;
+    width: 18%;
   }
 }
 @include media($mobile-size) {
@@ -738,9 +738,9 @@ html:not(.mobile) {
     padding: 1rem 0.938rem;
   }
   .kb-sidebar:not(.hide) + .kb-content {
-    margin-left: 22%;
+    margin-left: 18%;
     .kb-page-title.fixed > div {
-      left: calc(22% + 0.938rem);
+      left: calc(18% + 0.938rem);
     }
   }
   .kb-page-title.fixed > div {
