@@ -318,6 +318,11 @@ button.btn-click {
         background-color: #fff;
       }
     }
+    &.none-bg {
+      > div {
+        background: none;
+      }
+    }
     &.fixed-none {
       > div {
         position: relative;

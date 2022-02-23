@@ -478,12 +478,14 @@ ui.Common = {
     if ($naviBar.length && $naviBar.height() != 0) {
       $spaceArryHeight.push($naviBar.outerHeight());
     }
-    $('.bottom-fixed').each(function () {
-      const $this = $(this);
-      const $height = $this.children().outerHeight();
-      if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
-      if ($this.hasClass('is-restore')) $this.css('height', $height);
-    });
+    $('.bottom-fixed')
+      .not('.none-space')
+      .each(function () {
+        const $this = $(this);
+        const $height = $this.children().outerHeight();
+        if (!$this.hasClass('fixed-none')) $spaceArryHeight.push($height);
+        if ($this.hasClass('is-restore')) $this.css('height', $height);
+      });
 
     const $maxHeight = $spaceArryHeight.length ? Math.max.apply(null, $spaceArryHeight) : 0;
     $space.css('height', $maxHeight);
@@ -531,7 +533,8 @@ ui.Common = {
     //top 버튼
     const btnTop = {
       button: '#btnTop',
-      text: '컨텐츠 상단으로 이동',
+      label: '컨텐츠 상단으로 이동',
+      text: '맨 위로',
       min: 100,
       onClass: 'on',
       hoverClass: 'hover',
@@ -540,7 +543,7 @@ ui.Common = {
     let btnHtml = '';
     if (!$('#container').length) return;
     if (!$('.floating-btn').length) btnHtml += '<div class="floating-btn">';
-    btnHtml += '<a href="#" id="' + btnTop.button.substring(1) + '" class="btn btn-page-top" title="' + btnTop.text + '" role="button" aria-label="' + btnTop.text + '"></a>';
+    btnHtml += '<a href="#" id="' + btnTop.button.substring(1) + '" class="btn btn-page-top" title="' + btnTop.label + '" role="button" aria-label="' + btnTop.label + '">' + btnTop.text + '</a>';
     if (!$('.floating-btn').length) btnHtml += '</div>';
 
     if (!$(btnTop.button).length) {
@@ -5020,7 +5023,7 @@ const Layer = {
     Layer.imgBoxIdx += 1;
     const $popup = $('#' + imgPopId);
     $popup.find('.swiper-wrapper').append(contents);
-    $popup.find('.swiper-wrapper').children().addClass('swiper-zoom-container').wrap('<div class="swiper-slide"></div>');
+    $popup.find('.swiper-wrapper').children().addClass('swiper-zoom-container').removeClass('img-box').wrap('<div class="swiper-slide"></div>');
 
     // img rotate
     setTimeout(function () {
@@ -5030,6 +5033,7 @@ const Layer = {
         const $imgW = $this[0].naturalWidth;
         const $imgH = $this[0].naturalHeight;
         const $src = $this.attr('src');
+
         if ($imgW > $imgH) {
           $this.after('<canvas></canvas>');
           const $canvas = $this.next();
