@@ -13,15 +13,6 @@
     <link href="../../static/css/custom.min.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- 스킵네비 -->
-    <div class="skippy overflow-hidden">
-      <div class="container-xl">
-        <a class="sr-only sr-only-focusable d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
-        <a class="sr-only sr-only-focusable d-none d-md-inline-flex p-2 m-1" href="#kb-lnb-nav">Skip to navigation</a>
-      </div>
-    </div>
-    <!-- //스킵네비 -->
-
     <!-- wrap -->
     <section class="kb-wrap">
       <!-- 헤더 -->
@@ -69,7 +60,7 @@
                 <div class="modal-body">Woohoo, you're reading this text in a modal!</div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-primary" onclick="$('#exampleModal').modal('hide')">Save changes</button>
                 </div>
               </div>
             </div>
@@ -96,5 +87,19 @@
     <script src="../../static/lib/bootstrap-datepicker/locales/bootstrap-datepicker.ko.min.js"></script>
     <script src="../../static/js/custom.lib.min.js"></script>
     <script src="../../static/js/custom.js"></script>
+    <script>
+      $('#exampleModal').modal('show');
+
+      Layer.alert('얼럿메시지', function (e) {
+        console.log('확인');
+      });
+      Layer.confirm('컨펌메시지', function (e) {
+        if (e) {
+          console.log('확인');
+        } else {
+          console.log('취소');
+        }
+      });
+    </script>
   </body>
 </html>

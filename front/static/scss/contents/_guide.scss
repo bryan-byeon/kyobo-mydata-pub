@@ -154,7 +154,7 @@
   text-align: center;
   transform: translateX(-100%);
   transition: 0.3s;
-  z-index: 10;
+  z-index: 1000;
   &.open {
     left: 2rem;
     transform: translateX(0);

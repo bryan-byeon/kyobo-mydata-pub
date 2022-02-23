@@ -466,7 +466,7 @@
       $(document).on('change', '.table input.ui-tbl-chk-all', function () {
         var $wrap = $(this).closest('.table'),
           $chk = $wrap.find('input.ui-tbl-chk').not(':disabled');
-        if ($(this).prop('checked') == true) {
+        if ($(this).prop('checked')) {
           $chk.prop('checked', true).change();
         } else {
           $chk.prop('checked', false).change();
@@ -474,9 +474,17 @@
       });
       $(document).on('change', '.table input.ui-tbl-chk', function () {
         var $wrap = $(this).closest('.table'),
+          $tr = $(this).closest('tr'),
           $allChk = $wrap.find('input.ui-tbl-chk-all'),
           $chkLength = $wrap.find('input.ui-tbl-chk').not(':disabled').length,
           $checkedLength = $wrap.find('input.ui-tbl-chk:checked').length;
+
+        if ($(this).prop('checked')) {
+          $tr.addClass('tr-selected');
+        } else {
+          $tr.removeClass('tr-selected');
+        }
+
         if ($chkLength == $checkedLength) {
           $allChk.prop('checked', true);
         } else {
@@ -526,3 +534,62 @@
     );
   }
 })();
+
+var Layer = {
+  alertIdx: 0,
+  alertHtml: function (type, msg, popId, btnActionId, btnCancelId) {
+    var $html = '<div class="modal alert fade" id="' + popId + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+    $html += '<div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">';
+    $html += '<div class="modal-content">';
+    $html += '<div class="modal-body">';
+    $html += '<div class="modal-messege">';
+    $html += msg;
+    $html += '</div>';
+    $html += '</div>';
+    $html += '<div class="modal-footer">';
+    if (type === 'confirm') $html += '<button type="button" id="' + btnCancelId + '" class="btn btn-outline-dark">취소</button>';
+    $html += '<button type="button" id="' + btnActionId + '" class="btn btn-primary">확인</button>';
+    $html += '</div>';
+    $html += '</div>';
+    $html += '</div>';
+    $html += '</div>';
+    return $html;
+  },
+  alertEvt: function (type, msg, callback) {
+    var $popId = 'modal-alert-' + Layer.alertIdx;
+    var $btnActionId = 'modal-action-' + Layer.alertIdx;
+    var $btnCancelId = 'modal-cancel-' + Layer.alertIdx;
+    Layer.alertIdx += 1;
+    var $html = Layer.alertHtml(type, msg, $popId, $btnActionId, $btnCancelId);
+    var $layer = $($html);
+    $('body').append($layer);
+    $('#' + $popId).modal({
+      backdrop: false
+    });
+    $('#' + $btnActionId + ', #' + $btnCancelId)
+      .off('click')
+      .on('click', function () {
+        var $thisId = $(this).attr('id');
+        $('#' + $popId)
+          .modal('hide')
+          .on('hidden.bs.modal', function (event) {
+            $('#' + $popId).remove();
+          });
+        if (typeof callback === 'function') {
+          if (type === 'confirm') {
+            if ($thisId === $btnActionId) callback(true);
+            else if ($thisId === $btnCancelId) callback(false);
+            else callback();
+          } else {
+            callback();
+          }
+        }
+      });
+  },
+  alert(msg, callback) {
+    Layer.alertEvt('alert', msg, callback);
+  },
+  confirm(msg, callback) {
+    Layer.alertEvt('confirm', msg, callback);
+  }
+};
