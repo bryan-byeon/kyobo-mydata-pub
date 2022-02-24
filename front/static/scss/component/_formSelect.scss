@@ -64,7 +64,8 @@
   &.is-error {
     select,
     .btn-select {
-      border-color: var(--alert-txt-color);
+      // border-color: var(--alert-txt-color);
+      color: var(--alert-txt-color);
     }
   }
   &.is-success {

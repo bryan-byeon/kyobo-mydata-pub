@@ -48,16 +48,28 @@ i.require {
 }
 .validate-item {
   &.is-error {
-    .input,
-    .select,
-    .textarea {
-      border-color: var(--alert-txt-color);
-    }
-    .input:not(.focus) {
-      input {
+    // .input,
+    // .textarea {
+    //   border-color: var(--alert-txt-color);
+    // }
+    .input {
+      input:not(:focus) {
         color: var(--alert-txt-color);
-        @include bg-etc(1.6rem auto, right 1.2rem center);
-        background-image: url(../images/icon/ico-error@3x.png);
+        // @include bg-etc(1.6rem auto, right 1.2rem center);
+        // background-image: url(../images/icon/ico-error@3x.png);
+      }
+    }
+    .select {
+      // border-color: var(--alert-txt-color);
+      select,
+      .btn-select {
+        // border-color: var(--alert-txt-color);
+        color: var(--alert-txt-color);
+      }
+    }
+    .textarea {
+      textarea:not(:focus) {
+        color: var(--alert-txt-color);
       }
     }
   }

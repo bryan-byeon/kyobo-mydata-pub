@@ -25,13 +25,11 @@
     border-color: var(--primary-color);
   }
   &.is-error {
-    border-color: var(--alert-txt-color);
-    &:not(.focus) {
-      input {
-        color: var(--alert-txt-color);
-        @include bg-etc(1.6rem auto, right 1.2rem center);
-        background-image: url(../images/icon/ico-error@3x.png);
-      }
+    // border-color: var(--alert-txt-color);
+    input:not(:focus) {
+      color: var(--alert-txt-color);
+      // @include bg-etc(1.6rem auto, right 1.2rem center);
+      // background-image: url(../images/icon/ico-error@3x.png);
     }
   }
   // &.is-success {
