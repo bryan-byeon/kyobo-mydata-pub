@@ -182,6 +182,10 @@ html:not(.mobile) {
   padding: 0;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05), inset 0 -0.063rem 0 rgba(0, 0, 0, 0.1);
   z-index: 1109;
+  button {
+    background: none;
+    border: 0 none;
+  }
   .navbar-top {
     background-color: #444;
     display: flex;
@@ -732,8 +736,14 @@ html:not(.mobile) {
     // .breadcrumb-item.active{font-weight:bold;}
   }
 }
-.kb-page-btn .btn {
-  min-width: 5rem;
+.kb-page-btn {
+  font-size: 0;
+  .btn {
+    min-width: 5rem;
+    + .btn {
+      margin-left: 0.5rem;
+    }
+  }
 }
 @include media($pc-full-size) {
   .kb-content {
