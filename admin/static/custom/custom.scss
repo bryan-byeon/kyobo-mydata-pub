@@ -114,7 +114,8 @@ html:not(.mobile) {
   }
 }
 
-// btn top
+// btn
+
 .btn-scl-top {
   position: fixed;
   display: flex;
@@ -162,6 +163,9 @@ html:not(.mobile) {
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
+  .btn & {
+    font-size: 1.25em;
+  }
 }
 [class^='bi-']:before,
 [class*=' bi-']:before {
@@ -171,11 +175,10 @@ html:not(.mobile) {
 // header
 .kb-navbar {
   display: block;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  height: 5rem;
   padding: 0;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05), inset 0 -0.063rem 0 rgba(0, 0, 0, 0.1);
   z-index: 1109;
@@ -631,11 +634,10 @@ html:not(.mobile) {
 
 // container
 .kb-container {
-  padding-top: 5.625rem;
-  min-height: calc(100vh - 2.5rem);
+  min-height: calc(100vh - 8.125rem);
 }
 .kb-content {
-  padding: 2rem 1.875rem;
+  padding: 2rem 1.875rem 4rem;
 }
 .kb-sidebar:not(.hide) + .kb-content {
   margin-left: 15.625rem;
@@ -735,7 +737,8 @@ html:not(.mobile) {
 }
 @include media($pc-full-size) {
   .kb-content {
-    padding: 1rem 0.938rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .kb-sidebar:not(.hide) + .kb-content {
     margin-left: 18%;
@@ -743,9 +746,11 @@ html:not(.mobile) {
       left: calc(18% + 0.938rem);
     }
   }
-  .kb-page-title.fixed > div {
-    left: 0.938rem;
-    right: 0.938rem;
+  .kb-page-title {
+    &.fixed > div {
+      left: 0.938rem;
+      right: 0.938rem;
+    }
   }
 }
 @include media($mobile-size) {
@@ -753,7 +758,7 @@ html:not(.mobile) {
     min-height: 100vh;
   }
   .kb-content {
-    padding: 1rem;
+    padding-top: 1rem;
   }
   .kb-sidebar:not(.hide) + .kb-content {
     margin-left: 0;
@@ -802,10 +807,29 @@ html:not(.mobile) {
 
 //modal
 .modal-backdrop {
-  z-index: 1199;
+  // z-index: 1199;
+  background: none;
 }
 .modal {
-  z-index: 1200;
+  // z-index: 1199;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  &.alert {
+    z-index: $zindex-modal * 2;
+  }
+}
+.modal-body {
+  padding: 1rem;
+}
+.modal-footer {
+  flex-wrap: nowrap;
+  > * {
+    width: 100%;
+    margin: 0;
+    + * {
+      margin-left: 0.75rem;
+    }
+  }
 }
 .modal-messege {
   text-align: center;
@@ -912,7 +936,7 @@ html:not(.mobile) {
 .title-wrap {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.625rem;
   > .left {
     flex: 1 1 auto;
     // display: flex;
@@ -969,11 +993,18 @@ html:not(.mobile) {
     }
   }
 }
-.form-box-btn {
+.btn-wrap {
   text-align: right;
   margin-top: 1rem;
+  font-size: 0;
   .btn {
-    min-width: 4.375rem;
+    min-width: 5rem;
+    &.btn-lg {
+      min-width: 9.375rem;
+    }
+    + .btn {
+      margin-left: 0.5rem;
+    }
   }
 }
 .input-daterange-btn {
@@ -1008,8 +1039,11 @@ html:not(.mobile) {
     .form-box-label {
       display: block;
       width: auto;
-      padding: 1rem;
+      padding: 0.75rem 1rem;
       text-align: left;
+    }
+    .form-box-cont {
+      padding: 1rem 0;
     }
   }
   .input-daterange-btn {

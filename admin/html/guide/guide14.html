@@ -90,10 +90,10 @@
     <script>
       $('#exampleModal').modal('show');
 
-      Layer.alert('얼럿메시지', function (e) {
+      Modal.alert('얼럿메시지', function (e) {
         console.log('확인');
       });
-      Layer.confirm('컨펌메시지', function (e) {
+      Modal.confirm('컨펌메시지', function (e) {
         if (e) {
           console.log('확인');
         } else {

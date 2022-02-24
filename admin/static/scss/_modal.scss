@@ -30,12 +30,6 @@
   // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
   // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
   // See also https://github.com/twbs/bootstrap/issues/17695
-
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(2px);
-  &.alert{
-    z-index: $zindex-modal * 2;
-  }
 }
 
 // Shell div to position the modal with bottom padding
@@ -135,7 +129,7 @@
   z-index: $zindex-modal-backdrop;
   width: 100vw;
   height: 100vh;
-  // background-color: $modal-backdrop-bg;
+  background-color: $modal-backdrop-bg;
 
   // Fade for backdrop
   &.fade { opacity: 0; }

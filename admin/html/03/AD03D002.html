@@ -164,9 +164,9 @@
               </div>
             </div>
           </div>
-          <div class="form-box-btn">
-            <button type="button" class="btn btn-outline-dark"><i class="bi bi-x"></i> 취소</button>
-            <button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> 등록</button>
+          <div class="btn-wrap text-center mt-5">
+            <button type="button" class="btn btn-lg btn-outline-dark"><i class="bi bi-x"></i> 취소</button>
+            <button type="button" class="btn btn-lg btn-primary"><i class="bi bi-plus"></i> 등록</button>
           </div>
           <!-- //컨텐츠본문 -->
         </main>
@@ -204,10 +204,10 @@
         }
       });
 
-      Layer.alert('제목을 입력해주세요.', function () {
+      Modal.alert('제목을 입력해주세요.', function () {
         console.log('제목입력 - 확인');
       });
-      Layer.confirm('공지사항 등록을하시겠습니까?', function (e) {
+      Modal.confirm('공지사항 등록을하시겠습니까?', function (e) {
         if (e) {
           console.log('등록 - 확인');
         } else {

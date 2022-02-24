@@ -535,7 +535,7 @@
   }
 })();
 
-var Layer = {
+var Modal = {
   alertIdx: 0,
   alertHtml: function (type, msg, popId, btnActionId, btnCancelId) {
     var $html = '<div class="modal alert fade" id="' + popId + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
@@ -556,11 +556,11 @@ var Layer = {
     return $html;
   },
   alertEvt: function (type, msg, callback) {
-    var $popId = 'modal-alert-' + Layer.alertIdx;
-    var $btnActionId = 'modal-action-' + Layer.alertIdx;
-    var $btnCancelId = 'modal-cancel-' + Layer.alertIdx;
-    Layer.alertIdx += 1;
-    var $html = Layer.alertHtml(type, msg, $popId, $btnActionId, $btnCancelId);
+    var $popId = 'modal-alert-' + Modal.alertIdx;
+    var $btnActionId = 'modal-action-' + Modal.alertIdx;
+    var $btnCancelId = 'modal-cancel-' + Modal.alertIdx;
+    Modal.alertIdx += 1;
+    var $html = Modal.alertHtml(type, msg, $popId, $btnActionId, $btnCancelId);
     var $layer = $($html);
     $('body').append($layer);
     $('#' + $popId).modal({
@@ -587,9 +587,9 @@ var Layer = {
       });
   },
   alert(msg, callback) {
-    Layer.alertEvt('alert', msg, callback);
+    Modal.alertEvt('alert', msg, callback);
   },
   confirm(msg, callback) {
-    Layer.alertEvt('confirm', msg, callback);
+    Modal.alertEvt('confirm', msg, callback);
   }
 };
