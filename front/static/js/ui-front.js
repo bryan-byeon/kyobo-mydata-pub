@@ -50,6 +50,7 @@ const ui = {
     Layer.init();
     Splitting();
     ui.Util.paint();
+    ui.Chart.init();
   },
   LoadInit: function () {
     //console.log('window load complete');
@@ -6918,4 +6919,45 @@ const txtSpaceDel = function (txt) {
 const nl2br = function (str) {
   // return str.replace(/\n/g, "<br />");
   return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+};
+
+/* 장영석 */
+ui.Chart = {
+  circle: function () {
+    $('[data-circle-box]').each(function () {
+      const _this = $(this);
+      const typeCheck = _this.data('circle-box');
+      _this.find('[data-circle-idx]').each(function (e) {
+        const idx = $(this).data('circle-idx');
+        let html = '';
+        html += '<svg viewBox="0 0 36 36" class="circular-chart">';
+        html += '  <path';
+        html += '    class="circle-bg"';
+        html += '    d="M18 2.0845';
+        html += '      a 15.9155 15.9155 0 0 1 0 31.831';
+        html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
+        html += '  />';
+        html += '  <path';
+        html += '    class="circle"';
+        html += '    stroke-dasharray="' + idx + ', 100"';
+        html += '    d="M18 2.0845';
+        html += '      a 15.9155 15.9155 0 0 1 0 31.831';
+        html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
+        html += '  />';
+        html += '</svg>';
+        $(this).append(html);
+        if (typeCheck == 'type2') {
+          _this.addClass('type2');
+          if (e == 1) {
+            $(this)
+              .find('.circular-chart')
+              .css({ 'transform-origin': '50% 50%', transform: 'translate(-50%, -50%) rotate(' + 360 * ((100 - idx) / 100) + 'deg)' });
+          }
+        }
+      });
+    });
+  },
+  init: function () {
+    ui.Chart.circle();
+  }
 };
