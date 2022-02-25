@@ -446,3 +446,207 @@
     transform: translate(-50%, -50%) rotate(0deg);
   }
 }
+
+.number-random {
+  --animation-random-duration: 0.5s;
+  .number {
+    display: inline-block;
+    &:after {
+      content: counter(count);
+      counter-reset: count 0;
+      font-size: 20px;
+    }
+  }
+  @for $i from 1 to 10 {
+    .number:nth-of-type(#{$i}):after {
+      @if ($i%2 == 0) {
+        animation: counter var(--animation-random-duration) linear infinite alternate-reverse;
+      } @else {
+        animation: counter var(--animation-random-duration) linear infinite alternate;
+      }
+    }
+  }
+}
+
+@keyframes counter {
+  0% {
+    counter-increment: count 0;
+  }
+  10% {
+    counter-increment: count 1;
+  }
+  20% {
+    counter-increment: count 2;
+  }
+  30% {
+    counter-increment: count 3;
+  }
+  40% {
+    counter-increment: count 4;
+  }
+  50% {
+    counter-increment: count 5;
+  }
+  60% {
+    counter-increment: count 6;
+  }
+  70% {
+    counter-increment: count 7;
+  }
+  80% {
+    counter-increment: count 8;
+  }
+  90% {
+    counter-increment: count 9;
+  }
+  100% {
+    counter-increment: count 0;
+  }
+}
+
+.number-random2 {
+  --animation-random-duration: 0.4s;
+  > * {
+    vertical-align: middle;
+  }
+  .number {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    line-height: 1;
+    color: transparent;
+    &:before {
+      content: counter(count);
+      counter-reset: count 0;
+      font-size: 20px;
+      color: #111;
+      position: absolute;
+      line-height: 1;
+      top: 0;
+      left: 0;
+    }
+    &:after {
+      content: counter(count2);
+      counter-reset: count2 0;
+      font-size: 20px;
+      color: #111;
+      position: absolute;
+      top: 0;
+      left: 0;
+      line-height: 1;
+      transform: translateY(100%);
+    }
+  }
+  @for $i from 1 to 10 {
+    .number:nth-of-type(#{$i}) {
+      &:before {
+        @if ($i%2 == 0) {
+          animation: numberRandomBeforeReverse var(--animation-random-duration) linear infinite both, numberRandomBeforeCount calc(var(--animation-random-duration) * 10) linear infinite both;
+        } @else {
+          animation: numberRandomBefore var(--animation-random-duration) linear infinite both, numberRandomBeforeCount calc(var(--animation-random-duration) * 10) linear infinite both;
+        }
+      }
+      &:after {
+        @if ($i%2 == 0) {
+          animation: numberRandomAfterReverse var(--animation-random-duration) linear infinite both,
+            numberRandomAfterCount calc(var(--animation-random-duration) * 10) linear calc(var(--animation-random-duration) / 2) infinite both;
+        } @else {
+          animation: numberRandomAfter var(--animation-random-duration) linear infinite both,
+            numberRandomAfterCount calc(var(--animation-random-duration) * 10) linear calc(var(--animation-random-duration) / 2) infinite both;
+        }
+      }
+    }
+  }
+}
+@keyframes numberRandomBefore {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-100%);
+  }
+  50.1% {
+    transform: translateY(100%);
+  }
+}
+@keyframes numberRandomBeforeReverse {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  50.1% {
+    transform: translateY(-100%);
+  }
+}
+@keyframes numberRandomBeforeCount {
+  0%,
+  50%,
+  100% {
+    counter-increment: count 0;
+  }
+  10%,
+  60% {
+    counter-increment: count 2;
+  }
+  20%,
+  70% {
+    counter-increment: count 4;
+  }
+  30%,
+  80% {
+    counter-increment: count 6;
+  }
+  40%,
+  90% {
+    counter-increment: count 8;
+  }
+}
+
+@keyframes numberRandomAfter {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@keyframes numberRandomAfterReverse {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+@keyframes numberRandomAfterCount {
+  0%,
+  50%,
+  100% {
+    counter-increment: count2 1;
+  }
+  10%,
+  60% {
+    counter-increment: count2 3;
+  }
+  20%,
+  70% {
+    counter-increment: count2 5;
+  }
+  30%,
+  80% {
+    counter-increment: count2 7;
+  }
+  40%,
+  90% {
+    counter-increment: count2 9;
+  }
+}
