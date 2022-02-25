@@ -6926,9 +6926,12 @@ ui.Chart = {
   circle: function () {
     $('[data-circle-box]').each(function () {
       const _this = $(this);
+      let deg = 0;
       const typeCheck = _this.data('circle-box');
+      _this.addClass(typeCheck);
       _this.find('[data-circle-idx]').each(function (e) {
         const idx = $(this).data('circle-idx');
+        const color = $(this).data('circle-color');
         let html = '';
         html += '<svg viewBox="0 0 36 36" class="circular-chart">';
         html += '  <path';
@@ -6939,6 +6942,7 @@ ui.Chart = {
         html += '  />';
         html += '  <path';
         html += '    class="circle"';
+        html += '    stroke="' + color + '"';
         html += '    stroke-dasharray="' + idx + ', 100"';
         html += '    d="M18 2.0845';
         html += '      a 15.9155 15.9155 0 0 1 0 31.831';
@@ -6947,12 +6951,12 @@ ui.Chart = {
         html += '</svg>';
         $(this).append(html);
         if (typeCheck == 'type2') {
-          _this.addClass('type2');
-          if (e == 1) {
+          if (e) {
             $(this)
               .find('.circular-chart')
-              .css({ 'transform-origin': '50% 50%', transform: 'translate(-50%, -50%) rotate(' + 360 * ((100 - idx) / 100) + 'deg)' });
+              .css({ 'transform-origin': '50% 50%', transform: 'translate(-50%, -50%) rotate(' + 360 * (deg / 100) + 'deg)' });
           }
+          deg += idx;
         }
       });
     });
