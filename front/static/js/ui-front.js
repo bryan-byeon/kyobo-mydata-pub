@@ -6934,12 +6934,14 @@ ui.Chart = {
         const color = $(this).data('circle-color');
         let html = '';
         html += '<svg viewBox="0 0 36 36" class="circular-chart">';
-        html += '  <path';
-        html += '    class="circle-bg"';
-        html += '    d="M18 2.0845';
-        html += '      a 15.9155 15.9155 0 0 1 0 31.831';
-        html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
-        html += '  />';
+        if (!e || typeCheck !== 'type2') {
+          html += '  <path';
+          html += '    class="circle-bg"';
+          html += '    d="M18 2.0845';
+          html += '      a 15.9155 15.9155 0 0 1 0 31.831';
+          html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
+          html += '  />';
+        }
         html += '  <path';
         html += '    class="circle"';
         html += '    stroke="' + color + '"';

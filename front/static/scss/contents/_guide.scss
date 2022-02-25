@@ -403,13 +403,6 @@
   position: relative;
   width: 80px;
   height: 80px;
-  > div {
-    &:not(:first-child) {
-      .circle-bg {
-        display: none;
-      }
-    }
-  }
 
   .circular-chart {
     display: block;
