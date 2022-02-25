@@ -6927,38 +6927,68 @@ ui.Chart = {
     $('[data-circle-box]').each(function () {
       const _this = $(this);
       let deg = 0;
+      let $firstSize = 0;
+      let $firstBgLineW = 0;
+      let $firstLineW = 0;
       const typeCheck = _this.data('circle-box');
       _this.addClass(typeCheck);
-      _this.find('[data-circle-idx]').each(function (e) {
-        const idx = $(this).data('circle-idx');
+      _this.find('[data-circle-val]').each(function (e) {
+        const idx = $(this).data('circle-val');
         const color = $(this).data('circle-color');
+        const size = $(this).data('circle-size');
+
         let html = '';
-        html += '<svg viewBox="0 0 36 36" class="circular-chart">';
+        html += '<svg viewBox="0 0 36 36" class="circular-chart"';
+        if (size) html += ' style="width:' + size + 'px;height:' + size + 'px;"';
+        html += ' aria-hidden="true">';
         if (!e || typeCheck !== 'type2') {
-          html += '  <path';
-          html += '    class="circle-bg"';
-          html += '    d="M18 2.0845';
-          html += '      a 15.9155 15.9155 0 0 1 0 31.831';
-          html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
-          html += '  />';
+          html += '<path';
+          html += ' class="circle-bg"';
+          html += ' d="M18 2.0845';
+          html += ' a 15.9155 15.9155 0 0 1 0 31.831';
+          html += ' a 15.9155 15.9155 0 0 1 0 -31.831"';
+          html += ' />';
         }
-        html += '  <path';
-        html += '    class="circle"';
-        html += '    stroke="' + color + '"';
-        html += '    stroke-dasharray="' + idx + ', 100"';
-        html += '    d="M18 2.0845';
-        html += '      a 15.9155 15.9155 0 0 1 0 31.831';
-        html += '      a 15.9155 15.9155 0 0 1 0 -31.831"';
-        html += '  />';
+        html += '<path';
+        html += ' class="circle"';
+        if (typeCheck === 'type1') {
+          html += ' style="';
+          html += '-webkit-animation-delay: ' + e * 0.3 + 's;';
+          html += 'animation-delay: ' + e * 0.3 + 's;';
+          html += '" ';
+        }
+        if (color) html += ' stroke="' + color + '"';
+        html += ' stroke-dasharray="' + idx + ', 100"';
+        html += ' d="M18 2.0845';
+        html += ' a 15.9155 15.9155 0 0 1 0 31.831';
+        html += ' a 15.9155 15.9155 0 0 1 0 -31.831"';
+        html += ' />';
         html += '</svg>';
         $(this).append(html);
         if (typeCheck == 'type2') {
           if (e) {
             $(this)
               .find('.circular-chart')
-              .css({ 'transform-origin': '50% 50%', transform: 'translate(-50%, -50%) rotate(' + 360 * (deg / 100) + 'deg)' });
+              .css({ transform: 'rotate(' + 360 * (deg / 100) + 'deg)' });
           }
           deg += idx;
+        }
+        $(this).role('img');
+        // $(this).children().unwrap();
+        if (size) {
+          const $thisLineBg = $(this).find('.circle-bg');
+          const $thisLineBgW = parseInt($thisLineBg.css('stroke-width'));
+          const $thisLine = $(this).find('.circle');
+          const $thisLineW = parseInt($thisLine.css('stroke-width'));
+          if (!e) {
+            $firstSize = size;
+            $firstBgLineW = $thisLineBgW;
+            $firstLineW = $thisLineW;
+          } else {
+            const $ratio = $firstSize / size;
+            $thisLineBg.css('stroke-width', $firstBgLineW * $ratio);
+            $thisLine.css('stroke-width', $firstLineW * $ratio);
+          }
         }
       });
     });
