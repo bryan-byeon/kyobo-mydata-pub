@@ -469,7 +469,7 @@
   }
 }
 
-.number-random2 {
+.number-random[data-random='type2'] {
   --animation-random-duration: 0.4s;
   > * {
     vertical-align: middle;
