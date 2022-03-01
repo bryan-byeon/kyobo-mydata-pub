@@ -4,7 +4,7 @@
   },
   {
     "id":"MDB02-0100001",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 소비스 소개",
@@ -15,7 +15,7 @@
   },
   {
     "id":"MDB02-0100002",
-    "url":"../../front/html/MY/MDB02-0100001.html",
+    "url":"../../front/html/MDB/MDB02-0100001.html",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 소비스 소개",
@@ -26,7 +26,7 @@
   },
   {
     "id":"MDB02-0100003",
-    "url":"../../front/html/MY/MDB02-0100001.html",
+    "url":"../../front/html/MDB/MDB02-0100001.html",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 소비스 소개",
@@ -37,7 +37,7 @@
   },
   {
     "id":"MDB02-0201001",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 가입",
@@ -48,7 +48,7 @@
   },
   {
     "id":"MDB02-0201003",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 가입",
@@ -60,7 +60,7 @@
   },
   {
     "id":"MDB02-0201006",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 가입",
@@ -71,7 +71,7 @@
   },
   {
     "id":"MDB02-0303003",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -82,7 +82,7 @@
   },
   {
     "id":"MDB02-0303004",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -93,7 +93,7 @@
   },
   {
     "id":"MDB02-0303005",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -104,7 +104,7 @@
   },
   {
     "id":"MDB02-0303007",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -116,7 +116,7 @@
   },
   {
     "id":"MDB02-0303008",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -128,7 +128,7 @@
   },
   {
     "id":"MDB02-0303009",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -140,7 +140,7 @@
   },
   {
     "id":"MDB02-0305004",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -151,7 +151,7 @@
   },
   {
     "id":"MDB02-0305006",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -164,7 +164,7 @@
   
   {
     "id":"MDB02-0306001",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -175,7 +175,7 @@
   },
   {
     "id":"MDB02-0306003",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -186,7 +186,7 @@
   },
   {
     "id":"MDB02-0306005",
-    "url":"../../front/html/MY/MDB02-0306001.html",
+    "url":"../../front/html/MDB/MDB02-0306001.html",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "금융자산",
@@ -198,7 +198,7 @@
   },
   {
     "id":"MDB02-0502002",
-    "url":"../../front/html/MY/",
+    "url":"../../front/html/MDB/",
     "type":"page",
     "depth2": "통합자산조회",
     "depth3": "마이데이터 설정",
