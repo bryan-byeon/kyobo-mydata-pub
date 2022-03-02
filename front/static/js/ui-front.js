@@ -4705,8 +4705,8 @@ const Body = {
     if (!$('html').hasClass('lock')) {
       Body.scrollTop = window.pageYOffset;
       const $wrap = $('#wrap');
-      const $wrapTop = $wrap.offset().top;
-      $wrap.css('top', Body.scrollTop * -1 + $wrapTop);
+      const $wrapTop = $('#wrap').length ? $wrap.offset().top : 0;
+      if ($wrapTop) $wrap.css('top', Body.scrollTop * -1 + $wrapTop);
       $('html').addClass('lock');
     }
   },

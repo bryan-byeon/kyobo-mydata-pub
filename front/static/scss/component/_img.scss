@@ -31,6 +31,13 @@
     background-image: url(../images/end/end-img-complate.png);
   }
 }
+.img-area {
+  text-align: center;
+  display: block;
+  img {
+    max-width: 100%;
+  }
+}
 .smooth-corners {
   mask-image: paint(smooth-corners);
 }
