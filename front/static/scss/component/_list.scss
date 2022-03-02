@@ -1,3 +1,4 @@
+// 내용없음
 .list-empty {
   padding: 10rem 0;
   text-align: center;
@@ -10,6 +11,7 @@
   }
 }
 
+// 금융로고 + 텍스트 조합
 .logo-info-txt {
   display: flex;
   align-items: center;
@@ -34,7 +36,7 @@
   }
   .txt-sub {
     font-size: 1.2rem;
-    color: #979797;
+    color: var(--gray-txt-color);
   }
   .txt-name {
     display: block;
@@ -43,6 +45,8 @@
     @include ellipsis(1);
   }
 }
+
+// 기관 연결
 .round-box-item {
   display: flex;
   align-items: center;
@@ -67,6 +71,45 @@
   }
 }
 
+// line-list
+.line-list-1 {
+  > li {
+    + li {
+      border-top: 1px solid var(--line-color);
+    }
+  }
+}
+.line-list-item-1 {
+  display: block;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  .section & {
+    @include outer(true);
+  }
+  .item-tit {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    color: var(--strong-txt-color);
+    font-weight: 500;
+    @include ellipsis(1);
+    [class*='i-ico-'] {
+      vertical-align: middle;
+    }
+    .i-ico-new {
+      margin-right: 0.8rem;
+    }
+    + .item-sub {
+      margin-top: 6px;
+    }
+  }
+  .item-sub {
+    font-size: 1.4rem;
+    color: var(--gray-txt-color);
+  }
+}
+
+// temp
 .file-list {
   > li + li {
     margin-top: 0.8rem;

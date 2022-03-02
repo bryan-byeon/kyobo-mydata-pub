@@ -124,7 +124,7 @@
 // 텍스트리스트
 .txt-list {
   font-size: 1.4rem;
-  color: #979797;
+  color: var(--gray-txt-color);
   line-height: 1.4286;
   & + .txt_list {
     margin-top: 1.5rem;
@@ -340,7 +340,7 @@
   .terms-txt-sub {
     margin-top: 1rem;
     font-size: 1.4rem;
-    color: #979797;
+    color: var(--gray-txt-color);
   }
   .terms-box {
     margin-top: 0.8rem;

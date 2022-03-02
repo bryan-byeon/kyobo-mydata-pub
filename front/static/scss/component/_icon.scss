@@ -21,6 +21,7 @@
 
 [class*='i-ico-'],
 [class*='i-btn-'],
+[class*='i-img-'],
 [class*='i-ani-'] {
   position: relative;
   display: inline-block;
@@ -276,3 +277,11 @@
   // background-image: url(../images/icon/ico-check-on.png);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12' viewBox='0 0 14 12' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13.6486 0.331936C14.0965 0.795514 14.1192 1.57218 13.6993 2.06666L5.744 11.6121C5.53385 11.8596 5.24028 12 4.933 12C4.62573 12 4.33216 11.8596 4.12201 11.6121L0.300667 7.11211C-0.119242 6.61763 -0.096548 5.84097 0.351354 5.37739C0.799257 4.91381 1.50276 4.93886 1.92266 5.43335L4.933 8.97832L12.0773 0.387894C12.4972 -0.106589 13.2007 -0.131642 13.6486 0.331936Z' fill='white'/%3E%3C/svg%3E");
 }
+.i-ico-new {
+  width: 2rem;
+  height: 2rem;
+  // background-image: url(../images/icon/ico-new.png);
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23FE7D65'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.76283 5.28849C7.06909 5.1864 7.40631 5.29174 7.6 5.55L12.25 11.75V6C12.25 5.58579 12.5858 5.25 13 5.25C13.4142 5.25 13.75 5.58579 13.75 6V14C13.75 14.3228 13.5434 14.6094 13.2372 14.7115C12.9309 14.8136 12.5937 14.7083 12.4 14.45L7.75 8.25V14C7.75 14.4142 7.41421 14.75 7 14.75C6.58579 14.75 6.25 14.4142 6.25 14V6C6.25 5.67718 6.45657 5.39058 6.76283 5.28849Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+
+// i-img-
