@@ -1693,7 +1693,11 @@ ui.Tab = {
         if ($panelWrapH !== $setHeight) {
           $panelWrap.css('height', $panelWrapH).animate({ height: $setHeight }, 300, function () {
             $panelWrap.removeCss('height');
-            if ($panel.length && isScroll) ui.Scroll.inScreen(panel);
+            if ($panel.length && isScroll) {
+              const $tabBtn = $('[href="#' + panel + '"]');
+              const $tab = $tabBtn.length ? $tabBtn.closest('.tab-inner') : panel;
+              ui.Scroll.inScreen($tab, panel);
+            }
           });
         }
       }
@@ -1869,7 +1873,11 @@ ui.Tab = {
       const $href = $this.attr('href');
       const $closest = $this.closest('.ui-tab');
       const $siblings = $closest.data('target');
-      ui.Tab.panelActive($href, $siblings, true, true);
+      if ($this.hasClass('auto-scroll')) {
+        ui.Tab.panelActive($href, $siblings, true, true);
+      } else {
+        ui.Tab.panelActive($href, $siblings, true);
+      }
       const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
       const $tabInner = $tab.closest('.tab-inner');
       if ($tabInner.length) {
