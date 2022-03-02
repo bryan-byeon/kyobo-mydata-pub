@@ -1,13 +1,14 @@
 // 내용없음
 .list-empty {
-  padding: 10rem 0;
+  padding: 12rem 0;
   text-align: center;
+  font-size: 1.6rem;
   [class*='i-ico-'] {
     vertical-align: top;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
   }
   p {
-    color: #999;
+    color: var(--gray-txt-color);
   }
 }
 
@@ -110,17 +111,14 @@
     }
   }
   .item-tit {
-    display: flex;
-    align-items: center;
     font-size: 1.6rem;
+    line-height: 2rem;
     color: var(--strong-txt-color);
     font-weight: 500;
     @include ellipsis(1);
-    [class*='i-ico-'] {
-      vertical-align: middle;
-    }
     .i-ico-new {
       margin-right: 0.8rem;
+      vertical-align: -0.3rem;
     }
     + .item-sub {
       margin-top: 0.6rem;
@@ -129,6 +127,42 @@
   .item-sub {
     font-size: 1.4rem;
     color: var(--gray-txt-color);
+  }
+}
+
+// list-view
+[class*='list-view-'] {
+  word-break: break-all;
+  img {
+    max-width: 100%;
+  }
+}
+.list-view-1 {
+  .view-tit {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    font-weight: 700;
+  }
+  .view-info {
+    display: flex;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    margin-top: 0.8rem;
+    .date {
+      color: var(--gray-txt-color);
+    }
+    .right {
+      margin-left: auto;
+    }
+  }
+  .view-cont {
+    margin-top: 3.2rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    min-height: 10rem;
+  }
+  .evt-view {
+    text-align: center;
   }
 }
 
@@ -159,37 +193,7 @@
   padding-bottom: 1.3rem;
   border-bottom: 0.1rem solid #eee;
 }
-.list-view {
-  padding-top: 1.2rem;
-  word-break: break-all;
-  img {
-    max-width: 100%;
-  }
-  .list-view-tit {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 500;
-  }
-  .list-view-info {
-    display: flex;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
 
-    margin-top: 1.2rem;
-    .right {
-      margin-left: auto;
-    }
-  }
-  .list-view-cont {
-    padding-top: 2.4rem;
-    margin-top: 2rem;
-    border-top: 0.1rem solid #eee;
-    font-size: 1.4rem;
-    line-height: 2.2rem;
-
-    min-height: 20.1rem;
-  }
-}
 .faq-list.folding-list {
   border-width: 0;
   > li {

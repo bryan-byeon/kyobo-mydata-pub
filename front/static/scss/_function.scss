@@ -77,3 +77,6 @@
     }
   }
 }
+@function -xyPercent($width, $height) {
+  @return ($height / $width) * 100%;
+}

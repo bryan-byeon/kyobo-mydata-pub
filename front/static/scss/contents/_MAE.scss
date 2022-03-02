@@ -1,1 +1,72 @@
- 
+.event-list {
+  > li {
+    + li {
+      margin-top: 3.2rem;
+    }
+  }
+  &.end {
+    .event-list-item {
+      .img-box {
+        &:after {
+          content: '이벤트가\A 종료되었습니다.';
+          white-space: pre;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #fff;
+          font-weight: 500;
+          font-size: 1.8rem;
+          line-height: 2.6rem;
+          @include dimm;
+        }
+      }
+    }
+  }
+}
+.event-list-item {
+  .img-box {
+    &:before {
+      padding-top: -xyPercent(312, 192);
+    }
+  }
+  .item-link {
+    display: block;
+    .section & {
+      @include outer(true);
+    }
+    + .btn-wrap {
+      margin-top: 1.6rem;
+    }
+  }
+  .item-tit {
+    margin-top: 1.6rem;
+    font-size: 1.6rem;
+    line-height: 2.3rem;
+    color: var(--strong-txt-color);
+    .i-ico-new {
+      margin-right: 0.8rem;
+      vertical-align: -0.3rem;
+    }
+    + .item-sub {
+      margin-top: 0.8rem;
+    }
+  }
+  .item-sub {
+    display: flex;
+    font-size: 1.4rem;
+    color: var(--gray-txt-color);
+    .item-point {
+      margin-left: auto;
+      color: var(--primary-color);
+      strong {
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -111,8 +111,8 @@
 }
 
 @mixin dimm {
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.5);
+  // backdrop-filter: blur(1px);
 }
 
 @mixin ios-top($key, $value: 0, $miuns: false) {
