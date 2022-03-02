@@ -427,7 +427,7 @@ ui.Common = {
     const $headLeftW = $headLeft.outerWidth();
     const $headRight = $header.find('.head-right');
     const $headRightW = $headRight.outerWidth();
-    if (!$headLeft.length) {
+    if (!$headLeft.length && !$titleEl.hasClass('t-left')) {
       $titleEl.before('<div class="head-left" style="width:' + $headRightW + 'px;" aria-hidden="true"></div>');
     } else if (!$headRight.length) {
       $titleEl.after('<div class="head-right" style="width:' + $headLeftW + 'px;" aria-hidden="true"></div>');
@@ -535,7 +535,7 @@ ui.Common = {
     const btnTop = {
       button: '#btnTop',
       label: '컨텐츠 상단으로 이동',
-      text: '맨 위로',
+      text: 'TOP',
       min: 100,
       onClass: 'on',
       hoverClass: 'hover',
