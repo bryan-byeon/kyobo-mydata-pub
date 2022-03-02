@@ -913,16 +913,10 @@ $bdTypes: (solid, dashed, dotted);
 
 // filter
 .blur img {
-  -webkit-filter: blur(6px);
-  -moz-filter: blur(6px);
   filter: blur(6px);
 }
 .grayscale img {
-  filter: gray;
-  -moz-filter: grayscale(1);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 // etc

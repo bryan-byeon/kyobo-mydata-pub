@@ -80,11 +80,34 @@
   }
 }
 .line-list-item-1 {
-  display: block;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  &:where(a) {
+    display: block;
+    padding-right: 3.2rem;
+    &:after {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -1.2rem;
+      @include arr-right-24;
+    }
+    &:visited,
+    &.visited {
+      .item-tit {
+        font-weight: 400;
+        color: var(--gray-txt-color);
+      }
+    }
+  }
   .section & {
     @include outer(true);
+    &:where(a) {
+      padding-right: 5.6rem;
+      &:after {
+        right: 2.4rem;
+      }
+    }
   }
   .item-tit {
     display: flex;
@@ -100,7 +123,7 @@
       margin-right: 0.8rem;
     }
     + .item-sub {
-      margin-top: 6px;
+      margin-top: 0.6rem;
     }
   }
   .item-sub {
