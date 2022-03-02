@@ -29,6 +29,7 @@
   height: 2.4rem;
   @include bg-etc;
   flex-shrink: 0;
+  font-size: 0;
 }
 .i-ani-success,
 .i-ani-warning {
@@ -305,4 +306,24 @@ a.visited {
   }
 }
 
+.i-ico-refresh {
+  width: 1.6rem;
+  height: 1.6rem;
+  background-image: url('../images/icon/ico-refresh@3x.png');
+}
 // i-img-
+.i-img-victory {
+  width: 2.8rem;
+  height: 2.8rem;
+  background-image: url('../images/icon/ico-victory@3x.png');
+}
+.i-img-trophy {
+  width: 2.8rem;
+  height: 2.8rem;
+  background-image: url('../images/icon/ico-trophy@3x.png');
+}
+.i-img-point {
+  width: 2.8rem;
+  height: 2.8rem;
+  background-image: url('../images/icon/ico-point@3x.png');
+}

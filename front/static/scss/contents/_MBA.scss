@@ -115,23 +115,22 @@
     top: 50%;
     left: 50%;
     z-index: 1;
-    width: 4.8rem;
-    height: 3.6rem;
+    width: 5.8rem;
+    height: 4.6rem;
     text-align: center;
     transform: translate(-50%, -50%);
-
     span {
       opacity: 0;
       display: flex;
       width: 100%;
       height: 100%;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       color: #fff;
       align-items: center;
       justify-content: center;
       background: linear-gradient(180deg, #757575 0%, #363636 100%);
       box-shadow: 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
-      border-radius: 1.8rem;
+      border-radius: 2.8rem;
     }
   }
   .progressbar {
@@ -140,8 +139,9 @@
     left: 0;
     z-index: 1;
     width: 0%;
-    height: 0.2rem;
-    background: rgba(0, 0, 0, 0.4);
+    height: 0.3rem;
+    background: #363636;
+    transform: translateY(-50%);
     transition: all 3s linear 2s;
   }
 
@@ -169,6 +169,7 @@
       transform: translateY(0);
     }
     .vs {
+      animation: vsShake 1.5s ease-in-out infinite both;
       span {
         animation: bounceIn 0.5s ease 0.6s both;
       }
@@ -195,6 +196,29 @@
       opacity: 0;
       transition: all 0.3s ease;
     }
+  }
+}
+
+@keyframes vsShake {
+  10%,
+  90% {
+    transform: translate(-50%, -50%) translate3d(0, -1px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate(-50%, -50%) translate3d(0, 2px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate(-50%, -50%) translate3d(0, -4px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate(-50%, -50%) translate3d(0, 4px, 0);
   }
 }
 
@@ -248,10 +272,15 @@
     padding: 5.1rem 0;
     text-align: center;
     .tit {
-      font-size: 8rem;
-      color: #fff;
-      font-weight: bold;
-      line-height: 1;
+      position: relative;
+      &:before {
+        content: '승리';
+        display: block;
+        font-size: 8rem;
+        color: #fff;
+        font-weight: bold;
+        line-height: 1;
+      }
     }
     .number {
       margin-top: 2.4rem;
@@ -345,6 +374,11 @@
       }
     }
     .result-info {
+      .tit {
+        &:before {
+          content: '패배';
+        }
+      }
       .img-result-box {
         .img {
           img {
@@ -403,7 +437,10 @@
     }
     .result-info {
       .tit {
-        color: #424242;
+        &:before {
+          content: '무승부';
+          color: #424242;
+        }
       }
       .number {
         color: #606060;
@@ -485,5 +522,309 @@
   }
   100% {
     transform: translateX(-33.333%);
+  }
+}
+
+.match-animation-wrap {
+  #header {
+    position: fixed;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+  .match-result-wrap {
+    position: fixed;
+    overflow: hidden;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    padding-top: 4rem;
+    height: 100%;
+    background: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    .section {
+      padding-top: var(--base-padding);
+      padding-bottom: var(--base-padding);
+    }
+
+    .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #606060;
+    }
+  }
+  .btn-wrap {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+  }
+}
+
+.match-animation-wrap.action {
+  #header {
+    position: sticky;
+    transform: translateY(0%);
+    opacity: 1;
+    z-index: 11;
+    visibility: visible;
+    transition: all 0.3s ease 0.3s;
+  }
+
+  .match-result-wrap {
+    z-index: 10;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* 매치현황 */
+.my-match-info {
+  margin-top: 1.4rem;
+  ul {
+    padding: 2.4rem;
+    li {
+      display: flex;
+      align-items: center;
+      i {
+        margin-right: 1.2rem;
+      }
+      span {
+        padding: 0 0.4rem;
+      }
+      + li {
+        margin-top: 2.4rem;
+      }
+      .updown {
+        margin-left: 0.4rem;
+        font-size: 1.2rem;
+        vertical-align: middle;
+
+        &:before {
+          content: '';
+          display: inline-block;
+          font-size: 1.2rem;
+          vertical-align: middle;
+          line-height: 1;
+          margin-top: -0.2rem;
+        }
+        &.up {
+          &:before {
+            content: '▲';
+          }
+          color: #3887fd;
+        }
+        &.down {
+          &:before {
+            content: '▼';
+          }
+          color: #eb5757;
+        }
+      }
+    }
+  }
+}
+
+.match-score-box {
+  padding: 2.4rem;
+  margin-top: 1.2rem;
+  .tit-box {
+    display: flex;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #ebebeb;
+    .tit {
+      font-size: 1.6rem;
+      strong {
+        font-weight: bold;
+      }
+    }
+    .time {
+      flex: 0 0 auto;
+      margin-left: auto;
+      padding-top: 0.2rem;
+      font-size: 1.2rem;
+      color: #606060;
+    }
+  }
+  .score-list {
+    margin-top: 2.4rem;
+    .record {
+      display: flex;
+      justify-content: space-between;
+      & > div {
+        display: flex;
+        align-items: center;
+        .img-box {
+          width: 6rem;
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -0.6rem;
+            left: 50%;
+            width: 3rem;
+            height: 1.9rem;
+            background: url('../images/icon/ico_crown.png') no-repeat center center / 100%;
+            transform: translateX(-50%);
+          }
+        }
+        .text {
+          margin: 0 0.8rem;
+          font-size: 1.6rem;
+          font-weight: 500;
+          color: #424242;
+        }
+
+        &:nth-child(2) {
+          flex-flow: row-reverse;
+          .img-box {
+            img {
+              filter: grayscale(100);
+            }
+            &:after {
+              display: none;
+            }
+          }
+          .text {
+            color: #979797;
+          }
+        }
+      }
+    }
+    .point-box {
+      margin-top: 0.8rem;
+      span {
+        display: flex;
+        align-items: center;
+        color: #424242;
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 2rem;
+          height: 2rem;
+          margin-right: 0.6rem;
+          vertical-align: middle;
+          background: url('../images/icon/ico-point-small.png') no-repeat center center / 100%;
+        }
+        + span {
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+
+  &.loss {
+    .score-list {
+      .record {
+        & > div {
+          &:nth-child(1) {
+            .img-box {
+              img {
+                filter: grayscale(100);
+              }
+              &:after {
+                display: none;
+              }
+            }
+            .text {
+              color: #979797;
+            }
+          }
+          &:nth-child(2) {
+            .img-box {
+              img {
+                filter: grayscale(0);
+              }
+              &:after {
+                display: block;
+              }
+            }
+            .text {
+              color: #424242;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.draw {
+    .score-list {
+      .record {
+        & > div {
+          &:nth-child(1) {
+            .img-box {
+              img {
+                filter: grayscale(0);
+              }
+              &:after {
+                display: none;
+              }
+            }
+            .text {
+              color: #424242;
+            }
+          }
+          &:nth-child(2) {
+            .img-box {
+              img {
+                filter: grayscale(0);
+              }
+              &:after {
+                display: none;
+              }
+            }
+            .text {
+              color: #424242;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-100-box {
+  margin: 0 -2.4rem;
+  > a {
+    display: flex;
+    padding: 1.8rem 2.4rem 1.8rem 1.4rem;
+    align-items: center;
+    .number {
+      display: block;
+      flex: 0 0 auto;
+      width: 5rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #212121;
+    }
+    .img-box {
+      flex: 0 0 auto;
+      width: 4.4rem;
+      margin: 0 1.2rem 0 0.7rem;
+    }
+    .text-box {
+      overflow: hidden;
+      flex: 1 1 auto;
+      .name {
+        overflow: hidden;
+        font-size: 1.6rem;
+        color: #424242;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .score {
+        margin-top: 0.3rem;
+        font-size: 1.2rem;
+        color: #979797;
+      }
+    }
   }
 }
