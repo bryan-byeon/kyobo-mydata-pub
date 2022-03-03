@@ -132,7 +132,8 @@ div.checkbox.ty2:not(.btn, .switch, .switch2) {
       }
       &:checked ~ .lbl {
         border-color: var(--primary-color);
-        color: var(--strong-txt-color);
+        // color: var(--strong-txt-color);
+        color: var(--primary-color);
         font-weight: 500;
       }
       &:checked:not(:disabled) ~ .lbl {

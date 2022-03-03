@@ -16,233 +16,232 @@
     </script>
   </head>
   <body>
-    <article id="wrap">
-      <!-- 헤더 -->
-      <header id="header">
-        <div>
-          <h1 class="t-left"></h1>
-          <div class="head-right">
-            <button type="button" class="head-close button" role="button" aria-label="화면닫기"></button>
+    <div id="fullPopup" class="popup full" role="dialog" aria-hidden="true">
+      <article class="pop-wrap">
+        <div class="pop-head">
+          <div>
+            <h1>로즈마리스테이크맛있어요 매치 전적</h1>
+            <a href="#" class="pop-close ui-pop-close" role="button" aria-label="팝업창 닫기"></a>
           </div>
         </div>
-      </header>
-      <!-- //헤더 -->
-
-      <!-- 컨테이너(컨텐츠) -->
-      <main id="container">
-        <div class="section">
-          <h1 class="tit-h1">매치 현황</h1>
-          <div class="flex space-around mt-24 align-center">
-            <div class="flex flex-11 align-center">
-              <p class="fz-12 fc-818892">최근 업데이트 2022.12.12 16:29</p>
-              <div class="tooltip-wrap">
-                <button type="button" class="tooltip-btn" aria-label="자세한 내용 확인"></button>
-                <div class="tooltip-cont">
-                  매치 랭킹과 승점은<br />
-                  오늘의 매치를 완료할 때마다 실시간으로 반영되요.<br /><br />
-                  매치의 승패에 따라 획득한 승점이 누적되어 쌓이면,<br />
-                  내 승점과 다른 사용자의 승점을 비교해서 랭킹이 매겨져요.<br /><br />
-                  실시간으로 바뀌는 지금의 내 랭킹과 승점이<br />
-                  어제 마지막 매치 이용보다 얼마나 상승/하락 했는지,<br />
-                  또 나의 승률은 어떻게 변했는지 한 눈에 알 수 있어요.
+        <div class="pop-body">
+          <div class="section">
+            <h1 class="tit-h1">매치 현황</h1>
+            <div class="flex space-around mt-24 align-center">
+              <div class="flex flex-11 align-center">
+                <p class="fz-12 fc-818892">최근 업데이트 2022.12.12 16:29</p>
+                <div class="tooltip-wrap">
+                  <button type="button" class="tooltip-btn" aria-label="자세한 내용 확인"></button>
+                  <div class="tooltip-cont">
+                    매치 랭킹과 승점은<br />
+                    오늘의 매치를 완료할 때마다 실시간으로 반영되요.<br /><br />
+                    매치의 승패에 따라 획득한 승점이 누적되어 쌓이면,<br />
+                    내 승점과 다른 사용자의 승점을 비교해서 랭킹이 매겨져요.<br /><br />
+                    실시간으로 바뀌는 지금의 내 랭킹과 승점이<br />
+                    어제 마지막 매치 이용보다 얼마나 상승/하락 했는지,<br />
+                    또 나의 승률은 어떻게 변했는지 한 눈에 알 수 있어요.
+                  </div>
                 </div>
               </div>
+              <a href="#" class="inline-flex ml-0"><i class="i-ico-refresh">새로고침</i></a>
             </div>
-            <a href="#" class="inline-flex ml-0"><i class="i-ico-refresh">새로고침</i></a>
-          </div>
 
-          <div class="my-match-info">
-            <ul>
-              <li>
-                <i class="i-img-trophy"></i>
-                <p class="fz-18 fc-424242 fw-500">99,999위</p>
-                <span class="fz-12 fc-979797"> / </span>
-                <p class="fz-12 fc-979797">9,999,999</p>
-                <!-- 
-                  상승 : up 
-                  하락 : down
-                -->
-                <p class="updown up">85</p>
-              </li>
-              <li>
-                <i class="i-img-point"></i>
-                <p class="fz-18 fc-424242 fw-500">650점</p>
-                <span class="fz-12 fc-979797"> / </span>
-                <p class="fz-12 fc-979797">9,999,999</p>
-                <!-- 
-                  상승 : up 
-                  하락 : down
-                -->
-                <p class="updown down">85</p>
-              </li>
-              <li>
-                <i class="i-img-victory"></i>
-                <p class="fz-18 fc-424242 fw-500">11승 3무 3패</p>
-                <span class="fz-12 fc-979797"> / </span>
-                <p class="fz-12 fc-979797">승률 56%</p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="tab-line-menu ui-tab mt-24">
-            <div class="tab-inner">
-              <i class="tab-line" aria-hidden="true"></i>
-              <ul class="tab-list">
-                <li class="tab"><a href="#lineTabCont1">매치 전적</a></li>
-                <li class="tab"><a href="#lineTabCont2">TOP 100</a></li>
+            <div class="my-match-info">
+              <ul>
+                <li>
+                  <i class="i-img-trophy"></i>
+                  <p class="fz-18 fc-424242 fw-500">99,999위</p>
+                  <span class="fz-12 fc-979797"> / </span>
+                  <p class="fz-12 fc-979797">9,999,999</p>
+                  <!-- 
+                    상승 : up 
+                    하락 : down
+                  -->
+                  <p class="updown up">85</p>
+                </li>
+                <li>
+                  <i class="i-img-point"></i>
+                  <p class="fz-18 fc-424242 fw-500">650점</p>
+                  <span class="fz-12 fc-979797"> / </span>
+                  <p class="fz-12 fc-979797">9,999,999</p>
+                  <!-- 
+                    상승 : up 
+                    하락 : down
+                  -->
+                  <p class="updown down">85</p>
+                </li>
+                <li>
+                  <i class="i-img-victory"></i>
+                  <p class="fz-18 fc-424242 fw-500">11승 3무 3패</p>
+                  <span class="fz-12 fc-979797"> / </span>
+                  <p class="fz-12 fc-979797">승률 56%</p>
+                </li>
               </ul>
             </div>
-          </div>
-          <div class="tab-panels">
-            <!-- .tab-panels 영역 없어도 됨(전환될때 인터렉션용) -->
-            <div id="lineTabCont1" class="tab-panel">
-              <div class="list-empty">
-                <i class="i-ico-warning-40" aria-hidden="true"></i>
-                <p>아직 수익률 매치를 <br />진행하지 않았어요.</p>
-              </div>
-              <!--
-                기본 : 승리
-                loss : 패배
-                draw : 무승부
-              -->
-              <!-- 매치 결과 - 승리 -->
-              <div class="match-score-box">
-                <div class="tit-box">
-                  <p class="tit">
-                    <strong>닉네임닉네임닉네임닉네임</strong>님 <br />
-                    과의 매치에서 <strong class="fc-up">승리</strong> 했어요!
-                  </p>
-                  <p class="time">33분 전</p>
-                </div>
-                <div class="score-list">
-                  <div class="record">
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">14.05%</p>
-                    </div>
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">14.05%</p>
-                    </div>
-                  </div>
-                  <div class="point-box">
-                    <span>3점</span>
-                    <span>15점 (3연승)</span>
-                  </div>
-                </div>
-              </div>
-              <!-- //매치 결과 -->
 
-              <!-- 매치 결과 - 패배 -->
-              <div class="match-score-box loss">
-                <div class="tit-box">
-                  <p class="tit">
-                    <strong>우럭아힘내</strong>님<br />
-                    보다 조금 더 분발 해야겠어요.
-                  </p>
-                  <p class="time">33분 전</p>
-                </div>
-                <div class="score-list">
-                  <div class="record">
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">14.05%</p>
-                    </div>
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">14.05%</p>
-                    </div>
-                  </div>
-                  <div class="point-box">
-                    <span>3점</span>
-                    <span>15점 (3연승)</span>
-                  </div>
-                </div>
-              </div>
-              <!-- //매치 결과 -->
-
-              <!-- 매치 결과 - 무승부 -->
-              <div class="match-score-box draw">
-                <div class="tit-box">
-                  <p class="tit">
-                    <strong>우럭아힘내</strong>님<br />
-                    보다 조금 더 분발 해야겠어요.
-                  </p>
-                  <p class="time">33분 전</p>
-                </div>
-                <div class="score-list">
-                  <div class="record">
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">50%</p>
-                    </div>
-                    <div>
-                      <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                      <p class="text">50%</p>
-                    </div>
-                  </div>
-                  <div class="point-box">
-                    <span>3점</span>
-                    <span>15점 (3연승)</span>
-                  </div>
-                </div>
-              </div>
-              <!-- //매치 결과 -->
-            </div>
-            <div id="lineTabCont2" class="tab-panel">
-              <div class="list-empty">
-                <i class="i-ico-warning-40" aria-hidden="true"></i>
-                <p>아직 수익률 매치를 <br />진행하지 않았어요.</p>
-              </div>
-
-              <div class="top-100-box">
-                <a href="#">
-                  <span class="number">1</span>
-                  <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                  <div class="text-box">
-                    <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
-                    <p class="score">910점</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <span class="number">2</span>
-                  <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                  <div class="text-box">
-                    <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
-                    <p class="score">910점</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <span class="number">3</span>
-                  <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                  <div class="text-box">
-                    <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
-                    <p class="score">910점</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <span class="number">4</span>
-                  <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
-                  <div class="text-box">
-                    <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
-                    <p class="score">910점</p>
-                  </div>
-                </a>
+            <div class="tab-line-menu ui-tab mt-24">
+              <div class="tab-inner">
+                <i class="tab-line" aria-hidden="true"></i>
+                <ul class="tab-list">
+                  <li class="tab"><a href="#lineTabCont1">매치 전적</a></li>
+                  <li class="tab"><a href="#lineTabCont2">TOP 100</a></li>
+                </ul>
               </div>
             </div>
-          </div>
-          <div class="btn-wrap bottom-fixed">
-            <div class="flex">
-              <button type="button" class="button h60 primary">오늘의 매치 하기</button>
+            <div class="tab-panels">
+              <!-- .tab-panels 영역 없어도 됨(전환될때 인터렉션용) -->
+              <div id="lineTabCont1" class="tab-panel">
+                <div class="list-empty">
+                  <i class="i-ico-warning-40" aria-hidden="true"></i>
+                  <p>아직 수익률 매치를 <br />진행하지 않았어요.</p>
+                </div>
+                <!--
+                  기본 : 승리
+                  loss : 패배
+                  draw : 무승부
+                -->
+                <!-- 매치 결과 - 승리 -->
+                <div class="match-score-box">
+                  <div class="tit-box">
+                    <p class="tit">
+                      <strong>닉네임닉네임닉네임닉네임</strong>님 <br />
+                      과의 매치에서 <strong class="fc-up">승리</strong> 했어요!
+                    </p>
+                    <p class="time">33분 전</p>
+                  </div>
+                  <div class="score-list">
+                    <div class="record">
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">14.05%</p>
+                      </div>
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">14.05%</p>
+                      </div>
+                    </div>
+                    <div class="point-box">
+                      <span>3점</span>
+                      <span>15점 (3연승)</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- //매치 결과 -->
+
+                <!-- 매치 결과 - 패배 -->
+                <div class="match-score-box loss">
+                  <div class="tit-box">
+                    <p class="tit">
+                      <strong>우럭아힘내</strong>님<br />
+                      보다 조금 더 분발 해야겠어요.
+                    </p>
+                    <p class="time">33분 전</p>
+                  </div>
+                  <div class="score-list">
+                    <div class="record">
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">14.05%</p>
+                      </div>
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">14.05%</p>
+                      </div>
+                    </div>
+                    <div class="point-box">
+                      <span>3점</span>
+                      <span>15점 (3연승)</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- //매치 결과 -->
+
+                <!-- 매치 결과 - 무승부 -->
+                <div class="match-score-box draw">
+                  <div class="tit-box">
+                    <p class="tit">
+                      <strong>우럭아힘내</strong>님<br />
+                      보다 조금 더 분발 해야겠어요.
+                    </p>
+                    <p class="time">33분 전</p>
+                  </div>
+                  <div class="score-list">
+                    <div class="record">
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">50%</p>
+                      </div>
+                      <div>
+                        <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                        <p class="text">50%</p>
+                      </div>
+                    </div>
+                    <div class="point-box">
+                      <span>3점</span>
+                      <span>15점 (3연승)</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- //매치 결과 -->
+              </div>
+              <div id="lineTabCont2" class="tab-panel">
+                <div class="list-empty">
+                  <i class="i-ico-warning-40" aria-hidden="true"></i>
+                  <p>아직 수익률 매치를 <br />진행하지 않았어요.</p>
+                </div>
+
+                <div class="top-100-box">
+                  <a href="#">
+                    <span class="number">1</span>
+                    <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                    <div class="text-box">
+                      <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
+                      <p class="score">910점</p>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <span class="number">2</span>
+                    <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                    <div class="text-box">
+                      <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
+                      <p class="score">910점</p>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <span class="number">3</span>
+                    <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                    <div class="text-box">
+                      <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
+                      <p class="score">910점</p>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <span class="number">4</span>
+                    <p class="img-box"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+                    <div class="text-box">
+                      <p class="name">닉네임닉네임닉네임닉네임닉닉네임닉네임닉네임닉네임닉</p>
+                      <p class="score">910점</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </main>
-      <!-- 컨테이너(컨텐츠) -->
+        <div class="pop-foot">
+          <div>
+            <div class="flex">
+              <a href="#" class="button primary ui-pop-close">오늘의 매치 하기</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
 
-      <!-- 팝업 -->
-      <!-- //팝업 -->
-    </article>
-    <script></script>
+    <script>
+      $(function () {
+        Layer.open('#fullPopup');
+      });
+    </script>
   </body>
 </html>
