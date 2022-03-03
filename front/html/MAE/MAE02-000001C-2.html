@@ -59,7 +59,7 @@
                 </a>
                 <div class="btn-wrap">
                   <div class="flex">
-                    <a href="#" class="button line h52">당첨자 확인</a>
+                    <button type="button" class="button line h52" onclick="winnerPop()">당첨자 확인</button>
                   </div>
                 </div>
               </div>
@@ -98,5 +98,16 @@
       <!-- 팝업 -->
       <!-- //팝업 -->
     </article>
+    <script>
+      let isPopChage = false;
+      const winnerPop = function () {
+        if (isPopChage) {
+          Layer.alert('홍길동 회원님은 <strong class="fc-primary">당첨되셨습니다.</strong>', '축하드립니다.');
+        } else {
+          Layer.alert('홍길동 회원님은 <strong class="fc-primary">당첨자 명단에 없습니다.</strong><br />다음이벤트에 도전해주세요.', '다음기회에');
+        }
+        isPopChage = !isPopChage;
+      };
+    </script>
   </body>
 </html>

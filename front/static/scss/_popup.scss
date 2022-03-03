@@ -1,3 +1,7 @@
+:root {
+  --pop-move-time: 0.45s;
+  --pop-dimm-time: 0.15s;
+}
 /*popup*/
 .pop-wrap {
   position: relative;
@@ -144,7 +148,7 @@
   z-index: 200;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0);
-  transition: background 0.45s 0.15s;
+  transition: background var(--pop-move-time) var(--pop-dimm-time);
   .pop-wrap {
     overflow-x: hidden;
     overflow-y: auto;
@@ -159,7 +163,7 @@
     max-height: 100%;
     background-color: #fff;
     transform: translate3d(0, 120%, 0);
-    transition: transform 0.45s, margin 0.45s, visibility 0.45s;
+    transition: transform var(--pop-move-time), margin var(--pop-move-time), visibility var(--pop-move-time);
     visibility: hidden;
   }
 
@@ -451,7 +455,7 @@
     > .pop-scl-wrap,
     > .pop-wrap {
       transform: translate3d(0, 0, 0);
-      transition-delay: 0.15s;
+      transition-delay: var(--pop-dimm-time);
       visibility: visible;
     }
   }

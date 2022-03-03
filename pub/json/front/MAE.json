@@ -38,7 +38,8 @@
     "type":"page",
     "depth2": "이벤트",
     "name": "(진행중) 이벤트 목록",
-    "worker": "안효주"
+    "worker": "안효주",
+    "complete": "2022-03-22"
   },
   {
     "id":"MAE02-000001C-2",
@@ -46,7 +47,8 @@
     "type":"page",
     "depth2": "이벤트",
     "name": "(종료) 이벤트 목록",
-    "worker": "안효주"
+    "worker": "안효주",
+    "complete": "2022-03-22"
   },
   {
     "id":"MAE02-000002C",
@@ -54,14 +56,7 @@
     "type":"page",
     "depth2": "이벤트",
     "name": "이벤트 상세",
-    "worker": "안효주"
-  },
-  {
-    "id":"MAE02-0000p01",
-    "url":"../../front/html/MAE/",
-    "type":"pop",
-    "depth2": "이벤트",
-    "name": "이벤트 공유하기",
-    "worker": "안효주"
+    "worker": "안효주",
+    "complete": "2022-03-22"
   }
 ]

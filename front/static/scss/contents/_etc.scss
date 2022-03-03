@@ -1,5 +1,4 @@
 // 임시 (삭제 될 css)
-
 .check-btn-grid.pay-check-btn {
   .radio.btn {
     .lbl {
@@ -35,32 +34,6 @@
   }
 }
 
-.address-list-btn {
-  display: flex;
-  align-items: center;
-  > .left {
-    flex: 1 1 auto;
-    padding-right: 2rem;
-  }
-  > .right {
-    margin-left: auto;
-  }
-}
-
-.address-item {
-  border: 0.1rem solid #eee;
-  border-radius: 0.4rem;
-  padding: 2rem 1.6rem 1.6rem;
-  .txt-info-1 {
-    margin-top: 0.8rem;
-  }
-  .address-list-btn {
-    margin-top: 0.8rem;
-  }
-  + .address-item {
-    margin-top: 1.2rem;
-  }
-}
 .img-box-wrap {
   margin-top: 1.2rem;
   display: flex;
@@ -86,185 +59,6 @@
   }
 }
 
-.product-img {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
-  > img {
-    pointer-events: none;
-    @include img-fit(true);
-  }
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.03);
-  }
-  &.soldout:after {
-    content: '품절' !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 2rem;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-}
-.product-list-item {
-  position: relative;
-  display: block;
-  .product-cont {
-    position: relative;
-  }
-  .inner {
-    display: block;
-    padding: 1.2rem 1.6rem 0;
-  }
-  .product-name {
-    line-height: 1.9rem;
-    height: 3.8rem;
-  }
-  .product-price-wrap {
-    position: relative;
-    min-height: 4rem;
-    margin-top: 0.6rem;
-    padding-right: 5.2rem;
-  }
-  .product-rating {
-    margin-top: 0.8rem;
-  }
-  .product-badge {
-    margin-top: 0.9rem;
-  }
-  .btn-product-cart {
-    position: absolute;
-    right: 1.6rem;
-    top: 5.6rem;
-  }
-  &.soldout:after {
-    content: '품절' !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 2rem;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    pointer-events: none;
-  }
-  &.round-line {
-    overflow: hidden;
-    border-radius: 1.2rem;
-    .product-img {
-      border-radius: 1.2rem 1.2rem 0 0;
-    }
-    .prd-badge.top {
-      top: 1.2rem;
-      right: 1.2rem;
-    }
-    .product-cont {
-      border: 0.1rem solid #eee;
-      border-top-width: 0;
-      border-radius: 0 0 1.2rem 1.2rem;
-      .inner {
-        padding: 2rem 1.6rem;
-      }
-    }
-    .product-price-wrap {
-      display: flex;
-      min-height: auto;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .product-price:not(.line-through) {
-      strong {
-        font-size: 1.8rem;
-      }
-      + .product-price {
-        margin-left: 0.8rem;
-      }
-    }
-
-    .btn-product-cart {
-      top: auto;
-      bottom: 1.6rem;
-    }
-    &.soldout:after {
-      font-size: 4rem;
-    }
-  }
-}
-.product-scl-list {
-  .section & {
-    @include outer;
-  }
-  > ul {
-    display: flex;
-    @include scroll-x;
-    @include scroll-hide;
-    > li {
-      padding: 0 0.8rem;
-      &:first-child {
-        padding-left: 2rem;
-      }
-      &:last-child {
-        padding-right: 2rem;
-      }
-    }
-  }
-  .product-list-item {
-    width: 20rem;
-    border-radius: 1.2rem;
-    overflow: hidden;
-    .product-img {
-      &:after {
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8) 107%);
-        opacity: 0.8;
-      }
-    }
-    .product-cont {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      color: #fff;
-    }
-    .inner {
-      padding: 2rem;
-    }
-    .product-name {
-      height: auto;
-    }
-    .product-price-wrap {
-      min-height: auto;
-      margin-top: 0.8rem;
-    }
-    .product-price {
-      line-height: 2.5rem;
-      strong {
-        font-size: 1.8rem;
-      }
-    }
-  }
-}
-
 .scl-list-wrap {
   margin-top: 2rem;
   .section & {
@@ -282,30 +76,6 @@
       &:last-child {
         padding-right: 2rem;
       }
-    }
-  }
-}
-.product-name {
-  word-break: break-all;
-  @include ellipsis(2);
-}
-.product-scl-item {
-  display: block;
-  width: 12.8rem;
-  .product-img {
-    border-radius: 0.8rem;
-  }
-  .product-name {
-    margin-top: 0.8rem;
-    font-size: 1.2rem;
-    line-height: 1.8rem;
-    height: 3.6rem;
-  }
-  .product-price {
-    margin-top: 0.2rem;
-    line-height: 2rem;
-    strong {
-      font-size: 1.4rem;
     }
   }
 }

@@ -21,6 +21,10 @@
     background: #e5f5ed;
     color: #15b071;
   }
+  &.black {
+    background: var(--strong-txt-color);
+    color: #fff;
+  }
 
   &.line {
     background: #fff;
