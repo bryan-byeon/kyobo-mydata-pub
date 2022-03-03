@@ -81,20 +81,18 @@
     width: 100%;
     z-index: 1;
     li {
+      width: var(--slider-handle-size);
+      height: var(--slider-handle-size);
       position: absolute;
-      &:before {
-        content: '';
-        display: block;
-        width: var(--slider-handle-size);
-        height: var(--slider-handle-size);
-        position: absolute;
-        top: 0;
-        left: 50%;
-        background: #fff;
-        border: 0.2rem solid #ebebeb;
-        border-radius: 50%;
-        box-sizing: border-box;
-        transform: translateX(-50%);
+      top: 0;
+      left: 50%;
+      background: #fff;
+      border: 0.2rem solid #ebebeb;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      &.on {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
       }
     }
   }

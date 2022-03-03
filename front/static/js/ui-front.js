@@ -2914,11 +2914,12 @@ ui.Form = {
         const isMutilple = $(this).hasClass('multiple') ? true : false;
         const $slider = $(this).find('.slider');
         const $list = $(this).find('.list');
+        let $dot;
         const $inp = $(this).find('input[type=hidden]');
         const $unit = $list.data('unit') !== undefined ? $list.data('unit').split(',') : '';
         //const $unit = $list.data('unit') !== undefined ? $list.data('unit') : '';
         const $title = $list.attr('title');
-        const noHandle = $(this).hasClass('noHandle') ? false : true;
+        const noHandle = $(this).hasClass('no-handle-tip') ? false : true;
         let $min = parseInt($slider.data('min'));
         let $max = parseInt($slider.data('max'));
         let $val = isMutilple ? $slider.data('value') : parseInt($slider.data('value'));
@@ -2928,6 +2929,32 @@ ui.Form = {
         if (!$max) $max = 10;
         if (!$step) $step = 1;
         if (!$val) $val = $min;
+
+        if ($list.length) {
+          $list.empty();
+          $slider.find('.dot').remove();
+          if (!!$title) $list.removeAttr('title').append('<strong class="blind">' + $title + '</strong>');
+          const $total = ($max - $min) / $step;
+          const $stepLeft = 100 / $total;
+          let $listHtml = '<ul>';
+          let $dotHtml = '<ul class="dot">';
+          for (let i = 0; i <= $total; i++) {
+            const $setLeft = $stepLeft * i;
+            $dotHtml += '<li style="left:' + $setLeft + '%"></li>';
+            if (isMutilple) {
+              $listHtml += '<li style="left:' + $setLeft + '%"><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>';
+            } else {
+              $listHtml += '<li style="left:' + $setLeft + '%"><a href="#">' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</a></li>';
+            }
+          }
+          $listHtml += '</ul>';
+          $dotHtml += '</ul>';
+          $list.append($listHtml);
+          if ($list.hasClass('append-dot')) {
+            $slider.prepend($dotHtml);
+            $dot = $slider.find('.dot');
+          }
+        }
 
         if ($inp.length) $inp.val($val);
         const range = $slider.slider({
@@ -2961,6 +2988,16 @@ ui.Form = {
                 .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
+              if ($dot) {
+                $dot
+                  .find('li')
+                  .eq(($val[0] - $min) / $step)
+                  .addClass('on');
+                $dot
+                  .find('li')
+                  .eq(($val[1] - $min) / $step)
+                  .addClass('on');
+              }
             } else {
               if (noHandle) {
                 $slider.find('.ui-slider-handle').html('<i>' + ($unit.length > 1 ? $unit[$val] : $val + $unit) + '</i>');
@@ -2971,6 +3008,12 @@ ui.Form = {
                 .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
+              if ($dot) {
+                $dot
+                  .find('li')
+                  .eq(($val - $min) / $step)
+                  .addClass('on');
+              }
             }
           },
           stop: function (event, ui) {
@@ -2985,6 +3028,7 @@ ui.Form = {
                   .html($unit.length > 1 ? $unit[ui.value] : ui.value + $unit);
               }
               $list.find('li').removeClass('on').find('a').removeAttr('title');
+              if ($dot) $dot.find('li').removeClass('on');
               $list
                 .find('li')
                 .eq((ui.values[0] - $min) / $step)
@@ -2997,6 +3041,16 @@ ui.Form = {
                 .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
+              if ($dot) {
+                $dot
+                  .find('li')
+                  .eq((ui.values[0] - $min) / $step)
+                  .addClass('on');
+                $dot
+                  .find('li')
+                  .eq((ui.values[1] - $min) / $step)
+                  .addClass('on');
+              }
             } else {
               if ($inp.length) $inp.val(ui.value).change();
               if (noHandle) {
@@ -3018,6 +3072,13 @@ ui.Form = {
                 .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
+
+              if ($dot) {
+                $dot
+                  .find('li')
+                  .eq((ui.value - $min) / $step)
+                  .addClass('on');
+              }
             }
           }
         });
@@ -3032,31 +3093,6 @@ ui.Form = {
             $(this).parent().addClass('on').find('a').attr('title', '현재선택');
             $(this).parent().siblings().removeClass('on').find('a').removeAttr('title');
           });
-        }
-
-        if ($list.length) {
-          $list.empty();
-          $list.parent().find('.dot').remove();
-          if (!!$title) $list.removeAttr('title').append('<strong class="blind">' + $title + '</strong>');
-          const $total = ($max - $min) / $step;
-          const $stepLeft = 100 / $total;
-          let $listHtml = '<ul>';
-          let $dotHtml = '<ul class="dot">';
-          for (let i = 0; i <= $total; i++) {
-            const $setLeft = $stepLeft * i;
-            $dotHtml += '<li style="left:' + $setLeft + '%"></li>';
-            if (isMutilple) {
-              $listHtml += '<li style="left:' + $setLeft + '%"><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>';
-            } else {
-              $listHtml += '<li style="left:' + $setLeft + '%"><a href="#">' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</a></li>';
-            }
-          }
-          $listHtml += '</ul>';
-          $dotHtml += '</ul>';
-          $list.append($listHtml);
-          if ($list.hasClass('append-dot')) {
-            $list.prev().prepend($dotHtml);
-          }
         }
       });
     }
