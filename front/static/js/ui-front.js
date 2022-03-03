@@ -5643,6 +5643,9 @@ const Layer = {
         $popup.find('.' + Layer.agreeCheckedClassName).removeClass(Layer.agreeCheckedClassName);
       }
     };
+    setTimeout(function () {
+      $closeAfter();
+    }, $closeDelay);
 
     //callback
     if (!!callback) {
@@ -5651,9 +5654,6 @@ const Layer = {
       }, $callbackDelay);
     }
 
-    setTimeout(function () {
-      $closeAfter();
-    }, $closeDelay);
     /*
     const $wrap = $popup.find('.' + Layer.wrapClass);
     $wrap.on('transitionend', function () {
