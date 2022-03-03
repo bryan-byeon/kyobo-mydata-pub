@@ -2928,18 +2928,7 @@ ui.Form = {
         if (!$max) $max = 10;
         if (!$step) $step = 1;
         if (!$val) $val = $min;
-        if ($list.length) {
-          $list.empty();
-          if (!!$title) $list.removeAttr('title').append('<strong class="blind">' + $title + '</strong>');
-          $list.append('<ul></ul>');
-          for (let i = 0; i <= ($max - $min) / $step; i++) {
-            if (isMutilple) {
-              $list.find('ul').append('<li><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>');
-            } else {
-              $list.find('ul').append('<li><a href="#">' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</a></li>');
-            }
-          }
-        }
+
         if ($inp.length) $inp.val($val);
         const range = $slider.slider({
           range: isMutilple ? true : 'min',
@@ -2963,13 +2952,13 @@ ui.Form = {
               $list
                 .find('li')
                 .eq(($val[0] - $min) / $step)
-                .addClass('on active')
+                .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
               $list
                 .find('li')
                 .eq(($val[1] - $min) / $step)
-                .addClass('on active')
+                .addClass('on')
                 .find('a')
                 .attr('title', '현재선택');
             } else {
@@ -3043,6 +3032,31 @@ ui.Form = {
             $(this).parent().addClass('on').find('a').attr('title', '현재선택');
             $(this).parent().siblings().removeClass('on').find('a').removeAttr('title');
           });
+        }
+
+        if ($list.length) {
+          $list.empty();
+          $list.parent().find('.dot').remove();
+          if (!!$title) $list.removeAttr('title').append('<strong class="blind">' + $title + '</strong>');
+          const $total = ($max - $min) / $step;
+          const $stepLeft = 100 / $total;
+          let $listHtml = '<ul>';
+          let $dotHtml = '<ul class="dot">';
+          for (let i = 0; i <= $total; i++) {
+            const $setLeft = $stepLeft * i;
+            $dotHtml += '<li style="left:' + $setLeft + '%"></li>';
+            if (isMutilple) {
+              $listHtml += '<li style="left:' + $setLeft + '%"><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>';
+            } else {
+              $listHtml += '<li style="left:' + $setLeft + '%"><a href="#">' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</a></li>';
+            }
+          }
+          $listHtml += '</ul>';
+          $dotHtml += '</ul>';
+          $list.append($listHtml);
+          if ($list.hasClass('append-dot')) {
+            $list.prev().prepend($dotHtml);
+          }
         }
       });
     }
