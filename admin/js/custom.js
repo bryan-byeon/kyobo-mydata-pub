@@ -284,7 +284,7 @@
       });
 
       $(document).on('click', '.kb-sidebar-pc-btn', function (e) {
-        $('.kb-container').toggleClass('sidebar-off');
+        $('.kb-wrap').toggleClass('sidebar-off');
       });
     },
     sidebar: function () {
