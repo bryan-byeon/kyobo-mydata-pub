@@ -1869,17 +1869,17 @@ ui.Tab = {
     $(document).on('click', '.ui-tab a', function (e) {
       e.preventDefault();
       const $this = $(this);
-      ui.Tab.tabActive($this);
       const $href = $this.attr('href');
       const $closest = $this.closest('.ui-tab');
       const $siblings = $closest.data('target');
-      if ($this.hasClass('auto-scroll')) {
+      const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
+      const $tabInner = $tab.closest('.tab-inner');
+      ui.Tab.tabActive($this);
+      if ($tabInner.parent().hasClass('tab-scroll')) {
         ui.Tab.panelActive($href, $siblings, true, true);
       } else {
         ui.Tab.panelActive($href, $siblings, true);
       }
-      const $tab = $(this).closest('.tab').length ? $(this).closest('.tab') : $(this).closest('li');
-      const $tabInner = $tab.closest('.tab-inner');
       if ($tabInner.length) {
         const isScroll = ui.Scroll.is($tabInner).x;
         if (isScroll) ui.Scroll.center($tab);
@@ -4724,7 +4724,8 @@ const Body = {
       Body.scrollTop = window.pageYOffset;
       const $wrap = $('#wrap');
       const $wrapTop = $('#wrap').length ? $wrap.offset().top : 0;
-      if ($wrapTop) $wrap.css('top', Body.scrollTop * -1 + $wrapTop);
+      const $setTop = Body.scrollTop * -1 + $wrapTop;
+      $wrap.css('top', $setTop);
       $('html').addClass('lock');
     }
   },
@@ -5575,6 +5576,7 @@ const Layer = {
     if (!$popup.hasClass(Layer.showClass)) return console.log(tar, '해당팝업 안열려있음');
     const $id = $popup.attr('id');
     let $closeDelay = 610;
+    let $callbackDelay = 300;
     let $lastPop = '';
     const $visible = $('.' + Layer.popClass + '.' + Layer.showClass).length;
 
@@ -5650,16 +5652,18 @@ const Layer = {
         $popup.find('.' + Layer.agreeBtnClassName).remove();
         $popup.find('.' + Layer.agreeCheckedClassName).removeClass(Layer.agreeCheckedClassName);
       }
-
-      //callback
-      if (!!callback) {
-        callback();
-      }
     };
-
     setTimeout(function () {
       $closeAfter();
     }, $closeDelay);
+
+    //callback
+    if (!!callback) {
+      setTimeout(function () {
+        callback();
+      }, $callbackDelay);
+    }
+
     /*
     const $wrap = $popup.find('.' + Layer.wrapClass);
     $wrap.on('transitionend', function () {
