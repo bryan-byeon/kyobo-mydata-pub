@@ -133,5 +133,28 @@
         background: rgba(var(--primary-color-rgb), 0.3);
       }
     }
+    .list {
+      ul {
+        li {
+          &.on span,
+          &.on a {
+            font-weight: 500;
+            color: var(--primary-color);
+          }
+          &.on ~ li {
+            span,
+            a {
+              color: var(--primary-color);
+            }
+          }
+          &.on ~ .on ~ li {
+            span,
+            a {
+              color: var(--gray-txt-color);
+            }
+          }
+        }
+      }
+    }
   }
 }
