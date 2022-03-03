@@ -277,11 +277,14 @@
             $('.kb-lnb-dep1>li').first().addClass('open').siblings().removeClass('open');
           }
           if (!sideBar.find('.kb-navbar-util').length) {
-            console.log('aaa');
             var $clone = $('.kb-navbar-util').clone();
             $('.kb-sidebar-head').prepend($clone);
           }
         }
+      });
+
+      $(document).on('click', '.kb-sidebar-pc-btn', function (e) {
+        $('.kb-container').toggleClass('sidebar-off');
       });
     },
     sidebar: function () {
