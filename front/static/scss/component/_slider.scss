@@ -133,14 +133,21 @@
         background: rgba(var(--primary-color-rgb), 0.3);
       }
     }
+    .dot {
+      li {
+        &.on ~ li {
+          background: var(--primary-color);
+          border-color: var(--primary-color);
+        }
+        &.on ~ .on ~ li {
+          background: #fff;
+          border-color: #ebebeb;
+        }
+      }
+    }
     .list {
       ul {
         li {
-          &.on span,
-          &.on a {
-            font-weight: 500;
-            color: var(--primary-color);
-          }
           &.on ~ li {
             span,
             a {
