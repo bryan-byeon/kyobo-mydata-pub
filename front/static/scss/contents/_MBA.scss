@@ -588,6 +588,8 @@
   margin-top: 1.4rem;
   ul {
     padding: 2.4rem;
+    border-radius: 1.6rem;
+    background: #fafafa;
     li {
       display: flex;
       align-items: center;
@@ -633,6 +635,8 @@
 .match-score-box {
   padding: 2.4rem;
   margin-top: 1.2rem;
+  border-radius: 1.6rem;
+  background: #fafafa;
   .tit-box {
     display: flex;
     padding-bottom: 1.2rem;
@@ -793,8 +797,10 @@
   margin: 0 -2.4rem;
   > a {
     display: flex;
-    padding: 1.8rem 2.4rem 1.8rem 1.4rem;
+    padding: 1.8rem 0 1.8rem 0;
+    margin: 0 2.4rem 0 1.4rem;
     align-items: center;
+    border-bottom: 0.1rem solid #f2f4f6;
     .number {
       display: block;
       flex: 0 0 auto;
@@ -825,6 +831,166 @@
         font-size: 1.2rem;
         color: #979797;
       }
+    }
+  }
+}
+
+.fight-user-info {
+  .user-img {
+    position: absolute;
+    top: -4rem;
+    left: 50%;
+    width: 8rem;
+    height: 8rem;
+    transform: translateX(-50%);
+  }
+
+  .info-total-box {
+    display: flex;
+    position: relative;
+    margin-top: 1.6rem;
+    padding: 1.6rem 0;
+    border-radius: 1.2rem;
+    background: #fafafa;
+    > div {
+      position: relative;
+      width: 50%;
+      text-align: center;
+      font-size: 0;
+
+      &:nth-child(2):after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 0.1rem;
+        height: 7.2rem;
+        background: #ebebeb;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .hashtag-box {
+    overflow: hidden;
+    display: flex;
+    margin-top: 1.2rem;
+    p {
+      overflow: hidden;
+      flex: 1 1 auto;
+      display: flex;
+      height: 2.4rem;
+      padding: 0.6rem 1.2rem;
+      align-items: center;
+      background: #fafafa;
+      border-radius: 1.3rem;
+      max-width: 33.333%;
+      span {
+        overflow: hidden;
+        width: 100%;
+        text-align: center;
+        font-size: 1.2rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+
+        &:before {
+          content: '#';
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 0.2rem;
+          font-size: 1.2rem;
+          color: #f134c8;
+          line-height: 1;
+          margin-top: -0.5rem;
+        }
+      }
+
+      + p {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  .circle-info-box {
+    position: relative;
+    display: flex;
+    margin-top: 1.8rem;
+    align-items: center;
+    justify-content: space-around;
+    > .label-text {
+      text-align: center;
+      .tit {
+        font-size: 1.2rem;
+        i {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          margin-top: -0.4rem;
+          margin-right: 0.4rem;
+          vertical-align: middle;
+        }
+      }
+      .number {
+        padding-left: 0.4rem;
+        font-size: 1.8rem;
+        color: #424242;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .stock-list-box {
+    display: flex;
+
+    .list {
+      flex: 1 1 auto;
+      margin-top: 1.6rem;
+      text-align: center;
+      .tit {
+        padding-bottom: 0.8rem;
+        margin-bottom: 1.6rem;
+        border-bottom: 0.1rem solid #ebebeb;
+        font-size: 1.2rem;
+        color: #424242;
+        span {
+          color: #b0b0b0;
+        }
+      }
+
+      ol {
+        li {
+          line-height: 1;
+          &:nth-child(1) {
+            font-size: 1.4rem;
+          }
+          &:nth-child(2) {
+            font-size: 1.2rem;
+          }
+          &:nth-child(3) {
+            font-size: 1rem;
+          }
+          + li {
+            margin-top: 1.2rem;
+          }
+        }
+      }
+
+      + .list {
+        margin-left: 1.2rem;
+      }
+    }
+  }
+
+  .total-cash {
+    margin: 2.4rem 0 0.8rem;
+    font-size: 1.6rem;
+    text-align: center;
+    span {
+      font-size: 2.4rem;
+      filter: blur(0.8rem);
     }
   }
 }

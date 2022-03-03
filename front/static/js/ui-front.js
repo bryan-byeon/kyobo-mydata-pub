@@ -2915,8 +2915,10 @@ ui.Form = {
         const $slider = $(this).find('.slider');
         const $list = $(this).find('.list');
         const $inp = $(this).find('input[type=hidden]');
-        const $unit = $list.data('unit') !== undefined ? $list.data('unit') : '';
+        const $unit = $list.data('unit') !== undefined ? $list.data('unit').split(',') : '';
+        //const $unit = $list.data('unit') !== undefined ? $list.data('unit') : '';
         const $title = $list.attr('title');
+        const noHandle = $(this).hasClass('noHandle') ? false : true;
         let $min = parseInt($slider.data('min'));
         let $max = parseInt($slider.data('max'));
         let $val = isMutilple ? $slider.data('value') : parseInt($slider.data('value'));
@@ -2932,9 +2934,9 @@ ui.Form = {
           $list.append('<ul></ul>');
           for (let i = 0; i <= ($max - $min) / $step; i++) {
             if (isMutilple) {
-              $list.find('ul').append('<li><span>' + (i * $step + $min) + $unit + '</span></li>');
+              $list.find('ul').append('<li><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>');
             } else {
-              $list.find('ul').append('<li><a href="#">' + (i * $step + $min) + $unit + '</a></li>');
+              $list.find('ul').append('<li><a href="#">' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</a></li>');
             }
           }
         }
@@ -2948,28 +2950,32 @@ ui.Form = {
           step: $step,
           create: function (e) {
             if (isMutilple) {
-              $slider
-                .find('.ui-slider-handle')
-                .first()
-                .html('<i>' + $val[0] + $unit + '</i>');
-              $slider
-                .find('.ui-slider-handle')
-                .last()
-                .html('<i>' + $val[1] + $unit + '</i>');
+              if (noHandle) {
+                $slider
+                  .find('.ui-slider-handle')
+                  .first()
+                  .html('<i>' + ($unit.length > 1 ? $unit[$val[0]] : $val[0] + $unit) + '</i>');
+                $slider
+                  .find('.ui-slider-handle')
+                  .last()
+                  .html('<i>' + ($unit.length > 1 ? $unit[$val[1]] : $val[1] + $unit) + '</i>');
+              }
               $list
                 .find('li')
                 .eq(($val[0] - $min) / $step)
-                .addClass('on')
+                .addClass('on active')
                 .find('a')
                 .attr('title', '현재선택');
               $list
                 .find('li')
                 .eq(($val[1] - $min) / $step)
-                .addClass('on')
+                .addClass('on active')
                 .find('a')
                 .attr('title', '현재선택');
             } else {
-              $slider.find('.ui-slider-handle').html('<i>' + $val + $unit + '</i>');
+              if (noHandle) {
+                $slider.find('.ui-slider-handle').html('<i>' + ($unit.length > 1 ? $unit[$val] : $val + $unit) + '</i>');
+              }
               $list
                 .find('li')
                 .eq(($val - $min) / $step)
@@ -2981,12 +2987,14 @@ ui.Form = {
           stop: function (event, ui) {
             if (isMutilple) {
               if ($inp.length) $inp.val(ui.values).change();
-              $slider.data('value', ui.values);
-              $slider
-                .find('.ui-slider-handle')
-                .eq(ui.handleIndex)
-                .find('i')
-                .html(ui.value + $unit);
+              if (noHandle) {
+                $slider.data('value', ui.values);
+                $slider
+                  .find('.ui-slider-handle')
+                  .eq(ui.handleIndex)
+                  .find('i')
+                  .html($unit.length > 1 ? $unit[ui.value] : ui.value + $unit);
+              }
               $list.find('li').removeClass('on').find('a').removeAttr('title');
               $list
                 .find('li')
@@ -3002,7 +3010,9 @@ ui.Form = {
                 .attr('title', '현재선택');
             } else {
               if ($inp.length) $inp.val(ui.value).change();
-              $slider.data('value', ui.value);
+              if (noHandle) {
+                $slider.data('value', $unit.length > 1 ? $unit[ui.value] : ui.value);
+              }
               $(ui.handle)
                 .find('i')
                 .html(ui.value + $unit);

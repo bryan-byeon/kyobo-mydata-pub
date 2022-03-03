@@ -164,10 +164,10 @@ div.checkbox.ty2:not(.btn, .switch, .switch2) {
       vertical-align: middle;
       margin: 0;
       border: 0.1rem solid var(--line-color);
-      color: var(--strong-txt-color);
-      background: #fff;
+      color: #979797;
       transition: 0.3s;
       font-size: 1.4rem;
+      background: #fafafa;
     }
 
     + .btn {

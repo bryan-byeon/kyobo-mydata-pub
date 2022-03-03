@@ -32,8 +32,8 @@
                 </div>
                 <div class="radio btn">
                   <input type="radio" id="tglrdo1-2" name="rdo1" /><i aria-hidden="true"></i>
-                  <!-- 최초 설정된 값이라면 fc-red2 클래스 추가-->
-                  <label for="tglrdo1-2" class="lbl fc-red2">#30대</label>
+                  <!-- 최초 설정된 값이라면 fc-primary 클래스 추가-->
+                  <label for="tglrdo1-2" class="lbl fc-primary">#30대</label>
                 </div>
                 <div class="radio btn">
                   <input type="radio" id="tglrdo1-3" name="rdo1" checked="checked" /><i aria-hidden="true"></i>
@@ -47,10 +47,17 @@
             </div>
 
             <p class="mt-24 fz-16 fc-424242 fw-bold">투자 규모<span class="ml-4 fz-12 fc-979797 fw-normal">(보유 중인 주식의 총 금액)</span></p>
-            <div class="range-slider multiple">
+            <div class="range-slider multiple noHandle">
               <div class="slider" data-min="0" data-max="4" data-step="1" data-value="[1,3]" aria-hidden="true"></div>
-              <div class="list" title="기간을 선택해주세요" data-unit="['이하',]"></div>
+              <div class="list" title="기간을 선택해주세요" data-unit="이하,1백만원,3천만원,1억원,이상"></div>
               <input type="hidden" id="slider2" title="선택한 기간" />
+            </div>
+          </div>
+        </div>
+        <div class="pop-foot">
+          <div>
+            <div class="flex">
+              <a href="#" class="button primary ui-pop-close">변경하기</a>
             </div>
           </div>
         </div>

@@ -113,6 +113,12 @@
         font-weight: 500;
         color: var(--strong-txt-color);
       }
+
+      &.active {
+        span {
+          color: var(--primary-color);
+        }
+      }
     }
   }
   &.multiple {
