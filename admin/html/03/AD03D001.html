@@ -282,10 +282,7 @@
     <!-- //wrap -->
 
     <script>
-      // Modal.alert('해당 메뉴에 접속권한이 없습니다.', function (e) {
-      //   console.log('접속권한 - 확인');
-      // });
-
+      // 테이블
       function initTable() {
         var $table = $('#table');
         $table.bootstrapTable('destroy').bootstrapTable({
@@ -293,8 +290,12 @@
           locale: 'ko-KR'
         });
       }
-
       initTable();
+
+      // 팝업
+      Modal.alert('해당 메뉴에 접속권한이 없습니다.', function (e) {
+        console.log('접속권한 - 확인');
+      });
     </script>
   </body>
 </html>
