@@ -2908,9 +2908,82 @@ ui.Form = {
       }
     });
   },
+  range: function () {
+    const $sliderRange = document.querySelectorAll('.range-slider');
+    if ($sliderRange.length) {
+      const $clippath = function (wrap) {
+        const $wrap = wrap;
+        const $first = $wrap.querySelector('.first-inp');
+        const $last = $wrap.querySelector('.last-inp');
+        const $range = $wrap.querySelector('.range');
+        // const $rangeLeft = parseInt(getComputedStyle($range).left);
+        const $rangeLeft = $range.style.left === '' ? 0 : parseInt($range.style.left);
+        const $rangeRight = $range.style.right === '' ? 0 : parseInt($range.style.right);
+        if ($first && $last) {
+          const _polyVal = (100 - ($rangeLeft + $rangeRight)) / 2 + $rangeLeft;
+          $last.style.clipPath = 'polygon(' + _polyVal + '% 0%, 100% 0%, 100% 100%, ' + _polyVal + '% 100%)';
+        }
+      };
+
+      const $firstRange = function (firstEl, lastEl) {
+        const $el = firstEl;
+        const $lastVal = lastEl ? parseInt(lastEl.value) : 0;
+        $el.value = Math.min($el.value, $lastVal - 1);
+        const value = (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.value) - (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.min);
+
+        const parent = $el.parentNode;
+        parent.querySelector('.range').style.left = value + '%';
+        parent.querySelector('.thumb.first').style.left = value + '%';
+        if (parent.querySelector('.thumb.first .value')) parent.querySelector('.thumb.first .value').innerHTML = $el.value;
+        $clippath(parent);
+      };
+
+      const $lastRange = function (lastEl, firstEl) {
+        const $el = lastEl;
+        const $firstVal = firstEl ? parseInt(firstEl.value) : 0;
+        $el.value = Math.max($el.value, $firstVal + 1);
+        const value = (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.value) - (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.min);
+        const parent = $el.parentNode;
+        parent.querySelector('.range').style.right = 100 - value + '%';
+        parent.querySelector('.thumb.last').style.left = value + '%';
+        if (parent.querySelector('.thumb.last .value')) parent.querySelector('.thumb.last .value').innerHTML = $el.value;
+        $clippath(parent);
+      };
+
+      $sliderRange.forEach(function (el) {
+        const $el = el;
+        const $first = $el.querySelector('.first-inp');
+        const $last = $el.querySelector('.last-inp');
+        if ($first) {
+          $firstRange($first, $last);
+          $first.addEventListener(
+            'input',
+            function () {
+              $firstRange($first, $last);
+            },
+            false
+          );
+        } else if ($el.querySelector('.thumb.first')) {
+          $el.querySelector('.thumb.first').style.display = 'none';
+        }
+        if ($last) {
+          $lastRange($last, $first);
+          $last.addEventListener(
+            'input',
+            function () {
+              $lastRange($last, $first);
+            },
+            false
+          );
+        } else if ($el.querySelector('.thumb.last')) {
+          $el.querySelector('.thumb.last').style.display = 'none';
+        }
+      });
+    }
+  },
   jqRange: function () {
-    if ($('.range-slider').length) {
-      $('.range-slider').each(function () {
+    if ($('.jq-range-slider').length) {
+      $('.jq-range-slider').each(function () {
         const isMutilple = $(this).hasClass('multiple') ? true : false;
         const $slider = $(this).find('.slider');
         const $list = $(this).find('.list');
@@ -3472,6 +3545,7 @@ ui.Form = {
 
     ui.Form.spinnerUI();
     ui.Form.spinner();
+    ui.Form.range();
     ui.Form.jqRange();
     ui.Form.jqCalendar('.datepicker');
 
