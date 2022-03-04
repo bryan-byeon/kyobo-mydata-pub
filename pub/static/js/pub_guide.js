@@ -86,7 +86,11 @@ $(function () {
   makeBoard();
   $(window).resize();
 });
+const $devHost = 'dev-mydata.mykkl.com';
+const $protocol = location.protocol;
 const makeBoard = function () {
+  let $host;
+  if (location.host === $devHost) $host = location.host;
   const $slide = $('.g_board_tab .swiper-slide');
   const $lenth = $slide.length;
   const htmlBoard = function (boardid, data) {
@@ -163,10 +167,16 @@ const makeBoard = function () {
         if (obj.id === undefined || obj.id === '') {
           trHtml += '<td class="id"></td>';
         } else {
-          if (obj.url === undefined || obj.url === '') {
+          let $url = obj.url;
+          if ($host) {
+            $url = $url.replace('../..', $protocol + '//' + $devHost);
+            if ($url.indexOf('/front/') >= 0) $url = $url.replace('/front/', '/mydata/resources/');
+            if ($url.indexOf('/admin/') >= 0) $url = $url.replace('/admin/', '/admin/resources/');
+          }
+          if ($url === undefined || $url === '') {
             trHtml += '<td class="id">' + obj.id + '</td>';
           } else {
-            trHtml += '<td class="id"><a href="' + obj.url + '" target="_blank">' + obj.id + '</a></td>';
+            trHtml += '<td class="id"><a href="' + $url + '" target="_blank">' + obj.id + '</a></td>';
           }
         }
         if (obj.type === undefined || obj.type === '') {
@@ -232,8 +242,8 @@ const makeBoard = function () {
   let LoadCount = 0;
   $slide.each(function (i) {
     const $this = $(this);
-    const $idx = i;
-    const $rel = $this.attr('rel');
+    const $rel = 'panel' + i;
+    $this.attr('rel', $rel);
     const $json = $this.data('json');
     let $dataHtml = '';
 

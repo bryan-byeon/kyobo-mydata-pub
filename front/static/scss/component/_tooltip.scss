@@ -67,10 +67,11 @@
   }
 }
 .tooltip-btn {
-  @include text-blind;
-  display: inline-block;
-  width: 1.6rem;
-  height: 1.6rem;
-  overflow: hidden;
-  background: url(../images/icon/ico-tooltip@3x.png) no-repeat center center / contain;
+  vertical-align: top;
+  &:not(.button) {
+    line-height: 1;
+  }
+  .i-ico-tooltip {
+    vertical-align: top;
+  }
 }
