@@ -187,6 +187,17 @@
     "etc":"2022-03-04 수정"
   },
   {
+    "id":"MDB02-0306004",
+    "url":"../../front/html/MDB/",
+    "type":"page",
+    "depth2": "통합자산조회",
+    "depth3": "금융자산",
+    "depth4": "개별인증",
+    "name": "개인정보 제공동의",
+    "worker": "안효주",
+    "complete": "2022-03-04"
+  },
+  {
     "id":"MDB02-0306005",
     "url":"../../front/html/MDB/MDB02-0306001.html",
     "type":"page",
