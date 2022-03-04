@@ -282,7 +282,6 @@
         padding: 2.4rem 5rem 2.4rem var(--base-padding);
       }
       .pop-close {
-        display: none;
         top: 3.4rem;
       }
     }
@@ -318,9 +317,6 @@
   &.bottom,
   &.modal {
     .pop-head {
-      div {
-        padding-right: var(--base-padding) !important;
-      }
       h1 {
         text-align: left;
         font-size: 2rem;
@@ -355,7 +351,8 @@
     }
     .pop-head {
       > div {
-        padding: 2.4rem 5rem 1.2rem var(--base-padding);
+        // padding: 2.4rem 5rem 1.2rem var(--base-padding);
+        padding: 2.4rem var(--base-padding) 1.2rem var(--base-padding);
         min-height: auto;
         text-align: left;
       }
