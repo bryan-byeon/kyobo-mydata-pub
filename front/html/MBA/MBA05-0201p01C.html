@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/images/favicon.png" />
+    <meta property="og:image" content="https://anoju.github.io/kyobo-mydata-pub/front/static/images/og_image_1200x630.png" />
+    <title>교보증권 마이데이타</title>
+    <link href="../../static/css/front.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../static/js/lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-plugins.min.js"></script>
+    <script type="text/javascript" src="../../static/js/ui-front.js"></script>
+  </head>
+  <body>
+    <article id="wrap" class="match-animation-wrap">
+      <header id="header">
+        <div>
+          <div class="head-left">
+            <button type="button" class="head-back button" role="button" aria-label="이전화면"></button>
+          </div>
+        </div>
+      </header>
+      <!-- 컨테이너(컨텐츠) -->
+      <main id="container">
+        <div class="match-animation">
+          <span class="progressbar"></span>
+          <div class="top">
+            <div class="bg" style="background: #61bdf3"></div>
+            <div class="text-box">
+              <p class="name">입질만삼년째</p>
+              <div class="number-random" data-random="type2">
+                <p class="number">0</p>
+                <p class="number">0</p>
+                <span>.</span>
+                <p class="number">0</p>
+                <span class="percent">%</span>
+              </div>
+            </div>
+            <p class="img">
+              <span><img src="../../static/images/match/sample_ico1.png" alt="" /></span>
+            </p>
+          </div>
+
+          <div class="vs"><span>vs</span></div>
+
+          <div class="down">
+            <div class="bg" style="background: #ff6291"></div>
+            <div class="text-box">
+              <p class="name">입질만삼년째</p>
+              <div class="number-random" data-random="type2">
+                <p class="number">0</p>
+                <p class="number">0</p>
+                <span>.</span>
+                <p class="number">0</p>
+                <span>%</span>
+              </div>
+            </div>
+            <p class="img">
+              <span><img src="../../static/images/match/sample_ico2.png" alt="" /></span>
+            </p>
+          </div>
+
+          <!-- <div class="down influencer">
+            <div class="bg" style="background: #fe7d65"></div>
+            <div class="text-box">
+              <p class="name">유병재</p>
+              <div class="number-random" data-random="type2">
+                <p class="number">0</p>
+                <p class="number">0</p>
+                <span>.</span>
+                <p class="number">0</p>
+                <span>%</span>
+              </div>
+            </div>
+            <p class="img">
+              <span><img src="../../static/images/match/sample_ico3.png" alt="" /></span>
+            </p>
+          </div> -->
+        </div>
+
+        <!--
+          기본 : 승리
+          loss : 패배
+          draw : 무승부
+        -->
+        <div class="match-animation-result">
+          <div class="top-text-motion">
+            <div class="slide"><span></span><span></span><span></span></div>
+          </div>
+          <div class="result-info">
+            <p class="tit"></p>
+            <p class="number">18.09<span>%</span></p>
+            <div class="img-result-box">
+              <p class="img"><img src="../../static/images/match/sample_result.png" alt="" /></p>
+              <p class="text">입질만삼년째</p>
+            </div>
+          </div>
+          <div class="loss-info">
+            <div class="img">
+              <img src="../../static/images/match/sample_result.png" alt="" />
+            </div>
+            <div class="text-box">
+              <p class="name">지금이야지금지금이라도</p>
+              <div class="number">18.09<span>%</span></div>
+            </div>
+          </div>
+          <div class="btn-wrap">
+            <div class="flex">
+              <button type="button" class="button h60 primary">확인</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="match-result-wrap">
+          <div class="bg"></div>
+          <div class="section"></div>
+          <div class="btn-wrap">
+            <div class="flex">
+              <button type="button" class="button h60 primary">확인</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- 컨테이너(컨텐츠) -->
+    </article>
+
+    <script>
+      $(function () {
+        $(window).load(function () {
+          setTimeout(function () {
+            $('.match-animation').addClass('action');
+            setTimeout(function () {
+              $('.match-animation').addClass('end');
+              $('.match-animation-result').addClass('show');
+            }, 5000);
+          }, 1000);
+
+          // $('.match-animation').addClass('action end');
+          // $('.match-animation-result').addClass('show');
+        });
+        $(document).on('click', '.match-animation-result .button', function () {
+          $('.match-animation-wrap').addClass('action');
+          return false;
+        });
+      });
+    </script>
+  </body>
+</html>

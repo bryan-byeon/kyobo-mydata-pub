@@ -1,53 +1,60 @@
 [
   {
-    "depth1": "1뎁스명"
+    "depth1": "매치"
   },
   {
-    "id":"화면 아이디",
-    "url":"#화면주소",
-    "type":"page",
-    "depth2": "2뎁스명",
-    "depth3": "3뎁스명",
-    "depth4": "4뎁스명",
-    "depth5": "5뎁스명",
-    "name": "페이지(화면)명",
-    "worker": "작업자 이름"
+    "id":"MBA05-0200p01C",
+    "url":"../../front/html/MBA/",
+    "type":"pop",
+    "depth2": "1:1 매치",
+    "depth3": "매치 조건 변경",
+    "name": "매치 조건 변경",
+    "worker": "장영석",
+    "complete": "2022-03-04",
+    "etc":"slide 기능 변경 검토"
   },
   {
-    "id":"화면 아이디",
-    "url":"#화면주소",
+    "id":"MBA05-0201p01C",
+    "url":"../../front/html/MBA/",
     "type":"page",
-    "depth2": "2뎁스명",
-    "depth3": "3뎁스명",
-    "depth4": "4뎁스명",
-    "depth5": "5뎁스명",
-    "name": "페이지(화면)명",
-    "worker": "작업자 이름",
-    "complete": "2021-12-31"
+    "depth2": "1:1 매치",
+    "depth3": "매치중",
+    "name": "매치중",
+    "worker": "장영석",
+    "complete": "진행중",
+    "etc":""
   },
   {
-    "id":"화면 아이디",
-    "url":"#화면주소",
-    "type":"page",
-    "depth2": "2뎁스명",
-    "depth3": "3뎁스명",
-    "depth4": "4뎁스명",
-    "depth5": "5뎁스명",
-    "name": "페이지(화면)명",
-    "worker": "작업자 이름",
-    "complete": "2021-12-31",
-    "change": "2021-12-31"
+    "id":"MBA05-0300p01C",
+    "url":"../../front/html/MBA/",
+    "type":"pop",
+    "depth2": "1:1 매치",
+    "depth3": "상대 정보 확인",
+    "name": "상대 정보 확인",
+    "worker": "장영석",
+    "complete": "2022-03-04",
+    "etc":"기획 수정 예정(일부 변경)"
   },
   {
-    "id":"화면 아이디",
-    "url":"#화면주소",
-    "type":"page",
-    "depth2": "2뎁스명",
-    "depth3": "3뎁스명",
-    "name": "페이지(화면)명",
-    "worker": "작업자 이름",
-    "complete": "2021-12-31",
-    "change": "2021-12-31",
-    "etc": "비고 설명란입니다."
+    "id":"MBA05-0400p01C",
+    "url":"../../front/html/MBA/",
+    "type":"pop",
+    "depth2": "1:1 매치",
+    "depth3": "공유 채널 설치 안내",
+    "name": "외부 공유 채널 미 설치시 안내",
+    "worker": "장영석",
+    "complete": "2022-03-04",
+    "etc":""
+  },
+  {
+    "id":"MBA06-0200p01C",
+    "url":"../../front/html/MBA/",
+    "type":"pop",
+    "depth2": "매치 현황",
+    "depth3": "매치 전적",
+    "name": "매치 전적",
+    "worker": "장영석",
+    "complete": "2022-03-04",
+    "etc":""
   }
 ]
