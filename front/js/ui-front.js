@@ -2911,6 +2911,35 @@ ui.Form = {
   range: function () {
     const $sliderRange = document.querySelectorAll('.range-slider');
     if ($sliderRange.length) {
+      $('.range-slider').each(function () {
+        const $slider = $(this).find('.range-wrap');
+        const $list = $(this).find('.list');
+        const $input = $(this).find('input').first();
+        const $min = $input[0].min;
+        const $max = $input[0].max;
+        const $step = $input[0].step;
+        const $unit = $list.data('unit') !== undefined ? $list.data('unit').split(',') : '';
+        if ($list.length) {
+          $list.empty();
+          $slider.find('.dot').remove();
+          const $total = ($max - $min) / $step;
+          const $stepLeft = 100 / $total;
+          let $listHtml = '<ul>';
+          let $dotHtml = '<ul class="dot">';
+          for (let i = 0; i <= $total; i++) {
+            const $setLeft = $stepLeft * i;
+            $dotHtml += '<li style="left:' + $setLeft + '%"></li>';
+            $listHtml += '<li style="left:' + $setLeft + '%"><span>' + ($unit.length > 1 ? $unit[i] : i * $step + $min + $unit) + '</span></li>';
+          }
+          $listHtml += '</ul>';
+          $dotHtml += '</ul>';
+          $list.append($listHtml);
+          if ($list.hasClass('append-dot')) {
+            $slider.find('.range').after($dotHtml);
+          }
+        }
+      });
+
       const $clippath = function (wrap) {
         const $wrap = wrap;
         const $first = $wrap.querySelector('.first-inp');
@@ -2923,6 +2952,9 @@ ui.Form = {
           const _polyVal = (100 - ($rangeLeft + $rangeRight)) / 2 + $rangeLeft;
           $last.style.clipPath = 'polygon(' + _polyVal + '% 0%, 100% 0%, 100% 100%, ' + _polyVal + '% 100%)';
         }
+      };
+      const addLiClass = function (idx) {
+        // 작업중!!!!
       };
 
       const $firstRange = function (firstEl, lastEl) {
