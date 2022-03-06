@@ -995,3 +995,53 @@
     }
   }
 }
+
+.ground-wrap {
+  .ground-main-info {
+    .banner-box {
+      height: 160px;
+      margin: 0 -2.4rem;
+      background: no-repeat center center / cover;
+
+      /* 나중에 지울거 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .text-box {
+      position: relative;
+      margin: 2.4rem 0;
+    }
+    .tit {
+      font-size: 2.2rem;
+      color: #424242;
+      font-weight: bold;
+    }
+    .sub-tit {
+      margin-top: 1.6rem;
+      font-size: 1.4rem;
+      .hashtag {
+        color: #f134c8;
+      }
+    }
+    .info {
+      margin-top: 1rem;
+      span {
+        margin-right: 0.8rem;
+        i {
+          margin-right: 0.3rem;
+          vertical-align: middle;
+          margin-top: -0.2rem;
+        }
+        font-size: 1.4rem;
+        color: #979797;
+      }
+    }
+    .tooltip-wrap {
+      position: absolute;
+      top: 1.3rem;
+      right: 0;
+    }
+  }
+}
