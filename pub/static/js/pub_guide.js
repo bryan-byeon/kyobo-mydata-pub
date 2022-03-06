@@ -170,7 +170,7 @@ const makeBoard = function () {
           let $url = obj.url;
           if ($host) {
             $url = $url.replace('../..', $protocol + '//' + $devHost);
-            if ($url.indexOf('/front/') >= 0) $url = $url.replace('/front/', '/mydata/resources/');
+            if ($url.indexOf('/front/') >= 0) $url = $url.replace('/front/', '/mydata/resources/static');
             if ($url.indexOf('/admin/') >= 0) $url = $url.replace('/admin/', '/admin/resources/');
           }
           if ($url === undefined || $url === '') {

@@ -15,7 +15,7 @@
   <body>
     <!-- 팝업 -->
     <div id="mainEvtPop" class="popup bottom pop-event" role="dialog" aria-hidden="true">
-      <div class="pop-bg-close not-remove" arai-hidden="true"></div>
+      <div class="pop-bg-close not-remove ui-pop-today-close" arai-hidden="true"></div>
       <article class="pop-wrap">
         <div class="pop-body">
           <a href="#" class="img-area">
@@ -26,10 +26,10 @@
           <div>
             <div class="flex not-full">
               <div>
-                <button type="button" class="btn-txt btn-today"><i class="i-ico-check-off-14" aria-hidden="true"></i> 오늘 그만보기</button>
+                <button type="button" class="btn-txt btn-today ui-pop-today-close"><i class="i-ico-check-off-14" aria-hidden="true"></i> 오늘 그만보기</button>
               </div>
               <div class="ml-auto">
-                <button type="button" class="btn-txt btn-close">닫기</button>
+                <button type="button" class="btn-txt btn-close ui-pop-today-close">닫기</button>
               </div>
             </div>
           </div>
@@ -39,6 +39,19 @@
     <!-- //팝업 -->
     <script>
       Layer.open('#mainEvtPop');
+
+      // .ui-pop-today-close 클릭하면 닫히게
+      $('.ui-pop-today-close').click(function () {
+        const $this = $(this);
+
+        // '오늘그만보기' 체크
+        if ($this.hasClass('btn-today')) {
+          $this.addClass('checked');
+        }
+
+        // 닫기
+        Layer.close('#mainEvtPop');
+      });
     </script>
   </body>
 </html>
