@@ -4,7 +4,7 @@
   display: flex;
   min-height: -vh(100);
   flex-direction: column;
-  // min-width: 32rem;
+  min-width: 28rem;
 }
 .header-space {
   position: sticky;
@@ -33,23 +33,23 @@
     overflow: hidden;
     @include web-center;
   }
-  &.top-fixed {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(2px);
+  //&.top-fixed {
+  // background: rgba(255, 255, 255, 0.9);
+  // backdrop-filter: blur(2px);
 
-    // box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
-    // &.fixed-off {
-    //   box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-    // }
+  // box-shadow: 0 0.4rem 0.8rem 0.4rem rgba(255, 255, 255, 1);
+  // &.fixed-off {
+  //   box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  // }
 
-    // > div {
-    // position: fixed;
-    // left: 0;
-    // top: 0;
-    // width: 100%;
-    // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
-    // }
-  }
+  // > div {
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  // width: 100%;
+  // box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.08);
+  // }
+  //}
   &.no-shadow {
     > div {
       box-shadow: none !important;
