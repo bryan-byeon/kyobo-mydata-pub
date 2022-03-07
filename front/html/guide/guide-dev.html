@@ -112,8 +112,8 @@
               <h4 class="gd__h3">&lt;button&gt; 태그 일 경우(권장)</h4>
               <button type="button" class="button green small">활성화</button>
               <button type="button" class="button green small" disabled="disabled">비활성화</button>
-              <button type="button" class="button line small">활성화</button>
-              <button type="button" class="button line small" disabled="disabled">비활성화</button>
+              <button type="button" class="button line h32">활성화</button>
+              <button type="button" class="button line h32" disabled="disabled">비활성화</button>
               <div class="txt-list">
                 <ul>
                   <li class="dot">disabled 속성이 활성화되면 스타일이 변경됩니다.</li>
@@ -124,8 +124,8 @@
               <h4 class="gd__h3">&lt;a&gt; 태그 일 경우</h4>
               <a href="#" class="button green small">활성화</a>
               <a href="#" class="button green small disabled">비활성화</a>
-              <a href="#" class="button line small">활성화</a>
-              <a href="#" class="button line small disabled">비활성화</a>
+              <a href="#" class="button line h32">활성화</a>
+              <a href="#" class="button line h32 disabled">비활성화</a>
               <div class="txt-list">
                 <ul>
                   <li class="dot">&lt;a&gt;에 "disabled" 클래스를 추가해주세요.</li>
@@ -139,11 +139,11 @@
             <div>
               <h4 class="gd__h3">종류</h4>
               <div>
-                <a href="#" class="button line small" onclick="Layer.open('#fullPopup')">풀팝업 열기</a>
-                <a href="#modalPopup" class="button line small ui-pop-open">모달팝업 열기</a>
-                <a href="#" class="button line small" onclick="Layer.open('#bottomPopup')">바텀시트팝업 열기</a>
-                <a href="#" class="button line small" onclick="Layer.open('#sidePopup1')">사이드팝업(왼쪽) 열기</a>
-                <a href="#" class="button line small" onclick="Layer.open('#sidePopup2')">사이드팝업(오른쪽) 열기</a>
+                <a href="#" class="button line h32" onclick="Layer.open('#fullPopup')">풀팝업 열기</a>
+                <a href="#modalPopup" class="button line h32 ui-pop-open">모달팝업 열기</a>
+                <a href="#" class="button line h32" onclick="Layer.open('#bottomPopup')">바텀시트팝업 열기</a>
+                <a href="#" class="button line h32" onclick="Layer.open('#sidePopup1')">사이드팝업(왼쪽) 열기</a>
+                <a href="#" class="button line h32" onclick="Layer.open('#sidePopup2')">사이드팝업(오른쪽) 열기</a>
               </div>
               <br />
               <div class="txt-list">
@@ -165,7 +165,7 @@
 
               <h5 class="gd__h4">클래스로 오픈</h5>
               <div class="txt-list mt-20">
-                <pre><code class="language-xml">&lt;a href="#팝업ID" class="button line small ui-pop-open"&gt;버튼텍스트&lt;/a&gt;
+                <pre><code class="language-xml">&lt;a href="#팝업ID" class="button line h32 ui-pop-open"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
                 <ul class="mt-10">
                   <li class="dot">클래스로 <strong class="fc-red">ui-pop-open</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
@@ -185,10 +185,10 @@
               <h5 class="gd__h4">클래스로 닫기</h5>
               <div class="txt-list mt-20">
                 <pre><code class="language-xml">&lt;-- 닫으려는 팝업 밖에 있는 버튼이라면: href에 팝업ID 추가 --&gt;
-&lt;a href="#팝업ID" class="button line small ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
+&lt;a href="#팝업ID" class="button line h32 ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
 
 &lt;-- 닫으려는 팝업안에 있는 버튼이라면: href에 안넣어도 됨 --&gt;
-&lt;a href="#" class="button line small ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
+&lt;a href="#" class="button line h32 ui-pop-close"&gt;버튼텍스트&lt;/a&gt;
 </code></pre>
                 <ul class="mt-10">
                   <li class="dot">클래스로 <strong class="fc-red">ui-pop-close</strong>를 넣어주시고 href속성에 <strong class="fc-red">팝업의 ID</strong>를 넣어주면 됩니다.</li>
@@ -199,22 +199,22 @@
             </div>
             <h3 class="gd__h2">url로 팝업열기</h3>
             <div>
-              <a href="win-pop.html" class="button line small" target="_blank">사용된 (윈도우)팝업페이지 확인</a>
+              <a href="win-pop.html" class="button line h32" target="_blank">사용된 (윈도우)팝업페이지 확인</a>
               <br />
               <br />
-              <a href="#" data-popup="win-pop.html" class="button line small">팝업불러오기(기본:full)</a>
-              <a href="#" data-popup-full="win-pop.html" class="button line small">팝업불러오기(full)</a>
-              <a href="#" data-popup-modal="win-pop.html" class="button line small">팝업불러오기(modal)</a>
-              <a href="#" data-popup-bottom="win-pop.html" class="button line small">팝업불러오기(bottom)</a>
-              <a href="#" data-popup-left="win-pop.html" class="button line small">팝업불러오기(side-left)</a>
-              <a href="#" data-popup-right="win-pop.html" class="button line small">팝업불러오기(side-right)</a>
+              <a href="#" data-popup="win-pop.html" class="button line h32">팝업불러오기(기본:full)</a>
+              <a href="#" data-popup-full="win-pop.html" class="button line h32">팝업불러오기(full)</a>
+              <a href="#" data-popup-modal="win-pop.html" class="button line h32">팝업불러오기(modal)</a>
+              <a href="#" data-popup-bottom="win-pop.html" class="button line h32">팝업불러오기(bottom)</a>
+              <a href="#" data-popup-left="win-pop.html" class="button line h32">팝업불러오기(side-left)</a>
+              <a href="#" data-popup-right="win-pop.html" class="button line h32">팝업불러오기(side-right)</a>
               <div class="txt-list mt-20">
-                <pre><code class="language-xml">&lt;a href="#" data-popup="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- 기본(full)팝업호출 --&gt;
-&lt;a href="#" data-popup-full="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- full 팝업호출 --&gt;
-&lt;a href="#" data-popup-modal="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- modal 팝업호출 --&gt;
-&lt;a href="#" data-popup-bottom="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- bottom 팝업호출 --&gt;
-&lt;a href="#" data-popup-left="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-left 팝업호출 --&gt;
-&lt;a href="#" data-popup-right="팝업URL" class="button line small"&gt;버튼&lt;/a&gt; &lt;!-- side-right 팝업호출 --&gt;
+                <pre><code class="language-xml">&lt;a href="#" data-popup="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- 기본(full)팝업호출 --&gt;
+&lt;a href="#" data-popup-full="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- full 팝업호출 --&gt;
+&lt;a href="#" data-popup-modal="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- modal 팝업호출 --&gt;
+&lt;a href="#" data-popup-bottom="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- bottom 팝업호출 --&gt;
+&lt;a href="#" data-popup-left="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- side-left 팝업호출 --&gt;
+&lt;a href="#" data-popup-right="팝업URL" class="button line h32"&gt;버튼&lt;/a&gt; &lt;!-- side-right 팝업호출 --&gt;
 </code></pre>
                 <ul class="mt-10">
                   <li class="dot">
@@ -227,16 +227,16 @@
             <h3 class="gd__h2">얼럿, 컨펌</h3>
             <h4 class="gd__h3">기본(약식)</h4>
             <div>
-              <a href="#" id="btnAlert" class="button line small">얼럿창 팝업 열기</a>
-              <a href="#" id="btnAlert1" class="button line small">얼럿창 팝업 열기(+타이틀넣기)</a>
-              <a href="#" id="btnAlert2" class="button line small">얼럿창 팝업 열기(+버튼수정)</a>
-              <a href="#" id="btnAlert3" class="button line small">얼럿창 팝업 열기(+타이틀+버튼수정)</a>
+              <a href="#" id="btnAlert" class="button line h32">얼럿창 팝업 열기</a>
+              <a href="#" id="btnAlert1" class="button line h32">얼럿창 팝업 열기(+타이틀넣기)</a>
+              <a href="#" id="btnAlert2" class="button line h32">얼럿창 팝업 열기(+버튼수정)</a>
+              <a href="#" id="btnAlert3" class="button line h32">얼럿창 팝업 열기(+타이틀+버튼수정)</a>
               <br />
               <br />
-              <a href="#" id="btnConfirm" class="button line small">컨펌창 팝업 열기</a>
-              <a href="#" id="btnConfirm1" class="button line small">컨펌창 팝업 열기(+타이틀넣기)</a>
-              <a href="#" id="btnConfirm2" class="button line small">컨펌창 팝업 열기(+버튼수정)</a>
-              <a href="#" id="btnConfirm3" class="button line small">컨펌창 팝업 열기(+타이틀+버튼수정)</a>
+              <a href="#" id="btnConfirm" class="button line h32">컨펌창 팝업 열기</a>
+              <a href="#" id="btnConfirm1" class="button line h32">컨펌창 팝업 열기(+타이틀넣기)</a>
+              <a href="#" id="btnConfirm2" class="button line h32">컨펌창 팝업 열기(+버튼수정)</a>
+              <a href="#" id="btnConfirm3" class="button line h32">컨펌창 팝업 열기(+타이틀+버튼수정)</a>
               <br />
               <br />
               <pre><code class="language-javascript">//얼럿 
@@ -364,8 +364,8 @@ Layer.confirm('컨펌창입니다.','컨펌제목','완료','넘기기',function
             </div>
             <h4 class="gd__h3">커스텀(옵션)</h4>
             <div>
-              <a href="#" id="btnAlert10" class="button line small">커스텀 얼럿창 팝업 열기</a>
-              <a href="#" id="btnConfirm10" class="button line small">커스텀 컨펌창 팝업 열기</a>
+              <a href="#" id="btnAlert10" class="button line h32">커스텀 얼럿창 팝업 열기</a>
+              <a href="#" id="btnConfirm10" class="button line h32">커스텀 컨펌창 팝업 열기</a>
               <br />
               <br />
               <pre><code class="language-javascript">//커스텀 얼럿
@@ -445,7 +445,7 @@ Layer.confirm(
 
             <h4 class="gd__h3">토스트팝업</h4>
             <div>
-              <div><a href="#" class="button line small" id="toastOpen">토스트팝업 열기</a></div>
+              <div><a href="#" class="button line h32" id="toastOpen">토스트팝업 열기</a></div>
               <script>
                 $('#toastOpen').click(function (e) {
                   e.preventDefault();
@@ -467,7 +467,7 @@ Layer.toast('넣으려는 메세지', fn:클릭시 실행할 함수);</code></pr
 
             <h4 class="gd__h3">알람팝업</h4>
             <div>
-              <div><a href="#" class="button line small" id="alarmOpen">알람팝업 열기</a></div>
+              <div><a href="#" class="button line h32" id="alarmOpen">알람팝업 열기</a></div>
               <script>
                 $('#alarmOpen').click(function (e) {
                   e.preventDefault();
@@ -490,9 +490,9 @@ Layer.alarm('넣으려는 메세지', fn:클릭시 실행할 함수);</code></pr
             <h4 class="gd__h3">로딩 팝업</h4>
             <div>
               <div>
-                <a href="#" class="button line small" onclick="Loading.open();$(this).next().next().css('z-index',10000);">로딩창 열기</a>
-                <a href="#" class="button line small" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000);">텍스트+로딩창 열기</a>
-                <a href="#" class="button line small" onclick="Loading.close();$(this).removeAttr('style');">로딩창 닫기</a>
+                <a href="#" class="button line h32" onclick="Loading.open();$(this).next().next().css('z-index',10000);">로딩창 열기</a>
+                <a href="#" class="button line h32" onclick="Loading.open('텍스트 텍스트 텍스트');$(this).next().css('z-index',10000);">텍스트+로딩창 열기</a>
+                <a href="#" class="button line h32" onclick="Loading.close();$(this).removeAttr('style');">로딩창 닫기</a>
               </div>
               <br />
               <pre><code class="language-javascript">//로딩창열기

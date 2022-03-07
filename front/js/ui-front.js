@@ -2915,10 +2915,18 @@ ui.Form = {
         const $slider = $(this).find('.range-wrap');
         const $list = $(this).find('.list');
         const $input = $(this).find('input').first();
-        const $min = $input[0].min;
-        const $max = $input[0].max;
-        const $step = $input[0].step;
+        const $first = $(this).find('.first-inp');
+        const $last = $(this).find('.last-inp');
+        const $min = parseInt($input[0].min);
+        const $max = parseInt($input[0].max);
+        const $step = parseInt($input[0].step);
         const $unit = $list.data('unit') !== undefined ? $list.data('unit').split(',') : '';
+        if (!$slider.find('.range').length) $slider.prepend('<div class="range"></div>');
+        const $range = $slider.find('.range');
+        if ($first.length && $last.length && !$range.find('i').length) $range.append('<i></i>');
+        if ($last.length && !$slider.find('.thumb.last').length) $range.after('<div class="thumb last"></div>');
+        if ($first.length && !$slider.find('.thumb.first').length) $range.after('<div class="thumb first"></div>');
+
         if ($list.length) {
           $list.empty();
           $slider.find('.dot').remove();
@@ -2935,48 +2943,78 @@ ui.Form = {
           $dotHtml += '</ul>';
           $list.append($listHtml);
           if ($list.hasClass('append-dot')) {
-            $slider.find('.range').after($dotHtml);
+            $range.after($dotHtml);
           }
         }
       });
 
       const $clippath = function (wrap) {
+        // addClass
         const $wrap = wrap;
         const $first = $wrap.querySelector('.first-inp');
         const $last = $wrap.querySelector('.last-inp');
-        const $range = $wrap.querySelector('.range');
-        // const $rangeLeft = parseInt(getComputedStyle($range).left);
-        const $rangeLeft = $range.style.left === '' ? 0 : parseInt($range.style.left);
-        const $rangeRight = $range.style.right === '' ? 0 : parseInt($range.style.right);
+        const $getIdx = function (el) {
+          const $el = el;
+          const $value = parseInt($el.value);
+          const $min = parseInt($el.min);
+          const $step = parseInt($el.step);
+          return ($value - $min) / $step;
+        };
+        const $firstIdx = $first ? $getIdx($first) : null;
+        const $lastIdx = $last ? $getIdx($last) : null;
+
+        const $list = $wrap.parentNode.querySelector('.list');
+        const $dot = $wrap.querySelector('.dot');
+        const $liAddClass = function (wrap) {
+          const $li = wrap.querySelectorAll('li');
+          $li.forEach(function (item, i) {
+            if (i === $firstIdx || i === $lastIdx) {
+              item.classList.add('on');
+            } else {
+              item.classList.remove('on');
+            }
+          });
+        };
+        if ($list) $liAddClass($list);
+        if ($dot) $liAddClass($dot);
+
+        // clip-path
+        const $range = $wrap.querySelector('.range i');
+        let $rangeLeft = 0;
+        let $rangeRight = 0;
+        if ($range) {
+          $rangeLeft = parseInt($range.style.left);
+          $rangeRight = parseInt($range.style.right);
+        }
         if ($first && $last) {
           const _polyVal = (100 - ($rangeLeft + $rangeRight)) / 2 + $rangeLeft;
           $last.style.clipPath = 'polygon(' + _polyVal + '% 0%, 100% 0%, 100% 100%, ' + _polyVal + '% 100%)';
         }
       };
-      const addLiClass = function (idx) {
-        // 작업중!!!!
-      };
 
-      const $firstRange = function (firstEl, lastEl) {
-        const $el = firstEl;
-        const $lastVal = lastEl ? parseInt(lastEl.value) : 0;
+      const $firstRange = function (wrap) {
+        const $el = wrap.querySelector('.first-inp');
+        const $lastEl = wrap.querySelector('.last-inp');
+        const $lastVal = $lastEl ? parseInt($lastEl.value) : parseInt($el.max) + 1;
         $el.value = Math.min($el.value, $lastVal - 1);
         const value = (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.value) - (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.min);
+        console.log(value);
 
         const parent = $el.parentNode;
-        parent.querySelector('.range').style.left = value + '%';
+        if (parent.querySelector('.range i')) parent.querySelector('.range i').style.left = value + '%';
         parent.querySelector('.thumb.first').style.left = value + '%';
         if (parent.querySelector('.thumb.first .value')) parent.querySelector('.thumb.first .value').innerHTML = $el.value;
         $clippath(parent);
       };
 
-      const $lastRange = function (lastEl, firstEl) {
-        const $el = lastEl;
-        const $firstVal = firstEl ? parseInt(firstEl.value) : 0;
+      const $lastRange = function (wrap) {
+        const $el = wrap.querySelector('.last-inp');
+        const $firstEl = wrap.querySelector('.first-inp');
+        const $firstVal = $firstEl ? parseInt($firstEl.value) : parseInt($el.min) - 1;
         $el.value = Math.max($el.value, $firstVal + 1);
         const value = (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.value) - (100 / (parseInt($el.max) - parseInt($el.min))) * parseInt($el.min);
         const parent = $el.parentNode;
-        parent.querySelector('.range').style.right = 100 - value + '%';
+        if (parent.querySelector('.range i')) parent.querySelector('.range i').style.right = 100 - value + '%';
         parent.querySelector('.thumb.last').style.left = value + '%';
         if (parent.querySelector('.thumb.last .value')) parent.querySelector('.thumb.last .value').innerHTML = $el.value;
         $clippath(parent);
@@ -2986,12 +3024,15 @@ ui.Form = {
         const $el = el;
         const $first = $el.querySelector('.first-inp');
         const $last = $el.querySelector('.last-inp');
+        if ($first && $last) {
+          $el.classList.add('multiple');
+        }
         if ($first) {
-          $firstRange($first, $last);
+          $firstRange($el);
           $first.addEventListener(
             'input',
             function () {
-              $firstRange($first, $last);
+              $firstRange($el);
             },
             false
           );
@@ -2999,11 +3040,11 @@ ui.Form = {
           $el.querySelector('.thumb.first').style.display = 'none';
         }
         if ($last) {
-          $lastRange($last, $first);
+          $lastRange($el);
           $last.addEventListener(
             'input',
             function () {
-              $lastRange($last, $first);
+              $lastRange($el);
             },
             false
           );
