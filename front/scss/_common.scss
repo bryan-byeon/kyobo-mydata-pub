@@ -937,10 +937,10 @@ $bdTypes: (solid, dashed, dotted);
 
 // etc
 .block {
-  display: block;
+  display: block !important;
 }
 .inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
 .hide {
   display: none;
