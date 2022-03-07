@@ -1,4 +1,32 @@
 // 테스트
+
+.updown {
+  margin-left: 0.4rem;
+  font-size: 1.2rem;
+  vertical-align: middle;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    font-size: 1.2rem;
+    vertical-align: middle;
+    line-height: 1;
+    margin-top: -0.2rem;
+  }
+  &.up {
+    &:before {
+      content: '▲';
+    }
+    color: #3887fd;
+  }
+  &.down {
+    &:before {
+      content: '▼';
+    }
+    color: #eb5757;
+  }
+}
+
 .match-animation {
   overflow: hidden;
   position: relative;
@@ -602,32 +630,6 @@
       + li {
         margin-top: 2.4rem;
       }
-      .updown {
-        margin-left: 0.4rem;
-        font-size: 1.2rem;
-        vertical-align: middle;
-
-        &:before {
-          content: '';
-          display: inline-block;
-          font-size: 1.2rem;
-          vertical-align: middle;
-          line-height: 1;
-          margin-top: -0.2rem;
-        }
-        &.up {
-          &:before {
-            content: '▲';
-          }
-          color: #3887fd;
-        }
-        &.down {
-          &:before {
-            content: '▼';
-          }
-          color: #eb5757;
-        }
-      }
     }
   }
 }
@@ -1042,6 +1044,88 @@
       position: absolute;
       top: 1.3rem;
       right: 0;
+    }
+  }
+
+  .ground-rank {
+    .link-box {
+      display: flex;
+      margin-top: 2.8rem;
+      margin-left: -0.8rem;
+      li {
+        width: 33.333%;
+        margin-left: 0.8rem;
+        text-align: center;
+        height: 11.8rem;
+        border-radius: 16px;
+        padding: 0 1rem;
+        i {
+          display: block;
+          margin: 1.6rem auto 0;
+        }
+        .tit {
+          margin-top: 0.8rem;
+          font-size: 1.4rem;
+          color: #424242;
+        }
+        .number {
+          font-size: 1.2rem;
+          color: #979797;
+        }
+
+        &:nth-child(1) {
+          background: #fffbe8;
+          box-shadow: 0px 4px 6px rgba(240, 235, 213, 0.3);
+        }
+        &:nth-child(2) {
+          background: #f5f5f5;
+          box-shadow: 0px 4px 6px #f8f8f8;
+        }
+        &:nth-child(3) {
+          background: #faf1ea;
+          box-shadow: 0px 4px 6px #fff0e4;
+        }
+      }
+    }
+    .my-ranking {
+      display: flex;
+      margin-top: 2rem;
+      border-radius: 1.6rem;
+      padding: 1.6rem;
+      background: #fafafa;
+      .img-box {
+        width: 4.4rem;
+      }
+      .tit-box {
+        margin-left: 1.2rem;
+        flex: 1 1 auto;
+        .name {
+          font-size: 1.6rem;
+          color: #424242;
+        }
+        .percent {
+          font-size: 1.2rem;
+          color: #979797;
+        }
+      }
+      .rank {
+        font-size: 1.8rem;
+        color: #212121;
+        text-align: right;
+        .updown {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .ground-talk {
+    .filter {
+      margin-top: 1.6rem;
+      text-align: right;
+      a {
+        font-size: 1.4rem;
+      }
     }
   }
 }

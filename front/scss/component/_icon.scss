@@ -345,6 +345,13 @@ a.visited {
   height: 2.4rem;
   background-image: url('../images/icon/ico-tit-arrow.png');
 }
+.i-ico-filter {
+  width: 0.8rem;
+  height: 1.1rem;
+  margin-left: 0.4rem;
+  //background-image: url('../images/icon/ico-filter.png');
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='11' viewBox='0 0 8 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.672857 6.3842H7.32714C7.92547 6.3842 8.22463 7.09985 7.80245 7.51708L4.47531 10.8052C4.21249 11.0649 3.78751 11.0649 3.52749 10.8052L0.197551 7.51708C-0.224633 7.09985 0.0745303 6.3842 0.672857 6.3842ZM7.80245 3.48292L4.47531 0.1948C4.21249 -0.0649334 3.78751 -0.0649334 3.52749 0.1948L0.197551 3.48292C-0.224633 3.90015 0.0745303 4.6158 0.672857 4.6158H7.32714C7.92547 4.6158 8.22463 3.90015 7.80245 3.48292Z' fill='%23606060'/%3E%3C/svg%3E%0A");
+}
 
 // i-img-
 .i-img-victory {
